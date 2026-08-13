@@ -1,17 +1,32 @@
 // NESA-Africa & EduAid-Africa 2026 Master Timeline
-// Source: "NESA-Africa 2026 — Complete Timeline Set" (Sections 1, 2, 3, 6, 8, 9, 10, 11).
-// 1 July – 13 December 2026.
+// Source: "NESA-Africa 2026 — CORRECTED Complete Timeline Set".
+// 8 July 2026 – 13 December 2027 (recognition cycle + legacy phase).
 //
-// Governance notes carried from the source document:
-//  • Public nominations open 30 August 2026 (NOT 1 August).
-//  • Africa Education Icon nominations: 30 Aug – 12 Sep 2026.
-//  • Gold-Blue Garnet, Platinum & Influencer Education Impact: 30 Aug – 14 Nov 2026.
+// Governance notes carried from the corrected source document:
+//  • Public nominations open 6 September 2026 (supersedes 30 August).
+//  • Africa Education Icon nominations: 6 – 19 September 2026.
+//  • Gold-Blue Garnet, Platinum & Influencer Education Impact:
+//    6 September – 21 November 2026.
+//  • Recognition Gala: 13 December 2026, Lagos — re-confirmed, unchanged.
 //  • Retired terminology: "voting", "public vote", "winners" (outside the Icon
 //    judges-only internal ranking). Gold-Blue Garnet, Platinum and Influencer
 //    Education Impact are NRC-verified Certificates of Recognition.
 //
+// Date labels for nomination windows are imported from
+// `@/config/nominationWindows2026` and the Gala from `@/config/programme` —
+// never retyped.
+//
 // Source of truth for the Timeline page master calendar, homepage public notice
 // banner and any dated milestone lookups site-wide.
+
+import {
+  CERTIFICATE_WINDOW_CLOSE_LABEL,
+  CERTIFICATE_WINDOW_LABEL,
+  ICON_WINDOW_CLOSE_LABEL,
+  ICON_WINDOW_LABEL,
+  NOMINATIONS_OPEN_LABEL,
+} from "@/config/nominationWindows2026";
+import { PROGRAMME_END_LABEL } from "@/config/programme";
 
 export type MasterTimelineTrack =
   | "activation"
@@ -38,106 +53,81 @@ export interface MasterTimelineEntry {
   track: MasterTimelineTrack;
   href?: string;
   highlight?: boolean;
-  /** Flagged as an unresolved item in the Master Open Items List. */
+  /** Date genuinely unconfirmed in the source — shown honestly, never invented. */
+  toBeConfirmed?: boolean;
+  /** Flagged as an unresolved item in the internal open-items list. */
   flagged?: boolean;
 }
 
 /**
  * Two explicit nomination windows — Icon closes early so judges can complete
- * the 26 Sep – 31 Oct review; the other three tiers stay open to 14 November so
+ * their review, while the other three tiers stay open to 21 November so
  * nominees have time to request physical printed certificates before the Gala.
  */
 export const MASTER_TIMELINE_NOMINATION_WINDOWS = [
   {
     id: "icon",
     tier: "Africa Education Icon",
-    window: "30 August – 12 September 2026",
+    window: ICON_WINDOW_LABEL,
     verification:
-      "NRC pre-verifies, then pushes to the Judges Arena (13–26 Sep) for judges' ranking.",
+      "NRC reviews all Icon nominees 20 September – 3 October, then pushes verified dossiers to the Judges Arena.",
     href: "/nominate?tier=icon",
   },
   {
     id: "gold-blue-garnet",
     tier: "Gold-Blue Garnet",
-    window: "30 August – 14 November 2026",
-    verification: "Rolling NRC verification, 16 September – 13 December 2026.",
+    window: CERTIFICATE_WINDOW_LABEL,
+    verification: `Rolling NRC verification, 23 September – ${PROGRAMME_END_LABEL}.`,
     href: "/nominate?tier=gold-blue-garnet",
   },
   {
     id: "platinum",
     tier: "Platinum Recognition",
-    window: "30 August – 14 November 2026",
+    window: CERTIFICATE_WINDOW_LABEL,
     verification: "NRC verification only — no dated verification window confirmed.",
     href: "/nominate?tier=platinum",
   },
   {
     id: "influencer",
     tier: "Influencer Education Impact",
-    window: "30 August – 14 November 2026",
+    window: CERTIFICATE_WINDOW_LABEL,
     verification: "NRC verification only — no dated verification window confirmed.",
     href: "/nominate?tier=influencer",
   },
 ] as const;
 
 export const MASTER_TIMELINE_PUBLIC_NOTICE = {
-  title: "Public Nominations Open 30 August 2026",
-  body: "Africa Education Icon Award: 30 August – 12 September 2026. Education Impact Certificates (all six recognition families): 30 August – 14 November 2026 — the longer window gives nominees time to request physical printed certificates ahead of the Gala.",
-  effectiveDate: "2026-08-30T00:00:00Z",
+  title: `Public Nominations Open ${NOMINATIONS_OPEN_LABEL}`,
+  body: `Africa Education Icon Award: ${ICON_WINDOW_LABEL}. Education Impact Certificates (all six recognition families): ${CERTIFICATE_WINDOW_LABEL} — the longer window gives nominees time to request physical printed certificates ahead of the Gala.`,
+  effectiveDate: "2026-09-06T00:00:00Z",
   ctaLabel: "Nominate Now",
   ctaHref: "/nominate",
 } as const;
 
-/** Master Open Items List — published as flagged/pending, never silently resolved. */
-export const MASTER_TIMELINE_OPEN_ITEMS: { id: string; item: string; detail: string }[] = [
-  {
-    id: "gala-production-sequencing",
-    item: "Final Verification & Gala Production (10–14 Oct) vs. Icon selection lock (31 Oct)",
-    detail:
-      "Production finalises profiles and scripts before the Icon selection is confirmed. Sequencing conflict — referred to the production team, unresolved.",
-  },
-  {
-    id: "platinum-influencer-verification",
-    item: "Platinum & Influencer Education Impact NRC verification window",
-    detail:
-      "No dedicated verification date range exists (unlike Gold-Blue Garnet's rolling 16 Sep – 13 Dec window). Left as a confirmed gap — no dates invented.",
-  },
-  {
-    id: "podcast-8-9",
-    item: "Education Enablers Podcast — Episodes 8 and 9",
-    detail:
-      "Absent from every source document. The schedule jumps from Episode 7 (29 Sep) to Episode 10 (20 Oct); the gap is shown rather than implied continuity.",
-  },
-  {
-    id: "social-media",
-    item: "Social media timeline",
-    detail: "No confirmed cadence, platform plan or content calendar exists. Not published.",
-  },
-  {
-    id: "platform-go-live",
-    item: "Judges Arena platform build / go-live date",
-    detail:
-      "Unconfirmed. The platform must be production-ready before 12 September 2026 (Judges Onboarding start), but this has not been independently confirmed.",
-  },
-];
+/**
+ * INTERNAL ONLY — editorial/production open questions.
+ * Never rendered on public surfaces (see /timeline).
+ */
+export const MASTER_TIMELINE_OPEN_ITEMS: { id: string; item: string; detail: string }[] = [];
 
 export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   {
     id: "pre-launch",
-    dateLabel: "1 July – 30 August 2026",
-    startsAt: "2026-07-01T00:00:00Z",
-    endsAt: "2026-08-30T23:59:59Z",
+    dateLabel: "8 July – 6 September 2026",
+    startsAt: "2026-07-08T00:00:00Z",
+    endsAt: "2026-09-06T23:59:59Z",
     milestone: "Public Pre-Nomination Activation",
     activity:
       "Build awareness, introduce the four recognition tiers, mobilise media, volunteers, sponsors and partners.",
     outcome: "High readiness for nominations",
     track: "activation",
-    href: "/about/timeline",
+    href: "/timeline",
   },
   {
     id: "nrc-member-onboarding",
-    dateLabel: "1 – 28 August 2026",
-    startsAt: "2026-08-01T00:00:00Z",
-    endsAt: "2026-08-28T23:59:59Z",
+    dateLabel: "8 August – 4 September 2026",
+    startsAt: "2026-08-08T00:00:00Z",
+    endsAt: "2026-09-04T23:59:59Z",
     milestone: "NRC Member Onboarding",
     activity:
       "Onboard and train Nominee Research Corps members across all four tiers, including Icon-relevant verification training.",
@@ -147,8 +137,8 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "weekly-news",
-    dateLabel: "From Friday, 7 August 2026",
-    startsAt: "2026-08-07T00:00:00Z",
+    dateLabel: "From Friday, 14 August 2026",
+    startsAt: "2026-08-14T00:00:00Z",
     milestone: "Weekly NESA-Africa News",
     activity:
       "Weekly updates on nominations, Enablers, partners and Gala preparation.",
@@ -158,8 +148,8 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "podcast-1",
-    dateLabel: "Tuesday, 18 August 2026",
-    startsAt: "2026-08-18T00:00:00Z",
+    dateLabel: "Tuesday, 25 August 2026",
+    startsAt: "2026-08-25T00:00:00Z",
     milestone: "Education Enablers Podcast — Episode 1",
     activity: "Who Is an Education Enabler?",
     outcome: "Launch volunteer contributor network",
@@ -168,19 +158,19 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "webinar-1",
-    dateLabel: "Thursday, 20 August 2026",
-    startsAt: "2026-08-20T00:00:00Z",
-    milestone: "EduAid-Africa Webinar 1 · Fame With Purpose (pilot)",
+    dateLabel: "Thursday, 27 August 2026",
+    startsAt: "2026-08-27T00:00:00Z",
+    milestone: "EduAid-Africa Webinar Week 1 · Fame With Purpose (pilot)",
     activity:
-      "Mobilising influencers and public figures around scholarship support. Pilot episode of the 7-part series.",
+      "How Africa's Sports, Music and Digital Icons Can Turn Influence Into Education Opportunity. Pilot episode of the 7-week series.",
     outcome: "Non-competitive · Influencer Education Impact",
     track: "webinar",
     href: "/media/webinars",
   },
   {
     id: "podcast-2",
-    dateLabel: "Tuesday, 25 August 2026",
-    startsAt: "2026-08-25T00:00:00Z",
+    dateLabel: "Tuesday, 1 September 2026",
+    startsAt: "2026-09-01T00:00:00Z",
     milestone: "Education Enablers Podcast — Episode 2",
     activity: "Fame With Purpose",
     outcome: "Promote influencer advocacy",
@@ -189,8 +179,8 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "public-nominations-open",
-    dateLabel: "From 30 August 2026",
-    startsAt: "2026-08-30T00:00:00Z",
+    dateLabel: `From ${NOMINATIONS_OPEN_LABEL}`,
+    startsAt: "2026-09-06T00:00:00Z",
     milestone: "Public Nominations Open — All 4 Tiers",
     activity:
       "Nominations open for Africa Education Icon, Gold-Blue Garnet, Platinum Recognition and Influencer Education Impact.",
@@ -201,9 +191,9 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "icon-nominations",
-    dateLabel: "30 August – 12 September 2026",
-    startsAt: "2026-08-30T00:00:00Z",
-    endsAt: "2026-09-12T23:59:59Z",
+    dateLabel: ICON_WINDOW_LABEL,
+    startsAt: "2026-09-06T00:00:00Z",
+    endsAt: "2026-09-19T23:59:59Z",
     milestone: "Africa Education Icon Nominations",
     activity:
       "Receive nominations and evidence for the three Icon subcategories across three origin groups (2006–2026 eligibility window).",
@@ -214,9 +204,9 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "tier234-nominations",
-    dateLabel: "30 August – 14 November 2026",
-    startsAt: "2026-08-30T00:00:00Z",
-    endsAt: "2026-11-14T23:59:59Z",
+    dateLabel: CERTIFICATE_WINDOW_LABEL,
+    startsAt: "2026-09-06T00:00:00Z",
+    endsAt: "2026-11-21T23:59:59Z",
     milestone:
       "Gold-Blue Garnet, Platinum & Influencer Education Impact Nominations",
     activity:
@@ -227,19 +217,9 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
     highlight: true,
   },
   {
-    id: "webinar-2",
-    dateLabel: "Thursday, 3 September 2026",
-    startsAt: "2026-09-03T00:00:00Z",
-    milestone: "EduAid-Africa Webinar 2 · Women & Girls in Education",
-    activity: "Removing access barriers, in partnership with FAWE Africa.",
-    outcome: "Non-competitive · Influencer / Platinum / Gold-Blue Garnet",
-    track: "webinar",
-    href: "/media/webinars",
-  },
-  {
     id: "podcast-3",
-    dateLabel: "Tuesday, 1 September 2026",
-    startsAt: "2026-09-01T00:00:00Z",
+    dateLabel: "Tuesday, 8 September 2026",
+    startsAt: "2026-09-08T00:00:00Z",
     milestone: "Education Enablers Podcast — Episode 3",
     activity: "Education Legacies That Must Be Preserved",
     outcome: "Drive Icon nominations",
@@ -247,9 +227,20 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
     href: "/media",
   },
   {
+    id: "webinar-2",
+    dateLabel: "Thursday, 10 September 2026",
+    startsAt: "2026-09-10T00:00:00Z",
+    milestone: "EduAid-Africa Webinar Week 2 · Legacies That Teach Generations",
+    activity:
+      "The Literary, Technical and Philanthropic Leaders Who Changed African Learning.",
+    outcome: "Non-competitive · Africa Education Icon",
+    track: "webinar",
+    href: "/media/webinars",
+  },
+  {
     id: "podcast-4",
-    dateLabel: "Tuesday, 8 September 2026",
-    startsAt: "2026-09-08T00:00:00Z",
+    dateLabel: "Tuesday, 15 September 2026",
+    startsAt: "2026-09-15T00:00:00Z",
     milestone: "Education Enablers Podcast — Episode 4",
     activity: "Funding Education for All",
     outcome: "Attract investment",
@@ -258,8 +249,8 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "icon-nominations-close",
-    dateLabel: "Saturday, 12 September 2026",
-    startsAt: "2026-09-12T00:00:00Z",
+    dateLabel: `Saturday, ${ICON_WINDOW_CLOSE_LABEL}`,
+    startsAt: "2026-09-19T00:00:00Z",
     milestone: "Africa Education Icon Nominations Close",
     activity: "Close Icon nominations and hand the pool to the NRC.",
     outcome: "Begin NRC review of all Icon nominees",
@@ -267,9 +258,9 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "icon-judges-onboarding",
-    dateLabel: "12 – 25 September 2026",
-    startsAt: "2026-09-12T00:00:00Z",
-    endsAt: "2026-09-25T23:59:59Z",
+    dateLabel: "19 September – 2 October 2026",
+    startsAt: "2026-09-19T00:00:00Z",
+    endsAt: "2026-10-02T23:59:59Z",
     milestone: "Icon Judges' Onboarding & Calibration",
     activity:
       "Confirm 27 judges, conflict-of-interest declarations, rubric training and sample scoring. Judges Arena opens for onboarding with no live nominee data.",
@@ -279,9 +270,9 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "nrc-icon-review",
-    dateLabel: "13 – 26 September 2026",
-    startsAt: "2026-09-13T00:00:00Z",
-    endsAt: "2026-09-26T23:59:59Z",
+    dateLabel: "20 September – 3 October 2026",
+    startsAt: "2026-09-20T00:00:00Z",
+    endsAt: "2026-10-03T23:59:59Z",
     milestone: "NRC Review of All Icon Nominees → Judges Arena",
     activity:
       "The Nominee Research Corps verifies every Icon nomination and pushes the verified dossiers into the Judges Arena.",
@@ -290,31 +281,9 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
     href: "/nrc",
   },
   {
-    id: "webinar-3",
-    dateLabel: "Thursday, 17 September 2026",
-    startsAt: "2026-09-17T00:00:00Z",
-    milestone: "EduAid-Africa Webinar 3 · CSR & Corporate Partnership",
-    activity: "Structured funding pathways for corporate education investment.",
-    outcome: "Non-competitive · Gold-Blue Garnet",
-    track: "webinar",
-    href: "/media/webinars",
-  },
-  {
-    id: "gold-blue-garnet-verification",
-    dateLabel: "16 September – 13 December 2026",
-    startsAt: "2026-09-16T00:00:00Z",
-    endsAt: "2026-12-13T23:59:59Z",
-    milestone: "Gold-Blue Garnet NRC Verification (rolling)",
-    activity:
-      "Rolling Nominee Research Corps verification of Gold-Blue Garnet nominations against the EDI Matrix and evidence standards.",
-    outcome: "NRC-verified Certificates of Recognition",
-    track: "verification",
-    href: "/nrc",
-  },
-  {
     id: "podcast-5",
-    dateLabel: "Tuesday, 15 September 2026",
-    startsAt: "2026-09-15T00:00:00Z",
+    dateLabel: "Tuesday, 22 September 2026",
+    startsAt: "2026-09-22T00:00:00Z",
     milestone: "Education Enablers Podcast — Episode 5",
     activity: "Rebuild My School Africa 2027",
     outcome: "Prepare school nominations",
@@ -322,9 +291,32 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
     href: "/media",
   },
   {
+    id: "gold-blue-garnet-verification",
+    dateLabel: `23 September – ${PROGRAMME_END_LABEL}`,
+    startsAt: "2026-09-23T00:00:00Z",
+    endsAt: "2026-12-13T23:59:59Z",
+    milestone: "Gold-Blue Garnet NRC Verification (rolling)",
+    activity:
+      "Rolling Nominee Research Corps verification of Gold-Blue Garnet nominations against the EDI Matrix and evidence standards, capped at the Gala.",
+    outcome: "NRC-verified Certificates of Recognition",
+    track: "verification",
+    href: "/nrc",
+  },
+  {
+    id: "webinar-3",
+    dateLabel: "Thursday, 24 September 2026",
+    startsAt: "2026-09-24T00:00:00Z",
+    milestone: "EduAid-Africa Webinar Week 3 · Funding the Future of African Education",
+    activity:
+      "How CSR, ESG, Technology and Digital Training Can Deliver Measurable Education Impact.",
+    outcome: "Non-competitive · Gold-Blue Garnet",
+    track: "webinar",
+    href: "/media/webinars",
+  },
+  {
     id: "podcast-6",
-    dateLabel: "Tuesday, 22 September 2026",
-    startsAt: "2026-09-22T00:00:00Z",
+    dateLabel: "Tuesday, 29 September 2026",
+    startsAt: "2026-09-29T00:00:00Z",
     milestone: "Education Enablers Podcast — Episode 6",
     activity: "No Learner Left Behind",
     outcome: "Prepare special-needs nominations",
@@ -333,21 +325,21 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "judges-final-review",
-    dateLabel: "26 September – 31 October 2026",
-    startsAt: "2026-09-26T00:00:00Z",
-    endsAt: "2026-10-31T23:59:59Z",
+    dateLabel: "3 October – 7 November 2026",
+    startsAt: "2026-10-03T00:00:00Z",
+    endsAt: "2026-11-07T23:59:59Z",
     milestone: "Judges' Final Review & Selection — all 9 Icon pathways",
     activity:
       "All 27 judges deliberate, score and lock results per pathway in the Judges Arena (3 Icon subcategories × 3 origin groups).",
-    outcome: "All 9 Africa Education Icon recipients confirmed by 31 October 2026",
+    outcome: "All 9 Africa Education Icon recipients confirmed by 7 November 2026",
     track: "judging",
     href: "/judges/directory",
     highlight: true,
   },
   {
     id: "podcast-7",
-    dateLabel: "Tuesday, 29 September 2026",
-    startsAt: "2026-09-29T00:00:00Z",
+    dateLabel: "Tuesday, 6 October 2026",
+    startsAt: "2026-10-06T00:00:00Z",
     milestone: "Education Enablers Podcast — Episode 7",
     activity: "Volunteers Sharing Knowledge",
     outcome: "Recruit volunteers",
@@ -355,20 +347,9 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
     href: "/media",
   },
   {
-    id: "webinar-4",
-    dateLabel: "Thursday, 1 October 2026",
-    startsAt: "2026-10-01T00:00:00Z",
-    milestone: "EduAid-Africa Webinar 4 · Curriculum Innovation & Future of Work",
-    activity:
-      "Reforming what and how Africa's children learn. Content boundary applies — no naming, promoting or comparing any Icon nominee under review.",
-    outcome: "Icon only — content boundary applies",
-    track: "webinar",
-    href: "/media/webinars",
-  },
-  {
     id: "special-needs-nominations-open",
-    dateLabel: "From Thursday, 1 October 2026",
-    startsAt: "2026-10-01T00:00:00Z",
+    dateLabel: "From Thursday, 8 October 2026",
+    startsAt: "2026-10-08T00:00:00Z",
     milestone: "Special-Needs School Nominations Open",
     activity: "Open nominations for Rebuild My School Africa 2027.",
     outcome: "Build intervention database",
@@ -376,42 +357,32 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
     href: "/impact/rebuild-my-school-africa",
   },
   {
-    id: "final-verification-gala-production",
-    dateLabel: "10 – 14 October 2026",
-    startsAt: "2026-10-10T00:00:00Z",
-    endsAt: "2026-10-14T23:59:59Z",
-    milestone: "Final Verification & Gala Production ⚑",
+    id: "webinar-4",
+    dateLabel: "Thursday, 8 October 2026",
+    startsAt: "2026-10-08T00:00:00Z",
+    milestone:
+      "EduAid-Africa Webinar Week 4 · Stories That Mobilise, Organisations That Deliver",
     activity:
-      "Complete profiles, scripts and rehearsals. Flagged open item: this window precedes the 31 October Icon selection lock — sequencing referred to the production team.",
-    outcome: "Gala-ready programme (pending sequencing resolution)",
-    track: "gala",
-    flagged: true,
-  },
-  {
-    id: "webinar-5",
-    dateLabel: "Thursday, 15 October 2026",
-    startsAt: "2026-10-15T00:00:00Z",
-    milestone: "EduAid-Africa Webinar 5 · EduTech & Digital Learning",
-    activity: "Technology-driven access and learning outcomes.",
-    outcome: "Non-competitive · Gold-Blue Garnet",
+      "How Media, NGOs and Community Networks Can Move Africa From Awareness to Action. Content boundary applies — no naming, promoting or comparing any Icon nominee under review.",
+    outcome: "Content boundary applies",
     track: "webinar",
     href: "/media/webinars",
   },
   {
-    id: "podcast-8-9-gap",
-    dateLabel: "Date to be confirmed",
-    startsAt: "2026-10-06T00:00:00Z",
-    milestone: "Education Enablers Podcast — Episodes 8 & 9 ⚑",
+    id: "podcast-8-9",
+    dateLabel: "To be confirmed",
+    startsAt: "2026-10-13T00:00:00Z",
+    milestone: "Education Enablers Podcast — Episodes 8 & 9",
     activity:
-      "No date or topic exists in any source document. The schedule jumps from Episode 7 (29 September) to Episode 10 (20 October).",
-    outcome: "Open item — confirm whether these episodes exist or were cut",
+      "Dates and topics are not yet confirmed (indicatively around 13 October 2026). Published as unconfirmed rather than estimated.",
+    outcome: "To be confirmed",
     track: "podcast",
-    flagged: true,
+    toBeConfirmed: true,
   },
   {
     id: "podcast-10",
-    dateLabel: "Tuesday, 20 October 2026",
-    startsAt: "2026-10-20T00:00:00Z",
+    dateLabel: "Tuesday, 27 October 2026",
+    startsAt: "2026-10-27T00:00:00Z",
     milestone: "Education Enablers Podcast — Episode 10",
     activity: "From Recognition to Social Impact",
     outcome: "Connect to post-award delivery",
@@ -419,31 +390,79 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
     href: "/media",
   },
   {
-    id: "webinar-6",
-    dateLabel: "Thursday, 29 October 2026",
-    startsAt: "2026-10-29T00:00:00Z",
-    milestone: "EduAid-Africa Webinar 6 · Faith, Leadership & Institutional Impact",
-    activity: "Faith-based, political and institutional contributions to education.",
-    outcome: "Non-competitive · Platinum",
+    id: "webinar-5",
+    dateLabel: "Thursday, 22 October 2026",
+    startsAt: "2026-10-22T00:00:00Z",
+    milestone: "EduAid-Africa Webinar Week 5 · Building the Future-Ready African School",
+    activity:
+      "STEM, Creative Learning, Teacher Development, Government Action and School Transformation.",
+    outcome: "Non-competitive · Gold-Blue Garnet / Platinum Recognition",
     track: "webinar",
     href: "/media/webinars",
+  },
+  {
+    id: "webinar-6",
+    dateLabel: "Thursday, 5 November 2026",
+    startsAt: "2026-11-05T00:00:00Z",
+    milestone:
+      "EduAid-Africa Webinar Week 6 · Africa's Knowledge, Skills and Volunteer Teaching Network",
+    activity:
+      "Libraries, Research, Digital Learning, NYSC, Youth Skills and Educators Sharing Knowledge Across Borders.",
+    outcome: "Non-competitive · Gold-Blue Garnet / Platinum Recognition",
+    track: "webinar",
+    href: "/media/webinars",
+  },
+  {
+    id: "icon-recipients-confirmed",
+    dateLabel: "Saturday, 7 November 2026",
+    startsAt: "2026-11-07T00:00:00Z",
+    milestone: "All 9 Africa Education Icon Recipients Confirmed",
+    activity:
+      "Judges lock every pathway result and the Governance Board ratifies the nine Icon recipients.",
+    outcome: "Icon roll of honour finalised",
+    track: "judging",
+    highlight: true,
+  },
+  {
+    id: "final-verification-gala-production",
+    dateLabel: "9 – 13 November 2026",
+    startsAt: "2026-11-09T00:00:00Z",
+    endsAt: "2026-11-13T23:59:59Z",
+    milestone: "Final Verification & Gala Production",
+    activity:
+      "Complete verified profiles, citations, broadcast scripts and rehearsal schedules following the Icon selection lock.",
+    outcome: "Production-ready recognition programme",
+    track: "gala",
+    href: "/gala",
   },
   {
     id: "webinar-7",
-    dateLabel: "Thursday, 12 November 2026",
-    startsAt: "2026-11-12T00:00:00Z",
-    milestone: "EduAid-Africa Webinar 7 · Diaspora & International Partnership",
+    dateLabel: "Thursday, 19 November 2026",
+    startsAt: "2026-11-19T00:00:00Z",
+    milestone: "EduAid-Africa Webinar Week 7 · The Global Alliance for African Education",
     activity:
-      "Closing episode — global partners and Diaspora Africans investing in education. Content boundary applies.",
-    outcome: "Icon only — content boundary applies",
+      "Faith, Leadership, Diaspora, Tourism and International Partnerships for Schools, Teachers and Learners. Closing episode — content boundary applies.",
+    outcome: "Content boundary applies",
     track: "webinar",
     href: "/media/webinars",
   },
   {
+    id: "tier234-nominations-close",
+    dateLabel: `Saturday, ${CERTIFICATE_WINDOW_CLOSE_LABEL}`,
+    startsAt: "2026-11-21T00:00:00Z",
+    milestone:
+      "Gold-Blue Garnet, Platinum & Influencer Education Impact Nominations Close",
+    activity:
+      "Final submissions accepted; remaining nominations move into rolling NRC verification.",
+    outcome: "Nomination stage closed for the 2026 cycle",
+    track: "nominations",
+    highlight: true,
+  },
+  {
     id: "tv-show-1",
-    dateLabel: "Sunday, 15 November 2026",
-    startsAt: "2026-11-15T00:00:00Z",
-    milestone: "TV Show 1 — Icon + Influencer Education Impact",
+    dateLabel: "Sunday, 22 November 2026",
+    startsAt: "2026-11-22T00:00:00Z",
+    milestone: "TV Showcase 1 — Icon + Influencer Education Impact",
     activity:
       "Africa Education Icon recipients presented; Influencer Education Impact Certificates of Recognition announced.",
     outcome: "Continental broadcast moment",
@@ -452,9 +471,9 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "tv-show-2",
-    dateLabel: "Tuesday, 1 December 2026",
-    startsAt: "2026-12-01T00:00:00Z",
-    milestone: "TV Show 2 — Gold-Blue Garnet + Platinum",
+    dateLabel: "Tuesday, 8 December 2026",
+    startsAt: "2026-12-08T00:00:00Z",
+    milestone: "TV Showcase 2 — Gold-Blue Garnet + Platinum",
     activity:
       "NRC-verified Gold-Blue Garnet and Platinum Recognition Enablers presented ahead of the Gala.",
     outcome: "Build Gala momentum",
@@ -463,9 +482,9 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "tv-show-3",
-    dateLabel: "Sunday, 13 December 2026",
+    dateLabel: `Sunday, ${PROGRAMME_END_LABEL}`,
     startsAt: "2026-12-13T00:00:00Z",
-    milestone: "TV Show 3 — Gala Live Coverage",
+    milestone: "TV Showcase 3 — Gala Live Coverage",
     activity: "Live broadcast of the NESA-Africa 2026 Recognition Gala.",
     outcome: "Continental live coverage",
     track: "showcase",
@@ -473,20 +492,20 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
   },
   {
     id: "recognition-gala",
-    dateLabel: "Sunday, 13 December 2026",
+    dateLabel: `Sunday, ${PROGRAMME_END_LABEL}`,
     startsAt: "2026-12-13T00:00:00Z",
     milestone: "NESA-Africa 2026 Recognition Gala, Lagos",
     activity:
       "Honour the 9 Africa Education Icons and every NRC-verified Education Enabler across the four recognition tiers.",
     outcome: "Conclude the recognition stage",
     track: "gala",
-    href: "/media/gala",
+    href: "/gala",
     highlight: true,
   },
   {
     id: "impact-legacy",
-    dateLabel: "December 2026 – December 2027",
-    startsAt: "2026-12-15T00:00:00Z",
+    dateLabel: "22 December 2026 – 13 December 2027",
+    startsAt: "2026-12-22T00:00:00Z",
     endsAt: "2027-12-13T23:59:59Z",
     milestone: "Impact & Legacy Phase",
     activity:
@@ -522,3 +541,8 @@ export const MASTER_TIMELINE_TRACK_ACCENT: Record<MasterTimelineTrack, string> =
   news: "bg-sky-500/15 text-sky-200 border-sky-400/30",
   legacy: "bg-lime-500/15 text-lime-200 border-lime-400/30",
 };
+
+/** Chronological order (by ISO start) for timeline rendering. */
+export const MASTER_TIMELINE_CHRONOLOGICAL: MasterTimelineEntry[] = [
+  ...MASTER_TIMELINE_2026,
+].sort((a, b) => a.startsAt.localeCompare(b.startsAt));
