@@ -6434,6 +6434,77 @@ export type Database = {
         }
         Relationships: []
       }
+      nrc_judge_handovers: {
+        Row: {
+          created_at: string
+          decided_at: string
+          decision: string
+          id: string
+          nomination_id: string
+          nominee_id: string
+          public_note: string | null
+          quorum_reviews: number
+          released_at: string
+          summary_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          decided_at?: string
+          decision: string
+          id?: string
+          nomination_id: string
+          nominee_id: string
+          public_note?: string | null
+          quorum_reviews?: number
+          released_at?: string
+          summary_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          decided_at?: string
+          decision?: string
+          id?: string
+          nomination_id?: string
+          nominee_id?: string
+          public_note?: string | null
+          quorum_reviews?: number
+          released_at?: string
+          summary_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nrc_judge_handovers_nomination_id_fkey"
+            columns: ["nomination_id"]
+            isOneToOne: false
+            referencedRelation: "nominations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_judge_handovers_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_judge_handovers_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_judge_handovers_summary_id_fkey"
+            columns: ["summary_id"]
+            isOneToOne: true
+            referencedRelation: "nrc_verification_summaries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       nrc_members: {
         Row: {
           approval_rate: number | null
@@ -11588,6 +11659,14 @@ export type Database = {
           expires_at: string
           name: string
           token: string
+        }[]
+      }
+      nrc_handover_for_nominee: {
+        Args: { p_nominee_id: string }
+        Returns: {
+          decided_at: string
+          decision: string
+          public_note: string
         }[]
       }
       prepare_icon_grand_jury_ballots: {
