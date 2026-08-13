@@ -110,7 +110,9 @@ export const MASTER_TIMELINE_PUBLIC_NOTICE = {
  */
 export const MASTER_TIMELINE_OPEN_ITEMS: { id: string; item: string; detail: string }[] = [];
 
-export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
+export const MASTER_TIMELINE_2026: MasterTimelineEntry[
+  
+] = [
   {
     id: "pre-launch",
     dateLabel: "8 July – 6 September 2026",
