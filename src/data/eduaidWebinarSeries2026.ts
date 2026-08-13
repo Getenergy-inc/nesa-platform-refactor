@@ -51,9 +51,9 @@ export const EDUAID_WEBINAR_SERIES_2026: EduAidWebinarEpisode[] = [
     summary:
       "Mobilising influence — sport, music and digital platforms — behind scholarships and school support.",
     promotes: [
-      "Africa Sports Education Impact",
-      "Africa Music Education Impact",
-      "Africa Social Media Education Impact",
+      "Africa Sports — Education Impact",
+      "Africa Music — Education Impact",
+      "Africa Social Media — Education Impact",
       "Youth advocacy",
       "Scholarship mobilisation",
       "School-support campaigns",
@@ -97,9 +97,9 @@ export const EDUAID_WEBINAR_SERIES_2026: EduAidWebinarEpisode[] = [
     summary:
       "Structured funding and technology pathways for measurable education outcomes.",
     promotes: [
-      "Best CSR in Education (Africa)",
-      "Best CSR in Education (Nigeria)",
-      "Best EduTech Organisation Africa",
+      "Best CSR in Education — Africa",
+      "Best CSR in Education — Nigeria",
+      "Best EduTech Organisation — Africa",
       "CSR Education Fund Pool",
       "Digital learning",
       "School adoption",
@@ -120,9 +120,9 @@ export const EDUAID_WEBINAR_SERIES_2026: EduAidWebinarEpisode[] = [
     summary:
       "Advocacy and delivery — the media and civil-society engine behind education access.",
     promotes: [
-      "Best Media in Educational Advocacy Nigeria",
-      "Best NGO Contribution to Education (Nigeria)",
-      "Best NGO Contribution to Education (Africa)",
+      "Best Media in Educational Advocacy — Nigeria",
+      "Best NGO Contribution to Education — Nigeria",
+      "Best NGO Contribution to Education — Africa",
       "Advocacy",
       "Implementation partnerships",
       "Community mobilisation",
@@ -143,9 +143,9 @@ export const EDUAID_WEBINAR_SERIES_2026: EduAidWebinarEpisode[] = [
     summary:
       "What it takes to transform a school — teaching, curriculum, facilities and state-level action.",
     promotes: [
-      "Best STEM Education Champion Africa",
-      "Creative Arts Education Impact Nigeria",
-      "Best Education-Friendly State Nigeria",
+      "Best STEM Education Champion — Africa",
+      "Creative Arts Education Impact — Nigeria",
+      "Best Education-Friendly State — Nigeria",
       "Rebuild My School Africa",
       "Teacher CPD",
       "Digital classrooms",
@@ -167,7 +167,7 @@ export const EDUAID_WEBINAR_SERIES_2026: EduAidWebinarEpisode[] = [
       "Knowledge infrastructure and the volunteer teaching network that carries it across borders.",
     promotes: [
       "Best Library in Nigerian Tertiary Institutions",
-      "Best R&D Contribution to Education Nigeria",
+      "Best R&D Contribution to Education — Nigeria",
       "EduAid Volunteer Teachers",
       "NYSC Online SAED Plus",
       "Digital skills",
@@ -190,9 +190,9 @@ export const EDUAID_WEBINAR_SERIES_2026: EduAidWebinarEpisode[] = [
     summary:
       "Closing episode — faith, government, diaspora and international partners aligned behind African education.",
     promotes: [
-      "Christian Education Impact Africa",
-      "Islamic Education Impact Africa",
-      "Political Leaders' Contribution to Education Nigeria",
+      "Christian Education Impact — Africa",
+      "Islamic Education Impact — Africa",
+      "Political Leaders' Contribution to Education — Nigeria",
       "International and Bilateral Education Partnerships",
       "Diaspora Association Educational Impact",
       "Afri-EduTourism 2027",

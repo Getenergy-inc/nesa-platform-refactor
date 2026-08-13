@@ -33,6 +33,7 @@ import { EDUAID_WEBINAR_SERIES_2026 } from "@/data/eduaidWebinarSeries2026";
 import { PROGRAMME_END_LABEL, GALA_COUNTDOWN_TARGET } from "@/config/programme";
 import {
   NOMINATIONS_OPEN_LABEL,
+  NOMINATIONS_OPEN_ISO,
   ICON_WINDOW_LABEL,
   CERTIFICATE_WINDOW_LABEL,
 } from "@/config/nominationWindows2026";
@@ -82,6 +83,7 @@ export default function Timeline() {
 
   const nrcActive = (status.nrcQueued ?? 0) + (status.nrcVerified ?? 0) > 0;
   const judgesActive = (status.judgeAssignments ?? 0) > 0 && (status.activeJudges ?? 0) > 0;
+  const nominationsOpen = Date.now() >= new Date(`${NOMINATIONS_OPEN_ISO}T00:00:00Z`).getTime();
 
   const stages: {
     step: string;
@@ -96,8 +98,8 @@ export default function Timeline() {
       step: "01",
       title: "Nominations",
       body: `Education Enablers are nominated by the public from ${NOMINATIONS_OPEN_LABEL} across every NESA-Africa recognition pathway.`,
-      statusLabel: "Open",
-      tone: "gold",
+      statusLabel: nominationsOpen ? "Open" : `Opens ${NOMINATIONS_OPEN_LABEL}`,
+      tone: nominationsOpen ? "gold" : "stone",
       metric: status.loading ? "…" : formatCount(status.nominationsTotal),
       metricLabel: "nominations received",
     },

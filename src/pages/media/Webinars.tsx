@@ -61,7 +61,7 @@ export default function Webinars() {
         <title>EduAid-Africa Webinar Series Timetable | NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Full timetable for the EduAid-Africa Webinar Series 2026 — 7 bi-weekly episodes from 20 August to 12 November 2026, with linked NESA-Africa recognition tiers and integrity rules."
+          content={`Full timetable for the EduAid-Africa Webinar Series 2026 — 7 bi-weekly episodes from ${EDUAID_SERIES_META.seriesStartLabel} to ${EDUAID_SERIES_META.seriesEndLabel}, with linked NESA-Africa recognition tiers and integrity rules.`}
         />
       </Helmet>
 
