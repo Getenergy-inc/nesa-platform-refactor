@@ -299,7 +299,7 @@ export default function Timeline() {
                       {e.details && e.details.length > 0 && (
                         <details className="mt-3 rounded-lg border border-[#1b3a6b]/50 bg-[#1b3a6b]/[0.18]">
                           <summary className="cursor-pointer list-none px-4 py-2.5 text-xs font-semibold text-[#9db9e8]">
-                            How these pathways are decided
+                            {DETAILS_SUMMARY_LABEL[e.track] ?? "More detail"}
                           </summary>
                           <ul className="space-y-2 px-4 pb-4">
                             {e.details.map((d) => (
