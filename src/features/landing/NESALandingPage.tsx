@@ -22,6 +22,8 @@ import { useTranslation } from "react-i18next";
 import { LocalizedSEO } from "@/components/seo/LocalizedSEO";
 
 import { PublicNominationsNotice } from "@/components/nesa/PublicNominationsNotice";
+import { AwardPlaqueMotionSection } from "@/components/nesa/AwardPlaqueMotionSection";
+import { InteractiveAfricaMap } from "@/components/nesa/InteractiveAfricaMap";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { UtilityBar } from "@/components/nesa/UtilityBar";
