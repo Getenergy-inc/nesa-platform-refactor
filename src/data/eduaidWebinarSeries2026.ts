@@ -45,7 +45,7 @@ export const EDUAID_WEBINAR_SERIES_2026: EduAidWebinarEpisode[] = [
     id: "week-1-fame-with-purpose",
     isoDate: "2026-08-27",
     dateLabel: "Thursday, 27 August 2026",
-    title: "Week 1 — Fame With Purpose",
+    title: "Fame With Purpose",
     subtitle:
       "How Africa's Sports, Music and Digital Icons Can Turn Influence Into Education Opportunity",
     summary:
@@ -68,7 +68,7 @@ export const EDUAID_WEBINAR_SERIES_2026: EduAidWebinarEpisode[] = [
     id: "week-2-legacies-that-teach",
     isoDate: "2026-09-10",
     dateLabel: "Thursday, 10 September 2026",
-    title: "Week 2 — Legacies That Teach Generations",
+    title: "Legacies That Teach Generations",
     subtitle:
       "The Literary, Technical and Philanthropic Leaders Who Changed African Learning",
     summary:
@@ -91,7 +91,7 @@ export const EDUAID_WEBINAR_SERIES_2026: EduAidWebinarEpisode[] = [
     id: "week-3-funding-the-future",
     isoDate: "2026-09-24",
     dateLabel: "Thursday, 24 September 2026",
-    title: "Week 3 — Funding the Future of African Education",
+    title: "Funding the Future of African Education",
     subtitle:
       "How CSR, ESG, Technology and Digital Training Can Deliver Measurable Education Impact",
     summary:
@@ -114,7 +114,7 @@ export const EDUAID_WEBINAR_SERIES_2026: EduAidWebinarEpisode[] = [
     id: "week-4-stories-that-mobilise",
     isoDate: "2026-10-08",
     dateLabel: "Thursday, 8 October 2026",
-    title: "Week 4 — Stories That Mobilise, Organisations That Deliver",
+    title: "Stories That Mobilise, Organisations That Deliver",
     subtitle:
       "How Media, NGOs and Community Networks Can Move Africa From Awareness to Action",
     summary:
@@ -137,7 +137,7 @@ export const EDUAID_WEBINAR_SERIES_2026: EduAidWebinarEpisode[] = [
     id: "week-5-future-ready-school",
     isoDate: "2026-10-22",
     dateLabel: "Thursday, 22 October 2026",
-    title: "Week 5 — Building the Future-Ready African School",
+    title: "Building the Future-Ready African School",
     subtitle:
       "STEM, Creative Learning, Teacher Development, Government Action and School Transformation",
     summary:
@@ -160,7 +160,7 @@ export const EDUAID_WEBINAR_SERIES_2026: EduAidWebinarEpisode[] = [
     id: "week-6-knowledge-skills-volunteers",
     isoDate: "2026-11-05",
     dateLabel: "Thursday, 5 November 2026",
-    title: "Week 6 — Africa's Knowledge, Skills and Volunteer Teaching Network",
+    title: "Africa's Knowledge, Skills and Volunteer Teaching Network",
     subtitle:
       "Libraries, Research, Digital Learning, NYSC, Youth Skills and Educators Sharing Knowledge Across Borders",
     summary:
@@ -184,7 +184,7 @@ export const EDUAID_WEBINAR_SERIES_2026: EduAidWebinarEpisode[] = [
     id: "week-7-global-alliance",
     isoDate: "2026-11-19",
     dateLabel: "Thursday, 19 November 2026",
-    title: "Week 7 — The Global Alliance for African Education",
+    title: "The Global Alliance for African Education",
     subtitle:
       "Faith, Leadership, Diaspora, Tourism and International Partnerships for Schools, Teachers and Learners",
     summary:
