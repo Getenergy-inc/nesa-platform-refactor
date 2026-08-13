@@ -62,6 +62,12 @@ const TRACK_CHIP: Record<MasterTimelineTrack, string> = {
   legacy: "border-[#4a5f22]/60 bg-[#4a5f22]/25 text-[#c6d98a]",
 };
 
+/** Track-aware label for the expandable `details` block. */
+const DETAILS_SUMMARY_LABEL: Partial<Record<MasterTimelineTrack, string>> = {
+  showcase: "How these pathways are decided",
+  podcast: "Episode details",
+};
+
 const MONTH_LABEL = (iso: string) =>
   new Date(iso).toLocaleDateString("en-GB", { month: "long", year: "numeric", timeZone: "UTC" });
 
