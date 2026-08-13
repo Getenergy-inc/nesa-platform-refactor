@@ -75,7 +75,7 @@ const EDI_DIMENSIONS = [
 
 const TIMELINE = [
   { date: "1 Aug 2026", label: "Public Nominations Open" },
-  { date: "19 Sep 2026", label: "Nominations Close" },
+  { date: "6 Oct 2026", label: "Nominations Close" },
   { date: "1–13 Sept 2026", label: "NRC Verification & Dossiers" },
   { date: "14–30 Sept 2026", label: "Judges Arena — Panel Screening" },
   { date: "1–7 Oct 2026", label: "Grand Jury Ranked-Choice Voting" },

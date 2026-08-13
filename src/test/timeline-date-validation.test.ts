@@ -164,12 +164,12 @@ describe("Timeline anchors — Complete Timeline Set source values", () => {
     ["pre-launch", "2026-07-08", "2026-09-06"],
     ["nrc-member-onboarding", "2026-08-08", "2026-09-04"],
     ["public-nominations-open", "2026-09-06", undefined],
-    ["icon-nominations", "2026-09-06", "2026-09-19"],
+    ["icon-nominations", "2026-09-06", "2026-10-06"],
     ["tier234-nominations", "2026-09-06", "2026-11-21"],
-    ["icon-judges-onboarding", "2026-09-19", "2026-10-02"],
-    ["nrc-icon-review", "2026-09-20", "2026-10-03"],
+    ["icon-judges-onboarding", "2026-10-06", "2026-10-19"],
+    ["nrc-icon-review", "2026-10-07", "2026-10-20"],
     ["gold-blue-garnet-verification", "2026-09-23", "2026-12-13"],
-    ["judges-final-review", "2026-10-03", "2026-11-07"],
+    ["judges-final-review", "2026-10-20", "2026-11-07"],
     ["final-verification-gala-production", "2026-11-09", "2026-11-13"],
     ["tv-show-1", "2026-11-22", undefined],
     ["tv-show-2", "2026-12-08", undefined],
@@ -195,7 +195,7 @@ describe("Timeline anchors — Complete Timeline Set source values", () => {
     const byId = Object.fromEntries(
       MASTER_TIMELINE_NOMINATION_WINDOWS.map((w) => [w.id, w]),
     );
-    expect(byId.icon.window).toBe("6 – 19 September 2026");
+    expect(byId.icon.window).toBe("6 September – 6 October 2026");
     for (const id of ["gold-blue-garnet", "platinum", "influencer"]) {
       expect(byId[id].window, id).toBe("6 September – 21 November 2026");
     }
@@ -275,8 +275,8 @@ describe("Retired timeline dates are gone from src/", () => {
   it("the label parser detects a corrupted date (sanity check)", () => {
     const p = parseDateLabel("Tuesday, 18 August 2026");
     expect(dayOf(p.start!)).toBe("2026-08-18");
-    expect(parseDateLabel("6 – 19 September 2026").end!.toISOString()).toContain(
-      "2026-09-19",
+    expect(parseDateLabel("6 September – 6 October 2026").end!.toISOString()).toContain(
+      "2026-10-06",
     );
     expect(parseDateLabel("Date to be confirmed").unresolved).toBe(true);
   });

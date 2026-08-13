@@ -120,7 +120,7 @@ const TIER_BENEFITS: Record<TierSlug, SubpageBenefit[]> = {
 const ICON_TIMELINE: SubpageTimelineEntry[] = [
   { date: "1 – 31 July 2026", title: "Pre-launch activation", description: "Tier briefings, media mobilisation and chapter readiness." , status: "upcoming" },
   { date: "6 September 2026", title: "Nominations open", description: "Public nominations open for the Africa Education Icon tier.", status: "upcoming" },
-  { date: "19 September 2026", title: "Nominations close", description: "Icon nominations close at 23:59 WAT.", status: "upcoming" },
+  { date: "6 October 2026", title: "Nominations close", description: "Icon nominations close at 23:59 WAT.", status: "upcoming" },
   { date: "13 – 16 September 2026", title: "Final Icon verification", description: "NRC completes document, citation and referee checks.", status: "upcoming" },
   { date: "17 – 30 September 2026", title: "Icon Jury assessment", description: "Independent assessment, moderation and final jury decisions.", status: "upcoming" },
   { date: "10 – 14 October 2026", title: "Ratification & production", description: "Governance Board ratification and Gala production.", status: "upcoming" },
@@ -142,7 +142,7 @@ const STANDARD_TIMELINE: SubpageTimelineEntry[] = [
 const ICON_COUNTDOWN: SubpageCountdown = {
   heading: "Time left to nominate an Africa Education Icon",
   targetIso: "2026-09-12T23:59:00+01:00",
-  label: "Icon nominations close · 19 September 2026, 23:59 WAT",
+  label: "Icon nominations close · 6 October 2026, 23:59 WAT",
   note: "Nominations submitted with complete evidence enter NRC verification immediately.",
 };
 

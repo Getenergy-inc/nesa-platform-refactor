@@ -65,6 +65,11 @@ const TRACK_CHIP: Record<MasterTimelineTrack, string> = {
 const MONTH_LABEL = (iso: string) =>
   new Date(iso).toLocaleDateString("en-GB", { month: "long", year: "numeric", timeZone: "UTC" });
 
+/** Maps `webinar-N` chronological entries to their episode narrative. */
+const WEBINAR_BY_TIMELINE_ID = Object.fromEntries(
+  EDUAID_WEBINAR_SERIES_2026.map((ep) => [`webinar-${ep.episode}`, ep]),
+) as Record<string, (typeof EDUAID_WEBINAR_SERIES_2026)[number] | undefined>;
+
 /** Group the chronological milestones by month for a scannable reading rhythm. */
 function groupByMonth(entries: MasterTimelineEntry[]) {
   const groups: { key: string; label: string; items: MasterTimelineEntry[] }[] = [];
@@ -291,6 +296,35 @@ export default function Timeline() {
                       <p className="ed-mono mt-2 text-[11px] uppercase tracking-[0.12em] text-[#6b6a63]">
                         {e.outcome}
                       </p>
+                      {WEBINAR_BY_TIMELINE_ID[e.id] && (
+                        <details className="mt-3 rounded-lg border border-[#c9a227]/25 bg-[#c9a227]/[0.05]">
+                          <summary className="cursor-pointer list-none px-4 py-2.5 text-xs font-semibold text-[#e8c468]">
+                            See the full webinar narrative
+                          </summary>
+                          <div className="px-4 pb-4">
+                            <p className="text-sm italic text-[#cfcdc5]">
+                              {WEBINAR_BY_TIMELINE_ID[e.id].subtitle}
+                            </p>
+                            <div className="ed-mono mt-3 text-[11px] uppercase tracking-[0.14em] text-[#6b6a63]">
+                              Promotes
+                            </div>
+                            <ul className="mt-2 flex flex-wrap gap-2">
+                              {WEBINAR_BY_TIMELINE_ID[e.id].promotes.map((p) => (
+                                <li
+                                  key={p}
+                                  className="rounded-full border border-[#c9a227]/25 bg-[#c9a227]/[0.08] px-3 py-1 text-xs text-[#e8c468]"
+                                >
+                                  {p}
+                                </li>
+                              ))}
+                            </ul>
+                            <p className="mt-3 text-xs text-[#8a8981]">
+                              {WEBINAR_BY_TIMELINE_ID[e.id].tiers} ·{" "}
+                              {WEBINAR_BY_TIMELINE_ID[e.id].competitiveLabel}
+                            </p>
+                          </div>
+                        </details>
+                      )}
                     </li>
                   ))}
                 </ol>

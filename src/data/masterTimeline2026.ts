@@ -4,7 +4,7 @@
 //
 // Governance notes carried from the corrected source document:
 //  • Public nominations open 6 September 2026 (supersedes 30 August).
-//  • Africa Education Icon nominations: 6 – 19 September 2026.
+//  • Africa Education Icon nominations: 6 September – 6 October 2026.
 //  • Gold-Blue Garnet, Platinum & Influencer Education Impact:
 //    6 September – 21 November 2026.
 //  • Recognition Gala: 13 December 2026, Lagos — re-confirmed, unchanged.
@@ -110,7 +110,9 @@ export const MASTER_TIMELINE_PUBLIC_NOTICE = {
  */
 export const MASTER_TIMELINE_OPEN_ITEMS: { id: string; item: string; detail: string }[] = [];
 
-export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
+export const MASTER_TIMELINE_2026: MasterTimelineEntry[
+  
+] = [
   {
     id: "pre-launch",
     dateLabel: "8 July – 6 September 2026",
@@ -193,7 +195,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
     id: "icon-nominations",
     dateLabel: ICON_WINDOW_LABEL,
     startsAt: "2026-09-06T00:00:00Z",
-    endsAt: "2026-09-19T23:59:59Z",
+    endsAt: "2026-10-06T23:59:59Z",
     milestone: "Africa Education Icon Nominations",
     activity:
       "Receive nominations and evidence for the three Icon subcategories across three origin groups (2006–2026 eligibility window).",
@@ -248,39 +250,6 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
     href: "/media",
   },
   {
-    id: "icon-nominations-close",
-    dateLabel: `Saturday, ${ICON_WINDOW_CLOSE_LABEL}`,
-    startsAt: "2026-09-19T00:00:00Z",
-    milestone: "Africa Education Icon Nominations Close",
-    activity: "Close Icon nominations and hand the pool to the NRC.",
-    outcome: "Begin NRC review of all Icon nominees",
-    track: "nominations",
-  },
-  {
-    id: "icon-judges-onboarding",
-    dateLabel: "19 September – 2 October 2026",
-    startsAt: "2026-09-19T00:00:00Z",
-    endsAt: "2026-10-02T23:59:59Z",
-    milestone: "Icon Judges' Onboarding & Calibration",
-    activity:
-      "Confirm 27 judges, conflict-of-interest declarations, rubric training and sample scoring. Judges Arena opens for onboarding with no live nominee data.",
-    outcome: "Calibrated judging panel ready",
-    track: "judging",
-    href: "/judges/directory",
-  },
-  {
-    id: "nrc-icon-review",
-    dateLabel: "20 September – 3 October 2026",
-    startsAt: "2026-09-20T00:00:00Z",
-    endsAt: "2026-10-03T23:59:59Z",
-    milestone: "NRC Review of All Icon Nominees → Judges Arena",
-    activity:
-      "The Nominee Research Corps verifies every Icon nomination and pushes the verified dossiers into the Judges Arena.",
-    outcome: "Assessment-ready Icon pool in the Arena",
-    track: "verification",
-    href: "/nrc",
-  },
-  {
     id: "podcast-5",
     dateLabel: "Tuesday, 22 September 2026",
     startsAt: "2026-09-22T00:00:00Z",
@@ -324,17 +293,25 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
     href: "/media",
   },
   {
-    id: "judges-final-review",
-    dateLabel: "3 October – 7 November 2026",
-    startsAt: "2026-10-03T00:00:00Z",
-    endsAt: "2026-11-07T23:59:59Z",
-    milestone: "Judges' Final Review & Selection — all 9 Icon pathways",
+    id: "icon-nominations-close",
+    dateLabel: `Tuesday, ${ICON_WINDOW_CLOSE_LABEL}`,
+    startsAt: "2026-10-06T00:00:00Z",
+    milestone: "Africa Education Icon Nominations Close",
+    activity: "Close Icon nominations and hand the pool to the NRC.",
+    outcome: "Begin NRC review of all Icon nominees",
+    track: "nominations",
+  },
+  {
+    id: "icon-judges-onboarding",
+    dateLabel: "6 – 19 October 2026",
+    startsAt: "2026-10-06T00:00:00Z",
+    endsAt: "2026-10-19T23:59:59Z",
+    milestone: "Icon Judges' Onboarding & Calibration",
     activity:
-      "All 27 judges deliberate, score and lock results per pathway in the Judges Arena (3 Icon subcategories × 3 origin groups).",
-    outcome: "All 9 Africa Education Icon recipients confirmed by 7 November 2026",
+      "Confirm 27 judges, conflict-of-interest declarations, rubric training and sample scoring. Judges Arena opens for onboarding with no live nominee data.",
+    outcome: "Calibrated judging panel ready",
     track: "judging",
     href: "/judges/directory",
-    highlight: true,
   },
   {
     id: "podcast-7",
@@ -345,6 +322,18 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
     outcome: "Recruit volunteers",
     track: "podcast",
     href: "/media",
+  },
+  {
+    id: "nrc-icon-review",
+    dateLabel: "7 – 20 October 2026",
+    startsAt: "2026-10-07T00:00:00Z",
+    endsAt: "2026-10-20T23:59:59Z",
+    milestone: "NRC Review of All Icon Nominees → Judges Arena",
+    activity:
+      "The Nominee Research Corps verifies every Icon nomination and pushes the verified dossiers into the Judges Arena.",
+    outcome: "Assessment-ready Icon pool in the Arena",
+    track: "verification",
+    href: "/nrc",
   },
   {
     id: "special-needs-nominations-open",
@@ -380,14 +369,17 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
     toBeConfirmed: true,
   },
   {
-    id: "podcast-10",
-    dateLabel: "Tuesday, 27 October 2026",
-    startsAt: "2026-10-27T00:00:00Z",
-    milestone: "Education Enablers Podcast — Episode 10",
-    activity: "From Recognition to Social Impact",
-    outcome: "Connect to post-award delivery",
-    track: "podcast",
-    href: "/media",
+    id: "judges-final-review",
+    dateLabel: "20 October – 7 November 2026",
+    startsAt: "2026-10-20T00:00:00Z",
+    endsAt: "2026-11-07T23:59:59Z",
+    milestone: "Judges' Final Review & Selection — all 9 Icon pathways",
+    activity:
+      "All 27 judges deliberate, score and lock results per pathway in the Judges Arena (3 Icon subcategories × 3 origin groups).",
+    outcome: "All 9 Africa Education Icon recipients confirmed by 7 November 2026",
+    track: "judging",
+    href: "/judges/directory",
+    highlight: true,
   },
   {
     id: "webinar-5",
@@ -399,6 +391,16 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[] = [
     outcome: "Non-competitive · Gold-Blue Garnet / Platinum Recognition",
     track: "webinar",
     href: "/media/webinars",
+  },
+  {
+    id: "podcast-10",
+    dateLabel: "Tuesday, 27 October 2026",
+    startsAt: "2026-10-27T00:00:00Z",
+    milestone: "Education Enablers Podcast — Episode 10",
+    activity: "From Recognition to Social Impact",
+    outcome: "Connect to post-award delivery",
+    track: "podcast",
+    href: "/media",
   },
   {
     id: "webinar-6",

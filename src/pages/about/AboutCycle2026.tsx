@@ -44,7 +44,7 @@ const PHASES_2026: TimelinePhase[] = [
     spotlight: true,
     events: [
       { date: "6 Sep", title: "Public Nominations Open — all four tiers" },
-      { date: "6 – 19 Sep", title: "Africa Education Icon window", detail: "Independent, shorter closing date" },
+      { date: "6 Sep – 6 Oct", title: "Africa Education Icon window", detail: "Independent, shorter closing date" },
     ],
   },
   {
@@ -105,7 +105,7 @@ export default function AboutCycle2026() {
           { name: "NESA-Africa 2026", path: "/about/nesa-africa-2026" },
         ]}
         faqs={[
-          { question: "When do NESA-Africa 2026 nominations open?", answer: "Public nominations open 6 September 2026 across all four tiers. The Africa Education Icon Award nomination window runs 6 – 19 September 2026." },
+          { question: "When do NESA-Africa 2026 nominations open?", answer: "Public nominations open 6 September 2026 across all four tiers. The Africa Education Icon Award nomination window runs 6 September – 6 October 2026." },
           { question: "When is the NESA-Africa 2026 Recognition Gala?", answer: "The Recognition Gala takes place on 13 December 2026 in Lagos, Nigeria, where the 9 Icon Laureates are announced and all Certificates of Recognition are formally presented." },
           { question: "Is there any public voting in the 2026 cycle?", answer: "No. There is no public voting mechanism at any stage of the 2026 cycle. Recognition is determined exclusively through Nominee Research Corps verification, the EDI Matrix, and — for the Icon Award only — independent judging and Governance ratification." },
         ]}
