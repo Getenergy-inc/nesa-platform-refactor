@@ -65,6 +65,11 @@ const TRACK_CHIP: Record<MasterTimelineTrack, string> = {
 const MONTH_LABEL = (iso: string) =>
   new Date(iso).toLocaleDateString("en-GB", { month: "long", year: "numeric", timeZone: "UTC" });
 
+/** Maps `webinar-N` chronological entries to their episode narrative. */
+const WEBINAR_BY_TIMELINE_ID = Object.fromEntries(
+  EDUAID_WEBINAR_SERIES_2026.map((ep) => [`webinar-${ep.episode}`, ep]),
+) as Record<string, (typeof EDUAID_WEBINAR_SERIES_2026)[number] | undefined>;
+
 /** Group the chronological milestones by month for a scannable reading rhythm. */
 function groupByMonth(entries: MasterTimelineEntry[]) {
   const groups: { key: string; label: string; items: MasterTimelineEntry[] }[] = [];
