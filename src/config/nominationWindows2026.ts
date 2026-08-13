@@ -16,11 +16,11 @@
 export const NOMINATIONS_OPEN_ISO = "2026-09-06";
 export const NOMINATIONS_OPEN_LABEL = "6 September 2026";
 
-/** Africa Education Icon Award — short window so judging can complete. */
+/** Africa Education Icon Award — one-month window so judging can complete. */
 export const ICON_WINDOW_OPEN_ISO = "2026-09-06";
-export const ICON_WINDOW_CLOSE_ISO = "2026-09-19";
-export const ICON_WINDOW_LABEL = "6 – 19 September 2026";
-export const ICON_WINDOW_CLOSE_LABEL = "19 September 2026";
+export const ICON_WINDOW_CLOSE_ISO = "2026-10-06";
+export const ICON_WINDOW_LABEL = "6 September – 6 October 2026";
+export const ICON_WINDOW_CLOSE_LABEL = "6 October 2026";
 
 /**
  * Gold-Blue Garnet, Platinum Recognition and Influencer Education Impact —
@@ -32,7 +32,7 @@ export const CERTIFICATE_WINDOW_LABEL = "6 September – 21 November 2026";
 export const CERTIFICATE_WINDOW_CLOSE_LABEL = "21 November 2026";
 
 /** Icon judging window (onboarding through final selection). */
-export const ICON_JUDGING_WINDOW_LABEL = "19 September – 7 November 2026";
+export const ICON_JUDGING_WINDOW_LABEL = "6 October – 7 November 2026";
 
 /** Date all nine Africa Education Icon recipients are confirmed. */
 export const ICON_RECIPIENTS_CONFIRMED_LABEL = "7 November 2026";
