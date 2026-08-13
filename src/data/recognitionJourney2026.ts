@@ -126,7 +126,7 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     purpose:
       "Open nominations simultaneously for Africa Education Icon, Gold-Blue Garnet, Platinum Recognition and Influencer Education Impact.",
     description:
-      "Two distinct windows apply: Africa Education Icon closes early on 12 September 2026 so judges can complete their review, while Gold-Blue Garnet, Platinum Recognition and Influencer Education Impact stay open to 21 November 2026 — giving nominees time to request physical printed certificates before the Gala.",
+      "Two distinct windows apply: Africa Education Icon closes early on 19 September 2026 so judges can complete their review, while Gold-Blue Garnet, Platinum Recognition and Influencer Education Impact stay open to 21 November 2026 — giving nominees time to request physical printed certificates before the Gala.",
     selection: "NRC verification · Independent judging for Icon only",
     outcomes: ["Steady flow of nominations across all four tiers"],
     ctas: [{ label: "Nominate an Enabler", to: "/nominate" }],
@@ -136,7 +136,7 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     number: 4,
     name: "Africa Education Icon Nominations",
     shortName: "Icon Nominations",
-    dateRange: "30 August – 12 September 2026",
+    dateRange: "6 – 19 September 2026",
     startsAt: "2026-08-30T00:00:00Z",
     endsAt: "2026-09-12T23:59:59Z",
     status: "upcoming",
@@ -164,7 +164,7 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     number: 5,
     name: "Gold-Blue Garnet, Platinum & Influencer Nominations",
     shortName: "Tiers 2–4 Nominations",
-    dateRange: "30 August – 21 November 2026",
+    dateRange: "6 September – 21 November 2026",
     startsAt: "2026-08-30T00:00:00Z",
     endsAt: "2026-11-14T23:59:59Z",
     status: "upcoming",
