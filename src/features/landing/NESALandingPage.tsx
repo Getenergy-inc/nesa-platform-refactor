@@ -110,8 +110,18 @@ export function NESALandingPage() {
         <IconLifetimeSection />
         <IconGovernanceNote />
 
+        {/* 3b. AWARD PLAQUE + LOGO MOTION GRAPHIC */}
+        <AwardPlaqueMotionSection />
+
         {/* 4. LIVING GALLERY — Meet Africa's Education Enablers */}
         <LivingGallerySection />
+
+        {/* 4b. INTERACTIVE AFRICA MAP — 8 regions */}
+        <LazySection>
+          <InteractiveAfricaMap />
+        </LazySection>
+
+
 
         {/* 5. ONE CONTINENTAL MISSION. SIX RECOGNITION PATHWAYS. */}
         <RecognitionFamiliesSection />
