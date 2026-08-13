@@ -291,6 +291,35 @@ export default function Timeline() {
                       <p className="ed-mono mt-2 text-[11px] uppercase tracking-[0.12em] text-[#6b6a63]">
                         {e.outcome}
                       </p>
+                      {WEBINAR_BY_TIMELINE_ID[e.id] && (
+                        <details className="mt-3 rounded-lg border border-[#c9a227]/25 bg-[#c9a227]/[0.05]">
+                          <summary className="cursor-pointer list-none px-4 py-2.5 text-xs font-semibold text-[#e8c468]">
+                            See the full webinar narrative
+                          </summary>
+                          <div className="px-4 pb-4">
+                            <p className="text-sm italic text-[#cfcdc5]">
+                              {WEBINAR_BY_TIMELINE_ID[e.id].subtitle}
+                            </p>
+                            <div className="ed-mono mt-3 text-[11px] uppercase tracking-[0.14em] text-[#6b6a63]">
+                              Promotes
+                            </div>
+                            <ul className="mt-2 flex flex-wrap gap-2">
+                              {WEBINAR_BY_TIMELINE_ID[e.id].promotes.map((p) => (
+                                <li
+                                  key={p}
+                                  className="rounded-full border border-[#c9a227]/25 bg-[#c9a227]/[0.08] px-3 py-1 text-xs text-[#e8c468]"
+                                >
+                                  {p}
+                                </li>
+                              ))}
+                            </ul>
+                            <p className="mt-3 text-xs text-[#8a8981]">
+                              {WEBINAR_BY_TIMELINE_ID[e.id].tiers} ·{" "}
+                              {WEBINAR_BY_TIMELINE_ID[e.id].competitiveLabel}
+                            </p>
+                          </div>
+                        </details>
+                      )}
                     </li>
                   ))}
                 </ol>
