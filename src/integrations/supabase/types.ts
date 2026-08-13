@@ -14,27 +14,6 @@ export type Database = {
   }
   public: {
     Tables: {
-      _nrc_stage4_results: {
-        Row: {
-          check_name: string
-          created_at: string
-          detail: string | null
-          id: number
-        }
-        Insert: {
-          check_name: string
-          created_at?: string
-          detail?: string | null
-          id?: number
-        }
-        Update: {
-          check_name?: string
-          created_at?: string
-          detail?: string | null
-          id?: number
-        }
-        Relationships: []
-      }
       acceptance_letters: {
         Row: {
           created_at: string | null
