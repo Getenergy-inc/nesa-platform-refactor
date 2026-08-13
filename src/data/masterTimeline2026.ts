@@ -57,6 +57,8 @@ export interface MasterTimelineEntry {
   toBeConfirmed?: boolean;
   /** Flagged as an unresolved item in the internal open-items list. */
   flagged?: boolean;
+  /** Optional expandable breakdown lines (e.g. TV showcase pathway notes). */
+  details?: string[];
 }
 
 /**
@@ -70,7 +72,7 @@ export const MASTER_TIMELINE_NOMINATION_WINDOWS = [
     tier: "Africa Education Icon",
     window: ICON_WINDOW_LABEL,
     verification:
-      "NRC reviews all Icon nominees 20 September – 3 October, then pushes verified dossiers to the Judges Arena.",
+      "NRC reviews all Icon nominees 7 – 20 October, then pushes verified dossiers to the Judges Arena.",
     href: "/nominate?tier=icon",
   },
   {
@@ -108,7 +110,21 @@ export const MASTER_TIMELINE_PUBLIC_NOTICE = {
  * INTERNAL ONLY — editorial/production open questions.
  * Never rendered on public surfaces (see /timeline).
  */
-export const MASTER_TIMELINE_OPEN_ITEMS: { id: string; item: string; detail: string }[] = [];
+export const MASTER_TIMELINE_OPEN_ITEMS: { id: string; item: string; detail: string }[] = [
+  {
+    id: "podcast-8-9-unconfirmed",
+    item: "Education Enablers Podcast — Episodes 8 & 9 have no confirmed date or topic",
+    detail:
+      "No source record confirms air dates or themes for Episodes 8 and 9. Published as unconfirmed; no dates invented.",
+  },
+  {
+    id: "gbg-verification-past-showcase-2",
+    item:
+      "Gold-Blue Garnet verification (closes 13 December) extends 5 days past TV Showcase 2 (8 December)",
+    detail:
+      "TV Showcase 2 on 8 December 2026 presents Gold-Blue Garnet recipients, but rolling NRC verification for that family runs to Gala day, 13 December 2026. Recipients verified between 9 and 13 December cannot appear in the broadcast. Flagged for the team — not silently resolved.",
+  },
+];
 
 export const MASTER_TIMELINE_2026: MasterTimelineEntry[
   
@@ -370,13 +386,13 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
   },
   {
     id: "judges-final-review",
-    dateLabel: "20 October – 7 November 2026",
+    dateLabel: "20 October – 24 November 2026",
     startsAt: "2026-10-20T00:00:00Z",
-    endsAt: "2026-11-07T23:59:59Z",
+    endsAt: "2026-11-24T23:59:59Z",
     milestone: "Judges' Final Review & Selection — all 9 Icon pathways",
     activity:
       "All 27 judges deliberate, score and lock results per pathway in the Judges Arena (3 Icon subcategories × 3 origin groups).",
-    outcome: "All 9 Africa Education Icon recipients confirmed by 7 November 2026",
+    outcome: "All 9 Africa Education Icon recipients confirmed by 24 November 2026",
     track: "judging",
     href: "/judges/directory",
     highlight: true,
@@ -416,8 +432,8 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
   },
   {
     id: "icon-recipients-confirmed",
-    dateLabel: "Saturday, 7 November 2026",
-    startsAt: "2026-11-07T00:00:00Z",
+    dateLabel: "Tuesday, 24 November 2026",
+    startsAt: "2026-11-24T00:00:00Z",
     milestone: "All 9 Africa Education Icon Recipients Confirmed",
     activity:
       "Judges lock every pathway result and the Governance Board ratifies the nine Icon recipients.",
@@ -427,12 +443,12 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
   },
   {
     id: "final-verification-gala-production",
-    dateLabel: "9 – 13 November 2026",
-    startsAt: "2026-11-09T00:00:00Z",
-    endsAt: "2026-11-13T23:59:59Z",
+    dateLabel: "25 – 29 November 2026",
+    startsAt: "2026-11-25T00:00:00Z",
+    endsAt: "2026-11-29T23:59:59Z",
     milestone: "Final Verification & Gala Production",
     activity:
-      "Complete verified profiles, citations, broadcast scripts and rehearsal schedules following the Icon selection lock.",
+      "Complete verified profiles, citations, broadcast scripts and rehearsal schedules following the 24 November Icon selection lock.",
     outcome: "Production-ready recognition programme",
     track: "gala",
     href: "/gala",
@@ -464,23 +480,31 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     id: "tv-show-1",
     dateLabel: "Sunday, 22 November 2026",
     startsAt: "2026-11-22T00:00:00Z",
-    milestone: "TV Showcase 1 — Icon + Influencer Education Impact",
+    milestone: "TV Showcase 1 — Platinum + Influencer Education Impact",
     activity:
-      "Africa Education Icon recipients presented; Influencer Education Impact Certificates of Recognition announced.",
+      "Platinum Recognition and Influencer Education Impact Certificates of Recognition presented to a continental audience.",
     outcome: "Continental broadcast moment",
     track: "showcase",
     href: "/media",
+    details: [
+      "Platinum Recognition — NRC verification → Governance Approval. No judges, no public vote.",
+      "Influencer Education Impact — NRC verification → Governance Approval. No judges, no public vote.",
+    ],
   },
   {
     id: "tv-show-2",
     dateLabel: "Tuesday, 8 December 2026",
     startsAt: "2026-12-08T00:00:00Z",
-    milestone: "TV Showcase 2 — Gold-Blue Garnet + Platinum",
+    milestone: "TV Showcase 2 — Icon + Gold-Blue Garnet",
     activity:
-      "NRC-verified Gold-Blue Garnet and Platinum Recognition Enablers presented ahead of the Gala.",
+      "Africa Education Icon recipients presented alongside NRC-verified Gold-Blue Garnet Enablers ahead of the Gala.",
     outcome: "Build Gala momentum",
     track: "showcase",
     href: "/media",
+    details: [
+      "Africa Education Icon — NRC verification → Judges Arena → Grand Jury ranked-choice voting, locked 24 November 2026.",
+      "Gold-Blue Garnet — NRC verification only. No judges, no public vote.",
+    ],
   },
   {
     id: "tv-show-3",

@@ -32,7 +32,7 @@ export const CERTIFICATE_WINDOW_LABEL = "6 September – 21 November 2026";
 export const CERTIFICATE_WINDOW_CLOSE_LABEL = "21 November 2026";
 
 /** Icon judging window (onboarding through final selection). */
-export const ICON_JUDGING_WINDOW_LABEL = "6 October – 7 November 2026";
+export const ICON_JUDGING_WINDOW_LABEL = "6 October – 24 November 2026";
 
 /** Date all nine Africa Education Icon recipients are confirmed. */
-export const ICON_RECIPIENTS_CONFIRMED_LABEL = "7 November 2026";
+export const ICON_RECIPIENTS_CONFIRMED_LABEL = "24 November 2026";
