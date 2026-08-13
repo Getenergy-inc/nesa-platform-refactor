@@ -6434,25 +6434,102 @@ export type Database = {
         }
         Relationships: []
       }
+      nrc_judge_handovers: {
+        Row: {
+          created_at: string
+          decided_at: string
+          decision: string
+          id: string
+          nomination_id: string
+          nominee_id: string
+          public_note: string | null
+          quorum_reviews: number
+          released_at: string
+          summary_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          decided_at?: string
+          decision: string
+          id?: string
+          nomination_id: string
+          nominee_id: string
+          public_note?: string | null
+          quorum_reviews?: number
+          released_at?: string
+          summary_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          decided_at?: string
+          decision?: string
+          id?: string
+          nomination_id?: string
+          nominee_id?: string
+          public_note?: string | null
+          quorum_reviews?: number
+          released_at?: string
+          summary_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nrc_judge_handovers_nomination_id_fkey"
+            columns: ["nomination_id"]
+            isOneToOne: false
+            referencedRelation: "nominations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_judge_handovers_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_judge_handovers_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nrc_judge_handovers_summary_id_fkey"
+            columns: ["summary_id"]
+            isOneToOne: true
+            referencedRelation: "nrc_verification_summaries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       nrc_members: {
         Row: {
           approval_rate: number | null
           assigned_region: string | null
           avg_review_time_hours: number | null
+          bio: string | null
           category_checks: number | null
+          country: string | null
           created_at: string | null
           current_assignments: number | null
+          display_name: string | null
           evidence_checks: number | null
           id: string
           identity_checks: number | null
           invited_by: string | null
           is_available: boolean | null
+          is_public: boolean
           joined_at: string | null
           last_active_at: string | null
           max_queue_size: number | null
           nrc_role: string | null
           person_id: string
+          photo_url: string | null
           review_count: number | null
+          slug: string | null
           specialization: string[] | null
           status: string
           total_reviews: number | null
@@ -6463,20 +6540,26 @@ export type Database = {
           approval_rate?: number | null
           assigned_region?: string | null
           avg_review_time_hours?: number | null
+          bio?: string | null
           category_checks?: number | null
+          country?: string | null
           created_at?: string | null
           current_assignments?: number | null
+          display_name?: string | null
           evidence_checks?: number | null
           id?: string
           identity_checks?: number | null
           invited_by?: string | null
           is_available?: boolean | null
+          is_public?: boolean
           joined_at?: string | null
           last_active_at?: string | null
           max_queue_size?: number | null
           nrc_role?: string | null
           person_id?: string
+          photo_url?: string | null
           review_count?: number | null
+          slug?: string | null
           specialization?: string[] | null
           status?: string
           total_reviews?: number | null
@@ -6487,20 +6570,26 @@ export type Database = {
           approval_rate?: number | null
           assigned_region?: string | null
           avg_review_time_hours?: number | null
+          bio?: string | null
           category_checks?: number | null
+          country?: string | null
           created_at?: string | null
           current_assignments?: number | null
+          display_name?: string | null
           evidence_checks?: number | null
           id?: string
           identity_checks?: number | null
           invited_by?: string | null
           is_available?: boolean | null
+          is_public?: boolean
           joined_at?: string | null
           last_active_at?: string | null
           max_queue_size?: number | null
           nrc_role?: string | null
           person_id?: string
+          photo_url?: string | null
           review_count?: number | null
+          slug?: string | null
           specialization?: string[] | null
           status?: string
           total_reviews?: number | null
@@ -6685,7 +6774,7 @@ export type Database = {
           {
             foreignKeyName: "nrc_queue_nomination_id_fkey"
             columns: ["nomination_id"]
-            isOneToOne: true
+            isOneToOne: false
             referencedRelation: "nominations"
             referencedColumns: ["id"]
           },
@@ -6903,13 +6992,14 @@ export type Database = {
           created_at: string | null
           decision_at: string | null
           evidence_verified: boolean | null
-          final_decision: string
+          final_decision: string | null
           id: string
           identity_verified: boolean | null
           lead_reviewer_id: string | null
           nomination_id: string
           nominee_id: string | null
           primary_reviewer_id: string | null
+          public_summary_note: string | null
           reject_count: number | null
           review_count: number | null
           risk_cleared: boolean | null
@@ -6926,13 +7016,14 @@ export type Database = {
           created_at?: string | null
           decision_at?: string | null
           evidence_verified?: boolean | null
-          final_decision: string
+          final_decision?: string | null
           id?: string
           identity_verified?: boolean | null
           lead_reviewer_id?: string | null
           nomination_id: string
           nominee_id?: string | null
           primary_reviewer_id?: string | null
+          public_summary_note?: string | null
           reject_count?: number | null
           review_count?: number | null
           risk_cleared?: boolean | null
@@ -6949,13 +7040,14 @@ export type Database = {
           created_at?: string | null
           decision_at?: string | null
           evidence_verified?: boolean | null
-          final_decision?: string
+          final_decision?: string | null
           id?: string
           identity_verified?: boolean | null
           lead_reviewer_id?: string | null
           nomination_id?: string
           nominee_id?: string | null
           primary_reviewer_id?: string | null
+          public_summary_note?: string | null
           reject_count?: number | null
           review_count?: number | null
           risk_cleared?: boolean | null
@@ -10676,6 +10768,39 @@ export type Database = {
         }
         Relationships: []
       }
+      nrc_public_members: {
+        Row: {
+          bio: string | null
+          country: string | null
+          created_at: string | null
+          display_name: string | null
+          id: string | null
+          photo_url: string | null
+          slug: string | null
+          specialization: string[] | null
+        }
+        Insert: {
+          bio?: string | null
+          country?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          id?: string | null
+          photo_url?: string | null
+          slug?: string | null
+          specialization?: string[] | null
+        }
+        Update: {
+          bio?: string | null
+          country?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          id?: string | null
+          photo_url?: string | null
+          slug?: string | null
+          specialization?: string[] | null
+        }
+        Relationships: []
+      }
       pathway_scorecards_status: {
         Row: {
           id: string | null
@@ -11534,6 +11659,14 @@ export type Database = {
           expires_at: string
           name: string
           token: string
+        }[]
+      }
+      nrc_handover_for_nominee: {
+        Args: { p_nominee_id: string }
+        Returns: {
+          decided_at: string
+          decision: string
+          public_note: string
         }[]
       }
       prepare_icon_grand_jury_ballots: {
