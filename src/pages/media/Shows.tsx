@@ -5,12 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
   ArrowLeft,
-  Award,
+  ChevronDown,
   Clock,
-  Medal,
   Play,
-  Star,
-  Trophy,
   Video,
   X,
   Youtube,
@@ -18,173 +15,99 @@ import {
   Tv,
 } from "lucide-react";
 
-interface Show {
-  id: string;
-  title: string;
-  description: string;
-  duration: string;
-  episodes: number;
-  icon: React.ElementType;
-  color: string;
-  features: string[];
-  youtubeUrl: string;
-  thumbnailUrl?: string;
-}
+import { awardTVShows, type AwardTVShow } from "@/config/awardTVShows";
 
-const shows: Show[] = [
-  {
-    id: "platinum",
-    title: "The Platinum Show",
-    description: "Celebrating Platinum Certificate recipients and their contributions to education across Africa.",
-    duration: "3 hours",
-    episodes: 12,
-    icon: Medal,
-    color: "amber",
-    features: ["NRC-verified nominees", "Impact stories", "Certificate ceremonies"],
-    youtubeUrl: "https://www.youtube.com/embed/nQCXDX_X3rs",
-  },
-  {
-    id: "icon",
-    title: "The Icon Show",
-    description: "Profiles of Africa Education Icons — lifetime achievers who shaped the continent's education landscape.",
-    duration: "3 hours",
-    episodes: 9,
-    icon: Star,
-    color: "blue",
-    features: ["Lifetime achievements", "Legacy interviews", "Documentary segments"],
-    youtubeUrl: "https://www.youtube.com/embed/aP0SskrfioI",
-  },
-  {
-    id: "gold",
-    title: "The Gold Show",
-    description: "Public voting updates, regional competitions, and Gold Certificate winner announcements.",
-    duration: "3 hours",
-    episodes: 15,
-    icon: Award,
-    color: "yellow",
-    features: ["Live voting updates", "Regional spotlights", "Winner announcements"],
-    youtubeUrl: "https://www.youtube.com/embed/DDREAU_bmRk",
-  },
-  {
-    id: "blue-garnet",
-    title: "The Blue Garnet Show",
-    description: "Behind the scenes of the highest honour — jury deliberations, finalist profiles, and Gala previews.",
-    duration: "3 hours",
-    episodes: 6,
-    icon: Trophy,
-    color: "purple",
-    features: ["Finalist profiles", "Jury insights", "Gala countdown"],
-    youtubeUrl: "https://www.youtube.com/embed/Hdu_qlFLfrQ",
-  },
-];
+type Show = AwardTVShow;
 
-const colorClasses = {
-  amber: {
-    gradient: "from-amber-500/20 via-amber-500/10 to-transparent",
-    border: "border-amber-500/30 hover:border-amber-500/60",
-    text: "text-amber-400",
-    bg: "bg-amber-500/10",
-    icon: "bg-gradient-to-br from-amber-400 to-amber-600",
-  },
-  blue: {
-    gradient: "from-blue-500/20 via-blue-500/10 to-transparent",
-    border: "border-blue-500/30 hover:border-blue-500/60",
-    text: "text-blue-400",
-    bg: "bg-blue-500/10",
-    icon: "bg-gradient-to-br from-blue-400 to-blue-600",
-  },
-  yellow: {
-    gradient: "from-yellow-500/20 via-yellow-500/10 to-transparent",
-    border: "border-yellow-500/30 hover:border-yellow-500/60",
-    text: "text-yellow-400",
-    bg: "bg-yellow-500/10",
-    icon: "bg-gradient-to-br from-yellow-400 to-yellow-600",
-  },
-  purple: {
-    gradient: "from-purple-500/20 via-purple-500/10 to-transparent",
-    border: "border-purple-500/30 hover:border-purple-500/60",
-    text: "text-purple-400",
-    bg: "bg-purple-500/10",
-    icon: "bg-gradient-to-br from-purple-400 to-purple-600",
-  },
-};
+const shows: Show[] = awardTVShows;
 
-function ShowCard({ show, onPlay }: { show: Show; onPlay: () => void }) {
-  const Icon = show.icon;
-  const colors = colorClasses[show.color as keyof typeof colorClasses];
-  const thumbnailUrl = show.thumbnailUrl || 
-    `https://img.youtube.com/vi/${show.youtubeUrl.split('/embed/')[1]}/hqdefault.jpg`;
+const thumbFor = (show: Show) =>
+  show.thumbnailUrl ||
+  `https://img.youtube.com/vi/${show.videoUrl.split("/embed/")[1]}/hqdefault.jpg`;
+
+function ShowcaseRow({ show, onPlay }: { show: Show; onPlay: () => void }) {
+  const [open, setOpen] = useState(false);
 
   return (
-    <div 
-      className={`group relative rounded-2xl border bg-gradient-to-br ${colors.gradient} ${colors.border} overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl cursor-pointer`}
-      onClick={onPlay}
-    >
-      {/* Thumbnail */}
-      <div className="aspect-video relative overflow-hidden">
-        <img 
-          src={thumbnailUrl} 
-          alt={show.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        />
-        
-        {/* Play overlay */}
-        <div className="absolute inset-0 bg-charcoal/50 group-hover:bg-charcoal/30 transition-colors duration-300 flex items-center justify-center">
-          <div className={`h-16 w-16 rounded-full ${colors.icon} group-hover:scale-110 transition-all duration-300 flex items-center justify-center shadow-lg`}>
-            <Play className="h-7 w-7 text-white ml-1" fill="currentColor" />
-          </div>
-        </div>
-
-        {/* Badges */}
-        <div className="absolute top-3 left-3 right-3 flex justify-between items-start">
-          <div className={`h-10 w-10 rounded-xl ${colors.icon} flex items-center justify-center shadow-lg`}>
-            <Icon className="h-5 w-5 text-white" />
-          </div>
-          <div className="flex gap-2">
-            <Badge variant="outline" className="bg-charcoal/80 border-white/20 text-white/90 text-xs">
-              <Clock className="mr-1 h-3 w-3" />
-              {show.duration}
-            </Badge>
-            <Badge variant="outline" className="bg-charcoal/80 border-white/20 text-white/90 text-xs">
-              {show.episodes} eps
-            </Badge>
-          </div>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="p-5">
-        <h3 className={`font-display text-xl font-bold text-white mb-2 group-hover:${colors.text} transition-colors`}>
-          {show.title}
-        </h3>
-        <p className="text-white/60 text-sm mb-4 line-clamp-2">
-          {show.description}
-        </p>
-        
-        {/* Features */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {show.features.map((feature) => (
-            <span
-              key={feature}
-              className={`rounded-full ${colors.bg} px-3 py-1 text-xs ${colors.text}`}
-            >
-              {feature}
+    <>
+      <tr className="border-b border-gold/10 align-top">
+        <td className="p-4">
+          <button
+            onClick={() => setOpen((v) => !v)}
+            className="flex items-start gap-3 text-left"
+            aria-expanded={open}
+          >
+            <ChevronDown
+              className={`mt-1 h-4 w-4 shrink-0 text-gold transition-transform ${open ? "rotate-180" : ""}`}
+            />
+            <span>
+              <span className="block text-xs uppercase tracking-wider text-gold">
+                {show.showcaseLabel}
+              </span>
+              <span className="block font-display text-base font-semibold text-white">
+                {show.pairing}
+              </span>
             </span>
-          ))}
-        </div>
+          </button>
+        </td>
+        <td className="hidden p-4 text-sm text-white/60 md:table-cell">{show.description}</td>
+        <td className="whitespace-nowrap p-4 text-sm text-white/70">
+          <span className="inline-flex items-center gap-1">
+            <Clock className="h-3.5 w-3.5" />
+            {show.duration}
+          </span>
+          <span className="ml-3">{show.episodes} eps</span>
+        </td>
+        <td className="p-4 text-right">
+          <Button
+            size="sm"
+            className="rounded-full bg-gold text-charcoal hover:bg-gold/90"
+            onClick={onPlay}
+          >
+            <Play className="mr-1.5 h-3.5 w-3.5" fill="currentColor" />
+            Watch
+          </Button>
+        </td>
+      </tr>
 
-        <Button 
-          className={`w-full ${colors.icon} text-white border-0 hover:opacity-90`}
-          onClick={(e) => {
-            e.stopPropagation();
-            onPlay();
-          }}
-        >
-          <Play className="mr-2 h-4 w-4" />
-          Watch Episodes
-        </Button>
-      </div>
-    </div>
+      {open && (
+        <tr className="border-b border-gold/10 bg-charcoal-light/40">
+          <td colSpan={4} className="p-4">
+            <div className="grid gap-4 md:grid-cols-[220px_1fr]">
+              <img
+                src={thumbFor(show)}
+                alt={show.showName}
+                loading="lazy"
+                className="hidden w-full rounded-lg border border-gold/10 object-cover md:block"
+              />
+              <div>
+                <p className="mb-3 text-sm text-white/70 md:hidden">{show.description}</p>
+                <ul className="space-y-3">
+                  {show.segments.map((seg) => (
+                    <li key={seg.id} className="rounded-lg border border-gold/10 bg-charcoal p-3">
+                      <div className="flex items-center justify-between gap-3">
+                        <h4 className="font-display text-sm font-semibold text-white">{seg.title}</h4>
+                        <Badge variant="outline" className="border-gold/30 text-xs text-gold">
+                          {seg.episodes} eps
+                        </Badge>
+                      </div>
+                      <p className="mt-1 text-sm text-white/60">{seg.focus}</p>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {show.features.map((f) => (
+                    <span key={f} className="rounded-full bg-gold/10 px-3 py-1 text-xs text-gold">
+                      {f}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      )}
+    </>
   );
 }
 
@@ -201,9 +124,9 @@ function VideoModal({ show, onClose }: { show: Show; onClose: () => void }) {
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gold/10">
           <div className="flex items-center gap-3">
-            <show.icon className={`h-6 w-6 ${colorClasses[show.color as keyof typeof colorClasses].text}`} />
+            <Tv className="h-6 w-6 text-gold" />
             <h3 className="font-display text-xl font-semibold text-white">
-              {show.title}
+              {show.showName}
             </h3>
           </div>
           <button 
@@ -217,8 +140,8 @@ function VideoModal({ show, onClose }: { show: Show; onClose: () => void }) {
         {/* Video Player */}
         <div className="aspect-video bg-black">
           <iframe
-            src={`${show.youtubeUrl}?autoplay=1&rel=0`}
-            title={show.title}
+            src={`${show.videoUrl}?autoplay=1&rel=0`}
+            title={show.showName}
             className="w-full h-full"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -238,7 +161,7 @@ export default function Shows() {
         <title>Online Shows | NESA-Africa TV Programming</title>
         <meta
           name="description"
-          content="Watch NESA-Africa's flagship TV shows — The Platinum Show, Icon Show, Gold Show, and Blue Garnet Show. 3 hours each."
+          content="Watch NESA-Africa TV — Showcase 1 (Platinum + Influencer Education Impact) and Showcase 2 (Icon + Gold-Blue Garnet)."
         />
       </Helmet>
 
@@ -273,24 +196,32 @@ export default function Shows() {
                 Online <span className="text-primary">Shows</span>
               </h1>
               <p className="text-lg text-white/70 max-w-2xl">
-                Four flagship TV shows celebrating Africa's education champions — each a 3-hour
-                deep dive into recognition, impact, and transformation.
+                Two flagship showcases celebrating Africa's education enablers — Platinum with
+                Influencer Education Impact, and Icon with Gold-Blue Garnet.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Shows Grid */}
+        {/* Showcase Table */}
         <section className="bg-charcoal py-12 lg:py-20">
           <div className="container mx-auto px-4">
-            <div className="grid gap-6 md:grid-cols-2 lg:gap-8">
-              {shows.map((show) => (
-                <ShowCard 
-                  key={show.id} 
-                  show={show} 
-                  onPlay={() => setActiveShow(show)}
-                />
-              ))}
+            <div className="overflow-hidden rounded-2xl border border-gold/20">
+              <table className="w-full text-left">
+                <thead className="bg-charcoal-light text-xs uppercase tracking-wider text-white/50">
+                  <tr>
+                    <th scope="col" className="p-4 font-medium">Showcase</th>
+                    <th scope="col" className="hidden p-4 font-medium md:table-cell">What it covers</th>
+                    <th scope="col" className="p-4 font-medium">Runtime</th>
+                    <th scope="col" className="p-4 text-right font-medium">Play</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {shows.map((show) => (
+                    <ShowcaseRow key={show.awardId} show={show} onPlay={() => setActiveShow(show)} />
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </section>
@@ -300,9 +231,9 @@ export default function Shows() {
           <div className="container mx-auto px-4">
             <div className="mx-auto grid max-w-4xl gap-8 text-center md:grid-cols-4">
               {[
-                { value: "4", label: "Shows", color: "text-gold" },
-                { value: "12 hrs", label: "Total Content", color: "text-amber-400" },
-                { value: "42", label: "Episodes", color: "text-blue-400" },
+                { value: "2", label: "Showcases", color: "text-gold" },
+                { value: "6 hrs", label: "Total Content", color: "text-amber-400" },
+                { value: "50", label: "Episodes", color: "text-blue-400" },
                 { value: "5", label: "Languages", color: "text-purple-400" },
               ].map((stat) => (
                 <div key={stat.label} className="group">
