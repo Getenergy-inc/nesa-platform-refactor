@@ -1,203 +1,248 @@
-import { AboutSeo } from "@/pages/about/AboutSeo";
+// /timeline — "The Road to the 2026 Blue-Garnet Awards".
+// Every date is sourced from existing authoritative config: no new date literals.
+//  • Icon window  → ICON_NOMINATION_TIMELINE (brandHierarchy.ts)
+//  • Certificate window → MASTER_TIMELINE_NOMINATION_WINDOWS (masterTimeline2026.ts)
+//  • Gala → PROGRAMME_END_LABEL / GALA_COUNTDOWN_TARGET (config/programme.ts)
+//  • Governance wording → ICON_GOVERNANCE_STATEMENT (brandHierarchy.ts)
+
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { AboutSeo } from "@/pages/about/AboutSeo";
+import { useCountdown } from "@/hooks/useCountdown";
+import { useTimelineStatus, formatCount } from "@/hooks/useTimelineStatus";
 import {
-  Calendar,
-  Trophy,
-  Heart,
-  Handshake,
-  Globe,
-  Users,
-  Sparkles,
-  ArrowRight,
-} from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { RecognitionJourneyTimeline } from "@/components/timeline/RecognitionJourneyTimeline";
-import { MasterTimelineTable } from "@/components/timeline/MasterTimelineTable";
-import { RECOGNITION_JOURNEY_2026 } from "@/data/recognitionJourney2026";
+  ICON_NOMINATION_TIMELINE,
+  ICON_GOVERNANCE_STATEMENT,
+} from "@/config/brandHierarchy";
+import { MASTER_TIMELINE_NOMINATION_WINDOWS } from "@/data/masterTimeline2026";
+import { PROGRAMME_END_LABEL, GALA_COUNTDOWN_TARGET } from "@/config/programme";
+import "@/features/landing/editorial/editorial.css";
 
-const SUMMARY_CARDS = [
-  {
-    icon: Calendar,
-    label: "Recognition Campaign",
-    value: "1 July → 13 Dec 2026",
-    detail: "Pre-nomination activation, nominations, NRC verification, TV showcases and the Recognition Gala",
-  },
-  {
-    icon: Trophy,
-    label: "Recognition Gala",
-    value: "13 December 2026",
-    detail: "NESA-Africa 2026 Recognition Gala, Lagos — Africa's flagship education recognition moment",
-  },
-  {
-    icon: Heart,
-    label: "Impact & Legacy Phase",
-    value: "Dec 2026 → Dec 2027",
-    detail: "EduAid-Africa · Rebuild My School Africa · Afri-EduTourism · Scholarships",
-  },
-  {
-    icon: Handshake,
-    label: "Continental Reach",
-    value: "8 Regions + 2 Communities",
-    detail: "Eight Africa Regions, the Diaspora and Friends of Africa",
-  },
-];
+const ICON_OPEN = ICON_NOMINATION_TIMELINE.steps.find((s) => s.key === "open")!;
+const ICON_WINDOW = ICON_NOMINATION_TIMELINE.steps.find((s) => s.key === "window")!;
+const CERTIFICATE_WINDOW =
+  MASTER_TIMELINE_NOMINATION_WINDOWS.find((w) => w.id === "gold-blue-garnet")!.window;
 
-const PARTICIPANT_TRACKS = [
-  { label: "Nominees", to: "/nominate", desc: "Discover your subcategory and submit a nomination from 30 August 2026." },
-  { label: "NRC Verifiers", to: "/nrc", desc: "Research, verify and evidence every nomination against the EDI Matrix." },
-  { label: "Judges", to: "/judges/directory", desc: "Icon judges' onboarding, calibration and final review." },
-  { label: "Partners", to: "/partners", desc: "Sponsor, fund or co-host recognition moments." },
-  { label: "Volunteers", to: "/volunteer", desc: "Power regional activation and storytelling." },
-  { label: "Media", to: "/media", desc: "Broadcast, interviews and continental coverage." },
-];
+type Tone = "gold" | "stone" | "sapphire";
 
+const TONE_CLASS: Record<Tone, string> = {
+  gold: "text-[#e8c468] border-[#c9a227]/45 bg-[#c9a227]/10",
+  stone: "text-[#b0afa8] border-white/15 bg-white/[0.04]",
+  sapphire: "text-[#9db9e8] border-[#1b3a6b]/60 bg-[#1b3a6b]/25",
+};
 
 export default function Timeline() {
+  const status = useTimelineStatus();
+  const countdown = useCountdown(GALA_COUNTDOWN_TARGET);
+
+  const nrcActive = (status.nrcQueued ?? 0) + (status.nrcVerified ?? 0) > 0;
+  const judgesActive = (status.judgeAssignments ?? 0) > 0 && (status.activeJudges ?? 0) > 0;
+
+  const stages: {
+    step: string;
+    title: string;
+    body: string;
+    statusLabel: string;
+    tone: Tone;
+    metric?: string;
+    metricLabel?: string;
+  }[] = [
+    {
+      step: "01",
+      title: "Nominations",
+      body: "Education Enablers are nominated by the public across every NESA-Africa recognition pathway.",
+      statusLabel: "Open",
+      tone: "gold",
+      metric: status.loading ? "…" : formatCount(status.nominationsTotal),
+      metricLabel: "nominations received",
+    },
+    {
+      step: "02",
+      title: "NRC Review",
+      body: "The Nomination Review Committee verifies eligibility and supporting evidence for every nomination before it proceeds.",
+      statusLabel: nrcActive ? "In progress" : "Review begins once nominations close",
+      tone: nrcActive ? "gold" : "stone",
+      metric: nrcActive ? formatCount(status.nrcVerified) : undefined,
+      metricLabel: nrcActive ? "nominations verified" : undefined,
+    },
+    {
+      step: "03",
+      title: "Judges Arena",
+      body: "27 volunteer judges across 9 pathways review NRC-verified nominees, select finalists, and cast the final ranked-choice ballot.",
+      statusLabel: judgesActive ? "In progress" : "Not yet active",
+      tone: judgesActive ? "gold" : "stone",
+      metric: judgesActive ? formatCount(status.judgeAssignments) : undefined,
+      metricLabel: judgesActive ? "review assignments live" : undefined,
+    },
+    {
+      step: "04",
+      title: "The Gala",
+      body: `${PROGRAMME_END_LABEL} · Lagos, Nigeria.`,
+      statusLabel: countdown.isExpired ? "Celebrated" : `${countdown.days} days to go`,
+      tone: "sapphire",
+      metric: countdown.isExpired ? undefined : String(countdown.days),
+      metricLabel: countdown.isExpired ? undefined : "days remaining",
+    },
+  ];
+
+  const journey = [
+    {
+      when: ICON_OPEN.when,
+      title: "Public Nominations Open",
+      body: "Nominations open across all NESA-Africa recognition pathways — the Africa Education Icon Award and the six Education Impact Certificates (CSR for Education, EduTech Innovation, Media Organisation for Education, NGO & International Education Partnership, Diaspora Educational Impact, Influencer Education Impact).",
+    },
+    {
+      when: ICON_WINDOW.when,
+      title: "Africa Education Icon Award Nomination Window",
+      body: "The flagship lifetime honour closes first, giving the longest runway for NRC verification and Judges Arena review ahead of the Gala.",
+    },
+    {
+      when: CERTIFICATE_WINDOW,
+      title: "Education Impact Certificate Nomination Window",
+      body: "The six Certificate pathways remain open longer, reflecting their higher nomination volume and the additional time nominees may need to request physical printed certificates ahead of the Gala.",
+    },
+    {
+      when: "After each pathway's window closes",
+      title: "NRC Verification",
+      body: "The Nomination Review Committee reviews submissions, confirms eligibility, and verifies supporting evidence for every nomination before it can proceed to judging.",
+    },
+    {
+      when: "Following NRC Verification",
+      title: "Judges Arena Review",
+      body: "NRC-verified nominees move to their pathway's judging panel. Panels review evidence, select finalists, and the eligible judges cast a ranked-choice Grand Jury ballot. No public voting occurs at any stage — recognition is decided entirely through internal, audited judging.",
+    },
+    {
+      when: PROGRAMME_END_LABEL,
+      title: "The Blue-Garnet Awards Gala, Lagos",
+      body: "Africa Education Icon laureates and Education Impact Certificate winners are celebrated on stage.",
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-charcoal text-white">
+    <div className="nesa-ed min-h-screen">
       <AboutSeo
-        title="NESA-Africa 2026 Recognition Journey | Continental Roadmap"
-        description="The official 2026 recognition journey for NESA-Africa — 13 phases from public pre-nomination activation to the Gold-Blue Garnet Awards Gala, plus the continuous Media & EduAid-Africa engagement track."
-        path="/about/timeline"
+        title="The Road to the 2026 Blue-Garnet Awards | NESA-Africa Timeline"
+        description="One continental recognition cycle — from nomination and NRC verification through Judges Arena review to the Blue-Garnet Awards Gala in Lagos on 13 December 2026."
+        path="/timeline"
         breadcrumbs={[
           { name: "Home", path: "/" },
-          { name: "About", path: "/about" },
-          { name: "Timeline", path: "/about/timeline" },
+          { name: "Timeline", path: "/timeline" },
         ]}
       />
 
       {/* HERO */}
-      <section className="relative overflow-hidden border-b border-white/10">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.18),transparent_60%),radial-gradient(ellipse_at_bottom,rgba(59,130,246,0.15),transparent_60%)]" />
-        <div className="container relative mx-auto px-4 py-20 sm:py-24">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mx-auto max-w-4xl text-center"
-          >
-            <Badge className="mb-6 border-amber-500/40 bg-amber-500/10 text-amber-200">
-              <Sparkles className="mr-1.5 h-3 w-3" /> Africa's Education Recognition & Impact Platform
-            </Badge>
-            <h1 className="font-serif text-4xl leading-tight text-white sm:text-5xl md:text-6xl">
-              NESA-Africa 2026 <span className="bg-gradient-to-r from-amber-300 to-yellow-500 bg-clip-text text-transparent">Recognition Journey</span>
-            </h1>
-            <p className="mx-auto mt-4 max-w-3xl text-lg text-white/80 sm:text-xl">
-              The Continental Roadmap to Recognising the Enablers of Education for All.
-            </p>
-            <p className="mx-auto mt-6 max-w-3xl text-base text-white/70">
-              NESA-Africa 2026 unfolds through a carefully designed recognition journey that
-              identifies, verifies, celebrates and supports the people and organisations enabling
-              Education for All across <span className="text-white">Eight Africa Regions</span>, Africans in the
-              <span className="text-white"> Diaspora</span>, and <span className="text-white">Friends of Africa</span>.
-              Each milestone builds momentum toward the NESA-Africa 2026 Recognition Gala on 13 December
-              while opening doors for participation, partnerships, storytelling and measurable impact.
-
-            </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <Button asChild size="lg" className="bg-gradient-to-r from-amber-500 to-yellow-600 text-charcoal hover:from-amber-400 hover:to-yellow-500">
-                <Link to="/nominate">Nominate an Enabler <ArrowRight className="ml-1.5 h-4 w-4" /></Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/5">
-                <Link to="/awards/gold-blue-garnet">Explore Recognition</Link>
-              </Button>
-              <Button asChild size="lg" variant="ghost" className="text-white hover:bg-white/5">
-                <Link to="/programs">Explore Impact Programmes</Link>
-              </Button>
-            </div>
-          </motion.div>
-
-          {/* Summary cards */}
-          <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {SUMMARY_CARDS.map((c) => {
-              const Icon = c.icon;
-              return (
-                <div key={c.label} className="rounded-xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur">
-                  <Icon className="h-5 w-5 text-amber-300" />
-                  <div className="mt-3 text-[11px] uppercase tracking-[0.18em] text-white/50">{c.label}</div>
-                  <div className="mt-1 font-serif text-lg text-white">{c.value}</div>
-                  <div className="mt-2 text-xs text-white/60">{c.detail}</div>
-                </div>
-              );
-            })}
-          </div>
+      <section className="ed-section">
+        <div className="ed-wrap max-w-3xl text-center">
+          <div className="ed-eyebrow">NESA-Africa 2026 Recognition Cycle</div>
+          <h1 className="mt-4 font-serif text-4xl leading-tight sm:text-5xl">
+            The Road to the 2026 Blue-Garnet Awards
+          </h1>
+          <p className="mt-4 text-lg text-[#e8c468]">
+            One continental recognition cycle — from nomination to the Gala stage.
+          </p>
+          <p className="mt-4 text-[#b0afa8]">
+            A single continuous journey, from the moment a nomination is submitted to the night
+            nine Education Icons and category winners are celebrated in Lagos.
+          </p>
         </div>
       </section>
 
-      {/* MASTER TIMELINE (dated milestones) */}
-      <section className="container mx-auto px-4 py-16">
-        <MasterTimelineTable />
-      </section>
+      {/* SECTION 1 — live tracker */}
+      <section className="ed-section ed-section-ink" aria-labelledby="tl-status">
+        <div className="ed-wrap">
+          <div className="ed-section-head">
+            <div className="ed-eyebrow">Live status</div>
+            <h2 id="tl-status" className="ed-section-title">
+              Where Things Stand Right Now
+            </h2>
+          </div>
 
-      {/* TIMELINE (phase view) */}
-      <section className="container mx-auto px-4 pb-20">
-        <RecognitionJourneyTimeline
-          heading="The 13 Phases of the 2026 Journey"
-          intro="From continental activation to recognition, gala and a year-long impact and legacy phase. Every milestone is designed to convert visibility into measurable education impact."
-        />
-      </section>
-
-      {/* Recognition → Impact → Legacy strip */}
-      <section className="border-y border-white/10 bg-gradient-to-r from-amber-500/10 via-transparent to-emerald-500/10 py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid gap-6 md:grid-cols-3">
-            {[
-              { label: "Recognition", desc: "Identify, verify and honour Education Enablers across the continent.", tone: "amber" },
-              { label: "Impact", desc: "Translate visibility into partnerships, funding and education interventions.", tone: "blue" },
-              { label: "Legacy", desc: "Build a continental hall of fame and a measurable impact record year-on-year.", tone: "emerald" },
-            ].map((s) => (
-              <div key={s.label} className="rounded-xl border border-white/10 bg-white/[0.03] p-6">
-                <div className={`text-[11px] uppercase tracking-[0.2em] text-${s.tone}-300`}>Stage</div>
-                <h3 className="mt-1 font-serif text-2xl text-white">{s.label}</h3>
-                <p className="mt-2 text-sm text-white/70">{s.desc}</p>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4" aria-busy={status.loading || undefined}>
+            {stages.map((s) => (
+              <div
+                key={s.title}
+                className="flex flex-col rounded-2xl border border-[#c9a227]/20 bg-white/[0.03] p-6"
+              >
+                <div className="ed-mono text-xs text-[#6b6a63]">{s.step}</div>
+                <h3 className="mt-2 font-serif text-xl text-[#f3efe6]">{s.title}</h3>
+                <p className="mt-3 flex-1 text-sm text-[#b0afa8]">{s.body}</p>
+                {s.metric && (
+                  <div className="mt-4">
+                    <div className="font-serif text-3xl text-[#e8c468]">{s.metric}</div>
+                    <div className="ed-mono text-[11px] uppercase tracking-[0.14em] text-[#6b6a63]">
+                      {s.metricLabel}
+                    </div>
+                  </div>
+                )}
+                <span
+                  className={`mt-4 inline-block self-start rounded-full border px-3 py-1 text-xs ${TONE_CLASS[s.tone]}`}
+                >
+                  {s.statusLabel}
+                </span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Participant tracks */}
-      <section className="container mx-auto px-4 py-20">
-        <div className="mx-auto mb-10 max-w-2xl text-center">
-          <Badge variant="outline" className="border-white/15 text-white/70">
-            <Users className="mr-1.5 h-3 w-3" /> Choose Your Track
-          </Badge>
-          <h2 className="mt-3 font-serif text-3xl text-white sm:text-4xl">Who Participates &amp; How</h2>
-          <p className="mt-2 text-white/70">
-            The recognition journey is designed for nominees, NRC verifiers, judges, partners, volunteers and media — each with a clear pathway.
-          </p>
+      {/* SECTION 2 — the full journey */}
+      <section className="ed-section" aria-labelledby="tl-journey">
+        <div className="ed-wrap">
+          <div className="ed-section-head">
+            <div className="ed-eyebrow">Every pathway, one cycle</div>
+            <h2 id="tl-journey" className="ed-section-title">
+              The Full Journey
+            </h2>
+          </div>
 
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {PARTICIPANT_TRACKS.map((t) => (
-            <Link
-              key={t.label}
-              to={t.to}
-              className="group rounded-xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-amber-500/40 hover:bg-white/[0.05]"
-            >
-              <div className="flex items-center justify-between">
-                <h3 className="font-serif text-xl text-white group-hover:text-amber-200">{t.label}</h3>
-                <ArrowRight className="h-4 w-4 text-white/40 transition group-hover:translate-x-1 group-hover:text-amber-300" />
-              </div>
-              <p className="mt-2 text-sm text-white/70">{t.desc}</p>
-            </Link>
-          ))}
+          <ol className="relative mx-auto max-w-3xl border-l border-[#c9a227]/25 pl-6">
+            {journey.map((j) => (
+              <li key={j.title} className="relative pb-10 last:pb-0">
+                <span
+                  aria-hidden
+                  className="absolute -left-[31px] top-1.5 h-2.5 w-2.5 rounded-full bg-[#c9a227]"
+                />
+                <div className="ed-mono text-xs uppercase tracking-[0.12em] text-[#e8c468]">
+                  {j.when}
+                </div>
+                <h3 className="mt-2 font-serif text-xl text-[#f3efe6]">{j.title}</h3>
+                <p className="mt-2 text-sm text-[#b0afa8]">{j.body}</p>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
-      {/* Regional positioning footer */}
-      <section className="border-t border-white/10 bg-white/[0.02] py-12">
-        <div className="container mx-auto px-4 text-center">
-          <Globe className="mx-auto h-6 w-6 text-amber-300" />
-          <p className="mt-3 font-serif text-2xl text-white sm:text-3xl">
-            One Continent. Eight Africa Regions. Two Global Communities. One Mission.
-          </p>
-          <p className="mx-auto mt-3 max-w-2xl text-sm text-white/65">
-            {RECOGNITION_JOURNEY_2026.length} phases · 4 Recognition Tiers · 9 Recognition Pillars · every Enabler verified by the Nominee Research Corps.
-          </p>
+      {/* SECTION 3 — governance */}
+      <section className="ed-section ed-section-ink" aria-labelledby="tl-governance">
+        <div className="ed-wrap max-w-3xl">
+          <div className="ed-eyebrow">Governance</div>
+          <h2 id="tl-governance" className="ed-section-title mt-3 text-left">
+            How recognition is decided
+          </h2>
+          <div className="mt-4 space-y-3">
+            {ICON_GOVERNANCE_STATEMENT.map((line) => (
+              <p key={line} className="text-sm text-[#b0afa8]">
+                {line}
+              </p>
+            ))}
+          </div>
+        </div>
+      </section>
 
+      {/* SECTION 4 — close */}
+      <section className="ed-section" aria-labelledby="tl-close">
+        <div className="ed-wrap max-w-2xl text-center">
+          <h2 id="tl-close" className="ed-section-title">
+            Know an Education Enabler whose work deserves recognition?
+          </h2>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Link to="/nominate" className="ed-btn-primary">
+              Nominate an Education Enabler
+            </Link>
+            <Link to="/nominees" className="ed-btn-ghost">
+              Explore Existing Nominees
+            </Link>
+          </div>
         </div>
       </section>
     </div>

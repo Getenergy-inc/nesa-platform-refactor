@@ -11659,6 +11659,7 @@ export type Database = {
           reference: string
         }[]
       }
+      timeline_public_status: { Args: never; Returns: Json }
       update_nomination_draft: {
         Args: {
           p_award_tier?: string
