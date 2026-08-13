@@ -57,6 +57,8 @@ export interface MasterTimelineEntry {
   toBeConfirmed?: boolean;
   /** Flagged as an unresolved item in the internal open-items list. */
   flagged?: boolean;
+  /** Optional expandable breakdown lines (e.g. TV showcase pathway notes). */
+  details?: string[];
 }
 
 /**
@@ -70,7 +72,7 @@ export const MASTER_TIMELINE_NOMINATION_WINDOWS = [
     tier: "Africa Education Icon",
     window: ICON_WINDOW_LABEL,
     verification:
-      "NRC reviews all Icon nominees 20 September – 3 October, then pushes verified dossiers to the Judges Arena.",
+      "NRC reviews all Icon nominees 7 – 20 October, then pushes verified dossiers to the Judges Arena.",
     href: "/nominate?tier=icon",
   },
   {
@@ -108,7 +110,21 @@ export const MASTER_TIMELINE_PUBLIC_NOTICE = {
  * INTERNAL ONLY — editorial/production open questions.
  * Never rendered on public surfaces (see /timeline).
  */
-export const MASTER_TIMELINE_OPEN_ITEMS: { id: string; item: string; detail: string }[] = [];
+export const MASTER_TIMELINE_OPEN_ITEMS: { id: string; item: string; detail: string }[] = [
+  {
+    id: "podcast-8-9-unconfirmed",
+    item: "Education Enablers Podcast — Episodes 8 & 9 have no confirmed date or topic",
+    detail:
+      "No source record confirms air dates or themes for Episodes 8 and 9. Published as unconfirmed; no dates invented.",
+  },
+  {
+    id: "gbg-verification-past-showcase-2",
+    item:
+      "Gold-Blue Garnet verification (closes 13 December) extends 5 days past TV Showcase 2 (8 December)",
+    detail:
+      "TV Showcase 2 on 8 December 2026 presents Gold-Blue Garnet recipients, but rolling NRC verification for that family runs to Gala day, 13 December 2026. Recipients verified between 9 and 13 December cannot appear in the broadcast. Flagged for the team — not silently resolved.",
+  },
+];
 
 export const MASTER_TIMELINE_2026: MasterTimelineEntry[
   
