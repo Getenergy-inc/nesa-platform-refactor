@@ -33,6 +33,7 @@ import { EDUAID_WEBINAR_SERIES_2026 } from "@/data/eduaidWebinarSeries2026";
 import { PROGRAMME_END_LABEL, GALA_COUNTDOWN_TARGET } from "@/config/programme";
 import {
   NOMINATIONS_OPEN_LABEL,
+  NOMINATIONS_OPEN_ISO,
   ICON_WINDOW_LABEL,
   CERTIFICATE_WINDOW_LABEL,
 } from "@/config/nominationWindows2026";
