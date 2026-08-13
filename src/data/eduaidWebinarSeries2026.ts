@@ -45,15 +45,15 @@ export const EDUAID_WEBINAR_SERIES_2026: EduAidWebinarEpisode[] = [
     id: "week-1-fame-with-purpose",
     isoDate: "2026-08-27",
     dateLabel: "Thursday, 27 August 2026",
-    title: "Fame With Purpose",
+    title: "Week 1 — Fame With Purpose",
     subtitle:
       "How Africa's Sports, Music and Digital Icons Can Turn Influence Into Education Opportunity",
     summary:
       "Mobilising influence — sport, music and digital platforms — behind scholarships and school support.",
     promotes: [
-      "Africa Sports Education Impact",
-      "Africa Music Education Impact",
-      "Africa Social Media Education Impact",
+      "Africa Sports — Education Impact",
+      "Africa Music — Education Impact",
+      "Africa Social Media — Education Impact",
       "Youth advocacy",
       "Scholarship mobilisation",
       "School-support campaigns",
@@ -68,7 +68,7 @@ export const EDUAID_WEBINAR_SERIES_2026: EduAidWebinarEpisode[] = [
     id: "week-2-legacies-that-teach",
     isoDate: "2026-09-10",
     dateLabel: "Thursday, 10 September 2026",
-    title: "Legacies That Teach Generations",
+    title: "Week 2 — Legacies That Teach Generations",
     subtitle:
       "The Literary, Technical and Philanthropic Leaders Who Changed African Learning",
     summary:
@@ -91,15 +91,15 @@ export const EDUAID_WEBINAR_SERIES_2026: EduAidWebinarEpisode[] = [
     id: "week-3-funding-the-future",
     isoDate: "2026-09-24",
     dateLabel: "Thursday, 24 September 2026",
-    title: "Funding the Future of African Education",
+    title: "Week 3 — Funding the Future of African Education",
     subtitle:
       "How CSR, ESG, Technology and Digital Training Can Deliver Measurable Education Impact",
     summary:
       "Structured funding and technology pathways for measurable education outcomes.",
     promotes: [
-      "Best CSR in Education (Africa)",
-      "Best CSR in Education (Nigeria)",
-      "Best EduTech Organisation Africa",
+      "Best CSR in Education — Africa",
+      "Best CSR in Education — Nigeria",
+      "Best EduTech Organisation — Africa",
       "CSR Education Fund Pool",
       "Digital learning",
       "School adoption",
@@ -114,15 +114,15 @@ export const EDUAID_WEBINAR_SERIES_2026: EduAidWebinarEpisode[] = [
     id: "week-4-stories-that-mobilise",
     isoDate: "2026-10-08",
     dateLabel: "Thursday, 8 October 2026",
-    title: "Stories That Mobilise, Organisations That Deliver",
+    title: "Week 4 — Stories That Mobilise, Organisations That Deliver",
     subtitle:
       "How Media, NGOs and Community Networks Can Move Africa From Awareness to Action",
     summary:
       "Advocacy and delivery — the media and civil-society engine behind education access.",
     promotes: [
-      "Best Media in Educational Advocacy Nigeria",
-      "Best NGO Contribution to Education (Nigeria)",
-      "Best NGO Contribution to Education (Africa)",
+      "Best Media in Educational Advocacy — Nigeria",
+      "Best NGO Contribution to Education — Nigeria",
+      "Best NGO Contribution to Education — Africa",
       "Advocacy",
       "Implementation partnerships",
       "Community mobilisation",
@@ -137,15 +137,15 @@ export const EDUAID_WEBINAR_SERIES_2026: EduAidWebinarEpisode[] = [
     id: "week-5-future-ready-school",
     isoDate: "2026-10-22",
     dateLabel: "Thursday, 22 October 2026",
-    title: "Building the Future-Ready African School",
+    title: "Week 5 — Building the Future-Ready African School",
     subtitle:
       "STEM, Creative Learning, Teacher Development, Government Action and School Transformation",
     summary:
       "What it takes to transform a school — teaching, curriculum, facilities and state-level action.",
     promotes: [
-      "Best STEM Education Champion Africa",
-      "Creative Arts Education Impact Nigeria",
-      "Best Education-Friendly State Nigeria",
+      "Best STEM Education Champion — Africa",
+      "Creative Arts Education Impact — Nigeria",
+      "Best Education-Friendly State — Nigeria",
       "Rebuild My School Africa",
       "Teacher CPD",
       "Digital classrooms",
@@ -160,14 +160,14 @@ export const EDUAID_WEBINAR_SERIES_2026: EduAidWebinarEpisode[] = [
     id: "week-6-knowledge-skills-volunteers",
     isoDate: "2026-11-05",
     dateLabel: "Thursday, 5 November 2026",
-    title: "Africa's Knowledge, Skills and Volunteer Teaching Network",
+    title: "Week 6 — Africa's Knowledge, Skills and Volunteer Teaching Network",
     subtitle:
       "Libraries, Research, Digital Learning, NYSC, Youth Skills and Educators Sharing Knowledge Across Borders",
     summary:
       "Knowledge infrastructure and the volunteer teaching network that carries it across borders.",
     promotes: [
       "Best Library in Nigerian Tertiary Institutions",
-      "Best R&D Contribution to Education Nigeria",
+      "Best R&D Contribution to Education — Nigeria",
       "EduAid Volunteer Teachers",
       "NYSC Online SAED Plus",
       "Digital skills",
@@ -184,15 +184,15 @@ export const EDUAID_WEBINAR_SERIES_2026: EduAidWebinarEpisode[] = [
     id: "week-7-global-alliance",
     isoDate: "2026-11-19",
     dateLabel: "Thursday, 19 November 2026",
-    title: "The Global Alliance for African Education",
+    title: "Week 7 — The Global Alliance for African Education",
     subtitle:
       "Faith, Leadership, Diaspora, Tourism and International Partnerships for Schools, Teachers and Learners",
     summary:
       "Closing episode — faith, government, diaspora and international partners aligned behind African education.",
     promotes: [
-      "Christian Education Impact Africa",
-      "Islamic Education Impact Africa",
-      "Political Leaders' Contribution to Education Nigeria",
+      "Christian Education Impact — Africa",
+      "Islamic Education Impact — Africa",
+      "Political Leaders' Contribution to Education — Nigeria",
       "International and Bilateral Education Partnerships",
       "Diaspora Association Educational Impact",
       "Afri-EduTourism 2027",
