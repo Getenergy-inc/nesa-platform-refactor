@@ -66,6 +66,9 @@ function ProfileContent() {
                     </Badge>
                   ))}
                 </div>
+                <div className="mt-3">
+                  <NesaTvLink size="sm" />
+                </div>
               </div>
             </div>
           </CardContent>
