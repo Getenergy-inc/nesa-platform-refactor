@@ -1874,6 +1874,25 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  {/* Canonical nominee profile: /nominees/:award/:category/:classification/:slug */}
+                  <Route
+                    path="/nominees/:award/:category/:classification/:slug"
+                    element={
+                      <WithLayout>
+                        <NomineeCanonicalProfile />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominee-portal"
+                    element={
+                      <WithLayout>
+                        <ProtectedRoute>
+                          <NomineeProfileEditor />
+                        </ProtectedRoute>
+                      </WithLayout>
+                    }
+                  />
                   <Route
                     path="/nominee/:slug"
                     element={<NomineeSlugRedirect />}
