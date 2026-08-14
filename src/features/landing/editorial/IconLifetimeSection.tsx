@@ -12,7 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { getYouTubeEmbedUrl } from "@/lib/youtube";
 import { ICON_AWARD_SECTION, ICON_PATHWAYS } from "@/config/brandHierarchy";
 import { bySubcategory, type IconSubcategorySlug, type IconNominee } from "@/data/iconAward";
-import { useStripAutoScroll } from "./useStripAutoScroll";
+import { StripScroller } from "./StripScroller";
 
 /** Below this many real records we show the card without a strip. */
 const MIN_STRIP_RECORDS = 4;
@@ -21,17 +21,9 @@ const STRIP_LIMIT = 12;
 const VIDEO_ID = "Hdu_qlFLfrQ";
 
 function NomineeStrip({ pathway, nominees }: { pathway: string; nominees: IconNominee[] }) {
-  const { ref, pauseHandlers } = useStripAutoScroll<HTMLDivElement>(true, 5200);
-
   return (
-    <div
-      ref={ref}
-      {...pauseHandlers}
-      role="group"
-      tabIndex={0}
-      aria-label={`${pathway} nominees — scroll or swipe to browse`}
-      className="mt-4 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [scrollbar-width:thin] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
-    >
+    <StripScroller label={`${pathway} nominees`} className="mt-4">
+
       {nominees.map((n) => (
         <Link
           key={n.id}
@@ -59,7 +51,8 @@ function NomineeStrip({ pathway, nominees }: { pathway: string; nominees: IconNo
           </div>
         </Link>
       ))}
-    </div>
+    </StripScroller>
+
   );
 }
 

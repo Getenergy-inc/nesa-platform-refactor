@@ -11,7 +11,21 @@
 // The source document's internal editorial/production checklist section is
 // deliberately NOT rendered on this public page.
 
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  Award,
+  CalendarCheck,
+  ChevronDown,
+  Gavel,
+  Megaphone,
+  Mic,
+  Newspaper,
+  ShieldCheck,
+  Sparkles,
+  Tv,
+  Video,
+} from "lucide-react";
 import { AboutSeo } from "@/pages/about/AboutSeo";
 import { useCountdown } from "@/hooks/useCountdown";
 import { useTimelineStatus, formatCount } from "@/hooks/useTimelineStatus";
@@ -62,11 +76,60 @@ const TRACK_CHIP: Record<MasterTimelineTrack, string> = {
   legacy: "border-[#4a5f22]/60 bg-[#4a5f22]/25 text-[#c6d98a]",
 };
 
+/** One icon per track so the schedule can be scanned without reading labels. */
+const TRACK_ICON: Record<MasterTimelineTrack, typeof Mic> = {
+  activation: Megaphone,
+  nominations: CalendarCheck,
+  verification: ShieldCheck,
+  webinar: Video,
+  podcast: Mic,
+  judging: Gavel,
+  showcase: Tv,
+  gala: Award,
+  news: Newspaper,
+  legacy: Sparkles,
+};
+
+/** Timeline marker dot colour per track (static classes). */
+const TRACK_DOT: Record<MasterTimelineTrack, string> = {
+  activation: "bg-[#c9a227]",
+  nominations: "bg-[#e8c468]",
+  verification: "bg-[#8fd3c7]",
+  webinar: "bg-[#9fd6b4]",
+  podcast: "bg-[#c3b0e8]",
+  judging: "bg-[#cfcdc5]",
+  showcase: "bg-[#9db9e8]",
+  gala: "bg-[#f0d78d]",
+  news: "bg-[#9ecbdd]",
+  legacy: "bg-[#c6d98a]",
+};
+
 /** Track-aware label for the expandable `details` block. */
 const DETAILS_SUMMARY_LABEL: Partial<Record<MasterTimelineTrack, string>> = {
   showcase: "How these pathways are decided",
   podcast: "Episode details",
 };
+
+/** The three dates most visitors actually come for. */
+const MUST_KNOW_IDS = new Set([
+  "recognition-gala",
+  "icon-nominations-close",
+  "tier234-nominations-close",
+]);
+
+/** Order of the filter toolbar. */
+const TRACK_ORDER: MasterTimelineTrack[] = [
+  "nominations",
+  "verification",
+  "judging",
+  "webinar",
+  "podcast",
+  "news",
+  "showcase",
+  "gala",
+  "activation",
+  "legacy",
+];
 
 const MONTH_LABEL = (iso: string) =>
   new Date(iso).toLocaleDateString("en-GB", { month: "long", year: "numeric", timeZone: "UTC" });
@@ -88,9 +151,31 @@ function groupByMonth(entries: MasterTimelineEntry[]) {
   return groups;
 }
 
+/**
+ * Single expand/collapse affordance shared by webinar, podcast and showcase
+ * rows so all three dropdowns look and behave identically.
+ */
+function TimelineDetails({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <details className="group/details mt-3 rounded-lg border border-[#c9a227]/25 bg-[#c9a227]/[0.05]">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-2.5 text-xs font-semibold text-[#e8c468]">
+        <span>{label}</span>
+        <ChevronDown
+          aria-hidden
+          className="h-3.5 w-3.5 shrink-0 transition-transform group-open/details:rotate-180"
+        />
+      </summary>
+      <div className="px-4 pb-4">{children}</div>
+    </details>
+  );
+}
+
+
 export default function Timeline() {
   const status = useTimelineStatus();
   const countdown = useCountdown(GALA_COUNTDOWN_TARGET);
+  const [activeTrack, setActiveTrack] = useState<MasterTimelineTrack | "all">("all");
+
 
   const nrcActive = (status.nrcQueued ?? 0) + (status.nrcVerified ?? 0) > 0;
   const judgesActive = (status.judgeAssignments ?? 0) > 0 && (status.activeJudges ?? 0) > 0;
@@ -143,7 +228,24 @@ export default function Timeline() {
     },
   ];
 
-  const months = groupByMonth(MASTER_TIMELINE_CHRONOLOGICAL);
+  const availableTracks = useMemo(
+    () =>
+      TRACK_ORDER.filter((t) => MASTER_TIMELINE_CHRONOLOGICAL.some((e) => e.track === t)),
+    [],
+  );
+
+  const visibleEntries = useMemo(
+    () =>
+      activeTrack === "all"
+        ? MASTER_TIMELINE_CHRONOLOGICAL
+        : MASTER_TIMELINE_CHRONOLOGICAL.filter((e) => e.track === activeTrack),
+    [activeTrack],
+  );
+
+  const mustKnow = MASTER_TIMELINE_CHRONOLOGICAL.filter((e) => MUST_KNOW_IDS.has(e.id));
+
+  const months = groupByMonth(visibleEntries);
+
 
   return (
     <div className="nesa-ed min-h-screen">
@@ -259,6 +361,67 @@ export default function Timeline() {
             </h2>
           </div>
 
+          {/* The three dates most visitors are looking for */}
+          <div className="mx-auto mb-10 grid max-w-3xl gap-3 sm:grid-cols-3">
+            {mustKnow.map((e) => {
+              const Icon = TRACK_ICON[e.track];
+              return (
+                <div
+                  key={e.id}
+                  className="rounded-2xl border border-[#c9a227]/50 bg-[#c9a227]/[0.08] p-4"
+                >
+                  <div className="flex items-center gap-2 text-[#e8c468]">
+                    <Icon aria-hidden className="h-4 w-4" />
+                    <span className="ed-mono text-xs uppercase tracking-[0.12em]">
+                      {e.dateLabel}
+                    </span>
+                  </div>
+                  <p className="mt-2 font-serif text-base text-[#f3efe6]">{e.milestone}</p>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Track filter */}
+          <div
+            className="mx-auto mb-8 flex max-w-3xl flex-wrap gap-2"
+            role="group"
+            aria-label="Filter the schedule by track"
+          >
+            <button
+              type="button"
+              onClick={() => setActiveTrack("all")}
+              aria-pressed={activeTrack === "all"}
+              className={`rounded-full border px-3 py-1.5 text-xs transition ${
+                activeTrack === "all"
+                  ? "border-[#c9a227] bg-[#c9a227]/20 text-[#f0d78d]"
+                  : "border-white/15 bg-white/[0.03] text-[#b0afa8] hover:border-white/30"
+              }`}
+            >
+              All tracks
+            </button>
+            {availableTracks.map((t) => {
+              const Icon = TRACK_ICON[t];
+              const active = activeTrack === t;
+              return (
+                <button
+                  key={t}
+                  type="button"
+                  onClick={() => setActiveTrack(active ? "all" : t)}
+                  aria-pressed={active}
+                  className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs transition ${
+                    active
+                      ? TRACK_CHIP[t]
+                      : "border-white/15 bg-white/[0.03] text-[#b0afa8] hover:border-white/30"
+                  }`}
+                >
+                  <Icon aria-hidden className="h-3.5 w-3.5" />
+                  {MASTER_TIMELINE_TRACK_LABELS[t]}
+                </button>
+              );
+            })}
+          </div>
+
           <div className="mx-auto max-w-3xl space-y-12">
             {months.map((group) => (
               <div key={group.key}>
@@ -266,93 +429,106 @@ export default function Timeline() {
                   {group.label}
                 </h3>
                 <ol className="mt-4 border-l border-[#c9a227]/25 pl-6">
-                  {group.items.map((e) => (
-                    <li key={e.id} className="relative pb-8 last:pb-0">
-                      <span
-                        aria-hidden
-                        className={`absolute -left-[31px] top-2 h-2.5 w-2.5 rounded-full ${
-                          e.highlight ? "bg-[#e8c468]" : "bg-[#c9a227]/50"
-                        }`}
-                      />
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="ed-mono text-xs uppercase tracking-[0.12em] text-[#e8c468]">
-                          {e.dateLabel}
-                        </span>
+                  {group.items.map((e) => {
+                    const Icon = TRACK_ICON[e.track];
+                    const mustKnowRow = MUST_KNOW_IDS.has(e.id);
+                    const webinar = WEBINAR_BY_TIMELINE_ID[e.id];
+                    return (
+                      <li key={e.id} className="relative pb-8 last:pb-0">
                         <span
-                          className={`rounded-full border px-2 py-0.5 text-[10px] uppercase tracking-[0.1em] ${TRACK_CHIP[e.track]}`}
+                          aria-hidden
+                          className={`absolute -left-[31px] top-2 h-2.5 w-2.5 rounded-full ${TRACK_DOT[e.track]}`}
+                        />
+                        <div
+                          className={
+                            mustKnowRow
+                              ? "rounded-2xl border border-[#c9a227]/55 bg-[#c9a227]/[0.08] p-4"
+                              : ""
+                          }
                         >
-                          {MASTER_TIMELINE_TRACK_LABELS[e.track]}
-                        </span>
-                        {e.toBeConfirmed && (
-                          <span className="rounded-full border border-white/15 bg-white/[0.04] px-2 py-0.5 text-[10px] uppercase tracking-[0.1em] text-[#b0afa8]">
-                            To be confirmed
-                          </span>
-                        )}
-                      </div>
-                      <h4 className="mt-2 font-serif text-lg text-[#f3efe6]">
-                        {e.href ? (
-                          <Link to={e.href} className="hover:text-[#e8c468]">
-                            {e.milestone}
-                          </Link>
-                        ) : (
-                          e.milestone
-                        )}
-                      </h4>
-                      <p className="mt-1 text-sm text-[#b0afa8]">{e.activity}</p>
-                      <p className="ed-mono mt-2 text-[11px] uppercase tracking-[0.12em] text-[#6b6a63]">
-                        {e.outcome}
-                      </p>
-                      {e.details && e.details.length > 0 && (
-                        <details className="mt-3 rounded-lg border border-[#1b3a6b]/50 bg-[#1b3a6b]/[0.18]">
-                          <summary className="cursor-pointer list-none px-4 py-2.5 text-xs font-semibold text-[#9db9e8]">
-                            {DETAILS_SUMMARY_LABEL[e.track] ?? "More detail"}
-                          </summary>
-                          <ul className="space-y-2 px-4 pb-4">
-                            {e.details.map((d) => (
-                              <li key={d} className="text-sm text-[#cfcdc5]">
-                                {d}
-                              </li>
-                            ))}
-                          </ul>
-                        </details>
-                      )}
-                      {WEBINAR_BY_TIMELINE_ID[e.id] && (
-                        <details className="mt-3 rounded-lg border border-[#c9a227]/25 bg-[#c9a227]/[0.05]">
-                          <summary className="cursor-pointer list-none px-4 py-2.5 text-xs font-semibold text-[#e8c468]">
-                            See the full webinar narrative
-                          </summary>
-                          <div className="px-4 pb-4">
-                            <p className="text-sm italic text-[#cfcdc5]">
-                              {WEBINAR_BY_TIMELINE_ID[e.id].subtitle}
-                            </p>
-                            <div className="ed-mono mt-3 text-[11px] uppercase tracking-[0.14em] text-[#6b6a63]">
-                              Promotes
-                            </div>
-                            <ul className="mt-2 flex flex-wrap gap-2">
-                              {WEBINAR_BY_TIMELINE_ID[e.id].promotes.map((p) => (
-                                <li
-                                  key={p}
-                                  className="rounded-full border border-[#c9a227]/25 bg-[#c9a227]/[0.08] px-3 py-1 text-xs text-[#e8c468]"
-                                >
-                                  {p}
-                                </li>
-                              ))}
-                            </ul>
-                            <p className="mt-3 text-xs text-[#8a8981]">
-                              {WEBINAR_BY_TIMELINE_ID[e.id].tiers} ·{" "}
-                              {WEBINAR_BY_TIMELINE_ID[e.id].competitiveLabel}
-                            </p>
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="ed-mono text-xs uppercase tracking-[0.12em] text-[#e8c468]">
+                              {e.dateLabel}
+                            </span>
+                            <span
+                              className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[10px] uppercase tracking-[0.1em] ${TRACK_CHIP[e.track]}`}
+                            >
+                              <Icon aria-hidden className="h-3 w-3" />
+                              {MASTER_TIMELINE_TRACK_LABELS[e.track]}
+                            </span>
+                            {mustKnowRow && (
+                              <span className="rounded-full border border-[#c9a227]/60 bg-[#c9a227]/20 px-2 py-0.5 text-[10px] uppercase tracking-[0.1em] text-[#f0d78d]">
+                                Key date
+                              </span>
+                            )}
+                            {e.toBeConfirmed && (
+                              <span className="rounded-full border border-white/15 bg-white/[0.04] px-2 py-0.5 text-[10px] uppercase tracking-[0.1em] text-[#b0afa8]">
+                                To be confirmed
+                              </span>
+                            )}
                           </div>
-                        </details>
-                      )}
-                    </li>
-                  ))}
+                          <h4
+                            className={`mt-2 font-serif text-[#f3efe6] ${
+                              mustKnowRow ? "text-2xl" : "text-lg"
+                            }`}
+                          >
+                            {e.href ? (
+                              <Link to={e.href} className="hover:text-[#e8c468]">
+                                {e.milestone}
+                              </Link>
+                            ) : (
+                              e.milestone
+                            )}
+                          </h4>
+                          <p className="mt-1 text-sm text-[#b0afa8]">{e.activity}</p>
+                          <p className="ed-mono mt-2 text-[11px] uppercase tracking-[0.12em] text-[#6b6a63]">
+                            {e.outcome}
+                          </p>
+                          {e.details && e.details.length > 0 && (
+                            <TimelineDetails
+                              label={DETAILS_SUMMARY_LABEL[e.track] ?? "More detail"}
+                            >
+                              <ul className="space-y-2">
+                                {e.details.map((d) => (
+                                  <li key={d} className="text-sm text-[#cfcdc5]">
+                                    {d}
+                                  </li>
+                                ))}
+                              </ul>
+                            </TimelineDetails>
+                          )}
+                          {webinar && (
+                            <TimelineDetails label="See the full webinar narrative">
+                              <p className="text-sm italic text-[#cfcdc5]">{webinar.subtitle}</p>
+                              <div className="ed-mono mt-3 text-[11px] uppercase tracking-[0.14em] text-[#6b6a63]">
+                                Promotes
+                              </div>
+                              <ul className="mt-2 flex flex-wrap gap-2">
+                                {webinar.promotes.map((p) => (
+                                  <li
+                                    key={p}
+                                    className="rounded-full border border-[#c9a227]/25 bg-[#c9a227]/[0.08] px-3 py-1 text-xs text-[#e8c468]"
+                                  >
+                                    {p}
+                                  </li>
+                                ))}
+                              </ul>
+                              <p className="mt-3 text-xs text-[#8a8981]">
+                                {webinar.tiers} · {webinar.competitiveLabel}
+                              </p>
+                            </TimelineDetails>
+                          )}
+                        </div>
+                      </li>
+                    );
+                  })}
                 </ol>
               </div>
             ))}
           </div>
         </div>
       </section>
+
 
       {/* SECTION 4 — EduAid-Africa webinar weeks */}
       <section className="ed-section" aria-labelledby="tl-webinars">

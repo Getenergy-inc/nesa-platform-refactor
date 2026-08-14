@@ -18,7 +18,7 @@ import { LIVING_GALLERY_MIN_RECORDS } from "@/hooks/useLivingGallery";
 import { RECOGNITION_FAMILIES, BRAND, ICON_AWARD_SECTION, ICON_PATHWAYS } from "@/config/brandHierarchy";
 import { PROGRAMME_END_LABEL } from "@/config/programme";
 import { bySubcategory, type IconSubcategorySlug, type IconNominee } from "@/data/iconAward";
-import { useStripAutoScroll } from "./useStripAutoScroll";
+import { StripScroller } from "./StripScroller";
 
 /** Cap on cards rendered in the strip (the pool itself is much larger). */
 const GALLERY_CARD_LIMIT = 36;
@@ -162,8 +162,6 @@ function useIconGalleryPool() {
 export function LivingGallerySection() {
   const { entries, total } = useIconGalleryPool();
   const hasEnough = entries.length >= LIVING_GALLERY_MIN_RECORDS;
-  // Shared strip motion (auto-advance, reduced-motion + pause-on-interaction).
-  const { ref: trackRef, pauseHandlers } = useStripAutoScroll<HTMLDivElement>(hasEnough);
 
   const { gallery, tagline } = ICON_AWARD_SECTION;
   const lede = gallery.lede.replace("{count}", String(total));
@@ -183,18 +181,16 @@ export function LivingGallerySection() {
 
         {hasEnough ? (
           <>
-            <div
-              ref={trackRef}
-              role="group"
-              aria-label="Africa Education Icon nominees — scroll or swipe to browse"
-              tabIndex={0}
-              {...pauseHandlers}
-              className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 [scrollbar-width:thin] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+            <StripScroller
+              label="Africa Education Icon nominees"
+              autoScroll={hasEnough}
+              className="gap-4"
             >
               {entries.map((e) => (
                 <GalleryCard key={e.nominee.id} entry={e} />
               ))}
-            </div>
+            </StripScroller>
+
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <Link to="/nominees/africa-education-icon-award" className="ed-btn-ghost">
                 Explore Existing Nominees →

@@ -1,11 +1,13 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Award, ArrowRight } from "lucide-react";
+import { StripScroller } from "@/features/landing/editorial/StripScroller";
 import {
   ICON_NOMINEES,
   type IconSubcategorySlug,
   type IconClassificationSlug,
 } from "@/data/iconAward";
+
 
 interface Props {
   title: string;
@@ -62,7 +64,7 @@ export function RelatedIconHonoureesRibbon({
           </Link>
         </div>
 
-        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-3 -mx-4 px-4">
+        <StripScroller label={title} className="gap-4 -mx-4 px-4">
           {honourees.map((n) => (
             <Link
               key={n.id}
@@ -87,7 +89,7 @@ export function RelatedIconHonoureesRibbon({
               </div>
             </Link>
           ))}
-        </div>
+        </StripScroller>
       </div>
     </section>
   );
