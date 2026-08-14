@@ -12,7 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { getYouTubeEmbedUrl } from "@/lib/youtube";
 import { ICON_AWARD_SECTION, ICON_PATHWAYS } from "@/config/brandHierarchy";
 import { bySubcategory, type IconSubcategorySlug, type IconNominee } from "@/data/iconAward";
-import { useStripAutoScroll } from "./useStripAutoScroll";
+import { StripScroller } from "./StripScroller";
 
 /** Below this many real records we show the card without a strip. */
 const MIN_STRIP_RECORDS = 4;
