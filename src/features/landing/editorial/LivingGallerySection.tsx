@@ -183,18 +183,16 @@ export function LivingGallerySection() {
 
         {hasEnough ? (
           <>
-            <div
-              ref={trackRef}
-              role="group"
-              aria-label="Africa Education Icon nominees — scroll or swipe to browse"
-              tabIndex={0}
-              {...pauseHandlers}
-              className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 [scrollbar-width:thin] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+            <StripScroller
+              label="Africa Education Icon nominees"
+              autoScroll={hasEnough}
+              className="gap-4"
             >
               {entries.map((e) => (
                 <GalleryCard key={e.nominee.id} entry={e} />
               ))}
-            </div>
+            </StripScroller>
+
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <Link to="/nominees/africa-education-icon-award" className="ed-btn-ghost">
                 Explore Existing Nominees →
