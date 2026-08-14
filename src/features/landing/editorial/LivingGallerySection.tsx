@@ -18,7 +18,7 @@ import { LIVING_GALLERY_MIN_RECORDS } from "@/hooks/useLivingGallery";
 import { RECOGNITION_FAMILIES, BRAND, ICON_AWARD_SECTION, ICON_PATHWAYS } from "@/config/brandHierarchy";
 import { PROGRAMME_END_LABEL } from "@/config/programme";
 import { bySubcategory, type IconSubcategorySlug, type IconNominee } from "@/data/iconAward";
-import { useStripAutoScroll } from "./useStripAutoScroll";
+import { StripScroller } from "./StripScroller";
 
 /** Cap on cards rendered in the strip (the pool itself is much larger). */
 const GALLERY_CARD_LIMIT = 36;
@@ -162,8 +162,6 @@ function useIconGalleryPool() {
 export function LivingGallerySection() {
   const { entries, total } = useIconGalleryPool();
   const hasEnough = entries.length >= LIVING_GALLERY_MIN_RECORDS;
-  // Shared strip motion (auto-advance, reduced-motion + pause-on-interaction).
-  const { ref: trackRef, pauseHandlers } = useStripAutoScroll<HTMLDivElement>(hasEnough);
 
   const { gallery, tagline } = ICON_AWARD_SECTION;
   const lede = gallery.lede.replace("{count}", String(total));
