@@ -30,6 +30,22 @@ import {
 } from "lucide-react";
 
 import galaHeroImage from "@/assets/events/award-gala.jpeg";
+import { GALA_EVENT } from "@/config/galaConfig";
+import {
+  PROGRAMME_END_LABEL,
+  PROGRAMME_END_LONG_LABEL,
+  PROGRAMME_END_DATE,
+} from "@/config/programme";
+import {
+  getGalaJourneyMilestones,
+  MASTER_TIMELINE_TRACK_LABELS,
+} from "@/data/masterTimeline2026";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 interface TicketTier {
   id: string;
@@ -118,13 +134,41 @@ const ticketTiers: TicketTier[] = [
   },
 ];
 
+// Event facts come from the canonical gala config — never retyped here.
 const eventDetails = {
-  date: "June 28, 2026",
-  time: "18:00 WAT",
-  venue: "International Conference Centre",
-  city: "Abuja, Nigeria",
-  dressCode: "Black Tie / Traditional Formal",
+  date: `Sunday, ${PROGRAMME_END_LABEL}`,
+  time: GALA_EVENT.time,
+  venue: GALA_EVENT.venue,
+  city: GALA_EVENT.city,
+  dressCode: GALA_EVENT.dressCode,
 };
+
+const TICKET_FAQS: { q: string; a: string }[] = [
+  {
+    q: "When and where is the Gala?",
+    a: `${PROGRAMME_END_LONG_LABEL}, from ${GALA_EVENT.time}. ${GALA_EVENT.venue} — the exact venue is confirmed to ticket holders by email before the event.`,
+  },
+  {
+    q: "Is the Gala the same as the TV Showcases?",
+    a: "No. TV Showcase 1 (Sunday, 22 November 2026) and TV Showcase 2 (Tuesday, 8 December 2026) are broadcast programmes, not ticketed physical events. Your ticket admits you to the physical Recognition Gala in Lagos on 13 December 2026 only.",
+  },
+  {
+    q: "Does buying a ticket affect nominations, judging or recognition?",
+    a: "No. A ticket is admission to an event and nothing more. It confers no nomination, judging, voting or selection rights, and has no bearing on any recognition outcome.",
+  },
+  {
+    q: "When do nominations open and close?",
+    a: "Public nominations open 6 September 2026. Africa Education Icon nominations close 6 October 2026; Gold-Blue Garnet, Platinum and Influencer Education Impact nominations close 21 November 2026.",
+  },
+  {
+    q: "When are the Africa Education Icon recipients known?",
+    a: "All nine Africa Education Icon recipients are confirmed on 24 November 2026, ahead of TV Showcase 2 and the Gala.",
+  },
+  {
+    q: "How do I receive my ticket?",
+    a: "You receive a confirmation email with payment instructions, followed by your receipt and QR e-ticket. Bring the QR e-ticket to the Gala on 13 December 2026.",
+  },
+];
 
 export default function Tickets() {
   const { currentEdition } = useSeason();
@@ -160,11 +204,29 @@ export default function Tickets() {
   return (
     <>
       <Helmet>
-        <title>{`Get Tickets | NESA-Africa Awards Gala ${currentEdition?.displayYear || '2026'}`}</title>
+        <title>{`Gala Tickets · ${PROGRAMME_END_LABEL} · NESA-Africa 2026`}</title>
         <meta
           name="description"
-          content={`Purchase tickets for the NESA-Africa ${currentEdition?.displayYear} Awards Gala. Join us for a spectacular celebration of African education enablers.`}
+          content={`Buy tickets for the NESA-Africa 2026 Gold-Blue Garnet Awards Gala on ${PROGRAMME_END_LONG_LABEL}. Attendance only — tickets confer no nomination, judging or voting rights.`}
         />
+        <meta property="og:title" content={`Gala Tickets · ${PROGRAMME_END_LABEL} · NESA-Africa 2026`} />
+        <meta
+          property="og:description"
+          content={`NESA-Africa 2026 Gold-Blue Garnet Awards Gala — ${PROGRAMME_END_LONG_LABEL}.`}
+        />
+        <meta property="og:type" content="event" />
+        <meta property="og:url" content="https://nesaafrica.lovable.app/tickets" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Event",
+            name: GALA_EVENT.name,
+            startDate: `${PROGRAMME_END_DATE}T18:00:00+01:00`,
+            eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+            location: { "@type": "Place", name: GALA_EVENT.venue, address: GALA_EVENT.city },
+          })}
+        </script>
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
@@ -188,6 +250,9 @@ export default function Tickets() {
               <h1 className="font-display text-3xl font-bold text-white md:text-4xl">
                 Get Your <span className="text-primary">Gala Tickets</span>
               </h1>
+              <p className="mt-2 text-sm text-white/80 md:text-base">
+                NESA-Africa 2026 Gold-Blue Garnet Awards Gala · {PROGRAMME_END_LONG_LABEL}
+              </p>
             </div>
           </div>
         </section>
