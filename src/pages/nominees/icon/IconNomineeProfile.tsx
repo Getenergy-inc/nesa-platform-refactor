@@ -18,6 +18,7 @@ import {
   NomineeCard,
 } from "@/components/iconAward/shared";
 import { MapPin, ShieldCheck, Trophy } from "lucide-react";
+import { NesaTvLink } from "@/components/common/NesaTvLink";
 
 export default function IconNomineeProfile() {
   const { slug } = useParams<{ slug: string }>();
@@ -124,6 +125,7 @@ export default function IconNomineeProfile() {
                     Back to {cls.short}
                   </Link>
                 </Button>
+                <NesaTvLink name={nominee.name} />
               </div>
             </div>
           </div>

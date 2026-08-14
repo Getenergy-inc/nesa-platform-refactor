@@ -6,6 +6,7 @@ import { useNRCStats, useMyQueue } from "@/hooks/useNRCData";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { NesaTvLink } from "@/components/common/NesaTvLink";
 import {
   ClipboardList, FileSearch, Upload, Copy, MessageSquare,
   FileText, GraduationCap, LayoutDashboard, ArrowRight, CheckCircle2, Clock,
@@ -47,6 +48,9 @@ function VolunteerDashboardContent() {
           <p className="text-white/70 mt-2">
             Your volunteer overview and Nominee Research Corps (NRC) modules in one place.
           </p>
+          <div className="mt-4">
+            <NesaTvLink size="sm" />
+          </div>
         </div>
 
         <Tabs defaultValue="overview" className="w-full">

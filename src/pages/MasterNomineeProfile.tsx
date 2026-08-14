@@ -7,6 +7,7 @@ import {
   Building2, ThumbsUp, RotateCcw, Trophy, ChevronRight, Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { NesaTvLink } from "@/components/common/NesaTvLink";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -178,6 +179,11 @@ export default function MasterNomineeProfile() {
                       </Link>
                     </Button>
                   )}
+                  <NesaTvLink
+                    videoUrl={(nominee as any).videoUrl ?? (nominee as any).video_url ?? null}
+                    name={nominee.name}
+                    size="default"
+                  />
                 </div>
               </div>
             </div>

@@ -7,6 +7,7 @@ import {
   Users, Target, Share2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { NesaTvLink } from "@/components/common/NesaTvLink";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useVolunteerBySlug } from "@/hooks/useVolunteers";
@@ -136,6 +137,7 @@ export default function VolunteerProfile() {
                 <Button asChild size="sm" variant="ghost" className="text-white/80 hover:text-gold">
                   <Link to="/volunteer">Become a Volunteer</Link>
                 </Button>
+                <NesaTvLink name={v.fullName} size="sm" />
               </div>
             </div>
           </motion.div>
