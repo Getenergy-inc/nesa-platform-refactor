@@ -177,6 +177,7 @@ export default function Tickets() {
   const [quantity, setQuantity] = useState(1);
   const [isProcessing, setIsProcessing] = useState(false);
 
+  const journeyMilestones = getGalaJourneyMilestones();
   const selectedTicket = ticketTiers.find((t) => t.id === selectedTier);
   const subtotal = selectedTicket ? selectedTicket.price * quantity : 0;
   const processingFee = Math.round(subtotal * 0.035);
@@ -196,7 +197,7 @@ export default function Tickets() {
     
     toast({
       title: "Reservation Confirmed!",
-      description: `Your ${quantity}x ${selectedTicket?.name} ticket(s) have been reserved. Check your email for payment instructions.`,
+      description: `Your ${quantity}x ${selectedTicket?.name} ticket(s) for the Gala on ${PROGRAMME_END_LABEL} (Lagos, Nigeria) have been reserved. Check your email for payment instructions.`,
     });
     setIsProcessing(false);
   };
@@ -292,6 +293,60 @@ export default function Tickets() {
                       <p className="font-medium">{eventDetails.dressCode}</p>
                     </div>
                   </div>
+                </CardContent>
+              </Card>
+
+              {/* Your Journey to the Gala — derived from the /timeline master calendar */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Your Journey to the Gala</CardTitle>
+                  <CardDescription>
+                    Key milestones of the NESA-Africa 2026 recognition cycle.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ol className="space-y-3">
+                    {journeyMilestones.map((m) => (
+                      <li key={m.id} className="flex gap-3">
+                        <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                        <div>
+                          <p className="text-sm font-medium">{m.milestone}</p>
+                          <p className="text-xs text-muted-foreground">
+                            {m.dateLabel} · {MASTER_TIMELINE_TRACK_LABELS[m.track]}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                  <Button asChild variant="outline" size="sm" className="mt-5">
+                    <Link to="/timeline">View the full programme</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+
+              {/* Gala vs TV Showcases + rights disclaimer */}
+              <Card className="border-primary/30">
+                <CardHeader>
+                  <CardTitle className="text-base">What your ticket is — and is not</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3 text-sm text-muted-foreground">
+                  <p>
+                    <strong className="text-foreground">Includes:</strong> physical
+                    admission to the NESA-Africa 2026 Gold-Blue Garnet Awards Gala on{" "}
+                    {PROGRAMME_END_LONG_LABEL}, plus the seating and hospitality listed
+                    in your chosen tier.
+                  </p>
+                  <p>
+                    <strong className="text-foreground">Does not include:</strong> any
+                    nomination, judging, voting or selection right. Buying a ticket has
+                    no bearing whatsoever on who is nominated, verified or recognised.
+                  </p>
+                  <p>
+                    <strong className="text-foreground">Not the TV Showcases:</strong>{" "}
+                    TV Showcase 1 (22 November 2026) and TV Showcase 2 (8 December 2026)
+                    are separate broadcast programmes — they are not ticketed and are not
+                    the Gala.
+                  </p>
                 </CardContent>
               </Card>
 
@@ -400,6 +455,25 @@ export default function Tickets() {
                   </CardContent>
                 </Card>
               )}
+
+              {/* FAQ */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Frequently Asked Questions</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Accordion type="single" collapsible>
+                    {TICKET_FAQS.map((f, i) => (
+                      <AccordionItem key={f.q} value={`faq-${i}`}>
+                        <AccordionTrigger className="text-left text-sm">{f.q}</AccordionTrigger>
+                        <AccordionContent className="text-sm text-muted-foreground">
+                          {f.a}
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                </CardContent>
+              </Card>
             </div>
 
             {/* Order Summary */}
@@ -407,6 +481,9 @@ export default function Tickets() {
               <Card className="sticky top-24">
                 <CardHeader>
                   <CardTitle>Order Summary</CardTitle>
+                  <CardDescription>
+                    Gala · {PROGRAMME_END_LONG_LABEL}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {selectedTicket && (
