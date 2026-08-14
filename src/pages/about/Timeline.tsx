@@ -11,7 +11,21 @@
 // The source document's internal editorial/production checklist section is
 // deliberately NOT rendered on this public page.
 
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  Award,
+  CalendarCheck,
+  ChevronDown,
+  Gavel,
+  Megaphone,
+  Mic,
+  Newspaper,
+  ShieldCheck,
+  Sparkles,
+  Tv,
+  Video,
+} from "lucide-react";
 import { AboutSeo } from "@/pages/about/AboutSeo";
 import { useCountdown } from "@/hooks/useCountdown";
 import { useTimelineStatus, formatCount } from "@/hooks/useTimelineStatus";
@@ -62,11 +76,60 @@ const TRACK_CHIP: Record<MasterTimelineTrack, string> = {
   legacy: "border-[#4a5f22]/60 bg-[#4a5f22]/25 text-[#c6d98a]",
 };
 
+/** One icon per track so the schedule can be scanned without reading labels. */
+const TRACK_ICON: Record<MasterTimelineTrack, typeof Mic> = {
+  activation: Megaphone,
+  nominations: CalendarCheck,
+  verification: ShieldCheck,
+  webinar: Video,
+  podcast: Mic,
+  judging: Gavel,
+  showcase: Tv,
+  gala: Award,
+  news: Newspaper,
+  legacy: Sparkles,
+};
+
+/** Timeline marker dot colour per track (static classes). */
+const TRACK_DOT: Record<MasterTimelineTrack, string> = {
+  activation: "bg-[#c9a227]",
+  nominations: "bg-[#e8c468]",
+  verification: "bg-[#8fd3c7]",
+  webinar: "bg-[#9fd6b4]",
+  podcast: "bg-[#c3b0e8]",
+  judging: "bg-[#cfcdc5]",
+  showcase: "bg-[#9db9e8]",
+  gala: "bg-[#f0d78d]",
+  news: "bg-[#9ecbdd]",
+  legacy: "bg-[#c6d98a]",
+};
+
 /** Track-aware label for the expandable `details` block. */
 const DETAILS_SUMMARY_LABEL: Partial<Record<MasterTimelineTrack, string>> = {
   showcase: "How these pathways are decided",
   podcast: "Episode details",
 };
+
+/** The three dates most visitors actually come for. */
+const MUST_KNOW_IDS = new Set([
+  "recognition-gala",
+  "icon-nominations-close",
+  "tier234-nominations-close",
+]);
+
+/** Order of the filter toolbar. */
+const TRACK_ORDER: MasterTimelineTrack[] = [
+  "nominations",
+  "verification",
+  "judging",
+  "webinar",
+  "podcast",
+  "news",
+  "showcase",
+  "gala",
+  "activation",
+  "legacy",
+];
 
 const MONTH_LABEL = (iso: string) =>
   new Date(iso).toLocaleDateString("en-GB", { month: "long", year: "numeric", timeZone: "UTC" });
@@ -87,6 +150,26 @@ function groupByMonth(entries: MasterTimelineEntry[]) {
   }
   return groups;
 }
+
+/**
+ * Single expand/collapse affordance shared by webinar, podcast and showcase
+ * rows so all three dropdowns look and behave identically.
+ */
+function TimelineDetails({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <details className="group/details mt-3 rounded-lg border border-[#c9a227]/25 bg-[#c9a227]/[0.05]">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-2.5 text-xs font-semibold text-[#e8c468]">
+        <span>{label}</span>
+        <ChevronDown
+          aria-hidden
+          className="h-3.5 w-3.5 shrink-0 transition-transform group-open/details:rotate-180"
+        />
+      </summary>
+      <div className="px-4 pb-4">{children}</div>
+    </details>
+  );
+}
+
 
 export default function Timeline() {
   const status = useTimelineStatus();
