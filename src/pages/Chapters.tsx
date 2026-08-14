@@ -120,36 +120,85 @@ export default function Chapters() {
         </div>
       </section>
 
-      {/* Regional Map */}
+      {/* The Eight Africa Regions */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-display font-bold text-center mb-12 text-white">Chapters by Region</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {regions.map((region, index) => (
-              <Card key={index} className="bg-charcoal-light border-gold/10 hover:border-gold/30 transition-all hover:shadow-[0_0_20px_rgba(196,160,82,0.1)]">
-                <CardHeader>
-                  <div className="flex items-center gap-3">
-                    <div className={`w-4 h-4 rounded-full ${region.color}`} />
-                    <CardTitle className="text-white">{region.name}</CardTitle>
-                  </div>
-                  <Badge className="w-fit bg-gold/20 text-gold border-gold/30">
-                    {region.activeChapters} Active Chapters
-                  </Badge>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {region.countries.map((country, countryIndex) => (
-                      <Badge key={countryIndex} variant="outline" className="text-xs border-white/20 text-white/70">
-                        {country}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-display font-bold text-white">
+              Chapters Across the <span className="text-gold">Eight Africa Regions</span>
+            </h2>
+            <p className="text-white/60 max-w-2xl mx-auto mt-3">
+              Every African country belongs to exactly one of the eight canonical regions.
+              Chapter counts below are live from the NESA-Africa chapter register.
+            </p>
           </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {AFRICA_REGION_LIST.map((region) => {
+              const count = bySlug[region.slug] ?? 0;
+              return (
+                <Card
+                  key={region.code}
+                  className="bg-charcoal-light border-gold/10 hover:border-gold/30 transition-all hover:shadow-[0_0_20px_rgba(196,160,82,0.1)]"
+                >
+                  <CardHeader>
+                    <div className="flex items-center gap-3">
+                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gold/15 text-xs font-semibold text-gold">
+                        {region.order}
+                      </span>
+                      <CardTitle className="text-white text-lg">{region.name}</CardTitle>
+                    </div>
+                    <Badge className="w-fit bg-gold/20 text-gold border-gold/30">
+                      {loading
+                        ? "Loading chapters…"
+                        : count === 0
+                          ? "Chapter forming"
+                          : `${count} Active ${count === 1 ? "Chapter" : "Chapters"}`}
+                    </Badge>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-white/60 mb-4">{region.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {region.countries.map((country) => (
+                        <Badge
+                          key={country}
+                          variant="outline"
+                          className="text-xs border-white/20 text-white/70"
+                        >
+                          {country}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+
+          {/* The African Diaspora community sits alongside — not inside — the 8 regions */}
+          <Card className="mt-6 bg-charcoal-light border-gold/20">
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <Globe2 className="h-6 w-6 text-gold" />
+                <CardTitle className="text-white text-lg">African Diaspora Community</CardTitle>
+              </div>
+              <Badge className="w-fit bg-gold/20 text-gold border-gold/30">
+                {loading
+                  ? "Loading chapters…"
+                  : diasporaChapters === 0
+                    ? "Chapter forming"
+                    : `${diasporaChapters} Active ${diasporaChapters === 1 ? "Chapter" : "Chapters"}`}
+              </Badge>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-white/60">
+                Africans and Friends of Africa outside the continent organise as one global
+                community alongside the eight Africa regions — not as a ninth region.
+              </p>
+            </CardContent>
+          </Card>
         </div>
       </section>
+
 
       {/* Chapter Roles */}
       <section className="py-16 border-y border-gold/10">
