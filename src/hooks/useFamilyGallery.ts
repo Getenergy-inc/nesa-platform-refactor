@@ -101,7 +101,7 @@ async function fetchFamilyBuckets(): Promise<Record<string, FamilyGalleryEntry[]
     .select("id, slug, name")
     .in("slug", allSlugs);
   if (catErr) throw catErr;
-  if (!cats?.length) return [];
+  if (!cats?.length) return {};
 
   const catById = new Map<string, { slug: string; name: string }>(
     cats.map((c: any) => [c.id, { slug: c.slug, name: c.name }]),
@@ -115,7 +115,7 @@ async function fetchFamilyBuckets(): Promise<Record<string, FamilyGalleryEntry[]
       cats.map((c: any) => c.id),
     );
   if (subErr) throw subErr;
-  if (!subs?.length) return [];
+  if (!subs?.length) return {};
 
   // subcategory id -> { label, family }
   const subMeta = new Map<
@@ -137,7 +137,7 @@ async function fetchFamilyBuckets(): Promise<Record<string, FamilyGalleryEntry[]
       familyName: family.name,
     });
   }
-  if (subMeta.size === 0) return [];
+  if (subMeta.size === 0) return {};
 
   const { data: rows, error: nomErr } = await supabase
     .from("public_nominees")
