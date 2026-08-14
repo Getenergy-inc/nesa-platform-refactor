@@ -25,6 +25,22 @@ import { FamilyLivingGalleryStrip } from "./FamilyLivingGalleryStrip";
 const THUMB_W = 96;
 const THUMB_H = 120; // 4:5
 
+/**
+ * Per-family CTA overrides.
+ *
+ * Most families are served by the generic `?family=` routes. Influencer
+ * Education Impact is not: its real data model is three catalogue categories
+ * (Music / Social Media / Sports), so both CTAs must point at the same
+ * surfaces the /awards/influencer-education-impact slider uses, never at the
+ * empty legacy "influencer-education-impact" family route.
+ */
+const FAMILY_CTA_OVERRIDES: Record<string, { nominate?: string; explore?: string }> = {
+  "influencer-education-impact": {
+    nominate: "/nominate?tier=influencer-2026",
+    explore: "/awards/influencer-education-impact/nominees",
+  },
+};
+
 function FeaturedSkeleton() {
   return (
     <div className="mt-4 flex animate-pulse items-center gap-3 rounded-xl border border-white/10 bg-white/[0.02] p-3">
