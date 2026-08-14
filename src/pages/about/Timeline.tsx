@@ -174,6 +174,8 @@ function TimelineDetails({ label, children }: { label: string; children: React.R
 export default function Timeline() {
   const status = useTimelineStatus();
   const countdown = useCountdown(GALA_COUNTDOWN_TARGET);
+  const [activeTrack, setActiveTrack] = useState<MasterTimelineTrack | "all">("all");
+
 
   const nrcActive = (status.nrcQueued ?? 0) + (status.nrcVerified ?? 0) > 0;
   const judgesActive = (status.judgeAssignments ?? 0) > 0 && (status.activeJudges ?? 0) > 0;
