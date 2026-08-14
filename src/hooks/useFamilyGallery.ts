@@ -61,6 +61,8 @@ export interface FamilyGalleryEntry {
   categoryLabel: string;
   familySlug: string;
   familyName: string;
+  /** Role / organisation line, when the record carries one. */
+  title: string | null;
   impact: string | null;
   href: string;
 }
@@ -178,6 +180,7 @@ async function fetchFamilyBuckets(): Promise<Record<string, FamilyGalleryEntry[]
       categoryLabel: meta.label,
       familySlug: meta.familySlug,
       familyName: meta.familyName,
+      title: tidy(r.title, 90),
       impact: tidy(r.bio) || tidy(r.title, 90),
       href: `/nominees/${encodeURIComponent(r.slug)}`,
     });
