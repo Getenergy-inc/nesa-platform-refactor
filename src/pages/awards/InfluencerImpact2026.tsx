@@ -191,6 +191,10 @@ export default function InfluencerImpact2026() {
         ]}
       />
 
+      {/* LIVE NOMINEE SLIDERS — one per Influencer category, database-driven */}
+      <InfluencerPathwayNomineeSlider />
+
+
       {/* Influencer slot inside the 18-category registry */}
       <TierCategoryCards
         tier="influencer-education-impact"
