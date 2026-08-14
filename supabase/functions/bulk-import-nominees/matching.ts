@@ -106,7 +106,7 @@ export function normaliseTitle(raw: string | null | undefined): string {
   let text = stripDiacritics(String(raw)).toLowerCase();
   // Remove any parenthetical region suffix before scoring
   text = text.replace(/\(([^)]*)\)/g, " ");
-  for (const phrase of BOILERPLATE_PHRASES) text = text.replaceAll(phrase, " ");
+  for (const phrase of BOILERPLATE_PHRASES) text = text.split(phrase).join(" ");
   text = text.replace(/[^a-z0-9\s]/g, " ");
   const tokens = text
     .split(/\s+/)
