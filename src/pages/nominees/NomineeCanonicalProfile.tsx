@@ -118,10 +118,10 @@ export default function NomineeCanonicalProfile() {
           {sub && cls && (
             <IconBreadcrumbs
               items={[
-                { label: "Nominees", to: "/nominees" },
-                { label: ICON_AWARD.title, to: "/nominees/africa-education-icon-award" },
-                { label: sub.title, to: subcategoryUrl(sub.slug) },
-                { label: cls.title, to: classificationUrl(sub.slug, cls.slug) },
+                { label: "Nominees", href: "/nominees" },
+                { label: ICON_AWARD.title, href: "/nominees/africa-education-icon-award" },
+                { label: sub.title, href: subcategoryUrl(sub.slug) },
+                { label: cls.title, href: classificationUrl(sub.slug, cls.slug) },
                 { label: name },
               ]}
             />
