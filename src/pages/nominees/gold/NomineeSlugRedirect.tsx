@@ -1,11 +1,10 @@
 import { Navigate, useParams } from "react-router-dom";
 import { getAllGoldNominees } from "@/data/goldSpecialRecognition";
 import { getIconNominee, profileUrl as iconProfileUrl } from "@/data/iconAward";
-import IconNomineeProfile from "@/pages/nominees/icon/IconNomineeProfile";
 
 /**
  * Universal nominee profile resolver.
- * - Icon Award nominees are rendered directly via IconNomineeProfile.
+ * - Icon Award nominees redirect to the canonical nested profile URL.
  * - Gold Special Recognition nominees are redirected to their category-specific path.
  */
 export default function NomineeSlugRedirect() {
