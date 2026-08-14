@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import { NesaTvLink } from "@/components/common/NesaTvLink";
 import {
   Share2,
   Copy,
@@ -155,6 +156,12 @@ export function NomineeEngagementHub({
               WhatsApp
             </Button>
           </div>
+
+          <NesaTvLink
+            videoUrl={videoUrl}
+            name={nomineeName}
+            className="w-full"
+          />
         </CardContent>
       </Card>
 
