@@ -141,50 +141,67 @@ async function fetchFamilyBuckets(): Promise<Record<string, FamilyGalleryEntry[]
   }
   if (subMeta.size === 0) return {};
 
-  const { data: rows, error: nomErr } = await supabase
-    .from("public_nominees")
-    .select(
-      "id, name, slug, country, region, photo_url, logo_url, bio, title, subcategory_id, profile_completion_score",
-    )
-    .eq("publication_status", "published")
-    .in("subcategory_id", [...subMeta.keys()])
-    .or("photo_url.not.is.null,logo_url.not.is.null")
-    .order("profile_completion_score", { ascending: false, nullsFirst: false })
-    .limit(400);
-  if (nomErr) throw nomErr;
+  // One query PER family. A single pooled query would let the large families
+  // (CSR, EduTech) consume the row budget and starve the smaller ones, which
+  // then render an incorrect "no profile published yet" empty state.
+  const familySubIds = new Map<string, string[]>();
+  for (const [subId, meta] of subMeta) {
+    const list = familySubIds.get(meta.familySlug) || [];
+    list.push(subId);
+    familySubIds.set(meta.familySlug, list);
+  }
+
+  const results = await Promise.all(
+    [...familySubIds.entries()].map(async ([familySlug, subIds]) => {
+      const { data, error } = await supabase
+        .from("public_nominees")
+        .select(
+          "id, name, slug, country, region, photo_url, logo_url, bio, title, subcategory_id, profile_completion_score",
+        )
+        .eq("publication_status", "published")
+        .in("subcategory_id", subIds)
+        .or("photo_url.not.is.null,logo_url.not.is.null")
+        .order("profile_completion_score", { ascending: false, nullsFirst: false })
+        .limit(PER_FAMILY_LIMIT * 4);
+      if (error) throw error;
+      return { familySlug, rows: (data || []) as any[] };
+    }),
+  );
 
   // Bucket per family, then interleave.
   const buckets = new Map<string, FamilyGalleryEntry[]>();
-  for (const r of (rows || []) as any[]) {
-    if (!r.name || !r.slug) continue;
-    const meta = subMeta.get(r.subcategory_id);
-    if (!meta) continue;
-    const isOrg = looksLikeOrg(r.name);
-    const logo = normaliseUrl(r.logo_url);
-    const photo = normaliseUrl(r.photo_url);
-    const imageUrl = isOrg ? logo || photo : photo || logo;
-    if (!imageUrl) continue;
-    // A logo must never be cropped like a portrait — key off the field the
-    // image actually came from, not just the name heuristic.
-    const imageKind: "photo" | "logo" = imageUrl === logo ? "logo" : "photo";
-    const bucket = buckets.get(meta.familySlug) || [];
-    if (bucket.length >= PER_FAMILY_LIMIT) continue;
-    bucket.push({
-      id: r.id,
-      name: r.name,
-      slug: r.slug,
-      imageUrl,
-      imageKind,
-      country: tidy(r.country, 40),
-      region: tidy(r.region, 40),
-      categoryLabel: meta.label,
-      familySlug: meta.familySlug,
-      familyName: meta.familyName,
-      title: tidy(r.title, 90),
-      impact: tidy(r.bio) || tidy(r.title, 90),
-      href: `/nominees/${encodeURIComponent(r.slug)}`,
-    });
-    buckets.set(meta.familySlug, bucket);
+  for (const { rows } of results) {
+    for (const r of rows) {
+      if (!r.name || !r.slug) continue;
+      const meta = subMeta.get(r.subcategory_id);
+      if (!meta) continue;
+      const isOrg = looksLikeOrg(r.name);
+      const logo = normaliseUrl(r.logo_url);
+      const photo = normaliseUrl(r.photo_url);
+      const imageUrl = isOrg ? logo || photo : photo || logo;
+      if (!imageUrl) continue;
+      // A logo must never be cropped like a portrait — key off the field the
+      // image actually came from, not just the name heuristic.
+      const imageKind: "photo" | "logo" = imageUrl === logo ? "logo" : "photo";
+      const bucket = buckets.get(meta.familySlug) || [];
+      if (bucket.length >= PER_FAMILY_LIMIT) continue;
+      bucket.push({
+        id: r.id,
+        name: r.name,
+        slug: r.slug,
+        imageUrl,
+        imageKind,
+        country: tidy(r.country, 40),
+        region: tidy(r.region, 40),
+        categoryLabel: meta.label,
+        familySlug: meta.familySlug,
+        familyName: meta.familyName,
+        title: tidy(r.title, 90),
+        impact: tidy(r.bio) || tidy(r.title, 90),
+        href: `/nominees/${encodeURIComponent(r.slug)}`,
+      });
+      buckets.set(meta.familySlug, bucket);
+    }
   }
 
   const out: Record<string, FamilyGalleryEntry[]> = {};
