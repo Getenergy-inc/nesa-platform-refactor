@@ -428,6 +428,7 @@ import {
   AdminIconPortraitGaps,
 } from "./pages/admin";
 import BulkSeedNominees from "./pages/admin/BulkSeedNominees";
+import BulkImportNominees from "./pages/admin/BulkImportNominees";
 import AdminVolunteersCMS from "./pages/admin/AdminVolunteersCMS";
 
 // Optimized QueryClient with caching strategy
@@ -2195,6 +2196,10 @@ const App = () => (
                   <Route path="/admin/gallery" element={<AdminGalleryCMS />} />
                   <Route path="/admin/icon-migration" element={<AdminIconMigrationVerification />} />
                   <Route path="/admin/icon-portrait-gaps" element={<AdminIconPortraitGaps />} />
+                  <Route
+                    path="/admin/bulk-import"
+                    element={<BulkImportNominees />}
+                  />
                   <Route
                     path="/admin/bulk-seed"
                     element={<BulkSeedNominees />}
