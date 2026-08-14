@@ -15,6 +15,7 @@ import {
   subcategoryUrl,
 } from "@/data/iconAward";
 import { getYouTubeEmbedUrl } from "@/lib/youtube";
+import { NesaTvLink } from "@/components/common/NesaTvLink";
 import { ExternalLink, MapPin, ShieldCheck, Trophy } from "lucide-react";
 
 const SITE = "https://nesaafrica.lovable.app";
