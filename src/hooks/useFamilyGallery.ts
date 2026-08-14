@@ -43,7 +43,15 @@ const FAMILY_DB_CATEGORY_SLUGS: Record<string, string[]> = {
     "international-bilateral-education",
   ],
   "diaspora-impact": ["diaspora-educational-impact", "diaspora-education-impact"],
+  // Influencer Education Impact lives in THREE real catalogue categories —
+  // the same ones behind the /awards/influencer-education-impact slider
+  // (see useInfluencerPathwayNominees). The historical single
+  // "influencer-education-impact(-award)" category carries no records and is
+  // kept only so legacy rows, if any surface, are not dropped.
   "influencer-education-impact": [
+    "africa-music-influencer-education",
+    "africa-social-media-influencer-education",
+    "africa-sports-influencer-education",
     "influencer-education-impact-award",
     "influencer-education-impact",
   ],
