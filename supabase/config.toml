@@ -1,5 +1,8 @@
 project_id = "sjghitoydzpirpqjules"
 
+[functions.bulk-import-nominees]
+verify_jwt = false
+
 [functions.import-nominees]
 verify_jwt = false
 
