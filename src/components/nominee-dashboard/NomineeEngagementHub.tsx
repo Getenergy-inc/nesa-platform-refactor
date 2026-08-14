@@ -20,6 +20,8 @@ interface NomineeEngagementHubProps {
   nomineeSlug: string;
   nomineeName: string;
   referralCode?: string;
+  /** Nominee feature video, once the NESA Africa TV pipeline has published one. */
+  videoUrl?: string | null;
 }
 
 export function NomineeEngagementHub({
