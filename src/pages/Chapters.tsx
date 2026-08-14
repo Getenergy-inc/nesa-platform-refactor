@@ -233,7 +233,7 @@ export default function Chapters() {
             <CardHeader>
               <div className="flex items-center gap-3">
                 <Globe2 className="h-6 w-6 text-gold" />
-                <CardTitle className="text-white text-lg">African Diaspora Community</CardTitle>
+                <CardTitle className="text-white text-lg">International Friends of EduAid-Africa</CardTitle>
               </div>
               <Badge className="w-fit bg-gold/20 text-gold border-gold/30">
                 {loading
@@ -246,9 +246,8 @@ export default function Chapters() {
             <CardContent>
               <p className="text-sm text-white/60">
                 Africans and Friends of EduAid-Africa outside the continent organise as one
-                global SCEF chapter community alongside the eight Africa regions — not as a
-                ninth region.
-
+                global SCEF chapter community — the International Friends of EduAid-Africa
+                pillar — alongside the eight Africa regions, not as a ninth region.
               </p>
             </CardContent>
           </Card>
