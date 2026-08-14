@@ -51,7 +51,8 @@ function NomineeStrip({ pathway, nominees }: { pathway: string; nominees: IconNo
           </div>
         </Link>
       ))}
-    </div>
+    </StripScroller>
+
   );
 }
 
