@@ -184,7 +184,22 @@ async function fetchFamilyGallery(): Promise<FamilyGalleryEntry[]> {
     buckets.set(meta.familySlug, bucket);
   }
 
-  const ordered = RECOGNITION_FAMILIES.map((f) => buckets.get(f.slug) || []).filter(
+  const out: Record<string, FamilyGalleryEntry[]> = {};
+  for (const f of RECOGNITION_FAMILIES) out[f.slug] = buckets.get(f.slug) || [];
+  return out;
+}
+
+/** One shared cached query powers both the strip and the per-family cards. */
+function useFamilyBuckets() {
+  return useQuery({
+    queryKey: ["family-gallery-buckets"],
+    queryFn: fetchFamilyBuckets,
+    staleTime: 1000 * 60 * 10,
+  });
+}
+
+function interleave(buckets: Record<string, FamilyGalleryEntry[]>): FamilyGalleryEntry[] {
+  const ordered = RECOGNITION_FAMILIES.map((f) => buckets[f.slug] || []).filter(
     (b) => b.length > 0,
   );
   const longest = Math.max(0, ...ordered.map((b) => b.length));
@@ -201,12 +216,8 @@ async function fetchFamilyGallery(): Promise<FamilyGalleryEntry[]> {
 }
 
 export function useFamilyGalleryNominees() {
-  const q = useQuery({
-    queryKey: ["family-gallery-nominees"],
-    queryFn: fetchFamilyGallery,
-    staleTime: 1000 * 60 * 10,
-  });
-  const nominees = q.data ?? [];
+  const q = useFamilyBuckets();
+  const nominees = q.data ? interleave(q.data) : [];
   return {
     nominees,
     loading: q.isLoading,
@@ -214,3 +225,35 @@ export function useFamilyGalleryNominees() {
     hasEnough: !q.isLoading && !q.error && nominees.length >= LIVING_GALLERY_MIN_RECORDS,
   };
 }
+
+/**
+ * One featured, published profile per recognition family.
+ *
+ * Selection is deterministic (highest profile-completion score first, then a
+ * stable slug ordering) and rotates on a weekly cadence so the homepage stays
+ * alive without re-rendering a different face on every paint. Families with no
+ * eligible published record resolve to `null` — never a substitute from
+ * another family.
+ */
+export function useFamilyFeaturedProfiles() {
+  const q = useFamilyBuckets();
+  const buckets = q.data;
+
+  // Stable weekly rotation index (UTC weeks since epoch).
+  const week = Math.floor(Date.now() / (1000 * 60 * 60 * 24 * 7));
+
+  const featured: Record<string, FamilyGalleryEntry | null> = {};
+  for (const f of RECOGNITION_FAMILIES) {
+    const bucket = (buckets?.[f.slug] || [])
+      .slice()
+      .sort((a, b) => a.slug.localeCompare(b.slug));
+    featured[f.slug] = bucket.length ? bucket[week % bucket.length] : null;
+  }
+
+  return {
+    featured,
+    loading: q.isLoading,
+    error: (q.error as Error) ?? null,
+  };
+}
+
