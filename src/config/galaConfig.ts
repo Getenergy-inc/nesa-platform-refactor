@@ -3,6 +3,8 @@
  * Typed constants for tickets, donations, and payment methods
  */
 
+import { PROGRAMME_END_LABEL } from "@/config/programme";
+
 // ============== TICKET TIERS ==============
 
 export type TicketTierType = 'GENERAL' | 'PREMIUM' | 'VIP' | 'VVIP';
