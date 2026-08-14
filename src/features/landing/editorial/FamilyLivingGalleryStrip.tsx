@@ -14,7 +14,7 @@ import {
   LIVING_GALLERY_MIN_RECORDS,
   type FamilyGalleryEntry,
 } from "@/hooks/useFamilyGallery";
-import { useStripAutoScroll } from "./useStripAutoScroll";
+import { StripScroller } from "./StripScroller";
 
 /** Rendered card box — width/height attributes match the CSS box exactly. */
 const CARD_W = 280;
@@ -97,7 +97,6 @@ function FamilyCard({ entry }: { entry: FamilyGalleryEntry }) {
 
 export function FamilyLivingGalleryStrip() {
   const { nominees, loading, hasEnough } = useFamilyGalleryNominees();
-  const { ref: trackRef, pauseHandlers } = useStripAutoScroll<HTMLDivElement>(hasEnough);
 
   if (loading) {
     return (
@@ -126,18 +125,15 @@ export function FamilyLivingGalleryStrip() {
 
   return (
     <div className="mb-12">
-      <div
-        ref={trackRef}
-        role="group"
-        aria-label="Recognised education enablers across the six recognition pathways — scroll or swipe to browse"
-        tabIndex={0}
-        {...pauseHandlers}
-        className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 [scrollbar-width:thin] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+      <StripScroller
+        label="Recognised education enablers across the six recognition pathways"
+        autoScroll={hasEnough}
+        className="gap-4"
       >
         {nominees.map((entry) => (
           <FamilyCard key={entry.id} entry={entry} />
         ))}
-      </div>
+      </StripScroller>
     </div>
   );
 }
