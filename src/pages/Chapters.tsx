@@ -243,8 +243,10 @@ export default function Chapters() {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-white/60">
-                Africans and Friends of Africa outside the continent organise as one global
-                community alongside the eight Africa regions — not as a ninth region.
+                Africans and Friends of EduAid-Africa outside the continent organise as one
+                global SCEF chapter community alongside the eight Africa regions — not as a
+                ninth region.
+
               </p>
             </CardContent>
           </Card>
