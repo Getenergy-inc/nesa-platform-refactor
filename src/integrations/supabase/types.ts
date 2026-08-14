@@ -3251,6 +3251,78 @@ export type Database = {
         }
         Relationships: []
       }
+      import_review_queue: {
+        Row: {
+          batch_id: string
+          created_at: string
+          created_by: string | null
+          id: string
+          raw_row: Json
+          reason: string
+          resolved_at: string | null
+          resolved_by: string | null
+          resolved_nominee_id: string | null
+          row_number: number | null
+          source_file: string
+          status: string
+          suggested_country: string | null
+          suggested_name: string | null
+          suggested_region: string | null
+          updated_at: string
+        }
+        Insert: {
+          batch_id: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          raw_row?: Json
+          reason: string
+          resolved_at?: string | null
+          resolved_by?: string | null
+          resolved_nominee_id?: string | null
+          row_number?: number | null
+          source_file: string
+          status?: string
+          suggested_country?: string | null
+          suggested_name?: string | null
+          suggested_region?: string | null
+          updated_at?: string
+        }
+        Update: {
+          batch_id?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          raw_row?: Json
+          reason?: string
+          resolved_at?: string | null
+          resolved_by?: string | null
+          resolved_nominee_id?: string | null
+          row_number?: number | null
+          source_file?: string
+          status?: string
+          suggested_country?: string | null
+          suggested_name?: string | null
+          suggested_region?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "import_review_queue_resolved_nominee_id_fkey"
+            columns: ["resolved_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "import_review_queue_resolved_nominee_id_fkey"
+            columns: ["resolved_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       influencer_impact_nominees: {
         Row: {
           artist_profile_link: string | null
