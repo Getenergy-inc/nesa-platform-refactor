@@ -130,6 +130,47 @@ export default function Chapters() {
         </div>
       </section>
 
+      {/* SCEF institutional band */}
+      <section className="py-14">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto rounded-2xl border border-gold/20 bg-charcoal-light p-8">
+            <h2 className="text-2xl font-display font-bold text-white mb-3">
+              One Foundation, <span className="text-gold">One Global Chapter Network</span>
+            </h2>
+            <p className="text-white/70 mb-4">
+              Every chapter listed here is an international chapter of the Santos Creations
+              Educational Foundation (SCEF). Members serve as <span className="text-gold">Friends of
+              EduAid-Africa</span>: they raise and steward EduAid-Africa support, host local
+              education dialogues, and surface credible Education Enablers into the NESA-Africa
+              recognition pipeline.
+            </p>
+            <ul className="grid sm:grid-cols-3 gap-3 text-sm text-white/70">
+              <li className="rounded-lg border border-gold/10 p-3">
+                <span className="block text-gold font-semibold mb-1">SCEF</span>
+                Institutional owner and governance body of the chapter network.
+              </li>
+              <li className="rounded-lg border border-gold/10 p-3">
+                <span className="block text-gold font-semibold mb-1">EduAid-Africa</span>
+                The programme infrastructure chapters fund and deliver locally.
+              </li>
+              <li className="rounded-lg border border-gold/10 p-3">
+                <span className="block text-gold font-semibold mb-1">NESA-Africa</span>
+                The recognition cycle chapters mobilise their communities around.
+              </li>
+            </ul>
+            <div className="mt-6">
+              <Link
+                to="/impact/friends-of-eduaid-africa"
+                className="inline-flex items-center text-gold hover:underline"
+              >
+                Learn about Friends of EduAid-Africa
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* The Eight Africa Regions */}
       <section className="py-16">
         <div className="container mx-auto px-4">
@@ -139,9 +180,10 @@ export default function Chapters() {
             </h2>
             <p className="text-white/60 max-w-2xl mx-auto mt-3">
               Every African country belongs to exactly one of the eight canonical regions.
-              Chapter counts below are live from the NESA-Africa chapter register.
+              Chapter counts below are live from the SCEF chapter register.
             </p>
           </div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {AFRICA_REGION_LIST.map((region) => {
               const count = bySlug[region.slug] ?? 0;
