@@ -391,7 +391,10 @@ export function matchSubcategory(
     if (suffix) return region !== null && suffix === region;
     return true;
   });
-  const pool = eligible.length > 0 ? eligible : subcategories;
+  // Region gating is strict: a row in one region must never fall through to
+  // another region's subcategory.
+  if (eligible.length === 0) return { match: null, score: 0, confident: false };
+  const pool = eligible;
 
   let best: SubcategoryLike | null = null;
   let bestScore = 0;
@@ -409,7 +412,7 @@ export function matchSubcategory(
     return { match: pool[0], score: 0.4, confident: false };
   }
   if (bestScore < WEAK_THRESHOLD) {
-    if (pool.length === 1 && eligible.length === 1) {
+    if (pool.length === 1) {
       return { match: pool[0], score: 0.4, confident: false };
     }
     return { match: null, score: bestScore, confident: false };
