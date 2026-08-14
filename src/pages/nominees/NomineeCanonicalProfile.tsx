@@ -180,6 +180,7 @@ export default function NomineeCanonicalProfile() {
                 <Button asChild variant="outline" className="border-gold/30 text-gold">
                   <Link to="/nominee-portal">Is this you? Claim this profile</Link>
                 </Button>
+                <NesaTvLink videoId={videoId} name={name} />
               </div>
             </div>
           </header>
