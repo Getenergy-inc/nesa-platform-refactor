@@ -704,3 +704,38 @@
 .nesa-ed .ed-ticker-track::-webkit-scrollbar {
   display: none;
 }
+
+/* ---------- shared horizontal nominee strips ---------- */
+.ed-strip-scroll {
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 175, 55, 0.55) rgba(255, 255, 255, 0.06);
+  cursor: grab;
+}
+.ed-strip-scroll:active {
+  cursor: grabbing;
+}
+.ed-strip-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+.ed-strip-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+}
+.ed-strip-scroll::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.55);
+  border-radius: 999px;
+}
+.ed-strip-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 175, 55, 0.85);
+}
+.ed-strip-scroll > * {
+  scroll-snap-align: start;
+}
+/* grid/flex children must be allowed to shrink or the strip stretches the
+   card and gets clipped by the viewport instead of scrolling. */
+.nesa-ed .ed-card,
+.nesa-ed .ed-grid-3 > * {
+  min-width: 0;
+}
