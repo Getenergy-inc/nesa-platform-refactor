@@ -165,6 +165,7 @@ export function RecognitionFamiliesSection() {
         <div className="ed-grid-3">
           {RECOGNITION_FAMILIES.map((f) => {
             const entry = error ? null : featured[f.slug];
+            const cta = FAMILY_CTA_OVERRIDES[f.slug] ?? {};
             return (
               <article key={f.slug} className="ed-card">
                 <div className="ed-card-badge">Recognition Pathway</div>
@@ -177,17 +178,18 @@ export function RecognitionFamiliesSection() {
 
                 <div className="mt-4 flex flex-wrap items-center gap-2">
                   <Link
-                    to={`/nominate?family=${f.slug}`}
+                    to={cta.nominate ?? `/nominate?family=${f.slug}`}
                     className="inline-flex h-9 items-center rounded-full bg-gold px-4 text-xs font-semibold text-charcoal transition-colors hover:bg-gold/90"
                   >
                     Nominate
                   </Link>
                   <Link
-                    to={`/nominees?family=${f.slug}`}
+                    to={cta.explore ?? `/nominees?family=${f.slug}`}
                     className="inline-flex h-9 items-center rounded-full border border-gold/40 px-4 text-xs font-semibold text-gold transition-colors hover:bg-gold/10"
                   >
                     Explore Existing Nominees
                   </Link>
+
                   <Link
                     to={`/recognition/${f.slug}`}
                     className="inline-flex h-9 items-center rounded-full border border-white/15 px-4 text-xs font-semibold text-white/80 transition-colors hover:border-gold/40 hover:text-gold"
