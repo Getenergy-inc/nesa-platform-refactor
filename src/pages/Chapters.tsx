@@ -178,11 +178,11 @@ export default function Chapters() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-display font-bold text-white">
-              Chapters Across the <span className="text-gold">Eight Africa Regions</span>
+              SCEF Africa <span className="text-gold">Local Chapters</span>
             </h2>
             <p className="text-white/60 max-w-2xl mx-auto mt-3">
-              Every African country belongs to exactly one of the eight canonical regions.
-              Chapter counts below are live from the SCEF chapter register.
+              Every African country belongs to exactly one of the eight canonical SCEF Africa regions.
+              Local chapter counts below are live from the SCEF chapter register.
             </p>
           </div>
 
