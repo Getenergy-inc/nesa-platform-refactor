@@ -28,8 +28,10 @@ export function NomineeEngagementHub({
   nomineeSlug,
   nomineeName,
   referralCode,
+  videoUrl,
 }: NomineeEngagementHubProps) {
   const [copied, setCopied] = useState(false);
+
 
   const profileUrl = `${window.location.origin}/nominees/${nomineeSlug}`;
   const referralUrl = referralCode
