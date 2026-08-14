@@ -375,6 +375,10 @@ import {
 
 // NRC Arena — Foundation shell (Phase 1)
 import { NRCProtectedRoute } from "@/components/nrc/arena/NRCProtectedRoute";
+import NRCProfileRevisions from "./pages/nrc/NRCProfileRevisions";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
+import NomineeCanonicalProfile from "./pages/nominees/NomineeCanonicalProfile";
+import NomineeProfileEditor from "./pages/nominee/NomineeProfileEditor";
 import NRCArenaIndex from "./pages/nrc/arena/NRCArenaIndex";
 import NRCSignIn from "./pages/nrc/arena/NRCSignIn";
 import NRCOnboarding from "./pages/nrc/arena/NRCOnboarding";
@@ -1871,6 +1875,25 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  {/* Canonical nominee profile: /nominees/:award/:category/:classification/:slug */}
+                  <Route
+                    path="/nominees/:award/:category/:classification/:slug"
+                    element={
+                      <WithLayout>
+                        <NomineeCanonicalProfile />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/nominee-portal"
+                    element={
+                      <WithLayout>
+                        <ProtectedRoute>
+                          <NomineeProfileEditor />
+                        </ProtectedRoute>
+                      </WithLayout>
+                    }
+                  />
                   <Route
                     path="/nominee/:slug"
                     element={<NomineeSlugRedirect />}
@@ -2059,6 +2082,10 @@ const App = () => (
                   <Route path="/nrc/my-queue" element={<NRCProtectedRoute><NRCMyQueue /></NRCProtectedRoute>} />
                   <Route path="/nrc/members" element={<NRCProtectedRoute><NRCMembersPage /></NRCProtectedRoute>} />
                   <Route path="/nrc/settings" element={<NRCProtectedRoute><NRCSettings /></NRCProtectedRoute>} />
+                  <Route
+                    path="/nrc/profile-revisions"
+                    element={<NRCProtectedRoute><NRCProfileRevisions /></NRCProtectedRoute>}
+                  />
                   <Route
                     path="/nrc/scoring"
                     element={<NRCProtectedRoute><NRCScoringDashboard /></NRCProtectedRoute>}

@@ -1,20 +1,19 @@
 import { Navigate, useParams } from "react-router-dom";
 import { getAllGoldNominees } from "@/data/goldSpecialRecognition";
 import { getIconNominee, profileUrl as iconProfileUrl } from "@/data/iconAward";
-import IconNomineeProfile from "@/pages/nominees/icon/IconNomineeProfile";
 
 /**
  * Universal nominee profile resolver.
- * - Icon Award nominees are rendered directly via IconNomineeProfile.
+ * - Icon Award nominees redirect to the canonical nested profile URL.
  * - Gold Special Recognition nominees are redirected to their category-specific path.
  */
 export default function NomineeSlugRedirect() {
   const { slug } = useParams<{ slug: string }>();
   if (!slug) return <Navigate to="/nominees/africa-education-icon-award" replace />;
 
-  // Icon Award match → render profile inline (preserves URL)
+  // Icon Award match → redirect to the canonical 4-segment profile URL
   if (getIconNominee(slug)) {
-    return <IconNomineeProfile />;
+    return <Navigate to={iconProfileUrl(slug)} replace />;
   }
 
   // Gold Special Recognition match → redirect to nested path
