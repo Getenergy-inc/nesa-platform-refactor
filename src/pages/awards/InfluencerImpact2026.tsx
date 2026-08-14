@@ -24,6 +24,7 @@ import { trackEvent } from "@/lib/analytics";
 import { SubcategoryPathways } from "@/components/awards/standard/sections";
 import { TierCategoryCards } from "@/components/awards/TierCategoryCards";
 import TierCategoriesGrid from "@/components/recognition2026/TierCategoriesGrid";
+import { InfluencerPathwayNomineeSlider } from "@/components/awards/InfluencerPathwayNomineeSlider";
 
 const DIRECTORY_ROUTE = "/awards/influencer-education-impact/nominees";
 
