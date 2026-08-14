@@ -136,14 +136,15 @@ export default function Chapters() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto rounded-2xl border border-gold/20 bg-charcoal-light p-8">
             <h2 className="text-2xl font-display font-bold text-white mb-3">
-              One Foundation, <span className="text-gold">One Global Chapter Network</span>
+              Two Pillars, <span className="text-gold">One SCEF Chapter Network</span>
             </h2>
             <p className="text-white/70 mb-4">
-              Every chapter listed here is an international chapter of the Santos Creations
-              Educational Foundation (SCEF). Members serve as <span className="text-gold">Friends of
-              EduAid-Africa</span>: they raise and steward EduAid-Africa support, host local
-              education dialogues, and surface credible Education Enablers into the NESA-Africa
-              recognition pipeline.
+              Every chapter listed here belongs to the Santos Creations Educational Foundation
+              (SCEF). <span className="text-gold">SCEF Africa Local Chapters</span> operate inside
+              the eight Africa regions. <span className="text-gold">International Friends of
+              EduAid-Africa</span> chapters operate outside the continent, raising global support,
+              hosting education dialogues, and surfacing credible Education Enablers into the
+              NESA-Africa recognition pipeline.
             </p>
             <ul className="grid sm:grid-cols-3 gap-3 text-sm text-white/70">
               <li className="rounded-lg border border-gold/10 p-3">
@@ -152,14 +153,14 @@ export default function Chapters() {
               </li>
               <li className="rounded-lg border border-gold/10 p-3">
                 <span className="block text-gold font-semibold mb-1">EduAid-Africa</span>
-                The programme infrastructure chapters fund and deliver locally.
+                The programme infrastructure local chapters fund and deliver.
               </li>
               <li className="rounded-lg border border-gold/10 p-3">
                 <span className="block text-gold font-semibold mb-1">NESA-Africa</span>
                 The recognition cycle chapters mobilise their communities around.
               </li>
             </ul>
-            <div className="mt-6">
+            <div className="mt-6 flex flex-wrap gap-4">
               <Link
                 to="/impact/friends-of-eduaid-africa"
                 className="inline-flex items-center text-gold hover:underline"
