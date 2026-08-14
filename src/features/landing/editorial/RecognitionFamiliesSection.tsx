@@ -25,6 +25,22 @@ import { FamilyLivingGalleryStrip } from "./FamilyLivingGalleryStrip";
 const THUMB_W = 96;
 const THUMB_H = 120; // 4:5
 
+/**
+ * Per-family CTA overrides.
+ *
+ * Most families are served by the generic `?family=` routes. Influencer
+ * Education Impact is not: its real data model is three catalogue categories
+ * (Music / Social Media / Sports), so both CTAs must point at the same
+ * surfaces the /awards/influencer-education-impact slider uses, never at the
+ * empty legacy "influencer-education-impact" family route.
+ */
+const FAMILY_CTA_OVERRIDES: Record<string, { nominate?: string; explore?: string }> = {
+  "influencer-education-impact": {
+    nominate: "/nominate?tier=influencer-2026",
+    explore: "/awards/influencer-education-impact/nominees",
+  },
+};
+
 function FeaturedSkeleton() {
   return (
     <div className="mt-4 flex animate-pulse items-center gap-3 rounded-xl border border-white/10 bg-white/[0.02] p-3">
@@ -149,6 +165,7 @@ export function RecognitionFamiliesSection() {
         <div className="ed-grid-3">
           {RECOGNITION_FAMILIES.map((f) => {
             const entry = error ? null : featured[f.slug];
+            const cta = FAMILY_CTA_OVERRIDES[f.slug] ?? {};
             return (
               <article key={f.slug} className="ed-card">
                 <div className="ed-card-badge">Recognition Pathway</div>
@@ -161,17 +178,18 @@ export function RecognitionFamiliesSection() {
 
                 <div className="mt-4 flex flex-wrap items-center gap-2">
                   <Link
-                    to={`/nominate?family=${f.slug}`}
+                    to={cta.nominate ?? `/nominate?family=${f.slug}`}
                     className="inline-flex h-9 items-center rounded-full bg-gold px-4 text-xs font-semibold text-charcoal transition-colors hover:bg-gold/90"
                   >
                     Nominate
                   </Link>
                   <Link
-                    to={`/nominees?family=${f.slug}`}
+                    to={cta.explore ?? `/nominees?family=${f.slug}`}
                     className="inline-flex h-9 items-center rounded-full border border-gold/40 px-4 text-xs font-semibold text-gold transition-colors hover:bg-gold/10"
                   >
                     Explore Existing Nominees
                   </Link>
+
                   <Link
                     to={`/recognition/${f.slug}`}
                     className="inline-flex h-9 items-center rounded-full border border-white/15 px-4 text-xs font-semibold text-white/80 transition-colors hover:border-gold/40 hover:text-gold"
