@@ -117,15 +117,15 @@ export default function Chapters() {
             </div>
             <div>
               <p className="text-4xl font-bold text-gold">{REGION_STATS.africaRegions}</p>
-              <p className="text-white/60">Africa Regions</p>
+              <p className="text-white/60">SCEF Africa Regions</p>
             </div>
             <div>
               <p className="text-4xl font-bold text-gold">1</p>
-              <p className="text-white/60">Diaspora Community</p>
+              <p className="text-white/60">International Friends Community</p>
             </div>
             <div>
               <p className="text-4xl font-bold text-gold">{REGION_STATS.totalCountries}</p>
-              <p className="text-white/60">Countries Covered</p>
+              <p className="text-white/60">Countries & Diaspora Covered</p>
             </div>
           </div>
         </div>
