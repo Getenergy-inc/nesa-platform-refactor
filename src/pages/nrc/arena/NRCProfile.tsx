@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
+import { NesaTvLink } from "@/components/common/NesaTvLink";
 import { NRCArenaLayout } from "@/components/nrc/arena/NRCArenaLayout";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -33,6 +34,9 @@ export default function NRCProfile() {
           <div className="mt-2 flex flex-wrap gap-2 text-xs">
             <Badge variant="outline" className="border-gold/40 text-gold">Appointment · Active</Badge>
             <Badge variant="outline" className="border-emerald-400/40 text-emerald-300">MFA enabled</Badge>
+          </div>
+          <div className="mt-3">
+            <NesaTvLink size="sm" name={display} />
           </div>
         </div>
       </header>

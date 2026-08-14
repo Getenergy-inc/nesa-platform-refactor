@@ -15,6 +15,7 @@ import {
   subcategoryUrl,
 } from "@/data/iconAward";
 import { getYouTubeEmbedUrl } from "@/lib/youtube";
+import { NesaTvLink } from "@/components/common/NesaTvLink";
 import { ExternalLink, MapPin, ShieldCheck, Trophy } from "lucide-react";
 
 const SITE = "https://nesaafrica.lovable.app";
@@ -179,6 +180,7 @@ export default function NomineeCanonicalProfile() {
                 <Button asChild variant="outline" className="border-gold/30 text-gold">
                   <Link to="/nominee-portal">Is this you? Claim this profile</Link>
                 </Button>
+                <NesaTvLink videoId={videoId} name={name} />
               </div>
             </div>
           </header>

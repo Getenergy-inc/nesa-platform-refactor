@@ -13,6 +13,7 @@ import { User, Mail, MapPin, Building, Globe, Save, Loader2 } from "lucide-react
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { NesaTvLink } from "@/components/common/NesaTvLink";
 
 function ProfileContent() {
   const { user, roles } = useAuth();
@@ -65,6 +66,9 @@ function ProfileContent() {
                       {role}
                     </Badge>
                   ))}
+                </div>
+                <div className="mt-3">
+                  <NesaTvLink size="sm" />
                 </div>
               </div>
             </div>

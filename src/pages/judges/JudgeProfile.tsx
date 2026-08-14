@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { NesaTvLink } from "@/components/common/NesaTvLink";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -313,6 +314,7 @@ export default function JudgeProfile() {
                 <Mail className="mr-2 h-4 w-4" /> Contact Jury Office
               </a>
             </Button>
+            <NesaTvLink />
           </div>
         </div>
       </div>

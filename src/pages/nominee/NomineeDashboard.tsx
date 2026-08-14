@@ -470,6 +470,7 @@ export default function NomineeDashboard() {
                   nomineeSlug={nominee.slug}
                   nomineeName={nominee.name}
                   referralCode={nominee.referral_code}
+                  videoUrl={(nominee as any).video_url ?? null}
                 />
               )}
             </div>

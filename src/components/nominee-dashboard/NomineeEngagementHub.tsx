@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import { NesaTvLink } from "@/components/common/NesaTvLink";
 import {
   Share2,
   Copy,
@@ -20,14 +21,18 @@ interface NomineeEngagementHubProps {
   nomineeSlug: string;
   nomineeName: string;
   referralCode?: string;
+  /** Nominee feature video, once the NESA Africa TV pipeline has published one. */
+  videoUrl?: string | null;
 }
 
 export function NomineeEngagementHub({
   nomineeSlug,
   nomineeName,
   referralCode,
+  videoUrl,
 }: NomineeEngagementHubProps) {
   const [copied, setCopied] = useState(false);
+
 
   const profileUrl = `${window.location.origin}/nominees/${nomineeSlug}`;
   const referralUrl = referralCode
@@ -151,6 +156,12 @@ export function NomineeEngagementHub({
               WhatsApp
             </Button>
           </div>
+
+          <NesaTvLink
+            videoUrl={videoUrl}
+            name={nomineeName}
+            className="w-full"
+          />
         </CardContent>
       </Card>
 
