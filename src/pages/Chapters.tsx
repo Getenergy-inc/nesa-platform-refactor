@@ -71,31 +71,32 @@ export default function Chapters() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="mb-4 bg-gold/20 text-gold border-gold/30">
-              Friends of EduAid-Africa · SCEF International Chapters
+              SCEF Africa Local Chapters · International Friends of EduAid-Africa
             </Badge>
             <h1 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-              Friends of EduAid-Africa <span className="text-gold">International Chapters</span>
+              SCEF Africa Local Chapters <span className="text-gold">& International Friends of EduAid-Africa</span>
             </h1>
             <p className="text-lg text-white/70 mb-4">
-              The international chapters of the <span className="text-gold">Santos Creations
-              Educational Foundation (SCEF)</span> — the institution behind EduAid-Africa and
+              The chapter network of the <span className="text-gold">Santos Creations
+              Educational Foundation (SCEF)</span> — the institution that powers EduAid-Africa and
               NESA-Africa.
             </p>
             <p className="text-xl text-white/70 mb-8">
-              {REGIONAL_TAGLINE} Chapters organise across the eight Africa regions and the
-              African Diaspora community, mobilising Friends of EduAid-Africa to fund, verify and
+              {REGIONAL_TAGLINE} <span className="text-gold">SCEF Africa Local Chapters</span> anchor
+              the work across the eight Africa regions, while <span className="text-gold">International
+              Friends of EduAid-Africa</span> chapters mobilise global support to fund, verify and
               celebrate the Education Enablers advancing Education for All.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-semibold" asChild>
                 <Link to="/contact">
                   <Flag className="w-5 h-5 mr-2" />
-                  Start a Chapter
+                  Start a Local Chapter
                 </Link>
               </Button>
               <Button size="lg" variant="outline" className="border-gold/50 text-gold hover:bg-gold/10" asChild>
                 <Link to="/impact/friends-of-eduaid-africa">
-                  Join Friends of EduAid-Africa
+                  Join International Friends
                 </Link>
               </Button>
             </div>
@@ -116,15 +117,15 @@ export default function Chapters() {
             </div>
             <div>
               <p className="text-4xl font-bold text-gold">{REGION_STATS.africaRegions}</p>
-              <p className="text-white/60">Africa Regions</p>
+              <p className="text-white/60">SCEF Africa Regions</p>
             </div>
             <div>
               <p className="text-4xl font-bold text-gold">1</p>
-              <p className="text-white/60">Diaspora Community</p>
+              <p className="text-white/60">International Friends Community</p>
             </div>
             <div>
               <p className="text-4xl font-bold text-gold">{REGION_STATS.totalCountries}</p>
-              <p className="text-white/60">Countries Covered</p>
+              <p className="text-white/60">Countries & Diaspora Covered</p>
             </div>
           </div>
         </div>
@@ -135,14 +136,15 @@ export default function Chapters() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto rounded-2xl border border-gold/20 bg-charcoal-light p-8">
             <h2 className="text-2xl font-display font-bold text-white mb-3">
-              One Foundation, <span className="text-gold">One Global Chapter Network</span>
+              Two Pillars, <span className="text-gold">One SCEF Chapter Network</span>
             </h2>
             <p className="text-white/70 mb-4">
-              Every chapter listed here is an international chapter of the Santos Creations
-              Educational Foundation (SCEF). Members serve as <span className="text-gold">Friends of
-              EduAid-Africa</span>: they raise and steward EduAid-Africa support, host local
-              education dialogues, and surface credible Education Enablers into the NESA-Africa
-              recognition pipeline.
+              Every chapter listed here belongs to the Santos Creations Educational Foundation
+              (SCEF). <span className="text-gold">SCEF Africa Local Chapters</span> operate inside
+              the eight Africa regions. <span className="text-gold">International Friends of
+              EduAid-Africa</span> chapters operate outside the continent, raising global support,
+              hosting education dialogues, and surfacing credible Education Enablers into the
+              NESA-Africa recognition pipeline.
             </p>
             <ul className="grid sm:grid-cols-3 gap-3 text-sm text-white/70">
               <li className="rounded-lg border border-gold/10 p-3">
@@ -151,14 +153,14 @@ export default function Chapters() {
               </li>
               <li className="rounded-lg border border-gold/10 p-3">
                 <span className="block text-gold font-semibold mb-1">EduAid-Africa</span>
-                The programme infrastructure chapters fund and deliver locally.
+                The programme infrastructure local chapters fund and deliver.
               </li>
               <li className="rounded-lg border border-gold/10 p-3">
                 <span className="block text-gold font-semibold mb-1">NESA-Africa</span>
                 The recognition cycle chapters mobilise their communities around.
               </li>
             </ul>
-            <div className="mt-6">
+            <div className="mt-6 flex flex-wrap gap-4">
               <Link
                 to="/impact/friends-of-eduaid-africa"
                 className="inline-flex items-center text-gold hover:underline"
@@ -176,11 +178,11 @@ export default function Chapters() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-display font-bold text-white">
-              Chapters Across the <span className="text-gold">Eight Africa Regions</span>
+              SCEF Africa <span className="text-gold">Local Chapters</span>
             </h2>
             <p className="text-white/60 max-w-2xl mx-auto mt-3">
-              Every African country belongs to exactly one of the eight canonical regions.
-              Chapter counts below are live from the SCEF chapter register.
+              Every African country belongs to exactly one of the eight canonical SCEF Africa regions.
+              Local chapter counts below are live from the SCEF chapter register.
             </p>
           </div>
 
@@ -231,7 +233,7 @@ export default function Chapters() {
             <CardHeader>
               <div className="flex items-center gap-3">
                 <Globe2 className="h-6 w-6 text-gold" />
-                <CardTitle className="text-white text-lg">African Diaspora Community</CardTitle>
+                <CardTitle className="text-white text-lg">International Friends of EduAid-Africa</CardTitle>
               </div>
               <Badge className="w-fit bg-gold/20 text-gold border-gold/30">
                 {loading
@@ -244,9 +246,8 @@ export default function Chapters() {
             <CardContent>
               <p className="text-sm text-white/60">
                 Africans and Friends of EduAid-Africa outside the continent organise as one
-                global SCEF chapter community alongside the eight Africa regions — not as a
-                ninth region.
-
+                global SCEF chapter community — the International Friends of EduAid-Africa
+                pillar — alongside the eight Africa regions, not as a ninth region.
               </p>
             </CardContent>
           </Card>
@@ -315,20 +316,23 @@ export default function Chapters() {
       <section className="py-16 border-t border-gold/10 bg-gradient-to-r from-gold/5 to-gold/10">
         <div className="container mx-auto px-4 text-center">
           <Globe2 className="w-12 h-12 text-gold mx-auto mb-4" />
-          <h2 className="text-3xl font-display font-bold mb-4 text-white">Ready to Lead in Your Country?</h2>
+          <h2 className="text-3xl font-display font-bold mb-4 text-white">Start or Join an SCEF Chapter</h2>
           <p className="text-white/60 max-w-2xl mx-auto mb-8">
-            Whether you want to start a new chapter or join an existing one, we'd love to hear from you.
+            Lead an SCEF Africa Local Chapter in your country, or join the International Friends
+            of EduAid-Africa community from anywhere in the world.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact">
               <Button size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-semibold">
-                Apply to Lead a Chapter
+                Apply to Lead a Local Chapter
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </Link>
-            <Button size="lg" variant="outline" className="border-gold/50 text-gold hover:bg-gold/10">
-              <Mail className="w-5 h-5 mr-2" />
-              Contact Regional Lead
+            <Button size="lg" variant="outline" className="border-gold/50 text-gold hover:bg-gold/10" asChild>
+              <Link to="/impact/friends-of-eduaid-africa">
+                <Mail className="w-5 h-5 mr-2" />
+                Join International Friends
+              </Link>
             </Button>
           </div>
         </div>
