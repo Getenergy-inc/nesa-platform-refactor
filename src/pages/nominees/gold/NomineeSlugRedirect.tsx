@@ -12,9 +12,9 @@ export default function NomineeSlugRedirect() {
   const { slug } = useParams<{ slug: string }>();
   if (!slug) return <Navigate to="/nominees/africa-education-icon-award" replace />;
 
-  // Icon Award match → render profile inline (preserves URL)
+  // Icon Award match → redirect to the canonical 4-segment profile URL
   if (getIconNominee(slug)) {
-    return <IconNomineeProfile />;
+    return <Navigate to={iconProfileUrl(slug)} replace />;
   }
 
   // Gold Special Recognition match → redirect to nested path
