@@ -226,7 +226,24 @@ export default function Timeline() {
     },
   ];
 
-  const months = groupByMonth(MASTER_TIMELINE_CHRONOLOGICAL);
+  const availableTracks = useMemo(
+    () =>
+      TRACK_ORDER.filter((t) => MASTER_TIMELINE_CHRONOLOGICAL.some((e) => e.track === t)),
+    [],
+  );
+
+  const visibleEntries = useMemo(
+    () =>
+      activeTrack === "all"
+        ? MASTER_TIMELINE_CHRONOLOGICAL
+        : MASTER_TIMELINE_CHRONOLOGICAL.filter((e) => e.track === activeTrack),
+    [activeTrack],
+  );
+
+  const mustKnow = MASTER_TIMELINE_CHRONOLOGICAL.filter((e) => MUST_KNOW_IDS.has(e.id));
+
+  const months = groupByMonth(visibleEntries);
+
 
   return (
     <div className="nesa-ed min-h-screen">
