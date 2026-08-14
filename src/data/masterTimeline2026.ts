@@ -608,3 +608,23 @@ export const MASTER_TIMELINE_TRACK_ACCENT: Record<MasterTimelineTrack, string> =
 export const MASTER_TIMELINE_CHRONOLOGICAL: MasterTimelineEntry[] = [
   ...MASTER_TIMELINE_2026,
 ].sort((a, b) => a.startsAt.localeCompare(b.startsAt));
+
+/**
+ * "Your Journey to the Gala" — the compact public milestone path shown on
+ * /tickets. Derived from the same master calendar /timeline renders, so the
+ * two surfaces can never drift apart.
+ */
+export const GALA_JOURNEY_MILESTONE_IDS = [
+  "public-nominations-open",
+  "icon-nominations-close",
+  "icon-recipients-confirmed",
+  "tv-show-1",
+  "tv-show-2",
+  "recognition-gala",
+] as const;
+
+export function getGalaJourneyMilestones(): MasterTimelineEntry[] {
+  return GALA_JOURNEY_MILESTONE_IDS.map((id) =>
+    MASTER_TIMELINE_2026.find((e) => e.id === id),
+  ).filter((e): e is MasterTimelineEntry => Boolean(e));
+}
