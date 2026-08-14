@@ -93,7 +93,7 @@ function normaliseUrl(url: string | null | undefined): string | null {
   return null;
 }
 
-async function fetchFamilyGallery(): Promise<FamilyGalleryEntry[]> {
+async function fetchFamilyBuckets(): Promise<Record<string, FamilyGalleryEntry[]>> {
   const allSlugs = Object.values(FAMILY_DB_CATEGORY_SLUGS).flat();
 
   const { data: cats, error: catErr } = await supabase
