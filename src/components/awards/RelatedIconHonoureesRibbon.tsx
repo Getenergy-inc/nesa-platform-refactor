@@ -1,12 +1,13 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Award, ArrowRight } from "lucide-react";
-import {
 import { StripScroller } from "@/features/landing/editorial/StripScroller";
+import {
   ICON_NOMINEES,
   type IconSubcategorySlug,
   type IconClassificationSlug,
 } from "@/data/iconAward";
+
 
 interface Props {
   title: string;
