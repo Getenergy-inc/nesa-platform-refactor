@@ -60,7 +60,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (530 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (533 explicit paths from src/App.tsx) ---
 /recognition/influencer-education-impact/african-sports-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-music-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-social-media-influencers /index.html          200
@@ -72,6 +72,7 @@
 /awards/influencers-education-impact-2026-recognition        /index.html          200
 /awards/18-categories/:categorySlug/:subcategorySlug         /index.html          200
 /nominees/best-ngo-contribution-to-education/:region         /index.html          200
+/nominees/:award/:category/:classification/:slug             /index.html          200
 /nominees/gold-special-recognition/:categorySlug             /index.html          200
 /nominees/africa-education-icon-award/:sub/:cls              /index.html          200
 /nominees/category/africa-education-icon-award               /index.html          200
@@ -225,6 +226,7 @@
 /nrc/dashboard/flagged                                       /index.html          200
 /nrc/dashboard/profile                                       /index.html          200
 /nrc/dashboard/reports                                       /index.html          200
+/nrc/profile-revisions                                       /index.html          200
 /volunteer-leaderboard                                       /index.html          200
 /about/vision-mission                                        /index.html          200
 /admin/icon-migration                                        /index.html          200
@@ -363,6 +365,7 @@ nominee-pipeline                                             /index.html        
 /judges/sign-up                                              /index.html          200
 /media/webinars                                              /index.html          200
 /nominate/pages                                              /index.html          200
+/nominee-portal                                              /index.html          200
 /nominees/:slug                                              /index.html          200
 /nrc/automation                                              /index.html          200
 /nrc/duplicates                                              /index.html          200
