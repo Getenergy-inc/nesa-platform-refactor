@@ -2063,6 +2063,10 @@ const App = () => (
                   <Route path="/nrc/members" element={<NRCProtectedRoute><NRCMembersPage /></NRCProtectedRoute>} />
                   <Route path="/nrc/settings" element={<NRCProtectedRoute><NRCSettings /></NRCProtectedRoute>} />
                   <Route
+                    path="/nrc/profile-revisions"
+                    element={<NRCProtectedRoute><NRCProfileRevisions /></NRCProtectedRoute>}
+                  />
+                  <Route
                     path="/nrc/scoring"
                     element={<NRCProtectedRoute><NRCScoringDashboard /></NRCProtectedRoute>}
                   />
