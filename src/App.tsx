@@ -262,6 +262,7 @@ import FriendsOfEduAidAfrica from "./pages/impact/FriendsOfEduAidAfrica";
 import SponsorsPartners from "./pages/sponsors/SponsorsPartners";
 import EndorsementsPage from "./pages/endorsements/EndorsementsPage";
 import ChaptersConsolidated from "./pages/chapters/ChaptersConsolidated";
+import SCEFLocalChapters from "./pages/chapters/SCEFLocalChapters";
 
 // Judge Portal Pages
 import {
@@ -2445,6 +2446,14 @@ const App = () => (
                     }
                   />
 
+                  <Route
+                    path="/scef-local-chapters"
+                    element={
+                      <WithLayout>
+                        <SCEFLocalChapters />
+                      </WithLayout>
+                    }
+                  />
                   <Route
                     path="/chapters"
                     element={
