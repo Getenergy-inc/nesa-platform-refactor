@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { useSeason } from "@/contexts/SeasonContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -30,6 +29,22 @@ import {
 } from "lucide-react";
 
 import galaHeroImage from "@/assets/events/award-gala.jpeg";
+import { GALA_EVENT } from "@/config/galaConfig";
+import {
+  PROGRAMME_END_LABEL,
+  PROGRAMME_END_LONG_LABEL,
+  PROGRAMME_END_DATE,
+} from "@/config/programme";
+import {
+  getGalaJourneyMilestones,
+  MASTER_TIMELINE_TRACK_LABELS,
+} from "@/data/masterTimeline2026";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 interface TicketTier {
   id: string;
@@ -118,21 +133,49 @@ const ticketTiers: TicketTier[] = [
   },
 ];
 
+// Event facts come from the canonical gala config — never retyped here.
 const eventDetails = {
-  date: "June 28, 2026",
-  time: "18:00 WAT",
-  venue: "International Conference Centre",
-  city: "Abuja, Nigeria",
-  dressCode: "Black Tie / Traditional Formal",
+  date: `Sunday, ${PROGRAMME_END_LABEL}`,
+  time: GALA_EVENT.time,
+  venue: GALA_EVENT.venue,
+  city: GALA_EVENT.city,
+  dressCode: GALA_EVENT.dressCode,
 };
 
+const TICKET_FAQS: { q: string; a: string }[] = [
+  {
+    q: "When and where is the Gala?",
+    a: `${PROGRAMME_END_LONG_LABEL}, from ${GALA_EVENT.time}. ${GALA_EVENT.venue} — the exact venue is confirmed to ticket holders by email before the event.`,
+  },
+  {
+    q: "Is the Gala the same as the TV Showcases?",
+    a: "No. TV Showcase 1 (Sunday, 22 November 2026) and TV Showcase 2 (Tuesday, 8 December 2026) are broadcast programmes, not ticketed physical events. Your ticket admits you to the physical Recognition Gala in Lagos on 13 December 2026 only.",
+  },
+  {
+    q: "Does buying a ticket affect nominations, judging or recognition?",
+    a: "No. A ticket is admission to an event and nothing more. It confers no nomination, judging, voting or selection rights, and has no bearing on any recognition outcome.",
+  },
+  {
+    q: "When do nominations open and close?",
+    a: "Public nominations open 6 September 2026. Africa Education Icon nominations close 6 October 2026; Gold-Blue Garnet, Platinum and Influencer Education Impact nominations close 21 November 2026.",
+  },
+  {
+    q: "When are the Africa Education Icon recipients known?",
+    a: "All nine Africa Education Icon recipients are confirmed on 24 November 2026, ahead of TV Showcase 2 and the Gala.",
+  },
+  {
+    q: "How do I receive my ticket?",
+    a: "You receive a confirmation email with payment instructions, followed by your receipt and QR e-ticket. Bring the QR e-ticket to the Gala on 13 December 2026.",
+  },
+];
+
 export default function Tickets() {
-  const { currentEdition } = useSeason();
   const { toast } = useToast();
   const [selectedTier, setSelectedTier] = useState<string>("premium");
   const [quantity, setQuantity] = useState(1);
   const [isProcessing, setIsProcessing] = useState(false);
 
+  const journeyMilestones = getGalaJourneyMilestones();
   const selectedTicket = ticketTiers.find((t) => t.id === selectedTier);
   const subtotal = selectedTicket ? selectedTicket.price * quantity : 0;
   const processingFee = Math.round(subtotal * 0.035);
@@ -152,7 +195,7 @@ export default function Tickets() {
     
     toast({
       title: "Reservation Confirmed!",
-      description: `Your ${quantity}x ${selectedTicket?.name} ticket(s) have been reserved. Check your email for payment instructions.`,
+      description: `Your ${quantity}x ${selectedTicket?.name} ticket(s) for the Gala on ${PROGRAMME_END_LABEL} (Lagos, Nigeria) have been reserved. Check your email for payment instructions.`,
     });
     setIsProcessing(false);
   };
@@ -160,11 +203,29 @@ export default function Tickets() {
   return (
     <>
       <Helmet>
-        <title>{`Get Tickets | NESA-Africa Awards Gala ${currentEdition?.displayYear || '2026'}`}</title>
+        <title>{`Gala Tickets · ${PROGRAMME_END_LABEL} · NESA-Africa 2026`}</title>
         <meta
           name="description"
-          content={`Purchase tickets for the NESA-Africa ${currentEdition?.displayYear} Awards Gala. Join us for a spectacular celebration of African education enablers.`}
+          content={`Buy tickets for the NESA-Africa 2026 Gold-Blue Garnet Awards Gala on ${PROGRAMME_END_LONG_LABEL}. Attendance only — tickets confer no nomination, judging or voting rights.`}
         />
+        <meta property="og:title" content={`Gala Tickets · ${PROGRAMME_END_LABEL} · NESA-Africa 2026`} />
+        <meta
+          property="og:description"
+          content={`NESA-Africa 2026 Gold-Blue Garnet Awards Gala — ${PROGRAMME_END_LONG_LABEL}.`}
+        />
+        <meta property="og:type" content="event" />
+        <meta property="og:url" content="https://nesaafrica.lovable.app/tickets" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Event",
+            name: GALA_EVENT.name,
+            startDate: `${PROGRAMME_END_DATE}T18:00:00+01:00`,
+            eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+            location: { "@type": "Place", name: GALA_EVENT.venue, address: GALA_EVENT.city },
+          })}
+        </script>
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
@@ -188,6 +249,9 @@ export default function Tickets() {
               <h1 className="font-display text-3xl font-bold text-white md:text-4xl">
                 Get Your <span className="text-primary">Gala Tickets</span>
               </h1>
+              <p className="mt-2 text-sm text-white/80 md:text-base">
+                NESA-Africa 2026 Gold-Blue Garnet Awards Gala · {PROGRAMME_END_LONG_LABEL}
+              </p>
             </div>
           </div>
         </section>
@@ -227,6 +291,60 @@ export default function Tickets() {
                       <p className="font-medium">{eventDetails.dressCode}</p>
                     </div>
                   </div>
+                </CardContent>
+              </Card>
+
+              {/* Your Journey to the Gala — derived from the /timeline master calendar */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Your Journey to the Gala</CardTitle>
+                  <CardDescription>
+                    Key milestones of the NESA-Africa 2026 recognition cycle.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ol className="space-y-3">
+                    {journeyMilestones.map((m) => (
+                      <li key={m.id} className="flex gap-3">
+                        <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                        <div>
+                          <p className="text-sm font-medium">{m.milestone}</p>
+                          <p className="text-xs text-muted-foreground">
+                            {m.dateLabel} · {MASTER_TIMELINE_TRACK_LABELS[m.track]}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                  <Button asChild variant="outline" size="sm" className="mt-5">
+                    <Link to="/timeline">View the full programme</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+
+              {/* Gala vs TV Showcases + rights disclaimer */}
+              <Card className="border-primary/30">
+                <CardHeader>
+                  <CardTitle className="text-base">What your ticket is — and is not</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3 text-sm text-muted-foreground">
+                  <p>
+                    <strong className="text-foreground">Includes:</strong> physical
+                    admission to the NESA-Africa 2026 Gold-Blue Garnet Awards Gala on{" "}
+                    {PROGRAMME_END_LONG_LABEL}, plus the seating and hospitality listed
+                    in your chosen tier.
+                  </p>
+                  <p>
+                    <strong className="text-foreground">Does not include:</strong> any
+                    nomination, judging, voting or selection right. Buying a ticket has
+                    no bearing whatsoever on who is nominated, verified or recognised.
+                  </p>
+                  <p>
+                    <strong className="text-foreground">Not the TV Showcases:</strong>{" "}
+                    TV Showcase 1 (22 November 2026) and TV Showcase 2 (8 December 2026)
+                    are separate broadcast programmes — they are not ticketed and are not
+                    the Gala.
+                  </p>
                 </CardContent>
               </Card>
 
@@ -335,6 +453,25 @@ export default function Tickets() {
                   </CardContent>
                 </Card>
               )}
+
+              {/* FAQ */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Frequently Asked Questions</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Accordion type="single" collapsible>
+                    {TICKET_FAQS.map((f, i) => (
+                      <AccordionItem key={f.q} value={`faq-${i}`}>
+                        <AccordionTrigger className="text-left text-sm">{f.q}</AccordionTrigger>
+                        <AccordionContent className="text-sm text-muted-foreground">
+                          {f.a}
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                </CardContent>
+              </Card>
             </div>
 
             {/* Order Summary */}
@@ -342,6 +479,9 @@ export default function Tickets() {
               <Card className="sticky top-24">
                 <CardHeader>
                   <CardTitle>Order Summary</CardTitle>
+                  <CardDescription>
+                    Gala · {PROGRAMME_END_LONG_LABEL}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {selectedTicket && (
@@ -390,7 +530,7 @@ export default function Tickets() {
               {/* Venue Amenities */}
               <Card className="mt-6">
                 <CardHeader>
-                  <CardTitle className="text-base">Venue Amenities</CardTitle>
+                  <CardTitle className="text-base">Planned On-Site Facilities</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   {[

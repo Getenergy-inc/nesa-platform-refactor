@@ -25,6 +25,8 @@ import { SubcategoryPathways } from "@/components/awards/standard/sections";
 import { TierCategoryCards } from "@/components/awards/TierCategoryCards";
 import TierCategoriesGrid from "@/components/recognition2026/TierCategoriesGrid";
 import { InfluencerPathwayNomineeSlider } from "@/components/awards/InfluencerPathwayNomineeSlider";
+import { useInfluencerPathwayNominees } from "@/hooks/useInfluencerPathwayNominees";
+import { CERTIFICATE_WINDOW_CLOSE_LABEL } from "@/config/nominationWindows2026";
 
 const DIRECTORY_ROUTE = "/awards/influencer-education-impact/nominees";
 
@@ -48,14 +50,15 @@ export default function InfluencerImpact2026() {
     return [...pick("social-media"), ...pick("sports"), ...pick("music")];
   }, []);
 
-  const stats = useMemo(() => {
-    const total = SEED_NOMINEES.length;
-    const regions = new Set(SEED_NOMINEES.map((n) => n.nominee_region)).size;
-    return {
-      total,
-      regions: Math.max(regions, REGIONS.length),
-    };
-  }, []);
+  // Hero "Verified Nominees" must reflect the exact same live query the
+  // pathway sliders use — never a seeded/static count.
+  const { total: liveNomineeTotal, loading: liveNomineesLoading } =
+    useInfluencerPathwayNominees();
+
+  const stats = useMemo(
+    () => ({ regions: REGIONS.length }),
+    [],
+  );
 
   return (
     <>
@@ -96,7 +99,10 @@ export default function InfluencerImpact2026() {
 
           {/* Stats */}
           <div className="mx-auto mt-8 grid max-w-3xl grid-cols-2 gap-3 md:grid-cols-4">
-            <StatCard value={String(stats.total)} label="Verified Nominees" />
+            <StatCard
+              value={liveNomineesLoading ? "—" : String(liveNomineeTotal)}
+              label="Verified Nominees"
+            />
             <StatCard value="3" label="Recognition Subcategories" />
             <StatCard value="NRC" label="Verified Recognition" />
             <StatCard value={String(stats.regions)} label="Recognition Regions" />
@@ -146,7 +152,7 @@ export default function InfluencerImpact2026() {
           </h2>
           <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <StatCard value="6 Sep 2026" label="Nominations Open" />
-            <StatCard value="14 Nov 2026" label="Nominations Close" />
+            <StatCard value={CERTIFICATE_WINDOW_CLOSE_LABEL} label="Nominations Close" />
             <StatCard value="16 Sep – 13 Dec 2026" label="Rolling NRC Verification" />
             <StatCard value="13 Dec 2026" label="Gold-Blue Garnet Gala" />
           </div>
