@@ -127,7 +127,23 @@ function PathwayRow({ pathway }: { pathway: InfluencerPathwayBucket }) {
   );
 }
 
-export function InfluencerPathwayNomineeSlider() {
+export interface InfluencerPathwayNomineeSliderProps {
+  /** Small uppercase label above the heading. */
+  eyebrow?: string;
+  /** Heading text before the highlighted words. */
+  headingLead?: string;
+  /** Highlighted (gold) portion of the heading. */
+  headingHighlight?: string;
+  /** Optional footer link rendered under the three rows (homepage use). */
+  footerLink?: { to: string; label: string };
+}
+
+export function InfluencerPathwayNomineeSlider({
+  eyebrow = "Existing Nominees",
+  headingLead = "Nominees Across the Three",
+  headingHighlight = "Influencer Pathways",
+  footerLink,
+}: InfluencerPathwayNomineeSliderProps = {}) {
   const { pathways, total, loading, error } = useInfluencerPathwayNominees();
 
   return (
@@ -139,10 +155,10 @@ export function InfluencerPathwayNomineeSlider() {
       <div className="container mx-auto max-w-6xl px-4">
         <header className="mb-8 text-center">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
-            <Sparkles className="h-3 w-3" /> Existing Nominees
+            <Sparkles className="h-3 w-3" /> {eyebrow}
           </span>
           <h2 className="mt-3 font-display text-2xl font-bold text-white md:text-3xl">
-            Nominees Across the Three <span className="text-gold">Influencer Pathways</span>
+            {headingLead} <span className="text-gold">{headingHighlight}</span>
           </h2>
           <p className="mx-auto mt-2 max-w-2xl text-sm text-white/60">
             Live from the verified recognition database — Music, Social Media and Sports
@@ -166,6 +182,20 @@ export function InfluencerPathwayNomineeSlider() {
             {pathways.map((p) => (
               <PathwayRow key={p.categorySlug} pathway={p} />
             ))}
+          </div>
+        )}
+
+        {footerLink && (
+          <div className="mt-10 text-center">
+            <Button
+              asChild
+              variant="outline"
+              className="border-gold/40 text-gold hover:bg-gold/10"
+            >
+              <Link to={footerLink.to}>
+                {footerLink.label} <ArrowRight className="ml-1.5 h-4 w-4" />
+              </Link>
+            </Button>
           </div>
         )}
       </div>

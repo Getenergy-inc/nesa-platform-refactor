@@ -23,6 +23,7 @@ import { LocalizedSEO } from "@/components/seo/LocalizedSEO";
 
 import { PublicNominationsNotice } from "@/components/nesa/PublicNominationsNotice";
 import { AwardPlaqueMotionSection } from "@/components/nesa/AwardPlaqueMotionSection";
+import { InfluencerPathwayNomineeSlider } from "@/components/awards/InfluencerPathwayNomineeSlider";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { UtilityBar } from "@/components/nesa/UtilityBar";
@@ -121,6 +122,21 @@ export function NESALandingPage() {
 
         {/* 5. ONE CONTINENTAL MISSION. SIX RECOGNITION PATHWAYS. */}
         <RecognitionFamiliesSection />
+
+        {/* 5b. INFLUENCER EDUCATION IMPACT — the three live pathway sliders
+            (Music · Social Media · Sports), same data source as
+            /awards/influencer-education-impact so the two never drift. */}
+        <LazySection>
+          <InfluencerPathwayNomineeSlider
+            eyebrow="Influencer Education Impact"
+            headingLead="Three Influencer Pathways,"
+            headingHighlight="One Education Mission"
+            footerLink={{
+              to: "/awards/influencer-education-impact",
+              label: "Explore Influencer Education Impact",
+            }}
+          />
+        </LazySection>
 
         {/* 6. WHO CAN BE AN EDUCATION ENABLER? */}
         <WhoCanBeEnablerSection />
