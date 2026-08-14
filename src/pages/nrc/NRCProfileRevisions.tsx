@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { Check, Loader2, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { YouTubePublishPanel } from "@/components/nrc/YouTubePublishPanel";
 
 interface RevisionRow {
   id: string;
@@ -101,6 +102,10 @@ export default function NRCProfileRevisions() {
         Approve or reject nominee-submitted edits and supporter messages. Approving a
         revision publishes it to the public profile.
       </p>
+
+      <div className="mt-6">
+        <YouTubePublishPanel />
+      </div>
 
       {loading ? (
         <div className="mt-10 flex items-center text-white/60">

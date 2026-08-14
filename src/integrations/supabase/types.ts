@@ -5665,9 +5665,11 @@ export type Database = {
           title: string | null
           updated_at: string | null
           verification_tier: string | null
+          video_storage_path: string | null
           video_url: string | null
           website: string | null
           work_done: string | null
+          youtube_publish_error: string | null
           youtube_publish_state: string
           youtube_published_at: string | null
           youtube_video_id: string | null
@@ -5760,9 +5762,11 @@ export type Database = {
           title?: string | null
           updated_at?: string | null
           verification_tier?: string | null
+          video_storage_path?: string | null
           video_url?: string | null
           website?: string | null
           work_done?: string | null
+          youtube_publish_error?: string | null
           youtube_publish_state?: string
           youtube_published_at?: string | null
           youtube_video_id?: string | null
@@ -5855,9 +5859,11 @@ export type Database = {
           title?: string | null
           updated_at?: string | null
           verification_tier?: string | null
+          video_storage_path?: string | null
           video_url?: string | null
           website?: string | null
           work_done?: string | null
+          youtube_publish_error?: string | null
           youtube_publish_state?: string
           youtube_published_at?: string | null
           youtube_video_id?: string | null
