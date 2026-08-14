@@ -107,7 +107,7 @@ export const ICON_AWARD_SECTION = {
   /** Copy for the homepage living gallery of already-nominated Icons. */
   gallery: {
     eyebrow: "Africa's Flagship Lifetime Education Honour",
-    title: "Meet Africa's Education Enablers",
+    title: "Meet the Africa Education Icon Nominees",
     /** `{count}` is replaced with the real nominee total at render time. */
     lede:
       "These are the {count} people and institutions already nominated for the 2026 Africa Education Icon Award — Africans living in Africa, Diaspora Africans and Friends of Africa, enabling education for all across Africa.",

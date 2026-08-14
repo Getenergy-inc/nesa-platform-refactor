@@ -61,6 +61,8 @@ export interface FamilyGalleryEntry {
   categoryLabel: string;
   familySlug: string;
   familyName: string;
+  /** Role / organisation line, when the record carries one. */
+  title: string | null;
   impact: string | null;
   href: string;
 }
@@ -93,7 +95,7 @@ function normaliseUrl(url: string | null | undefined): string | null {
   return null;
 }
 
-async function fetchFamilyGallery(): Promise<FamilyGalleryEntry[]> {
+async function fetchFamilyBuckets(): Promise<Record<string, FamilyGalleryEntry[]>> {
   const allSlugs = Object.values(FAMILY_DB_CATEGORY_SLUGS).flat();
 
   const { data: cats, error: catErr } = await supabase
@@ -101,7 +103,7 @@ async function fetchFamilyGallery(): Promise<FamilyGalleryEntry[]> {
     .select("id, slug, name")
     .in("slug", allSlugs);
   if (catErr) throw catErr;
-  if (!cats?.length) return [];
+  if (!cats?.length) return {};
 
   const catById = new Map<string, { slug: string; name: string }>(
     cats.map((c: any) => [c.id, { slug: c.slug, name: c.name }]),
@@ -115,7 +117,7 @@ async function fetchFamilyGallery(): Promise<FamilyGalleryEntry[]> {
       cats.map((c: any) => c.id),
     );
   if (subErr) throw subErr;
-  if (!subs?.length) return [];
+  if (!subs?.length) return {};
 
   // subcategory id -> { label, family }
   const subMeta = new Map<
@@ -137,7 +139,7 @@ async function fetchFamilyGallery(): Promise<FamilyGalleryEntry[]> {
       familyName: family.name,
     });
   }
-  if (subMeta.size === 0) return [];
+  if (subMeta.size === 0) return {};
 
   const { data: rows, error: nomErr } = await supabase
     .from("public_nominees")
@@ -178,13 +180,29 @@ async function fetchFamilyGallery(): Promise<FamilyGalleryEntry[]> {
       categoryLabel: meta.label,
       familySlug: meta.familySlug,
       familyName: meta.familyName,
+      title: tidy(r.title, 90),
       impact: tidy(r.bio) || tidy(r.title, 90),
       href: `/nominees/${encodeURIComponent(r.slug)}`,
     });
     buckets.set(meta.familySlug, bucket);
   }
 
-  const ordered = RECOGNITION_FAMILIES.map((f) => buckets.get(f.slug) || []).filter(
+  const out: Record<string, FamilyGalleryEntry[]> = {};
+  for (const f of RECOGNITION_FAMILIES) out[f.slug] = buckets.get(f.slug) || [];
+  return out;
+}
+
+/** One shared cached query powers both the strip and the per-family cards. */
+function useFamilyBuckets() {
+  return useQuery({
+    queryKey: ["family-gallery-buckets"],
+    queryFn: fetchFamilyBuckets,
+    staleTime: 1000 * 60 * 10,
+  });
+}
+
+function interleave(buckets: Record<string, FamilyGalleryEntry[]>): FamilyGalleryEntry[] {
+  const ordered = RECOGNITION_FAMILIES.map((f) => buckets[f.slug] || []).filter(
     (b) => b.length > 0,
   );
   const longest = Math.max(0, ...ordered.map((b) => b.length));
@@ -201,12 +219,8 @@ async function fetchFamilyGallery(): Promise<FamilyGalleryEntry[]> {
 }
 
 export function useFamilyGalleryNominees() {
-  const q = useQuery({
-    queryKey: ["family-gallery-nominees"],
-    queryFn: fetchFamilyGallery,
-    staleTime: 1000 * 60 * 10,
-  });
-  const nominees = q.data ?? [];
+  const q = useFamilyBuckets();
+  const nominees = q.data ? interleave(q.data) : [];
   return {
     nominees,
     loading: q.isLoading,
@@ -214,3 +228,35 @@ export function useFamilyGalleryNominees() {
     hasEnough: !q.isLoading && !q.error && nominees.length >= LIVING_GALLERY_MIN_RECORDS,
   };
 }
+
+/**
+ * One featured, published profile per recognition family.
+ *
+ * Selection is deterministic (highest profile-completion score first, then a
+ * stable slug ordering) and rotates on a weekly cadence so the homepage stays
+ * alive without re-rendering a different face on every paint. Families with no
+ * eligible published record resolve to `null` — never a substitute from
+ * another family.
+ */
+export function useFamilyFeaturedProfiles() {
+  const q = useFamilyBuckets();
+  const buckets = q.data;
+
+  // Stable weekly rotation index (UTC weeks since epoch).
+  const week = Math.floor(Date.now() / (1000 * 60 * 60 * 24 * 7));
+
+  const featured: Record<string, FamilyGalleryEntry | null> = {};
+  for (const f of RECOGNITION_FAMILIES) {
+    const bucket = (buckets?.[f.slug] || [])
+      .slice()
+      .sort((a, b) => a.slug.localeCompare(b.slug));
+    featured[f.slug] = bucket.length ? bucket[week % bucket.length] : null;
+  }
+
+  return {
+    featured,
+    loading: q.isLoading,
+    error: (q.error as Error) ?? null,
+  };
+}
+
