@@ -736,4 +736,14 @@ export const classificationUrl = (
 export const subcategoryUrl = (sub: IconSubcategorySlug) =>
   `/nominees/africa-education-icon-award/${sub}`;
 
-export const profileUrl = (slug: string) => `/nominee/${slug}`;
+/**
+ * Canonical nominee profile URL:
+ *   /nominees/africa-education-icon-award/:subcategory/:classification/:slug
+ * Falls back to the short /nominee/:slug resolver when the nominee is unknown.
+ */
+export const profileUrl = (slug: string) => {
+  const n = ICON_NOMINEES.find((x) => x.slug === slug);
+  return n
+    ? `/nominees/africa-education-icon-award/${n.award_subcategory_slug}/${n.classification_slug}/${n.slug}`
+    : `/nominee/${slug}`;
+};
