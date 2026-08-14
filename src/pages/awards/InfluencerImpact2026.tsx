@@ -48,14 +48,15 @@ export default function InfluencerImpact2026() {
     return [...pick("social-media"), ...pick("sports"), ...pick("music")];
   }, []);
 
-  const stats = useMemo(() => {
-    const total = SEED_NOMINEES.length;
-    const regions = new Set(SEED_NOMINEES.map((n) => n.nominee_region)).size;
-    return {
-      total,
-      regions: Math.max(regions, REGIONS.length),
-    };
-  }, []);
+  // Hero "Verified Nominees" must reflect the exact same live query the
+  // pathway sliders use — never a seeded/static count.
+  const { total: liveNomineeTotal, loading: liveNomineesLoading } =
+    useInfluencerPathwayNominees();
+
+  const stats = useMemo(
+    () => ({ regions: REGIONS.length }),
+    [],
+  );
 
   return (
     <>
