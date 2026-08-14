@@ -71,28 +71,38 @@ export default function Chapters() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="mb-4 bg-gold/20 text-gold border-gold/30">
-              Pan-African Network
+              Friends of EduAid-Africa · SCEF International Chapters
             </Badge>
             <h1 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-              NESA-Africa <span className="text-gold">Country Chapters</span>
+              Friends of EduAid-Africa <span className="text-gold">International Chapters</span>
             </h1>
+            <p className="text-lg text-white/70 mb-4">
+              The international chapters of the <span className="text-gold">Santos Creations
+              Educational Foundation (SCEF)</span> — the institution behind EduAid-Africa and
+              NESA-Africa.
+            </p>
             <p className="text-xl text-white/70 mb-8">
-              {REGIONAL_TAGLINE} Country chapters organised across the eight Africa
-              regions and the African Diaspora community, working together to celebrate
-              the Education Enablers advancing Education for All.
+              {REGIONAL_TAGLINE} Chapters organise across the eight Africa regions and the
+              African Diaspora community, mobilising Friends of EduAid-Africa to fund, verify and
+              celebrate the Education Enablers advancing Education for All.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-semibold">
-                <Flag className="w-5 h-5 mr-2" />
-                Start a Chapter
+              <Button size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-semibold" asChild>
+                <Link to="/contact">
+                  <Flag className="w-5 h-5 mr-2" />
+                  Start a Chapter
+                </Link>
               </Button>
-              <Button size="lg" variant="outline" className="border-gold/50 text-gold hover:bg-gold/10">
-                Find Your Chapter
+              <Button size="lg" variant="outline" className="border-gold/50 text-gold hover:bg-gold/10" asChild>
+                <Link to="/impact/friends-of-eduaid-africa">
+                  Join Friends of EduAid-Africa
+                </Link>
               </Button>
             </div>
           </div>
         </div>
       </section>
+
 
       {/* Stats */}
       <section className="py-12 border-y border-gold/10">
@@ -120,6 +130,47 @@ export default function Chapters() {
         </div>
       </section>
 
+      {/* SCEF institutional band */}
+      <section className="py-14">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto rounded-2xl border border-gold/20 bg-charcoal-light p-8">
+            <h2 className="text-2xl font-display font-bold text-white mb-3">
+              One Foundation, <span className="text-gold">One Global Chapter Network</span>
+            </h2>
+            <p className="text-white/70 mb-4">
+              Every chapter listed here is an international chapter of the Santos Creations
+              Educational Foundation (SCEF). Members serve as <span className="text-gold">Friends of
+              EduAid-Africa</span>: they raise and steward EduAid-Africa support, host local
+              education dialogues, and surface credible Education Enablers into the NESA-Africa
+              recognition pipeline.
+            </p>
+            <ul className="grid sm:grid-cols-3 gap-3 text-sm text-white/70">
+              <li className="rounded-lg border border-gold/10 p-3">
+                <span className="block text-gold font-semibold mb-1">SCEF</span>
+                Institutional owner and governance body of the chapter network.
+              </li>
+              <li className="rounded-lg border border-gold/10 p-3">
+                <span className="block text-gold font-semibold mb-1">EduAid-Africa</span>
+                The programme infrastructure chapters fund and deliver locally.
+              </li>
+              <li className="rounded-lg border border-gold/10 p-3">
+                <span className="block text-gold font-semibold mb-1">NESA-Africa</span>
+                The recognition cycle chapters mobilise their communities around.
+              </li>
+            </ul>
+            <div className="mt-6">
+              <Link
+                to="/impact/friends-of-eduaid-africa"
+                className="inline-flex items-center text-gold hover:underline"
+              >
+                Learn about Friends of EduAid-Africa
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* The Eight Africa Regions */}
       <section className="py-16">
         <div className="container mx-auto px-4">
@@ -129,9 +180,10 @@ export default function Chapters() {
             </h2>
             <p className="text-white/60 max-w-2xl mx-auto mt-3">
               Every African country belongs to exactly one of the eight canonical regions.
-              Chapter counts below are live from the NESA-Africa chapter register.
+              Chapter counts below are live from the SCEF chapter register.
             </p>
           </div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {AFRICA_REGION_LIST.map((region) => {
               const count = bySlug[region.slug] ?? 0;
@@ -191,8 +243,10 @@ export default function Chapters() {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-white/60">
-                Africans and Friends of Africa outside the continent organise as one global
-                community alongside the eight Africa regions — not as a ninth region.
+                Africans and Friends of EduAid-Africa outside the continent organise as one
+                global SCEF chapter community alongside the eight Africa regions — not as a
+                ninth region.
+
               </p>
             </CardContent>
           </Card>
