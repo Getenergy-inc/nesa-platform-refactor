@@ -316,20 +316,23 @@ export default function Chapters() {
       <section className="py-16 border-t border-gold/10 bg-gradient-to-r from-gold/5 to-gold/10">
         <div className="container mx-auto px-4 text-center">
           <Globe2 className="w-12 h-12 text-gold mx-auto mb-4" />
-          <h2 className="text-3xl font-display font-bold mb-4 text-white">Ready to Lead in Your Country?</h2>
+          <h2 className="text-3xl font-display font-bold mb-4 text-white">Start or Join an SCEF Chapter</h2>
           <p className="text-white/60 max-w-2xl mx-auto mb-8">
-            Whether you want to start a new chapter or join an existing one, we'd love to hear from you.
+            Lead an SCEF Africa Local Chapter in your country, or join the International Friends
+            of EduAid-Africa community from anywhere in the world.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact">
               <Button size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-semibold">
-                Apply to Lead a Chapter
+                Apply to Lead a Local Chapter
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </Link>
-            <Button size="lg" variant="outline" className="border-gold/50 text-gold hover:bg-gold/10">
-              <Mail className="w-5 h-5 mr-2" />
-              Contact Regional Lead
+            <Button size="lg" variant="outline" className="border-gold/50 text-gold hover:bg-gold/10" asChild>
+              <Link to="/impact/friends-of-eduaid-africa">
+                <Mail className="w-5 h-5 mr-2" />
+                Join International Friends
+              </Link>
             </Button>
           </div>
         </div>
