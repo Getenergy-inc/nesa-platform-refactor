@@ -188,14 +188,16 @@ export const PAYMENT_METHODS: PaymentMethod[] = [
 ];
 
 // ============== EVENT DETAILS ==============
+// Canonical Gala date lives in @/config/programme — never retype it here.
 
 export const GALA_EVENT = {
-  name: 'NESA-Africa Grand Gala Night',
-  date: 'June 28, 2026',
+  name: 'NESA-Africa 2026 Gold-Blue Garnet Awards Gala',
+  date: `Sunday, ${PROGRAMME_END_LABEL}`,
   year: 2026,
   time: '18:00 WAT',
-  venue: 'International Conference Centre',
-  city: 'Abuja, Nigeria',
+  /** No venue confirmed yet — do not invent one. */
+  venue: 'Venue details to be announced',
+  city: 'Lagos, Nigeria',
   dressCode: 'Black Tie / Traditional Formal',
 };
 
