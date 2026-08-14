@@ -5457,6 +5457,126 @@ export type Database = {
           },
         ]
       }
+      nominee_profile_revisions: {
+        Row: {
+          created_at: string
+          id: string
+          nominee_id: string
+          payload: Json
+          review_notes: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string
+          submitted_by: string
+          updated_at: string
+          video_description: string | null
+          video_storage_path: string | null
+          video_title: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          nominee_id: string
+          payload?: Json
+          review_notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          submitted_by: string
+          updated_at?: string
+          video_description?: string | null
+          video_storage_path?: string | null
+          video_title?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          nominee_id?: string
+          payload?: Json
+          review_notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          submitted_by?: string
+          updated_at?: string
+          video_description?: string | null
+          video_storage_path?: string | null
+          video_title?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nominee_profile_revisions_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominee_profile_revisions_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      nominee_support_messages: {
+        Row: {
+          author_email: string | null
+          author_name: string
+          author_organization: string | null
+          created_at: string
+          id: string
+          message: string
+          nominee_id: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          author_email?: string | null
+          author_name: string
+          author_organization?: string | null
+          created_at?: string
+          id?: string
+          message: string
+          nominee_id: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          author_email?: string | null
+          author_name?: string
+          author_organization?: string | null
+          created_at?: string
+          id?: string
+          message?: string
+          nominee_id?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nominee_support_messages_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominee_support_messages_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       nominees: {
         Row: {
           acceptance_status:
@@ -5467,8 +5587,13 @@ export type Database = {
           accepted_at: string | null
           active_nominee_id: string | null
           award_family: string | null
+          award_slug: string | null
           bio: string | null
           category_fit_summary: string | null
+          category_slug: string | null
+          claimed_at: string | null
+          claimed_by_user_id: string | null
+          classification_slug: string | null
           consent_confirmed: boolean
           country: string | null
           country_iso2: string | null
@@ -5540,8 +5665,12 @@ export type Database = {
           title: string | null
           updated_at: string | null
           verification_tier: string | null
+          video_url: string | null
           website: string | null
           work_done: string | null
+          youtube_publish_state: string
+          youtube_published_at: string | null
+          youtube_video_id: string | null
           zone_slug: string | null
         }
         Insert: {
@@ -5553,8 +5682,13 @@ export type Database = {
           accepted_at?: string | null
           active_nominee_id?: string | null
           award_family?: string | null
+          award_slug?: string | null
           bio?: string | null
           category_fit_summary?: string | null
+          category_slug?: string | null
+          claimed_at?: string | null
+          claimed_by_user_id?: string | null
+          classification_slug?: string | null
           consent_confirmed?: boolean
           country?: string | null
           country_iso2?: string | null
@@ -5626,8 +5760,12 @@ export type Database = {
           title?: string | null
           updated_at?: string | null
           verification_tier?: string | null
+          video_url?: string | null
           website?: string | null
           work_done?: string | null
+          youtube_publish_state?: string
+          youtube_published_at?: string | null
+          youtube_video_id?: string | null
           zone_slug?: string | null
         }
         Update: {
@@ -5639,8 +5777,13 @@ export type Database = {
           accepted_at?: string | null
           active_nominee_id?: string | null
           award_family?: string | null
+          award_slug?: string | null
           bio?: string | null
           category_fit_summary?: string | null
+          category_slug?: string | null
+          claimed_at?: string | null
+          claimed_by_user_id?: string | null
+          classification_slug?: string | null
           consent_confirmed?: boolean
           country?: string | null
           country_iso2?: string | null
@@ -5712,8 +5855,12 @@ export type Database = {
           title?: string | null
           updated_at?: string | null
           verification_tier?: string | null
+          video_url?: string | null
           website?: string | null
           work_done?: string | null
+          youtube_publish_state?: string
+          youtube_published_at?: string | null
+          youtube_video_id?: string | null
           zone_slug?: string | null
         }
         Relationships: [
@@ -10768,6 +10915,48 @@ export type Database = {
         }
         Relationships: []
       }
+      nominee_support_messages_public: {
+        Row: {
+          author_name: string | null
+          author_organization: string | null
+          created_at: string | null
+          id: string | null
+          message: string | null
+          nominee_id: string | null
+        }
+        Insert: {
+          author_name?: string | null
+          author_organization?: string | null
+          created_at?: string | null
+          id?: string | null
+          message?: string | null
+          nominee_id?: string | null
+        }
+        Update: {
+          author_name?: string | null
+          author_organization?: string | null
+          created_at?: string | null
+          id?: string | null
+          message?: string | null
+          nominee_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nominee_support_messages_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominee_support_messages_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       nrc_public_members: {
         Row: {
           bio: string | null
@@ -10869,17 +11058,22 @@ export type Database = {
             | Database["public"]["Enums"]["acceptance_status"]
             | null
           award_family: string | null
+          award_slug: string | null
           bio: string | null
           category_fit_summary: string | null
+          category_slug: string | null
+          classification_slug: string | null
           consent_confirmed: boolean | null
           country: string | null
           created_at: string | null
           data_source: string | null
+          evidence_urls: string[] | null
           final_score: number | null
           id: string | null
           impact_area: string | null
           is_platinum: boolean | null
           jury_score: number | null
+          linkedin_url: string | null
           logo_url: string | null
           media_gallery: Json | null
           name: string | null
@@ -10907,6 +11101,10 @@ export type Database = {
           subcategory_id: string | null
           title: string | null
           updated_at: string | null
+          video_url: string | null
+          website: string | null
+          work_done: string | null
+          youtube_video_id: string | null
           zone_slug: string | null
         }
         Insert: {
@@ -10914,17 +11112,22 @@ export type Database = {
             | Database["public"]["Enums"]["acceptance_status"]
             | null
           award_family?: string | null
+          award_slug?: string | null
           bio?: string | null
           category_fit_summary?: string | null
+          category_slug?: string | null
+          classification_slug?: string | null
           consent_confirmed?: boolean | null
           country?: string | null
           created_at?: string | null
           data_source?: string | null
+          evidence_urls?: string[] | null
           final_score?: number | null
           id?: string | null
           impact_area?: string | null
           is_platinum?: boolean | null
           jury_score?: number | null
+          linkedin_url?: string | null
           logo_url?: string | null
           media_gallery?: Json | null
           name?: string | null
@@ -10952,6 +11155,10 @@ export type Database = {
           subcategory_id?: string | null
           title?: string | null
           updated_at?: string | null
+          video_url?: string | null
+          website?: string | null
+          work_done?: string | null
+          youtube_video_id?: string | null
           zone_slug?: string | null
         }
         Update: {
@@ -10959,17 +11166,22 @@ export type Database = {
             | Database["public"]["Enums"]["acceptance_status"]
             | null
           award_family?: string | null
+          award_slug?: string | null
           bio?: string | null
           category_fit_summary?: string | null
+          category_slug?: string | null
+          classification_slug?: string | null
           consent_confirmed?: boolean | null
           country?: string | null
           created_at?: string | null
           data_source?: string | null
+          evidence_urls?: string[] | null
           final_score?: number | null
           id?: string | null
           impact_area?: string | null
           is_platinum?: boolean | null
           jury_score?: number | null
+          linkedin_url?: string | null
           logo_url?: string | null
           media_gallery?: Json | null
           name?: string | null
@@ -10997,6 +11209,10 @@ export type Database = {
           subcategory_id?: string | null
           title?: string | null
           updated_at?: string | null
+          video_url?: string | null
+          website?: string | null
+          work_done?: string | null
+          youtube_video_id?: string | null
           zone_slug?: string | null
         }
         Relationships: [
@@ -11357,6 +11573,10 @@ export type Database = {
         Args: { p_position_id: string }
         Returns: undefined
       }
+      approve_nominee_revision: {
+        Args: { _notes?: string; _revision_id: string }
+        Returns: undefined
+      }
       assign_nrc_reviewers: {
         Args: { p_nomination_id: string; p_num_reviewers?: number }
         Returns: Json
@@ -11371,6 +11591,7 @@ export type Database = {
       }
       check_email_exists: { Args: { p_email: string }; Returns: boolean }
       check_nrc_quorum: { Args: { p_nomination_id: string }; Returns: Json }
+      claim_nominee_profile: { Args: { _slug: string }; Returns: string }
       compute_icon_grand_jury_results: {
         Args: { p_group_id: string }
         Returns: undefined
@@ -11737,6 +11958,10 @@ export type Database = {
         }
       }
       redeem_icon_invitation: { Args: { p_token: string }; Returns: string }
+      reject_nominee_revision: {
+        Args: { _notes?: string; _revision_id: string }
+        Returns: undefined
+      }
       reopen_icon_review: {
         Args: { p_reason: string; p_review_id: string }
         Returns: undefined
