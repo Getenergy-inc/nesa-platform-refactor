@@ -71,31 +71,32 @@ export default function Chapters() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="mb-4 bg-gold/20 text-gold border-gold/30">
-              Friends of EduAid-Africa · SCEF International Chapters
+              SCEF Africa Local Chapters · International Friends of EduAid-Africa
             </Badge>
             <h1 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-              Friends of EduAid-Africa <span className="text-gold">International Chapters</span>
+              SCEF Africa Local Chapters <span className="text-gold">& International Friends of EduAid-Africa</span>
             </h1>
             <p className="text-lg text-white/70 mb-4">
-              The international chapters of the <span className="text-gold">Santos Creations
-              Educational Foundation (SCEF)</span> — the institution behind EduAid-Africa and
+              The chapter network of the <span className="text-gold">Santos Creations
+              Educational Foundation (SCEF)</span> — the institution that powers EduAid-Africa and
               NESA-Africa.
             </p>
             <p className="text-xl text-white/70 mb-8">
-              {REGIONAL_TAGLINE} Chapters organise across the eight Africa regions and the
-              African Diaspora community, mobilising Friends of EduAid-Africa to fund, verify and
+              {REGIONAL_TAGLINE} <span className="text-gold">SCEF Africa Local Chapters</span> anchor
+              the work across the eight Africa regions, while <span className="text-gold">International
+              Friends of EduAid-Africa</span> chapters mobilise global support to fund, verify and
               celebrate the Education Enablers advancing Education for All.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-semibold" asChild>
                 <Link to="/contact">
                   <Flag className="w-5 h-5 mr-2" />
-                  Start a Chapter
+                  Start a Local Chapter
                 </Link>
               </Button>
               <Button size="lg" variant="outline" className="border-gold/50 text-gold hover:bg-gold/10" asChild>
                 <Link to="/impact/friends-of-eduaid-africa">
-                  Join Friends of EduAid-Africa
+                  Join International Friends
                 </Link>
               </Button>
             </div>
