@@ -96,7 +96,11 @@ export function installChunkReloadHandler() {
 
   // Vite emits this for failed module preloads (covers React.lazy routes).
   window.addEventListener("vite:preloadError", (event) => {
-    if (recoverFromChunkError((event as CustomEvent).detail ?? event)) {
+    const payload =
+      (event as unknown as { payload?: unknown; detail?: unknown }).payload ??
+      (event as unknown as { detail?: unknown }).detail ??
+      event;
+    if (recoverFromChunkError(payload)) {
       event.preventDefault();
     }
   });
