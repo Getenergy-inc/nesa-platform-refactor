@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { useSeason } from "@/contexts/SeasonContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -171,7 +170,6 @@ const TICKET_FAQS: { q: string; a: string }[] = [
 ];
 
 export default function Tickets() {
-  const { currentEdition } = useSeason();
   const { toast } = useToast();
   const [selectedTier, setSelectedTier] = useState<string>("premium");
   const [quantity, setQuantity] = useState(1);
@@ -532,7 +530,7 @@ export default function Tickets() {
               {/* Venue Amenities */}
               <Card className="mt-6">
                 <CardHeader>
-                  <CardTitle className="text-base">Venue Amenities</CardTitle>
+                  <CardTitle className="text-base">Planned On-Site Facilities</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   {[
