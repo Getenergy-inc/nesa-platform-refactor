@@ -44,6 +44,16 @@ const EMPTY_FILTERS: Record<FilterKey, string> = {
 };
 
 
+/**
+ * Tolerant comparison for URL-supplied values: `?region=west-africa` must
+ * still match a stored region of "West Africa".
+ */
+function looseMatch(stored: string | null | undefined, wanted: string) {
+  const norm = (v: string) => v.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  if (!stored) return false;
+  return norm(stored) === norm(wanted);
+}
+
 function verificationLabel(n: EnrichedDatabaseNominee) {
   if (n.nrcVerified) return "Verified";
   if (n.acceptanceStatus === "accepted") return "Accepted";
