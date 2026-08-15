@@ -303,7 +303,7 @@ const GOLD_BLUE_GARNET: AwardPageContent = {
       subcategoryCount: 6,
       voteSplit: "Recognition Edition · No public voting",
       viewHref: "/awards/blue-garnet-categories/best-education-policy-and-implementation-state-nigeria",
-      nominateHref: "/nominate?category=best-education-policy-and-implementation-state-nigeria",
+      nominateHref: "/nominate?category=best-education-policy-implementation-state-nigeria",
     },
   ],
   finalCta: {
@@ -392,7 +392,7 @@ const PLATINUM: AwardPageContent = {
       subcategoryCount: 3,
       voteSplit: "Jury only",
       viewHref: "/awards/platinum-certificate-categories/excellence-in-research-and-development-for-education-nigeria",
-      nominateHref: "/nominate?category=excellence-in-research-and-development-for-education-nigeria",
+      nominateHref: "/nominate?category=excellence-in-research-development-for-education-nigeria",
     },
     {
       slug: "christian-africa",

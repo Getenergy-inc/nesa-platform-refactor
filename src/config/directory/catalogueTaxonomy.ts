@@ -94,7 +94,7 @@ export const CATEGORY_MAPPINGS: CatalogueCategoryMapping[] = [
     displayName: "Best CSR for Education — Africa Regional",
     tier: "blue-garnet",
     scope: "Africa Regional",
-    nominateHref: "/nominate?category=csr-for-education&scope=africa",
+    nominateHref: "/nominate?category=best-csr-for-education-africa-regional",
     confidence: 1,
   },
   {
@@ -102,7 +102,7 @@ export const CATEGORY_MAPPINGS: CatalogueCategoryMapping[] = [
     displayName: "Best CSR for Education — Nigeria",
     tier: "blue-garnet",
     scope: "Nigeria",
-    nominateHref: "/nominate?category=csr-for-education&scope=nigeria",
+    nominateHref: "/nominate?category=best-csr-for-education-nigeria",
     confidence: 1,
   },
   {
@@ -110,7 +110,7 @@ export const CATEGORY_MAPPINGS: CatalogueCategoryMapping[] = [
     displayName: "Best EduTech Innovation",
     tier: "blue-garnet",
     scope: "Africa Regional",
-    nominateHref: "/nominate?category=edtech-and-ai-innovation",
+    nominateHref: "/nominate?category=best-edutech-innovation-for-education-africa-regional",
     confidence: 1,
   },
   {
@@ -118,7 +118,7 @@ export const CATEGORY_MAPPINGS: CatalogueCategoryMapping[] = [
     displayName: "Media Organisations Supporting Education",
     tier: "blue-garnet",
     scope: "Nigeria",
-    nominateHref: "/nominate?category=media-and-journalism-for-education",
+    nominateHref: "/nominate?category=best-media-organisation-for-education-advocacy-nigeria",
     confidence: 1,
   },
   {
@@ -126,7 +126,7 @@ export const CATEGORY_MAPPINGS: CatalogueCategoryMapping[] = [
     displayName: "NGOs Supporting Education — Nigeria",
     tier: "blue-garnet",
     scope: "Nigeria",
-    nominateHref: "/nominate?category=ngos-advancing-education&scope=nigeria",
+    nominateHref: "/nominate?category=best-ngo-for-education-advancement-nigeria",
     confidence: 1,
   },
   {
@@ -134,7 +134,7 @@ export const CATEGORY_MAPPINGS: CatalogueCategoryMapping[] = [
     displayName: "NGOs Supporting Education — Africa Regional",
     tier: "blue-garnet",
     scope: "Africa Regional",
-    nominateHref: "/nominate?category=ngos-advancing-education&scope=africa",
+    nominateHref: "/nominate?category=best-ngo-for-education-advancement-africa-regional",
     confidence: 1,
   },
   {
@@ -142,7 +142,7 @@ export const CATEGORY_MAPPINGS: CatalogueCategoryMapping[] = [
     displayName: "STEM Education Programme",
     tier: "blue-garnet",
     scope: "Africa Regional",
-    nominateHref: "/nominate?category=stem-education",
+    nominateHref: "/nominate?category=best-stem-education-programme-africa-regional",
     confidence: 1,
   },
   {
@@ -150,7 +150,7 @@ export const CATEGORY_MAPPINGS: CatalogueCategoryMapping[] = [
     displayName: "Creative Industries Supporting Education",
     tier: "blue-garnet",
     scope: "Nigeria",
-    nominateHref: "/nominate?category=media-and-journalism-for-education&track=creative",
+    nominateHref: "/nominate?category=best-creative-arts-contribution-to-education-nigeria",
     confidence: 1,
   },
   {
@@ -158,7 +158,7 @@ export const CATEGORY_MAPPINGS: CatalogueCategoryMapping[] = [
     displayName: "Education Policy & Implementation",
     tier: "blue-garnet",
     scope: "Nigeria",
-    nominateHref: "/nominate?category=education-policy-and-government",
+    nominateHref: "/nominate?category=best-education-policy-implementation-state-nigeria",
     confidence: 1,
   },
 
@@ -168,7 +168,7 @@ export const CATEGORY_MAPPINGS: CatalogueCategoryMapping[] = [
     displayName: "Libraries",
     tier: "platinum",
     scope: "Nigeria",
-    nominateHref: "/nominate?category=libraries-and-knowledge-systems",
+    nominateHref: "/nominate?category=best-tertiary-institution-library-nigeria",
     confidence: 1,
   },
   {
@@ -176,7 +176,7 @@ export const CATEGORY_MAPPINGS: CatalogueCategoryMapping[] = [
     displayName: "Research & Development",
     tier: "platinum",
     scope: "Nigeria",
-    nominateHref: "/nominate?category=research-and-curriculum-development",
+    nominateHref: "/nominate?category=excellence-in-research-development-for-education-nigeria",
     confidence: 1,
   },
   {
@@ -184,7 +184,7 @@ export const CATEGORY_MAPPINGS: CatalogueCategoryMapping[] = [
     displayName: "Christian Education Impact",
     tier: "platinum",
     scope: "Africa Regional",
-    nominateHref: "/nominate?category=faith-based-organisations&track=christian",
+    nominateHref: "/nominate?category=excellence-in-christian-education-impact-africa-regional",
     confidence: 1,
   },
   {
@@ -192,7 +192,7 @@ export const CATEGORY_MAPPINGS: CatalogueCategoryMapping[] = [
     displayName: "Islamic Education Impact",
     tier: "platinum",
     scope: "Africa Regional",
-    nominateHref: "/nominate?category=faith-based-organisations&track=islamic",
+    nominateHref: "/nominate?category=excellence-in-islamic-education-impact-africa-regional",
     confidence: 1,
   },
   {
@@ -200,7 +200,7 @@ export const CATEGORY_MAPPINGS: CatalogueCategoryMapping[] = [
     displayName: "Political Leadership",
     tier: "platinum",
     scope: "Nigeria",
-    nominateHref: "/nominate?category=education-policy-and-government&track=political",
+    nominateHref: "/nominate?category=excellence-in-political-leadership-for-education-nigeria",
     confidence: 1,
   },
   {
@@ -208,7 +208,7 @@ export const CATEGORY_MAPPINGS: CatalogueCategoryMapping[] = [
     displayName: "International Partnership",
     tier: "platinum",
     scope: "Global",
-    nominateHref: "/nominate?category=institutional-and-bilateral-grants",
+    nominateHref: "/nominate?category=excellence-in-international-partnership-for-education-africa",
     confidence: 1,
   },
   {
@@ -216,7 +216,7 @@ export const CATEGORY_MAPPINGS: CatalogueCategoryMapping[] = [
     displayName: "Diaspora Educational Impact",
     tier: "platinum",
     scope: "Global",
-    nominateHref: "/nominate?category=education-philanthropy&track=diaspora",
+    nominateHref: "/nominate?category=excellence-in-diaspora-educational-impact-international",
     confidence: 1,
   },
 
