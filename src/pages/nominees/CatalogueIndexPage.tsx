@@ -154,8 +154,16 @@ export default function CatalogueIndexPage() {
       if (!meta) return false; // review-queue rows are listed separately
       if (famSet && !famSet.has(meta.category) && !famSet.has(n.categorySlug ?? "")) return false;
       if (filters.tier && meta.tier !== filters.tier) return false;
-      if (filters.category && meta.category !== filters.category) return false;
-      if (filters.subcategory && meta.sub !== filters.subcategory) return false;
+      if (
+        filters.category &&
+        meta.category !== filters.category &&
+        !looseMatch(meta.categoryName, filters.category)
+      ) return false;
+      if (
+        filters.subcategory &&
+        meta.sub !== filters.subcategory &&
+        !looseMatch(meta.subName, filters.subcategory)
+      ) return false;
       if (filters.region && !looseMatch(n.region, filters.region)) return false;
       if (filters.country && !looseMatch(n.country, filters.country)) return false;
       if (filters.year && String(n.nominationYear ?? "") !== filters.year) return false;
