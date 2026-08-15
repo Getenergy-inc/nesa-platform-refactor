@@ -24,6 +24,7 @@ import {
   ArenaTopBar,
   ArenaFooter,
 } from "@/components/arena/ArenaChrome";
+import { ArenaExitButton, ArenaExitRailLink } from "@/components/arena/ArenaExitLink";
 
 const navItems = [
   { title: "Dashboard", url: "/judges-arena", icon: LayoutDashboard, end: true },
@@ -72,6 +73,7 @@ function ArenaNav({ onNavigate }: { onNavigate?: () => void }) {
 function ArenaRail({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <div className="flex h-full flex-col bg-arena-rail">
+      <ArenaExitRailLink />
       <ArenaBrand workspace="Judges Arena" to="/judges-arena" />
       <ArenaNav onNavigate={onNavigate} />
       <ArenaRailBadge />
@@ -121,6 +123,7 @@ export default function JudgesArenaLayout() {
             identityName={user?.email ?? "Judge"}
             identityRole="Panel Judge"
             notifications={3}
+            actions={<ArenaExitButton />}
           />
 
           <main className="relative flex-1 overflow-x-hidden">
