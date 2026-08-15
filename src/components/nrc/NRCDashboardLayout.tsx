@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import {
   ArenaSeal, ArenaBrand, ArenaTopBar, ArenaFooter,
 } from "@/components/arena/ArenaChrome";
+import { ArenaExitButton, ArenaExitRailLink } from "@/components/arena/ArenaExitLink";
 import { ArenaSeo } from "@/components/arena/ArenaSeo";
 import {
   Award, LayoutDashboard, Users, ClipboardList, FileCheck, Flag,
@@ -92,6 +93,7 @@ export function NRCDashboardLayout({ children }: NRCDashboardLayoutProps) {
   const sidebarContent = (
     <div className="flex h-full flex-col bg-arena-rail">
       {/* Sidebar Header */}
+      <ArenaExitRailLink />
       {collapsed ? (
         <div className="flex items-center justify-center border-b border-white/10 py-4">
           <ArenaSeal className="h-9 w-9" />

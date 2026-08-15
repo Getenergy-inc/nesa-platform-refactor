@@ -82,19 +82,7 @@ export function NRCLayout({ children }: NRCLayoutProps) {
             identityName={user?.email ?? "NRC Member"}
             identityRole="NRC Member"
             notifications={3}
-            actions={
-              <Button
-                variant="ghost"
-                size="sm"
-                asChild
-                className="hidden text-white/70 hover:bg-white/5 hover:text-gold lg:inline-flex"
-              >
-                <Link to="/dashboard">
-                  <ArrowLeft className="mr-1.5 h-4 w-4" />
-                  Exit
-                </Link>
-              </Button>
-            }
+            actions={<ArenaExitButton />}
           />
 
           <main className="min-w-0 flex-1 px-4 py-6 pb-24 sm:px-6 lg:pb-16">{children}</main>
