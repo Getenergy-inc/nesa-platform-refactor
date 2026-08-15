@@ -106,7 +106,7 @@ export default function NRCDashboard() {
       </section>
 
       {/* Next required action */}
-      <section className="mb-6 rounded-xl border border-white/10 bg-white/[0.04] p-5">
+      <section className="mb-6 rounded-xl border border-white/10 bg-arena-panel p-5">
         <p className="text-xs uppercase tracking-wider text-gold/80">Next required action</p>
         <p className="mt-1 text-white/85">
           Complete NRC onboarding to unlock case assignments.

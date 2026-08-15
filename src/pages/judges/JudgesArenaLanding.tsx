@@ -10,11 +10,11 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
-  ICON_ARENA_STATS,
   ICON_PHASE_TIMELINE,
   getCurrentIconPhase,
 } from "@/config/iconAward/calendar";
-import { supabase } from "@/integrations/supabase/client";
+import { ArenaStatStrip } from "@/components/arena/ArenaChrome";
+import { useArenaPublicStats, arenaCount } from "@/hooks/useArenaPublicStats";
 import heroImg from "@/assets/judges-arena/jury-chamber-hero.jpg";
 
 const WORKFLOW = [
@@ -34,32 +34,39 @@ const WORKFLOW = [
 
 export default function JudgesArenaLanding() {
   const phase = useMemo(() => getCurrentIconPhase(), []);
-  const [nomineeCount, setNomineeCount] = useState<number>(ICON_ARENA_STATS.minNominees);
+  const { data: publicStats, isLoading: statsLoading } = useArenaPublicStats();
 
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      const { count } = await supabase
-        .from("nominees")
-        .select("id", { count: "exact", head: true });
-      if (!cancelled && typeof count === "number" && count > ICON_ARENA_STATS.minNominees) {
-        setNomineeCount(count);
-      }
-    })();
-    return () => { cancelled = true; };
-  }, []);
-
+  // Every figure below is a live query result. Nothing is hardcoded: when the
+  // jury has not been appointed yet the count is genuinely zero and renders "—".
   const stats = [
-    { value: ICON_ARENA_STATS.judges,      label: "Judges" },
-    { value: ICON_ARENA_STATS.pathways,    label: "Pathways" },
-    { value: ICON_ARENA_STATS.panels,      label: "Screening Panels" },
-    { value: ICON_ARENA_STATS.finalists,   label: "Finalists" },
-    { value: ICON_ARENA_STATS.laureates,   label: "Laureates" },
-    { value: `${nomineeCount.toLocaleString()}+`, label: "Nominees" },
+    {
+      icon: Gavel,
+      value: arenaCount(publicStats?.publicJudges, statsLoading),
+      label: "Confirmed judges listed",
+      detail: "Published only after appointment & consent",
+    },
+    {
+      icon: Users,
+      value: arenaCount(publicStats?.publicNrcMembers, statsLoading),
+      label: "NRC researchers listed",
+      detail: "Verification corps, opt-in profiles",
+    },
+    {
+      icon: FileSearch,
+      value: arenaCount(publicStats?.nominees, statsLoading),
+      label: "Nominees in the directory",
+      detail: "Across every 2026 recognition pathway",
+    },
+    {
+      icon: ShieldCheck,
+      value: phase.label,
+      label: "Current jury phase",
+      detail: phase.nextLabel ? `Next: ${phase.nextLabel}` : "Canonical 2026 calendar",
+    },
   ];
 
   return (
-    <div className="min-h-screen bg-[#050b1a] text-white">
+    <div className="min-h-screen bg-arena-bg text-white">
       <Helmet>
         <title>2026 Africa Education Icon Judges Arena | NESA-Africa</title>
         <meta
@@ -81,14 +88,14 @@ export default function JudgesArenaLanding() {
           style={{ backgroundImage: `url(${heroImg})` }}
           aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050b1a]/70 via-[#050b1a]/85 to-[#050b1a]" aria-hidden="true" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--arena-bg))]/70 via-[hsl(var(--arena-bg))]/85 to-[hsl(var(--arena-bg))]" aria-hidden="true" />
         <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-24 lg:pt-28 lg:pb-32">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#4b6cff]/40 bg-[#0b1a3a]/70 px-3 py-1 text-xs uppercase tracking-widest text-[#8ea6ff]">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#4b6cff]/40 bg-arena-panel px-3 py-1 text-xs uppercase tracking-widest text-[#8ea6ff]">
             <Lock className="h-3 w-3" /> Invitation-only jury portal
           </div>
           <div className="mt-4"><ArenaExitButton /></div>
           <h1 className="mt-6 font-serif text-4xl sm:text-5xl lg:text-6xl leading-tight max-w-4xl">
-            2026 <span className="text-[#c9a24a]">Africa Education Icon</span> Judges Arena
+            2026 <span className="text-gold">Africa Education Icon</span> Judges Arena
           </h1>
           <p className="mt-6 text-lg sm:text-xl text-white/75 max-w-3xl leading-relaxed">
             A secure, independent jury platform for reviewing verified lifetime education
@@ -96,21 +103,21 @@ export default function JudgesArenaLanding() {
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Button asChild size="lg" className="bg-[#c9a24a] text-[#050b1a] hover:bg-[#e0b96b]">
+            <Button asChild size="lg" className="bg-gold text-[hsl(var(--arena-bg))] hover:bg-gold/90">
               <SmartLink to="/judges/sign-in">Judge Sign In <ArrowRight className="ml-2 h-4 w-4" /></SmartLink>
             </Button>
             <Button asChild size="lg" variant="outline"
               className="border-white/25 bg-white/5 text-white hover:bg-white/10">
               <a href="#workflow">Learn About the Judging Process</a>
             </Button>
-            <Button asChild size="lg" variant="ghost" className="text-white/80 hover:text-[#c9a24a]">
+            <Button asChild size="lg" variant="ghost" className="text-white/80 hover:text-gold">
               <SmartLink to="/judges/directory">Meet the Judges</SmartLink>
             </Button>
           </div>
 
 
           <div className="mt-10 inline-flex items-center gap-3 rounded-lg border border-white/10 bg-white/[0.04] px-4 py-2 text-sm">
-            <span className="h-2 w-2 rounded-full bg-[#c9a24a] animate-pulse" />
+            <span className="h-2 w-2 rounded-full bg-gold animate-pulse" />
             <span className="text-white/80">Current phase:</span>
             <span className="text-white font-medium">{phase.label}</span>
             {phase.nextLabel && (
@@ -120,15 +127,10 @@ export default function JudgesArenaLanding() {
         </div>
       </section>
 
-      {/* Stat strip */}
-      <section className="border-y border-white/10 bg-[#0b1a3a]/60">
-        <div className="max-w-7xl mx-auto px-6 py-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-          {stats.map((s) => (
-            <div key={s.label} className="text-center">
-              <div className="font-serif text-3xl lg:text-4xl text-[#c9a24a]">{s.value}</div>
-              <div className="mt-1 text-xs uppercase tracking-widest text-white/60">{s.label}</div>
-            </div>
-          ))}
+      {/* Stat strip — live counts only */}
+      <section className="border-y border-white/10 bg-arena-rail">
+        <div className="mx-auto max-w-7xl px-6 py-8">
+          <ArenaStatStrip stats={stats} />
         </div>
       </section>
 
@@ -152,11 +154,11 @@ export default function JudgesArenaLanding() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.04 }}
-                className="relative rounded-xl border border-white/10 bg-white/[0.03] p-5 hover:border-[#c9a24a]/40 transition"
+                className="relative rounded-xl border border-white/10 bg-white/[0.03] p-5 hover:border-gold/40 transition"
               >
                 <div className="flex items-center gap-3">
-                  <div className="rounded-lg bg-[#c9a24a]/15 border border-[#c9a24a]/30 p-2">
-                    <Icon className="h-5 w-5 text-[#c9a24a]" />
+                  <div className="rounded-lg bg-gold/15 border border-gold/30 p-2">
+                    <Icon className="h-5 w-5 text-gold" />
                   </div>
                   <span className="text-xs text-white/50">Step {i + 1}</span>
                 </div>
@@ -168,7 +170,7 @@ export default function JudgesArenaLanding() {
       </section>
 
       {/* About sections */}
-      <section className="bg-[#08122b] border-y border-white/10">
+      <section className="bg-arena-panel border-y border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-3 gap-8">
           {[
             {
@@ -197,7 +199,7 @@ export default function JudgesArenaLanding() {
             },
           ].map((s) => (
             <div key={s.title} className="rounded-xl border border-white/10 bg-white/[0.03] p-6">
-              <h3 className="font-serif text-xl text-[#c9a24a]">{s.title}</h3>
+              <h3 className="font-serif text-xl text-gold">{s.title}</h3>
               <p className="mt-3 text-sm text-white/75 leading-relaxed">{s.body}</p>
             </div>
           ))}
@@ -223,7 +225,7 @@ export default function JudgesArenaLanding() {
 
       {/* Final CTA */}
       <section className="max-w-7xl mx-auto px-6 pb-24">
-        <div className="rounded-2xl border border-[#c9a24a]/30 bg-gradient-to-br from-[#0b1a3a] to-[#050b1a] p-10 lg:p-14 text-center">
+        <div className="rounded-2xl border border-gold/30 bg-gradient-to-br from-[#0b1a3a] to-[hsl(var(--arena-bg))] p-10 lg:p-14 text-center">
           <h2 className="font-serif text-3xl sm:text-4xl">
             27 Judges. 3 Pathways. 9 Screening Panels. 27 Finalists. 9 Laureates.
           </h2>
@@ -232,7 +234,7 @@ export default function JudgesArenaLanding() {
             highest lifetime education recognition.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Button asChild size="lg" className="bg-[#c9a24a] text-[#050b1a] hover:bg-[#e0b96b]">
+            <Button asChild size="lg" className="bg-gold text-[hsl(var(--arena-bg))] hover:bg-gold/90">
               <SmartLink to="/judges/sign-in">Judge Sign In</SmartLink>
             </Button>
             <Button asChild size="lg" variant="outline"
