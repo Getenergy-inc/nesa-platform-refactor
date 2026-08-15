@@ -2252,6 +2252,10 @@ const App = () => (
                     element={<BulkImportNominees />}
                   />
                   <Route
+                    path="/admin/youtube-pipeline"
+                    element={<AdminBareShell><YouTubePipeline /></AdminBareShell>}
+                  />
+                  <Route
                     path="/admin/bulk-seed"
                     element={<AdminBareShell><BulkSeedNominees /></AdminBareShell>}
                   />
