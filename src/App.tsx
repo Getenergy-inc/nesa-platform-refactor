@@ -1,4 +1,5 @@
 import { Toaster } from "@/components/ui/toaster";
+import { AdminBareShell } from "@/components/admin/AdminBareShell";
 import { useEffect } from "react";
 import Nominees from "./pages/Nominees";
 
@@ -2216,15 +2217,15 @@ const App = () => (
                   <Route path="/admin/impact" element={<AdminImpact />} />
                   <Route
                     path="/admin/nominee-images"
-                    element={<AdminNomineeImages />}
+                    element={<AdminBareShell><AdminNomineeImages /></AdminBareShell>}
                   />
                   <Route
                     path="/admin/nominee-media"
-                    element={<AdminNomineeMediaLibrary />}
+                    element={<AdminBareShell><AdminNomineeMediaLibrary /></AdminBareShell>}
                   />
                   <Route
                     path="/admin/nominee-profiles"
-                    element={<AdminNomineeProfiles />}
+                    element={<AdminBareShell><AdminNomineeProfiles /></AdminBareShell>}
                   />
                   <Route path="/admin/voting" element={<Navigate to="/admin" replace />} />
                   <Route path="/admin/rebuild" element={<AdminRebuild />} />
@@ -2233,7 +2234,7 @@ const App = () => (
                   <Route path="/admin/contributors" element={<AdminContributorsCMS />} />
                   <Route path="/admin/volunteers" element={<AdminVolunteersCMS />} />
                   <Route path="/admin/subcategories" element={<AdminPathwaysCMS />} />
-                  <Route path="/admin/gallery" element={<AdminGalleryCMS />} />
+                  <Route path="/admin/gallery" element={<AdminBareShell><AdminGalleryCMS /></AdminBareShell>} />
                   <Route path="/admin/icon-migration" element={<AdminIconMigrationVerification />} />
                   <Route path="/admin/icon-portrait-gaps" element={<AdminIconPortraitGaps />} />
                   <Route
@@ -2242,7 +2243,7 @@ const App = () => (
                   />
                   <Route
                     path="/admin/bulk-seed"
-                    element={<BulkSeedNominees />}
+                    element={<AdminBareShell><BulkSeedNominees /></AdminBareShell>}
                   />
 
                   {/* Support */}
