@@ -78,7 +78,7 @@ describe("Deep-link integrity: every wired ?category= slug resolves", () => {
       } else {
         // Category resolved, but it fans out into per-region forms.
         const chooser = screen.getByRole("heading", {
-          name: /Select Your (Africa Region|Zone)/i,
+          name: /Select Your Africa Region|Select a Geopolitical Zone|Choose a State \/ FCT|Choose an Education Impact Subcategory|Choose a Subcategory/i,
         });
         expect(chooser).toBeInTheDocument();
       }
@@ -99,7 +99,10 @@ describe("Deep-link integrity: every wired ?category= slug resolves", () => {
 
   // 2) Every nominateCategorySlug literal hard-coded in the site source code
   //    must exist in AWARD_CATEGORY_FORMS. Catches typos at build time.
-  it("all hard-coded nominateCategorySlug values exist in the catalogue", () => {
+  it("all hard-coded /nominate?category= links point at a real form", () => {
+    // The old scan looked for a `nominateCategorySlug` prop that no longer
+    // exists in the codebase; deep links are now written inline as
+    // `/nominate?category=<slug>`. Same guard, current syntax.
     const root = path.resolve(__dirname, "../..");
     const found = new Set<string>();
 
@@ -111,8 +114,7 @@ describe("Deep-link integrity: every wired ?category= slug resolves", () => {
           walk(p);
         } else if (/\.(tsx?|jsx?)$/.test(entry.name)) {
           const src = fs.readFileSync(p, "utf8");
-          // matches: nominateCategorySlug="..."  or  nominateCategorySlug={"..."}
-          const re = /nominateCategorySlug\s*=\s*\{?\s*["'`]([^"'`]+)["'`]/g;
+          const re = /nominate\?category=([a-z0-9-]+)/g;
           let m: RegExpExecArray | null;
           while ((m = re.exec(src)) !== null) found.add(m[1]);
         }
