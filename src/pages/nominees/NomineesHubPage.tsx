@@ -153,6 +153,9 @@ export default function NomineesHubPage() {
     url: CANONICAL,
   };
 
+  // Hooks above must run unconditionally; the redirect is decided last.
+  if (redirectTo) return <Navigate to={redirectTo} replace />;
+
   return (
     <>
       <Helmet>
