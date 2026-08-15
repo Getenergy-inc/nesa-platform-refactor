@@ -83,6 +83,8 @@ export function JudgesSidebar() {
     >
       {/* Header with NESA seal brand block */}
       <SidebarHeader className="border-b border-gold/20 p-0">
+        {!collapsed && <ArenaExitRailLink />}
+
         {collapsed ? (
           <Link to="/judge/dashboard" className="grid place-items-center py-4">
             <ArenaSeal className="h-9 w-9" />
