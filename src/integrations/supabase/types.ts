@@ -10864,6 +10864,75 @@ export type Database = {
         }
         Relationships: []
       }
+      youtube_upload_jobs: {
+        Row: {
+          category_id: string
+          created_at: string
+          created_by: string | null
+          description: string
+          entry_point: string
+          error: string | null
+          id: string
+          privacy_status: string
+          source_bucket: string | null
+          source_path: string | null
+          source_type: string
+          source_url: string | null
+          status: string
+          tags: string[]
+          target_record_id: string | null
+          target_table: string | null
+          title: string
+          updated_at: string
+          video_url: string | null
+          youtube_video_id: string | null
+        }
+        Insert: {
+          category_id?: string
+          created_at?: string
+          created_by?: string | null
+          description?: string
+          entry_point?: string
+          error?: string | null
+          id?: string
+          privacy_status?: string
+          source_bucket?: string | null
+          source_path?: string | null
+          source_type: string
+          source_url?: string | null
+          status?: string
+          tags?: string[]
+          target_record_id?: string | null
+          target_table?: string | null
+          title: string
+          updated_at?: string
+          video_url?: string | null
+          youtube_video_id?: string | null
+        }
+        Update: {
+          category_id?: string
+          created_at?: string
+          created_by?: string | null
+          description?: string
+          entry_point?: string
+          error?: string | null
+          id?: string
+          privacy_status?: string
+          source_bucket?: string | null
+          source_path?: string | null
+          source_type?: string
+          source_url?: string | null
+          status?: string
+          tags?: string[]
+          target_record_id?: string | null
+          target_table?: string | null
+          title?: string
+          updated_at?: string
+          video_url?: string | null
+          youtube_video_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       correspondence_branding_public: {
