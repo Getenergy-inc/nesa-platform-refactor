@@ -222,6 +222,7 @@ import GalleryCollection from "./pages/gallery/GalleryCollection";
 import NESATV from "./pages/media/NESATV";
 import Shows from "./pages/media/Shows";
 import Webinars from "./pages/media/Webinars";
+import Podcast from "./pages/media/Podcast";
 import Gala from "./pages/media/Gala";
 
 // Support Pages
@@ -1528,6 +1529,14 @@ const App = () => (
                     element={
                       <WithLayout>
                         <Webinars />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/media/podcast"
+                    element={
+                      <WithLayout>
+                        <Podcast />
                       </WithLayout>
                     }
                   />
