@@ -112,14 +112,17 @@ export default function CatalogueIndexPage() {
     setVisible(PAGE_SIZE);
   };
 
+  // Every active filter is mirrored back into the URL so deep links are
+  // shareable and survive a reload / back navigation.
   useEffect(() => {
     const next = new URLSearchParams();
     if (search) next.set("q", search);
-    (["tier", "category", "subcategory"] as FilterKey[]).forEach((k) => {
+    FILTER_KEYS.forEach((k) => {
       if (filters[k]) next.set(k, filters[k]);
     });
+    if (family) next.set("family", family);
     setParams(next, { replace: true });
-  }, [search, filters, setParams]);
+  }, [search, filters, family, setParams]);
 
   const options = useMemo(() => {
     const list = nominees ?? [];
