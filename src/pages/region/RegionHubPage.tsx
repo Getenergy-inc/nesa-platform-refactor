@@ -200,7 +200,7 @@ export function RegionHubPage() {
                 { label: "Regional Profile", to: `/regions/${hub.slug}` },
                 { label: "EduAid Conference", to: "/eduaid" },
                 { label: "RMSA Legacy Project", to: "/rebuild" },
-                { label: "Special-Needs Nomination", to: `/nominate?category=special-needs&region=${hub.slug}` },
+                { label: "Special-Needs Nomination", to: `/nominate?region=${hub.slug}` },
                 { label: "Vote", to: "/awards/gold-blue-garnet" },
                 { label: "Regional GFA Wallet", to: "/wallet" },
                 { label: "Sponsorship Opportunities", to: "/sponsor" },

@@ -7,9 +7,18 @@ describe("Recognition catalogue — master nominee mapping", () => {
   const list = getMasterCatalogueNominees();
   const catalogue = buildCatalogue(list as never);
 
-  it("projects every master nominee", () => {
-    expect(list.length).toBe(getAllMasterNominees().length);
-    expect(list.length).toBeGreaterThanOrEqual(1674);
+  // `toCatalogueNominee` intentionally drops master rows with no nominee name:
+  // they stay in the register for audit but are never published as a public
+  // profile. So the projected count is master rows MINUS unnamed rows, not the
+  // raw master count (the old assertion). Both sides are asserted explicitly so
+  // any change in either number still fails the test.
+  it("projects every named master nominee and drops only unnamed rows", () => {
+    const master = getAllMasterNominees();
+    const unnamed = master.filter((n) => !n.name || !n.name.trim());
+    expect(master.length).toBe(1703);
+    expect(unnamed.length).toBe(7);
+    expect(list.length).toBe(master.length - unnamed.length);
+    expect(list.every((n) => n.name.trim().length > 0)).toBe(true);
   });
 
   it("gives every nominee a stable, unique id", () => {

@@ -29,6 +29,7 @@ describe("parseFilterParams (deep-link state coverage)", () => {
       region: "west-africa",
       awardFamily: "platinum",
       recognitionClass: "institutional",
+      subcategory: "all",
       zone: "south-west",
       state: "lagos",
       edition: "2024",
@@ -96,9 +97,15 @@ describe("activeFilterCount", () => {
     expect(activeFilterCount(s)).toBe(4);
   });
 
-  it("ignores edition / group toggles (they live outside the chip count)", () => {
-    const s: NomineeFilterState = { ...DEFAULT_FILTERS, edition: "2024", group: "diaspora" };
+  it("ignores the edition toggle (it lives outside the chip count)", () => {
+    const s: NomineeFilterState = { ...DEFAULT_FILTERS, edition: "2024" };
     expect(activeFilterCount(s)).toBe(0);
+  });
+
+  // `group` was promoted to a first-class dropdown filter, so it now counts.
+  it("counts the group dropdown", () => {
+    const s: NomineeFilterState = { ...DEFAULT_FILTERS, group: "diaspora" };
+    expect(activeFilterCount(s)).toBe(1);
   });
 });
 

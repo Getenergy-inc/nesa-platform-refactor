@@ -157,7 +157,7 @@ export const SITE_NAV: NavItem[] = [
       { label: "Partner", href: "/partners" },
       { label: "Endorse", href: "/endorsements" },
       { label: "Volunteer", href: "/vacancies" },
-      { label: "Ambassador", href: "/chapters" },
+      { label: "Ambassador", href: "/ambassadors" },
       { label: "Chapters", href: "/chapters" },
       { label: "Merchandise", href: "/merch" },
       { label: "Donate", href: "/donate" },

@@ -68,10 +68,22 @@ export const AWARD_CATEGORY_FORMS: AwardCategoryForm[] = withResolvedStatuses(
 /** Raw, unresolved array — for the admin mapping register only. */
 export { AWARD_CATEGORY_FORMS_RAW };
 
+/**
+ * Historic `?category=` deep-link slugs that predate the canonical form slugs.
+ * Kept so older links (and the directory taxonomy) resolve to a real form
+ * instead of silently falling back to the generic category picker.
+ */
+export const LEGACY_CATEGORY_SLUG_ALIASES: Record<string, string> = {
+  icon: "africa-education-icon-lifetime-achievement-2006-2026",
+  "africa-education-icon-award": "africa-education-icon-lifetime-achievement-2006-2026",
+  "csr-education": "best-csr-for-education-africa-regional",
+};
+
 export function getCategoryFormBySlug(
   slug: string,
 ): AwardCategoryForm | undefined {
-  return AWARD_CATEGORY_FORMS.find((c) => c.slug === slug);
+  const canonical = LEGACY_CATEGORY_SLUG_ALIASES[slug] ?? slug;
+  return AWARD_CATEGORY_FORMS.find((c) => c.slug === canonical);
 }
 
 /**

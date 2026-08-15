@@ -74,11 +74,15 @@ describe("Africa Regional category forms", () => {
     );
   });
 
-  it("yields exactly 32 regional variants across the 4 Africa Regional categories (4 × 8 regions)", () => {
+  // Africa Regional categories grew from 4 to 6; 6 × 8 regions = 48 variants.
+  it("yields one variant per Africa Regional category × 8 regions", () => {
     const total = AWARD_CATEGORY_FORMS.filter((c) => c.isRegionalCategory).reduce(
       (n, c) => n + (c.regions?.length ?? 0),
       0,
     );
-    expect(total).toBe(32);
+    const regionalCategories = AWARD_CATEGORY_FORMS.filter((c) => c.isRegionalCategory);
+    expect(regionalCategories.length).toBe(6);
+    expect(total).toBe(regionalCategories.length * 8);
+    expect(total).toBe(48);
   });
 });
