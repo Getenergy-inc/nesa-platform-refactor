@@ -9,7 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 interface StatusPayload {
   configured: boolean;
   missingSecrets?: string[];
-  queued?: number;
+  queuedNominees?: number;
   message?: string;
 }
 
@@ -23,7 +23,7 @@ export function YouTubePublishPanel() {
   const [busy, setBusy] = useState(false);
 
   const load = useCallback(async () => {
-    const { data, error } = await supabase.functions.invoke("youtube-publish", {
+    const { data, error } = await supabase.functions.invoke("youtube-upload", {
       body: { action: "status" },
     });
     if (error) {
@@ -39,23 +39,24 @@ export function YouTubePublishPanel() {
 
   const publish = async () => {
     setBusy(true);
-    const { data, error } = await supabase.functions.invoke("youtube-publish", {
-      body: { action: "publish" },
+    const { data, error } = await supabase.functions.invoke("youtube-upload", {
+      body: { action: "publish_queue", limit: 3 },
     });
     setBusy(false);
     if (error) {
       toast.error("Publishing failed", { description: error.message });
       return;
     }
-    const payload = data as StatusPayload & { published?: Array<{ error?: string }> };
+    const payload = data as StatusPayload & { results?: Array<{ ok?: boolean }> };
     if (payload.configured === false) {
       toast.warning("YouTube publishing not yet configured");
       setStatus(payload);
       return;
     }
-    const failed = (payload.published ?? []).filter((p) => p.error).length;
+    const results = payload.results ?? [];
+    const failed = results.filter((r) => !r.ok).length;
     toast.success(
-      `Published ${(payload.published ?? []).length - failed} video(s)${failed ? `, ${failed} failed` : ""}`,
+      `Published ${results.length - failed} video(s)${failed ? `, ${failed} failed` : ""}`,
     );
     void load();
   };
@@ -66,7 +67,7 @@ export function YouTubePublishPanel() {
         <CardTitle className="flex items-center gap-2 text-white">
           <Youtube className="h-5 w-5 text-gold" />
           NESA Africa TV publishing
-          {status?.queued ? <Badge variant="outline">{status.queued} queued</Badge> : null}
+          {status?.queuedNominees ? <Badge variant="outline">{status.queuedNominees} queued</Badge> : null}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-3 text-sm text-white/75">
