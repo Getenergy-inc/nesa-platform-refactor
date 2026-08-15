@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { SmartLink } from "@/components/navigation/SmartLink";
 import { PublicJudgesDirectorySection } from "@/components/judges/PublicJudgesDirectorySection";
 import { ArenaExitButton } from "@/components/arena/ArenaExitLink";
@@ -88,7 +88,7 @@ export default function JudgesArenaLanding() {
           style={{ backgroundImage: `url(${heroImg})` }}
           aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--arena-bg))]/70 via-[hsl(var(--arena-bg))]/85 to-[hsl(var(--arena-bg))]" aria-hidden="true" />
+        <div className="absolute inset-0 bg-gradient-to-b from-arena-bg/70 via-arena-bg/85 to-arena-bg" aria-hidden="true" />
         <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-24 lg:pt-28 lg:pb-32">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#4b6cff]/40 bg-arena-panel px-3 py-1 text-xs uppercase tracking-widest text-[#8ea6ff]">
             <Lock className="h-3 w-3" /> Invitation-only jury portal
@@ -103,7 +103,7 @@ export default function JudgesArenaLanding() {
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Button asChild size="lg" className="bg-gold text-[hsl(var(--arena-bg))] hover:bg-gold/90">
+            <Button asChild size="lg" className="bg-gold text-arena-bg hover:bg-gold/90">
               <SmartLink to="/judges/sign-in">Judge Sign In <ArrowRight className="ml-2 h-4 w-4" /></SmartLink>
             </Button>
             <Button asChild size="lg" variant="outline"
@@ -227,14 +227,14 @@ export default function JudgesArenaLanding() {
       <section className="max-w-7xl mx-auto px-6 pb-24">
         <div className="rounded-2xl border border-gold/30 bg-gradient-to-br from-arena-panel to-arena-bg p-10 lg:p-14 text-center">
           <h2 className="font-serif text-3xl sm:text-4xl">
-            27 Judges. 3 Pathways. 9 Screening Panels. 27 Finalists. 9 Laureates.
+            Three pathways · nine finalist groups · nine laureates — decided by an independent, firewalled jury matrix.
           </h2>
           <p className="mt-4 text-white/70 max-w-2xl mx-auto">
             One independent, evidence-based and auditable jury process for Africa's
             highest lifetime education recognition.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Button asChild size="lg" className="bg-gold text-[hsl(var(--arena-bg))] hover:bg-gold/90">
+            <Button asChild size="lg" className="bg-gold text-arena-bg hover:bg-gold/90">
               <SmartLink to="/judges/sign-in">Judge Sign In</SmartLink>
             </Button>
             <Button asChild size="lg" variant="outline"
