@@ -7,12 +7,12 @@
 // same editorial card template (`ed-card` / `ed-grid-3`), the same CTA pattern
 // (Nominate · Explore Existing Nominees · Explore pathway →) and the same
 // nominee data layer — the published `public_nominees` view, read through
-// `useFamilyFeaturedProfiles`, strictly scoped per recognition family.
+// `useFamilyBuckets`, strictly scoped per recognition family.
 //
 // Nothing is invented: a pathway with no eligible published record shows an
 // honest empty state rather than a substituted profile from another family.
 
-import { useState } from "react";
+
 import { Link } from "react-router-dom";
 import { RECOGNITION_FAMILIES, BRAND } from "@/config/brandHierarchy";
 import { FamilyLivingGalleryStrip } from "./FamilyLivingGalleryStrip";
