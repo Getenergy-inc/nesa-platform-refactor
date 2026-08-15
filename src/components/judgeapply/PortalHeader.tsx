@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { PORTAL_AREAS } from "@/config/judgeapply/portalRegistry";
 import { cn } from "@/lib/utils";
+import { ArenaExitButton } from "@/components/arena/ArenaExitLink";
 
 /**
  * PortalHeader — dropdown navigation for the /judgeapply portal.
@@ -18,6 +19,7 @@ export function PortalHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-gold/20 bg-charcoal/95 backdrop-blur">
       <div className="container flex h-16 items-center justify-between gap-4">
+        <ArenaExitButton className="mr-1 shrink-0" />
         <Link to="/judgeapply" className="flex items-center gap-3 group">
           <img
             src="/images/logo.svg"
