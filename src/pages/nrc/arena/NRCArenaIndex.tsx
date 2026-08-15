@@ -10,23 +10,26 @@ import { ArrowRight, FileSearch, ShieldCheck, Users, ClipboardCheck } from "luci
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { NRC_TOTALS } from "@/config/nrc/arenaTeams";
+import { ArenaSeal, ArenaStatStrip } from "@/components/arena/ArenaChrome";
+import { useArenaPublicStats, arenaCount } from "@/hooks/useArenaPublicStats";
 
 const PILLARS = [
   { icon: FileSearch, title: "Verification", body: "Independent identity, eligibility and evidence review for every nominee." },
   { icon: ClipboardCheck, title: "Research", body: "Structured dossiers built from independent, primary and secondary sources." },
   { icon: ShieldCheck, title: "Governance-grade", body: "Audit-trailed decisions, dual-review quorum and traced handover." },
-  { icon: Users, title: "28 NRC teams", body: `${NRC_TOTALS.slots} approved members across ${NRC_TOTALS.teams} operational teams.` },
+  { icon: Users, title: "Team structure", body: `${NRC_TOTALS.teams} operational teams with ${NRC_TOTALS.slots} approved member slots across the 2026 tiers.` },
 ];
 
 export default function NRCArenaIndex() {
   const { user, roles, loading } = useAuth();
+  const { data: publicStats, isLoading: statsLoading } = useArenaPublicStats();
 
   if (!loading && user && (roles ?? []).some((r) => r === "nrc" || r === "admin")) {
     return <Navigate to="/nrc/dashboard" replace />;
   }
 
   return (
-    <div className="min-h-screen bg-charcoal text-white">
+    <div className="min-h-screen bg-arena-bg text-arena-text">
       <Helmet>
         <title>NRC Arena · NESA-Africa 2026</title>
         <meta
@@ -38,8 +41,13 @@ export default function NRCArenaIndex() {
       <section className="relative overflow-hidden border-b border-white/10">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:py-24">
           <ArenaExitButton className="mb-5" />
-          <p className="text-xs uppercase tracking-[0.2em] text-gold/80">NESA-Africa · Secure Portal</p>
-          <h1 className="mt-3 font-display text-4xl sm:text-5xl font-bold">
+          <div className="flex items-center gap-4">
+            <ArenaSeal className="h-14 w-14" />
+            <p className="text-xs uppercase tracking-[0.2em] text-gold/80">
+              NESA-Africa · Secure Portal
+            </p>
+          </div>
+          <h1 className="mt-4 font-display text-4xl sm:text-5xl font-bold">
             NRC Arena
           </h1>
           <p className="mt-2 text-lg text-white/70">
@@ -66,10 +74,43 @@ export default function NRCArenaIndex() {
         </div>
       </section>
 
+      <section className="border-b border-white/10 bg-arena-rail">
+        <div className="mx-auto max-w-6xl px-4 py-8">
+          <ArenaStatStrip
+            stats={[
+              {
+                icon: Users,
+                value: arenaCount(publicStats?.publicNrcMembers, statsLoading),
+                label: "NRC researchers listed",
+                detail: "Published only after onboarding & consent",
+              },
+              {
+                icon: FileSearch,
+                value: arenaCount(publicStats?.nominees, statsLoading),
+                label: "Nominees in the directory",
+                detail: "Cases eligible for verification",
+              },
+              {
+                icon: ClipboardCheck,
+                value: NRC_TOTALS.teams,
+                label: "Operational teams",
+                detail: `${NRC_TOTALS.slots} approved member slots`,
+              },
+              {
+                icon: ShieldCheck,
+                value: "Dual",
+                label: "Review quorum",
+                detail: "Every case audit-trailed",
+              },
+            ]}
+          />
+        </div>
+      </section>
+
       <section className="mx-auto max-w-6xl px-4 py-16">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {PILLARS.map((p) => (
-            <div key={p.title} className="rounded-xl border border-white/10 bg-white/5 p-5">
+            <div key={p.title} className="rounded-xl border border-white/10 bg-arena-panel p-5 transition-colors hover:border-gold/40">
               <p.icon className="h-6 w-6 text-gold" aria-hidden />
               <h3 className="mt-3 font-display font-semibold text-lg">{p.title}</h3>
               <p className="mt-1 text-sm text-white/65">{p.body}</p>
@@ -80,7 +121,7 @@ export default function NRCArenaIndex() {
 
       <PublicNRCDirectorySection />
 
-      <section className="border-t border-white/10 bg-white/5">
+      <section className="border-t border-white/10 bg-arena-rail">
         <div className="mx-auto max-w-6xl px-4 py-12 grid gap-8 md:grid-cols-2">
           <div>
             <h2 className="font-display text-2xl font-bold text-gold">Two separate arenas · one identity</h2>
@@ -91,11 +132,11 @@ export default function NRCArenaIndex() {
             </p>
           </div>
           <div className="grid gap-3">
-            <Link to="/nrc/sign-in" className="rounded-lg border border-gold/30 bg-charcoal p-4 hover:border-gold">
+            <Link to="/nrc/sign-in" className="rounded-lg border border-gold/30 bg-arena-panel p-4 hover:border-gold">
               <p className="text-gold font-semibold">NRC Arena →</p>
               <p className="text-sm text-white/60">Verification · Evidence · Dossier · Handover</p>
             </Link>
-            <Link to="/judges" className="rounded-lg border border-white/15 bg-charcoal p-4 hover:border-gold">
+            <Link to="/judges" className="rounded-lg border border-white/15 bg-arena-panel p-4 hover:border-gold">
               <p className="text-white font-semibold">Judges Arena →</p>
               <p className="text-sm text-white/60">Independent Review · Scoring · Deliberation · Final Voting</p>
             </Link>

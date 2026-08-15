@@ -64,12 +64,12 @@ export function PublicNRCDirectorySection({ limit }: { limit?: number }) {
               <SmartLink
                 key={m.id}
                 to={`/nrc/member/${m.slug}`}
-                className="group rounded-xl border border-white/10 bg-white/5 p-5 transition-colors hover:border-gold/50"
+                className="group rounded-xl border border-white/10 bg-arena-panel p-5 transition-colors hover:border-gold/50"
               >
                 <div className="flex items-center gap-3">
                   <Avatar className="h-12 w-12 border border-gold/30">
                     {m.photo_url ? <AvatarImage src={m.photo_url} alt={m.display_name} /> : null}
-                    <AvatarFallback className="bg-charcoal text-gold">
+                    <AvatarFallback className="bg-arena-bg text-gold">
                       {m.display_name.slice(0, 2).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
