@@ -60,7 +60,7 @@ function Card({ card }: { card: StatCard }) {
     >
       <div className="flex items-start gap-3">
         <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-gold/30 bg-gold/10">
-          <card.icon className="h-4.5 w-4.5 text-gold" aria-hidden />
+          <card.icon className="h-5 w-5 text-gold" aria-hidden />
         </span>
         <div className="min-w-0">
           <p className="font-playfair text-3xl font-bold leading-none text-white">{card.value}</p>
