@@ -28,6 +28,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { WorkspaceSwitcher } from "@/components/navigation/WorkspaceSwitcher";
 import { ArenaBrand, ArenaRailBadge, ArenaTopBar, ArenaFooter } from "@/components/arena/ArenaChrome";
 import { ArenaSeo } from "@/components/arena/ArenaSeo";
+import { ArenaExitRailLink } from "@/components/arena/ArenaExitLink";
 
 interface NavItem {
   href: string;
@@ -113,6 +114,7 @@ export function NRCArenaLayout({ children }: { children: ReactNode }) {
         {/* Brand rail */}
         <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-arena-rail lg:block">
           <div className="sticky top-0 flex h-screen flex-col overflow-y-auto">
+            <ArenaExitRailLink />
             <ArenaBrand workspace="NRC Arena" to="/nrc" />
             {user && (
               <div className="mx-3 mb-4 rounded-lg border border-white/10 bg-white/5 p-3">
@@ -151,6 +153,7 @@ export function NRCArenaLayout({ children }: { children: ReactNode }) {
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="left" className="w-72 overflow-y-auto border-r border-white/10 bg-arena-rail p-0">
+                  <ArenaExitRailLink />
                   <ArenaBrand workspace="NRC Arena" to="/nrc" />
                   <div className="px-1 pb-6">
                     <SideNav />

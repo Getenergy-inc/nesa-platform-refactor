@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
 import { SmartLink } from "@/components/navigation/SmartLink";
 import { PublicJudgesDirectorySection } from "@/components/judges/PublicJudgesDirectorySection";
 import { ArenaExitButton } from "@/components/arena/ArenaExitLink";
