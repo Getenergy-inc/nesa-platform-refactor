@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { type EnrichedDatabaseNominee } from "@/hooks/useNominees";
 import { useCatalogueNominees } from "@/lib/directory/masterCatalogueSource";
+import { FAMILY_DB_CATEGORY_SLUGS } from "@/hooks/useFamilyGallery";
 import { buildCatalogue } from "@/lib/directory/buildCatalogue";
 import { subcategoryFamilySlug } from "@/config/directory/catalogueTaxonomy";
 import { toast } from "@/hooks/use-toast";
