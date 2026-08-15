@@ -30,6 +30,7 @@ import {
   DossierDialog,
 } from "@/components/judge";
 import { JudgesArenaLayout } from "@/components/judge/JudgesArenaLayout";
+import { ICON_CALENDAR } from "@/config/iconAward/calendar";
 
 export default function JudgeDashboard() {
   const { user } = useAuth();
@@ -88,6 +89,10 @@ export default function JudgeDashboard() {
     }
   };
 
+  // Real days remaining to the canonical grand-jury close (config-driven, not a mock figure).
+  const msLeft = ICON_CALENDAR.grandJuryClose.getTime() - Date.now();
+  const daysRemaining = msLeft > 0 ? Math.ceil(msLeft / 86_400_000) : undefined;
+
   const pendingAssignments = assignments?.filter(a => a.status === "pending") || [];
   const completedAssignments = assignments?.filter(a => a.status === "completed") || [];
   const recusedAssignments = assignments?.filter(a => a.status === "recused") || [];
@@ -99,11 +104,12 @@ export default function JudgeDashboard() {
       </Helmet>
 
       <JudgesArenaLayout title="Dashboard" description="Your jury workspace overview">
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           {/* Welcome Message */}
-          <div className="mb-8 flex items-start justify-between">
+          <div className="mb-6 flex flex-wrap items-start justify-between gap-4 rounded-2xl border border-gold/25 bg-gradient-to-br from-gold/[0.07] to-transparent p-5 sm:p-6">
             <div>
-              <h2 className="text-2xl font-bold text-white mb-2">
+              <p className="text-xs uppercase tracking-[0.2em] text-gold/80">NESA-Africa 2026 · Judges Arena</p>
+              <h2 className="mt-1 font-playfair text-2xl font-bold text-white mb-2">
                 Welcome back, {user.user_metadata?.full_name || "Judge"}
               </h2>
               {stats && (
@@ -124,7 +130,7 @@ export default function JudgeDashboard() {
           </div>
 
           {/* Stats Grid */}
-          <JuryStatsGrid stats={stats} isLoading={statsLoading} />
+          <JuryStatsGrid stats={stats} isLoading={statsLoading} daysRemaining={daysRemaining} />
 
           {/* Pending Assignments */}
           {pendingAssignments.length > 0 && (
@@ -185,7 +191,7 @@ export default function JudgeDashboard() {
 
           {/* Empty State */}
           {!assignmentsLoading && assignments?.length === 0 && (
-            <Card className="border-white/10 bg-white/5">
+            <Card className="rounded-xl border-white/10 bg-arena-panel">
               <CardContent className="py-12 text-center">
                 <Gavel className="h-12 w-12 text-white/20 mx-auto mb-4" />
                 <h3 className="text-lg font-medium text-white mb-2">No Assignments Yet</h3>
@@ -199,10 +205,10 @@ export default function JudgeDashboard() {
 
           {/* Important Notice */}
           {pendingAssignments.length > 0 && (
-            <Card className="border-yellow-500/20 bg-yellow-500/5 mt-8">
+            <Card className="mt-8 rounded-xl border-gold/30 bg-gold/5">
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
-                  <AlertCircle className="h-6 w-6 text-yellow-500 flex-shrink-0 mt-0.5" />
+                  <AlertCircle className="h-6 w-6 text-gold flex-shrink-0 mt-0.5" />
                   <div>
                     <h3 className="font-semibold text-white mb-1">Scoring Deadline Approaching</h3>
                     <p className="text-sm text-white/70">
