@@ -64,12 +64,20 @@ export default function CatalogueIndexPage() {
   const { data: nominees, isLoading } = useCatalogueNominees();
   const [params, setParams] = useSearchParams();
   const [search, setSearch] = useState(params.get("q") ?? "");
-  const [filters, setFilters] = useState<Record<FilterKey, string>>({
-    ...EMPTY_FILTERS,
-    tier: params.get("tier") ?? "",
-    category: params.get("category") ?? "",
-    subcategory: params.get("subcategory") ?? "",
+  // Every filter is seeded from the URL — previously only tier/category/
+  // subcategory were, so `?region=`/`?country=` etc. silently showed everyone.
+  const [filters, setFilters] = useState<Record<FilterKey, string>>(() => {
+    const seeded = { ...EMPTY_FILTERS };
+    FILTER_KEYS.forEach((k) => { seeded[k] = params.get(k) ?? ""; });
+    return seeded;
   });
+  // Recognition FAMILY (six homepage families) maps to several real database
+  // category slugs, so it is a filter of its own rather than a `category`.
+  const [family, setFamily] = useState(
+    params.get("family") ?? params.get("awardFamily") ?? "",
+  );
+  const familyCategories = family ? FAMILY_DB_CATEGORY_SLUGS[family] : undefined;
+
   const [expanded, setExpanded] = useState<string[]>([]);
   const [visible, setVisible] = useState(PAGE_SIZE);
   const [showReview, setShowReview] = useState(false);
