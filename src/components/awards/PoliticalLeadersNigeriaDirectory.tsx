@@ -35,8 +35,6 @@ import {
  *  - Free-text name/title search
  */
 
-const CATEGORY_NAME =
-  "Excellence in Political Leadership for Education — Nigeria";
 const CATEGORY_SLUGS = new Set([
   "excellence-in-political-leadership-for-education-nigeria",
   "political-leaders-education-nigeria",
