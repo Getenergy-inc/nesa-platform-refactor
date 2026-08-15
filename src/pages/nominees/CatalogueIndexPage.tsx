@@ -308,8 +308,16 @@ export default function CatalogueIndexPage() {
               ))}
             </div>
 
-            {activeFilters.length > 0 && (
+            {(activeFilters.length > 0 || family) && (
               <div className="flex flex-wrap items-center gap-2 pt-1">
+                {family && (
+                  <button
+                    onClick={() => { setFamily(""); setVisible(PAGE_SIZE); }}
+                    className="flex items-center gap-1 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-[11px] text-gold"
+                  >
+                    recognition family: {family} <X className="h-3 w-3" />
+                  </button>
+                )}
                 {activeFilters.map((k) => (
                   <button
                     key={k}
