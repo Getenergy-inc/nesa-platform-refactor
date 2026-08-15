@@ -94,13 +94,17 @@ export default function JudgesArenaLanding() {
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Button asChild size="lg" className="bg-[#c9a24a] text-[#050b1a] hover:bg-[#e0b96b]">
-              <Link to="/judges/sign-in">Judge Sign In <ArrowRight className="ml-2 h-4 w-4" /></Link>
+              <SmartLink to="/judges/sign-in">Judge Sign In <ArrowRight className="ml-2 h-4 w-4" /></SmartLink>
             </Button>
             <Button asChild size="lg" variant="outline"
               className="border-white/25 bg-white/5 text-white hover:bg-white/10">
               <a href="#workflow">Learn About the Judging Process</a>
             </Button>
+            <Button asChild size="lg" variant="ghost" className="text-white/80 hover:text-[#c9a24a]">
+              <SmartLink to="/judges/directory">Meet the Judges</SmartLink>
+            </Button>
           </div>
+
 
           <div className="mt-10 inline-flex items-center gap-3 rounded-lg border border-white/10 bg-white/[0.04] px-4 py-2 text-sm">
             <span className="h-2 w-2 rounded-full bg-[#c9a24a] animate-pulse" />
