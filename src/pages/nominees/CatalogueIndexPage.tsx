@@ -32,10 +32,16 @@ type FilterKey =
   | "tier" | "category" | "subcategory" | "region"
   | "country" | "year" | "verification" | "organisation";
 
+const FILTER_KEYS: FilterKey[] = [
+  "tier", "category", "subcategory", "region",
+  "country", "year", "verification", "organisation",
+];
+
 const EMPTY_FILTERS: Record<FilterKey, string> = {
   tier: "", category: "", subcategory: "", region: "",
   country: "", year: "", verification: "", organisation: "",
 };
+
 
 function verificationLabel(n: EnrichedDatabaseNominee) {
   if (n.nrcVerified) return "Verified";
