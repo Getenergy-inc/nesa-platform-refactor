@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { NESALogo } from "@/components/nesa/NESALogo";
 import { cn } from "@/lib/utils";
+import { ArenaExitButton } from "@/components/arena/ArenaExitLink";
 import { DASHBOARD_SIDEBAR_NAV, DASHBOARD_TOP_NAV } from "@/config/dashboard-navigation";
 import {
   DropdownMenu,
@@ -163,6 +164,10 @@ export function InstitutionalDashboardLayout({ children, title, breadcrumbs }: P
           >
             <Menu className="h-5 w-5" />
           </Button>
+
+          <ArenaExitButton className="shrink-0" />
+
+
 
           {/* Breadcrumbs */}
           {breadcrumbs && breadcrumbs.length > 0 && (

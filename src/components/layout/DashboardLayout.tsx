@@ -10,6 +10,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { NESALogo } from "@/components/nesa/NESALogo";
 import { NavLink } from "@/components/NavLink";
 import { cn } from "@/lib/utils";
+import { ArenaExitButton } from "@/components/arena/ArenaExitLink";
 import {
   USER_DASHBOARD_NAV,
   NRC_DASHBOARD_NAV,
@@ -178,6 +179,8 @@ export function DashboardLayout({ children, title, breadcrumbs }: DashboardLayou
           >
             <Menu className="h-5 w-5" />
           </Button>
+
+          <ArenaExitButton className="shrink-0" />
 
           {/* Breadcrumbs */}
           {breadcrumbs && breadcrumbs.length > 0 && (

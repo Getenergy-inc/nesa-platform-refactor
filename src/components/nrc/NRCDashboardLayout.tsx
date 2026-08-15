@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import {
   ArenaSeal, ArenaBrand, ArenaTopBar, ArenaFooter,
 } from "@/components/arena/ArenaChrome";
+import { ArenaExitButton, ArenaExitRailLink } from "@/components/arena/ArenaExitLink";
 import { ArenaSeo } from "@/components/arena/ArenaSeo";
 import {
   Award, LayoutDashboard, Users, ClipboardList, FileCheck, Flag,
@@ -92,6 +93,7 @@ export function NRCDashboardLayout({ children }: NRCDashboardLayoutProps) {
   const sidebarContent = (
     <div className="flex h-full flex-col bg-arena-rail">
       {/* Sidebar Header */}
+      <ArenaExitRailLink />
       {collapsed ? (
         <div className="flex items-center justify-center border-b border-white/10 py-4">
           <ArenaSeal className="h-9 w-9" />
@@ -188,16 +190,20 @@ export function NRCDashboardLayout({ children }: NRCDashboardLayoutProps) {
           </div>
         }
         actions={
-          <div className="relative hidden md:block">
-            <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-white/50" />
-            <Input
-              placeholder="Search nominees..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="h-9 w-56 border-white/12 bg-arena-panel pl-8 text-xs text-white placeholder:text-white/40"
-            />
+          <div className="flex items-center gap-2">
+            <div className="relative hidden md:block">
+              <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-white/50" />
+              <Input
+                placeholder="Search nominees..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="h-9 w-56 border-white/12 bg-arena-panel pl-8 text-xs text-white placeholder:text-white/40"
+              />
+            </div>
+            <ArenaExitButton />
           </div>
         }
+
       />
 
       <div className="flex">

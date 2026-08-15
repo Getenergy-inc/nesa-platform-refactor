@@ -12,6 +12,7 @@ import {
   ArenaTopBar,
   ArenaFooter,
 } from "@/components/arena/ArenaChrome";
+import { ArenaExitButton, ArenaExitRailLink } from "@/components/arena/ArenaExitLink";
 
 const NAV = [
   { to: "/judges/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -41,6 +42,7 @@ export function IconJuryLayout() {
     <div className="min-h-screen bg-arena-bg text-arena-text flex flex-col lg:flex-row">
       <ArenaSeo workspace="Judges Arena" />
       <aside className="lg:w-64 border-b lg:border-b-0 lg:border-r border-white/10 bg-arena-rail flex flex-col">
+        <ArenaExitRailLink />
         <ArenaBrand workspace="Judges Arena" to="/judges/dashboard" />
         <nav className="flex-1 p-3 space-y-1">
           {NAV.map(({ to, label, icon: Icon }) => (
@@ -77,6 +79,7 @@ export function IconJuryLayout() {
           identityName={user?.email ?? "Judge"}
           identityRole="Panel Judge"
           notifications={3}
+          actions={<ArenaExitButton />}
         />
         <main className="flex-1 min-w-0">
           <Outlet />

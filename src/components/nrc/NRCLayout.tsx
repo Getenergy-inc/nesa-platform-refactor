@@ -13,6 +13,7 @@ import {
   ArenaTopBar,
   ArenaFooter,
 } from "@/components/arena/ArenaChrome";
+import { ArenaExitButton, ArenaExitRailLink } from "@/components/arena/ArenaExitLink";
 import { ArenaSeo } from "@/components/arena/ArenaSeo";
 import {
   LayoutDashboard,
@@ -48,6 +49,7 @@ export function NRCLayout({ children }: NRCLayoutProps) {
       <div className="flex min-h-screen w-full">
         <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-arena-rail lg:block">
           <div className="sticky top-0 flex h-screen flex-col overflow-y-auto">
+            <ArenaExitRailLink />
             <ArenaBrand workspace="NRC Arena" to="/nrc" />
             <nav aria-label="NRC portal" className="flex-1 space-y-1 px-3">
               {navItems.map((item) => (
@@ -80,19 +82,7 @@ export function NRCLayout({ children }: NRCLayoutProps) {
             identityName={user?.email ?? "NRC Member"}
             identityRole="NRC Member"
             notifications={3}
-            actions={
-              <Button
-                variant="ghost"
-                size="sm"
-                asChild
-                className="hidden text-white/70 hover:bg-white/5 hover:text-gold lg:inline-flex"
-              >
-                <Link to="/dashboard">
-                  <ArrowLeft className="mr-1.5 h-4 w-4" />
-                  Exit
-                </Link>
-              </Button>
-            }
+            actions={<ArenaExitButton />}
           />
 
           <main className="min-w-0 flex-1 px-4 py-6 pb-24 sm:px-6 lg:pb-16">{children}</main>

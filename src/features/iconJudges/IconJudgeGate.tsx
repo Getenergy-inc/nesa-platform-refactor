@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
+import { ArenaExitButton } from "@/components/arena/ArenaExitLink";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { Loader2, ShieldAlert } from "lucide-react";
@@ -74,7 +75,11 @@ export function IconJudgeGate({ children, requireModerator = false }: Props) {
             The Africa Education Icon Judges Portal is invitation-only. Your account does not have
             Icon jury access.
           </p>
+          <div className="mt-6 flex justify-center">
+            <ArenaExitButton />
+          </div>
         </div>
+
       </div>
     );
   }
