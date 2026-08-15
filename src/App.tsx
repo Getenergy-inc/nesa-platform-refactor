@@ -2546,7 +2546,11 @@ const App = () => (
                   <Route path="/volunteer/analytics" element={<WithLayout><VolunteerAnalyticsPage /></WithLayout>} />
                   <Route path="/volunteer/settings" element={<WithLayout><VolunteerSettingsPage /></WithLayout>} />
                   <Route path="/volunteer/share-assets" element={<WithLayout><VolunteerShareAssets /></WithLayout>} />
+                  <Route path="/volunteer/webinar-host" element={<WithLayout><VolunteerVacancyPage /></WithLayout>} />
+                  <Route path="/volunteer/podcast-host" element={<WithLayout><VolunteerVacancyPage /></WithLayout>} />
+                  <Route path="/volunteer/production" element={<WithLayout><VolunteerVacancyPage /></WithLayout>} />
                   <Route path="/volunteer-chapters" element={<WithLayout><VolunteerChaptersHub /></WithLayout>} />
+
                   <Route path="/join-local-chapter" element={<WithLayout><JoinLocalChapter /></WithLayout>} />
                   <Route path="/volunteers/command-center" element={<VolunteerCommandCenter />} />
                   <Route
