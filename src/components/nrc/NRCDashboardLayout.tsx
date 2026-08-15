@@ -190,16 +190,20 @@ export function NRCDashboardLayout({ children }: NRCDashboardLayoutProps) {
           </div>
         }
         actions={
-          <div className="relative hidden md:block">
-            <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-white/50" />
-            <Input
-              placeholder="Search nominees..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="h-9 w-56 border-white/12 bg-arena-panel pl-8 text-xs text-white placeholder:text-white/40"
-            />
+          <div className="flex items-center gap-2">
+            <div className="relative hidden md:block">
+              <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-white/50" />
+              <Input
+                placeholder="Search nominees..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="h-9 w-56 border-white/12 bg-arena-panel pl-8 text-xs text-white placeholder:text-white/40"
+              />
+            </div>
+            <ArenaExitButton />
           </div>
         }
+
       />
 
       <div className="flex">
