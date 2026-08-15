@@ -317,6 +317,7 @@ import {
   VolunteerSettingsPage,
 } from "./pages/volunteer/VolunteerSubPages";
 import VolunteerShareAssets from "./pages/volunteer/VolunteerShareAssets";
+import VolunteerVacancyPage from "./pages/volunteer/VolunteerVacancyPage";
 import VolunteerChaptersHub from "./pages/volunteers/Chapters";
 import JoinLocalChapter from "./pages/volunteers/JoinLocalChapter";
 import VolunteerCommandCenter from "./pages/volunteers/CommandCenter";

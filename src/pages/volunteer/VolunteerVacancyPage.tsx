@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link, useParams, Navigate } from "react-router-dom";
+import { Link, useLocation, Navigate } from "react-router-dom";
 import { Calendar, Check, Copy, MapPin, Clock, ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -12,7 +12,7 @@ import {
 } from "@/data/volunteerVacancies2026";
 
 export default function VolunteerVacancyPage() {
-  const { slug = "" } = useParams();
+  const slug = useLocation().pathname.split("/").filter(Boolean).pop() ?? "";
   const vacancy = getVolunteerVacancy(slug);
   const [selected, setSelected] = useState<string[]>([]);
   const [fns, setFns] = useState<string[]>([]);
