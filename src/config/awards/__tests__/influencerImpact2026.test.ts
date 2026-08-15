@@ -79,10 +79,13 @@ describe("Influencer Impact 2026 — taxonomy", () => {
     ]);
   });
 
-  it("has the 5 African regions", () => {
-    expect(REGIONS).toHaveLength(5);
+  // Region model was intentionally expanded to the approved 8 Africa regions
+  // plus African Diaspora (was 5 in the original spec draft).
+  it("has the 8 African regions plus African Diaspora", () => {
+    expect(REGIONS).toHaveLength(9);
     expect(REGIONS).toContain("West Africa");
     expect(REGIONS).toContain("North Africa");
+    expect(REGIONS).toContain("African Diaspora");
   });
 
   it("EDX weights total 100", () => {
