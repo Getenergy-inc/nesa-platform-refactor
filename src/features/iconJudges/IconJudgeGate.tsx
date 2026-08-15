@@ -74,7 +74,11 @@ export function IconJudgeGate({ children, requireModerator = false }: Props) {
             The Africa Education Icon Judges Portal is invitation-only. Your account does not have
             Icon jury access.
           </p>
+          <div className="mt-6 flex justify-center">
+            <ArenaExitButton />
+          </div>
         </div>
+
       </div>
     );
   }
