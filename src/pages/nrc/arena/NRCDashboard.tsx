@@ -55,12 +55,18 @@ function Card({ card }: { card: StatCard }) {
         ? "border-emerald-400/30"
         : "border-white/10";
   const inner = (
-    <div className={`rounded-xl border ${toneCls} bg-white/[0.04] p-4 hover:bg-white/[0.07] transition-colors h-full`}>
-      <div className="flex items-start justify-between gap-2">
-        <p className="text-xs uppercase tracking-wider text-white/55">{card.label}</p>
-        <card.icon className="h-4 w-4 text-gold/80" aria-hidden />
+    <div
+      className={`h-full rounded-xl border ${toneCls} bg-arena-panel p-4 transition-colors hover:border-gold/40 hover:bg-arena-panel-2`}
+    >
+      <div className="flex items-start gap-3">
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-gold/30 bg-gold/10">
+          <card.icon className="h-5 w-5 text-gold" aria-hidden />
+        </span>
+        <div className="min-w-0">
+          <p className="font-playfair text-3xl font-bold leading-none text-white">{card.value}</p>
+          <p className="mt-1.5 text-xs uppercase tracking-wider text-white/55">{card.label}</p>
+        </div>
       </div>
-      <p className="mt-2 font-display text-3xl font-bold text-white">{card.value}</p>
     </div>
   );
   return card.href ? <Link to={card.href}>{inner}</Link> : inner;
@@ -77,7 +83,7 @@ export default function NRCDashboard() {
       </Helmet>
 
       {/* Identity block */}
-      <section className="rounded-2xl border border-gold/25 bg-gradient-to-br from-white/[0.06] to-transparent p-6 mb-6">
+      <section className="rounded-2xl border border-gold/25 bg-gradient-to-br from-gold/[0.07] to-transparent p-6 mb-6">
         <div className="flex flex-wrap items-start gap-4">
           <div className="h-16 w-16 rounded-full bg-gold/15 flex items-center justify-center border border-gold/40">
             <span className="font-display text-xl font-bold text-gold">
@@ -100,7 +106,7 @@ export default function NRCDashboard() {
       </section>
 
       {/* Next required action */}
-      <section className="mb-6 rounded-xl border border-white/10 bg-white/[0.04] p-5">
+      <section className="mb-6 rounded-xl border border-white/10 bg-arena-panel p-5">
         <p className="text-xs uppercase tracking-wider text-gold/80">Next required action</p>
         <p className="mt-1 text-white/85">
           Complete NRC onboarding to unlock case assignments.
