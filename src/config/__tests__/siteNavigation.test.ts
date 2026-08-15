@@ -18,7 +18,7 @@ const EXPECTED_TOP_LEVEL = [
   "Africa Education Icon",
   "Recognition",
   "Explore Nominees",
-  "NESA-Africa Education Social Impact",
+  "Education Impact",
   "Participate",
 ];
 

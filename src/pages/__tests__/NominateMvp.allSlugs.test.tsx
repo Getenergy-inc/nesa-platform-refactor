@@ -64,16 +64,38 @@ describe("Deep-link integrity: every wired ?category= slug resolves", () => {
   });
 
   // 1) Every form in the central catalogue is reachable via deep link.
+  //    Africa Regional / Nigeria zonal categories deliberately show a
+  //    region-or-zone chooser first (the form is per-region), so for those the
+  //    deep link must land on the chooser for that category rather than the
+  //    generic picker. Both outcomes are asserted — nothing is skipped.
   it.each(AWARD_CATEGORY_FORMS.map((f) => [f.slug, f.name] as const))(
-    "renders form for slug %s",
+    "renders form or region chooser for slug %s",
     (slug, name) => {
       const { unmount } = renderAt(`/nominate?category=${slug}`);
-      const display = screen.getByTestId("form-display");
-      expect(display).toBeInTheDocument();
-      expect(screen.getByTestId("form-title").textContent).toBe(name);
+      const form = screen.queryByTestId("form-display");
+      if (form) {
+        expect(screen.getByTestId("form-title").textContent).toBe(name);
+      } else {
+        // Category resolved, but it fans out into per-region forms.
+        const chooser = screen.getByRole("heading", {
+          name: /Select Your (Africa Region|Zone)/i,
+        });
+        expect(chooser).toBeInTheDocument();
+      }
       unmount();
     },
   );
+
+  // 1b) Every regional category variant renders its own form directly.
+  it.each(
+    AWARD_CATEGORY_FORMS.filter((f) => f.isRegionalCategory && f.regions).flatMap((f) =>
+      f.regions!.map((r) => [f.slug, r.slug] as const),
+    ),
+  )("renders regional form for %s / %s", (slug, regionSlug) => {
+    const { unmount } = renderAt(`/nominate?category=${slug}&region=${regionSlug}`);
+    expect(screen.getByTestId("form-display")).toBeInTheDocument();
+    unmount();
+  });
 
   // 2) Every nominateCategorySlug literal hard-coded in the site source code
   //    must exist in AWARD_CATEGORY_FORMS. Catches typos at build time.
