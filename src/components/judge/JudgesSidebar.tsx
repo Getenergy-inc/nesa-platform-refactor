@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/sidebar";
 import { NavLink } from "@/components/NavLink";
 import { ArenaBrand, ArenaSeal } from "@/components/arena/ArenaChrome";
+import { ArenaExitRailLink } from "@/components/arena/ArenaExitLink";
 
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";

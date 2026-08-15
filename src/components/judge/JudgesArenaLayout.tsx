@@ -8,6 +8,7 @@ import {
 import { JudgesSidebar } from "./JudgesSidebar";
 import { useAuth } from "@/contexts/AuthContext";
 import { ArenaTopBar, ArenaFooter } from "@/components/arena/ArenaChrome";
+import { ArenaExitButton } from "@/components/arena/ArenaExitLink";
 
 interface JudgesArenaLayoutProps {
   children: ReactNode;
@@ -34,6 +35,7 @@ export function JudgesArenaLayout({ children, title, description }: JudgesArenaL
             identityName={user?.email ?? "Judge"}
             identityRole="Panel Judge"
             notifications={3}
+            actions={<ArenaExitButton />}
           />
           <main className="flex-1 min-w-0">{children}</main>
           <ArenaFooter workspace="Judges Arena" />
