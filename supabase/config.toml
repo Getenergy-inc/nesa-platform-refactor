@@ -79,3 +79,8 @@ verify_jwt = false
 
 [functions.migration-emails]
 verify_jwt = false
+[functions.youtube-upload]
+verify_jwt = false
+
+[functions.youtube-publish]
+verify_jwt = false
