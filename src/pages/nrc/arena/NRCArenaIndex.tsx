@@ -1,7 +1,10 @@
 // /nrc — Public NRC Arena introduction. Signed-in members auto-forward to
 // their dashboard.
 
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { SmartLink as Link } from "@/components/navigation/SmartLink";
+import { ArenaExitButton } from "@/components/arena/ArenaExitLink";
+import { PublicNRCDirectorySection } from "@/components/nrc/PublicNRCDirectorySection";
 import { Helmet } from "react-helmet-async";
 import { ArrowRight, FileSearch, ShieldCheck, Users, ClipboardCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -34,6 +37,7 @@ export default function NRCArenaIndex() {
 
       <section className="relative overflow-hidden border-b border-white/10">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:py-24">
+          <ArenaExitButton className="mb-5" />
           <p className="text-xs uppercase tracking-[0.2em] text-gold/80">NESA-Africa · Secure Portal</p>
           <h1 className="mt-3 font-display text-4xl sm:text-5xl font-bold">
             NRC Arena
@@ -73,6 +77,8 @@ export default function NRCArenaIndex() {
           ))}
         </div>
       </section>
+
+      <PublicNRCDirectorySection />
 
       <section className="border-t border-white/10 bg-white/5">
         <div className="mx-auto max-w-6xl px-4 py-12 grid gap-8 md:grid-cols-2">

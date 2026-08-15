@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/sidebar";
 import { NavLink } from "@/components/NavLink";
 import { ArenaBrand, ArenaSeal } from "@/components/arena/ArenaChrome";
+import { ArenaExitRailLink } from "@/components/arena/ArenaExitLink";
 
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -82,6 +83,8 @@ export function JudgesSidebar() {
     >
       {/* Header with NESA seal brand block */}
       <SidebarHeader className="border-b border-gold/20 p-0">
+        {!collapsed && <ArenaExitRailLink />}
+
         {collapsed ? (
           <Link to="/judge/dashboard" className="grid place-items-center py-4">
             <ArenaSeal className="h-9 w-9" />

@@ -380,6 +380,7 @@ import NRCProfileRevisions from "./pages/nrc/NRCProfileRevisions";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import NomineeCanonicalProfile from "./pages/nominees/NomineeCanonicalProfile";
 import NomineeProfileEditor from "./pages/nominee/NomineeProfileEditor";
+import PublicNRCMemberProfile from "./pages/nrc/PublicNRCMemberProfile";
 import NRCArenaIndex from "./pages/nrc/arena/NRCArenaIndex";
 import NRCSignIn from "./pages/nrc/arena/NRCSignIn";
 import NRCOnboarding from "./pages/nrc/arena/NRCOnboarding";
@@ -2090,6 +2091,7 @@ const App = () => (
 
                   {/* NRC Arena — public landing + secure workspace shell. */}
                   <Route path="/nrc" element={<NRCArenaIndex />} />
+                  <Route path="/nrc/member/:slug" element={<PublicNRCMemberProfile />} />
                   <Route path="/nrc/sign-in" element={<NRCSignIn />} />
                   <Route path="/nrc/portal" element={<Navigate to="/nrc" replace />} />
                   <Route

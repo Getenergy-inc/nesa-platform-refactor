@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { SmartLink } from "@/components/navigation/SmartLink";
+import { PublicJudgesDirectorySection } from "@/components/judges/PublicJudgesDirectorySection";
+import { ArenaExitButton } from "@/components/arena/ArenaExitLink";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import {
@@ -84,6 +86,7 @@ export default function JudgesArenaLanding() {
           <div className="inline-flex items-center gap-2 rounded-full border border-[#4b6cff]/40 bg-[#0b1a3a]/70 px-3 py-1 text-xs uppercase tracking-widest text-[#8ea6ff]">
             <Lock className="h-3 w-3" /> Invitation-only jury portal
           </div>
+          <div className="mt-4"><ArenaExitButton /></div>
           <h1 className="mt-6 font-serif text-4xl sm:text-5xl lg:text-6xl leading-tight max-w-4xl">
             2026 <span className="text-[#c9a24a]">Africa Education Icon</span> Judges Arena
           </h1>
@@ -94,13 +97,17 @@ export default function JudgesArenaLanding() {
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Button asChild size="lg" className="bg-[#c9a24a] text-[#050b1a] hover:bg-[#e0b96b]">
-              <Link to="/judges/sign-in">Judge Sign In <ArrowRight className="ml-2 h-4 w-4" /></Link>
+              <SmartLink to="/judges/sign-in">Judge Sign In <ArrowRight className="ml-2 h-4 w-4" /></SmartLink>
             </Button>
             <Button asChild size="lg" variant="outline"
               className="border-white/25 bg-white/5 text-white hover:bg-white/10">
               <a href="#workflow">Learn About the Judging Process</a>
             </Button>
+            <Button asChild size="lg" variant="ghost" className="text-white/80 hover:text-[#c9a24a]">
+              <SmartLink to="/judges/directory">Meet the Judges</SmartLink>
+            </Button>
           </div>
+
 
           <div className="mt-10 inline-flex items-center gap-3 rounded-lg border border-white/10 bg-white/[0.04] px-4 py-2 text-sm">
             <span className="h-2 w-2 rounded-full bg-[#c9a24a] animate-pulse" />
@@ -197,6 +204,8 @@ export default function JudgesArenaLanding() {
         </div>
       </section>
 
+      <PublicJudgesDirectorySection />
+
       {/* Phase key dates */}
       <section className="max-w-5xl mx-auto px-6 py-20">
         <h2 className="font-serif text-3xl">Key Dates</h2>
@@ -224,11 +233,11 @@ export default function JudgesArenaLanding() {
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Button asChild size="lg" className="bg-[#c9a24a] text-[#050b1a] hover:bg-[#e0b96b]">
-              <Link to="/judges/sign-in">Judge Sign In</Link>
+              <SmartLink to="/judges/sign-in">Judge Sign In</SmartLink>
             </Button>
             <Button asChild size="lg" variant="outline"
               className="border-white/25 bg-white/5 text-white hover:bg-white/10">
-              <Link to="/judges/help">Technical Support</Link>
+              <SmartLink to="/judges/help">Technical Support</SmartLink>
             </Button>
           </div>
         </div>
