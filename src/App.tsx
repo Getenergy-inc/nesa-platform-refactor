@@ -317,6 +317,7 @@ import {
   VolunteerSettingsPage,
 } from "./pages/volunteer/VolunteerSubPages";
 import VolunteerShareAssets from "./pages/volunteer/VolunteerShareAssets";
+import VolunteerVacancyPage from "./pages/volunteer/VolunteerVacancyPage";
 import VolunteerChaptersHub from "./pages/volunteers/Chapters";
 import JoinLocalChapter from "./pages/volunteers/JoinLocalChapter";
 import VolunteerCommandCenter from "./pages/volunteers/CommandCenter";
@@ -2546,7 +2547,11 @@ const App = () => (
                   <Route path="/volunteer/analytics" element={<WithLayout><VolunteerAnalyticsPage /></WithLayout>} />
                   <Route path="/volunteer/settings" element={<WithLayout><VolunteerSettingsPage /></WithLayout>} />
                   <Route path="/volunteer/share-assets" element={<WithLayout><VolunteerShareAssets /></WithLayout>} />
+                  <Route path="/volunteer/webinar-host" element={<WithLayout><VolunteerVacancyPage /></WithLayout>} />
+                  <Route path="/volunteer/podcast-host" element={<WithLayout><VolunteerVacancyPage /></WithLayout>} />
+                  <Route path="/volunteer/production" element={<WithLayout><VolunteerVacancyPage /></WithLayout>} />
                   <Route path="/volunteer-chapters" element={<WithLayout><VolunteerChaptersHub /></WithLayout>} />
+
                   <Route path="/join-local-chapter" element={<WithLayout><JoinLocalChapter /></WithLayout>} />
                   <Route path="/volunteers/command-center" element={<VolunteerCommandCenter />} />
                   <Route

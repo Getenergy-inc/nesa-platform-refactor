@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import { VOLUNTEER_VACANCIES_2026 } from "@/data/volunteerVacancies2026";
 import { motion } from "framer-motion";
 import {
   Briefcase,
@@ -321,6 +322,36 @@ export default function Vacancies() {
             <span className="px-3 py-1 rounded-full border border-ivory/20 text-ivory/70">
               Sequenced against 2026 calendar
             </span>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-charcoal py-12 border-b border-gold/10">
+        <div className="container mx-auto px-4">
+          <h2 className="font-display text-2xl md:text-3xl text-ivory mb-2">
+            Volunteer listings — Webinar &amp; Podcast Services Team
+          </h2>
+          <p className="text-ivory/60 text-sm mb-8 max-w-2xl">
+            Session-based volunteer roles across the 2026 Education Enablers webinar
+            and podcast series. Each listing has its own shareable page with an
+            interactive session picker.
+          </p>
+          <div className="grid md:grid-cols-3 gap-5">
+            {VOLUNTEER_VACANCIES_2026.map((v) => (
+              <Link
+                key={v.slug}
+                to={`/volunteer/${v.slug}`}
+                className="rounded-xl border border-gold/20 bg-ivory/5 p-5 hover:border-gold/60 transition block"
+              >
+                <span className="text-[11px] uppercase tracking-[0.18em] text-gold/80">
+                  {v.code} · Volunteer
+                </span>
+                <h3 className="font-display text-lg text-ivory mt-2">{v.title}</h3>
+                <p className="text-ivory/60 text-sm mt-2">{v.commitment}</p>
+                <p className="text-ivory/70 text-sm mt-3 line-clamp-3">{v.intro}</p>
+                <span className="text-gold text-sm mt-3 inline-block">View listing →</span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
