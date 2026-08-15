@@ -10,7 +10,7 @@
 // ============================================================================
 
 import { useEffect, useMemo, useState } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Search, Sparkles } from "lucide-react";
 
@@ -60,12 +60,50 @@ const INTEGRITY = [
   },
 ];
 
+// Filter params that belong to the Recognition Catalogue. Historically every
+// one of these was silently ignored on /nominees, so links such as
+// `/nominees?family=csr-education` dumped visitors into the full directory.
+// They are now forwarded, intact, to /nominees/catalogue which reads them all.
+const CATALOGUE_FILTER_PARAMS = [
+  "family", "tier", "category", "subcategory", "region",
+  "country", "year", "verification", "organisation",
+];
+
+/** Legacy `?awardFamily=` values map onto catalogue tier slugs. */
+const AWARD_FAMILY_TO_TIER: Record<string, string> = {
+  icon: "africa-education-icon",
+  influencer: "influencer-education-impact",
+  "gold-bluegarnet": "blue-garnet",
+  "blue-garnet": "blue-garnet",
+  platinum: "platinum",
+};
+
+/** Build the catalogue URL for an incoming filtered /nominees request. */
+export function catalogueRedirectTarget(params: URLSearchParams): string | null {
+  const next = new URLSearchParams();
+  let matched = false;
+  CATALOGUE_FILTER_PARAMS.forEach((k) => {
+    const v = params.get(k);
+    if (v) { next.set(k, v); matched = true; }
+  });
+  const awardFamily = params.get("awardFamily");
+  if (awardFamily) {
+    const tier = AWARD_FAMILY_TO_TIER[awardFamily.toLowerCase()];
+    if (tier) { next.set("tier", tier); matched = true; }
+  }
+  if (!matched) return null;
+  const q = params.get("q");
+  if (q) next.set("q", q);
+  return `/nominees/catalogue?${next.toString()}`;
+}
+
 export default function NomineesHubPage() {
   const { data: nominees, isLoading } = useCatalogueNominees();
   const stats = useSiteStats();
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const [search, setSearch] = useState(params.get("q") ?? "");
+  const redirectTo = catalogueRedirectTarget(params);
 
   useEffect(() => {
     trackEvent("directory_view", { name: DIRECTORY_NAME, surface: "nominees_hub" });
