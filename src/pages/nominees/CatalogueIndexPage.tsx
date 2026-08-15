@@ -331,7 +331,7 @@ export default function CatalogueIndexPage() {
                   size="sm"
                   variant="ghost"
                   className="h-7 text-[11px] text-foreground/60"
-                  onClick={() => { setFilters({ ...EMPTY_FILTERS }); setVisible(PAGE_SIZE); }}
+                  onClick={() => { setFilters({ ...EMPTY_FILTERS }); setFamily(""); setVisible(PAGE_SIZE); }}
                 >
                   Clear all
                 </Button>
