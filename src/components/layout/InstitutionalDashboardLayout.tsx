@@ -164,6 +164,10 @@ export function InstitutionalDashboardLayout({ children, title, breadcrumbs }: P
             <Menu className="h-5 w-5" />
           </Button>
 
+          <ArenaExitButton className="shrink-0" />
+
+
+
           {/* Breadcrumbs */}
           {breadcrumbs && breadcrumbs.length > 0 && (
             <nav className="hidden sm:flex items-center gap-2 text-sm">
