@@ -188,6 +188,7 @@ export const UTILITY_NAV: UtilityNavItem[] = [
   { label: "Buy Award Gala Ticket", href: "/tickets", analyticsId: "util_gala_ticket", emphasis: true },
   { label: "Merchandise", href: "/merch", analyticsId: "util_merch" },
   { label: "Join Webinar", href: "/media/webinars", analyticsId: "util_webinar" },
+  { label: "Join Podcast", href: "/media/podcast", analyticsId: "util_podcast" },
   { label: "Watch Award TV Show", href: "/media/tv", analyticsId: "util_tv_show" },
   { label: "Join Our Team", href: "/vacancies", analyticsId: "util_join_team" },
 ];
