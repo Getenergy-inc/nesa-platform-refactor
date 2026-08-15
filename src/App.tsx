@@ -434,6 +434,7 @@ import {
 } from "./pages/admin";
 import BulkSeedNominees from "./pages/admin/BulkSeedNominees";
 import BulkImportNominees from "./pages/admin/BulkImportNominees";
+import YouTubePipeline from "./pages/admin/YouTubePipeline";
 import AdminVolunteersCMS from "./pages/admin/AdminVolunteersCMS";
 
 // Optimized QueryClient with caching strategy
@@ -2250,6 +2251,10 @@ const App = () => (
                   <Route
                     path="/admin/bulk-import"
                     element={<BulkImportNominees />}
+                  />
+                  <Route
+                    path="/admin/youtube-pipeline"
+                    element={<AdminBareShell><YouTubePipeline /></AdminBareShell>}
                   />
                   <Route
                     path="/admin/bulk-seed"
