@@ -17,14 +17,15 @@ type Importer = () => Promise<unknown>;
  */
 const ROUTE_CHUNKS: Array<[RegExp, Importer]> = [
   // Nominee directory + profiles (the heaviest, most-clicked surfaces)
-  [/^\/nominees\/[^/]+\/[^/]+/, () => import("@/pages/nominees/NomineeProfilePage")],
-  [/^\/nominees\/[^/]+/, () => import("@/pages/nominees/NomineeProfilePage")],
+  [/^\/nominees\/[^/]+\/[^/]+/, () => import("@/pages/nominees/SubcategoryLandingPage")],
+  [/^\/nominees\/[^/]+/, () => import("@/pages/nominees/NomineeSlugDispatcher")],
   [/^\/nominees/, () => import("@/pages/nominees/NomineesHubPage")],
 
   // Recognition / awards
-  [/^\/awards\/[^/]+/, () => import("@/pages/awards/AwardSubpageTemplate")],
+  [/^\/awards\/[^/]+/, () => import("@/pages/awards/AwardCategoryRoute")],
   [/^\/awards/, () => import("@/pages/Awards")],
-  [/^\/categories/, () => import("@/pages/categories/EighteenCategoriesPage")],
+  [/^\/categories/, () => import("@/pages/awards/EighteenCategoriesPage")],
+
 
   // Nomination funnel
   [/^\/nominate/, () => import("@/pages/nominate/NominateHub2026")],
