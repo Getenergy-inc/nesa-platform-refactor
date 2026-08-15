@@ -25,7 +25,7 @@ const PER_FAMILY_LIMIT = 12;
  * catalogue uses some historical variants. Both are listed so the query keeps
  * working through the taxonomy cutover — unknown slugs are simply ignored.
  */
-const FAMILY_DB_CATEGORY_SLUGS: Record<string, string[]> = {
+export const FAMILY_DB_CATEGORY_SLUGS: Record<string, string[]> = {
   "csr-education": ["best-csr-education-africa", "best-csr-education-nigeria"],
   "edutech-innovation": [
     "best-edtech-innovation-africa",
