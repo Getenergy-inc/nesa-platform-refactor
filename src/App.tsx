@@ -53,7 +53,7 @@ import FAQPage from "./pages/FAQ";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, useNavigationType } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { SeasonProvider } from "@/contexts/SeasonContext";
@@ -445,15 +445,52 @@ const queryClient = new QueryClient({
   },
 });
 
+// Scroll management:
+//  - PUSH / REPLACE navigations scroll to top (new page = fresh read)
+//  - POP (browser back/forward) restores the previous scroll offset so a
+//    visitor returning from a nominee profile lands where they left the list.
+//  - Hash targets are honoured over both.
+const scrollPositions = new Map<string, number>();
+
 const ScrollToTop = () => {
-  const { pathname } = useLocation();
+  const { pathname, search, hash, key } = useLocation();
+  const navigationType = useNavigationType();
+
+  // Continuously record the offset for the current history entry.
+  useEffect(() => {
+    const record = () => scrollPositions.set(key, window.scrollY);
+    window.addEventListener("scroll", record, { passive: true });
+    return () => {
+      record();
+      window.removeEventListener("scroll", record);
+    };
+  }, [key]);
 
   useEffect(() => {
+    if (hash) {
+      const el = document.getElementById(hash.slice(1));
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+    }
+    if (navigationType === "POP") {
+      const saved = scrollPositions.get(key);
+      if (typeof saved === "number") {
+        // Wait a frame so lazy route content has a chance to mount.
+        requestAnimationFrame(() => window.scrollTo(0, saved));
+        return;
+      }
+    }
     window.scrollTo(0, 0);
-  }, [pathname]);
+    // `search` is intentionally excluded: filter changes on a directory page
+    // should not yank the visitor back to the top of the page.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname, hash, navigationType, key]);
 
   return null;
 };
+
 
 // Wrapper component that applies PublicLayout
 const WithLayout = ({
