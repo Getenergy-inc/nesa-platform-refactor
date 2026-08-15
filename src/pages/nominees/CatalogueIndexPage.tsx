@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { type EnrichedDatabaseNominee } from "@/hooks/useNominees";
 import { useCatalogueNominees } from "@/lib/directory/masterCatalogueSource";
+import { FAMILY_DB_CATEGORY_SLUGS } from "@/hooks/useFamilyGallery";
 import { buildCatalogue } from "@/lib/directory/buildCatalogue";
 import { subcategoryFamilySlug } from "@/config/directory/catalogueTaxonomy";
 import { toast } from "@/hooks/use-toast";
@@ -42,6 +43,16 @@ const EMPTY_FILTERS: Record<FilterKey, string> = {
   country: "", year: "", verification: "", organisation: "",
 };
 
+
+/**
+ * Tolerant comparison for URL-supplied values: `?region=west-africa` must
+ * still match a stored region of "West Africa".
+ */
+function looseMatch(stored: string | null | undefined, wanted: string) {
+  const norm = (v: string) => v.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  if (!stored) return false;
+  return norm(stored) === norm(wanted);
+}
 
 function verificationLabel(n: EnrichedDatabaseNominee) {
   if (n.nrcVerified) return "Verified";
@@ -111,14 +122,17 @@ export default function CatalogueIndexPage() {
     setVisible(PAGE_SIZE);
   };
 
+  // Every active filter is mirrored back into the URL so deep links are
+  // shareable and survive a reload / back navigation.
   useEffect(() => {
     const next = new URLSearchParams();
     if (search) next.set("q", search);
-    (["tier", "category", "subcategory"] as FilterKey[]).forEach((k) => {
+    FILTER_KEYS.forEach((k) => {
       if (filters[k]) next.set(k, filters[k]);
     });
+    if (family) next.set("family", family);
     setParams(next, { replace: true });
-  }, [search, filters, setParams]);
+  }, [search, filters, family, setParams]);
 
   const options = useMemo(() => {
     const list = nominees ?? [];
@@ -134,14 +148,24 @@ export default function CatalogueIndexPage() {
 
   const results = useMemo(() => {
     const q = search.trim().toLowerCase();
+    const famSet = familyCategories ? new Set(familyCategories) : null;
     return (nominees ?? []).filter((n) => {
       const meta = decorated.get(n.id);
       if (!meta) return false; // review-queue rows are listed separately
+      if (famSet && !famSet.has(meta.category) && !famSet.has(n.categorySlug ?? "")) return false;
       if (filters.tier && meta.tier !== filters.tier) return false;
-      if (filters.category && meta.category !== filters.category) return false;
-      if (filters.subcategory && meta.sub !== filters.subcategory) return false;
-      if (filters.region && n.region !== filters.region) return false;
-      if (filters.country && n.country !== filters.country) return false;
+      if (
+        filters.category &&
+        meta.category !== filters.category &&
+        !looseMatch(meta.categoryName, filters.category)
+      ) return false;
+      if (
+        filters.subcategory &&
+        meta.sub !== filters.subcategory &&
+        !looseMatch(meta.subName, filters.subcategory)
+      ) return false;
+      if (filters.region && !looseMatch(n.region, filters.region)) return false;
+      if (filters.country && !looseMatch(n.country, filters.country)) return false;
       if (filters.year && String(n.nominationYear ?? "") !== filters.year) return false;
       if (filters.verification && verificationLabel(n) !== filters.verification) return false;
       if (filters.organisation && (n.organization ?? "") !== filters.organisation) return false;
@@ -292,8 +316,16 @@ export default function CatalogueIndexPage() {
               ))}
             </div>
 
-            {activeFilters.length > 0 && (
+            {(activeFilters.length > 0 || family) && (
               <div className="flex flex-wrap items-center gap-2 pt-1">
+                {family && (
+                  <button
+                    onClick={() => { setFamily(""); setVisible(PAGE_SIZE); }}
+                    className="flex items-center gap-1 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-[11px] text-gold"
+                  >
+                    recognition family: {family} <X className="h-3 w-3" />
+                  </button>
+                )}
                 {activeFilters.map((k) => (
                   <button
                     key={k}
@@ -307,7 +339,7 @@ export default function CatalogueIndexPage() {
                   size="sm"
                   variant="ghost"
                   className="h-7 text-[11px] text-foreground/60"
-                  onClick={() => { setFilters({ ...EMPTY_FILTERS }); setVisible(PAGE_SIZE); }}
+                  onClick={() => { setFilters({ ...EMPTY_FILTERS }); setFamily(""); setVisible(PAGE_SIZE); }}
                 >
                   Clear all
                 </Button>

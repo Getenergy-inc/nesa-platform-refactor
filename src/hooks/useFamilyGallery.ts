@@ -218,7 +218,7 @@ async function fetchFamilyBuckets(): Promise<Record<string, FamilyGalleryEntry[]
 }
 
 /** One shared cached query powers both the strip and the per-family cards. */
-function useFamilyBuckets() {
+export function useFamilyBuckets() {
   return useQuery({
     queryKey: ["family-gallery-buckets"],
     queryFn: fetchFamilyBuckets,

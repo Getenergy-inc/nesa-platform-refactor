@@ -35,12 +35,14 @@ import {
  *  - Free-text name/title search
  */
 
-const CATEGORY_NAME =
-  "Excellence in Political Leadership for Education — Nigeria";
 const CATEGORY_SLUGS = new Set([
   "excellence-in-political-leadership-for-education-nigeria",
   "political-leaders-education-nigeria",
 ]);
+// The directory link must carry the database category SLUG, never the
+// display name — a name never matches a slug filter and silently returned
+// the whole directory.
+const CATEGORY_FILTER_SLUG = "excellence-in-political-leadership-for-education-nigeria";
 const CATEGORY_NAME_KEYWORDS = ["political leader", "political leadership"];
 
 const ALL_NIGERIA_STATES = NIGERIA_ZONES.flatMap((z) =>
@@ -221,7 +223,7 @@ export function PoliticalLeadersNigeriaDirectory({
             size="lg"
             className="gap-2 rounded-full bg-emerald-500 px-6 font-semibold text-charcoal hover:bg-emerald-500/90"
           >
-            <Link to={`/nominees?category=${encodeURIComponent(CATEGORY_NAME)}`}>
+            <Link to={`/nominees?category=${CATEGORY_FILTER_SLUG}`}>
               <Users className="h-4 w-4" />
               View All Nominees
               <ArrowRight className="h-4 w-4" />
@@ -475,7 +477,7 @@ export function PoliticalLeadersNigeriaDirectory({
               variant="outline"
               className="rounded-full border-emerald-500/30 text-emerald-300 hover:bg-white/5"
             >
-              <Link to={`/nominees?category=${encodeURIComponent(CATEGORY_NAME)}`}>
+              <Link to={`/nominees?category=${CATEGORY_FILTER_SLUG}`}>
                 See all {filtered.length} matching nominees
                 <ArrowRight className="ml-1.5 h-4 w-4" />
               </Link>
