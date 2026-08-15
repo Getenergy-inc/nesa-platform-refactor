@@ -225,7 +225,7 @@ export default function JudgesArenaLanding() {
 
       {/* Final CTA */}
       <section className="max-w-7xl mx-auto px-6 pb-24">
-        <div className="rounded-2xl border border-gold/30 bg-gradient-to-br from-[#0b1a3a] to-[hsl(var(--arena-bg))] p-10 lg:p-14 text-center">
+        <div className="rounded-2xl border border-gold/30 bg-gradient-to-br from-arena-panel to-arena-bg p-10 lg:p-14 text-center">
           <h2 className="font-serif text-3xl sm:text-4xl">
             27 Judges. 3 Pathways. 9 Screening Panels. 27 Finalists. 9 Laureates.
           </h2>
