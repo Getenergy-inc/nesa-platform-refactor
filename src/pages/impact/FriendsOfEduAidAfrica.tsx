@@ -26,6 +26,21 @@ import {
   FRIENDS_CTAS,
 } from "@/config/educationSocialImpact";
 import EducationImpactStatsGrid from "@/components/impact/EducationImpactStatsGrid";
+import { GalleryGrid } from "@/components/gallery/GalleryGrid";
+import { getFeaturedImages } from "@/data/gallery";
+import FriendsWalletWidget from "@/components/impact/FriendsWalletWidget";
+import GovernanceLeadershipSection from "@/components/impact/GovernanceLeadershipSection";
+
+/** Real SCEF/NESA programme surfaces that already exist in this project. */
+const PROGRAMME_LINKS: { label: string; href: string; external?: boolean }[] = [
+  { label: "EduAid-Africa", href: "/eduaid-africa" },
+  { label: "NESA-Africa", href: "/programs/nesa-africa" },
+  { label: "Rebuild My School Africa", href: "/eduaid-africa/rebuild-my-school" },
+  { label: "eLibrary Africa", href: "https://elibrarynigeria.org", external: true },
+  { label: "Media & Advocacy", href: "/media" },
+  { label: "All SCEF programmes", href: "/programs" },
+];
+
 
 export default function FriendsOfEduAidAfrica() {
   return (
