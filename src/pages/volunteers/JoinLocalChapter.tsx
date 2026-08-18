@@ -94,7 +94,7 @@ export default function JoinLocalChapter() {
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               <Button asChild className="bg-gold text-charcoal hover:bg-gold/90">
-                <Link to="/volunteers">Meet Our Volunteers</Link>
+                <Link to="/meet-the-team">Meet Our Global Volunteer Team</Link>
               </Button>
               <Button asChild variant="outline" className="border-gold/40 text-gold">
                 <Link to="/chapters">Browse Chapters</Link>

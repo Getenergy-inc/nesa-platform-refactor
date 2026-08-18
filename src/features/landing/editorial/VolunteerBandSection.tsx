@@ -22,8 +22,8 @@ export function VolunteerBandSection() {
           ))}
         </div>
         <p style={{ textAlign: "center", fontSize: "0.88rem" }}>
-          <Link to="/volunteers" className="ed-link-inline">
-            Meet the people behind the movement →
+          <Link to="/meet-the-team" className="ed-link-inline">
+            Meet Our Global Volunteer Team →
           </Link>
         </p>
       </div>

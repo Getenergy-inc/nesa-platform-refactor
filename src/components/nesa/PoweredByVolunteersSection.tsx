@@ -138,8 +138,8 @@ export function PoweredByVolunteersSection() {
         {/* CTAs */}
         <div className="flex flex-wrap justify-center gap-3">
           <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
-            <Link to="/volunteers">
-              Meet Our Volunteers <ArrowRight className="ml-2 h-4 w-4" />
+            <Link to="/meet-the-team">
+              Meet Our Global Volunteer Team <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
           <Button asChild size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">

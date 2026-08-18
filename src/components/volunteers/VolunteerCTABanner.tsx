@@ -57,7 +57,7 @@ export function VolunteerCTABanner({
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
-                <Link to="/volunteers">Meet the Team</Link>
+                <Link to="/meet-the-team">Meet Our Global Volunteer Team</Link>
               </Button>
             </div>
           </div>

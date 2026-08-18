@@ -205,7 +205,7 @@ export const MAIN_NAV: NavItem[] = [
     icon: Users,
     children: [
       { label: "Become a Volunteer", href: "/volunteer", description: "Join the continental volunteer force", icon: UserPlus },
-      { label: "Meet Our Volunteers", href: "/volunteers", description: "People powering NESA-Africa", icon: Heart },
+      { label: "Meet Our Global Volunteer Team", href: "/meet-the-team", description: "People powering NESA-Africa", icon: Heart },
       { label: "Become an Ambassador", href: "/volunteers#ambassadors", description: "Continental & diaspora ambassadors", icon: Star },
       { label: "Apply to be a Judge", href: "/judgeapply", description: "Independent jury panel", icon: Gavel },
       { label: "Meet Our Judges", href: "/judges/directory", description: "Our independent jury", icon: Gavel },
