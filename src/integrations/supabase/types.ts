@@ -11004,8 +11004,12 @@ export type Database = {
           judge_status: Database["public"]["Enums"]["judge_status"] | null
           languages: string[] | null
           organization: string | null
+          person_id: string | null
           photo_url: string | null
           professional_title: string | null
+          profile_visibility:
+            | Database["public"]["Enums"]["judge_profile_visibility"]
+            | null
           public_contribution_statement: string | null
           region: string | null
           slug: string | null
@@ -11027,8 +11031,12 @@ export type Database = {
           judge_status?: Database["public"]["Enums"]["judge_status"] | null
           languages?: string[] | null
           organization?: string | null
+          person_id?: string | null
           photo_url?: string | null
           professional_title?: string | null
+          profile_visibility?:
+            | Database["public"]["Enums"]["judge_profile_visibility"]
+            | null
           public_contribution_statement?: string | null
           region?: string | null
           slug?: string | null
@@ -11050,8 +11058,12 @@ export type Database = {
           judge_status?: Database["public"]["Enums"]["judge_status"] | null
           languages?: string[] | null
           organization?: string | null
+          person_id?: string | null
           photo_url?: string | null
           professional_title?: string | null
+          profile_visibility?:
+            | Database["public"]["Enums"]["judge_profile_visibility"]
+            | null
           public_contribution_statement?: string | null
           region?: string | null
           slug?: string | null
