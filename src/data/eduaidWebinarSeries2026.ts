@@ -1,7 +1,7 @@
 /**
  * EduAid-Africa Webinar Series 2026 — canonical timetable.
  * ------------------------------------------------------
- * Single source of truth for the 7-week series starting Thursday
+ * Single source of truth for the 9-week series starting Thursday
  * 27 August 2026 (corrected schedule). Every NESA-Africa surface that shows
  * a webinar timetable must read from this module — no hard-coded episode
  * dates elsewhere.
@@ -299,7 +299,7 @@ export const EDUAID_PRODUCTION_MODEL = {
   notes: [
     "80-seat Focus Group Discussion model, 4 breakout rooms per episode.",
     "Seats and facilitators are recruited per episode via public campaign, not a standing internal team.",
-    "Week 1 (27 August) serves as the pilot — actual sign-up numbers and facilitator availability from this episode determine whether the 80-seat / 4-room model holds for Weeks 2–7, or needs adjusting.",
+    "Week 1 (27 August) serves as the pilot — actual sign-up numbers and facilitator availability from this episode determine whether the 80-seat / 4-room model holds for Weeks 2–9, or needs adjusting.",
   ],
 } as const;
 
@@ -321,4 +321,4 @@ export const EDUAID_CROSS_REFERENCE = {
 
 /** Where the series sits in the wider 2026 cycle calendar. */
 export const EDUAID_SERIES_CONTEXT =
-  `This 7-week run is one line in the larger 2026 cycle calendar — "${EDUAID_SERIES_META.masterTimelineLine}" — running in parallel with the nomination window (${NOMINATIONS_OPEN_LABEL} onward) and the Icon judging window (${ICON_JUDGING_WINDOW_LABEL}), and concluding on 19 November, weeks before the ${PROGRAMME_END_LABEL} Recognition Gala.`;
+  `This 9-week run is one line in the larger 2026 cycle calendar — "${EDUAID_SERIES_META.masterTimelineLine}" — running in parallel with the nomination window (${NOMINATIONS_OPEN_LABEL} onward) and the Icon judging window (${ICON_JUDGING_WINDOW_LABEL}), and concluding on 3 December, days before the ${PROGRAMME_END_LABEL} Recognition Gala.`;

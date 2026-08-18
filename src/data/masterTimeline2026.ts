@@ -178,7 +178,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     startsAt: "2026-08-27T00:00:00Z",
     milestone: "EduAid-Africa Webinar Week 1 · Fame With Purpose (pilot)",
     activity:
-      "How Africa's Sports, Music and Digital Icons Can Turn Influence Into Education Opportunity. Pilot episode of the 7-week series.",
+      "How Africa's Sports, Music and Digital Icons Can Turn Influence Into Education Opportunity. Pilot episode of the 9-week series.",
     outcome: "Non-competitive · Influencer Education Impact",
     track: "webinar",
     href: "/media/webinars",
