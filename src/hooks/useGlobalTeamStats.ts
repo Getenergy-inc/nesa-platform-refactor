@@ -88,12 +88,10 @@ export function useGlobalTeamStats(): GlobalTeamStats {
             .eq("visibility_status", "public")
             .eq("verification_status", "approved"),
           supabase
-            .from("judges")
+            .from("judges_public")
             .select(
               "id, person_id, slug, full_name, photo_url, professional_title, region, country_residence"
-            )
-            .eq("profile_visibility", "public")
-            .eq("verification_status", "verified"),
+            ),
           supabase.from("nrc_members").select("person_id"),
           supabase
             .from("chapters")
