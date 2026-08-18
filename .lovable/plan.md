@@ -1,53 +1,37 @@
-# Judges Arena — port into this codebase
+# Add Podcast Episodes 8 & 9 and Webinar Weeks 8 & 9
 
-## Key finding first
+Add-only completion of the two existing calendars. No existing entry is rewritten, reordered or removed, with one unavoidable exception flagged below.
 
-The Judges Arena you described **already exists in this project**, in large part. Before building anything new I inspected the database and routes and found:
+## What gets added
 
-- **29 tables** already namespaced `icon_*` covering pathways, judges, panels, panel members, assignments, invitations, onboarding, conflicts, scores, reviews, notes, shortlists, deliberations + messages, Grand Jury groups/finalists/ballots/results, governance reviews, moderation actions, result snapshots, notifications and an immutable audit log.
-- **11 server-side functions** already exist and do exactly what the spec's "key server-side operations" list asks: `submit_icon_score`, `submit_icon_shortlist`, `submit_icon_grand_jury_ballot`, `compute_icon_grand_jury_results`, `icon_governance_decide`, `icon_ensure_review`, plus role predicates `is_icon_judge` / `is_icon_moderator` / `is_icon_governance`.
-- A **navy/gold Arena design system** (`ArenaChrome`, `ArenaSeo`, `IconJuryLayout`) and an access gate (`IconJudgeGate`) that already enforces auth + `ICON_JUDGE`/`ICON_MODERATOR`/`ICON_GOVERNANCE` role + a live OTP session.
-- 18 routes already live under `/judges/*` and `/admin/icon-jury/*`.
+**EduAid-Africa Webinar Series** (`src/data/eduaidWebinarSeries2026.ts`)
+Append two episode objects after Week 7, using the existing episode schema (episode, id, isoDate, dateLabel, title, subtitle, summary, promotes[], tiers, competitiveStatus, competitiveLabel):
 
-**Recommendation: extend this, do not build a parallel `judges_arena_*` schema.** A second schema covering the same domain in the same Supabase project would double the RLS surface area — the opposite of the security goal — and would orphan the RPCs and audit log that already work. `icon_*` already satisfies the spec's "pick one namespace convention and use it consistently".
+- Week 8 — Thursday, 26 November 2026 — "Education Beyond Recognition" / CSR, NGOs, Political Leadership & Institutional Action. Promotes list exactly as supplied. Non-competitive · Impact & Legacy · Institutional Education Impact.
+- Week 9 — Thursday, 3 December 2026 — "Africa's Education Champions" / Influencers, Africa Education Icons & Friends of Education. Promotes list exactly as supplied. Non-competitive · Final Pre-Gala Webinar, plus the closing message "Recognition is not the destination. It is an invitation to do more." and the Recognition → Commitment → Partnership → Action → Impact → Legacy chain.
 
-If you disagree and want a clean-room `judges_arena_*` build, say so and I'll re-plan — but I'd be duplicating working, already-secured tables.
+Weeks 1–7 objects are untouched. Series metadata that is currently derived (`episodeCount`) updates itself; the hand-written strings that say "7-Week" / series end "19 November 2026" get corrected to 9 weeks / 3 December 2026 so the calendar is not self-contradicting — copy only, no episode content touched.
 
-## What is genuinely missing
+**Master timeline** (`src/data/masterTimeline2026.ts`)
+Add four dated entries in the existing `MasterTimelineEntry` shape, sorted into place by `startsAt`:
 
-Current data state: 3 pathways, 3 classifications, **0 judges, 0 panels, 0 Grand Jury groups, 0 invitations**. So the schema is there; the 9-pathway structure (3 categories x 3 communities), the 27 seats, and several UI surfaces are not.
+- `podcast-8` — Tuesday, 13 October 2026 — Education Enablers Podcast Episode 8 — Education Beyond Recognition, with the supplied description, topic list and purpose in `details`, plus a cross-reference line to Webinar Week 8 (26 November 2026).
+- `podcast-9` — Tuesday, 20 October 2026 — Episode 9 — Africa's Education Champions, same treatment, cross-referencing Webinar Week 9 (3 December 2026).
+- `webinar-8` — Thursday, 26 November 2026.
+- `webinar-9` — Thursday, 3 December 2026.
 
-### Stage 1 — Schema completion (one migration)
-- Seed the **9 pathways** as `3 categories x 3 classifications` (Africans in Africa / Diaspora Africans / Friends of Africa), with the 3 categories as a first-class `icon_categories` table so `/judges/categories/:slug` has a real record to read.
-- Add the missing columns the spec needs and the schema lacks: reserve nominee on panel shortlists, `reopen_requests` table for formal governance reopen (preserves the original record, never overwrites), per-pathway **result rooms** and a **Final 27-Judge Results Review Room** on the deliberations table, and message edit-history preservation.
-- Add a `prepare_grand_jury_ballots(pathway)` RPC (missing) that materialises ballots once all 9 panel decisions are locked.
-- Harden `submit_icon_grand_jury_ballot` validation: reject duplicate finalist IDs, duplicate ranks, missing ranks, out-of-range ranks, and reject submission by a **recused** judge.
-- RLS audit pass across all 29 tables: verify Judge A cannot read Judge B's notes/scores/ballots, unassigned judges cannot read a pathway, and locked rows reject UPDATE at the policy level (not just the UI).
+Episodes 1–7 and Episode 10, Webinar Weeks 1–7, all nomination/judging/gala rows: unchanged. Existing hrefs (`/media`, `/media/webinars`) reused — no new routes, no new pages, no second calendar.
 
-### Stage 2 — Invitation onboarding (missing)
-- `/judges/sign-up` — single-use invitation token entry. Token compared as **SHA-256 hash** against `icon_judge_invitations`, tied to the approved email. Never logged.
-- `/judges/onboarding` — the sequence: profile (title, institution, country, bio 30+ chars) -> appointment acceptance -> MOU -> Code of Conduct -> confidentiality -> COI declaration -> training -> MFA -> awaits governance activation. Persisted to `icon_judge_onboarding`.
-- `/judges/forgot-password`.
+## The one existing record that must change
 
-### Stage 3 — Missing workspace routes
-`/judges/categories`, `/judges/categories/:slug`, `/judges/pathways`, `/judges/pathways/:slug` (nominee queue + top-3 pipeline + reserve + pathway chat), `/judges/judge-profiles` (27-judge directory, auth-only), `/judges/finalists` (27 finalists), `/judges/chat-rooms` (3-column layout: room list / active room / details + confidentiality notice), `/judges/audit-log` (governance-only).
+The timeline currently holds a single placeholder row `podcast-8-9` labelled "To be confirmed", and a matching internal open item `podcast-8-9-unconfirmed` saying no dates or topics exist. Now that both episodes have confirmed dates and topics, that placeholder is replaced by the two real entries and the open item is removed. Leaving it would render "Episodes 8 & 9 — to be confirmed" alongside the newly dated Episodes 8 and 9.
 
-### Stage 4 — Grand Jury + results
-- `/judges/general-voting` — select pathway -> review top 3 -> rank 1st/2nd/3rd -> submit, updatable until close, then locked. (Existing `/judges/voting` becomes an alias.)
-- `/judges/general-voting/results` and `/results/:pathwaySlug` — scoring matrix (judges as columns, finalists as rows, 1pt/2pt/3pt, **lowest total wins**), "Verified & Approved" locked cards.
-- **Status/completeness invariant:** the results view derives its status badge from the same lock state that gates the data. While a vote is open it renders a "Voting Open — results sealed" state with *no* provisional standings. A "Voting Live" badge can never appear next to revealed results. I'll add a unit test asserting this pairing.
+Knock-on: `src/data/volunteerVacancies2026.ts` derives its host slot pickers from these two datasets, so the podcast picker's "Episode 8 & 9 — to be confirmed" slot automatically becomes two real dated slots, and the webinar picker gains Weeks 8 and 9 (Week 9 becomes the "closing" label). No edit needed there — it is derived.
 
-### Stage 5 — Public landing + governance consistency
-- Rebuild `/judges` as the public explainer, linked from the Trust page as the proof behind "no public voting". Flagship naming from `BRAND.flagship`. No wallet/AGC references, no public-voting language.
-- Add `Disallow: /judges/` (keeping `/judges` itself indexable) to `robots.txt`, keep only `/judges` in the sitemap, and confirm `ArenaSeo` emits `noindex` on every confidential route.
+## Governance
 
-## Technical notes
+New entries carry the same non-competitive framing as existing ones: participation in a webinar or podcast does not influence nomination approval, verification, judging or any recognition outcome. Weeks 8 and 9 fall after the Icon judging window, so the Episode 4/7 content boundary is not extended.
 
-- Reuses existing auth: Supabase session + `user_roles.role_code` + OTP session, via `IconJudgeGate`. No parallel auth system, no service-role key in the browser.
-- All new writes go through `SECURITY DEFINER` RPCs with authorization checks inside the function; the client never supplies the acting judge's identity.
-- Gold/navy tokens come from the existing arena CSS variables and `brandHierarchy.ts` — no second gold.
-- Mobile: sidebar collapses to the existing arena mobile pattern; the scoring matrix becomes stacked cards below `md`, never a wide table.
+## Verification
 
-## Sequencing
-
-I'll do Stage 1 as a migration you approve, then build Stages 2-5 in order, reporting what's complete, what's partial, and what needs a follow-up pass.
+Run the existing test suites that guard these datasets: timeline date validation, timeline integrity, and the Icon content-boundary test (Week 9 names Icon pathways generically — no individual nominee names). Then visually check `/timeline`, `/media/webinars` and the podcast page.
