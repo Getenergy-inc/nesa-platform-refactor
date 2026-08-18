@@ -112,12 +112,6 @@ export const MASTER_TIMELINE_PUBLIC_NOTICE = {
  */
 export const MASTER_TIMELINE_OPEN_ITEMS: { id: string; item: string; detail: string }[] = [
   {
-    id: "podcast-8-9-unconfirmed",
-    item: "Education Enablers Podcast — Episodes 8 & 9 have no confirmed date or topic",
-    detail:
-      "No source record confirms air dates or themes for Episodes 8 and 9. Published as unconfirmed; no dates invented.",
-  },
-  {
     id: "gbg-verification-past-showcase-2",
     item:
       "Gold-Blue Garnet verification (closes 13 December) extends 5 days past TV Showcase 2 (8 December)",
