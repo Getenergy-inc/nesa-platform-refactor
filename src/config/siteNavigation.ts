@@ -192,6 +192,7 @@ export const UTILITY_NAV: UtilityNavItem[] = [
   { label: "Join Podcast", href: "/media/podcast", analyticsId: "util_podcast" },
   { label: "Watch Award TV Show", href: "/media/tv", analyticsId: "util_tv_show" },
   { label: "Join Our Team", href: "/vacancies", analyticsId: "util_join_team" },
+  { label: "Meet Our Global Volunteer Team", href: "/meet-the-team", analyticsId: "util_meet_team" },
 ];
 
 // Re-export the phase-driven CTA so consumers have one import surface.
