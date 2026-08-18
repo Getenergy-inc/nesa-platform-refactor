@@ -112,12 +112,6 @@ export const MASTER_TIMELINE_PUBLIC_NOTICE = {
  */
 export const MASTER_TIMELINE_OPEN_ITEMS: { id: string; item: string; detail: string }[] = [
   {
-    id: "podcast-8-9-unconfirmed",
-    item: "Education Enablers Podcast — Episodes 8 & 9 have no confirmed date or topic",
-    detail:
-      "No source record confirms air dates or themes for Episodes 8 and 9. Published as unconfirmed; no dates invented.",
-  },
-  {
     id: "gbg-verification-past-showcase-2",
     item:
       "Gold-Blue Garnet verification (closes 13 December) extends 5 days past TV Showcase 2 (8 December)",
@@ -184,7 +178,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     startsAt: "2026-08-27T00:00:00Z",
     milestone: "EduAid-Africa Webinar Week 1 · Fame With Purpose (pilot)",
     activity:
-      "How Africa's Sports, Music and Digital Icons Can Turn Influence Into Education Opportunity. Pilot episode of the 7-week series.",
+      "How Africa's Sports, Music and Digital Icons Can Turn Influence Into Education Opportunity. Pilot episode of the 9-week series.",
     outcome: "Non-competitive · Influencer Education Impact",
     track: "webinar",
     href: "/media/webinars",
@@ -402,18 +396,35 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     href: "/media/webinars",
   },
   {
-    id: "podcast-8-9",
-    dateLabel: "To be confirmed",
+    id: "podcast-8",
+    dateLabel: "Tuesday, 13 October 2026",
     startsAt: "2026-10-13T00:00:00Z",
-    milestone: "Education Enablers Podcast — Episodes 8 & 9",
-    activity:
-      "Dates and topics are not yet confirmed (indicatively around 13 October 2026). Published as unconfirmed rather than estimated.",
-    outcome: "To be confirmed",
+    milestone: "Education Enablers Podcast — Episode 8",
+    activity: "Education Beyond Recognition — CSR, NGOs, Political Leadership & Institutional Action",
+    outcome: "Convert institutional commitments into measurable education action",
     track: "podcast",
-    toBeConfirmed: true,
+    href: "/media",
     details: [
-      "Topic: Not yet confirmed — no source record gives dates or themes for these two episodes.",
-      "Purpose: To be confirmed",
+      "Explore how companies, NGOs, public institutions, political leaders, education stakeholders and development partners can move beyond recognition and commitment into measurable education action across Africa.",
+      "Topics: Corporate Social Responsibility for Education · NGO Education Impact · Political Leadership for Education · Public-Sector Education Action · Institutional Education Partnerships · Education Technology · School Infrastructure · Rebuild My School Africa · Special-Needs School Support · Teacher Development · Scholarships",
+      "Purpose: Prepare institutions, companies, NGOs and public-sector stakeholders to convert education commitments into practical and measurable education outcomes.",
+      "Connects to: EduAid-Africa Webinar Week 8 — Thursday, 26 November 2026",
+    ],
+  },
+  {
+    id: "podcast-9",
+    dateLabel: "Tuesday, 20 October 2026",
+    startsAt: "2026-10-20T00:00:00Z",
+    milestone: "Education Enablers Podcast — Episode 9",
+    activity: "Africa's Education Champions — Influencers, Africa Education Icons & Friends of Education",
+    outcome: "Move from recognition to participation, partnership and impact",
+    track: "podcast",
+    href: "/media",
+    details: [
+      "Explore how influencers, Africa Education Icons, education enablers, diaspora Africans, Friends of Education and Friends of EduAid-Africa can transform recognition, influence and goodwill into sustained education impact.",
+      "Topics: Influencer Education Impact · Africa Education Icons · Gold-Blue Garnet Education Enablers · Platinum Recognition · Friends of Education · Friends of EduAid-Africa · African and Diaspora Education Champions · Education Advocacy · Scholarship Mobilisation · Rebuild My School Africa · Special-Needs School Support · Education Legacy 2027",
+      "Purpose: Move people from recognition and admiration to participation, partnership and measurable education impact.",
+      "Connects to: EduAid-Africa Webinar Week 9 — Thursday, 3 December 2026",
     ],
   },
   {
@@ -499,6 +510,38 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     outcome: "Content boundary applies",
     track: "webinar",
     href: "/media/webinars",
+  },
+  {
+    id: "webinar-8",
+    dateLabel: "Thursday, 26 November 2026",
+    startsAt: "2026-11-26T00:00:00Z",
+    milestone: "EduAid-Africa Webinar Week 8 · Education Beyond Recognition",
+    activity:
+      "CSR, NGOs, Political Leadership & Institutional Action — how companies, NGOs, public institutions, political leaders and education partners can turn commitment into measurable education impact across Africa.",
+    outcome: "Impact & Legacy · Non-competitive · Institutional Education Impact",
+    track: "webinar",
+    href: "/media/webinars",
+    details: [
+      "Promotes: Corporate Social Responsibility for Education · CSR Education Impact — Africa · CSR Education Impact — Nigeria · NGO Education Impact — Nigeria · NGO Education Impact — Africa · Political Leadership & Contribution to Education · Public-Sector Education Action · Institutional Education Partnerships · Rebuild My School Africa · Special-Needs School Support · Education Infrastructure · Digital Education",
+      "This is an education-impact discussion, not a judging, scoring or winner-selection session. Participation, sponsorship or partnership does not determine any NESA-Africa recognition outcome.",
+      "Companion episode: Education Enablers Podcast Episode 8 — Tuesday, 13 October 2026",
+    ],
+  },
+  {
+    id: "webinar-9",
+    dateLabel: "Thursday, 3 December 2026",
+    startsAt: "2026-12-03T00:00:00Z",
+    milestone: "EduAid-Africa Webinar Week 9 · Africa's Education Champions",
+    activity:
+      "Influencers, Africa Education Icons & Friends of Education — the final webinar before the Recognition Gala, turning recognition and influence into a continental education movement.",
+    outcome: "Impact & Legacy · Non-competitive · Final Pre-Gala Webinar",
+    track: "webinar",
+    href: "/media/webinars",
+    details: [
+      "Promotes: Influencer Education Impact · Africa Education Icons · Gold-Blue Garnet Education Enablers · Platinum Education Recognition · Friends of Education · Friends of EduAid-Africa · African Education Champions · Diaspora Education Support · Education Advocacy · Scholarship Mobilisation · Rebuild My School Africa · Special-Needs School Support · Afri-EduTourism 2027 · Volunteer Education Missions · Education Legacy 2027",
+      "Recognition is not the destination. It is an invitation to do more: Recognition → Commitment → Partnership → Action → Impact → Legacy.",
+      "Companion episode: Education Enablers Podcast Episode 9 — Tuesday, 20 October 2026",
+    ],
   },
   {
     id: "tier234-nominations-close",

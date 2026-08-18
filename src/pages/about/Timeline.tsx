@@ -539,7 +539,7 @@ export default function Timeline() {
               The Seven Webinar Weeks
             </h2>
             <p className="mt-3 text-sm text-[#b0afa8]">
-              Bi-weekly Thursdays, 27 August – 19 November 2026. Open each week for the full
+              Bi-weekly Thursdays, 27 August – 3 December 2026. Open each week for the full
               theme and the recognition pathways it promotes.
             </p>
           </div>

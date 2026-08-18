@@ -1,7 +1,7 @@
 /**
  * EduAid-Africa Webinar Series 2026 — canonical timetable.
  * ------------------------------------------------------
- * Single source of truth for the 7-week series starting Thursday
+ * Single source of truth for the 9-week series starting Thursday
  * 27 August 2026 (corrected schedule). Every NESA-Africa surface that shows
  * a webinar timetable must read from this module — no hard-coded episode
  * dates elsewhere.
@@ -203,17 +203,74 @@ export const EDUAID_WEBINAR_SERIES_2026: EduAidWebinarEpisode[] = [
     competitiveStatus: "icon-boundary",
     competitiveLabel: "Content boundary applies — no Icon nominee may be named",
   },
+  {
+    episode: 8,
+    id: "week-8-education-beyond-recognition",
+    isoDate: "2026-11-26",
+    dateLabel: "Thursday, 26 November 2026",
+    title: "Education Beyond Recognition",
+    subtitle: "CSR, NGOs, Political Leadership & Institutional Action",
+    summary:
+      "How companies, NGOs, public institutions, political leaders and education partners can turn commitment into measurable education impact across Africa.",
+    promotes: [
+      "Corporate Social Responsibility for Education",
+      "CSR Education Impact — Africa",
+      "CSR Education Impact — Nigeria",
+      "NGO Education Impact — Nigeria",
+      "NGO Education Impact — Africa",
+      "Political Leadership & Contribution to Education",
+      "Public-Sector Education Action",
+      "Institutional Education Partnerships",
+      "Rebuild My School Africa",
+      "Special-Needs School Support",
+      "Education Infrastructure",
+      "Digital Education",
+    ],
+    tiers: "Impact & Legacy · Institutional Education Impact",
+    competitiveStatus: "non-competitive",
+    competitiveLabel: "Non-competitive",
+  },
+  {
+    episode: 9,
+    id: "week-9-africas-education-champions",
+    isoDate: "2026-12-03",
+    dateLabel: "Thursday, 3 December 2026",
+    title: "Africa's Education Champions",
+    subtitle: "Influencers, Africa Education Icons & Friends of Education",
+    summary:
+      "Final pre-Gala webinar — how influencers, Africa Education Icons, education enablers, diaspora Africans, Friends of Education and Friends of EduAid-Africa can turn recognition and influence into a continental education movement. Recognition is not the destination. It is an invitation to do more: Recognition → Commitment → Partnership → Action → Impact → Legacy.",
+    promotes: [
+      "Influencer Education Impact",
+      "Africa Education Icons",
+      "Gold-Blue Garnet Education Enablers",
+      "Platinum Education Recognition",
+      "Friends of Education",
+      "Friends of EduAid-Africa",
+      "African Education Champions",
+      "Diaspora Education Support",
+      "Education Advocacy",
+      "Scholarship Mobilisation",
+      "Rebuild My School Africa",
+      "Special-Needs School Support",
+      "Afri-EduTourism 2027",
+      "Volunteer Education Missions",
+      "Education Legacy 2027",
+    ],
+    tiers: "Impact & Legacy · Final Pre-Gala Webinar",
+    competitiveStatus: "non-competitive",
+    competitiveLabel: "Non-competitive",
+  },
 ];
 
 export const EDUAID_SERIES_META = {
   name: "EduAid-Africa Webinar Series",
-  strapline: "The 7-Week Series, Bi-Weekly, Starting 27 August 2026",
+  strapline: "The 9-Week Series, Bi-Weekly, Starting 27 August 2026",
   episodeCount: EDUAID_WEBINAR_SERIES_2026.length,
   cadence: "Bi-weekly, Thursdays",
   seriesStartLabel: "27 August 2026",
-  seriesEndLabel: "19 November 2026",
+  seriesEndLabel: "3 December 2026",
   seriesStartIso: "2026-08-27",
-  seriesEndIso: "2026-11-19",
+  seriesEndIso: "2026-12-03",
   masterTimelineLine: "27 August 2026 | EduAid-Africa Webinar Series begins",
 } as const;
 
@@ -242,7 +299,7 @@ export const EDUAID_PRODUCTION_MODEL = {
   notes: [
     "80-seat Focus Group Discussion model, 4 breakout rooms per episode.",
     "Seats and facilitators are recruited per episode via public campaign, not a standing internal team.",
-    "Week 1 (27 August) serves as the pilot — actual sign-up numbers and facilitator availability from this episode determine whether the 80-seat / 4-room model holds for Weeks 2–7, or needs adjusting.",
+    "Week 1 (27 August) serves as the pilot — actual sign-up numbers and facilitator availability from this episode determine whether the 80-seat / 4-room model holds for Weeks 2–9, or needs adjusting.",
   ],
 } as const;
 
@@ -264,4 +321,4 @@ export const EDUAID_CROSS_REFERENCE = {
 
 /** Where the series sits in the wider 2026 cycle calendar. */
 export const EDUAID_SERIES_CONTEXT =
-  `This 7-week run is one line in the larger 2026 cycle calendar — "${EDUAID_SERIES_META.masterTimelineLine}" — running in parallel with the nomination window (${NOMINATIONS_OPEN_LABEL} onward) and the Icon judging window (${ICON_JUDGING_WINDOW_LABEL}), and concluding on 19 November, weeks before the ${PROGRAMME_END_LABEL} Recognition Gala.`;
+  `This 9-week run is one line in the larger 2026 cycle calendar — "${EDUAID_SERIES_META.masterTimelineLine}" — running in parallel with the nomination window (${NOMINATIONS_OPEN_LABEL} onward) and the Icon judging window (${ICON_JUDGING_WINDOW_LABEL}), and concluding on 3 December, days before the ${PROGRAMME_END_LABEL} Recognition Gala.`;
