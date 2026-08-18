@@ -78,7 +78,7 @@ export function TeamCollageHero({ className }: { className?: string }) {
     >
       {/* Collage layer */}
       {rows.length > 0 && (
-        <div className="absolute inset-0 flex flex-col justify-center gap-3 md:gap-4 opacity-40">
+        <div className="absolute inset-0 flex flex-col justify-center gap-3 md:gap-4 opacity-70">
           {rows.map((row, i) => (
             <Strip
               key={i}
@@ -92,8 +92,8 @@ export function TeamCollageHero({ className }: { className?: string }) {
       )}
 
       {/* Readability overlays */}
-      <div className="absolute inset-0 bg-charcoal/75" />
-      <div className="absolute inset-0 bg-gradient-to-b from-charcoal via-charcoal/70 to-black" />
+      <div className="absolute inset-0 bg-charcoal/55" />
+      <div className="absolute inset-0 bg-gradient-to-b from-charcoal/90 via-charcoal/50 to-black/95" />
       <div className="absolute -top-1/3 left-1/4 h-96 w-96 rounded-full bg-gold blur-3xl opacity-10 pointer-events-none" />
 
       {/* Headline */}
