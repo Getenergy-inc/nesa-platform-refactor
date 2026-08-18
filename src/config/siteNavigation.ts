@@ -156,6 +156,7 @@ export const SITE_NAV: NavItem[] = [
       { label: "Sponsor", href: "/get-involved/gala-sponsorship" },
       { label: "Partner", href: "/partners" },
       { label: "Endorse", href: "/endorsements" },
+      { label: "Global Volunteer Team", href: "/volunteers" },
       { label: "Volunteer", href: "/vacancies" },
       { label: "Ambassador", href: "/ambassadors" },
       { label: "Chapters", href: "/chapters" },
