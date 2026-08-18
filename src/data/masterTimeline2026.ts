@@ -518,6 +518,38 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     href: "/media/webinars",
   },
   {
+    id: "webinar-8",
+    dateLabel: "Thursday, 26 November 2026",
+    startsAt: "2026-11-26T00:00:00Z",
+    milestone: "EduAid-Africa Webinar Week 8 · Education Beyond Recognition",
+    activity:
+      "CSR, NGOs, Political Leadership & Institutional Action — how companies, NGOs, public institutions, political leaders and education partners can turn commitment into measurable education impact across Africa.",
+    outcome: "Impact & Legacy · Non-competitive · Institutional Education Impact",
+    track: "webinar",
+    href: "/media/webinars",
+    details: [
+      "Promotes: Corporate Social Responsibility for Education · CSR Education Impact — Africa · CSR Education Impact — Nigeria · NGO Education Impact — Nigeria · NGO Education Impact — Africa · Political Leadership & Contribution to Education · Public-Sector Education Action · Institutional Education Partnerships · Rebuild My School Africa · Special-Needs School Support · Education Infrastructure · Digital Education",
+      "This is an education-impact discussion, not a judging, scoring or winner-selection session. Participation, sponsorship or partnership does not determine any NESA-Africa recognition outcome.",
+      "Companion episode: Education Enablers Podcast Episode 8 — Tuesday, 13 October 2026",
+    ],
+  },
+  {
+    id: "webinar-9",
+    dateLabel: "Thursday, 3 December 2026",
+    startsAt: "2026-12-03T00:00:00Z",
+    milestone: "EduAid-Africa Webinar Week 9 · Africa's Education Champions",
+    activity:
+      "Influencers, Africa Education Icons & Friends of Education — the final webinar before the Recognition Gala, turning recognition and influence into a continental education movement.",
+    outcome: "Impact & Legacy · Non-competitive · Final Pre-Gala Webinar",
+    track: "webinar",
+    href: "/media/webinars",
+    details: [
+      "Promotes: Influencer Education Impact · Africa Education Icons · Gold-Blue Garnet Education Enablers · Platinum Education Recognition · Friends of Education · Friends of EduAid-Africa · African Education Champions · Diaspora Education Support · Education Advocacy · Scholarship Mobilisation · Rebuild My School Africa · Special-Needs School Support · Afri-EduTourism 2027 · Volunteer Education Missions · Education Legacy 2027",
+      "Recognition is not the destination. It is an invitation to do more: Recognition → Commitment → Partnership → Action → Impact → Legacy.",
+      "Companion episode: Education Enablers Podcast Episode 9 — Tuesday, 20 October 2026",
+    ],
+  },
+  {
     id: "tier234-nominations-close",
     dateLabel: `Saturday, ${CERTIFICATE_WINDOW_CLOSE_LABEL}`,
     startsAt: "2026-11-21T00:00:00Z",
