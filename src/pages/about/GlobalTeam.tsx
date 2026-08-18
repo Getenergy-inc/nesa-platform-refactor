@@ -64,8 +64,8 @@ const NETWORK: TeamGroup[] = [
     title: "Volunteers",
     blurb:
       "Researchers, translators, designers, community organisers and event crew who make each recognition cycle possible across the continent.",
-    href: "/volunteers",
-    cta: "Volunteer network",
+    href: "/meet-the-team",
+    cta: "Meet Our Global Volunteer Team",
   },
   {
     icon: Megaphone,

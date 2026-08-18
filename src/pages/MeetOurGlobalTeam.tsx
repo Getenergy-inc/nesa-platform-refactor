@@ -18,6 +18,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useGlobalTeamStats, formatStat } from "@/hooks/useGlobalTeamStats";
+import { TeamCollageHero } from "@/components/team/TeamCollageHero";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -84,25 +85,7 @@ export default function MeetOurGlobalTeam() {
         />
       </Helmet>
 
-      {/* Hero */}
-      <section className="relative px-4 py-20 bg-gradient-to-b from-charcoal via-charcoal to-black overflow-hidden">
-        <div className="absolute -top-1/3 left-1/4 h-96 w-96 rounded-full bg-gold blur-3xl opacity-10 pointer-events-none" />
-        <div className="container mx-auto max-w-4xl relative text-center">
-          <motion.div {...fadeUp}>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold/10 border border-gold/30 text-gold text-xs uppercase tracking-widest mb-5">
-              <Users className="h-3 w-3" /> The People Behind the Movement
-            </div>
-            <h1 className="font-playfair text-4xl md:text-6xl text-gold mb-5">
-              Meet Our Global Team
-            </h1>
-            <p className="text-white/70 text-lg leading-relaxed">
-              NESA-Africa isn't run from a single office — it's built by a growing,
-              continent-spanning team of volunteers, judges, and researchers who believe
-              Africa's education enablers deserve to be seen.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <TeamCollageHero />
 
       {/* By the Numbers */}
       <section className="px-4 py-16 bg-black/40">
@@ -196,7 +179,7 @@ export default function MeetOurGlobalTeam() {
                 className="border-gold/40 text-gold hover:bg-gold/10"
               >
                 <Link to="/volunteers">
-                  Meet the Team <ArrowRight className="ml-2 h-4 w-4" />
+                  Browse the Volunteer Directory <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </div>

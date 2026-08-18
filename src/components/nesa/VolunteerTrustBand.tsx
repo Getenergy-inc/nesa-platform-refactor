@@ -21,8 +21,8 @@ export function VolunteerTrustBand() {
           <span className="font-bold text-gold">{formatStat(stats.countries)}</span> countries ·{" "}
           <span className="font-bold text-gold">{formatStat(stats.activeChapters)}</span> active chapters
         </p>
-        <Link to="/volunteers" className="inline-flex items-center gap-1 text-gold font-semibold hover:underline">
-          Meet the team <ArrowRight className="h-4 w-4" />
+        <Link to="/meet-the-team" className="inline-flex items-center gap-1 text-gold font-semibold hover:underline">
+          Meet Our Global Volunteer Team <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
     </section>
