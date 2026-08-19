@@ -202,10 +202,15 @@ export default function FriendsOfEduAidAfrica() {
               </div>
             ))}
           </div>
+          <GovernanceLeadershipPreview />
         </div>
       </section>
 
+      {/* Programs & Initiatives */}
+      <ProgramsInitiativesSection />
+
       {/* CTA cards */}
+
       <section className="bg-charcoal text-white px-4 pb-20">
         <div className="max-w-6xl mx-auto grid gap-4 md:grid-cols-3">
           {FRIENDS_CTAS.map((c) => (
