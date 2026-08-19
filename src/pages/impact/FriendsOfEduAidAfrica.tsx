@@ -29,7 +29,8 @@ import EducationImpactStatsGrid from "@/components/impact/EducationImpactStatsGr
 import { GalleryGrid } from "@/components/gallery/GalleryGrid";
 import { getFeaturedImages } from "@/data/gallery";
 import FriendsWalletWidget from "@/components/impact/FriendsWalletWidget";
-import GovernanceLeadershipSection from "@/components/impact/GovernanceLeadershipSection";
+import GovernanceLeadershipPreview from "@/components/impact/GovernanceLeadershipPreview";
+import ProgramsInitiativesSection from "@/components/impact/ProgramsInitiativesSection";
 
 /** Real SCEF/NESA programme surfaces that already exist in this project. */
 const PROGRAMME_LINKS: { label: string; href: string; external?: boolean }[] = [
