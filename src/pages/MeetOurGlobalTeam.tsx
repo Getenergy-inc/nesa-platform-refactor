@@ -2,7 +2,7 @@
 // Live counts come from useGlobalTeamStats (volunteers + judges + NRC + chapters).
 
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import { AboutSeo } from "@/pages/about/AboutSeo";
 import { motion } from "framer-motion";
 import {
   Users,
