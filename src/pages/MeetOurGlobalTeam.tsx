@@ -78,13 +78,16 @@ export default function MeetOurGlobalTeam() {
 
   return (
     <div className="min-h-screen bg-charcoal text-white">
-      <Helmet>
-        <title>Meet Our Global Volunteer Team | NESA-Africa</title>
-        <meta
-          name="description"
-          content="NESA-Africa is built by a continent-spanning team of volunteers, judges and researchers verifying and recognising Africa's education enablers."
-        />
-      </Helmet>
+      <AboutSeo
+        title="Meet Our Global Volunteer Team | NESA-Africa"
+        description="NESA-Africa is built by a continent-spanning team of volunteers, judges and researchers verifying and recognising Africa's education enablers."
+        path="/meet-the-team"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Meet Our Global Volunteer Team", path: "/meet-the-team" },
+        ]}
+      />
+
 
       <TeamCollageHero />
 
