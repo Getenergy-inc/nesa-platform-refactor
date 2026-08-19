@@ -13,3 +13,4 @@ export { default as AdminGalleryCMS } from "./GalleryAdmin";
 export { default as AdminIconMigrationVerification } from "./IconMigrationVerification";
 export { default as AdminIconPortraitGaps } from "./IconPortraitGaps";
 export { default as AdminBulkImportNominees } from "./BulkImportNominees";
+export { default as AdminRecruitmentTracker } from "./AdminRecruitmentTracker";
