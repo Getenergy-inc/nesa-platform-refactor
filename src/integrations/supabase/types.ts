@@ -8857,6 +8857,80 @@ export type Database = {
           },
         ]
       }
+      recruitment_applicants: {
+        Row: {
+          category_id: string
+          created_at: string
+          current_status: string
+          full_name: string
+          id: string
+          next_action: string
+          notes: string | null
+          pipeline_stage: Database["public"]["Enums"]["recruitment_pipeline_stage"]
+          updated_at: string
+        }
+        Insert: {
+          category_id: string
+          created_at?: string
+          current_status?: string
+          full_name: string
+          id?: string
+          next_action?: string
+          notes?: string | null
+          pipeline_stage?: Database["public"]["Enums"]["recruitment_pipeline_stage"]
+          updated_at?: string
+        }
+        Update: {
+          category_id?: string
+          created_at?: string
+          current_status?: string
+          full_name?: string
+          id?: string
+          next_action?: string
+          notes?: string | null
+          pipeline_stage?: Database["public"]["Enums"]["recruitment_pipeline_stage"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recruitment_applicants_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "recruitment_vacancy_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recruitment_vacancy_categories: {
+        Row: {
+          created_at: string
+          display_order: number
+          id: string
+          name: string
+          notes: string | null
+          status: Database["public"]["Enums"]["recruitment_vacancy_status"]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          name: string
+          notes?: string | null
+          status?: Database["public"]["Enums"]["recruitment_vacancy_status"]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          name?: string
+          notes?: string | null
+          status?: Database["public"]["Enums"]["recruitment_vacancy_status"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
       referral_events: {
         Row: {
           created_at: string | null
@@ -12393,6 +12467,19 @@ export type Database = {
         | "ARCHIVED"
       product_category: "APPAREL" | "ACCESSORIES" | "LIMITED" | "BUNDLES"
       push_status: "pending" | "pushed" | "failed" | "revoked"
+      recruitment_pipeline_stage:
+        | "under_review"
+        | "awaiting_info"
+        | "draft_pending_approval"
+        | "contacted_needs_verification"
+        | "no_response_required"
+        | "withdrawn_closed"
+      recruitment_vacancy_status:
+        | "active"
+        | "expiring_soon"
+        | "needs_correction"
+        | "expired"
+        | "under_review"
       referral_event_type:
         | "SIGNUP"
         | "NOMINATION_PAID"
@@ -12801,6 +12888,21 @@ export const Constants = {
       ],
       product_category: ["APPAREL", "ACCESSORIES", "LIMITED", "BUNDLES"],
       push_status: ["pending", "pushed", "failed", "revoked"],
+      recruitment_pipeline_stage: [
+        "under_review",
+        "awaiting_info",
+        "draft_pending_approval",
+        "contacted_needs_verification",
+        "no_response_required",
+        "withdrawn_closed",
+      ],
+      recruitment_vacancy_status: [
+        "active",
+        "expiring_soon",
+        "needs_correction",
+        "expired",
+        "under_review",
+      ],
       referral_event_type: [
         "SIGNUP",
         "NOMINATION_PAID",
