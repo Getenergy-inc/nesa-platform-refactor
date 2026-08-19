@@ -142,6 +142,10 @@ export default function MeetOurGlobalTeam() {
         </div>
       </section>
 
+      <GlobalVolunteerTeamSection />
+
+
+
       {/* Why It Works */}
       <section className="px-4 py-16 bg-black/40">
         <div className="container mx-auto max-w-3xl text-center">
