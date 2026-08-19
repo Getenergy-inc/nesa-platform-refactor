@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useGlobalTeamStats, formatStat } from "@/hooks/useGlobalTeamStats";
 import { TeamCollageHero } from "@/components/team/TeamCollageHero";
+import { GlobalVolunteerTeamSection } from "@/components/team/GlobalVolunteerTeamSection";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -140,6 +141,10 @@ export default function MeetOurGlobalTeam() {
           </div>
         </div>
       </section>
+
+      <GlobalVolunteerTeamSection />
+
+
 
       {/* Why It Works */}
       <section className="px-4 py-16 bg-black/40">
