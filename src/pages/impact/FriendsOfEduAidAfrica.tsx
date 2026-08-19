@@ -29,7 +29,8 @@ import EducationImpactStatsGrid from "@/components/impact/EducationImpactStatsGr
 import { GalleryGrid } from "@/components/gallery/GalleryGrid";
 import { getFeaturedImages } from "@/data/gallery";
 import FriendsWalletWidget from "@/components/impact/FriendsWalletWidget";
-import GovernanceLeadershipSection from "@/components/impact/GovernanceLeadershipSection";
+import GovernanceLeadershipPreview from "@/components/impact/GovernanceLeadershipPreview";
+import ProgramsInitiativesSection from "@/components/impact/ProgramsInitiativesSection";
 
 /** Real SCEF/NESA programme surfaces that already exist in this project. */
 const PROGRAMME_LINKS: { label: string; href: string; external?: boolean }[] = [
@@ -202,10 +203,15 @@ export default function FriendsOfEduAidAfrica() {
               </div>
             ))}
           </div>
+          <GovernanceLeadershipPreview />
         </div>
       </section>
 
+      {/* Programs & Initiatives */}
+      <ProgramsInitiativesSection />
+
       {/* CTA cards */}
+
       <section className="bg-charcoal text-white px-4 pb-20">
         <div className="max-w-6xl mx-auto grid gap-4 md:grid-cols-3">
           {FRIENDS_CTAS.map((c) => (
