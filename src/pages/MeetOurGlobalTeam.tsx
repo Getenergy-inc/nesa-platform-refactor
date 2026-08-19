@@ -2,7 +2,7 @@
 // Live counts come from useGlobalTeamStats (volunteers + judges + NRC + chapters).
 
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import { AboutSeo } from "@/pages/about/AboutSeo";
 import { motion } from "framer-motion";
 import {
   Users,
@@ -78,13 +78,16 @@ export default function MeetOurGlobalTeam() {
 
   return (
     <div className="min-h-screen bg-charcoal text-white">
-      <Helmet>
-        <title>Meet Our Global Volunteer Team | NESA-Africa</title>
-        <meta
-          name="description"
-          content="NESA-Africa is built by a continent-spanning team of volunteers, judges and researchers verifying and recognising Africa's education enablers."
-        />
-      </Helmet>
+      <AboutSeo
+        title="Meet Our Global Volunteer Team | NESA-Africa"
+        description="NESA-Africa is built by a continent-spanning team of volunteers, judges and researchers verifying and recognising Africa's education enablers."
+        path="/meet-the-team"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Meet Our Global Volunteer Team", path: "/meet-the-team" },
+        ]}
+      />
+
 
       <TeamCollageHero />
 
