@@ -251,29 +251,43 @@ export function InfluencerHallOfFameSection() {
           </div>
         </div>
 
-        {/* Browse by Recognition Subcategory */}
+        {/* Browse by Region */}
         <div id="influencer-regional-grid">
           <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-2">
-            Browse Existing Nominees by Recognition Subcategory
+            Browse Existing Nominees by Region
           </h3>
           <p className="text-white/60 text-sm mb-6">
             {filtered.length} {filtered.length === 1 ? "nominee" : "nominees"} match your filters.
-            {region !== "all" && ` Region: ${region}.`}
+            Each card is badged <span className="text-gold">Social Media</span> or{" "}
+            <span className="text-gold">Music Icon</span>.
           </p>
 
           <div className="space-y-12">
-            {CATEGORIES.filter((c) => pathway === "all" || pathway === c.id).map((c) => {
-              const list = filtered.filter((n) => n.award_category === c.id);
-              return (
-                <SubcategoryBlock
-                  key={c.id}
-                  categoryId={c.id}
-                  label={OFFICIAL_SUBCATEGORY_LABELS[c.id]}
-                  nominees={list}
-                />
-              );
-            })}
+            {REGIONS.filter((r) => region === "all" || region === r).map((r) => (
+              <RegionBlock
+                key={r}
+                region={r}
+                nominees={byRegion.get(r) ?? []}
+                pathway={pathway}
+              />
+            ))}
           </div>
+
+          {filtered.length === 0 && (
+            <div className="rounded-xl border border-dashed border-gold/25 bg-gold/[0.04] p-8 text-center">
+              <p className="text-gold text-sm font-semibold mb-1">Nominations Open</p>
+              <p className="text-white/60 text-xs max-w-md mx-auto">
+                No nominees match these filters yet. Be the first to nominate an Education
+                Enabler.
+              </p>
+              <Link
+                to={NOMINATE_URL(pathway === "all" ? "social-media" : pathway)}
+                className="inline-block mt-3 text-xs font-semibold text-charcoal bg-gold px-4 py-2 rounded-lg hover:bg-gold/90"
+              >
+                Nominate Now
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </section>
