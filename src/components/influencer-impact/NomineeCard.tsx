@@ -23,15 +23,37 @@ export function NomineeCard({ nominee: n }: Props) {
   const profileLink =
     n.platform_profile_link ?? n.sports_profile_link ?? n.artist_profile_link;
 
+  const initials = n.nominee_name
+    .split(/\s+/)
+    .map((w) => w[0])
+    .filter(Boolean)
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+
   return (
     <article className="group rounded-2xl border border-white/10 bg-white/5 overflow-hidden hover:border-gold/40 transition-all">
       <div className="relative aspect-[4/3] overflow-hidden bg-charcoal">
-        <img
-          src={n.image}
-          alt={n.nominee_name}
-          loading="lazy"
-          className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-        />
+        {n.image ? (
+          <img
+            src={n.image}
+            alt={n.nominee_name}
+            loading="lazy"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).style.display = "none";
+            }}
+            className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+          />
+        ) : null}
+        <div
+          aria-hidden={n.image ? "true" : undefined}
+          className={`absolute inset-0 flex items-center justify-center bg-gradient-to-br from-charcoal to-black ${
+            n.image ? "-z-10" : ""
+          }`}
+        >
+          <span className="font-display text-3xl font-bold text-gold/70">{initials}</span>
+        </div>
+
         <div className="absolute top-2 left-2 flex flex-wrap gap-1.5">
           <Badge tone="gold">{category.shortName}</Badge>
           <Badge tone={n.verification_status === "VERIFIED" ? "emerald" : "amber"}>
