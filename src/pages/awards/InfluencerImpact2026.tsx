@@ -45,12 +45,18 @@ export default function InfluencerImpact2026() {
     });
   }, []);
 
-  // 2 nominees per pathway = 6
+  const { nominees: registerNominees } = useInfluencerNominees();
+
+  // 2 nominees per pathway = 6, preferring records that carry a real portrait
   const featured = useMemo(() => {
     const pick = (cat: "social-media" | "sports" | "music") =>
-      SEED_NOMINEES.filter((n) => n.award_category === cat).slice(0, 2);
+      registerNominees
+        .filter((n) => n.award_category === cat)
+        .sort((a, b) => Number(Boolean(b.image)) - Number(Boolean(a.image)))
+        .slice(0, 2);
     return [...pick("social-media"), ...pick("sports"), ...pick("music")];
-  }, []);
+  }, [registerNominees]);
+
 
   // Hero "Verified Nominees" must reflect the exact same live query the
   // pathway sliders use — never a seeded/static count.
