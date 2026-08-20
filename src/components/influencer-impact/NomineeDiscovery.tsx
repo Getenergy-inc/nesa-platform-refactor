@@ -10,14 +10,15 @@ import {
   SOCIAL_CONTENT_IMPACT_AREAS,
   SPORTS_IMPACT_AREAS,
   MUSIC_IMPACT_AREAS,
-  SEED_NOMINEES,
   COUNTRIES_BY_REGION,
   ALL_COUNTRIES,
   filterNominees,
   type CategoryId,
   type NomineeFilters,
 } from "@/config/awards/influencerImpact2026";
+import { useInfluencerNominees } from "@/hooks/useInfluencerNominees";
 import { NomineeCard } from "./NomineeCard";
+
 
 interface Props {
   category: CategoryId | "all";
@@ -27,6 +28,7 @@ interface Props {
 export function NomineeDiscovery({ category, onCategoryChange }: Props) {
   const [filters, setFilters] = useState<NomineeFilters>({});
   const [search, setSearch] = useState("");
+  const { nominees } = useInfluencerNominees();
 
   const allImpactAreas = [
     ...SOCIAL_CONTENT_IMPACT_AREAS,
@@ -42,13 +44,14 @@ export function NomineeDiscovery({ category, onCategoryChange }: Props) {
 
   const results = useMemo(
     () =>
-      filterNominees(SEED_NOMINEES, {
+      filterNominees(nominees, {
         ...filters,
         category,
         search,
       }),
-    [filters, category, search],
+    [nominees, filters, category, search],
   );
+
 
   const update = (patch: Partial<NomineeFilters>) =>
     setFilters((p) => ({ ...p, ...patch }));

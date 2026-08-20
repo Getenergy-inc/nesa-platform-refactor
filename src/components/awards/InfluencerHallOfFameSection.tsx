@@ -14,16 +14,17 @@ import {
 import {
   CATEGORIES,
   REGIONS,
-  SEED_NOMINEES,
   COUNTRIES_BY_REGION,
   NOMINATE_URL,
   type CategoryId,
   type RegionId,
   type InfluencerNominee,
 } from "@/config/awards/influencerImpact2026";
+import { useInfluencerNominees } from "@/hooks/useInfluencerNominees";
 import { NomineeCard } from "@/components/influencer-impact/NomineeCard";
 import { Button } from "@/components/ui/button";
 import { trackEvent } from "@/lib/analytics";
+
 
 /**
  * Influencer Education Impact — Existing Nominees & Hall of Fame Preview.
@@ -36,9 +37,10 @@ export function InfluencerHallOfFameSection() {
   const [pathway, setPathway] = useState<CategoryId | "all">("all");
   const [search, setSearch] = useState("");
   const [region, setRegion] = useState<RegionId | "all">("all");
+  const { nominees } = useInfluencerNominees();
 
   const filtered = useMemo(() => {
-    return SEED_NOMINEES.filter((n) => {
+    return nominees.filter((n) => {
       if (pathway !== "all" && n.award_category !== pathway) return false;
       if (region !== "all" && n.nominee_region !== region) return false;
       if (search) {
@@ -49,7 +51,7 @@ export function InfluencerHallOfFameSection() {
       }
       return true;
     });
-  }, [pathway, region, search]);
+  }, [nominees, pathway, region, search]);
 
   const byRegion = useMemo(() => {
     const map = new Map<RegionId, InfluencerNominee[]>();
@@ -59,18 +61,19 @@ export function InfluencerHallOfFameSection() {
   }, [filtered]);
 
   const stats = useMemo(() => {
-    const total = SEED_NOMINEES.length;
-    const social = SEED_NOMINEES.filter((n) => n.award_category === "social-media").length;
-    const sports = SEED_NOMINEES.filter((n) => n.award_category === "sports").length;
-    const music = SEED_NOMINEES.filter((n) => n.award_category === "music").length;
-    const countries = new Set(SEED_NOMINEES.map((n) => n.nominee_country)).size;
-    const regions = new Set(SEED_NOMINEES.map((n) => n.nominee_region)).size;
-    const diaspora = SEED_NOMINEES.filter(
+    const total = nominees.length;
+    const social = nominees.filter((n) => n.award_category === "social-media").length;
+    const sports = nominees.filter((n) => n.award_category === "sports").length;
+    const music = nominees.filter((n) => n.award_category === "music").length;
+    const countries = new Set(nominees.map((n) => n.nominee_country)).size;
+    const regions = new Set(nominees.map((n) => n.nominee_region)).size;
+    const diaspora = nominees.filter(
       (n) => n.recognition_class === "African in the Diaspora",
     ).length;
-    const verified = SEED_NOMINEES.filter((n) => n.verification_status === "VERIFIED").length;
+    const verified = nominees.filter((n) => n.verification_status === "VERIFIED").length;
     return { total, social, sports, music, countries, regions, diaspora, verified };
-  }, []);
+  }, [nominees]);
+
 
   return (
     <section
@@ -469,7 +472,7 @@ function RegionalBlock({
 
       {nominees.length > 0 ? (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {nominees.slice(0, 4).map((n) => (
+          {nominees.slice(0, 12).map((n) => (
             <NomineeCard key={n.slug} nominee={n} />
           ))}
         </div>
