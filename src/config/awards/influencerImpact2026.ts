@@ -335,6 +335,13 @@ export const CATEGORIES: CategoryConfig[] = [
   },
 ];
 
+/** Official NESA-Africa subcategory labels used on public surfaces. */
+export const OFFICIAL_SUBCATEGORY_LABELS: Record<CategoryId, string> = {
+  "social-media": "Africa Social Media Influencer Education Impact",
+  music: "Africa Music Icon Education Impact",
+  sports: "Africa Sports Icon Education Impact",
+};
+
 export const HERO_STATS = [
   { value: "27", label: "Countries Represented" },
   { value: "3", label: "Recognition Categories" },

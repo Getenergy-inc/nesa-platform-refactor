@@ -1,7 +1,10 @@
 import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { Search } from "lucide-react";
 import {
   CATEGORIES,
+  OFFICIAL_SUBCATEGORY_LABELS,
+  NOMINATE_URL,
   RECOGNITION_CLASSES,
   REGIONS,
   SOCIAL_PLATFORMS,
@@ -176,23 +179,53 @@ export function NomineeDiscovery({ category, onCategoryChange }: Props) {
           />
         </div>
 
-        <p className="text-xs text-white/55 mb-4" data-testid="nominee-result-count">
+        <p className="text-xs text-white/55 mb-6" data-testid="nominee-result-count">
           {results.length} {results.length === 1 ? "nominee" : "nominees"} match
           your filters
         </p>
 
-        {/* Grid */}
-        {results.length > 0 ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {results.map((n) => (
-              <NomineeCard key={n.slug} nominee={n} />
-            ))}
-          </div>
-        ) : (
-          <div className="rounded-xl border border-dashed border-white/15 bg-white/[0.02] p-10 text-center text-white/60 text-sm">
-            No nominees match these filters. Try widening your search.
-          </div>
-        )}
+        {/* Grouped by subcategory */}
+        <div className="space-y-12">
+          {CATEGORIES.filter((c) => category === "all" || category === c.id).map((c) => {
+            const group = results.filter((n) => n.award_category === c.id);
+            return (
+              <div key={c.id}>
+                <div className="flex flex-wrap items-baseline justify-between gap-2 mb-4 pb-2 border-b border-white/10">
+                  <h3 className="font-display text-xl md:text-2xl font-bold text-white">
+                    {OFFICIAL_SUBCATEGORY_LABELS[c.id]}
+                  </h3>
+                  <span className="text-[11px] uppercase tracking-wider text-gold/80">
+                    {group.length} {group.length === 1 ? "nominee" : "nominees"}
+                  </span>
+                </div>
+
+                {group.length > 0 ? (
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    {group.map((n) => (
+                      <NomineeCard key={n.slug} nominee={n} />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="rounded-xl border border-dashed border-gold/25 bg-gold/[0.04] p-8 text-center">
+                    <p className="text-gold text-sm font-semibold mb-1">
+                      Nominations Open
+                    </p>
+                    <p className="text-white/60 text-xs max-w-md mx-auto">
+                      No nominees recorded in this subcategory yet. Submit the first
+                      verified nomination for {OFFICIAL_SUBCATEGORY_LABELS[c.id]}.
+                    </p>
+                    <Link
+                      to={NOMINATE_URL(c.id)}
+                      className="inline-block mt-3 text-xs font-semibold text-charcoal bg-gold px-4 py-2 rounded-lg hover:bg-gold/90"
+                    >
+                      Nominate Now
+                    </Link>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
