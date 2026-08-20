@@ -3330,6 +3330,7 @@ export type Database = {
           award_category: string
           award_family: string
           club_team_or_foundation: string | null
+          contact_on_file: boolean
           content_impact_area: string | null
           created_at: string
           education_impact_summary: string
@@ -3367,6 +3368,7 @@ export type Database = {
           award_category: string
           award_family?: string
           club_team_or_foundation?: string | null
+          contact_on_file?: boolean
           content_impact_area?: string | null
           created_at?: string
           education_impact_summary?: string
@@ -3404,6 +3406,7 @@ export type Database = {
           award_category?: string
           award_family?: string
           club_team_or_foundation?: string | null
+          contact_on_file?: boolean
           content_impact_area?: string | null
           created_at?: string
           education_impact_summary?: string
@@ -3448,6 +3451,41 @@ export type Database = {
             columns: ["region_slug"]
             isOneToOne: false
             referencedRelation: "regions_v2"
+            referencedColumns: ["slug"]
+          },
+        ]
+      }
+      influencer_nominee_contacts: {
+        Row: {
+          contact_email: string | null
+          contact_phone: string | null
+          created_at: string
+          id: string
+          nominee_slug: string
+          updated_at: string
+        }
+        Insert: {
+          contact_email?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          id?: string
+          nominee_slug: string
+          updated_at?: string
+        }
+        Update: {
+          contact_email?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          id?: string
+          nominee_slug?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "influencer_nominee_contacts_nominee_slug_fkey"
+            columns: ["nominee_slug"]
+            isOneToOne: true
+            referencedRelation: "influencer_impact_nominees"
             referencedColumns: ["slug"]
           },
         ]
