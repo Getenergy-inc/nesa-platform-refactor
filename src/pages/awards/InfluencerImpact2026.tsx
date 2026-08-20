@@ -19,7 +19,9 @@ import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { Button } from "@/components/ui/button";
 import { InfluencerNominationForm } from "@/components/awards/InfluencerNominationForm";
 import { NomineeCard } from "@/components/influencer-impact/NomineeCard";
-import { SEED_NOMINEES, REGIONS } from "@/config/awards/influencerImpact2026";
+import { REGIONS } from "@/config/awards/influencerImpact2026";
+import { useInfluencerNominees } from "@/hooks/useInfluencerNominees";
+
 import { trackEvent } from "@/lib/analytics";
 import { SubcategoryPathways } from "@/components/awards/standard/sections";
 import { TierCategoryCards } from "@/components/awards/TierCategoryCards";
