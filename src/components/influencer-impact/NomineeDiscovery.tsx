@@ -28,6 +28,7 @@ interface Props {
 export function NomineeDiscovery({ category, onCategoryChange }: Props) {
   const [filters, setFilters] = useState<NomineeFilters>({});
   const [search, setSearch] = useState("");
+  const { nominees } = useInfluencerNominees();
 
   const allImpactAreas = [
     ...SOCIAL_CONTENT_IMPACT_AREAS,
@@ -43,13 +44,14 @@ export function NomineeDiscovery({ category, onCategoryChange }: Props) {
 
   const results = useMemo(
     () =>
-      filterNominees(SEED_NOMINEES, {
+      filterNominees(nominees, {
         ...filters,
         category,
         search,
       }),
-    [filters, category, search],
+    [nominees, filters, category, search],
   );
+
 
   const update = (patch: Partial<NomineeFilters>) =>
     setFilters((p) => ({ ...p, ...patch }));
