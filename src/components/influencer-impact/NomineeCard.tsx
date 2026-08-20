@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { CheckCircle2, Clock, MapPin, Share2, Plus, ExternalLink } from "lucide-react";
+import { CheckCircle2, Clock, MapPin, Share2, Plus, ExternalLink, Mail } from "lucide-react";
 import {
   CATEGORIES,
   NOMINATE_URL,
@@ -33,7 +33,9 @@ export function NomineeCard({ nominee: n }: Props) {
     .slice(0, 2);
 
   const [imageFailed, setImageFailed] = useState(false);
+  const [placeholderFailed, setPlaceholderFailed] = useState(false);
   const showImage = Boolean(n.image) && !imageFailed;
+  const showPlaceholder = !showImage && !placeholderFailed;
 
   return (
     <article className="group rounded-2xl border border-white/10 bg-white/5 overflow-hidden hover:border-gold/40 transition-all">
@@ -41,6 +43,16 @@ export function NomineeCard({ nominee: n }: Props) {
         <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-charcoal to-black">
           <span className="font-display text-3xl font-bold text-gold/70">{initials}</span>
         </div>
+        {showPlaceholder && (
+          <img
+            src="/images/Avatar.png"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            onError={() => setPlaceholderFailed(true)}
+            className="relative w-full h-full object-cover object-top opacity-45"
+          />
+        )}
         {showImage && (
           <img
             src={n.image}
@@ -94,6 +106,15 @@ export function NomineeCard({ nominee: n }: Props) {
             nominations
           </span>
           <div className="flex gap-1">
+            {n.contact_on_file && (
+              <span
+                className="text-gold/80 p-1.5 rounded bg-gold/10"
+                title="Contact details on file with the NESA-Africa research team"
+                aria-label="Contact details on file"
+              >
+                <Mail className="h-3.5 w-3.5" />
+              </span>
+            )}
             {profileLink && (
               <IconLink href={profileLink} label="View profile">
                 <ExternalLink className="h-3.5 w-3.5" />

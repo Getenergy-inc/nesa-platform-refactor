@@ -308,7 +308,7 @@ export const CATEGORIES: CategoryConfig[] = [
   {
     id: "sports",
     title: "African Sports Icons Supporting Education",
-    shortName: "Sports",
+    shortName: "Sports Icon",
     description:
       "Recognising athletes, sports foundations, academies, coaches, and sports leaders using sports as a tool for educational transformation.",
     primaryFieldLabel: "Area of Sport",
@@ -322,7 +322,7 @@ export const CATEGORIES: CategoryConfig[] = [
   {
     id: "music",
     title: "African Music Icons Supporting Education",
-    shortName: "Music",
+    shortName: "Music Icon",
     description:
       "Recognising musicians, performers, producers, music executives, and cultural icons using music, entertainment, concerts, lyrics, influence, and public campaigns to advance education awareness and youth empowerment across Africa.",
     primaryFieldLabel: "Music Genre",
@@ -366,6 +366,8 @@ export interface InfluencerNominee {
   verification_status: VerificationStatus;
   verified_nominations: number;
   image: string;
+  /** True when the research team holds contact details (never displayed publicly). */
+  contact_on_file?: boolean;
 
   // Social Media
   primary_social_media_platform?: (typeof SOCIAL_PLATFORMS)[number];

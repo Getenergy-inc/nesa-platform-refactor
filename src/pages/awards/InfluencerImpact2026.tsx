@@ -71,7 +71,7 @@ export default function InfluencerImpact2026() {
   return (
     <>
       <Helmet>
-        <title>Influencer Education Impact 2026 · NESA-Africa</title>
+        <title>Influencer Education Impact Award — 2026 Nominees</title>
         <meta
           name="description"
           content="Nominate African social media creators, sports icons, and music icons using their influence to enable Education for All across Africa and the African Diaspora."
