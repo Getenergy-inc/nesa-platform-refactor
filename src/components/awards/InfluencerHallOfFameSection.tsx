@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import {
   CATEGORIES,
+  OFFICIAL_SUBCATEGORY_LABELS,
   REGIONS,
   COUNTRIES_BY_REGION,
   NOMINATE_URL,
