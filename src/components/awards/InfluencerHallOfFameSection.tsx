@@ -14,16 +14,17 @@ import {
 import {
   CATEGORIES,
   REGIONS,
-  SEED_NOMINEES,
   COUNTRIES_BY_REGION,
   NOMINATE_URL,
   type CategoryId,
   type RegionId,
   type InfluencerNominee,
 } from "@/config/awards/influencerImpact2026";
+import { useInfluencerNominees } from "@/hooks/useInfluencerNominees";
 import { NomineeCard } from "@/components/influencer-impact/NomineeCard";
 import { Button } from "@/components/ui/button";
 import { trackEvent } from "@/lib/analytics";
+
 
 /**
  * Influencer Education Impact — Existing Nominees & Hall of Fame Preview.
