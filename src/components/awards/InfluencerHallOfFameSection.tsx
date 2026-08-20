@@ -432,65 +432,54 @@ function RegionChip({
   );
 }
 
-function SubcategoryBlock({
-  categoryId,
-  label,
+function RegionBlock({
+  region,
   nominees,
+  pathway,
 }: {
-  categoryId: CategoryId;
-  label: string;
+  region: RegionId;
   nominees: InfluencerNominee[];
+  pathway: CategoryId | "all";
 }) {
-  const viewAllHref = `/nominees?awardFamily=influencer&category=${categoryId}`;
-  const regionCount = new Set(nominees.map((n) => n.nominee_region)).size;
+  if (nominees.length === 0) return null;
+
+  const viewAllHref = `/nominees?awardFamily=influencer${
+    pathway !== "all" ? `&category=${pathway}` : ""
+  }&region=${encodeURIComponent(region)}`;
+  const countryCount = new Set(nominees.map((n) => n.nominee_country)).size;
+  const socialCount = nominees.filter((n) => n.award_category === "social-media").length;
+  const musicCount = nominees.filter((n) => n.award_category === "music").length;
 
   return (
     <div>
       <div className="flex items-end justify-between gap-3 flex-wrap mb-4 pb-2 border-b border-white/5">
         <div>
           <h4 className="font-display text-lg md:text-xl font-bold text-white flex items-center gap-2">
-            <Globe2 className="h-4 w-4 text-gold" /> {label}
+            <Globe2 className="h-4 w-4 text-gold" /> {region}
           </h4>
           <p className="text-xs text-white/55 mt-0.5">
             {nominees.length} {nominees.length === 1 ? "nominee" : "nominees"} ·{" "}
-            {regionCount} {regionCount === 1 ? "region" : "regions"} represented
+            {countryCount} {countryCount === 1 ? "country" : "countries"} ·{" "}
+            {socialCount} Social Media · {musicCount} Music Icon
           </p>
         </div>
-        {nominees.length > 0 && (
-          <Button
-            asChild
-            variant="ghost"
-            size="sm"
-            className="text-gold hover:bg-gold/10 hover:text-gold"
-          >
-            <Link to={viewAllHref}>
-              View All Nominees <ArrowRight className="ml-1 h-3.5 w-3.5" />
-            </Link>
-          </Button>
-        )}
+        <Button
+          asChild
+          variant="ghost"
+          size="sm"
+          className="text-gold hover:bg-gold/10 hover:text-gold"
+        >
+          <Link to={viewAllHref}>
+            View All {region} Nominees <ArrowRight className="ml-1 h-3.5 w-3.5" />
+          </Link>
+        </Button>
       </div>
 
-      {nominees.length > 0 ? (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {nominees.map((n) => (
-            <NomineeCard key={n.slug} nominee={n} />
-          ))}
-        </div>
-      ) : (
-        <div className="rounded-xl border border-dashed border-gold/25 bg-gold/[0.04] p-8 text-center">
-          <p className="text-gold text-sm font-semibold mb-1">Nominations Open</p>
-          <p className="text-white/60 text-xs max-w-md mx-auto">
-            No nominees recorded under {label} yet. Be the first to nominate an
-            Education Enabler in this subcategory.
-          </p>
-          <Link
-            to={NOMINATE_URL(categoryId)}
-            className="inline-block mt-3 text-xs font-semibold text-charcoal bg-gold px-4 py-2 rounded-lg hover:bg-gold/90"
-          >
-            Nominate Now
-          </Link>
-        </div>
-      )}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {nominees.map((n) => (
+          <NomineeCard key={n.slug} nominee={n} />
+        ))}
+      </div>
     </div>
   );
 }
