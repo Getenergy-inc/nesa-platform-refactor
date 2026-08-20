@@ -251,42 +251,29 @@ export function InfluencerHallOfFameSection() {
           </div>
         </div>
 
-        {/* Browse by Region */}
+        {/* Browse by Recognition Subcategory */}
         <div id="influencer-regional-grid">
           <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-2">
-            Browse Existing Nominees by Region
+            Browse Existing Nominees by Recognition Subcategory
           </h3>
           <p className="text-white/60 text-sm mb-6">
             {filtered.length} {filtered.length === 1 ? "nominee" : "nominees"} match your filters.
+            {region !== "all" && ` Region: ${region}.`}
           </p>
 
-          <div className="space-y-10">
-            {REGIONS.map((r) => {
-              const list = byRegion.get(r) ?? [];
-              if (region !== "all" && region !== r) return null;
+          <div className="space-y-12">
+            {CATEGORIES.filter((c) => pathway === "all" || pathway === c.id).map((c) => {
+              const list = filtered.filter((n) => n.award_category === c.id);
               return (
-                <RegionalBlock
-                  key={r}
-                  region={r}
+                <SubcategoryBlock
+                  key={c.id}
+                  categoryId={c.id}
+                  label={OFFICIAL_SUBCATEGORY_LABELS[c.id]}
                   nominees={list}
-                  pathway={pathway}
                 />
               );
             })}
           </div>
-
-          {filtered.length === 0 && (
-            <div className="rounded-xl border border-dashed border-white/15 bg-white/[0.02] p-10 text-center text-white/60 text-sm">
-              No nominees match these filters. Try widening your search — or{" "}
-              <Link
-                to="/nominate/influencer-education-impact"
-                className="text-gold underline"
-              >
-                nominate an Education Enabler
-              </Link>
-              .
-            </div>
-          )}
         </div>
       </div>
     </section>
