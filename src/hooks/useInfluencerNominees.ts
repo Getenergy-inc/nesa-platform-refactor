@@ -34,6 +34,7 @@ function mapRow(row: any): InfluencerNominee {
     verification_status: row.verification_status as VerificationStatus,
     verified_nominations: row.verified_nominations ?? 0,
     image: row.image_url || seed?.image || "",
+    contact_on_file: Boolean(row.contact_on_file),
     primary_social_media_platform:
       row.primary_social_media_platform ?? seed?.primary_social_media_platform,
     other_platforms: row.other_platforms ?? seed?.other_platforms,

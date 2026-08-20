@@ -366,6 +366,8 @@ export interface InfluencerNominee {
   verification_status: VerificationStatus;
   verified_nominations: number;
   image: string;
+  /** True when the research team holds contact details (never displayed publicly). */
+  contact_on_file?: boolean;
 
   // Social Media
   primary_social_media_platform?: (typeof SOCIAL_PLATFORMS)[number];
