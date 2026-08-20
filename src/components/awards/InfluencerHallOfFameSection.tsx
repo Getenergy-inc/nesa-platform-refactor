@@ -15,7 +15,6 @@ import {
   CATEGORIES,
   OFFICIAL_SUBCATEGORY_LABELS,
   REGIONS,
-  COUNTRIES_BY_REGION,
   NOMINATE_URL,
   type CategoryId,
   type RegionId,
