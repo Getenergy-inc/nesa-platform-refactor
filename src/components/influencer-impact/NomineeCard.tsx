@@ -24,34 +24,14 @@ export function NomineeCard({ nominee: n }: Props) {
   const profileLink =
     n.platform_profile_link ?? n.sports_profile_link ?? n.artist_profile_link;
 
-  const initials = n.nominee_name
-    .split(/\s+/)
-    .map((w) => w[0])
-    .filter(Boolean)
-    .join("")
-    .toUpperCase()
-    .slice(0, 2);
-
   const [imageFailed, setImageFailed] = useState(false);
-  const [placeholderFailed, setPlaceholderFailed] = useState(false);
   const showImage = Boolean(n.image) && !imageFailed;
-  const showPlaceholder = !showImage && !placeholderFailed;
 
   return (
     <article className="group rounded-2xl border border-white/10 bg-white/5 overflow-hidden hover:border-gold/40 transition-all">
       <div className="relative aspect-[4/3] overflow-hidden bg-charcoal">
-        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-charcoal to-black">
-          <span className="font-display text-3xl font-bold text-gold/70">{initials}</span>
-        </div>
-        {showPlaceholder && (
-          <img
-            src="/images/Avatar.png"
-            alt=""
-            aria-hidden="true"
-            loading="lazy"
-            onError={() => setPlaceholderFailed(true)}
-            className="relative w-full h-full object-cover object-top opacity-45"
-          />
+        {!showImage && (
+          <InitialsAvatar name={n.nominee_name} label={category.shortName} />
         )}
         {showImage && (
           <img
@@ -62,6 +42,7 @@ export function NomineeCard({ nominee: n }: Props) {
             className="relative w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
           />
         )}
+
 
 
         <div className="absolute top-2 left-2 flex flex-wrap gap-1.5">
