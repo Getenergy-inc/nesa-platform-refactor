@@ -105,7 +105,7 @@ export const ABOUT_TIERS: AboutTier[] = [
     body:
       "Public figures, creators, athletes, musicians and influential personalities whose verified programmes, campaigns or personal interventions have advanced education.",
     note: "Impact is measured by evidence — not follower count or celebrity status.",
-    href: "/awards/influencer-impact",
+    href: "/awards/influencer-education-impact",
   },
   {
     id: "tier-3",
@@ -113,7 +113,7 @@ export const ABOUT_TIERS: AboutTier[] = [
     title: "Platinum Certificates of Recognition",
     body:
       "Institutions and leadership whose sustained contributions strengthen educational systems, access, quality, innovation, infrastructure, inclusion and continental collaboration.",
-    href: "/awards",
+    href: "/awards/platinum",
   },
   {
     id: "tier-4",
@@ -121,7 +121,7 @@ export const ABOUT_TIERS: AboutTier[] = [
     title: "Gold-Blue Garnet Recognition",
     body:
       "Organisations, companies, NGOs, governments, states, education programmes and other sector or regional Education Enablers whose verified interventions are advancing Education for All.",
-    href: "/awards",
+    href: "/awards/gold-blue-garnet",
   },
 ];
 
