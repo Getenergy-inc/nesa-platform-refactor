@@ -10,6 +10,7 @@ import { MapPin, Sparkles, ArrowRight, Users } from "lucide-react";
 import { StripScroller } from "@/features/landing/editorial/StripScroller";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { InitialsAvatar } from "@/components/influencer-impact/InitialsAvatar";
 import {
   useInfluencerPathwayNominees,
   type InfluencerNomineeEntry,
@@ -23,13 +24,6 @@ function NomineeCardItem({ entry }: { entry: InfluencerNomineeEntry }) {
   const [broken, setBroken] = useState(false);
   const [contain, setContain] = useState(entry.imageKind === "logo");
   const place = [entry.country, entry.region].filter(Boolean).join(" · ");
-  const initials = entry.name
-    .split(/\s+/)
-    .slice(0, 2)
-    .map((w) => w[0])
-    .join("")
-    .toUpperCase();
-
   return (
     <article className="group relative flex w-[78vw] max-w-[320px] shrink-0 snap-center flex-col overflow-hidden rounded-2xl border border-gold/20 bg-white/[0.03] transition-colors hover:border-gold/50 focus-within:border-gold sm:w-[46vw] lg:w-[280px]">
       <div className="relative aspect-[4/5] w-full overflow-hidden bg-charcoal/60">
@@ -52,9 +46,10 @@ function NomineeCardItem({ entry }: { entry: InfluencerNomineeEntry }) {
             }`}
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-gold/10 font-display text-3xl font-bold text-gold">
-            {initials}
-          </div>
+          <InitialsAvatar
+            name={entry.name}
+            label={entry.subcategoryName || entry.categoryName}
+          />
         )}
       </div>
       <div className="flex flex-1 flex-col gap-1.5 p-4">
