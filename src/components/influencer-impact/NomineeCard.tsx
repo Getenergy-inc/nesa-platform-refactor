@@ -6,6 +6,7 @@ import {
   NOMINATE_URL,
   type InfluencerNominee,
 } from "@/config/awards/influencerImpact2026";
+import { InitialsAvatar } from "@/components/influencer-impact/InitialsAvatar";
 
 interface Props {
   nominee: InfluencerNominee;
