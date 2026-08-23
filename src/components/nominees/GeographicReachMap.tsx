@@ -26,7 +26,7 @@ const REGION_PATHS: Record<string, { path: string; labelX: number; labelY: numbe
     path: "M 80,130 L 160,120 L 200,130 L 190,160 L 170,190 L 140,200 L 110,195 L 80,180 L 65,160 Z",
     labelX: 135, labelY: 165,
   },
-  "sahel": {
+  "sahel-region": {
     path: "M 160,110 L 250,115 L 260,130 L 250,145 L 200,150 L 165,140 L 155,125 Z",
     labelX: 205, labelY: 130,
   },
