@@ -212,3 +212,152 @@
   color: var(--ed-stone);
   font-size: 0.9rem;
 }
+
+/* ——— Geographic Reach: interactive 8-region Africa map ——— */
+.nesa-ed .ed-dir-geo {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+@media (min-width: 960px) {
+  .nesa-ed .ed-dir-geo {
+    grid-template-columns: minmax(0, 11fr) minmax(0, 10fr);
+    gap: 44px;
+  }
+}
+
+.nesa-ed .ed-geo-map > svg {
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+.nesa-ed .ed-geo-shape {
+  cursor: pointer;
+  outline: none;
+}
+.nesa-ed .ed-geo-shape path {
+  fill: rgba(201, 162, 39, 0.07);
+  stroke: var(--ed-line);
+  stroke-width: 1.5;
+  transition: fill 0.25s ease, stroke 0.25s ease, stroke-width 0.25s ease;
+}
+.nesa-ed .ed-geo-shape:hover path,
+.nesa-ed .ed-geo-shape:focus-visible path,
+.nesa-ed .ed-geo-shape.is-active path {
+  fill: rgba(201, 162, 39, 0.3);
+  stroke: var(--ed-gold);
+  stroke-width: 2.25;
+}
+.nesa-ed .ed-geo-label {
+  fill: var(--ed-stone);
+  font-size: 10px;
+  font-family: "Inter", sans-serif;
+  pointer-events: none;
+  user-select: none;
+  transition: fill 0.25s ease;
+}
+.nesa-ed .ed-geo-shape:hover .ed-geo-label,
+.nesa-ed .ed-geo-shape:focus-visible .ed-geo-label,
+.nesa-ed .ed-geo-shape.is-active .ed-geo-label {
+  fill: #fff;
+  font-weight: 700;
+}
+
+.nesa-ed .ed-geo-detail {
+  margin-top: 18px;
+  border: 1px solid var(--ed-line);
+  border-radius: 10px;
+  padding: 16px 18px;
+  background: rgba(243, 239, 230, 0.02);
+  min-height: 108px;
+}
+.nesa-ed .ed-geo-detail-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  color: var(--ed-parchment);
+  font-size: 0.95rem;
+}
+.nesa-ed .ed-geo-detail-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--ed-gold);
+  flex-shrink: 0;
+}
+.nesa-ed .ed-geo-detail-countries {
+  margin: 8px 0 0;
+  color: var(--ed-stone);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+.nesa-ed .ed-geo-detail-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  color: var(--ed-gold-bright);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.nesa-ed .ed-geo-detail-link:hover {
+  text-decoration: underline;
+}
+.nesa-ed .ed-geo-detail-link svg {
+  width: 14px;
+  height: 14px;
+}
+
+.nesa-ed .ed-geo-list {
+  display: grid;
+  gap: 8px;
+}
+.nesa-ed .ed-geo-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid var(--ed-line);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: var(--ed-parchment);
+  font-size: 0.92rem;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.nesa-ed .ed-geo-row:hover,
+.nesa-ed .ed-geo-row:focus-visible,
+.nesa-ed .ed-geo-row.is-active {
+  border-color: var(--ed-gold);
+  color: var(--ed-gold-bright);
+  background: rgba(201, 162, 39, 0.06);
+}
+.nesa-ed .ed-geo-row-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.nesa-ed .ed-geo-globe {
+  width: 14px;
+  height: 14px;
+  color: var(--ed-gold);
+  flex-shrink: 0;
+}
+.nesa-ed .ed-geo-count {
+  font-family: "Space Mono", monospace;
+  font-size: 0.78rem;
+  color: var(--ed-gold);
+  flex-shrink: 0;
+}
+.nesa-ed .ed-geo-subhead {
+  font-family: "Space Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ed-stone-dim);
+  margin: 18px 0 10px;
+}

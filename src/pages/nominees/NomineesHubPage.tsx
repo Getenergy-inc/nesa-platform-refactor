@@ -21,6 +21,7 @@ import { BottomPageNav } from "@/components/navigation/PageNavigation";
 import { MobileBottomNav } from "@/components/navigation/MainNav";
 import { BackToTopButton } from "@/components/ui/back-to-top";
 import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicator";
+import { GeographicReachMap } from "@/components/nominees/GeographicReachMap";
 
 import { useCatalogueNominees } from "@/lib/directory/masterCatalogueSource";
 import { buildCatalogue } from "@/lib/directory/buildCatalogue";
@@ -320,7 +321,7 @@ export default function NomineesHubPage() {
           </section>
 
           {/* 4 — GEOGRAPHIC REACH */}
-          <section className="ed-section" aria-labelledby="dir-regions">
+          <section id="regions" className="ed-section" aria-labelledby="dir-regions">
             <div className="ed-wrap">
               <div className="ed-section-head">
                 <div className="ed-eyebrow">Geographic Reach</div>
@@ -331,19 +332,7 @@ export default function NomineesHubPage() {
                 </p>
               </div>
 
-              <div className="ed-dir-regions">
-                {[...REGION_FRAMING.africaRegions, ...REGION_FRAMING.globalCommunities].map((r) => (
-                  <Link
-                    key={r}
-                    to={`/nominees/catalogue?region=${encodeURIComponent(r)}`}
-                    className="ed-dir-region"
-                    onClick={() => trackEvent("directory_region_click", { region: r })}
-                  >
-                    <span>{r}</span>
-                    <span>{isLoading ? "…" : (regionCounts.get(normalizeRegion(r)) ?? 0)}</span>
-                  </Link>
-                ))}
-              </div>
+              <GeographicReachMap counts={regionCounts} loading={isLoading} />
             </div>
           </section>
 
