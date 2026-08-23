@@ -227,7 +227,7 @@
   }
 }
 
-.nesa-ed .ed-geo-map svg {
+.nesa-ed .ed-geo-map > svg {
   width: 100%;
   max-width: 460px;
   height: auto;
