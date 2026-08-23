@@ -21,6 +21,7 @@ import { BottomPageNav } from "@/components/navigation/PageNavigation";
 import { MobileBottomNav } from "@/components/navigation/MainNav";
 import { BackToTopButton } from "@/components/ui/back-to-top";
 import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicator";
+import { GeographicReachMap } from "@/components/nominees/GeographicReachMap";
 
 import { useCatalogueNominees } from "@/lib/directory/masterCatalogueSource";
 import { buildCatalogue } from "@/lib/directory/buildCatalogue";
