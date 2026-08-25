@@ -55,7 +55,7 @@ const COMMON_QUICK_INFO_TAIL = [
     value: "NRC impact verification and governance approval",
   },
   { label: "Public voting", value: "None" },
-  { label: "Nominations close", value: "14 October 2026" },
+  { label: "Nominations close", value: "21 November 2026" },
 ];
 
 export const INFLUENCER_SUBCATEGORIES: Record<

@@ -194,7 +194,7 @@ export default function Partners() {
         <title>Partner with NESA-Africa 2026 | Sponsorship, Media &amp; Impact Opportunities</title>
         <meta
           name="description"
-          content="Partner with NESA-Africa 2026 (Gala Weekend June 27–28, 2026). Sponsor awards, Rebuild My School (2026–2027), NESA Africa TV, media rights, and public participation. Multi-currency payments available. Receipts and reporting provided."
+          content="Partner with NESA-Africa 2026 (Recognition Gala Sunday, 13 December 2026). Sponsor awards, Rebuild My School (2026–2027), NESA Africa TV, media rights, and public participation. Multi-currency payments available. Receipts and reporting provided."
         />
       </Helmet>
 
@@ -347,9 +347,9 @@ export default function Partners() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground mb-2">
-                    <strong>18 May – 17 June 2026</strong>
+                    <strong>6 September – 21 November 2026</strong>
                   </p>
-                  <p className="text-sm text-muted-foreground">Final Show (Gala Weekend): 27 June 2026</p>
+                  <p className="text-sm text-muted-foreground">Recognition Gala: 13 December 2026</p>
                   <p className="text-xs text-primary mt-2">40% Public Voting + 60% Jury Review</p>
                 </CardContent>
               </Card>

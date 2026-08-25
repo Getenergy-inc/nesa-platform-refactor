@@ -118,22 +118,19 @@ const TIER_BENEFITS: Record<TierSlug, SubpageBenefit[]> = {
 // ── Timelines ────────────────────────────────────────────────────────────────
 
 const ICON_TIMELINE: SubpageTimelineEntry[] = [
-  { date: "1 – 31 July 2026", title: "Pre-launch activation", description: "Tier briefings, media mobilisation and chapter readiness." , status: "upcoming" },
+  { date: "1 – 31 July 2026", title: "Pre-launch activation", description: "Tier briefings, media mobilisation and chapter readiness.", status: "upcoming" },
   { date: "6 September 2026", title: "Nominations open", description: "Public nominations open for the Africa Education Icon tier.", status: "upcoming" },
   { date: "6 October 2026", title: "Nominations close", description: "Icon nominations close at 23:59 WAT.", status: "upcoming" },
-  { date: "13 – 16 September 2026", title: "Final Icon verification", description: "NRC completes document, citation and referee checks.", status: "upcoming" },
-  { date: "17 – 30 September 2026", title: "Icon Jury assessment", description: "Independent assessment, moderation and final jury decisions.", status: "upcoming" },
-  { date: "10 – 14 October 2026", title: "Ratification & production", description: "Governance Board ratification and Gala production.", status: "upcoming" },
+  { date: "7 October – 10 November 2026", title: "Verification & Assessment", description: "NRC verification and Icon Jury independent assessment.", status: "upcoming" },
+  { date: "24 November 2026", title: "Icon confirmation", description: "All 9 Africa Education Icon recipients confirmed and locked.", status: "upcoming" },
   { date: PROGRAMME_END_LABEL, title: "Recognition Gala", description: "Icons honoured at the NESA-Africa 2026 Recognition Gala, Lagos.", status: "upcoming" },
 ];
 
 const STANDARD_TIMELINE: SubpageTimelineEntry[] = [
   { date: "1 – 31 July 2026", title: "Pre-launch activation", description: "Category briefings, evidence guidance and partner mobilisation.", status: "upcoming" },
   { date: "6 September 2026", title: "Nominations open", description: "Public nominations open across all four recognition tiers.", status: "upcoming" },
-  { date: "August – September 2026", title: "Rolling NRC verification", description: "Evidence checks begin as soon as a nomination is complete.", status: "upcoming" },
-  { date: "1 – 6 September 2026", title: "Reviewer calibration", description: "Assessors calibrate against the published EDI matrix.", status: "upcoming" },
-  { date: "17 – 30 September 2026", title: "Independent assessment", description: "Scoring, moderation and final reviewer decisions.", status: "upcoming" },
-  { date: "10 – 14 October 2026", title: "Ratification & production", description: "Governance Board ratification and Gala production.", status: "upcoming" },
+  { date: "6 September – 21 November 2026", title: "Rolling NRC verification", description: "Evidence checks begin as soon as a nomination is complete.", status: "upcoming" },
+  { date: "22 November – 10 December 2026", title: "Final curation", description: "Final profile verification and certification production.", status: "upcoming" },
   { date: PROGRAMME_END_LABEL, title: "Recognition Gala", description: "Verified Enablers honoured in Lagos, Nigeria.", status: "upcoming" },
 ];
 
@@ -141,7 +138,7 @@ const STANDARD_TIMELINE: SubpageTimelineEntry[] = [
 
 const ICON_COUNTDOWN: SubpageCountdown = {
   heading: "Time left to nominate an Africa Education Icon",
-  targetIso: "2026-09-12T23:59:00+01:00",
+  targetIso: "2026-10-06T23:59:00+01:00",
   label: "Icon nominations close · 6 October 2026, 23:59 WAT",
   note: "Nominations submitted with complete evidence enter NRC verification immediately.",
 };
