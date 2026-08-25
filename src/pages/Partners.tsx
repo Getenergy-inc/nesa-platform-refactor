@@ -347,7 +347,7 @@ export default function Partners() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground mb-2">
-                    <strong>18 May – 17 June 2026</strong>
+                    <strong>6 September – 21 November 2026</strong>
                   </p>
                   <p className="text-sm text-muted-foreground">Recognition Gala: 13 December 2026</p>
                   <p className="text-xs text-primary mt-2">40% Public Voting + 60% Jury Review</p>

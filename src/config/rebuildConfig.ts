@@ -18,7 +18,7 @@ export const REBUILD_MILESTONES: RebuildMilestone[] = [
     label: "School Nominations Open",
     description: "Communities nominate deserving special needs schools in their region",
     date: "2026-06-01",
-    displayDate: "June 2026",
+    displayDate: "13 December 2026",
     icon: MapPin,
   },
   {
