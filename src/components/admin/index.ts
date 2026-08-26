@@ -7,6 +7,7 @@ export { FXRateCard } from "./finance/FXRateCard";
 export { NominationTrendsCard } from "./monitoring/NominationTrendsCard";
 export { TopPerformersCard } from "./monitoring/TopPerformersCard";
 export { VoteLogsCard } from "./monitoring/VoteLogsCard";
+export { NominationFunnelCard } from "./monitoring/NominationFunnelCard";
 
 // Disbursement Components
 export { RevenueSplitsCard } from "./disbursement/RevenueSplitsCard";
