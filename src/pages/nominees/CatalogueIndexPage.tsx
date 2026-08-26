@@ -24,10 +24,16 @@ import { useCatalogueNominees } from "@/lib/directory/masterCatalogueSource";
 import { FAMILY_DB_CATEGORY_SLUGS } from "@/hooks/useFamilyGallery";
 import { buildCatalogue } from "@/lib/directory/buildCatalogue";
 import { subcategoryFamilySlug } from "@/config/directory/catalogueTaxonomy";
+import { AFRICA_REGIONS } from "@/config/regions/africaRegions";
 import { toast } from "@/hooks/use-toast";
 
 const PAGE_SIZE = 24;
 const CANONICAL = "https://nesa.africa/nominees/catalogue";
+const DIRECTORY_REGIONS = [
+  ...AFRICA_REGIONS.map((region) => region.name),
+  "African Diaspora",
+  "Friends of Africa",
+];
 
 type FilterKey =
   | "tier" | "category" | "subcategory" | "region"
@@ -139,7 +145,9 @@ export default function CatalogueIndexPage() {
     const uniq = (vals: (string | null)[]) =>
       Array.from(new Set(vals.filter(Boolean) as string[])).sort();
     return {
-      regions: uniq(list.map((n) => n.region)),
+      // Always expose the complete approved 8+2 taxonomy, including regions
+      // that currently have no published records.
+      regions: DIRECTORY_REGIONS,
       countries: uniq(list.map((n) => n.country)),
       years: uniq(list.map((n) => (n.nominationYear ? String(n.nominationYear) : null))).reverse(),
       verifications: ["Verified", "Accepted", "Pending", "Needs Review", "Rejected"],
