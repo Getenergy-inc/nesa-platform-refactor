@@ -14,7 +14,7 @@ const announcements = [
   },
   {
     id: 2,
-    title: "NESA Africa Gala — June 27, 2026",
+    title: "NESA-Africa Recognition Gala — 13 December 2026",
     date: "Save the Date",
     highlight: false,
   },

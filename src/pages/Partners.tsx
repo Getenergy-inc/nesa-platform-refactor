@@ -213,7 +213,7 @@ export default function Partners() {
                 Partner with <span className="text-gold">NESA-Africa 2026</span>
               </h1>
               <p className="text-lg md:text-xl text-primary font-medium mb-2">
-                Gala Weekend: June 27–28, 2026
+                Recognition Gala: Sunday, 13 December 2026 · Lagos, Nigeria
               </p>
               <p className="text-lg text-muted-foreground mb-8 max-w-3xl mx-auto">
                 Put your brand at the center of Africa's education story—celebrating champions and funding real impact through{" "}
