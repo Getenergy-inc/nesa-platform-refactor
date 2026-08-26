@@ -348,6 +348,19 @@ export function IconNominationWizard({
     });
   }, [ediMatrixKey, tier, category, state.pathway, ediMatrix.title]);
 
+  // ── Funnel instrumentation: wizard opened + each step reached ──
+  const funnelCtx = { formType: "icon-award", awardTier: tier, categorySlug: category };
+  useEffect(() => {
+    logFunnelStepOnce("wizard_started", funnelCtx);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    logFunnelStepOnce(STEP_EVENT_IDS[step] ?? `step_${step + 1}`, funnelCtx);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step]);
+
+
+
   const set = <K extends keyof WizardState>(k: K, v: WizardState[K]) =>
     setState((p) => ({ ...p, [k]: v }));
 
