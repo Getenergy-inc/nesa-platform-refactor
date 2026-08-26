@@ -1,0 +1,2 @@
+ALTER TABLE public.nominees ADD COLUMN IF NOT EXISTS admin_notes text;
+COMMENT ON COLUMN public.nominees.admin_notes IS 'Append-only administrative audit trail for manual/batch corrections (reclassification, region fixes, data cleanup).';

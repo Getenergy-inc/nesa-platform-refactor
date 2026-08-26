@@ -5777,6 +5777,7 @@ export type Database = {
           acceptance_token_expires_at: string | null
           accepted_at: string | null
           active_nominee_id: string | null
+          admin_notes: string | null
           award_family: string | null
           award_slug: string | null
           bio: string | null
@@ -5874,6 +5875,7 @@ export type Database = {
           acceptance_token_expires_at?: string | null
           accepted_at?: string | null
           active_nominee_id?: string | null
+          admin_notes?: string | null
           award_family?: string | null
           award_slug?: string | null
           bio?: string | null
@@ -5971,6 +5973,7 @@ export type Database = {
           acceptance_token_expires_at?: string | null
           accepted_at?: string | null
           active_nominee_id?: string | null
+          admin_notes?: string | null
           award_family?: string | null
           award_slug?: string | null
           bio?: string | null
