@@ -444,6 +444,8 @@ export default function Nominate() {
         return;
       }
 
+      const { utm, referralCode } = getAttribution();
+
       const { error } = await supabase.from("nominations").insert({
         season_id: season.id,
         subcategory_id: selectedSubcategoryId,
@@ -455,6 +457,12 @@ export default function Nominate() {
         evidence_urls: uploadedFiles.map((f) => f.url),
         justification: justification.trim(),
         nominator_id: user.id,
+        utm_source: utm.utm_source ?? null,
+        utm_medium: utm.utm_medium ?? null,
+        utm_campaign: utm.utm_campaign ?? null,
+        utm_content: utm.utm_content ?? null,
+        utm_term: utm.utm_term ?? null,
+        referral_code: referralCode,
       });
 
       if (error) {
@@ -468,7 +476,16 @@ export default function Nominate() {
         return;
       }
 
+      await recordNominationReferral(referralCode);
+
+      logFunnelStep("nomination_submitted", {
+        formType: "nominate-standard",
+        awardTier: selectedTier,
+        categorySlug: selectedCategoryId || null,
+      });
+
       clearDraft();
+
       setShowConfirmDialog(false);
       toast.success("Nomination Submitted Successfully!", {
         description: "Your nomination is recorded. Share and engage to maximise your impact for quality education.",
