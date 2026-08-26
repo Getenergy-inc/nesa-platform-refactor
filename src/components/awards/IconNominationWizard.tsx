@@ -25,6 +25,7 @@ import NominationAccountAtSubmit, {
 } from "@/components/nominate/NominationAccountAtSubmit";
 
 import { trackEvent } from "@/lib/analytics";
+import { logFunnelStepOnce } from "@/lib/funnel";
 import { getEDIMatrix, EDI_MATRIX_VERSION, type EDIIndicator } from "@/config/nominate2026/ediMatrix";
 
 // ─────────────────────────── Taxonomy ───────────────────────────
