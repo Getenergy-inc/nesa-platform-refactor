@@ -120,6 +120,21 @@ const STEP_TITLES = [
   "Review & Submit",
 ];
 
+/** Funnel step identifiers logged to `nomination_funnel_events`. */
+const STEP_EVENT_IDS = [
+  "step_1_recognition_pathway",
+  "step_2_classification",
+  "step_3_nominee_information",
+  "step_4_nomination_details",
+  "step_5_edi_matrix_alignment",
+  "step_6_evidence",
+  "step_7_nominator_information",
+  "step_8_declaration",
+  "step_9_review_submit",
+];
+
+
+
 // ─────────────────────────── State ───────────────────────────
 interface WizardState {
   pathway: string;
