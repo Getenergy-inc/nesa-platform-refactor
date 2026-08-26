@@ -23,7 +23,7 @@ interface FunnelEventRow {
 }
 
 interface IntakeRow {
-  created_at: string;
+  ingested_at: string;
   utm_source: string | null;
   referral_code: string | null;
 }
@@ -49,9 +49,9 @@ export function NominationFunnelCard() {
           .limit(5000),
         supabase
           .from("nomination_intake")
-          .select("created_at, utm_source, referral_code")
-          .gte("created_at", since)
-          .order("created_at", { ascending: true })
+          .select("ingested_at, utm_source, referral_code")
+          .gte("ingested_at", since)
+          .order("ingested_at", { ascending: true })
           .limit(5000),
       ]);
       if (cancelled) return;
@@ -68,7 +68,7 @@ export function NominationFunnelCard() {
   const submissionsByDay = useMemo(() => {
     const map = new Map<string, number>();
     for (const row of intake) {
-      const day = row.created_at.slice(0, 10);
+      const day = row.ingested_at.slice(0, 10);
       map.set(day, (map.get(day) ?? 0) + 1);
     }
     return [...map.entries()]
