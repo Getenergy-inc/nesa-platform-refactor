@@ -1,6 +1,7 @@
 import { supabase } from "@/integrations/supabase/client";
 import { trackEvent } from "@/lib/analytics";
 import { getAttribution } from "@/lib/attribution";
+import { logFunnelStep } from "@/lib/funnel";
 
 export interface PublicNominationInput {
   formType: string;
