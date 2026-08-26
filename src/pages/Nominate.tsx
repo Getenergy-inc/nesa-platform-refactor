@@ -36,6 +36,7 @@ import {
 import { useNominationDraft } from "@/hooks/useNominationDraft";
 import { formatDistanceToNow } from "date-fns";
 import { ExistingNomineesSection } from "@/components/nesa/ExistingNomineesSection";
+import { logFunnelStepOnce } from "@/lib/funnel";
 
 interface DbSubcategory {
   id: string;
