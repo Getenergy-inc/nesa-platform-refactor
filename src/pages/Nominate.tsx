@@ -137,6 +137,27 @@ export default function Nominate() {
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
+  // ── Funnel instrumentation: wizard opened + each step reached ──
+  useEffect(() => {
+    logFunnelStepOnce("wizard_started", { formType: "nominate-standard" });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    const ids: Record<number, string> = {
+      1: "step_1_category_selection",
+      2: "step_2_nominee_details",
+      3: "step_3_evidence_justification",
+    };
+    logFunnelStepOnce(ids[step] ?? `step_${step}`, {
+      formType: "nominate-standard",
+      awardTier: selectedTier,
+      categorySlug: selectedCategoryId || null,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step]);
+
+
+
   // Influencers Award Social Media fields
   const [socialPlatforms, setSocialPlatforms] = useState<Record<string, string>>({});
   const [countryOfOrigin, setCountryOfOrigin] = useState("");
