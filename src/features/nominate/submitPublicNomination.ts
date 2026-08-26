@@ -74,6 +74,15 @@ export async function submitPublicNomination(
     reference: result.reference,
   });
 
+  if (!result.isDuplicate) {
+    logFunnelStep("nomination_submitted", {
+      formType: input.formType,
+      awardTier: input.awardTier ?? null,
+      categorySlug: input.categorySlug ?? null,
+    });
+  }
+
+
   return result;
 }
 
