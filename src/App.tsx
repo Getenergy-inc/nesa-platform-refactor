@@ -537,6 +537,7 @@ const App = () => (
                 <RegionPickerModal />
                 <RegionConfirmationPopup />
                 <ScrollToTop />
+                <AttributionCapture />
                 <Routes>
                   {/* Landing - has its own header/footer */}
                   <Route path="/" element={<NESALandingPage />} />
