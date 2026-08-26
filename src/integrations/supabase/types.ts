@@ -12259,6 +12259,10 @@ export type Database = {
         }
         Returns: string
       }
+      record_nomination_referral: {
+        Args: { p_referral_code: string }
+        Returns: boolean
+      }
       record_renomination_via_referral: {
         Args: {
           p_device_hash?: string
