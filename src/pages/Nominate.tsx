@@ -36,6 +36,9 @@ import {
 import { useNominationDraft } from "@/hooks/useNominationDraft";
 import { formatDistanceToNow } from "date-fns";
 import { ExistingNomineesSection } from "@/components/nesa/ExistingNomineesSection";
+import { logFunnelStep, logFunnelStepOnce } from "@/lib/funnel";
+import { getAttribution } from "@/lib/attribution";
+import { recordNominationReferral } from "@/features/nominate/recordNominationReferral";
 
 interface DbSubcategory {
   id: string;
@@ -136,6 +139,27 @@ export default function Nominate() {
   const [showDraftBanner, setShowDraftBanner] = useState(true);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+
+  // ── Funnel instrumentation: wizard opened + each step reached ──
+  useEffect(() => {
+    logFunnelStepOnce("wizard_started", { formType: "nominate-standard" });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    const ids: Record<number, string> = {
+      1: "step_1_category_selection",
+      2: "step_2_nominee_details",
+      3: "step_3_evidence_justification",
+    };
+    logFunnelStepOnce(ids[step] ?? `step_${step}`, {
+      formType: "nominate-standard",
+      awardTier: selectedTier,
+      categorySlug: selectedCategoryId || null,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step]);
+
+
 
   // Influencers Award Social Media fields
   const [socialPlatforms, setSocialPlatforms] = useState<Record<string, string>>({});
@@ -422,6 +446,8 @@ export default function Nominate() {
         return;
       }
 
+      const { utm, referralCode } = getAttribution();
+
       const { error } = await supabase.from("nominations").insert({
         season_id: season.id,
         subcategory_id: selectedSubcategoryId,
@@ -433,6 +459,12 @@ export default function Nominate() {
         evidence_urls: uploadedFiles.map((f) => f.url),
         justification: justification.trim(),
         nominator_id: user.id,
+        utm_source: utm.utm_source ?? null,
+        utm_medium: utm.utm_medium ?? null,
+        utm_campaign: utm.utm_campaign ?? null,
+        utm_content: utm.utm_content ?? null,
+        utm_term: utm.utm_term ?? null,
+        referral_code: referralCode,
       });
 
       if (error) {
@@ -446,7 +478,16 @@ export default function Nominate() {
         return;
       }
 
+      await recordNominationReferral(referralCode);
+
+      logFunnelStep("nomination_submitted", {
+        formType: "nominate-standard",
+        awardTier: selectedTier,
+        categorySlug: selectedCategoryId || null,
+      });
+
       clearDraft();
+
       setShowConfirmDialog(false);
       toast.success("Nomination Submitted Successfully!", {
         description: "Your nomination is recorded. Share and engage to maximise your impact for quality education.",

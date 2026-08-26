@@ -25,6 +25,7 @@ import NominationAccountAtSubmit, {
 } from "@/components/nominate/NominationAccountAtSubmit";
 
 import { trackEvent } from "@/lib/analytics";
+import { logFunnelStepOnce } from "@/lib/funnel";
 import { getEDIMatrix, EDI_MATRIX_VERSION, type EDIIndicator } from "@/config/nominate2026/ediMatrix";
 
 // ─────────────────────────── Taxonomy ───────────────────────────
@@ -118,6 +119,21 @@ const STEP_TITLES = [
   "Declaration",
   "Review & Submit",
 ];
+
+/** Funnel step identifiers logged to `nomination_funnel_events`. */
+const STEP_EVENT_IDS = [
+  "step_1_recognition_pathway",
+  "step_2_classification",
+  "step_3_nominee_information",
+  "step_4_nomination_details",
+  "step_5_edi_matrix_alignment",
+  "step_6_evidence",
+  "step_7_nominator_information",
+  "step_8_declaration",
+  "step_9_review_submit",
+];
+
+
 
 // ─────────────────────────── State ───────────────────────────
 interface WizardState {
@@ -331,6 +347,19 @@ export function IconNominationWizard({
       matrix: ediMatrix.title,
     });
   }, [ediMatrixKey, tier, category, state.pathway, ediMatrix.title]);
+
+  // ── Funnel instrumentation: wizard opened + each step reached ──
+  const funnelCtx = { formType: "icon-award", awardTier: tier, categorySlug: category };
+  useEffect(() => {
+    logFunnelStepOnce("wizard_started", funnelCtx);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    logFunnelStepOnce(STEP_EVENT_IDS[step] ?? `step_${step + 1}`, funnelCtx);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step]);
+
+
 
   const set = <K extends keyof WizardState>(k: K, v: WizardState[K]) =>
     setState((p) => ({ ...p, [k]: v }));

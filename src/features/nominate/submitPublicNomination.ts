@@ -1,5 +1,7 @@
 import { supabase } from "@/integrations/supabase/client";
 import { trackEvent } from "@/lib/analytics";
+import { getAttribution } from "@/lib/attribution";
+import { logFunnelStep } from "@/lib/funnel";
 
 export interface PublicNominationInput {
   formType: string;
@@ -30,10 +32,14 @@ export interface PublicNominationResult {
 export async function submitPublicNomination(
   input: PublicNominationInput,
 ): Promise<PublicNominationResult> {
+  const { utm, referralCode } = getAttribution();
+
   trackEvent("nomination_submit_attempted", {
     form: input.formType,
     tier: input.awardTier,
     category: input.categorySlug,
+    utm_source: utm.utm_source ?? null,
+    referral_code: referralCode,
   });
 
   const { data, error } = await supabase.rpc("submit_public_nomination", {
@@ -47,7 +53,10 @@ export async function submitPublicNomination(
     p_nominator_email: input.nominatorEmail ?? null,
     p_draft_token: input.draftToken ?? null,
     p_subcategory: input.subcategory ?? null,
+    p_utm: Object.keys(utm).length ? utm : null,
+    p_referral_code: referralCode,
   });
+
 
   if (error) throw new Error(error.message);
   const row = Array.isArray(data) ? data[0] : data;
@@ -65,6 +74,15 @@ export async function submitPublicNomination(
     category: input.categorySlug,
     reference: result.reference,
   });
+
+  if (!result.isDuplicate) {
+    logFunnelStep("nomination_submitted", {
+      formType: input.formType,
+      awardTier: input.awardTier ?? null,
+      categorySlug: input.categorySlug ?? null,
+    });
+  }
+
 
   return result;
 }

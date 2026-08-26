@@ -21,6 +21,7 @@ import {
   useEDXCategoryEngagement,
   useEDXRegionMetrics,
 } from "@/hooks/useEDXMetrics";
+import { NominationFunnelCard } from "@/components/admin/monitoring/NominationFunnelCard";
 import { useRegionNomineeCounts } from "@/hooks/useRegionNomineeCounts";
 import {
   BarChart3,
@@ -230,10 +231,11 @@ export default function AdminEDXAnalytics() {
       breadcrumbs={[{ label: "Admin" }, { label: "EDX Analytics" }]}
     >
       <Tabs defaultValue="overview" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 lg:w-auto lg:inline-flex">
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-5 lg:w-auto lg:inline-flex">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="categories">Categories</TabsTrigger>
           <TabsTrigger value="regions">Regions</TabsTrigger>
+          <TabsTrigger value="funnel">Funnel &amp; Attribution</TabsTrigger>
           <TabsTrigger value="audit">Referral & AGC</TabsTrigger>
         </TabsList>
 
@@ -247,6 +249,10 @@ export default function AdminEDXAnalytics() {
 
         <TabsContent value="regions">
           <RegionMetricsTable />
+        </TabsContent>
+
+        <TabsContent value="funnel">
+          <NominationFunnelCard />
         </TabsContent>
 
         <TabsContent value="audit">

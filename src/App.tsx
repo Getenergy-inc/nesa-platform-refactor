@@ -56,6 +56,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, useNavigationType } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import { captureUtmFromSearch, captureReferralFromSearch } from "@/lib/attribution";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { SeasonProvider } from "@/contexts/SeasonContext";
 import { RegionProvider } from "@/contexts/RegionContext";
@@ -498,6 +499,20 @@ const ScrollToTop = () => {
   return null;
 };
 
+// Captures campaign (`utm_*`) and referral (`?ref=`) params on every
+// navigation into the same 60-day cookie/localStorage store the referral
+// system already uses, so attribution survives until submission.
+const AttributionCapture = () => {
+  const { search } = useLocation();
+  useEffect(() => {
+    captureUtmFromSearch(search);
+    captureReferralFromSearch(search);
+  }, [search]);
+  return null;
+};
+
+
+
 
 // Wrapper component that applies PublicLayout
 const WithLayout = ({
@@ -522,6 +537,7 @@ const App = () => (
                 <RegionPickerModal />
                 <RegionConfirmationPopup />
                 <ScrollToTop />
+                <AttributionCapture />
                 <Routes>
                   {/* Landing - has its own header/footer */}
                   <Route path="/" element={<NESALandingPage />} />

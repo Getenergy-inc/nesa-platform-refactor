@@ -4580,6 +4580,51 @@ export type Database = {
           },
         ]
       }
+      nomination_funnel_events: {
+        Row: {
+          award_tier: string | null
+          category_slug: string | null
+          created_at: string
+          form_type: string | null
+          id: string
+          referral_code: string | null
+          session_id: string
+          step: string
+          user_id: string | null
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
+        }
+        Insert: {
+          award_tier?: string | null
+          category_slug?: string | null
+          created_at?: string
+          form_type?: string | null
+          id?: string
+          referral_code?: string | null
+          session_id: string
+          step: string
+          user_id?: string | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Update: {
+          award_tier?: string | null
+          category_slug?: string | null
+          created_at?: string
+          form_type?: string | null
+          id?: string
+          referral_code?: string | null
+          session_id?: string
+          step?: string
+          user_id?: string | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Relationships: []
+      }
       nomination_ingest_audit: {
         Row: {
           action: string
@@ -4658,9 +4703,15 @@ export type Database = {
           nominee_type_clean: string | null
           raw_payload: Json | null
           record_id: string
+          referral_code: string | null
           reviewer_notes: string | null
           submitted_by: string | null
           updated_at: string
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
           verification_status: string | null
           website_sync_status: string | null
         }
@@ -4688,9 +4739,15 @@ export type Database = {
           nominee_type_clean?: string | null
           raw_payload?: Json | null
           record_id: string
+          referral_code?: string | null
           reviewer_notes?: string | null
           submitted_by?: string | null
           updated_at?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
           verification_status?: string | null
           website_sync_status?: string | null
         }
@@ -4718,9 +4775,15 @@ export type Database = {
           nominee_type_clean?: string | null
           raw_payload?: Json | null
           record_id?: string
+          referral_code?: string | null
           reviewer_notes?: string | null
           submitted_by?: string | null
           updated_at?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
           verification_status?: string | null
           website_sync_status?: string | null
         }
@@ -4771,6 +4834,7 @@ export type Database = {
           recognition_cycle_id: string | null
           recognition_subcategory_id: string | null
           recognition_tier_id: string | null
+          referral_code: string | null
           region_override_reason: string | null
           region_slug: string | null
           review_notes: string | null
@@ -4789,6 +4853,11 @@ export type Database = {
           subcategory_id: string
           submission_kind: string
           updated_at: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
           verification_tier: string | null
           workflow_status: string | null
           zone_slug: string | null
@@ -4829,6 +4898,7 @@ export type Database = {
           recognition_cycle_id?: string | null
           recognition_subcategory_id?: string | null
           recognition_tier_id?: string | null
+          referral_code?: string | null
           region_override_reason?: string | null
           region_slug?: string | null
           review_notes?: string | null
@@ -4847,6 +4917,11 @@ export type Database = {
           subcategory_id: string
           submission_kind?: string
           updated_at?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
           verification_tier?: string | null
           workflow_status?: string | null
           zone_slug?: string | null
@@ -4887,6 +4962,7 @@ export type Database = {
           recognition_cycle_id?: string | null
           recognition_subcategory_id?: string | null
           recognition_tier_id?: string | null
+          referral_code?: string | null
           region_override_reason?: string | null
           region_slug?: string | null
           review_notes?: string | null
@@ -4905,6 +4981,11 @@ export type Database = {
           subcategory_id?: string
           submission_kind?: string
           updated_at?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
           verification_tier?: string | null
           workflow_status?: string | null
           zone_slug?: string | null
@@ -12178,6 +12259,10 @@ export type Database = {
         }
         Returns: string
       }
+      record_nomination_referral: {
+        Args: { p_referral_code: string }
+        Returns: boolean
+      }
       record_renomination_via_referral: {
         Args: {
           p_device_hash?: string
@@ -12280,7 +12365,9 @@ export type Database = {
           p_nominee_country?: string
           p_nominee_name: string
           p_payload: Json
+          p_referral_code?: string
           p_subcategory?: string
+          p_utm?: Json
         }
         Returns: {
           intake_id: string
