@@ -28,6 +28,7 @@ import { buildCatalogue } from "@/lib/directory/buildCatalogue";
 import { CATALOGUE_TIERS } from "@/config/directory/catalogueTaxonomy";
 import { useSiteStats } from "@/config/siteStats";
 import { DIRECTORY_NAME, REGION_FRAMING } from "@/config/platformCopy";
+import { NOMINATIONS_OPEN_LABEL } from "@/config/nominationWindows2026";
 import { normalizeRegion } from "@/lib/regions";
 import { trackEvent } from "@/lib/analytics";
 import type { EnrichedDatabaseNominee } from "@/hooks/useNominees";
@@ -189,7 +190,7 @@ export default function NomineesHubPage() {
             <div className="ed-dir-hero-inner">
               <div className="ed-badge">
                 <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
-                NOMINATIONS OPEN 6 SEPTEMBER 2026 · NESA-AFRICA 2026
+                NOMINATIONS OPEN {NOMINATIONS_OPEN_LABEL.toUpperCase()} · NESA-AFRICA 2026
               </div>
 
               <div className="ed-kicker" style={{ marginTop: 18 }}>

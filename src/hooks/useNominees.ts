@@ -1,7 +1,7 @@
 /**
  * Database-driven Nominees Hook
  * Fetches nominees from Supabase with real-time updates
- * Uses canonical 7-region structure from regions.ts
+ * Uses the canonical 8-region + 2 global-community structure from regions.ts
  */
 
 import { useQuery } from "@tanstack/react-query";
@@ -184,7 +184,12 @@ async function fetchNominees(): Promise<EnrichedDatabaseNominee[]> {
   for (let from = 0; ; from += PAGE) {
     const { data, error } = await supabase
       .from("public_nominees")
-      .select("*")
+      .select(`
+        id, name, slug, title, bio, organization, country, region,
+        photo_url, logo_url, status, is_platinum, subcategory_id,
+        season_id, nrc_verified, data_source, consent_confirmed,
+        acceptance_status, award_family, recognition_class, created_at
+      `)
       .order("name")
       .range(from, from + PAGE - 1);
 
