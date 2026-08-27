@@ -224,12 +224,23 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
 
       <div className="container mx-auto px-4 py-10 max-w-5xl">
         {content.intro.length > 1 && (
-          <div className="mb-8 max-w-3xl space-y-3 text-white/75 text-sm md:text-base">
+          <div className="mb-6 max-w-3xl space-y-3 text-white/75 text-sm md:text-base">
             {content.intro.slice(1).map((p, i) => (
               <p key={i}>{p}</p>
             ))}
           </div>
         )}
+
+        {/* Full quick-info reference (long values live here, not in the hero tiles) */}
+        <dl className="mb-8 grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+          {content.quickInfo.map((q) => (
+            <div key={q.label} className="rounded-lg border border-gold/20 bg-white/5 p-3">
+              <dt className="text-white/50 uppercase tracking-wide">{q.label}</dt>
+              <dd className="text-gold font-semibold mt-1">{q.value}</dd>
+            </div>
+          ))}
+        </dl>
+
 
 
         {/* Sticky jump nav */}

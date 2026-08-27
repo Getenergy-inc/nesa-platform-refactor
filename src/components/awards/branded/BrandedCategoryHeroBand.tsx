@@ -183,7 +183,10 @@ export function BrandedCategoryHeroBand({
                   key={s.label}
                   className="rounded-xl border border-gold/20 bg-white/[0.03] px-3 py-3"
                 >
-                  <div className="font-display text-2xl font-bold text-gold">{s.value}</div>
+                  <div className="font-display text-xl md:text-2xl font-bold leading-tight text-gold break-words">
+                    {s.value}
+                  </div>
+
                   <div className="mt-0.5 text-[11px] text-white/60">{s.label}</div>
                 </div>
               ))}
