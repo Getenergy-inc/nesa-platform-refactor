@@ -18,7 +18,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { CategoryNomineeDashboard } from "@/components/awards/CategoryNomineeDashboard";
+import { BrandedCategoryHeroBand } from "@/components/awards/branded/BrandedCategoryHeroBand";
 import { NomineeCard } from "@/components/iconAward/shared";
+
 import {
   ICON_AWARD,
   ICON_NOMINEES,
