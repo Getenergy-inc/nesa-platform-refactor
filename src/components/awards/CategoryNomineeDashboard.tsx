@@ -13,10 +13,11 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { Loader2, Sparkles, Users } from "lucide-react";
+import { Loader2, Search, Sparkles, Users } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Dialog,
@@ -64,6 +65,7 @@ export function CategoryNomineeDashboard({
   className,
 }: Props) {
   const [activeSub, setActiveSub] = useState<string>("all");
+  const [query, setQuery] = useState("");
   const [formOpen, setFormOpen] = useState(false);
 
   const { data, isLoading } = useQuery({
@@ -125,8 +127,14 @@ export function CategoryNomineeDashboard({
 
   const visible = useMemo(() => {
     const all = data?.nominees ?? [];
-    return activeSub === "all" ? all : all.filter((n) => n.subcategory_id === activeSub);
-  }, [data, activeSub]);
+    const bySub = activeSub === "all" ? all : all.filter((n) => n.subcategory_id === activeSub);
+    const q = query.trim().toLowerCase();
+    if (!q) return bySub;
+    return bySub.filter((n) => {
+      const hay = `${n.name} ${n.organization ?? ""}`.toLowerCase();
+      return hay.includes(q);
+    });
+  }, [data, activeSub, query]);
 
   const brandName = getCategoryDisplayName(categorySlug, data?.category.name ?? "");
   const Heading = headingLevel;
@@ -207,6 +215,19 @@ export function CategoryNomineeDashboard({
           ))}
         </div>
 
+        {/* Search */}
+        <div className="relative mb-6 max-w-md">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gold/70" />
+          <Input
+            type="search"
+            placeholder="Filter nominees by name or organization…"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="pl-10 bg-charcoal border-gold/20 text-white placeholder:text-white/40 focus:border-gold"
+            aria-label="Filter nominees by name or organization"
+          />
+        </div>
+
         {/* Subcategory filter tabs — every real subcategory, including empty ones */}
         <div className="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="Filter by subcategory">
           <button
@@ -251,7 +272,9 @@ export function CategoryNomineeDashboard({
           <div className="rounded-2xl border border-gold/20 bg-white/[0.02] py-12 text-center">
             <Users className="mx-auto mb-3 h-9 w-9 text-gold/60" />
             <p className="text-white/85 font-medium">
-              No nominees yet in this subcategory — be the first to nominate
+              {query.trim()
+                ? "No nominees match your search — try a different name or organization."
+                : "No nominees yet in this subcategory — be the first to nominate"}
             </p>
             <Button
               className="mt-5 rounded-full bg-gold text-charcoal hover:bg-gold/90"
