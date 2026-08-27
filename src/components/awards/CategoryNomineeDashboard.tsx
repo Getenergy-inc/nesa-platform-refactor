@@ -65,6 +65,7 @@ export function CategoryNomineeDashboard({
   className,
 }: Props) {
   const [activeSub, setActiveSub] = useState<string>("all");
+  const [query, setQuery] = useState("");
   const [formOpen, setFormOpen] = useState(false);
 
   const { data, isLoading } = useQuery({
