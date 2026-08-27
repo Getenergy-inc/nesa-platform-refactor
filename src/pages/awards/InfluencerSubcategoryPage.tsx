@@ -1,6 +1,6 @@
 import { Link, Navigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { ChevronRight, ShieldCheck, ArrowRight, Users } from "lucide-react";
+import { ChevronRight, ShieldCheck, ArrowRight, Users, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   getInfluencerSubcategory,
@@ -11,6 +11,9 @@ import {
 import { InfluencerNominationForm } from "@/components/awards/InfluencerNominationForm";
 import { getStoryHeroImage } from "@/config/awards/subpageHeroImages";
 import { CategoryNomineeDashboard } from "@/components/awards/CategoryNomineeDashboard";
+import { BrandedCategoryHeroBand } from "@/components/awards/branded/BrandedCategoryHeroBand";
+import { useCategoryHeroStats } from "@/components/awards/branded/useCategoryHeroStats";
+
 
 const CANONICAL_ORIGIN = "https://nesaafrica.lovable.app";
 const PARENT_TIER_HREF = "/awards/influencer-education-impact";
