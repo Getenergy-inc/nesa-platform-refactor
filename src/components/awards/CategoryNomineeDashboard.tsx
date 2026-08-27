@@ -272,7 +272,9 @@ export function CategoryNomineeDashboard({
           <div className="rounded-2xl border border-gold/20 bg-white/[0.02] py-12 text-center">
             <Users className="mx-auto mb-3 h-9 w-9 text-gold/60" />
             <p className="text-white/85 font-medium">
-              No nominees yet in this subcategory — be the first to nominate
+              {query.trim()
+                ? "No nominees match your search — try a different name or organization."
+                : "No nominees yet in this subcategory — be the first to nominate"}
             </p>
             <Button
               className="mt-5 rounded-full bg-gold text-charcoal hover:bg-gold/90"
