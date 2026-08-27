@@ -10,6 +10,7 @@ import {
 } from "@/config/influencer/subcategoryContent";
 import { InfluencerNominationForm } from "@/components/awards/InfluencerNominationForm";
 import { getStoryHeroImage } from "@/config/awards/subpageHeroImages";
+import { CategoryNomineeDashboard } from "@/components/awards/CategoryNomineeDashboard";
 
 const CANONICAL_ORIGIN = "https://nesaafrica.lovable.app";
 const PARENT_TIER_HREF = "/awards/influencer-education-impact";
@@ -73,6 +74,12 @@ const JUMP_LINKS = [
 interface Props {
   slugOverride?: string;
 }
+
+const DB_CATEGORY_SLUG_BY_SUBPAGE: Record<string, string> = {
+  "african-music-icons-supporting-education": "africa-music-influencer-education",
+  "african-social-media-influencers": "africa-social-media-influencer-education",
+  "african-sports-icons-supporting-education": "africa-sports-influencer-education",
+};
 
 export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
   const params = useParams<{ sub: string }>();
@@ -352,6 +359,12 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
             </Button>
           </div>
         </Section>
+
+        {DB_CATEGORY_SLUG_BY_SUBPAGE[content.slug] && (
+          <CategoryNomineeDashboard
+            categorySlug={DB_CATEGORY_SLUG_BY_SUBPAGE[content.slug]}
+          />
+        )}
 
         <Section id="nomination-form" title={content.formTitle}>
           <div className="rounded-lg border border-gold/20 bg-white/5 p-4 mb-6">

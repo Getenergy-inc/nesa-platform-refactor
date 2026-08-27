@@ -17,6 +17,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { CategoryNomineeDashboard } from "@/components/awards/CategoryNomineeDashboard";
 import { NomineeCard } from "@/components/iconAward/shared";
 import {
   ICON_AWARD,
@@ -208,6 +209,8 @@ export default function AfricaEducationIconPage() {
             </div>
           </div>
         </section>
+
+        <CategoryNomineeDashboard categorySlug="africa-education-icon-award" />
 
         {/* ───────────────── 3. CLASSIFICATIONS ───────────────── */}
         <section className="border-y border-gold/10 bg-black/40 py-16 lg:py-20">
