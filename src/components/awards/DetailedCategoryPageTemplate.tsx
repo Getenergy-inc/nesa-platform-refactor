@@ -275,26 +275,31 @@ export default function DetailedCategoryPageTemplate({ page, theme = "corporate"
       </section>
 
       {/* S9 — Existing Nominees */}
-      <section id="existing-nominees" className="bg-muted/30">
-        <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
-          <h2 className="font-serif text-2xl md:text-3xl mb-2">Existing Nominees</h2>
-          <p className="text-muted-foreground max-w-3xl mb-6">
-            Explore organisations, institutions, programmes, and leaders already identified under this
-            category. Entries are updated as NRC verification progresses. Grouping:{" "}
-            <span className="font-medium">{page.nomineeCatalogue.grouping.replace("_", " ")}</span>.
-          </p>
-          <BrandedNomineeDirectory
-            theme={theme}
-            categoryName={page.nomineeCatalogue.categoryTitle}
-            title="Live Nominees"
-          />
-          <div className="mt-6 text-center">
-            <Button asChild variant="outline">
-              <Link to={page.secondaryCta.href}>View All Nominees</Link>
-            </Button>
+      {dbCategorySlug ? (
+        <CategoryNomineeDashboard categorySlug={dbCategorySlug} />
+      ) : (
+        <section id="existing-nominees" className="bg-muted/30">
+          <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
+            <h2 className="font-serif text-2xl md:text-3xl mb-2">Existing Nominees</h2>
+            <p className="text-muted-foreground max-w-3xl mb-6">
+              Explore organisations, institutions, programmes, and leaders already identified under this
+              category. Entries are updated as NRC verification progresses. Grouping:{" "}
+              <span className="font-medium">{page.nomineeCatalogue.grouping.replace("_", " ")}</span>.
+            </p>
+            <BrandedNomineeDirectory
+              theme={theme}
+              categoryName={page.nomineeCatalogue.categoryTitle}
+              title="Live Nominees"
+            />
+            <div className="mt-6 text-center">
+              <Button asChild variant="outline">
+                <Link to={page.secondaryCta.href}>View All Nominees</Link>
+              </Button>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
+
 
       {/* S10 — Evidence / media submission */}
       <section className="bg-background">
