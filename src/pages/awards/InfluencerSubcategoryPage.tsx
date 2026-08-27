@@ -185,76 +185,34 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
           <span className="text-gold">{content.breadcrumbLeaf}</span>
         </nav>
 
-        {/* Hero */}
-        <header className="mb-8 relative overflow-hidden rounded-2xl border border-gold/20">
-          {(() => {
-            const heroImg = getStoryHeroImage(content.slug);
-            return heroImg ? (
-              <>
-                <img
-                  src={heroImg}
-                  alt={`${content.title} — Enablers of Education for All Across Africa`}
-                  loading="eager"
-                  width={1600}
-                  height={900}
-                  className="absolute inset-0 h-full w-full object-cover opacity-30"
-                />
-                <div
-                  aria-hidden
-                  className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/85 to-charcoal"
-                />
-              </>
-            ) : null;
-          })()}
-          <div className="relative p-6 md:p-8">
-          <p className="text-[11px] uppercase tracking-[0.2em] text-gold/80 font-semibold mb-2">
-            {content.tierLabel}
-          </p>
-          <h1 className="font-display text-3xl md:text-5xl font-bold text-white leading-tight mb-4">
-            {content.title}
-          </h1>
-          <p className="text-white/80 text-base md:text-lg max-w-3xl italic mb-4">
-            {content.supportingStatement}
-          </p>
-          <div className="max-w-3xl space-y-3 text-white/75 text-sm md:text-base">
-            {content.intro.map((p, i) => (
+      </div>
+
+      {/* Hero — shared BrandedCategoryHeroBand (same component as the Icon page) */}
+      <BrandedCategoryHeroBand
+        badgeLabel={content.tierLabel}
+        badgeIcon={Sparkles}
+        title={content.title}
+        eyebrowStatement={content.supportingStatement}
+        subtitle={content.intro[0]}
+        backgroundImage={getStoryHeroImage(content.slug) ?? undefined}
+        stats={heroStats}
+        primaryCta={{ label: content.nominateCta, href: "#nomination-form" }}
+        secondaryCta={{
+          label: "Explore Existing Nominees",
+          href: "#existing-nominees",
+        }}
+        trustLine="NRC impact verification · Governance approval · No public voting in 2026"
+      />
+
+      <div className="container mx-auto px-4 py-10 max-w-5xl">
+        {content.intro.length > 1 && (
+          <div className="mb-8 max-w-3xl space-y-3 text-white/75 text-sm md:text-base">
+            {content.intro.slice(1).map((p, i) => (
               <p key={i}>{p}</p>
             ))}
           </div>
+        )}
 
-          <dl className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
-            {content.quickInfo.map((q) => (
-              <div
-                key={q.label}
-                className="rounded-lg border border-gold/20 bg-white/5 p-3"
-              >
-                <dt className="text-white/50 uppercase tracking-wide">{q.label}</dt>
-                <dd className="text-gold font-semibold mt-1">{q.value}</dd>
-              </div>
-            ))}
-          </dl>
-
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Button
-              asChild
-              size="lg"
-              className="bg-gold text-charcoal hover:bg-gold-dark font-semibold"
-            >
-              <a href="#nomination-form">{content.nominateCta}</a>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="border-gold/40 text-gold hover:bg-gold/10"
-            >
-              <Link to="/awards/influencer-education-impact/nominees">
-                Explore Existing Nominees
-              </Link>
-            </Button>
-          </div>
-          </div>
-        </header>
 
         {/* Sticky jump nav */}
         <nav
