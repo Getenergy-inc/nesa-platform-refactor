@@ -18,6 +18,11 @@ import {
 } from "@/components/ui/accordion";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { BrandedNomineeDirectory } from "@/components/awards/BrandedNomineeDirectory";
+import { CategoryNomineeDashboard } from "@/components/awards/CategoryNomineeDashboard";
+import {
+  getCategoryDisplayName,
+  getDbCategorySlugForPathway,
+} from "@/config/categoryDisplayBrand";
 import {
   BENEFITS, EDI_MATRIX, EVIDENCE_CHECKLIST, GALA_NOTE, POLICY_2026_NOTE,
   RECOGNITION_PACKAGE, THRESHOLDS, TIMELINE_STAGES, TRUST_LINKS,
@@ -36,6 +41,9 @@ export default function DetailedCategoryPageTemplate({ page, theme = "corporate"
   const accent = tierAccent(page.awardTier);
   const bands = THRESHOLDS[page.awardTier];
   const pack = RECOGNITION_PACKAGE[page.awardTier];
+  const dbCategorySlug = getDbCategorySlugForPathway(page.id);
+  // Presentation-only branded H1; DB name/slug untouched.
+  const brandedTitle = getCategoryDisplayName(dbCategorySlug, page.title);
 
   return (
     <>
@@ -66,7 +74,7 @@ export default function DetailedCategoryPageTemplate({ page, theme = "corporate"
             animate={{ opacity: 1, y: 0 }}
             className="font-serif text-3xl md:text-5xl leading-tight"
           >
-            {page.title}
+            {brandedTitle}
           </motion.h1>
           <p className="mt-4 max-w-3xl text-base md:text-lg text-white/80">{page.subtitle}</p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -275,26 +283,31 @@ export default function DetailedCategoryPageTemplate({ page, theme = "corporate"
       </section>
 
       {/* S9 — Existing Nominees */}
-      <section id="existing-nominees" className="bg-muted/30">
-        <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
-          <h2 className="font-serif text-2xl md:text-3xl mb-2">Existing Nominees</h2>
-          <p className="text-muted-foreground max-w-3xl mb-6">
-            Explore organisations, institutions, programmes, and leaders already identified under this
-            category. Entries are updated as NRC verification progresses. Grouping:{" "}
-            <span className="font-medium">{page.nomineeCatalogue.grouping.replace("_", " ")}</span>.
-          </p>
-          <BrandedNomineeDirectory
-            theme={theme}
-            categoryName={page.nomineeCatalogue.categoryTitle}
-            title="Live Nominees"
-          />
-          <div className="mt-6 text-center">
-            <Button asChild variant="outline">
-              <Link to={page.secondaryCta.href}>View All Nominees</Link>
-            </Button>
+      {dbCategorySlug ? (
+        <CategoryNomineeDashboard categorySlug={dbCategorySlug} />
+      ) : (
+        <section id="existing-nominees" className="bg-muted/30">
+          <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
+            <h2 className="font-serif text-2xl md:text-3xl mb-2">Existing Nominees</h2>
+            <p className="text-muted-foreground max-w-3xl mb-6">
+              Explore organisations, institutions, programmes, and leaders already identified under this
+              category. Entries are updated as NRC verification progresses. Grouping:{" "}
+              <span className="font-medium">{page.nomineeCatalogue.grouping.replace("_", " ")}</span>.
+            </p>
+            <BrandedNomineeDirectory
+              theme={theme}
+              categoryName={page.nomineeCatalogue.categoryTitle}
+              title="Live Nominees"
+            />
+            <div className="mt-6 text-center">
+              <Button asChild variant="outline">
+                <Link to={page.secondaryCta.href}>View All Nominees</Link>
+              </Button>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
+
 
       {/* S10 — Evidence / media submission */}
       <section className="bg-background">
