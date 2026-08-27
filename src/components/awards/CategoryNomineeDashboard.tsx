@@ -215,6 +215,19 @@ export function CategoryNomineeDashboard({
           ))}
         </div>
 
+        {/* Search */}
+        <div className="relative mb-6 max-w-md">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gold/70" />
+          <Input
+            type="search"
+            placeholder="Filter nominees by name or organization…"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="pl-10 bg-charcoal border-gold/20 text-white placeholder:text-white/40 focus:border-gold"
+            aria-label="Filter nominees by name or organization"
+          />
+        </div>
+
         {/* Subcategory filter tabs — every real subcategory, including empty ones */}
         <div className="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="Filter by subcategory">
           <button
