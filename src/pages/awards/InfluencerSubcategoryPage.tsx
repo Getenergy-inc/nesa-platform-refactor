@@ -97,11 +97,16 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
     return <Navigate to={PARENT_TIER_HREF} replace />;
   }
 
+  // Live counts first; only short quickInfo values are compact enough for tiles.
   const heroStats = [
     { value: liveStats?.nomineeCount ?? "—", label: "Listed Nominees" },
     { value: liveStats?.subcategoryCount ?? "—", label: "Subcategories" },
-    ...content.quickInfo.slice(0, 2).map((q) => ({ value: q.value, label: q.label })),
+    ...content.quickInfo
+      .filter((q) => q.value.length <= 26)
+      .slice(0, 2)
+      .map((q) => ({ value: q.value, label: q.label })),
   ];
+
 
   const canonicalUrl = `${CANONICAL_ORIGIN}${subcategoryPath(content.slug)}`;
   const siblings = INFLUENCER_SUBCATEGORY_ORDER.filter((s) => s !== content.slug).map(
