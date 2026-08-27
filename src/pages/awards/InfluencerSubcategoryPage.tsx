@@ -90,14 +90,24 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
   const content: InfluencerSubcategoryContent | undefined =
     getInfluencerSubcategory(slug);
 
+  const dbCategorySlug = content ? DB_CATEGORY_SLUG_BY_SUBPAGE[content.slug] : undefined;
+  const { data: liveStats } = useCategoryHeroStats(dbCategorySlug);
+
   if (!content) {
     return <Navigate to={PARENT_TIER_HREF} replace />;
   }
+
+  const heroStats = [
+    { value: liveStats?.nomineeCount ?? "—", label: "Listed Nominees" },
+    { value: liveStats?.subcategoryCount ?? "—", label: "Subcategories" },
+    ...content.quickInfo.slice(0, 2).map((q) => ({ value: q.value, label: q.label })),
+  ];
 
   const canonicalUrl = `${CANONICAL_ORIGIN}${subcategoryPath(content.slug)}`;
   const siblings = INFLUENCER_SUBCATEGORY_ORDER.filter((s) => s !== content.slug).map(
     (s) => INFLUENCER_SUBCATEGORIES[s],
   );
+
 
   const faqJsonLd = {
     "@context": "https://schema.org",
