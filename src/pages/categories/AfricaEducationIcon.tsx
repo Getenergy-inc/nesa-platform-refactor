@@ -18,7 +18,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { CategoryNomineeDashboard } from "@/components/awards/CategoryNomineeDashboard";
+import { BrandedCategoryHeroBand } from "@/components/awards/branded/BrandedCategoryHeroBand";
 import { NomineeCard } from "@/components/iconAward/shared";
+
 import {
   ICON_AWARD,
   ICON_NOMINEES,
@@ -77,82 +79,30 @@ export default function AfricaEducationIconPage() {
       />
 
       <div className="min-h-screen bg-charcoal">
-        {/* ───────────────── 1. HERO ───────────────── */}
-        <section className="relative overflow-hidden border-b border-gold/15 bg-gradient-to-b from-black via-charcoal to-charcoal-light">
-          <div
-            aria-hidden
-            className="absolute inset-0 opacity-[0.08]"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle at 15% 20%, hsl(42 85% 52%) 0, transparent 45%), radial-gradient(circle at 85% 80%, hsl(42 85% 52%) 0, transparent 45%)",
-            }}
-          />
-          <div className="container relative mx-auto px-4 py-20 lg:py-28">
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="mx-auto max-w-4xl text-center"
-            >
-              <Badge
-                variant="outline"
-                className="mb-5 border-gold/40 bg-gold/5 px-3 py-1 text-gold inline-flex items-center gap-1.5"
-              >
-                <Crown className="h-3 w-3" />
-                Lifetime Achievement · {ICON_AWARD.yearRange}
-              </Badge>
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white">
-                Africa Education Icon Award{" "}
-                <span className="text-gold">2006–2026</span>
-              </h1>
-              <p className="mx-auto mt-5 max-w-2xl text-base md:text-lg text-white/75">
-                Two decades. Three pathways. Nine laureates. A continental Hall of Fame for the
-                educators, advocates, and philanthropists who reshaped African learning.
-              </p>
+        {/* ───────────────── 1. HERO (shared BrandedCategoryHeroBand) ───────────────── */}
+        <BrandedCategoryHeroBand
+          badgeLabel={`Lifetime Achievement · ${ICON_AWARD.yearRange}`}
+          badgeIcon={Crown}
+          title="Africa Education Icon Award"
+          titleHighlight="2006–2026"
+          subtitle="Two decades. Three pathways. Nine laureates. A continental Hall of Fame for the educators, advocates, and philanthropists who reshaped African learning."
+          stats={[
+            { value: total, label: "Verified Nominees" },
+            { value: ICON_SUBCATEGORIES.length, label: "Subcategories" },
+            { value: ICON_CLASSIFICATIONS.length, label: "Classifications" },
+            { value: 9, label: "Final Laureates" },
+          ]}
+          primaryCta={{
+            label: "Nominate an Education Icon",
+            href: "/nominate?category=africa-education-icon-award",
+          }}
+          secondaryCta={{
+            label: "Explore Existing Nominees",
+            href: "#existing-nominees",
+          }}
+          trustLine={`${ICON_AWARD.status} · No public voting · Independent continental jury`}
+        />
 
-              <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto">
-                {[
-                  { v: total, l: "Verified Nominees" },
-                  { v: ICON_SUBCATEGORIES.length, l: "Subcategories" },
-                  { v: ICON_CLASSIFICATIONS.length, l: "Classifications" },
-                  { v: 9, l: "Final Laureates" },
-                ].map((m) => (
-                  <div
-                    key={m.l}
-                    className="rounded-xl border border-gold/20 bg-white/[0.03] px-3 py-3"
-                  >
-                    <div className="font-display text-2xl font-bold text-gold">{m.v}</div>
-                    <div className="text-[11px] text-white/60 mt-0.5">{m.l}</div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-9 flex flex-wrap justify-center gap-3">
-                <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
-                  <a href="#nomination-form">
-                    Nominate an Education Icon
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="border-gold/40 text-white hover:bg-gold/10"
-                >
-                  <Link to="/awards/africa-education-icon/nominees">
-                    Explore Existing Nominees
-                  </Link>
-                </Button>
-              </div>
-
-              <p className="mt-6 text-xs text-white/50 flex items-center justify-center gap-1.5">
-                <ShieldCheck className="h-3.5 w-3.5 text-gold" />
-                {ICON_AWARD.status} · No public voting · Independent continental jury
-              </p>
-            </motion.div>
-          </div>
-        </section>
 
         {/* ───────────────── 2. PATHWAYS ───────────────── */}
         <section id="subcategories" className="py-16 lg:py-24">
