@@ -1,54 +1,62 @@
-# Recruitment Tracker — investigation findings
+# Template Comparison Report — Icon vs Influencer vs Detailed Category
 
-## 1. How admin pages are gated
+Investigation only. No files were changed.
 
-Two layers exist; admin pages currently use the in-page layer.
+## 1. AfricaEducationIcon.tsx (reference, 427 lines)
 
-- `src/components/ProtectedRoute.tsx` — generic guard: redirects to `/login` when signed out, `/unauthorized` when `requiredRoles` don't match. It accepts `requiredRoles?: AppRole[]`.
-- Admin pages such as `src/pages/admin/AdminContributorsCMS.tsx` do the check inside the component instead:
-  ```tsx
-  const { user, hasRole } = useAuth();
-  if (!user) return <Navigate to="/login" replace />;
-  if (!hasRole("admin")) return <Navigate to="/unauthorized" replace />;
-  ```
-- Role source: `AuthContext` loads rows from the `user_roles` table into `roles: AppRole[]`; `hasRole(role)` checks membership. Roles are `user | nrc | jury | chapter | sponsor | admin` (`src/config/roles.ts`). No email allowlist, no JWT claim.
-- Server side, the `has_role(auth.uid(), 'admin')` security-definer function is the authority — the client check is UX only.
+Section order:
+1. Helmet SEO + `BreadcrumbJsonLd`
+2. **Hero** — full-bleed dark section, `bg-gradient-to-b from-black via-charcoal to-charcoal-light`, decorative gold radial-gradient overlay at 8% opacity, centered `max-w-4xl`, framer-motion fade-up. Contains: crown pill badge, `font-display` h1 up to `text-6xl` with a gold-coloured fragment, subhead, a **4-up inline stat grid** (rounded gold-bordered tiles, gold numerals), two CTAs (primary gold "Nominate", outline "Explore Existing Nominees"), and a trust line with a shield icon.
+3. **Pathways** — 3 subcategory cards with icon chip, live count badge, hover gold glow shadow.
+4. `CategoryNomineeDashboard categorySlug="africa-education-icon-award"` (shared component)
+5. **Classifications** — 3 cards, each with a nested list of pathway × classification counts.
+6. **Selection Process** — 6 numbered step cards + trust chips row.
+7. **Hall of Fame preview** — 8 `NomineeCard` (from `@/components/iconAward/shared`) + 3 per-pathway quick links.
+8. **Final CTA** — centered, sparkles icon, two buttons.
 
-## 2. Route/file pattern
+Visual signature: whole page sits on `bg-charcoal`, every section is dark; `font-display` headings; eyebrow labels in `text-[11px] uppercase tracking-[0.18em] text-gold`; rounded-2xl gold-tinted cards; framer-motion `whileInView` stagger. There is **no on-page nomination form** — CTAs anchor to `#nomination-form` (which does not exist on this page) or link out to `/nominate?category=...`. That anchor is a live bug worth noting.
 
-- Files live in `src/pages/admin/<AdminXxx>.tsx`, exported through `src/pages/admin/index.ts`.
-- Registered in `src/App.tsx` in the "Admin Routes" block (~line 2227) as flat `/admin/...` routes, outside the public layout. Chrome is either `DashboardLayout` (contributors/volunteers CMS) or `<AdminBareShell>` wrapping the page (gallery, nominee media, youtube pipeline).
-- So a new page would be `src/pages/admin/AdminRecruitmentTracker.tsx` + `<Route path="/admin/recruitment" .../>`.
+## 2. InfluencerSubcategoryPage.tsx (498 lines, 3 pages)
 
-## 3. Existing recruitment-ish data
+Section order: tier ribbon → breadcrumb → **card hero** (rounded-2xl bordered box inside a `max-w-5xl` container, optional background photo at 30% opacity, tier eyebrow, h1, italic supporting statement, intro paragraphs, 4-up `quickInfo` `<dl>` tiles, 2 CTAs) → sticky jump nav (11 anchors) → then a long stack of narrow uniform `Section` blocks: Overview, Who, Geography, Eligibility, Evidence, Impact Questions, Directory → `CategoryNomineeDashboard` → **Nomination form inline** (`InfluencerNominationForm`) → Review → Integrity → FAQs → sibling subcategories → final CTA.
 
-There is no generic `applicants`, `vacancies`, or `recruitment` table. What exists:
+Differences from Icon: constrained document layout instead of full-bleed sections; hero is a boxed card, not a gradient band; no stat grid tied to live counts (only static `quickInfo`); heading scale is `text-xl/2xl` gold rather than large white display; no motion; but it *does* embed the real nomination form on-page and has a sticky jump nav Icon lacks.
 
-- `judge_applications` (24 cols) — judge-specific intake, public INSERT + admin ALL.
-- `volunteers` (29 cols) — volunteer profiles with `verification_status` (pending/approved/rejected) and `visibility_status`; doubles as a light applicant store, plus `volunteer_tasks`, `volunteer_referrals`, `volunteer_teams`.
-- `partnership_leads`, `bulk_order_leads` — lead-capture tables with the same public-insert / admin-manage shape.
-- Vacancies themselves are **static code**, not data: `src/data/volunteerVacancies2026.ts` (`VOLUNTEER_VACANCIES_2026`, slot arrays derived from the 2026 timeline). Nothing writes applications against those slots today.
+## 3. DetailedCategoryPageTemplate.tsx (426 lines, 16 pages)
 
-Conclusion: a recruitment tracker needs a new table (e.g. `recruitment_applications`, optionally `recruitment_vacancies` if vacancies must become data-driven). Extending `volunteers` would mix approved public profiles with private applicant pipeline data and fight its existing public-read policy.
+S1 Hero (dark, `max-w-6xl`, `font-serif`, badges, 3 CTAs — no stats grid) → S2 Overview 3-col → S3 Enabler story → S4 Who Qualifies + EDI matrix table + threshold bands → S5 Subcategories cards → S6 Benefits 4-up → S7 Nomination CTA band → S8 Recognition Timeline → S9 `CategoryNomineeDashboard` (falls back to `BrandedNomineeDirectory` when no mapped slug) → S10 Evidence submission → S11 Recognition Package → S12 Trust → S13 FAQs (+ tail sections).
 
-## 4. RLS pattern to follow for an admin-only table
+Differences from Icon: light theme — S2/S6/S8/S10/S12 use `bg-background`, alternating `bg-muted/30`; `font-serif` not `font-display`; shadcn `Card`/`Accordion` primitives instead of hand-rolled gold-bordered tiles; only the hero and S7 are dark. It already consumes the branded label map (`getCategoryDisplayName`) and tier accents (gold vs platinum slate). No inline nomination form — S7 links to `/nominate`.
 
-Consistent pattern across `partnership_leads`, `bulk_order_leads`, `judge_applications`, `import_review_queue`:
+## 4. Is Icon's layout extractable?
 
-```sql
-CREATE TABLE public.<t> (...);
-GRANT SELECT, INSERT, UPDATE, DELETE ON public.<t> TO authenticated;
-GRANT ALL ON public.<t> TO service_role;
--- no anon SELECT grant
-ALTER TABLE public.<t> ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Admins manage <t>" ON public.<t> FOR ALL TO authenticated
-  USING (has_role(auth.uid(), 'admin')) WITH CHECK (has_role(auth.uid(), 'admin'));
+Mostly yes. Only two things on the Icon page are genuinely bespoke:
+- `NomineeCard` from `@/components/iconAward/shared` and the `ICON_*` static dataset (`bySubcategory`, `byClassification`, `featured`).
+- The Classifications section, which depends on a 3×3 pathway × classification grid that no other category has.
+
+Everything else — hero band, gradient + radial overlay, badge, stat grid, eyebrow/heading pattern, motion card grid, numbered process steps, final CTA — is plain Tailwind over generic props and can be lifted into shared pieces:
+
+```text
+src/components/awards/branded/
+  BrandedCategoryHeroBand.tsx   eyebrow badge, title (+gold fragment), subhead,
+                                stats[] tiles, primary/secondary CTA, trust line
+  BrandedSectionHeading.tsx     eyebrow + h2 + lede
+  BrandedProcessSteps.tsx       numbered step cards + trust chips
+  BrandedFinalCta.tsx           centered closing CTA
 ```
 
-Add a public `INSERT`-only policy (`WITH CHECK (true)`, granted to `anon`) **only** if the public application form writes directly; otherwise keep it fully admin-scoped. Never a public `SELECT` policy — that is what currently keeps leads private.
+Adoption without a rewrite:
+- **InfluencerSubcategoryPage**: swap the boxed header for `BrandedCategoryHeroBand` (map `quickInfo` → `stats`, keep hero image as an optional prop). Keep the jump nav, `Section` stack, and inline form. ~1 section changed.
+- **DetailedCategoryPageTemplate**: swap S1 for the same hero band, feed it live counts from the dashboard query, and optionally re-skin S8 with `BrandedProcessSteps` and the tail CTA with `BrandedFinalCta`. Body sections can stay as-is initially.
 
-## Open questions before schema design
+## 5. Risks in making the 16 pages look like Icon
 
-1. Should vacancies stay static in `src/data/volunteerVacancies2026.ts` (tracker just references a `vacancy_slug`), or become a DB table so admins can create roles?
-2. Does the tracker only record candidates admins enter/import, or does a public "apply" form insert into it (which decides the anon INSERT policy)?
-3. Should it aggregate existing pipelines (`judge_applications`, pending `volunteers`) into one view, or track only its own new records?
+- **Icon-specific data assumptions**: Icon's stat grid uses `ICON_SUBCATEGORIES.length` / `ICON_CLASSIFICATIONS.length` / hardcoded `9 laureates`. Other categories have no classifications and no fixed laureate count — the stats array must be a prop, not baked in. The Classifications and Hall-preview sections should **not** be generalised.
+- **Theme collision**: the 16 pages are light-themed with `bg-background`/`bg-muted/30` and shadcn `Card`s. Making only the hero dark is safe; converting whole pages to `bg-charcoal` means auditing every `text-muted-foreground`, `Card`, `Accordion`, and the EDI `<table>` for contrast — that is the expensive part, and where accessibility regressions would appear.
+- **Typography split**: Icon uses `font-display`, the 16 pages use `font-serif`. Pick one for the shared hero or expose it as a prop, otherwise headings will drift across the site.
+- **Platinum tier**: `tierAccent()` renders slate accents for platinum pages. A gold-hardcoded hero would erase that distinction unless the accent is passed through.
+- **Existing anchor bug**: Icon's hero CTA points at `#nomination-form`, which does not exist on that page. If the hero is extracted as-is, the broken anchor propagates. The Influencer pages are the only ones with a real `#nomination-form`.
+
+## Open question
+
+Do you want the shared hero applied to **all 19 pages** (Icon + 3 Influencer + 16 detailed), or hero-only on the 16 detailed pages first, leaving Influencer untouched? And should the 16 detailed pages go fully dark charcoal, or keep light bodies with a dark hero band?
