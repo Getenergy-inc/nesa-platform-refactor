@@ -102,8 +102,9 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
     { value: liveStats?.nomineeCount ?? "—", label: "Listed Nominees" },
     { value: liveStats?.subcategoryCount ?? "—", label: "Subcategories" },
     ...content.quickInfo
-      .filter((q) => q.value.length <= 26)
+      .filter((q) => q.value.length <= 26 && !/voting/i.test(q.label))
       .slice(0, 2)
+
       .map((q) => ({ value: q.value, label: q.label })),
   ];
 
