@@ -127,8 +127,14 @@ export function CategoryNomineeDashboard({
 
   const visible = useMemo(() => {
     const all = data?.nominees ?? [];
-    return activeSub === "all" ? all : all.filter((n) => n.subcategory_id === activeSub);
-  }, [data, activeSub]);
+    const bySub = activeSub === "all" ? all : all.filter((n) => n.subcategory_id === activeSub);
+    const q = query.trim().toLowerCase();
+    if (!q) return bySub;
+    return bySub.filter((n) => {
+      const hay = `${n.name} ${n.organization ?? ""}`.toLowerCase();
+      return hay.includes(q);
+    });
+  }, [data, activeSub, query]);
 
   const brandName = getCategoryDisplayName(categorySlug, data?.category.name ?? "");
   const Heading = headingLevel;
