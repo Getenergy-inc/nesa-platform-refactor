@@ -18,7 +18,8 @@ import {
 } from "@/components/ui/accordion";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { BrandedNomineeDirectory } from "@/components/awards/BrandedNomineeDirectory";
-import { CategoryNomineeDashboard } from "@/components/awards/CategoryNomineeDashboard";
+import { FeaturedCategorySpotlight } from "@/components/awards/branded/FeaturedCategorySpotlight";
+import { CategoryPictureCatalogue } from "@/components/awards/branded/CategoryPictureCatalogue";
 import {
   getCategoryDisplayName,
   getDbCategorySlugForPathway,
@@ -284,7 +285,10 @@ export default function DetailedCategoryPageTemplate({ page, theme = "corporate"
 
       {/* S9 — Existing Nominees */}
       {dbCategorySlug ? (
-        <CategoryNomineeDashboard categorySlug={dbCategorySlug} />
+        <>
+          <FeaturedCategorySpotlight categorySlug={dbCategorySlug} />
+          <CategoryPictureCatalogue categorySlug={dbCategorySlug} />
+        </>
       ) : (
         <section id="existing-nominees" className="bg-muted/30">
           <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">

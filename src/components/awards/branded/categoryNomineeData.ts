@@ -45,8 +45,9 @@ export const SPOTLIGHT_EXCLUDED_CATEGORY_SLUGS = new Set([
   "islamic-education-impact-africa",
 ]);
 
-export function useCategoryNominees(categorySlug: string) {
+export function useCategoryNominees(categorySlug: string, enabled = true) {
   return useQuery({
+    enabled: enabled && Boolean(categorySlug),
     queryKey: ["category-nominees-light", categorySlug],
     staleTime: 0,
     gcTime: 0,

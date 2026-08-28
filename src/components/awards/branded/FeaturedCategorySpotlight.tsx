@@ -28,7 +28,7 @@ interface Props {
 
 export function FeaturedCategorySpotlight({ categorySlug, className }: Props) {
   const excluded = SPOTLIGHT_EXCLUDED_CATEGORY_SLUGS.has(categorySlug);
-  const { data, isLoading } = useCategoryNominees(excluded ? "" : categorySlug);
+  const { data, isLoading } = useCategoryNominees(categorySlug, !excluded);
 
   if (excluded) return null;
 
