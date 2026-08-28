@@ -32,15 +32,31 @@ import { trackEvent } from "@/lib/analytics";
  * by the three recognition subcategories (Social Media, Sports, Music) and grouped
  * by 8 African regions + African Diaspora.
  */
-export function InfluencerHallOfFameSection() {
-  const [pathway, setPathway] = useState<CategoryId | "all">("all");
+interface HallOfFameProps {
+  /**
+   * When provided, the section becomes a single-category picture catalogue:
+   * the pathway cards and subcategory selector are hidden, only real database
+   * rows for that category are shown (no curated seed padding), and the stat
+   * block is computed over that category alone.
+   */
+  category?: CategoryId;
+}
+
+export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) {
+  const scoped = Boolean(category);
+  const [pathway, setPathway] = useState<CategoryId | "all">(category ?? "all");
   const [search, setSearch] = useState("");
   const [region, setRegion] = useState<RegionId | "all">("all");
-  const { nominees } = useInfluencerNominees();
+  const { nominees: allNominees } = useInfluencerNominees({ dbOnly: scoped });
+
+  const nominees = useMemo(
+    () => (category ? allNominees.filter((n) => n.award_category === category) : allNominees),
+    [allNominees, category],
+  );
 
   const filtered = useMemo(() => {
     return nominees.filter((n) => {
-      if (pathway !== "all" && n.award_category !== pathway) return false;
+      if (!scoped && pathway !== "all" && n.award_category !== pathway) return false;
       if (region !== "all" && n.nominee_region !== region) return false;
       if (search) {
         const q = search.toLowerCase();
@@ -50,7 +66,7 @@ export function InfluencerHallOfFameSection() {
       }
       return true;
     });
-  }, [nominees, pathway, region, search]);
+  }, [nominees, pathway, region, search, scoped]);
 
   const byRegion = useMemo(() => {
     const map = new Map<RegionId, InfluencerNominee[]>();
@@ -72,6 +88,9 @@ export function InfluencerHallOfFameSection() {
     const verified = nominees.filter((n) => n.verification_status === "VERIFIED").length;
     return { total, social, sports, music, countries, regions, diaspora, verified };
   }, [nominees]);
+
+  const categoryMeta = category ? CATEGORIES.find((c) => c.id === category) : undefined;
+
 
 
   return (
