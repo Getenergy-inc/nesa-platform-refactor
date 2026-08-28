@@ -103,20 +103,31 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">
           <span className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.22em] text-gold font-semibold">
-            <Sparkles className="h-3 w-3" /> Existing Nominees · Hall of Fame Preview
+            <Sparkles className="h-3 w-3" />{" "}
+            {scoped ? "Existing Nominees · Picture Catalogue" : "Existing Nominees · Hall of Fame Preview"}
           </span>
           <h2 className="mt-3 font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white">
-            Africa's Education Influencers <span className="text-gold">Discovery Hub</span>
+            {scoped ? (
+              <>
+                {categoryMeta?.shortName ?? "Education Enablers"}{" "}
+                <span className="text-gold">Nominee Catalogue</span>
+              </>
+            ) : (
+              <>
+                Africa's Education Influencers <span className="text-gold">Discovery Hub</span>
+              </>
+            )}
           </h2>
           <p className="mt-4 text-white/70 text-sm md:text-base leading-relaxed">
-            Explore some of Africa's leading public figures using their influence to advance
-            Education for All. Browse nominees by recognition subcategory and discover inspiring
-            Education Enablers from across Africa and the African Diaspora.
+            {scoped
+              ? "Every nominee currently on file for this recognition subcategory, grouped by African region and the African Diaspora. Verification status shown is the live status on record."
+              : "Explore some of Africa's leading public figures using their influence to advance Education for All. Browse nominees by recognition subcategory and discover inspiring Education Enablers from across Africa and the African Diaspora."}
           </p>
         </div>
 
         {/* Recognition Subcategory Cards */}
-        <div className="grid gap-5 md:grid-cols-3 mb-12">
+        <div className={`grid gap-5 md:grid-cols-3 mb-12 ${scoped ? "hidden" : ""}`}>
+
           <PathwayCard
             id="social-media"
             title="African Social Media Influencers Education Impact Award"
