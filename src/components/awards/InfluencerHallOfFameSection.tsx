@@ -14,9 +14,11 @@ import {
 import {
   CATEGORIES,
   REGIONS,
+  RECOGNITION_CLASSES,
   NOMINATE_URL,
   type CategoryId,
   type RegionId,
+  type RecognitionClass,
   type InfluencerNominee,
 } from "@/config/awards/influencerImpact2026";
 import { useInfluencerNominees } from "@/hooks/useInfluencerNominees";
@@ -47,6 +49,7 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
   const [pathway, setPathway] = useState<CategoryId | "all">(category ?? "all");
   const [search, setSearch] = useState("");
   const [region, setRegion] = useState<RegionId | "all">("all");
+  const [classification, setClassification] = useState<RecognitionClass | "all">("all");
   const { nominees: allNominees } = useInfluencerNominees({ dbOnly: scoped });
 
   const nominees = useMemo(
@@ -54,10 +57,31 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
     [allNominees, category],
   );
 
+  /**
+   * Regions that actually hold data for the current classification. Keeps the
+   * region filter honest — e.g. selecting the Diaspora class only surfaces
+   * "African Diaspora" / "Global", not empty African-region tabs.
+   */
+  const activeRegions = useMemo(() => {
+    const classScoped = nominees.filter(
+      (n) => classification === "all" || n.recognition_class === classification,
+    );
+    const present = new Set(classScoped.map((n) => n.nominee_region));
+    const ordered = REGIONS.filter((r) => present.has(r)) as string[];
+    const extras = [...present].filter(
+      (r) => !(REGIONS as readonly string[]).includes(r),
+    ) as string[];
+    return [...ordered, ...extras] as RegionId[];
+  }, [nominees, classification]);
+
+  const effectiveRegion: RegionId | "all" =
+    region !== "all" && !(activeRegions as string[]).includes(region) ? "all" : region;
+
   const filtered = useMemo(() => {
     return nominees.filter((n) => {
       if (!scoped && pathway !== "all" && n.award_category !== pathway) return false;
-      if (region !== "all" && n.nominee_region !== region) return false;
+      if (classification !== "all" && n.recognition_class !== classification) return false;
+      if (effectiveRegion !== "all" && n.nominee_region !== effectiveRegion) return false;
       if (search) {
         const q = search.toLowerCase();
         const hay =
@@ -66,14 +90,17 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
       }
       return true;
     });
-  }, [nominees, pathway, region, search, scoped]);
+  }, [nominees, pathway, classification, effectiveRegion, search, scoped]);
 
   const byRegion = useMemo(() => {
-    const map = new Map<RegionId, InfluencerNominee[]>();
-    REGIONS.forEach((r) => map.set(r, []));
-    filtered.forEach((n) => map.get(n.nominee_region)?.push(n));
+    const map = new Map<string, InfluencerNominee[]>();
+    activeRegions.forEach((r) => map.set(r, []));
+    filtered.forEach((n) => {
+      if (!map.has(n.nominee_region)) map.set(n.nominee_region, []);
+      map.get(n.nominee_region)?.push(n);
+    });
     return map;
-  }, [filtered]);
+  }, [filtered, activeRegions]);
 
   const stats = useMemo(() => {
     const total = nominees.length;
@@ -85,8 +112,11 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
     const diaspora = nominees.filter(
       (n) => n.recognition_class === "African in the Diaspora",
     ).length;
+    const livingInAfrica = nominees.filter(
+      (n) => n.recognition_class === "African Living in Africa",
+    ).length;
     const verified = nominees.filter((n) => n.verification_status === "VERIFIED").length;
-    return { total, social, sports, music, countries, regions, diaspora, verified };
+    return { total, social, sports, music, countries, regions, diaspora, livingInAfrica, verified };
   }, [nominees]);
 
   const categoryMeta = category ? CATEGORIES.find((c) => c.id === category) : undefined;
@@ -206,21 +236,24 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
 
         {/* Dynamic Stats */}
         {scoped ? (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2.5 mb-8">
             <Stat label="Nominees on File" value={stats.total} icon={Users} />
+            <Stat label="Living in Africa" value={stats.livingInAfrica} />
+            <Stat label="Diaspora" value={stats.diaspora} />
             <Stat label="Countries" value={stats.countries} icon={Globe2} />
             <Stat label="African Regions" value={stats.regions} />
             <Stat label="Verified" value={stats.verified} icon={CheckCircle2} />
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-2.5 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-9 gap-2.5 mb-8">
             <Stat label="Total Nominees" value={stats.total} icon={Users} />
             <Stat label="Social Media" value={stats.social} />
             <Stat label="Sports" value={stats.sports} />
             <Stat label="Music" value={stats.music} />
+            <Stat label="Living in Africa" value={stats.livingInAfrica} />
+            <Stat label="Diaspora" value={stats.diaspora} />
             <Stat label="Countries" value={stats.countries} icon={Globe2} />
             <Stat label="African Regions" value={stats.regions} />
-            <Stat label="Diaspora" value={stats.diaspora} />
             <Stat label="Verified" value={stats.verified} icon={CheckCircle2} />
           </div>
         )}
@@ -257,13 +290,30 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
             )}
 
             <select
-              value={region}
+              value={classification}
+              onChange={(e) => {
+                setClassification(e.target.value as RecognitionClass | "all");
+                setRegion("all");
+              }}
+              aria-label="Classification"
+              className="px-3 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white/85 text-sm focus:outline-none focus:border-gold/60"
+            >
+              <option value="all" className="bg-charcoal">All Classifications</option>
+              {RECOGNITION_CLASSES.map((rc) => (
+                <option key={rc} value={rc} className="bg-charcoal">
+                  {rc}
+                </option>
+              ))}
+            </select>
+
+            <select
+              value={effectiveRegion}
               onChange={(e) => setRegion(e.target.value as RegionId | "all")}
               aria-label="Region"
               className="px-3 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white/85 text-sm focus:outline-none focus:border-gold/60"
             >
               <option value="all" className="bg-charcoal">All Regions</option>
-              {REGIONS.map((r) => (
+              {activeRegions.map((r) => (
                 <option key={r} value={r} className="bg-charcoal">
                   {r}
                 </option>
@@ -277,15 +327,15 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
           <div className="flex gap-2 min-w-max">
             <RegionChip
               label="All Regions"
-              active={region === "all"}
+              active={effectiveRegion === "all"}
               count={filtered.length}
               onClick={() => setRegion("all")}
             />
-            {REGIONS.map((r) => (
+            {activeRegions.map((r) => (
               <RegionChip
                 key={r}
                 label={r}
-                active={region === r}
+                active={effectiveRegion === r}
                 count={byRegion.get(r)?.length ?? 0}
                 onClick={() => setRegion(r)}
               />
@@ -306,14 +356,16 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
           </p>
 
           <div className="space-y-12">
-            {REGIONS.filter((r) => region === "all" || region === r).map((r) => (
-              <RegionBlock
-                key={r}
-                region={r}
-                nominees={byRegion.get(r) ?? []}
-                pathway={pathway}
-              />
-            ))}
+            {activeRegions
+              .filter((r) => effectiveRegion === "all" || effectiveRegion === r)
+              .map((r) => (
+                <RegionBlock
+                  key={r}
+                  region={r}
+                  nominees={byRegion.get(r) ?? []}
+                  pathway={pathway}
+                />
+              ))}
           </div>
 
           {filtered.length === 0 && (
