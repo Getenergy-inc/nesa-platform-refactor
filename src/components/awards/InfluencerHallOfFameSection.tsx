@@ -236,21 +236,24 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
 
         {/* Dynamic Stats */}
         {scoped ? (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2.5 mb-8">
             <Stat label="Nominees on File" value={stats.total} icon={Users} />
+            <Stat label="Living in Africa" value={stats.livingInAfrica} />
+            <Stat label="Diaspora" value={stats.diaspora} />
             <Stat label="Countries" value={stats.countries} icon={Globe2} />
             <Stat label="African Regions" value={stats.regions} />
             <Stat label="Verified" value={stats.verified} icon={CheckCircle2} />
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-2.5 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-9 gap-2.5 mb-8">
             <Stat label="Total Nominees" value={stats.total} icon={Users} />
             <Stat label="Social Media" value={stats.social} />
             <Stat label="Sports" value={stats.sports} />
             <Stat label="Music" value={stats.music} />
+            <Stat label="Living in Africa" value={stats.livingInAfrica} />
+            <Stat label="Diaspora" value={stats.diaspora} />
             <Stat label="Countries" value={stats.countries} icon={Globe2} />
             <Stat label="African Regions" value={stats.regions} />
-            <Stat label="Diaspora" value={stats.diaspora} />
             <Stat label="Verified" value={stats.verified} icon={CheckCircle2} />
           </div>
         )}
@@ -287,13 +290,30 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
             )}
 
             <select
-              value={region}
+              value={classification}
+              onChange={(e) => {
+                setClassification(e.target.value as RecognitionClass | "all");
+                setRegion("all");
+              }}
+              aria-label="Classification"
+              className="px-3 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white/85 text-sm focus:outline-none focus:border-gold/60"
+            >
+              <option value="all" className="bg-charcoal">All Classifications</option>
+              {RECOGNITION_CLASSES.map((rc) => (
+                <option key={rc} value={rc} className="bg-charcoal">
+                  {rc}
+                </option>
+              ))}
+            </select>
+
+            <select
+              value={effectiveRegion}
               onChange={(e) => setRegion(e.target.value as RegionId | "all")}
               aria-label="Region"
               className="px-3 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white/85 text-sm focus:outline-none focus:border-gold/60"
             >
               <option value="all" className="bg-charcoal">All Regions</option>
-              {REGIONS.map((r) => (
+              {activeRegions.map((r) => (
                 <option key={r} value={r} className="bg-charcoal">
                   {r}
                 </option>
