@@ -205,16 +205,26 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
         </div>
 
         {/* Dynamic Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-2.5 mb-8">
-          <Stat label="Total Nominees" value={stats.total} icon={Users} />
-          <Stat label="Social Media" value={stats.social} />
-          <Stat label="Sports" value={stats.sports} />
-          <Stat label="Music" value={stats.music} />
-          <Stat label="Countries" value={stats.countries} icon={Globe2} />
-          <Stat label="African Regions" value={stats.regions} />
-          <Stat label="Diaspora" value={stats.diaspora} />
-          <Stat label="Verified" value={stats.verified} icon={CheckCircle2} />
-        </div>
+        {scoped ? (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 mb-8">
+            <Stat label="Nominees on File" value={stats.total} icon={Users} />
+            <Stat label="Countries" value={stats.countries} icon={Globe2} />
+            <Stat label="African Regions" value={stats.regions} />
+            <Stat label="Verified" value={stats.verified} icon={CheckCircle2} />
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-2.5 mb-8">
+            <Stat label="Total Nominees" value={stats.total} icon={Users} />
+            <Stat label="Social Media" value={stats.social} />
+            <Stat label="Sports" value={stats.sports} />
+            <Stat label="Music" value={stats.music} />
+            <Stat label="Countries" value={stats.countries} icon={Globe2} />
+            <Stat label="African Regions" value={stats.regions} />
+            <Stat label="Diaspora" value={stats.diaspora} />
+            <Stat label="Verified" value={stats.verified} icon={CheckCircle2} />
+          </div>
+        )}
+
 
         {/* Search + Filter Toolbar */}
         <div className="sticky top-16 z-10 -mx-4 px-4 py-3 bg-charcoal/85 backdrop-blur border-y border-white/5 mb-6">
