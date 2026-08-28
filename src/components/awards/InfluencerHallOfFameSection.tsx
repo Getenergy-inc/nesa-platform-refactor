@@ -240,19 +240,22 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
                 aria-label="Search nominees"
               />
             </div>
-            <select
-              value={pathway}
-              onChange={(e) => setPathway(e.target.value as CategoryId | "all")}
-              aria-label="Recognition Subcategory"
-              className="px-3 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white/85 text-sm focus:outline-none focus:border-gold/60"
-            >
-              <option value="all" className="bg-charcoal">All Subcategories</option>
-              {CATEGORIES.map((c) => (
-                <option key={c.id} value={c.id} className="bg-charcoal">
-                  {c.shortName}
-                </option>
-              ))}
-            </select>
+            {!scoped && (
+              <select
+                value={pathway}
+                onChange={(e) => setPathway(e.target.value as CategoryId | "all")}
+                aria-label="Recognition Subcategory"
+                className="px-3 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white/85 text-sm focus:outline-none focus:border-gold/60"
+              >
+                <option value="all" className="bg-charcoal">All Subcategories</option>
+                {CATEGORIES.map((c) => (
+                  <option key={c.id} value={c.id} className="bg-charcoal">
+                    {c.shortName}
+                  </option>
+                ))}
+              </select>
+            )}
+
             <select
               value={region}
               onChange={(e) => setRegion(e.target.value as RegionId | "all")}
