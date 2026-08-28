@@ -84,6 +84,14 @@ const DB_CATEGORY_SLUG_BY_SUBPAGE: Record<string, string> = {
   "african-sports-icons-supporting-education": "africa-sports-influencer-education",
 };
 
+/** Live influencer register category for each subpage. */
+const INFLUENCER_CATEGORY_BY_SUBPAGE: Record<string, InfluencerCategoryId> = {
+  "african-music-icons-supporting-education": "music",
+  "african-social-media-influencers": "social-media",
+  "african-sports-icons-supporting-education": "sports",
+};
+
+
 export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
   const params = useParams<{ sub: string }>();
   const slug = slugOverride ?? params.sub;

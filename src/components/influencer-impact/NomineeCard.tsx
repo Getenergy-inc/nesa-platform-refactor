@@ -54,7 +54,11 @@ export function NomineeCard({ nominee: n }: Props) {
             ) : (
               <Clock className="h-3 w-3" />
             )}
-            {n.verification_status}
+            {n.verification_status === "VERIFIED"
+              ? "Verified"
+              : n.verification_status === "PENDING"
+                ? "Pending Review"
+                : n.verification_status}
           </Badge>
         </div>
         <div className="absolute top-2 right-2">
