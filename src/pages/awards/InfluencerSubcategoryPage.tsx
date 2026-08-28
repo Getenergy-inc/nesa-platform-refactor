@@ -10,7 +10,10 @@ import {
 } from "@/config/influencer/subcategoryContent";
 import { InfluencerNominationForm } from "@/components/awards/InfluencerNominationForm";
 import { getStoryHeroImage } from "@/config/awards/subpageHeroImages";
-import { CategoryNomineeDashboard } from "@/components/awards/CategoryNomineeDashboard";
+
+import { InfluencerHallOfFameSection } from "@/components/awards/InfluencerHallOfFameSection";
+import { FeaturedInfluencerSpotlight } from "@/components/influencer-impact/FeaturedInfluencerSpotlight";
+import type { CategoryId as InfluencerCategoryId } from "@/config/awards/influencerImpact2026";
 import { BrandedCategoryHeroBand } from "@/components/awards/branded/BrandedCategoryHeroBand";
 import { useCategoryHeroStats } from "@/components/awards/branded/useCategoryHeroStats";
 
@@ -84,6 +87,14 @@ const DB_CATEGORY_SLUG_BY_SUBPAGE: Record<string, string> = {
   "african-sports-icons-supporting-education": "africa-sports-influencer-education",
 };
 
+/** Live influencer register category for each subpage. */
+const INFLUENCER_CATEGORY_BY_SUBPAGE: Record<string, InfluencerCategoryId> = {
+  "african-music-icons-supporting-education": "music",
+  "african-social-media-influencers": "social-media",
+  "african-sports-icons-supporting-education": "sports",
+};
+
+
 export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
   const params = useParams<{ sub: string }>();
   const slug = slugOverride ?? params.sub;
@@ -91,6 +102,9 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
     getInfluencerSubcategory(slug);
 
   const dbCategorySlug = content ? DB_CATEGORY_SLUG_BY_SUBPAGE[content.slug] : undefined;
+  const influencerCategory = content
+    ? INFLUENCER_CATEGORY_BY_SUBPAGE[content.slug]
+    : undefined;
   const { data: liveStats } = useCategoryHeroStats(dbCategorySlug);
 
   if (!content) {
@@ -232,6 +246,12 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
           </div>
         )}
 
+        {/* Featured Enablers spotlight (admin-curated, live database) */}
+        {influencerCategory && (
+          <FeaturedInfluencerSpotlight category={influencerCategory} />
+        )}
+
+
         {/* Full quick-info reference (long values live here, not in the hero tiles) */}
         <dl className="mb-8 grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
           {content.quickInfo.map((q) => (
@@ -348,11 +368,13 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
           </div>
         </Section>
 
-        {DB_CATEGORY_SLUG_BY_SUBPAGE[content.slug] && (
-          <CategoryNomineeDashboard
-            categorySlug={DB_CATEGORY_SLUG_BY_SUBPAGE[content.slug]}
-          />
+        {/* Live picture catalogue for this subcategory only (single source of counts) */}
+        {influencerCategory && (
+          <div className="-mx-4">
+            <InfluencerHallOfFameSection category={influencerCategory} />
+          </div>
         )}
+
 
         <Section id="nomination-form" title={content.formTitle}>
           <div className="rounded-lg border border-gold/20 bg-white/5 p-4 mb-6">

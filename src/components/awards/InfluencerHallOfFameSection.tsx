@@ -32,15 +32,31 @@ import { trackEvent } from "@/lib/analytics";
  * by the three recognition subcategories (Social Media, Sports, Music) and grouped
  * by 8 African regions + African Diaspora.
  */
-export function InfluencerHallOfFameSection() {
-  const [pathway, setPathway] = useState<CategoryId | "all">("all");
+interface HallOfFameProps {
+  /**
+   * When provided, the section becomes a single-category picture catalogue:
+   * the pathway cards and subcategory selector are hidden, only real database
+   * rows for that category are shown (no curated seed padding), and the stat
+   * block is computed over that category alone.
+   */
+  category?: CategoryId;
+}
+
+export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) {
+  const scoped = Boolean(category);
+  const [pathway, setPathway] = useState<CategoryId | "all">(category ?? "all");
   const [search, setSearch] = useState("");
   const [region, setRegion] = useState<RegionId | "all">("all");
-  const { nominees } = useInfluencerNominees();
+  const { nominees: allNominees } = useInfluencerNominees({ dbOnly: scoped });
+
+  const nominees = useMemo(
+    () => (category ? allNominees.filter((n) => n.award_category === category) : allNominees),
+    [allNominees, category],
+  );
 
   const filtered = useMemo(() => {
     return nominees.filter((n) => {
-      if (pathway !== "all" && n.award_category !== pathway) return false;
+      if (!scoped && pathway !== "all" && n.award_category !== pathway) return false;
       if (region !== "all" && n.nominee_region !== region) return false;
       if (search) {
         const q = search.toLowerCase();
@@ -50,7 +66,7 @@ export function InfluencerHallOfFameSection() {
       }
       return true;
     });
-  }, [nominees, pathway, region, search]);
+  }, [nominees, pathway, region, search, scoped]);
 
   const byRegion = useMemo(() => {
     const map = new Map<RegionId, InfluencerNominee[]>();
@@ -73,6 +89,9 @@ export function InfluencerHallOfFameSection() {
     return { total, social, sports, music, countries, regions, diaspora, verified };
   }, [nominees]);
 
+  const categoryMeta = category ? CATEGORIES.find((c) => c.id === category) : undefined;
+
+
 
   return (
     <section
@@ -84,20 +103,31 @@ export function InfluencerHallOfFameSection() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">
           <span className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.22em] text-gold font-semibold">
-            <Sparkles className="h-3 w-3" /> Existing Nominees · Hall of Fame Preview
+            <Sparkles className="h-3 w-3" />{" "}
+            {scoped ? "Existing Nominees · Picture Catalogue" : "Existing Nominees · Hall of Fame Preview"}
           </span>
           <h2 className="mt-3 font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white">
-            Africa's Education Influencers <span className="text-gold">Discovery Hub</span>
+            {scoped ? (
+              <>
+                {categoryMeta?.shortName ?? "Education Enablers"}{" "}
+                <span className="text-gold">Nominee Catalogue</span>
+              </>
+            ) : (
+              <>
+                Africa's Education Influencers <span className="text-gold">Discovery Hub</span>
+              </>
+            )}
           </h2>
           <p className="mt-4 text-white/70 text-sm md:text-base leading-relaxed">
-            Explore some of Africa's leading public figures using their influence to advance
-            Education for All. Browse nominees by recognition subcategory and discover inspiring
-            Education Enablers from across Africa and the African Diaspora.
+            {scoped
+              ? "Every nominee currently on file for this recognition subcategory, grouped by African region and the African Diaspora. Verification status shown is the live status on record."
+              : "Explore some of Africa's leading public figures using their influence to advance Education for All. Browse nominees by recognition subcategory and discover inspiring Education Enablers from across Africa and the African Diaspora."}
           </p>
         </div>
 
         {/* Recognition Subcategory Cards */}
-        <div className="grid gap-5 md:grid-cols-3 mb-12">
+        <div className={`grid gap-5 md:grid-cols-3 mb-12 ${scoped ? "hidden" : ""}`}>
+
           <PathwayCard
             id="social-media"
             title="African Social Media Influencers Education Impact Award"
@@ -175,16 +205,26 @@ export function InfluencerHallOfFameSection() {
         </div>
 
         {/* Dynamic Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-2.5 mb-8">
-          <Stat label="Total Nominees" value={stats.total} icon={Users} />
-          <Stat label="Social Media" value={stats.social} />
-          <Stat label="Sports" value={stats.sports} />
-          <Stat label="Music" value={stats.music} />
-          <Stat label="Countries" value={stats.countries} icon={Globe2} />
-          <Stat label="African Regions" value={stats.regions} />
-          <Stat label="Diaspora" value={stats.diaspora} />
-          <Stat label="Verified" value={stats.verified} icon={CheckCircle2} />
-        </div>
+        {scoped ? (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 mb-8">
+            <Stat label="Nominees on File" value={stats.total} icon={Users} />
+            <Stat label="Countries" value={stats.countries} icon={Globe2} />
+            <Stat label="African Regions" value={stats.regions} />
+            <Stat label="Verified" value={stats.verified} icon={CheckCircle2} />
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-2.5 mb-8">
+            <Stat label="Total Nominees" value={stats.total} icon={Users} />
+            <Stat label="Social Media" value={stats.social} />
+            <Stat label="Sports" value={stats.sports} />
+            <Stat label="Music" value={stats.music} />
+            <Stat label="Countries" value={stats.countries} icon={Globe2} />
+            <Stat label="African Regions" value={stats.regions} />
+            <Stat label="Diaspora" value={stats.diaspora} />
+            <Stat label="Verified" value={stats.verified} icon={CheckCircle2} />
+          </div>
+        )}
+
 
         {/* Search + Filter Toolbar */}
         <div className="sticky top-16 z-10 -mx-4 px-4 py-3 bg-charcoal/85 backdrop-blur border-y border-white/5 mb-6">
@@ -200,19 +240,22 @@ export function InfluencerHallOfFameSection() {
                 aria-label="Search nominees"
               />
             </div>
-            <select
-              value={pathway}
-              onChange={(e) => setPathway(e.target.value as CategoryId | "all")}
-              aria-label="Recognition Subcategory"
-              className="px-3 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white/85 text-sm focus:outline-none focus:border-gold/60"
-            >
-              <option value="all" className="bg-charcoal">All Subcategories</option>
-              {CATEGORIES.map((c) => (
-                <option key={c.id} value={c.id} className="bg-charcoal">
-                  {c.shortName}
-                </option>
-              ))}
-            </select>
+            {!scoped && (
+              <select
+                value={pathway}
+                onChange={(e) => setPathway(e.target.value as CategoryId | "all")}
+                aria-label="Recognition Subcategory"
+                className="px-3 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white/85 text-sm focus:outline-none focus:border-gold/60"
+              >
+                <option value="all" className="bg-charcoal">All Subcategories</option>
+                {CATEGORIES.map((c) => (
+                  <option key={c.id} value={c.id} className="bg-charcoal">
+                    {c.shortName}
+                  </option>
+                ))}
+              </select>
+            )}
+
             <select
               value={region}
               onChange={(e) => setRegion(e.target.value as RegionId | "all")}
@@ -257,8 +300,9 @@ export function InfluencerHallOfFameSection() {
           </h3>
           <p className="text-white/60 text-sm mb-6">
             {filtered.length} {filtered.length === 1 ? "nominee" : "nominees"} match your filters.
-            Each card is badged <span className="text-gold">Social Media</span> or{" "}
-            <span className="text-gold">Music Icon</span>.
+            {scoped
+              ? " Verification status on each card is the live status held on record."
+              : " Each card is badged by recognition subcategory."}
           </p>
 
           <div className="space-y-12">
@@ -276,8 +320,9 @@ export function InfluencerHallOfFameSection() {
             <div className="rounded-xl border border-dashed border-gold/25 bg-gold/[0.04] p-8 text-center">
               <p className="text-gold text-sm font-semibold mb-1">Nominations Open</p>
               <p className="text-white/60 text-xs max-w-md mx-auto">
-                No nominees match these filters yet. Be the first to nominate an Education
-                Enabler.
+                {scoped && nominees.length === 0
+                  ? `No verified ${categoryMeta?.shortName ?? "Influencer"} nominees yet — nominations are open. Be the first to nominate in this subcategory.`
+                  : "No nominees match these filters yet. Be the first to nominate an Education Enabler."}
               </p>
               <Link
                 to={NOMINATE_URL(pathway === "all" ? "social-media" : pathway)}
@@ -288,6 +333,7 @@ export function InfluencerHallOfFameSection() {
             </div>
           )}
         </div>
+
       </div>
     </section>
   );

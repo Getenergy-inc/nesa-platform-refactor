@@ -3338,6 +3338,7 @@ export type Database = {
           follower_count_range: string | null
           id: string
           image_url: string | null
+          is_featured: boolean
           label_or_foundation: string | null
           music_education_impact_area: string | null
           music_genre: string | null
@@ -3376,6 +3377,7 @@ export type Database = {
           follower_count_range?: string | null
           id?: string
           image_url?: string | null
+          is_featured?: boolean
           label_or_foundation?: string | null
           music_education_impact_area?: string | null
           music_genre?: string | null
@@ -3414,6 +3416,7 @@ export type Database = {
           follower_count_range?: string | null
           id?: string
           image_url?: string | null
+          is_featured?: boolean
           label_or_foundation?: string | null
           music_education_impact_area?: string | null
           music_genre?: string | null
