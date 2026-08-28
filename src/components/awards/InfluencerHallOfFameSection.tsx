@@ -300,8 +300,9 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
           </h3>
           <p className="text-white/60 text-sm mb-6">
             {filtered.length} {filtered.length === 1 ? "nominee" : "nominees"} match your filters.
-            Each card is badged <span className="text-gold">Social Media</span> or{" "}
-            <span className="text-gold">Music Icon</span>.
+            {scoped
+              ? " Verification status on each card is the live status held on record."
+              : " Each card is badged by recognition subcategory."}
           </p>
 
           <div className="space-y-12">
@@ -319,8 +320,9 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
             <div className="rounded-xl border border-dashed border-gold/25 bg-gold/[0.04] p-8 text-center">
               <p className="text-gold text-sm font-semibold mb-1">Nominations Open</p>
               <p className="text-white/60 text-xs max-w-md mx-auto">
-                No nominees match these filters yet. Be the first to nominate an Education
-                Enabler.
+                {scoped && nominees.length === 0
+                  ? `No verified ${categoryMeta?.shortName ?? "Influencer"} nominees yet — nominations are open. Be the first to nominate in this subcategory.`
+                  : "No nominees match these filters yet. Be the first to nominate an Education Enabler."}
               </p>
               <Link
                 to={NOMINATE_URL(pathway === "all" ? "social-media" : pathway)}
@@ -331,6 +333,7 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
             </div>
           )}
         </div>
+
       </div>
     </section>
   );
