@@ -1,62 +1,68 @@
-# Template Comparison Report — Icon vs Influencer vs Detailed Category
+# Investigation: Icon subcategory gallery vs Influencer dashboards
 
-Investigation only. No files were changed.
+Report only — no source files were changed.
 
-## 1. AfricaEducationIcon.tsx (reference, 427 lines)
+## 1. The page behind `/nominees/africa-education-icon-award/education-philanthropy-icon`
 
-Section order:
-1. Helmet SEO + `BreadcrumbJsonLd`
-2. **Hero** — full-bleed dark section, `bg-gradient-to-b from-black via-charcoal to-charcoal-light`, decorative gold radial-gradient overlay at 8% opacity, centered `max-w-4xl`, framer-motion fade-up. Contains: crown pill badge, `font-display` h1 up to `text-6xl` with a gold-coloured fragment, subhead, a **4-up inline stat grid** (rounded gold-bordered tiles, gold numerals), two CTAs (primary gold "Nominate", outline "Explore Existing Nominees"), and a trust line with a shield icon.
-3. **Pathways** — 3 subcategory cards with icon chip, live count badge, hover gold glow shadow.
-4. `CategoryNomineeDashboard categorySlug="africa-education-icon-award"` (shared component)
-5. **Classifications** — 3 cards, each with a nested list of pathway × classification counts.
-6. **Selection Process** — 6 numbered step cards + trust chips row.
-7. **Hall of Fame preview** — 8 `NomineeCard` (from `@/components/iconAward/shared`) + 3 per-pathway quick links.
-8. **Final CTA** — centered, sparkles icon, two buttons.
+Route: `src/App.tsx:1932-1939` — `/nominees/africa-education-icon-award/:sub` renders
+`src/pages/nominees/icon/IconSubcategoryPage.tsx` (siblings: `IconAwardMain` for the index,
+`IconClassificationPage` for `/:sub/:cls`).
 
-Visual signature: whole page sits on `bg-charcoal`, every section is dark; `font-display` headings; eyebrow labels in `text-[11px] uppercase tracking-[0.18em] text-gold`; rounded-2xl gold-tinted cards; framer-motion `whileInView` stagger. There is **no on-page nomination form** — CTAs anchor to `#nomination-form` (which does not exist on this page) or link out to `/nominate?category=...`. That anchor is a live bug worth noting.
+Section order in `IconSubcategoryPage.tsx`:
 
-## 2. InfluencerSubcategoryPage.tsx (498 lines, 3 pages)
+1. `IconBreadcrumbs` (Home / Africa Education Icon Award / subcategory short name)
+2. `IconHero` — dark gradient band, eyebrow "Icon Subcategory · 2006–2026", subcategory title/description, meta pills (`Classifications: 3`, `Nominees: <count>`), primary CTA `#all`
+3. Classifications grid — 3 `ClassificationCard`s (Africans in Africa / Diaspora / Friends of Africa) with per-classification counts
+4. "Featured Icon Spotlight" — `featured(subSlug, undefined, 3)`, 3 `NomineeCard`s
+5. `SubcategoryNomineeBrowser` — `NomineeFilterBar` (sticky) + the full picture grid at `id="all"`
+6. `FinalCTA`
 
-Section order: tier ribbon → breadcrumb → **card hero** (rounded-2xl bordered box inside a `max-w-5xl` container, optional background photo at 30% opacity, tier eyebrow, h1, italic supporting statement, intro paragraphs, 4-up `quickInfo` `<dl>` tiles, 2 CTAs) → sticky jump nav (11 anchors) → then a long stack of narrow uniform `Section` blocks: Overview, Who, Geography, Eligibility, Evidence, Impact Questions, Directory → `CategoryNomineeDashboard` → **Nomination form inline** (`InfluencerNominationForm`) → Review → Integrity → FAQs → sibling subcategories → final CTA.
+### Picture catalogue details
 
-Differences from Icon: constrained document layout instead of full-bleed sections; hero is a boxed card, not a gradient band; no stat grid tied to live counts (only static `quickInfo`); heading scale is `text-xl/2xl` gold rather than large white display; no motion; but it *does* embed the real nomination form on-page and has a sticky jump nav Icon lacks.
+- Grid: `grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4`; spotlight grid is 3-up.
+- Card: `NomineeCard` in `src/components/iconAward/shared.tsx:186-244`. Structure: `aspect-[4/3]` image, `object-cover`, `loading="lazy"`, hover scale; "Verified" gold badge overlay when `verification_status === "verified"`; then name (`line-clamp-2`), `MapPin` + `country · region`, `impact_summary` (`line-clamp-3`), then badges — optional subcategory badge, `years_of_contribution`, `jury_status`.
+- Photo fallback: **`onError` swap only** — `src = "/images/africaicons/placeholder-icon.svg"`. No initials avatar, no `HonoureeImage`/`NomineeImage`/`InitialsAvatar` usage here. Image URLs come from `src/data/iconAward/imageManifest.ts` via `resolveIconImage`.
+- Filtering: `useNomineeFilters` (`src/components/iconAward/NomineeFilterBar.tsx`) — URL-param driven (`q`, `country`, `region`, `verification`, `jury`, `classification`), derived country/region option lists, active-filter count, clear-all.
+- Pagination: **none**. Every filtered nominee renders at once.
+- Data source: **static TS**, not the database — `src/data/iconAward/index.ts` (`ICON_NOMINEES`, merged with `workbookNominees.ts`), selectors `bySubcategory` / `byClassification` / `featured`. The philanthropy subcategory has ~98 workbook rows + ~10 legacy rows.
+- Links: each card → `profileUrl(slug)` = `/nominees/africa-education-icon-award/:sub/:cls/:slug`.
 
-## 3. DetailedCategoryPageTemplate.tsx (426 lines, 16 pages)
+## 2. Is it reusable?
 
-S1 Hero (dark, `max-w-6xl`, `font-serif`, badges, 3 CTAs — no stats grid) → S2 Overview 3-col → S3 Enabler story → S4 Who Qualifies + EDI matrix table + threshold bands → S5 Subcategories cards → S6 Benefits 4-up → S7 Nomination CTA band → S8 Recognition Timeline → S9 `CategoryNomineeDashboard` (falls back to `BrandedNomineeDirectory` when no mapped slug) → S10 Evidence submission → S11 Recognition Package → S12 Trust → S13 FAQs (+ tail sections).
+Partially. `IconSubcategoryPage` itself is **bespoke to the Icon award**: it is parameterized only by `:sub`, hard-codes the Icon breadcrumb/CTA, assumes the 3-classification model, and reads exclusively from the static `iconAward` data module — there is no category-slug prop and no Supabase query.
 
-Differences from Icon: light theme — S2/S6/S8/S10/S12 use `bg-background`, alternating `bg-muted/30`; `font-serif` not `font-display`; shadcn `Card`/`Accordion` primitives instead of hand-rolled gold-bordered tiles; only the hero and S7 are dark. It already consumes the branded label map (`getCategoryDisplayName`) and tier accents (gold vs platinum slate). No inline nomination form — S7 links to `/nominate`.
+The building blocks *are* generic-ish and could be lifted: `IconHero`, `NomineeCard`, `ClassificationCard`, `NomineeFilterBar`/`useNomineeFilters`. Blockers to reuse as-is: `NomineeCard` types on `IconNominee` (requires `impact_summary`, `years_of_contribution`, `jury_status`, `classification_slug`), the filter hook imports `ICON_CLASSIFICATIONS` directly, and `profileUrl` builds Icon-only URLs.
 
-## 4. Is Icon's layout extractable?
+## 3. Do the 3 Influencer subpages have this gallery?
 
-Mostly yes. Only two things on the Icon page are genuinely bespoke:
-- `NomineeCard` from `@/components/iconAward/shared` and the `ICON_*` static dataset (`bySubcategory`, `byClassification`, `featured`).
-- The Classifications section, which depends on a 3×3 pathway × classification grid that no other category has.
+No. `src/pages/awards/InfluencerSubcategoryPage.tsx` (Music / Social Media / Sports) renders:
 
-Everything else — hero band, gradient + radial overlay, badge, stat grid, eyebrow/heading pattern, motion card grid, numbered process steps, final CTA — is plain Tailwind over generic props and can be lifted into shared pieces:
+- `BrandedCategoryHeroBand`, sticky jump nav, long content `Section` stack
+- a `#directory` section that is **text only** — bullet lists describing "Directory filters" and "Each nominee card displays", plus a button out to `/awards/influencer-education-impact/nominees`
+- `CategoryNomineeDashboard` (the compact live list we built)
+- inline `InfluencerNominationForm`, FAQs, final CTA
 
-```text
-src/components/awards/branded/
-  BrandedCategoryHeroBand.tsx   eyebrow badge, title (+gold fragment), subhead,
-                                stats[] tiles, primary/secondary CTA, trust line
-  BrandedSectionHeading.tsx     eyebrow + h2 + lede
-  BrandedProcessSteps.tsx       numbered step cards + trust chips
-  BrandedFinalCta.tsx           centered closing CTA
-```
+Real difference between the two grids:
 
-Adoption without a rewrite:
-- **InfluencerSubcategoryPage**: swap the boxed header for `BrandedCategoryHeroBand` (map `quickInfo` → `stats`, keep hero image as an optional prop). Keep the jump nav, `Section` stack, and inline form. ~1 section changed.
-- **DetailedCategoryPageTemplate**: swap S1 for the same hero band, feed it live counts from the dashboard query, and optionally re-skin S8 with `BrandedProcessSteps` and the tail CTA with `BrandedFinalCta`. Body sections can stay as-is initially.
+| | Icon `NomineeCard` grid | `CategoryNomineeDashboard` |
+|---|---|---|
+| Data | static `ICON_NOMINEES` TS module | live `public_nominees` via Supabase, joined to `subcategories`/`categories` |
+| Card media | `aspect-[4/3]` photo, `onError` → placeholder SVG | `aspect-[4/3]` photo (`photo_url \|\| logo_url`), else `InitialsAvatar` |
+| Card body | name, country·region, 3-line impact summary, 3 badges (years, jury status, verification) | name, organization, subcategory label, country/region — no narrative, no status badges |
+| Grid | 2/3/4-up, larger cards | 2/3/4-up, denser cards |
+| Filtering | URL-param filter bar: search, country, region, verification, jury, classification | local state: text search + subcategory pill tabs (incl. empty subcategories), live per-sub counters |
+| CTA | page-level `FinalCTA` link to `/nominate` | inline "Nominate for this category" modal (StageGate-aware) |
+| Pagination | none | none (query limit 2000) |
 
-## 5. Risks in making the 16 pages look like Icon
+There *is* a richer Influencer gallery, but only on the separate directory route `/awards/influencer-education-impact/nominees` → `InfluencerNomineesDirectoryPage` → `InfluencerHallOfFameSection` (pathway/region/search filters, region-grouped `src/components/influencer-impact/NomineeCard`). It is not embedded on the three subpages.
 
-- **Icon-specific data assumptions**: Icon's stat grid uses `ICON_SUBCATEGORIES.length` / `ICON_CLASSIFICATIONS.length` / hardcoded `9 laureates`. Other categories have no classifications and no fixed laureate count — the stats array must be a prop, not baked in. The Classifications and Hall-preview sections should **not** be generalised.
-- **Theme collision**: the 16 pages are light-themed with `bg-background`/`bg-muted/30` and shadcn `Card`s. Making only the hero dark is safe; converting whole pages to `bg-charcoal` means auditing every `text-muted-foreground`, `Card`, `Accordion`, and the EDI `<table>` for contrast — that is the expensive part, and where accessibility regressions would appear.
-- **Typography split**: Icon uses `font-display`, the 16 pages use `font-serif`. Pick one for the shared hero or expose it as a prop, otherwise headings will drift across the site.
-- **Platinum tier**: `tierAccent()` renders slate accents for platinum pages. A gold-hardcoded hero would erase that distinction unless the accent is passed through.
-- **Existing anchor bug**: Icon's hero CTA points at `#nomination-form`, which does not exist on that page. If the hero is extracted as-is, the broken anchor propagates. The Influencer pages are the only ones with a real `#nomination-form`.
+## 4. Existing "featured / spotlight nominee" patterns
 
-## Open question
+Four distinct ones already exist:
 
-Do you want the shared hero applied to **all 19 pages** (Icon + 3 Influencer + 16 detailed), or hero-only on the 16 detailed pages first, leaving Influencer untouched? And should the 16 detailed pages go fully dark charcoal, or keep light bodies with a dark hero band?
+1. **`featured()` + "Featured Icon Spotlight"** — `src/data/iconAward/index.ts:719` returns the first N of the pool (`pool.slice(0, n)`, no curation field); rendered as 3 standard `NomineeCard`s on `IconSubcategoryPage` and `IconClassificationPage`. Closest thing to a per-subcategory spotlight, but it is just "first 3", not an editorially chosen nominee.
+2. **`FeaturedNomineeSpotlight`** (`src/components/nominees/FeaturedNomineeSpotlight.tsx`) — takes `EnrichedDatabaseNominee[]`, shows the top 3 with `#1 Featured` badges, `aspect-[4/3]` image with logo/photo `object-contain` vs `object-cover` handling, framer-motion stagger. Used only by `src/pages/nominees/CategoryLandingPage.tsx:199`.
+3. **`CuratedFeaturedNominees`** (`src/components/nominees/CuratedFeaturedNominees.tsx`) — hardcoded 9-name "Hall of Fame Spotlight" strip with initials tiles, links into `/nominees?search=`.
+4. **`InfluencerPathwayNomineeSlider`** — live DB carousel used on the landing page and `InfluencerImpact2026`.
+
+No single-nominee "hero spotlight" component (one large highlighted nominee distinct from the grid) exists anywhere; every current pattern is a 3-up or carousel of cards, and none reads a `featured`/`is_spotlight` flag from the database.
