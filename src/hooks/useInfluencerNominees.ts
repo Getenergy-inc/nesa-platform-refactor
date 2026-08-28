@@ -58,7 +58,7 @@ function mapRow(row: any): InfluencerNominee {
   };
 }
 
-async function fetchInfluencerNominees(): Promise<InfluencerNominee[]> {
+async function fetchInfluencerNominees(dbOnly: boolean): Promise<InfluencerNominee[]> {
   const { data, error } = await supabase
     .from("influencer_impact_nominees")
     .select("*")
@@ -68,20 +68,33 @@ async function fetchInfluencerNominees(): Promise<InfluencerNominee[]> {
   if (error) throw error;
 
   const rows = (data ?? []).map(mapRow);
+  if (dbOnly) return rows;
+
   const present = new Set(rows.map((r) => r.slug));
   const curatedOnly = SEED_NOMINEES.filter((s) => !present.has(s.slug));
 
   return [...rows, ...curatedOnly];
 }
 
-export function useInfluencerNominees() {
+interface UseInfluencerNomineesOptions {
+  /**
+   * When true, only real database rows are returned — curated seed entries are
+   * never merged in. Used by per-category surfaces so an empty category renders
+   * an honest zero-state instead of borrowed data.
+   */
+  dbOnly?: boolean;
+}
+
+export function useInfluencerNominees(options: UseInfluencerNomineesOptions = {}) {
+  const dbOnly = Boolean(options.dbOnly);
+
   const q = useQuery({
-    queryKey: ["influencer-impact-nominees"],
-    queryFn: fetchInfluencerNominees,
+    queryKey: ["influencer-impact-nominees", dbOnly],
+    queryFn: () => fetchInfluencerNominees(dbOnly),
     staleTime: 1000 * 60 * 10,
   });
 
-  const nominees = q.data ?? SEED_NOMINEES;
+  const nominees = q.data ?? (dbOnly ? [] : SEED_NOMINEES);
 
   return {
     nominees,
