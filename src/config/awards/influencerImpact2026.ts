@@ -366,6 +366,8 @@ export interface InfluencerNominee {
   verification_status: VerificationStatus;
   verified_nominations: number;
   image: string;
+  /** Admin-controlled spotlight flag (influencer_impact_nominees.is_featured). */
+  is_featured?: boolean;
   /** True when the research team holds contact details (never displayed publicly). */
   contact_on_file?: boolean;
 
