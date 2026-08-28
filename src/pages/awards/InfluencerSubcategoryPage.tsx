@@ -102,6 +102,9 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
     getInfluencerSubcategory(slug);
 
   const dbCategorySlug = content ? DB_CATEGORY_SLUG_BY_SUBPAGE[content.slug] : undefined;
+  const influencerCategory = content
+    ? INFLUENCER_CATEGORY_BY_SUBPAGE[content.slug]
+    : undefined;
   const { data: liveStats } = useCategoryHeroStats(dbCategorySlug);
 
   if (!content) {
