@@ -327,15 +327,15 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
           <div className="flex gap-2 min-w-max">
             <RegionChip
               label="All Regions"
-              active={region === "all"}
+              active={effectiveRegion === "all"}
               count={filtered.length}
               onClick={() => setRegion("all")}
             />
-            {REGIONS.map((r) => (
+            {activeRegions.map((r) => (
               <RegionChip
                 key={r}
                 label={r}
-                active={region === r}
+                active={effectiveRegion === r}
                 count={byRegion.get(r)?.length ?? 0}
                 onClick={() => setRegion(r)}
               />
@@ -356,14 +356,16 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
           </p>
 
           <div className="space-y-12">
-            {REGIONS.filter((r) => region === "all" || region === r).map((r) => (
-              <RegionBlock
-                key={r}
-                region={r}
-                nominees={byRegion.get(r) ?? []}
-                pathway={pathway}
-              />
-            ))}
+            {activeRegions
+              .filter((r) => effectiveRegion === "all" || effectiveRegion === r)
+              .map((r) => (
+                <RegionBlock
+                  key={r}
+                  region={r}
+                  nominees={byRegion.get(r) ?? []}
+                  pathway={pathway}
+                />
+              ))}
           </div>
 
           {filtered.length === 0 && (
