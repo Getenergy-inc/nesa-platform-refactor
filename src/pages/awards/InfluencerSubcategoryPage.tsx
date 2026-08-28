@@ -362,11 +362,13 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
           </div>
         </Section>
 
-        {DB_CATEGORY_SLUG_BY_SUBPAGE[content.slug] && (
-          <CategoryNomineeDashboard
-            categorySlug={DB_CATEGORY_SLUG_BY_SUBPAGE[content.slug]}
-          />
+        {/* Live picture catalogue for this subcategory only (single source of counts) */}
+        {influencerCategory && (
+          <div className="-mx-4">
+            <InfluencerHallOfFameSection category={influencerCategory} />
+          </div>
         )}
+
 
         <Section id="nomination-form" title={content.formTitle}>
           <div className="rounded-lg border border-gold/20 bg-white/5 p-4 mb-6">
