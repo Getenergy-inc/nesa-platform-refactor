@@ -11,6 +11,9 @@ import {
 import { InfluencerNominationForm } from "@/components/awards/InfluencerNominationForm";
 import { getStoryHeroImage } from "@/config/awards/subpageHeroImages";
 import { CategoryNomineeDashboard } from "@/components/awards/CategoryNomineeDashboard";
+import { InfluencerHallOfFameSection } from "@/components/awards/InfluencerHallOfFameSection";
+import { FeaturedInfluencerSpotlight } from "@/components/influencer-impact/FeaturedInfluencerSpotlight";
+import type { CategoryId as InfluencerCategoryId } from "@/config/awards/influencerImpact2026";
 import { BrandedCategoryHeroBand } from "@/components/awards/branded/BrandedCategoryHeroBand";
 import { useCategoryHeroStats } from "@/components/awards/branded/useCategoryHeroStats";
 
