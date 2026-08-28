@@ -14,9 +14,11 @@ import {
 import {
   CATEGORIES,
   REGIONS,
+  RECOGNITION_CLASSES,
   NOMINATE_URL,
   type CategoryId,
   type RegionId,
+  type RecognitionClass,
   type InfluencerNominee,
 } from "@/config/awards/influencerImpact2026";
 import { useInfluencerNominees } from "@/hooks/useInfluencerNominees";
@@ -47,6 +49,7 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
   const [pathway, setPathway] = useState<CategoryId | "all">(category ?? "all");
   const [search, setSearch] = useState("");
   const [region, setRegion] = useState<RegionId | "all">("all");
+  const [classification, setClassification] = useState<RecognitionClass | "all">("all");
   const { nominees: allNominees } = useInfluencerNominees({ dbOnly: scoped });
 
   const nominees = useMemo(
@@ -54,10 +57,31 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
     [allNominees, category],
   );
 
+  /**
+   * Regions that actually hold data for the current classification. Keeps the
+   * region filter honest — e.g. selecting the Diaspora class only surfaces
+   * "African Diaspora" / "Global", not empty African-region tabs.
+   */
+  const activeRegions = useMemo(() => {
+    const classScoped = nominees.filter(
+      (n) => classification === "all" || n.recognition_class === classification,
+    );
+    const present = new Set(classScoped.map((n) => n.nominee_region));
+    const ordered = REGIONS.filter((r) => present.has(r)) as string[];
+    const extras = [...present].filter(
+      (r) => !(REGIONS as readonly string[]).includes(r),
+    ) as string[];
+    return [...ordered, ...extras] as RegionId[];
+  }, [nominees, classification]);
+
+  const effectiveRegion: RegionId | "all" =
+    region !== "all" && !(activeRegions as string[]).includes(region) ? "all" : region;
+
   const filtered = useMemo(() => {
     return nominees.filter((n) => {
       if (!scoped && pathway !== "all" && n.award_category !== pathway) return false;
-      if (region !== "all" && n.nominee_region !== region) return false;
+      if (classification !== "all" && n.recognition_class !== classification) return false;
+      if (effectiveRegion !== "all" && n.nominee_region !== effectiveRegion) return false;
       if (search) {
         const q = search.toLowerCase();
         const hay =
@@ -66,14 +90,17 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
       }
       return true;
     });
-  }, [nominees, pathway, region, search, scoped]);
+  }, [nominees, pathway, classification, effectiveRegion, search, scoped]);
 
   const byRegion = useMemo(() => {
-    const map = new Map<RegionId, InfluencerNominee[]>();
-    REGIONS.forEach((r) => map.set(r, []));
-    filtered.forEach((n) => map.get(n.nominee_region)?.push(n));
+    const map = new Map<string, InfluencerNominee[]>();
+    activeRegions.forEach((r) => map.set(r, []));
+    filtered.forEach((n) => {
+      if (!map.has(n.nominee_region)) map.set(n.nominee_region, []);
+      map.get(n.nominee_region)?.push(n);
+    });
     return map;
-  }, [filtered]);
+  }, [filtered, activeRegions]);
 
   const stats = useMemo(() => {
     const total = nominees.length;
@@ -85,8 +112,11 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
     const diaspora = nominees.filter(
       (n) => n.recognition_class === "African in the Diaspora",
     ).length;
+    const livingInAfrica = nominees.filter(
+      (n) => n.recognition_class === "African Living in Africa",
+    ).length;
     const verified = nominees.filter((n) => n.verification_status === "VERIFIED").length;
-    return { total, social, sports, music, countries, regions, diaspora, verified };
+    return { total, social, sports, music, countries, regions, diaspora, livingInAfrica, verified };
   }, [nominees]);
 
   const categoryMeta = category ? CATEGORIES.find((c) => c.id === category) : undefined;
