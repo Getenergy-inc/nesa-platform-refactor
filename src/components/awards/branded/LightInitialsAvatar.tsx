@@ -2,6 +2,7 @@
  * Light-theme initials monogram used where a category nominee has no verified
  * photograph. Muted surface, gold monogram — never a generic stock placeholder.
  */
+import { useState } from "react";
 import { getInitials } from "@/components/influencer-impact/InitialsAvatar";
 import { cn } from "@/lib/utils";
 
@@ -48,3 +49,32 @@ export function LightInitialsAvatar({ name, label, size = "md", className }: Pro
 }
 
 export default LightInitialsAvatar;
+
+/** Image with graceful fallback to the initials monogram on load failure. */
+export function NomineeImageOrInitials({
+  src,
+  name,
+  label,
+  size = "md",
+  className,
+}: {
+  src: string | null;
+  name: string;
+  label?: string;
+  size?: "sm" | "md";
+  className?: string;
+}) {
+  const [failed, setFailed] = useState(false);
+  if (!src || failed) {
+    return <LightInitialsAvatar name={name} label={label} size={size} />;
+  }
+  return (
+    <img
+      src={src}
+      alt={name}
+      loading="lazy"
+      onError={() => setFailed(true)}
+      className={cn("h-full w-full object-cover", className)}
+    />
+  );
+}

@@ -25,7 +25,7 @@ import { GoogleFormDisplay } from "@/components/nominate/GoogleFormDisplay";
 import { NativeCategoryNominationForm } from "@/components/awards/NativeCategoryNominationForm";
 import { resolveAwardForm } from "@/config/nomination/resolveAwardForm";
 import { getCategoryDisplayName } from "@/config/categoryDisplayBrand";
-import { LightInitialsAvatar } from "./LightInitialsAvatar";
+import { NomineeImageOrInitials } from "./LightInitialsAvatar";
 import {
   nomineeImage,
   useCategoryNominees,
@@ -246,16 +246,12 @@ export function CategoryPictureCatalogue({
                     const card = (
                       <div className="group h-full overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-gold/50">
                         <div className="aspect-[4/3] w-full overflow-hidden bg-muted">
-                          {img ? (
-                            <img
-                              src={img}
-                              alt={n.name}
-                              loading="lazy"
-                              className="h-full w-full object-cover"
-                            />
-                          ) : (
-                            <LightInitialsAvatar name={n.name} label={sub?.name} size="sm" />
-                          )}
+                          <NomineeImageOrInitials
+                            src={img}
+                            name={n.name}
+                            label={sub?.name}
+                            size="sm"
+                          />
                         </div>
                         <div className="p-3">
                           <p className="line-clamp-2 text-sm font-semibold leading-snug text-foreground transition-colors group-hover:text-gold">

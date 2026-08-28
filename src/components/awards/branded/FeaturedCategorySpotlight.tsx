@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import { BadgeCheck, ShieldQuestion, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { LightInitialsAvatar } from "./LightInitialsAvatar";
+import { NomineeImageOrInitials } from "./LightInitialsAvatar";
 import {
   featuredSummary,
   nomineeImage,
@@ -80,16 +80,12 @@ export function FeaturedCategorySpotlight({ categorySlug, className }: Props) {
             const card = (
               <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-gold/50">
                 <div className="aspect-[4/3] w-full overflow-hidden bg-muted">
-                  {img ? (
-                    <img
-                      src={img}
-                      alt={n.name}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    />
-                  ) : (
-                    <LightInitialsAvatar name={n.name} label={sub?.name} />
-                  )}
+                  <NomineeImageOrInitials
+                    src={img}
+                    name={n.name}
+                    label={sub?.name}
+                    className="transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
                 </div>
                 <div className="flex flex-1 flex-col p-4">
                   <div className="mb-2 flex flex-wrap items-center gap-2">
