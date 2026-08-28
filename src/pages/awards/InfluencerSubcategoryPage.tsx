@@ -246,6 +246,12 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
           </div>
         )}
 
+        {/* Featured Enablers spotlight (admin-curated, live database) */}
+        {influencerCategory && (
+          <FeaturedInfluencerSpotlight category={influencerCategory} />
+        )}
+
+
         {/* Full quick-info reference (long values live here, not in the hero tiles) */}
         <dl className="mb-8 grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
           {content.quickInfo.map((q) => (
