@@ -7,11 +7,15 @@ interface AuthContextType {
   user: User | null;
   session: Session | null;
   roles: AppRole[];
+  /** Non-null when the role lookup failed — authorization state is unknown, not "no roles". */
+  rolesError: string | null;
   loading: boolean;
   signUp: (email: string, password: string, fullName?: string, referralCode?: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
   hasRole: (role: AppRole) => boolean;
+  refreshUser: () => Promise<void>;
+
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
