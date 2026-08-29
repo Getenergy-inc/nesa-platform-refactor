@@ -167,11 +167,17 @@ Deno.serve(async (req) => {
 
       if (error) throw error;
 
+      // nomination-evidence is a PRIVATE bucket — a public URL would 404, so
+      // hand back a signed read URL alongside the durable path.
+      const { data: readUrl } = await supabase.storage
+        .from("nomination-evidence")
+        .createSignedUrl(filePath, 60 * 60 * 24 * 365);
+
       return ok({
         uploadUrl: data.signedUrl,
         token: data.token,
         filePath,
-        publicUrl: `${Deno.env.get("SUPABASE_URL")}/storage/v1/object/public/nomination-evidence/${filePath}`,
+        readUrl: readUrl?.signedUrl ?? null,
       });
     }
 
