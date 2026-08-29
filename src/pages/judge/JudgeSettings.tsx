@@ -155,19 +155,16 @@ export default function JudgeSettings() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label className="text-white/70">Organization</Label>
-                  <Input 
-                    placeholder="Your institution" 
-                    className="bg-white/5 border-white/10 text-white placeholder:text-white/30"
-                  />
-                </div>
-                <div className="space-y-2">
                   <Label className="text-white/70">Country</Label>
                   <Input 
-                    placeholder="Your country" 
+                    placeholder="Your country"
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                    disabled={loading}
                     className="bg-white/5 border-white/10 text-white placeholder:text-white/30"
                   />
                 </div>
+
               </div>
             </CardContent>
           </Card>
