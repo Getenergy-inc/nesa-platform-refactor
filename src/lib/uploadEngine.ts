@@ -29,6 +29,11 @@ export interface UploadConfig {
   maxRetries?: number;
   /** Chunk size for large files (default 5MB) */
   chunkThreshold?: number;
+  /**
+   * Bucket is private — a public URL would 404, so a long-lived signed URL is
+   * issued instead. Consumers should always keep `path` as the durable handle.
+   */
+  privateBucket?: boolean;
 }
 
 export interface UploadProgress {
@@ -58,6 +63,8 @@ const DEFAULT_CONCURRENCY = 3;
 const DEFAULT_MAX_SIZE = 10 * 1024 * 1024; // 10MB
 const DEFAULT_MAX_RETRIES = 3;
 const DEFAULT_CHUNK_THRESHOLD = 5 * 1024 * 1024; // 5MB
+/** Signed-URL lifetime for private-bucket uploads (1 year). */
+const SIGNED_URL_TTL_SECONDS = 60 * 60 * 24 * 365;
 const BASE_RETRY_DELAY = 1000; // 1 second
 
 // ── Utility ──
@@ -107,6 +114,7 @@ async function uploadSingleFile(
   bucket: string,
   filePath: string,
   maxRetries: number,
+  privateBucket: boolean,
   onProgress: (status: UploadProgress["status"], progress: number, error?: string) => void
 ): Promise<UploadResult> {
   let lastError: Error | null = null;
@@ -135,15 +143,26 @@ async function uploadSingleFile(
 
       onProgress("uploading", 90);
 
-      const { data: urlData } = supabase.storage
-        .from(bucket)
-        .getPublicUrl(data.path);
+      // Private buckets have no public URL — issue a long-lived signed URL so
+      // the stored reference actually resolves for reviewers.
+      let url: string;
+      if (privateBucket) {
+        const { data: signed, error: signErr } = await supabase.storage
+          .from(bucket)
+          .createSignedUrl(data.path, SIGNED_URL_TTL_SECONDS);
+        if (signErr || !signed?.signedUrl) {
+          throw new Error(signErr?.message || "Could not create a signed URL for the uploaded file");
+        }
+        url = signed.signedUrl;
+      } else {
+        url = supabase.storage.from(bucket).getPublicUrl(data.path).data.publicUrl;
+      }
 
       onProgress("success", 100);
 
       return {
         name: file.name,
-        url: urlData.publicUrl,
+        url,
         path: data.path,
         type: file.type,
         size: file.size,
@@ -214,6 +233,7 @@ export async function uploadFiles(
     maxFileSize = DEFAULT_MAX_SIZE,
     allowedTypes = [],
     maxRetries = DEFAULT_MAX_RETRIES,
+    privateBucket = false,
   } = config;
 
   // Validate all files first
@@ -268,6 +288,7 @@ export async function uploadFiles(
         bucket,
         filePath,
         maxRetries,
+        privateBucket,
         (status, progress, error) => {
           const entry = progressMap.get(fileId)!;
           entry.status = status;
@@ -335,6 +356,7 @@ export async function uploadSingle(
 export const UPLOAD_PRESETS = {
   nominationEvidence: {
     bucket: "nomination-evidence",
+    privateBucket: true,
     concurrency: 3,
     maxFileSize: 10 * 1024 * 1024,
     allowedTypes: [
@@ -350,6 +372,7 @@ export const UPLOAD_PRESETS = {
 
   nomineePhoto: {
     bucket: "nomination-evidence",
+    privateBucket: true,
     concurrency: 1,
     maxFileSize: 5 * 1024 * 1024,
     allowedTypes: ["image/jpeg", "image/png", "image/webp", "image/svg+xml"],
@@ -358,6 +381,7 @@ export const UPLOAD_PRESETS = {
 
   endorsementMedia: {
     bucket: "nomination-evidence",
+    privateBucket: true,
     concurrency: 2,
     maxFileSize: 50 * 1024 * 1024,
     allowedTypes: ["image/*", "video/mp4", "video/quicktime", "video/x-msvideo"],

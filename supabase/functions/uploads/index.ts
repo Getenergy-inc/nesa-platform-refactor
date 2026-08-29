@@ -167,11 +167,13 @@ Deno.serve(async (req) => {
 
       if (error) throw error;
 
+      // nomination-evidence is a PRIVATE bucket: there is no public URL. The
+      // caller uploads to `uploadUrl` and keeps `filePath` as the durable
+      // handle; a signed read URL is minted on demand afterwards.
       return ok({
         uploadUrl: data.signedUrl,
         token: data.token,
         filePath,
-        publicUrl: `${Deno.env.get("SUPABASE_URL")}/storage/v1/object/public/nomination-evidence/${filePath}`,
       });
     }
 

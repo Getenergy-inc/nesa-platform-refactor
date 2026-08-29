@@ -36,15 +36,18 @@ export interface SupportMessage {
 export function useNomineeProfile(slug?: string) {
   const [profile, setProfile] = useState<DbNomineeProfile | null>(null);
   const [loading, setLoading] = useState(Boolean(slug));
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
     if (!slug) {
       setProfile(null);
+      setError(null);
       setLoading(false);
       return;
     }
     setLoading(true);
+    setError(null);
     supabase
       .from("public_nominees")
       .select(
@@ -52,9 +55,15 @@ export function useNomineeProfile(slug?: string) {
       )
       .eq("slug", slug)
       .maybeSingle()
-      .then(({ data }) => {
+      .then(({ data, error: fetchError }) => {
         if (!active) return;
-        setProfile((data as unknown as DbNomineeProfile) ?? null);
+        // A failed request must never be presented as "not published yet".
+        if (fetchError) {
+          setError(fetchError.message);
+          setProfile(null);
+        } else {
+          setProfile((data as unknown as DbNomineeProfile) ?? null);
+        }
         setLoading(false);
       });
     return () => {
@@ -62,7 +71,7 @@ export function useNomineeProfile(slug?: string) {
     };
   }, [slug]);
 
-  return { profile, loading };
+  return { profile, loading, error };
 }
 
 /** Approved (NRC-moderated) supporter messages for a nominee. No counters, no votes. */

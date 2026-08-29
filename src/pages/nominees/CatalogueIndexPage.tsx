@@ -78,7 +78,7 @@ function Counter({ label, value }: { label: string; value: number | string }) {
 }
 
 export default function CatalogueIndexPage() {
-  const { data: nominees, isLoading } = useCatalogueNominees();
+  const { data: nominees, isLoading, isError, error: loadError, refetch } = useCatalogueNominees();
   const [params, setParams] = useSearchParams();
   const [search, setSearch] = useState(params.get("q") ?? "");
   // Every filter is seeded from the URL — previously only tier/category/
@@ -257,6 +257,26 @@ export default function CatalogueIndexPage() {
               automatically from the live record set.
             </p>
           </header>
+
+          {/* Directory load failure — never rendered as an empty catalogue */}
+          {isError && (
+            <div
+              role="alert"
+              className="mb-8 rounded-xl border border-destructive/40 bg-destructive/10 px-4 py-3 text-sm text-foreground"
+            >
+              <p className="font-semibold">The nominee directory could not be loaded.</p>
+              <p className="mt-1 text-foreground/70">
+                {(loadError as Error)?.message ?? "Please check your connection and try again."}
+              </p>
+              <button
+                type="button"
+                onClick={() => refetch()}
+                className="mt-3 rounded-md border border-gold/40 px-3 py-1.5 text-xs uppercase tracking-wide text-gold"
+              >
+                Retry
+              </button>
+            </div>
+          )}
 
           {/* Counters */}
           {isLoading ? (
