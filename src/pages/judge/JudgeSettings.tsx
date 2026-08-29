@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { JudgesArenaLayout } from "@/components/judge/JudgesArenaLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -9,6 +9,7 @@ import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { 
   User, 
@@ -17,17 +18,31 @@ import {
   Key,
   Save,
   Upload,
+  Loader2,
 } from "lucide-react";
+
+type NotificationPrefs = {
+  email: boolean;
+  newAssignments: boolean;
+  deadlineReminders: boolean;
+  systemUpdates: boolean;
+};
+
+const DEFAULT_PREFS: NotificationPrefs = {
+  email: true,
+  newAssignments: true,
+  deadlineReminders: true,
+  systemUpdates: false,
+};
 
 export default function JudgeSettings() {
   const { user } = useAuth();
-  const [notifications, setNotifications] = useState({
-    email: true,
-    newAssignments: true,
-    deadlineReminders: true,
-    systemUpdates: false,
-  });
+  const [notifications, setNotifications] = useState<NotificationPrefs>(DEFAULT_PREFS);
+  const [country, setCountry] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [sendingReset, setSendingReset] = useState(false);
 
   const initials = user?.user_metadata?.full_name
     ?.split(" ")
@@ -36,13 +51,53 @@ export default function JudgeSettings() {
     .toUpperCase()
     .slice(0, 2) || "JG";
 
+  const loadProfile = useCallback(async () => {
+    if (!user) return;
+    setLoading(true);
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("country, notification_preferences")
+      .eq("user_id", user.id)
+      .maybeSingle();
+    if (error) {
+      setLoadError(error.message);
+      toast.error(`Could not load your settings: ${error.message}`);
+    } else {
+      setLoadError(null);
+      setCountry(data?.country ?? "");
+      setNotifications({ ...DEFAULT_PREFS, ...((data?.notification_preferences as Partial<NotificationPrefs>) ?? {}) });
+    }
+    setLoading(false);
+  }, [user]);
+
+  useEffect(() => { loadProfile(); }, [loadProfile]);
+
   const handleSave = async () => {
+    if (!user) return;
     setSaving(true);
-    // Simulate save
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    const { error } = await supabase
+      .from("profiles")
+      .update({ country: country || null, notification_preferences: notifications })
+      .eq("user_id", user.id);
     setSaving(false);
-    toast.success("Settings saved successfully");
+    if (error) {
+      toast.error(`Save failed: ${error.message}`);
+      return;
+    }
+    toast.success("Settings saved");
   };
+
+  const handlePasswordReset = async () => {
+    if (!user?.email) return toast.error("No email address on this account.");
+    setSendingReset(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(user.email, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    setSendingReset(false);
+    if (error) return toast.error(error.message);
+    toast.success(`Password reset link sent to ${user.email}`);
+  };
+
 
   return (
     <>
