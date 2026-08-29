@@ -112,6 +112,7 @@ async function uploadSingleFile(
   bucket: string,
   filePath: string,
   maxRetries: number,
+  privateBucket: boolean,
   onProgress: (status: UploadProgress["status"], progress: number, error?: string) => void
 ): Promise<UploadResult> {
   let lastError: Error | null = null;
