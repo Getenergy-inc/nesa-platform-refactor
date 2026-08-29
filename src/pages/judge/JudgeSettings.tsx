@@ -242,37 +242,47 @@ export default function JudgeSettings() {
               <div className="flex items-center justify-between py-2">
                 <div>
                   <p className="text-white font-medium">Change Password</p>
-                  <p className="text-sm text-white/50">Update your account password</p>
+                  <p className="text-sm text-white/50">We email a secure reset link to {user?.email || "your address"}</p>
                 </div>
-                <Button variant="outline" size="sm" className="border-white/20 text-white hover:bg-white/10">
-                  <Key className="mr-2 h-4 w-4" />
-                  Change
+                <Button
+                  variant="outline" size="sm" disabled={sendingReset}
+                  onClick={handlePasswordReset}
+                  className="border-white/20 text-white hover:bg-white/10"
+                >
+                  {sendingReset ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Key className="mr-2 h-4 w-4" />}
+                  Send reset link
                 </Button>
               </div>
               <Separator className="bg-white/10" />
               <div className="flex items-center justify-between py-2">
                 <div>
-                  <p className="text-white font-medium">Two-Factor Authentication</p>
-                  <p className="text-sm text-white/50">Add an extra layer of security</p>
+                  <p className="text-white font-medium">Step-up verification</p>
+                  <p className="text-sm text-white/50">
+                    Every Judges Arena sign-in already requires a one-time code emailed to your registered address.
+                    It is always on and cannot be disabled.
+                  </p>
                 </div>
-                <Button variant="outline" size="sm" className="border-white/20 text-white hover:bg-white/10">
-                  Enable
-                </Button>
+                <span className="text-xs font-semibold uppercase tracking-wide text-gold">Always on</span>
               </div>
             </CardContent>
           </Card>
+
+          {loadError && (
+            <p className="mb-4 text-sm text-red-400">Settings could not be loaded: {loadError}</p>
+          )}
 
           {/* Save Button */}
           <div className="flex justify-end">
             <Button 
               onClick={handleSave}
-              disabled={saving}
+              disabled={saving || loading || !!loadError}
               className="bg-gold text-charcoal hover:bg-gold/90"
             >
               <Save className="mr-2 h-4 w-4" />
               {saving ? "Saving..." : "Save Changes"}
             </Button>
           </div>
+
         </div>
       </JudgesArenaLayout>
     </>
