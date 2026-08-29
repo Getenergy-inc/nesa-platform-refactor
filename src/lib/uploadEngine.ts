@@ -63,6 +63,8 @@ const DEFAULT_CONCURRENCY = 3;
 const DEFAULT_MAX_SIZE = 10 * 1024 * 1024; // 10MB
 const DEFAULT_MAX_RETRIES = 3;
 const DEFAULT_CHUNK_THRESHOLD = 5 * 1024 * 1024; // 5MB
+/** Signed-URL lifetime for private-bucket uploads (1 year). */
+const SIGNED_URL_TTL_SECONDS = 60 * 60 * 24 * 365;
 const BASE_RETRY_DELAY = 1000; // 1 second
 
 // ── Utility ──
