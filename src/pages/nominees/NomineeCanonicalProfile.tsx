@@ -42,7 +42,7 @@ export default function NomineeCanonicalProfile() {
   }>();
 
   const staticNominee = slug ? getIconNominee(slug) : undefined;
-  const { profile, loading } = useNomineeProfile(slug);
+  const { profile, loading, error: profileError } = useNomineeProfile(slug);
 
   const sub = getSubcategory(staticNominee?.award_subcategory_slug ?? category ?? "");
   const cls = getClassification(staticNominee?.classification_slug ?? classification ?? "");
@@ -51,9 +51,21 @@ export default function NomineeCanonicalProfile() {
     return (
       <div className="mx-auto max-w-3xl px-4 py-24 text-center">
         <h1 className="font-display text-2xl font-semibold text-white">
-          {loading ? "Loading profile…" : "This profile is not published yet"}
+          {loading
+            ? "Loading profile…"
+            : profileError
+              ? "We couldn't load this profile"
+              : "This profile is not published yet"}
         </h1>
-        {!loading && (
+        {!loading && profileError && (
+          <>
+            <p className="mt-3 text-white/60">{profileError}</p>
+            <Button className="mt-6" onClick={() => window.location.reload()}>
+              Try again
+            </Button>
+          </>
+        )}
+        {!loading && !profileError && (
           <>
             <p className="mt-3 text-white/60">
               The nominee record you are looking for is still in verification with the
