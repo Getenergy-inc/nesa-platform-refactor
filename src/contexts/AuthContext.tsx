@@ -155,15 +155,39 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (error) throw error;
   };
 
+  /** Equivalent of `/auth/me`: re-reads the live user + roles from the backend. */
+  const refreshUser = async () => {
+    const { data, error } = await supabase.auth.getUser();
+    if (error) throw error;
+    setUser(data.user ?? null);
+    if (data.user) {
+      const { data: roleRows, error: roleError } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", data.user.id);
+      if (roleError) {
+        setRolesError(roleError.message);
+        throw roleError;
+      }
+      setRolesError(null);
+      setRoles((roleRows || []).map((r) => r.role as AppRole));
+    } else {
+      setRoles([]);
+    }
+  };
+
   const hasRole = (role: AppRole): boolean => {
     return roles.includes(role);
   };
 
   return (
-    <AuthContext.Provider value={{ user, session, roles, loading, signUp, signIn, signOut, hasRole }}>
+    <AuthContext.Provider
+      value={{ user, session, roles, rolesError, loading, signUp, signIn, signOut, hasRole, refreshUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
+
 }
 
 export function useAuth() {
