@@ -219,6 +219,7 @@ export async function uploadFiles(
     maxFileSize = DEFAULT_MAX_SIZE,
     allowedTypes = [],
     maxRetries = DEFAULT_MAX_RETRIES,
+    privateBucket = false,
   } = config;
 
   // Validate all files first
