@@ -4,7 +4,6 @@ export interface UploadInitResponse {
   uploadUrl: string;
   token: string;
   filePath: string;
-  publicUrl?: string;
 }
 
 export interface FileMetadata {
