@@ -29,6 +29,11 @@ export interface UploadConfig {
   maxRetries?: number;
   /** Chunk size for large files (default 5MB) */
   chunkThreshold?: number;
+  /**
+   * Bucket is private — a public URL would 404, so a long-lived signed URL is
+   * issued instead. Consumers should always keep `path` as the durable handle.
+   */
+  privateBucket?: boolean;
 }
 
 export interface UploadProgress {
