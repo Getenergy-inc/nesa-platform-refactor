@@ -24,7 +24,7 @@ export default function IconJurySignIn() {
       const { data } = await supabase.auth.getSession();
       if (data.session?.user?.email) {
         setEmail((prev) => prev || data.session!.user.email!);
-        if (!otpMode) nav(`/icon-jury/sign-in?otp=1&next=${encodeURIComponent(next)}`, { replace: true });
+        if (!otpMode) nav(`/judges/sign-in?otp=1&next=${encodeURIComponent(next)}`, { replace: true });
       }
     })();
   }, [nav, next, otpMode]);
@@ -49,7 +49,7 @@ export default function IconJurySignIn() {
     if (error) { setBusy(false); return toast.error(error.message); }
     await sendCode(email);
     setBusy(false);
-    nav(`/icon-jury/sign-in?otp=1&next=${encodeURIComponent(next)}`, { replace: true });
+    nav(`/judges/sign-in?otp=1&next=${encodeURIComponent(next)}`, { replace: true });
   };
 
   const resendCode = async () => {
