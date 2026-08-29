@@ -139,10 +139,11 @@ export default function IconJurySignIn() {
               <>
                 <div className="flex items-center gap-2 text-gold mb-2">
                   <ShieldCheck className="h-5 w-5" />
-                  <h2 className="text-xl font-semibold">Two-factor verification</h2>
+                  <h2 className="text-xl font-semibold">Email verification</h2>
                 </div>
                 <p className="text-sm text-white/60 mb-6">
-                  Enter the 6-digit code from your authenticator or registered email.
+                  Enter the 6-digit code we emailed to{" "}
+                  <span className="text-white/80">{email || "your registered address"}</span>.
                 </p>
                 <form onSubmit={verifyOtp} className="space-y-4">
                   <Input
@@ -155,7 +156,14 @@ export default function IconJurySignIn() {
                   <Button type="submit" disabled={busy} className="w-full bg-gold hover:bg-gold/90 text-black">
                     {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : "Verify"}
                   </Button>
+                  <Button
+                    type="button" variant="ghost" disabled={busy} onClick={resendCode}
+                    className="w-full text-white/70 hover:text-white"
+                  >
+                    Resend code
+                  </Button>
                 </form>
+
               </>
             )}
             <p className="text-[11px] text-white/40 mt-6 text-center leading-relaxed">
