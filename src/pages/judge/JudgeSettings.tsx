@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { JudgesArenaLayout } from "@/components/judge/JudgesArenaLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -9,6 +9,7 @@ import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { 
   User, 
@@ -17,17 +18,31 @@ import {
   Key,
   Save,
   Upload,
+  Loader2,
 } from "lucide-react";
+
+type NotificationPrefs = {
+  email: boolean;
+  newAssignments: boolean;
+  deadlineReminders: boolean;
+  systemUpdates: boolean;
+};
+
+const DEFAULT_PREFS: NotificationPrefs = {
+  email: true,
+  newAssignments: true,
+  deadlineReminders: true,
+  systemUpdates: false,
+};
 
 export default function JudgeSettings() {
   const { user } = useAuth();
-  const [notifications, setNotifications] = useState({
-    email: true,
-    newAssignments: true,
-    deadlineReminders: true,
-    systemUpdates: false,
-  });
+  const [notifications, setNotifications] = useState<NotificationPrefs>(DEFAULT_PREFS);
+  const [country, setCountry] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [sendingReset, setSendingReset] = useState(false);
 
   const initials = user?.user_metadata?.full_name
     ?.split(" ")
@@ -36,13 +51,53 @@ export default function JudgeSettings() {
     .toUpperCase()
     .slice(0, 2) || "JG";
 
+  const loadProfile = useCallback(async () => {
+    if (!user) return;
+    setLoading(true);
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("country, notification_preferences")
+      .eq("user_id", user.id)
+      .maybeSingle();
+    if (error) {
+      setLoadError(error.message);
+      toast.error(`Could not load your settings: ${error.message}`);
+    } else {
+      setLoadError(null);
+      setCountry(data?.country ?? "");
+      setNotifications({ ...DEFAULT_PREFS, ...((data?.notification_preferences as Partial<NotificationPrefs>) ?? {}) });
+    }
+    setLoading(false);
+  }, [user]);
+
+  useEffect(() => { loadProfile(); }, [loadProfile]);
+
   const handleSave = async () => {
+    if (!user) return;
     setSaving(true);
-    // Simulate save
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    const { error } = await supabase
+      .from("profiles")
+      .update({ country: country || null, notification_preferences: notifications })
+      .eq("user_id", user.id);
     setSaving(false);
-    toast.success("Settings saved successfully");
+    if (error) {
+      toast.error(`Save failed: ${error.message}`);
+      return;
+    }
+    toast.success("Settings saved");
   };
+
+  const handlePasswordReset = async () => {
+    if (!user?.email) return toast.error("No email address on this account.");
+    setSendingReset(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(user.email, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    setSendingReset(false);
+    if (error) return toast.error(error.message);
+    toast.success(`Password reset link sent to ${user.email}`);
+  };
+
 
   return (
     <>
@@ -100,19 +155,16 @@ export default function JudgeSettings() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label className="text-white/70">Organization</Label>
-                  <Input 
-                    placeholder="Your institution" 
-                    className="bg-white/5 border-white/10 text-white placeholder:text-white/30"
-                  />
-                </div>
-                <div className="space-y-2">
                   <Label className="text-white/70">Country</Label>
                   <Input 
-                    placeholder="Your country" 
+                    placeholder="Your country"
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                    disabled={loading}
                     className="bg-white/5 border-white/10 text-white placeholder:text-white/30"
                   />
                 </div>
+
               </div>
             </CardContent>
           </Card>
@@ -190,37 +242,47 @@ export default function JudgeSettings() {
               <div className="flex items-center justify-between py-2">
                 <div>
                   <p className="text-white font-medium">Change Password</p>
-                  <p className="text-sm text-white/50">Update your account password</p>
+                  <p className="text-sm text-white/50">We email a secure reset link to {user?.email || "your address"}</p>
                 </div>
-                <Button variant="outline" size="sm" className="border-white/20 text-white hover:bg-white/10">
-                  <Key className="mr-2 h-4 w-4" />
-                  Change
+                <Button
+                  variant="outline" size="sm" disabled={sendingReset}
+                  onClick={handlePasswordReset}
+                  className="border-white/20 text-white hover:bg-white/10"
+                >
+                  {sendingReset ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Key className="mr-2 h-4 w-4" />}
+                  Send reset link
                 </Button>
               </div>
               <Separator className="bg-white/10" />
               <div className="flex items-center justify-between py-2">
                 <div>
-                  <p className="text-white font-medium">Two-Factor Authentication</p>
-                  <p className="text-sm text-white/50">Add an extra layer of security</p>
+                  <p className="text-white font-medium">Step-up verification</p>
+                  <p className="text-sm text-white/50">
+                    Every Judges Arena sign-in already requires a one-time code emailed to your registered address.
+                    It is always on and cannot be disabled.
+                  </p>
                 </div>
-                <Button variant="outline" size="sm" className="border-white/20 text-white hover:bg-white/10">
-                  Enable
-                </Button>
+                <span className="text-xs font-semibold uppercase tracking-wide text-gold">Always on</span>
               </div>
             </CardContent>
           </Card>
+
+          {loadError && (
+            <p className="mb-4 text-sm text-red-400">Settings could not be loaded: {loadError}</p>
+          )}
 
           {/* Save Button */}
           <div className="flex justify-end">
             <Button 
               onClick={handleSave}
-              disabled={saving}
+              disabled={saving || loading || !!loadError}
               className="bg-gold text-charcoal hover:bg-gold/90"
             >
               <Save className="mr-2 h-4 w-4" />
               {saving ? "Saving..." : "Save Changes"}
             </Button>
           </div>
+
         </div>
       </JudgesArenaLayout>
     </>

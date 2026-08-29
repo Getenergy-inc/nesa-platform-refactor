@@ -7,11 +7,15 @@ interface AuthContextType {
   user: User | null;
   session: Session | null;
   roles: AppRole[];
+  /** Non-null when the role lookup failed — authorization state is unknown, not "no roles". */
+  rolesError: string | null;
   loading: boolean;
   signUp: (email: string, password: string, fullName?: string, referralCode?: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
   hasRole: (role: AppRole) => boolean;
+  refreshUser: () => Promise<void>;
+
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -21,52 +25,57 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [roles, setRoles] = useState<AppRole[]>([]);
   const [loading, setLoading] = useState(true);
+  const [rolesError, setRolesError] = useState<string | null>(null);
 
   useEffect(() => {
+    const loadRoles = async (userId: string) => {
+      const { data, error } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", userId);
+      if (error) {
+        // Never silently treat a failed role lookup as "no roles" — surface it.
+        console.error("Failed to resolve user roles", error);
+        setRolesError(error.message);
+        setRoles([]);
+        return;
+      }
+      setRolesError(null);
+      setRoles((data || []).map((r) => r.role as AppRole));
+    };
+
     // Set up auth state listener BEFORE getting initial session
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+      (event, session) => {
         setSession(session);
         setUser(session?.user ?? null);
-        
+
         if (session?.user) {
-          // Fetch roles - use setTimeout to avoid potential deadlock
-          setTimeout(async () => {
-            const { data } = await supabase
-              .from("user_roles")
-              .select("role")
-              .eq("user_id", session.user.id);
-            setRoles((data || []).map(r => r.role as AppRole));
-          }, 0);
+          // Defer the Supabase call to avoid a deadlock inside the callback
+          setTimeout(() => { loadRoles(session.user.id); }, 0);
         } else {
           setRoles([]);
+          setRolesError(null);
         }
-        
+
         setLoading(false);
       }
     );
 
     // Get initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
-      
+
       if (session?.user) {
-        supabase
-          .from("user_roles")
-          .select("role")
-          .eq("user_id", session.user.id)
-          .then(({ data }) => {
-            setRoles((data || []).map(r => r.role as AppRole));
-            setLoading(false);
-          });
-      } else {
-        setLoading(false);
+        await loadRoles(session.user.id);
       }
+      setLoading(false);
     });
 
     return () => subscription.unsubscribe();
   }, []);
+
 
   const signUp = async (email: string, password: string, fullName?: string, referralCode?: string) => {
     const { error, data } = await supabase.auth.signUp({
@@ -150,15 +159,39 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (error) throw error;
   };
 
+  /** Equivalent of `/auth/me`: re-reads the live user + roles from the backend. */
+  const refreshUser = async () => {
+    const { data, error } = await supabase.auth.getUser();
+    if (error) throw error;
+    setUser(data.user ?? null);
+    if (data.user) {
+      const { data: roleRows, error: roleError } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", data.user.id);
+      if (roleError) {
+        setRolesError(roleError.message);
+        throw roleError;
+      }
+      setRolesError(null);
+      setRoles((roleRows || []).map((r) => r.role as AppRole));
+    } else {
+      setRoles([]);
+    }
+  };
+
   const hasRole = (role: AppRole): boolean => {
     return roles.includes(role);
   };
 
   return (
-    <AuthContext.Provider value={{ user, session, roles, loading, signUp, signIn, signOut, hasRole }}>
+    <AuthContext.Provider
+      value={{ user, session, roles, rolesError, loading, signUp, signIn, signOut, hasRole, refreshUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
+
 }
 
 export function useAuth() {

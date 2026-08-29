@@ -22,44 +22,81 @@ export default function IconJurySignIn() {
   useEffect(() => {
     (async () => {
       const { data } = await supabase.auth.getSession();
-      if (data.session && !otpMode) nav(`/icon-jury/sign-in?otp=1&next=${encodeURIComponent(next)}`, { replace: true });
+      if (data.session?.user?.email) {
+        setEmail((prev) => prev || data.session!.user.email!);
+        if (!otpMode) nav(`/judges/sign-in?otp=1&next=${encodeURIComponent(next)}`, { replace: true });
+      }
     })();
   }, [nav, next, otpMode]);
+
+  const sendCode = async (address: string) => {
+    const { error } = await supabase.auth.signInWithOtp({
+      email: address,
+      options: { shouldCreateUser: false },
+    });
+    if (error) {
+      toast.error(`Could not send your verification code: ${error.message}`);
+      return false;
+    }
+    toast.success(`Verification code sent to ${address}.`);
+    return true;
+  };
 
   const signIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setBusy(true);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) { setBusy(false); return toast.error(error.message); }
+    await sendCode(email);
     setBusy(false);
-    if (error) return toast.error(error.message);
-    toast.success("Signed in. Please complete two-factor verification.");
-    nav(`/icon-jury/sign-in?otp=1&next=${encodeURIComponent(next)}`, { replace: true });
+    nav(`/judges/sign-in?otp=1&next=${encodeURIComponent(next)}`, { replace: true });
+  };
+
+  const resendCode = async () => {
+    const { data } = await supabase.auth.getUser();
+    const address = email || data.user?.email;
+    if (!address) return toast.error("Session expired. Please sign in again.");
+    setBusy(true);
+    await sendCode(address);
+    setBusy(false);
   };
 
   const verifyOtp = async (e: React.FormEvent) => {
     e.preventDefault();
-    setBusy(true);
-    // Simple demo OTP: any 6-digit accepted; production would call an edge function to email/verify.
     if (!/^\d{6}$/.test(otp)) {
-      setBusy(false);
       return toast.error("Enter the 6-digit code sent to your registered email.");
     }
+    setBusy(true);
     const { data: userData } = await supabase.auth.getUser();
-    if (!userData.user) { setBusy(false); return toast.error("Session expired. Please sign in again."); }
+    const address = email || userData.user?.email;
+    if (!address) { setBusy(false); return toast.error("Session expired. Please sign in again."); }
+
+    // Real verification against Supabase Auth — no code, no access.
+    const { data: verified, error: otpError } = await supabase.auth.verifyOtp({
+      email: address,
+      token: otp,
+      type: "email",
+    });
+    if (otpError || !verified?.session) {
+      setBusy(false);
+      return toast.error(otpError?.message || "That code is invalid or has expired. Request a new one.");
+    }
+
     const { error } = await supabase.from("icon_judge_otp_sessions").insert({
-      user_id: userData.user.id,
+      user_id: verified.session.user.id,
       user_agent: navigator.userAgent,
     });
     setBusy(false);
     if (error) return toast.error(error.message);
     await supabase.from("icon_jury_audit_logs").insert({
-      actor_user_id: userData.user.id,
+      actor_user_id: verified.session.user.id,
       action: "icon_jury_sign_in",
       entity_type: "auth",
-      metadata: { via: "otp" },
+      metadata: { via: "email_otp" },
     });
     nav(next, { replace: true });
   };
+
 
   return (
     <div className="min-h-screen bg-charcoal text-white flex flex-col">
@@ -102,10 +139,11 @@ export default function IconJurySignIn() {
               <>
                 <div className="flex items-center gap-2 text-gold mb-2">
                   <ShieldCheck className="h-5 w-5" />
-                  <h2 className="text-xl font-semibold">Two-factor verification</h2>
+                  <h2 className="text-xl font-semibold">Email verification</h2>
                 </div>
                 <p className="text-sm text-white/60 mb-6">
-                  Enter the 6-digit code from your authenticator or registered email.
+                  Enter the 6-digit code we emailed to{" "}
+                  <span className="text-white/80">{email || "your registered address"}</span>.
                 </p>
                 <form onSubmit={verifyOtp} className="space-y-4">
                   <Input
@@ -118,7 +156,14 @@ export default function IconJurySignIn() {
                   <Button type="submit" disabled={busy} className="w-full bg-gold hover:bg-gold/90 text-black">
                     {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : "Verify"}
                   </Button>
+                  <Button
+                    type="button" variant="ghost" disabled={busy} onClick={resendCode}
+                    className="w-full text-white/70 hover:text-white"
+                  >
+                    Resend code
+                  </Button>
                 </form>
+
               </>
             )}
             <p className="text-[11px] text-white/40 mt-6 text-center leading-relaxed">

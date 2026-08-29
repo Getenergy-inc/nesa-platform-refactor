@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -146,20 +148,47 @@ export default function Register() {
     }
   };
 
-  const handleResendCode = () => {
-    toast.info("New verification code sent to your email");
+  const handleResendCode = async () => {
+    if (!personalInfo.email) {
+      toast.error("Enter your email address first.");
+      return;
+    }
+    const { error } = await supabase.auth.resend({
+      type: "signup",
+      email: personalInfo.email,
+      options: { emailRedirectTo: window.location.origin },
+    });
+    if (error) {
+      setVerificationError(error.message);
+      toast.error(error.message);
+      return;
+    }
     setVerificationError(undefined);
+    toast.success("Verification email re-sent. Check your inbox.");
   };
 
-  const handleVerify = (code: string) => {
+  const handleVerify = async (code: string) => {
     setIsVerifying(true);
     setVerificationError(undefined);
-    setTimeout(() => {
-      setIsVerifying(false);
+    try {
+      const { data, error } = await supabase.auth.verifyOtp({
+        email: personalInfo.email,
+        token: code,
+        type: "signup",
+      });
+      if (error) throw error;
+      if (!data.session) throw new Error("Verification did not return a session. Please try again.");
       setIsVerified(true);
-      toast.success("Email verified! Your dashboard is ready.");
-    }, 1500);
+      toast.success("Email verified. Your dashboard is ready.");
+    } catch (error: any) {
+      const message = error?.message || "Verification failed. Please try again.";
+      setVerificationError(message);
+      toast.error(message);
+    } finally {
+      setIsVerifying(false);
+    }
   };
+
 
   const handleComplete = () => {
     goToStep(steps.length);
