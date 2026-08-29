@@ -356,6 +356,7 @@ export async function uploadSingle(
 export const UPLOAD_PRESETS = {
   nominationEvidence: {
     bucket: "nomination-evidence",
+    privateBucket: true,
     concurrency: 3,
     maxFileSize: 10 * 1024 * 1024,
     allowedTypes: [
@@ -371,6 +372,7 @@ export const UPLOAD_PRESETS = {
 
   nomineePhoto: {
     bucket: "nomination-evidence",
+    privateBucket: true,
     concurrency: 1,
     maxFileSize: 5 * 1024 * 1024,
     allowedTypes: ["image/jpeg", "image/png", "image/webp", "image/svg+xml"],
@@ -379,6 +381,7 @@ export const UPLOAD_PRESETS = {
 
   endorsementMedia: {
     bucket: "nomination-evidence",
+    privateBucket: true,
     concurrency: 2,
     maxFileSize: 50 * 1024 * 1024,
     allowedTypes: ["image/*", "video/mp4", "video/quicktime", "video/x-msvideo"],
