@@ -274,6 +274,7 @@ export async function uploadFiles(
         bucket,
         filePath,
         maxRetries,
+        privateBucket,
         (status, progress, error) => {
           const entry = progressMap.get(fileId)!;
           entry.status = status;
