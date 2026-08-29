@@ -9,7 +9,7 @@ interface ProtectedRouteProps {
 }
 
 export function ProtectedRoute({ children, requiredRoles }: ProtectedRouteProps) {
-  const { user, roles, loading } = useAuth();
+  const { user, roles, rolesError, loading } = useAuth();
   const location = useLocation();
 
   if (loading) {
@@ -25,11 +25,24 @@ export function ProtectedRoute({ children, requiredRoles }: ProtectedRouteProps)
   }
 
   if (requiredRoles && requiredRoles.length > 0) {
+    // A failed role lookup means permissions are unknown — say so instead of
+    // silently treating the user as unauthorised.
+    if (rolesError) {
+      return (
+        <div className="flex min-h-screen flex-col items-center justify-center gap-3 px-6 text-center">
+          <h1 className="text-xl font-semibold">We couldn&apos;t verify your access</h1>
+          <p className="max-w-md text-sm text-muted-foreground">
+            Your permissions could not be loaded ({rolesError}). Please reload the page or sign in again.
+          </p>
+        </div>
+      );
+    }
     const hasRequiredRole = requiredRoles.some(role => roles.includes(role));
     if (!hasRequiredRole) {
       return <Navigate to="/unauthorized" replace />;
     }
   }
+
 
   return <>{children}</>;
 }
