@@ -252,7 +252,7 @@ export default function JudgesOnboarding() {
 
         {/* 7-8 */}
         <section className="rounded-2xl border border-white/10 bg-arena-rail p-6 space-y-5">
-          <h2 className="font-serif text-xl text-white">7–8. Training & two-factor authentication</h2>
+          <h2 className="font-serif text-xl text-white">7–8. Training & sign-in verification</h2>
           <Attestation
             id="training" done={stepDone("training_completed_at")} disabled={busy}
             title="Judging training"
@@ -261,10 +261,11 @@ export default function JudgesOnboarding() {
           />
           <Attestation
             id="mfa" done={stepDone("mfa_enrolled_at")} disabled={busy}
-            title="Two-factor authentication"
-            body="I understand that every sign-in to the Judges Arena requires a one-time code sent to my registered address, and that my session expires when that verification lapses."
-            onConfirm={() => markStep({ mfa_enrolled_at: new Date().toISOString() }, "Two-factor authentication")}
+            title="Email one-time-code sign-in (acknowledgement)"
+            body="I acknowledge that every sign-in to the Judges Arena requires a one-time code emailed to my registered address, and that my session expires when that verification lapses. This is an acknowledgement — the code check is enforced by the Arena at sign-in, not enrolled here."
+            onConfirm={() => markStep({ mfa_enrolled_at: new Date().toISOString() }, "Sign-in verification acknowledgement")}
           />
+
         </section>
 
         <div className="rounded-xl border border-white/10 bg-black/20 p-4 flex items-start gap-3">
