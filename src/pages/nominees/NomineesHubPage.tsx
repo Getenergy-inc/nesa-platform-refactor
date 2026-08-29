@@ -100,7 +100,7 @@ export function catalogueRedirectTarget(params: URLSearchParams): string | null 
 }
 
 export default function NomineesHubPage() {
-  const { data: nominees, isLoading } = useCatalogueNominees();
+  const { data: nominees, isLoading, isError, error: loadError, refetch } = useCatalogueNominees();
   const stats = useSiteStats();
   const navigate = useNavigate();
   const [params] = useSearchParams();
@@ -297,7 +297,17 @@ export default function NomineesHubPage() {
                 </p>
               </div>
 
-              {isLoading ? (
+              {isError ? (
+                <div className="ed-dir-empty" role="alert">
+                  <p>The nominee directory could not be loaded.</p>
+                  <p style={{ opacity: 0.7, marginTop: 6 }}>
+                    {(loadError as Error)?.message ?? "Please check your connection and try again."}
+                  </p>
+                  <button type="button" onClick={() => refetch()} style={{ marginTop: 12, textDecoration: "underline" }}>
+                    Retry
+                  </button>
+                </div>
+              ) : isLoading ? (
                 <div className="ed-nom-grid">
                   {Array.from({ length: 8 }).map((_, i) => (
                     <div key={i} className="ed-nom-card" style={{ height: 260, opacity: 0.4 }} />
