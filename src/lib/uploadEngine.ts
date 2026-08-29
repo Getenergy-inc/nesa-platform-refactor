@@ -141,15 +141,26 @@ async function uploadSingleFile(
 
       onProgress("uploading", 90);
 
-      const { data: urlData } = supabase.storage
-        .from(bucket)
-        .getPublicUrl(data.path);
+      // Private buckets have no public URL — issue a long-lived signed URL so
+      // the stored reference actually resolves for reviewers.
+      let url: string;
+      if (privateBucket) {
+        const { data: signed, error: signErr } = await supabase.storage
+          .from(bucket)
+          .createSignedUrl(data.path, SIGNED_URL_TTL_SECONDS);
+        if (signErr || !signed?.signedUrl) {
+          throw new Error(signErr?.message || "Could not create a signed URL for the uploaded file");
+        }
+        url = signed.signedUrl;
+      } else {
+        url = supabase.storage.from(bucket).getPublicUrl(data.path).data.publicUrl;
+      }
 
       onProgress("success", 100);
 
       return {
         name: file.name,
-        url: urlData.publicUrl,
+        url,
         path: data.path,
         type: file.type,
         size: file.size,
