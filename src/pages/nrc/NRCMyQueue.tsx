@@ -42,114 +42,64 @@ import {
 } from "lucide-react";
 import type { NRCQueueItem, NRCDecisionPayload } from "@/types/nrc";
 
+type ReviewDecision = "APPROVE" | "REJECT" | "REQUEST_MORE_EVIDENCE" | "ESCALATE";
+
+const DECISION_TITLES: Record<ReviewDecision, string> = {
+  APPROVE: "Approve Nomination",
+  REJECT: "Reject Nomination",
+  REQUEST_MORE_EVIDENCE: "Request More Evidence",
+  ESCALATE: "Escalate to NRC Lead",
+};
+
 function NRCMyQueueContent() {
   const { user } = useAuth();
-  const queryClient = useQueryClient();
-  const { data: queue, isLoading } = useMyQueue();
+  const { data: queue, isLoading, error, refetch } = useMyQueue();
+  const startReview = useStartNRCReview();
+  const submitReview = useSubmitNRCReview();
   const [selectedItem, setSelectedItem] = useState<NRCQueueItem | null>(null);
-  const [decisionType, setDecisionType] = useState<NRCDecisionPayload["decision"] | null>(null);
+  const [decisionType, setDecisionType] = useState<ReviewDecision | null>(null);
   const [notes, setNotes] = useState("");
-  const [targetTier, setTargetTier] = useState<"gold" | "blue_garnet" | "platinum">("gold");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const isSubmitting = submitReview.isPending;
 
   const handleStartReview = async (item: NRCQueueItem) => {
     try {
-      const { error } = await supabase
-        .from("nrc_queue")
-        .update({
-          status: "in_review",
-          started_at: new Date().toISOString(),
-        })
-        .eq("id", item.id);
-
-      if (error) throw error;
-      queryClient.invalidateQueries({ queryKey: ["nrc-my-queue"] });
+      await startReview.mutateAsync(item.nomination_id);
       toast.success("Review started");
-    } catch (error) {
-      console.error("Failed to start review:", error);
-      toast.error("Failed to start review");
+    } catch (err: any) {
+      toast.error(err?.message || "Failed to start review");
     }
   };
 
   const handleDecision = async () => {
     if (!selectedItem || !decisionType || !user) return;
 
-    setIsSubmitting(true);
     try {
-      // Update nomination status based on decision
-      type NominationStatus = "pending" | "approved" | "rejected" | "platinum" | "under_review";
-      let nominationStatus: NominationStatus = "pending";
-      switch (decisionType) {
-        case "APPROVE":
-          nominationStatus = "approved";
-          break;
-        case "REJECT":
-          nominationStatus = "rejected";
-          break;
-        case "PUSH_RENOMINATION":
-          nominationStatus = "pending"; // Reset for renomination
-          break;
-        case "PUSH_VOTING":
-          nominationStatus = targetTier === "platinum" ? "platinum" : "approved";
-          break;
-        case "NEEDS_INFO":
-          nominationStatus = "pending";
-          break;
-      }
-
-      // Update nomination
-      const { error: nominationError } = await supabase
-        .from("nominations")
-        .update({
-          status: nominationStatus,
-          review_notes: notes,
-          reviewed_at: new Date().toISOString(),
-          nrc_reviewer_id: user.id,
-        })
-        .eq("id", selectedItem.nomination_id);
-
-      if (nominationError) throw nominationError;
-
-      // Update queue item
-      const { error: queueError } = await supabase
-        .from("nrc_queue")
-        .update({
-          status: "completed",
-          completed_at: new Date().toISOString(),
-          notes: notes,
-        })
-        .eq("id", selectedItem.id);
-
-      if (queueError) throw queueError;
-
-      // Log audit event
-      await supabase.from("audit_events").insert({
-        actor_id: user.id,
-        actor_role: "nrc",
-        action: `nrc_decision_${decisionType.toLowerCase()}`,
-        entity_type: "nomination",
-        entity_id: selectedItem.nomination_id,
-        metadata: {
-          queue_item_id: selectedItem.id,
-          decision: decisionType,
-          target_tier: targetTier,
-          notes: notes,
-        },
+      // Verdicts go through the `nrc` edge function, which records the review
+      // and evaluates the 2-of-3 quorum server-side. A single reviewer never
+      // changes the nomination status on their own.
+      const result = await submitReview.mutateAsync({
+        nominationId: selectedItem.nomination_id,
+        decision: decisionType,
+        notes: notes.trim() || undefined,
       });
 
-      queryClient.invalidateQueries({ queryKey: ["nrc-my-queue"] });
-      queryClient.invalidateQueries({ queryKey: ["nrc-stats"] });
-      
-      toast.success(`Nomination ${decisionType.toLowerCase().replace("_", " ")}`);
-      
+      const quorum = result.quorum;
+      if (quorum?.quorum_reached) {
+        toast.success(
+          `Quorum reached — nomination ${quorum.decision === "verified" ? "verified" : "rejected"}`
+        );
+      } else if (quorum?.reason === "split_decision") {
+        toast.warning("Split decision recorded — escalated to the NRC Lead");
+      } else {
+        toast.success("Your review was recorded. Awaiting the second reviewer.");
+      }
+
       setSelectedItem(null);
       setDecisionType(null);
       setNotes("");
-    } catch (error) {
-      console.error("Failed to submit decision:", error);
-      toast.error("Failed to submit decision");
-    } finally {
-      setIsSubmitting(false);
+    } catch (err: any) {
+      toast.error(err?.message || "Failed to submit review");
     }
   };
 
@@ -170,6 +120,24 @@ function NRCMyQueueContent() {
       </NRCLayout>
     );
   }
+
+  if (error) {
+    return (
+      <NRCLayout>
+        <Alert variant="destructive">
+          <AlertTriangle className="h-4 w-4" />
+          <AlertTitle>Could not load your review queue</AlertTitle>
+          <AlertDescription className="space-y-3">
+            <p>{(error as Error).message}</p>
+            <Button variant="outline" size="sm" onClick={() => refetch()}>
+              Try again
+            </Button>
+          </AlertDescription>
+        </Alert>
+      </NRCLayout>
+    );
+  }
+
 
   return (
     <NRCLayout>
