@@ -1,21 +1,13 @@
 import { useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { NRCLayout } from "@/components/nrc/NRCLayout";
-import { useMyQueue } from "@/hooks/useNRCData";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useMyQueue, useStartNRCReview, useSubmitNRCReview } from "@/hooks/useNRCData";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import {
   Dialog,
   DialogContent,
@@ -30,17 +22,16 @@ import {
   Building2,
   Calendar,
   FileText,
-  ExternalLink,
   CheckCircle,
   XCircle,
-  Award,
-  Vote,
-  RotateCcw,
+  HelpCircle,
+  ShieldAlert,
   Loader2,
   Clock,
   AlertTriangle,
 } from "lucide-react";
-import type { NRCQueueItem, NRCDecisionPayload } from "@/types/nrc";
+import type { NRCQueueItem } from "@/types/nrc";
+
 
 type ReviewDecision = "APPROVE" | "REJECT" | "REQUEST_MORE_EVIDENCE" | "ESCALATE";
 
