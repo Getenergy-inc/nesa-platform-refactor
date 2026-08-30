@@ -203,7 +203,11 @@ function NRCMembersContent() {
             </p>
           </div>
 
-          <Dialog open={showInviteDialog} onOpenChange={setShowInviteDialog}>
+          <div className="flex items-center gap-2">
+            <Button asChild variant="outline">
+              <Link to="/nrc/applications">Review applications</Link>
+            </Button>
+            <Dialog open={showInviteDialog} onOpenChange={setShowInviteDialog}>
             <DialogTrigger asChild>
               <Button disabled={!canInvite}>
                 <UserPlus className="mr-2 h-4 w-4" />
