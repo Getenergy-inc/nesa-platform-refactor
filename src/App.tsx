@@ -2156,8 +2156,16 @@ const App = () => (
                   />
 
                   {/* NRC operational pages (legacy screens retained) — role-gated */}
-                  <Route path="/nrc/my-queue" element={<NRCProtectedRoute><NRCMyQueue /></NRCProtectedRoute>} />
+                  <Route
+                    path="/nrc/my-queue"
+                    element={
+                      <NRCProtectedRoute>
+                        <NRCOnboardingGate><NRCMyQueue /></NRCOnboardingGate>
+                      </NRCProtectedRoute>
+                    }
+                  />
                   <Route path="/nrc/members" element={<NRCProtectedRoute><NRCMembersPage /></NRCProtectedRoute>} />
+                  <Route path="/nrc/applications" element={<NRCProtectedRoute><NRCApplications /></NRCProtectedRoute>} />
                   <Route path="/nrc/settings" element={<NRCProtectedRoute><NRCSettings /></NRCProtectedRoute>} />
                   <Route
                     path="/nrc/profile-revisions"
