@@ -287,23 +287,24 @@ function NRCMyQueueContent() {
                             variant="outline"
                             onClick={() => {
                               setSelectedItem(item);
-                              setDecisionType("PUSH_VOTING");
+                              setDecisionType("REQUEST_MORE_EVIDENCE");
                             }}
                           >
-                            <Vote className="mr-1.5 h-4 w-4" />
-                            Push to Voting
+                            <HelpCircle className="mr-1.5 h-4 w-4" />
+                            Request Evidence
                           </Button>
                           <Button
                             size="sm"
                             variant="outline"
                             onClick={() => {
                               setSelectedItem(item);
-                              setDecisionType("PUSH_RENOMINATION");
+                              setDecisionType("ESCALATE");
                             }}
                           >
-                            <RotateCcw className="mr-1.5 h-4 w-4" />
-                            Renomination
+                            <ShieldAlert className="mr-1.5 h-4 w-4" />
+                            Escalate to Lead
                           </Button>
+
                         </>
                       )}
                     </div>
