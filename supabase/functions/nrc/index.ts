@@ -318,6 +318,188 @@ serve(async (req: Request): Promise<Response> => {
       );
     }
 
+    // POST /nrc/assign/auto - Workload-balanced auto-assignment via assign_nrc_reviewers()
+    if (req.method === "POST" && path === "/assign/auto") {
+      const { nominationId, numReviewers } = await req.json();
+
+      if (!nominationId) {
+        return new Response(
+          JSON.stringify({ error: "nominationId required" }),
+          { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      const { data, error } = await supabase.rpc("assign_nrc_reviewers", {
+        p_nomination_id: nominationId,
+        p_num_reviewers: Math.min(Math.max(Number(numReviewers) || 2, 1), 3),
+      });
+
+      if (error) throw error;
+
+      // The RPC returns { success:false, error } when no reviewer has capacity.
+      const result = data as { success?: boolean; error?: string } | null;
+      if (!result?.success) {
+        return new Response(
+          JSON.stringify({ error: result?.error || "Auto-assignment failed" }),
+          { status: 409, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      await supabase.from("audit_logs").insert({
+        action: "nrc_assign_auto",
+        entity_type: "nomination",
+        entity_id: nominationId,
+        user_id: userData.user.id,
+        new_values: result,
+      });
+
+      return new Response(
+        JSON.stringify(result),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // POST /nrc/review/:nominationId/start - Mark the reviewer's queue item in_review
+    const startMatch = path.match(/^\/review\/([0-9a-f-]{36})\/start$/i);
+    if (req.method === "POST" && startMatch) {
+      const nominationId = startMatch[1];
+
+      const { data, error } = await supabase
+        .from("nrc_queue")
+        .update({ status: "in_review", started_at: new Date().toISOString() })
+        .eq("nomination_id", nominationId)
+        .eq("assigned_to", userData.user.id)
+        .select()
+        .maybeSingle();
+
+      if (error) throw error;
+      if (!data) {
+        return new Response(
+          JSON.stringify({ error: "No queue item assigned to you for this nomination" }),
+          { status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      await supabase
+        .from("nominations")
+        .update({ workflow_status: "NRC_IN_REVIEW" })
+        .eq("id", nominationId);
+
+      return new Response(
+        JSON.stringify({ success: true, started_at: data.started_at }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // POST /nrc/review/:nominationId - Submit a reviewer verdict, then evaluate quorum
+    const reviewMatch = path.match(/^\/review\/([0-9a-f-]{36})$/i);
+    if (req.method === "POST" && reviewMatch) {
+      const nominationId = reviewMatch[1];
+      const body = await req.json();
+
+      const decision = String(body.decision || "").toUpperCase();
+      if (!["APPROVE", "REJECT", "REQUEST_MORE_EVIDENCE", "ESCALATE"].includes(decision)) {
+        return new Response(
+          JSON.stringify({ error: "decision must be APPROVE, REJECT, REQUEST_MORE_EVIDENCE or ESCALATE" }),
+          { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      // Reviewer must actually hold this assignment (admins may act as lead).
+      const { data: assignment } = await supabase
+        .from("nrc_queue")
+        .select("id")
+        .eq("nomination_id", nominationId)
+        .eq("assigned_to", userData.user.id)
+        .maybeSingle();
+
+      if (!assignment && !hasAdminRole) {
+        return new Response(
+          JSON.stringify({ error: "This nomination is not assigned to you" }),
+          { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      const reviewRow = {
+        nomination_id: nominationId,
+        reviewer_user_id: userData.user.id,
+        review_type: hasAdminRole && !assignment ? "lead" : "primary",
+        decision,
+        identity_match: body.identity_match ?? null,
+        category_fit: body.category_fit ?? null,
+        evidence_sufficiency: body.evidence_sufficiency ?? null,
+        evidence_authenticity: body.evidence_authenticity ?? null,
+        timeframe_fit: body.timeframe_fit ?? null,
+        duplication_status: body.duplication_status ?? null,
+        reviewer_notes: body.notes ?? null,
+        completed_at: new Date().toISOString(),
+      };
+
+      const { data: review, error: reviewError } = await supabase
+        .from("nrc_reviews")
+        .insert(reviewRow)
+        .select()
+        .single();
+
+      if (reviewError) throw reviewError;
+
+      if (assignment) {
+        await supabase
+          .from("nrc_queue")
+          .update({
+            status: "completed",
+            completed_at: new Date().toISOString(),
+            notes: body.notes ?? null,
+          })
+          .eq("id", assignment.id);
+      }
+
+      // Evaluate the 2-of-3 quorum. The RPC applies the final status itself.
+      const { data: quorum, error: quorumError } = await supabase.rpc("check_nrc_quorum", {
+        p_nomination_id: nominationId,
+      });
+      if (quorumError) throw quorumError;
+
+      await supabase.from("audit_logs").insert({
+        action: "nrc_review_submitted",
+        entity_type: "nomination",
+        entity_id: nominationId,
+        user_id: userData.user.id,
+        new_values: { decision, quorum },
+      });
+
+      return new Response(
+        JSON.stringify({ success: true, review, quorum }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // GET /nrc/reviews/:nominationId - All reviewer verdicts + current quorum state
+    const reviewsMatch = path.match(/^\/reviews\/([0-9a-f-]{36})$/i);
+    if (req.method === "GET" && reviewsMatch) {
+      const nominationId = reviewsMatch[1];
+
+      const { data, error } = await supabase
+        .from("nrc_reviews")
+        .select("*")
+        .eq("nomination_id", nominationId)
+        .order("created_at", { ascending: true });
+
+      if (error) throw error;
+
+      const { data: summary } = await supabase
+        .from("nrc_verification_summaries")
+        .select("*")
+        .eq("nomination_id", nominationId)
+        .maybeSingle();
+
+      return new Response(
+        JSON.stringify({ data: data || [], summary: summary || null }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+
     // POST /nrc/decision - Make decision on nomination
     if (req.method === "POST" && path === "/decision") {
       const payload: NRCDecisionPayload = await req.json();
