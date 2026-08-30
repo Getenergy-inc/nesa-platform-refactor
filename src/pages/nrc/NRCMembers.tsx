@@ -33,7 +33,6 @@ import { createUuid } from "@/lib/uuid";
 import {
   UserPlus,
   MoreVertical,
-  Mail,
   Shield,
   ShieldOff,
   UserMinus,
