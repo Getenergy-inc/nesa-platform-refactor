@@ -180,8 +180,8 @@ function NRCSettingsContent() {
                   <SelectValue placeholder="Select a region (optional)" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Regions</SelectItem>
-                  {REGIONS.map((region) => (
+                  <SelectItem value={ALL_REGIONS}>All Regions</SelectItem>
+                  {AFRICAN_REGIONS.map((region) => (
                     <SelectItem key={region} value={region}>
                       {region}
                     </SelectItem>
@@ -196,32 +196,6 @@ function NRCSettingsContent() {
           </CardContent>
         </Card>
 
-        {/* Notifications */}
-        <Card>
-          <CardHeader>
-            <div className="flex items-center gap-2">
-              <Bell className="h-5 w-5 text-muted-foreground" />
-              <CardTitle className="text-lg">Notifications</CardTitle>
-            </div>
-            <CardDescription>
-              Manage how you receive updates about your queue
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label>Email Notifications</Label>
-                <p className="text-sm text-muted-foreground">
-                  Receive emails when new nominations are assigned
-                </p>
-              </div>
-              <Switch
-                checked={emailNotifications}
-                onCheckedChange={setEmailNotifications}
-              />
-            </div>
-          </CardContent>
-        </Card>
 
         {/* Save Button */}
         <div className="flex justify-end">
