@@ -28,7 +28,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { toast } from "sonner";
-import { createUuid } from "@/lib/uuid";
 import {
   UserPlus,
   MoreVertical,
