@@ -79,21 +79,16 @@ function NRCMembersContent() {
 
     setIsInviting(true);
     try {
-      // Generate invitation token
-      const token = createUuid();
-      const expiresAt = new Date();
-      expiresAt.setDate(expiresAt.getDate() + 7);
-
-      const { error } = await supabase.from("nrc_invitations").insert({
-        email: inviteEmail.trim().toLowerCase(),
-        token,
-        invited_by: user.id,
-        expires_at: expiresAt.toISOString(),
+      // The edge function creates the invitation AND delivers the email via
+      // Resend — the toast below only fires once delivery actually succeeded.
+      const { data, error } = await supabase.functions.invoke("nrc-invite", {
+        body: { email: inviteEmail.trim().toLowerCase() },
       });
 
-      if (error) throw error;
+      const failure = (error as Error | null)?.message || (data as { error?: string })?.error;
+      if (failure) throw new Error(failure);
 
-      toast.success(`Invitation sent to ${inviteEmail}`);
+      toast.success(`Invitation emailed to ${inviteEmail}`);
       setInviteEmail("");
       setShowInviteDialog(false);
       queryClient.invalidateQueries({ queryKey: ["nrc-stats"] });
