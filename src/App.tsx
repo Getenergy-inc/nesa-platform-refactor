@@ -2127,6 +2127,8 @@ const App = () => (
                   <Route path="/nrc" element={<NRCArenaIndex />} />
                   <Route path="/nrc/member/:slug" element={<PublicNRCMemberProfile />} />
                   <Route path="/nrc/sign-in" element={<NRCSignIn />} />
+                  <Route path="/nrc/apply" element={<NRCApply />} />
+                  <Route path="/nrc/redeem" element={<NRCRedeem />} />
                   <Route path="/nrc/portal" element={<Navigate to="/nrc" replace />} />
                   <Route
                     path="/nrc/onboarding"
