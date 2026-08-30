@@ -340,11 +340,7 @@ function NRCMyQueueContent() {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              {decisionType === "APPROVE" && "Approve Nomination"}
-              {decisionType === "REJECT" && "Reject Nomination"}
-              {decisionType === "PUSH_VOTING" && "Push to Voting Pool"}
-              {decisionType === "PUSH_RENOMINATION" && "Request Renomination"}
-              {decisionType === "NEEDS_INFO" && "Request More Information"}
+              {decisionType ? DECISION_TITLES[decisionType] : ""}
             </DialogTitle>
             <DialogDescription>
               {selectedItem?.nomination?.nominee_name} •{" "}
@@ -353,28 +349,15 @@ function NRCMyQueueContent() {
           </DialogHeader>
 
           <div className="space-y-4 py-4">
-            {decisionType === "PUSH_VOTING" && (
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Target Award Tier</label>
-                <Select
-                  value={targetTier}
-                  onValueChange={(v) => setTargetTier(v as any)}
-                >
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="gold">Gold Award (Public Voting)</SelectItem>
-                    <SelectItem value="blue_garnet">
-                      Blue Garnet (Public + Jury)
-                    </SelectItem>
-                    <SelectItem value="platinum">
-                      Platinum (Verification Only)
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            )}
+            <Alert>
+              <AlertTriangle className="h-4 w-4" />
+              <AlertDescription>
+                This records your individual verdict. The nomination's status only
+                changes once two of three NRC reviewers agree.
+              </AlertDescription>
+            </Alert>
+
+
 
             <div className="space-y-2">
               <label className="text-sm font-medium">Review Notes</label>
