@@ -47,7 +47,12 @@ import type { NRCMember } from "@/types/nrc";
 function NRCMembersContent() {
   const { user } = useAuth();
   const queryClient = useQueryClient();
-  const { data: members, isLoading: membersLoading } = useNRCMembers();
+  const {
+    data: members,
+    isLoading: membersLoading,
+    error: membersError,
+    refetch: refetchMembers,
+  } = useNRCMembers();
   const { data: stats } = useNRCStats();
   const [searchQuery, setSearchQuery] = useState("");
   const [inviteEmail, setInviteEmail] = useState("");
@@ -290,7 +295,18 @@ function NRCMembersContent() {
         </div>
 
         {/* Members List */}
-        {membersLoading ? (
+        {membersError ? (
+          <Alert variant="destructive">
+            <AlertTriangle className="h-4 w-4" />
+            <AlertTitle>Could not load NRC members</AlertTitle>
+            <AlertDescription className="space-y-3">
+              <p>{(membersError as Error).message}</p>
+              <Button variant="outline" size="sm" onClick={() => refetchMembers()}>
+                Try again
+              </Button>
+            </AlertDescription>
+          </Alert>
+        ) : membersLoading ? (
           <div className="flex items-center justify-center py-12">
             <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
           </div>
@@ -342,11 +358,7 @@ function NRCMembersContent() {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem>
-                        <Mail className="mr-2 h-4 w-4" />
-                        Send Message
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
+
                       {member.status === "pending" && (
                         <DropdownMenuItem
                           onClick={() => handleStatusChange(member, "active")}
