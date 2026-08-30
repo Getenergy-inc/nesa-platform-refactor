@@ -42,6 +42,7 @@ import {
   CheckCircle,
   Clock,
   Award,
+  AlertTriangle,
 } from "lucide-react";
 import type { NRCMember } from "@/types/nrc";
 
