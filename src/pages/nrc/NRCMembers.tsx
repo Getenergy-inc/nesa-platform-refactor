@@ -117,31 +117,43 @@ function NRCMembersContent() {
 
       if (error) throw error;
 
-      // If activating, also add NRC role
+      // Role grants/revocations are admin-only at the RLS layer; a failure here
+      // must not be swallowed, otherwise a member appears active without the
+      // role that actually unlocks the NRC workspace.
       if (newStatus === "active") {
-        await supabase.from("user_roles").upsert(
+        const { error: roleError } = await supabase.from("user_roles").upsert(
           { user_id: member.user_id, role: "nrc" },
           { onConflict: "user_id,role" }
         );
+        if (roleError) {
+          throw new Error(
+            `Member marked active but the NRC role could not be granted: ${roleError.message}`
+          );
+        }
       }
 
-      // If suspending/removing, remove NRC role
       if (newStatus === "suspended" || newStatus === "removed") {
-        await supabase
+        const { error: roleError } = await supabase
           .from("user_roles")
           .delete()
           .eq("user_id", member.user_id)
           .eq("role", "nrc");
+        if (roleError) {
+          throw new Error(
+            `Member status changed but the NRC role could not be revoked: ${roleError.message}`
+          );
+        }
       }
 
       queryClient.invalidateQueries({ queryKey: ["nrc-members"] });
       queryClient.invalidateQueries({ queryKey: ["nrc-stats"] });
       toast.success(`Member ${newStatus}`);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Failed to update member:", error);
-      toast.error("Failed to update member status");
+      toast.error(error?.message || "Failed to update member status");
     }
   };
+
 
   const getStatusBadge = (status: NRCMember["status"]) => {
     switch (status) {
