@@ -260,7 +260,8 @@ function NRCMembersContent() {
                 </Button>
               </DialogFooter>
             </DialogContent>
-          </Dialog>
+            </Dialog>
+          </div>
         </div>
 
         {/* Capacity Bar */}
