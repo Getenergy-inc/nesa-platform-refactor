@@ -388,6 +388,10 @@ import NomineeProfileEditor from "./pages/nominee/NomineeProfileEditor";
 import PublicNRCMemberProfile from "./pages/nrc/PublicNRCMemberProfile";
 import NRCArenaIndex from "./pages/nrc/arena/NRCArenaIndex";
 import NRCSignIn from "./pages/nrc/arena/NRCSignIn";
+import NRCRedeem from "./pages/nrc/arena/NRCRedeem";
+import NRCApply from "./pages/nrc/NRCApply";
+import NRCApplications from "./pages/nrc/NRCApplications";
+import { NRCOnboardingGate } from "@/components/nrc/arena/NRCOnboardingGate";
 import NRCOnboarding from "./pages/nrc/arena/NRCOnboarding";
 import NRCProfile from "./pages/nrc/arena/NRCProfile";
 import NRCDirectory from "./pages/nrc/arena/NRCDirectory";
@@ -2123,6 +2127,8 @@ const App = () => (
                   <Route path="/nrc" element={<NRCArenaIndex />} />
                   <Route path="/nrc/member/:slug" element={<PublicNRCMemberProfile />} />
                   <Route path="/nrc/sign-in" element={<NRCSignIn />} />
+                  <Route path="/nrc/apply" element={<NRCApply />} />
+                  <Route path="/nrc/redeem" element={<NRCRedeem />} />
                   <Route path="/nrc/portal" element={<Navigate to="/nrc" replace />} />
                   <Route
                     path="/nrc/onboarding"
@@ -2150,8 +2156,16 @@ const App = () => (
                   />
 
                   {/* NRC operational pages (legacy screens retained) — role-gated */}
-                  <Route path="/nrc/my-queue" element={<NRCProtectedRoute><NRCMyQueue /></NRCProtectedRoute>} />
+                  <Route
+                    path="/nrc/my-queue"
+                    element={
+                      <NRCProtectedRoute>
+                        <NRCOnboardingGate><NRCMyQueue /></NRCOnboardingGate>
+                      </NRCProtectedRoute>
+                    }
+                  />
                   <Route path="/nrc/members" element={<NRCProtectedRoute><NRCMembersPage /></NRCProtectedRoute>} />
+                  <Route path="/nrc/applications" element={<NRCProtectedRoute><NRCApplications /></NRCProtectedRoute>} />
                   <Route path="/nrc/settings" element={<NRCProtectedRoute><NRCSettings /></NRCProtectedRoute>} />
                   <Route
                     path="/nrc/profile-revisions"

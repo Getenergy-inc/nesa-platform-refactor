@@ -65,6 +65,9 @@ export default function NRCArenaIndex() {
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="border-gold/40 text-gold hover:bg-gold/10">
+              <Link to="/nrc/apply">Apply to Join the NRC</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="border-gold/40 text-gold hover:bg-gold/10">
               <Link to="/nrc/directory">View NRC Directory</Link>
             </Button>
             <Button asChild variant="ghost" size="lg" className="text-white/80 hover:text-gold">

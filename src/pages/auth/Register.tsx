@@ -191,6 +191,12 @@ export default function Register() {
 
 
   const handleComplete = () => {
+    // "Apply as NRC Volunteer" is a real application, not a stored preference:
+    // hand the user straight to the NRC application form.
+    if (selectedPurposes.includes("nrc")) {
+      navigate("/nrc/apply?from=register");
+      return;
+    }
     goToStep(steps.length);
   };
 
