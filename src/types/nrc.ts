@@ -76,7 +76,8 @@ export interface NRCStats {
   pending_invitations: number;
   total_queue_items: number;
   completed_reviews: number;
-  avg_review_time_days: number;
+  /** Null until at least one review has actually been completed. */
+  avg_review_time_days: number | null;
 }
 
 export interface NRCDecisionPayload {
