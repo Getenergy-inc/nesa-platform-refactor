@@ -6233,6 +6233,86 @@ export type Database = {
         }
         Relationships: []
       }
+      nrc_applications: {
+        Row: {
+          country: string | null
+          created_at: string
+          cv_url: string | null
+          email: string
+          expertise_areas: string[]
+          full_name: string
+          id: string
+          invitation_id: string | null
+          languages: string[]
+          linkedin_url: string | null
+          motivation: string
+          organization: string | null
+          phone: string | null
+          professional_title: string | null
+          review_notes: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string
+          updated_at: string
+          user_id: string | null
+          weekly_hours: number | null
+        }
+        Insert: {
+          country?: string | null
+          created_at?: string
+          cv_url?: string | null
+          email: string
+          expertise_areas?: string[]
+          full_name: string
+          id?: string
+          invitation_id?: string | null
+          languages?: string[]
+          linkedin_url?: string | null
+          motivation: string
+          organization?: string | null
+          phone?: string | null
+          professional_title?: string | null
+          review_notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+          weekly_hours?: number | null
+        }
+        Update: {
+          country?: string | null
+          created_at?: string
+          cv_url?: string | null
+          email?: string
+          expertise_areas?: string[]
+          full_name?: string
+          id?: string
+          invitation_id?: string | null
+          languages?: string[]
+          linkedin_url?: string | null
+          motivation?: string
+          organization?: string | null
+          phone?: string | null
+          professional_title?: string | null
+          review_notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+          weekly_hours?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nrc_applications_invitation_id_fkey"
+            columns: ["invitation_id"]
+            isOneToOne: false
+            referencedRelation: "nrc_invitations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       nrc_assignment_rules: {
         Row: {
           config: Json | null
@@ -7076,6 +7156,72 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      nrc_onboarding: {
+        Row: {
+          activated: boolean
+          activated_at: string | null
+          activated_by: string | null
+          appointment_accepted: boolean
+          assessment_passed: boolean
+          category_training: boolean
+          code_of_conduct: boolean
+          completed_at: string | null
+          confidentiality_signed: boolean
+          conflict_declared: boolean
+          created_at: string
+          data_protection: boolean
+          evidence_training: boolean
+          id: string
+          identity_verified: boolean
+          mou_signed: boolean
+          profile_completed: boolean
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          activated?: boolean
+          activated_at?: string | null
+          activated_by?: string | null
+          appointment_accepted?: boolean
+          assessment_passed?: boolean
+          category_training?: boolean
+          code_of_conduct?: boolean
+          completed_at?: string | null
+          confidentiality_signed?: boolean
+          conflict_declared?: boolean
+          created_at?: string
+          data_protection?: boolean
+          evidence_training?: boolean
+          id?: string
+          identity_verified?: boolean
+          mou_signed?: boolean
+          profile_completed?: boolean
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          activated?: boolean
+          activated_at?: string | null
+          activated_by?: string | null
+          appointment_accepted?: boolean
+          assessment_passed?: boolean
+          category_training?: boolean
+          code_of_conduct?: boolean
+          completed_at?: string | null
+          confidentiality_signed?: boolean
+          conflict_declared?: boolean
+          created_at?: string
+          data_protection?: boolean
+          evidence_training?: boolean
+          id?: string
+          identity_verified?: boolean
+          mou_signed?: boolean
+          profile_completed?: boolean
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       nrc_queue: {
         Row: {
@@ -11938,6 +12084,10 @@ export type Database = {
         Args: { _notes?: string; _revision_id: string }
         Returns: undefined
       }
+      approve_nrc_application: {
+        Args: { p_application_id: string; p_notes?: string }
+        Returns: Json
+      }
       assign_nrc_reviewers: {
         Args: { p_nomination_id: string; p_num_reviewers?: number }
         Returns: Json
@@ -12243,6 +12393,14 @@ export type Database = {
           token: string
         }[]
       }
+      nrc_check_invitation: {
+        Args: { p_token: string }
+        Returns: {
+          email_hint: string
+          expires_at: string
+          valid: boolean
+        }[]
+      }
       nrc_handover_for_nominee: {
         Args: { p_nominee_id: string }
         Returns: {
@@ -12323,9 +12481,14 @@ export type Database = {
         }
       }
       redeem_icon_invitation: { Args: { p_token: string }; Returns: string }
+      redeem_nrc_invitation: { Args: { p_token: string }; Returns: Json }
       reject_nominee_revision: {
         Args: { _notes?: string; _revision_id: string }
         Returns: undefined
+      }
+      reject_nrc_application: {
+        Args: { p_application_id: string; p_notes?: string }
+        Returns: Json
       }
       reopen_icon_review: {
         Args: { p_reason: string; p_review_id: string }
