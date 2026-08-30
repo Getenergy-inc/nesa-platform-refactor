@@ -84,3 +84,7 @@ verify_jwt = false
 
 [functions.youtube-publish]
 verify_jwt = false
+
+# NRC invitation delivery (auth verified in code: admin/NRC only)
+[functions.nrc-invite]
+verify_jwt = false
