@@ -185,12 +185,15 @@ export interface UtilityNavItem {
 
 export const UTILITY_NAV: UtilityNavItem[] = [
   // Growth CTAs — separately-branded front doors for the CSR / NGO /
-  // Foundations award lanes (real categories across Gold-Blue Garnet and
-  // the Icon tier). The bar is horizontally scrollable on narrow xl widths,
-  // so four emphasized items do not break the layout.
+  // Foundations / EduTech / Influencers award lanes (real categories across
+  // Gold-Blue Garnet, the Icon tier, and Influencer Education Impact). The
+  // bar is horizontally scrollable on narrow xl widths, so the emphasized
+  // items do not break the layout — see the header's overflow-x-auto.
   { label: "CSR", href: "/get-involved/csr", analyticsId: "util_csr", emphasis: true },
   { label: "NGO", href: "/get-involved/ngo", analyticsId: "util_ngo", emphasis: true },
   { label: "Foundations", href: "/get-involved/foundations", analyticsId: "util_foundations", emphasis: true },
+  { label: "EduTech", href: "/get-involved/edutech", analyticsId: "util_edutech", emphasis: true },
+  { label: "Influencers", href: "/get-involved/influencers", analyticsId: "util_influencers", emphasis: true },
   { label: "NRC", href: "/nrc", analyticsId: "util_nrc" },
   { label: "Judges", href: "/judges", analyticsId: "util_judges" },
   { label: "Buy Award Gala Ticket", href: "/tickets", analyticsId: "util_gala_ticket", emphasis: true },
