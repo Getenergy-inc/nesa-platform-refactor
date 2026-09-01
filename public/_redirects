@@ -60,7 +60,7 @@
 /cookie-policy                                               /policies            301
 /language                                                    /                    301
 
-# --- 2. SPA routes (546 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (549 explicit paths from src/App.tsx) ---
 /recognition/influencer-education-impact/african-sports-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-music-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-social-media-influencers /index.html          200
@@ -178,6 +178,7 @@
 /awards/platinum/diaspora                                    /index.html          200
 /category/library-nigeria                                    /index.html          200
 /friends-of-eduaid-africa                                    /index.html          200
+/get-involved/foundations                                    /index.html          200
 /guidelines/update-impact                                    /index.html          200
 /nominee/dashboard/:token                                    /index.html          200
 /nrc/dashboard/duplicates                                    /index.html          200
@@ -314,6 +315,8 @@ nominee/:nomineeId                                           /index.html        
 /dashboard/region                                            /index.html          200
 /dashboard/wallet                                            /index.html          200
 /enabler-database                                            /index.html          200
+/get-involved/csr                                            /index.html          200
+/get-involved/ngo                                            /index.html          200
 /gold-blue-garnet                                            /index.html          200
 /how-voting-works                                            /index.html          200
 /judge/guidelines                                            /index.html          200
