@@ -251,6 +251,8 @@ import MeetOurGlobalTeam from "./pages/MeetOurGlobalTeam";
 import CsrLanePage from "./pages/get-involved/CsrLanePage";
 import NgoLanePage from "./pages/get-involved/NgoLanePage";
 import FoundationsLanePage from "./pages/get-involved/FoundationsLanePage";
+import EduTechLanePage from "./pages/get-involved/EduTechLanePage";
+import InfluencersLanePage from "./pages/get-involved/InfluencersLanePage";
 import AboutCycle2026 from "./pages/about/AboutCycle2026";
 import AboutCycle2027 from "./pages/about/AboutCycle2027";
 import AboutCycle2028_2030 from "./pages/about/AboutCycle2028_2030";
