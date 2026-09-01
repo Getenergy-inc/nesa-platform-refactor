@@ -711,6 +711,8 @@ const App = () => (
                   <Route path="/get-involved/csr" element={<WithLayout><CsrLanePage /></WithLayout>} />
                   <Route path="/get-involved/ngo" element={<WithLayout><NgoLanePage /></WithLayout>} />
                   <Route path="/get-involved/foundations" element={<WithLayout><FoundationsLanePage /></WithLayout>} />
+                  <Route path="/get-involved/edutech" element={<WithLayout><EduTechLanePage /></WithLayout>} />
+                  <Route path="/get-involved/influencers" element={<WithLayout><InfluencersLanePage /></WithLayout>} />
                   <Route path="/get-involved/partner" element={<Navigate to="/support#partner" replace />} />
                   <Route path="/get-involved/category-sponsorship" element={<Navigate to="/sponsorship-packages" replace />} />
                   <Route path="/get-involved/enabler-page-sponsorship" element={<Navigate to="/sponsorship-packages" replace />} />
