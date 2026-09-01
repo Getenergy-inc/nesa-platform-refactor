@@ -248,6 +248,9 @@ import Install from "./pages/Install";
 import AboutConsolidated from "./pages/about/AboutConsolidated";
 import GlobalTeam from "./pages/about/GlobalTeam";
 import MeetOurGlobalTeam from "./pages/MeetOurGlobalTeam";
+import CsrLanePage from "./pages/get-involved/CsrLanePage";
+import NgoLanePage from "./pages/get-involved/NgoLanePage";
+import FoundationsLanePage from "./pages/get-involved/FoundationsLanePage";
 import AboutCycle2026 from "./pages/about/AboutCycle2026";
 import AboutCycle2027 from "./pages/about/AboutCycle2027";
 import AboutCycle2028_2030 from "./pages/about/AboutCycle2028_2030";
@@ -702,6 +705,10 @@ const App = () => (
                   <Route path="/events/afri-edutourism" element={<Navigate to="/afri-edutourism" replace />} />
 
                   {/* Get Involved */}
+                  {/* Get Involved — branded award-lane front doors */}
+                  <Route path="/get-involved/csr" element={<WithLayout><CsrLanePage /></WithLayout>} />
+                  <Route path="/get-involved/ngo" element={<WithLayout><NgoLanePage /></WithLayout>} />
+                  <Route path="/get-involved/foundations" element={<WithLayout><FoundationsLanePage /></WithLayout>} />
                   <Route path="/get-involved/partner" element={<Navigate to="/support#partner" replace />} />
                   <Route path="/get-involved/category-sponsorship" element={<Navigate to="/sponsorship-packages" replace />} />
                   <Route path="/get-involved/enabler-page-sponsorship" element={<Navigate to="/sponsorship-packages" replace />} />
