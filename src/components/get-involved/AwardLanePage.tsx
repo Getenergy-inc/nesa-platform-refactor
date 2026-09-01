@@ -50,7 +50,7 @@ export function AwardLanePage({
         <p className="font-mono text-xs uppercase tracking-[0.25em] text-gold">
           NESA-Africa 2026 · Recognition Lane
         </p>
-        <h1 className="mt-3 font-playfair text-4xl font-bold md:text-5xl">{title}</h1>
+        <h1 className="mt-3 font-display text-4xl font-bold md:text-5xl">{title}</h1>
         {subtitle && (
           <p className="mt-2 text-lg text-gold/90">{subtitle}</p>
         )}
@@ -79,7 +79,7 @@ export function AwardLanePage({
               <p className="font-mono text-[11px] uppercase tracking-wider text-gold/70">
                 {cat.tier}
               </p>
-              <h2 className="mt-1 font-playfair text-2xl font-semibold">{cat.name}</h2>
+              <h2 className="mt-1 font-display text-2xl font-semibold">{cat.name}</h2>
               <p className="mt-3 text-ivory/80">{cat.whoItsFor}</p>
               <div className="mt-5 flex flex-wrap gap-3">
                 <Button asChild className="bg-gold font-semibold text-black hover:bg-gold/90">
