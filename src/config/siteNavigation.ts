@@ -116,6 +116,64 @@ export const SITE_NAV: NavItem[] = [
       { label: "Nominate an Icon", href: "/nominate/africa-education-icon" },
     ],
   },
+  // --- Award-lane groups (real existing categories only, no new taxonomy) ---
+  {
+    label: "CSR",
+    href: "/get-involved/csr",
+    analyticsId: "nav_csr",
+    children: [
+      { label: "CSR for Education — Overview", href: "/get-involved/csr" },
+      { label: "CSR for Education (Africa Regional)", href: "/nominees/lane/csr-africa" },
+      { label: "CSR for Education (Nigeria)", href: "/nominees/lane/csr-nigeria" },
+      { label: "Nominate a Company", href: "/nominate?category=best-csr-for-education-africa-regional" },
+    ],
+  },
+  {
+    label: "NGO & Foundations",
+    shortLabel: "NGO & Foundations",
+    href: "/get-involved/ngo",
+    analyticsId: "nav_ngo_foundations",
+    sections: [
+      {
+        title: "NGOs",
+        items: [
+          { label: "NGO Lane — Overview", href: "/get-involved/ngo" },
+          { label: "NGO Contribution to Education (Nigeria)", href: "/nominees/lane/ngo-nigeria" },
+          { label: "Nominate an NGO", href: "/nominate?category=best-ngo-for-education-nigeria" },
+        ],
+      },
+      {
+        title: "Foundations",
+        items: [
+          { label: "Foundations Lane — Overview", href: "/get-involved/foundations" },
+          { label: "Africa Education Philanthropy Icon", href: "/nominees/lane/foundations" },
+          { label: "Nominate a Foundation", href: "/nominate?category=africa-education-philanthropy-icon" },
+        ],
+      },
+    ],
+  },
+  {
+    label: "EduTech",
+    href: "/get-involved/edutech",
+    analyticsId: "nav_edutech",
+    children: [
+      { label: "EduTech Lane — Overview", href: "/get-involved/edutech" },
+      { label: "EduTech Organisation (Africa) Nominees", href: "/nominees/lane/edutech-africa" },
+      { label: "Nominate an EduTech Organisation", href: "/nominate?category=best-edutech-organisation-africa" },
+    ],
+  },
+  {
+    label: "Influencers",
+    href: "/get-involved/influencers",
+    analyticsId: "nav_influencers",
+    children: [
+      { label: "Influencers Lane — Overview", href: "/get-involved/influencers" },
+      { label: "Social Media Education Impact", href: "/nominees/lane/influencer-social-media" },
+      { label: "Sports Education Impact", href: "/nominees/lane/influencer-sports" },
+      { label: "Music Education Impact", href: "/nominees/lane/influencer-music" },
+      { label: "Influencer Education Impact — Overview", href: "/awards/influencers-education-impact" },
+    ],
+  },
   {
     label: "Recognition",
     href: "/recognition/certificates",
