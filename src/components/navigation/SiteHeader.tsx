@@ -603,21 +603,38 @@ function MobileMenu() {
             </Accordion>
           </nav>
 
-          <div className="mt-4 border-t border-gold/20 pt-3">
-            <p className="px-3 pb-1 text-[11px] uppercase tracking-wider text-gold/70 font-semibold">
-              Quick links
-            </p>
-            {UTILITY_NAV.map((item) => (
-              <Link
-                key={item.href}
-                to={item.href}
-                onClick={close}
-                className={cn(linkCls, item.emphasis && "text-gold font-semibold")}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
+          {/* Navbar 2 → its own collapsed "Quick Links" accordion */}
+          <nav aria-label="Mobile quick links" className="mt-4 border-t border-gold/20 pt-3">
+            <Accordion type="single" collapsible className="w-full">
+              <AccordionItem value="quick-links" className="border-gold/15">
+                <AccordionTrigger className="text-white hover:text-gold px-3 text-sm rounded-md">
+                  Quick Links
+                </AccordionTrigger>
+                <AccordionContent className="pb-1">
+                  {UTILITY_NAV.map((item) => (
+                    <Link
+                      key={item.href}
+                      to={item.href}
+                      onClick={() => {
+                        close();
+                        trackNav("mobile_drawer_item_click", {
+                          parent: "Quick Links",
+                          label: item.label,
+                          href: item.href,
+                          section: item.analyticsId,
+                          device: "mobile",
+                        });
+                      }}
+                      className={cn(linkCls, item.emphasis && "text-gold font-semibold")}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </nav>
+
 
           <div className="mt-4 border-t border-gold/20 pt-3 space-y-1">
             {user ? (
