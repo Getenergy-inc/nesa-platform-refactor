@@ -1,0 +1,1 @@
+UPDATE public.nominees SET bio = replace(bio, 'girlsّ education', 'girls'' education') WHERE slug = 'ngo-africa-plan-international-nigeria-2026';
