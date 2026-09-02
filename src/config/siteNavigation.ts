@@ -251,19 +251,18 @@ export interface UtilityNavItem {
 }
 
 export const UTILITY_NAV: UtilityNavItem[] = [
-  // Growth CTAs — separately-branded front doors for the CSR / NGO /
-  // Foundations / EduTech / Influencers award lanes (real categories across
-  // Gold-Blue Garnet, the Icon tier, and Influencer Education Impact). The
-  // bar is horizontally scrollable on narrow xl widths, so the emphasized
-  // items do not break the layout — see the header's overflow-x-auto.
-  { label: "CSR", href: "/get-involved/csr", analyticsId: "util_csr", emphasis: true },
-  { label: "NGO", href: "/get-involved/ngo", analyticsId: "util_ngo", emphasis: true },
-  { label: "Foundations", href: "/get-involved/foundations", analyticsId: "util_foundations", emphasis: true },
-  { label: "EduTech", href: "/get-involved/edutech", analyticsId: "util_edutech", emphasis: true },
-  { label: "Influencers", href: "/get-involved/influencers", analyticsId: "util_influencers", emphasis: true },
+  // The CSR / NGO / Foundations / EduTech / Influencers award lanes now live
+  // in the PRIMARY nav (SITE_NAV) as their own dropdown groups, so they are
+  // deliberately NOT duplicated here. Only "Buy Award Gala Ticket" is
+  // emphasized — it is the single transactional item on this bar.
+  { label: "Buy Award Gala Ticket", href: "/tickets", analyticsId: "util_gala_ticket", emphasis: true },
   { label: "NRC", href: "/nrc", analyticsId: "util_nrc" },
   { label: "Judges", href: "/judges", analyticsId: "util_judges" },
-  { label: "Buy Award Gala Ticket", href: "/tickets", analyticsId: "util_gala_ticket", emphasis: true },
+  { label: "EduAid Africa", href: "/eduaid-africa", analyticsId: "util_eduaid" },
+  { label: "Rebuild My School Africa", href: "/rebuild-my-school", analyticsId: "util_rebuild_school" },
+  { label: "Become a Sponsor", href: "/sponsorship-packages", analyticsId: "util_sponsor" },
+  { label: "Partner With Us", href: "/partners", analyticsId: "util_partner" },
+  { label: "Support", href: "/support", analyticsId: "util_support" },
   { label: "Merchandise", href: "/merch", analyticsId: "util_merch" },
   { label: "Join Webinar", href: "/media/webinars", analyticsId: "util_webinar" },
   { label: "Join Podcast", href: "/media/podcast", analyticsId: "util_podcast" },
@@ -271,6 +270,7 @@ export const UTILITY_NAV: UtilityNavItem[] = [
   { label: "Join Our Team", href: "/vacancies", analyticsId: "util_join_team" },
   { label: "Meet Our Global Volunteer Team", href: "/meet-the-team", analyticsId: "util_meet_team" },
 ];
+
 
 // Re-export the phase-driven CTA so consumers have one import surface.
 export { NOMINATE_CTA, CURRENT_PHASE } from "./campaignPhase";
