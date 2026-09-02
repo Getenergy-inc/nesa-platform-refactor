@@ -11,14 +11,18 @@
 // size caps) are all still enforced, plus a new intra-dropdown duplicate check.
 
 import { describe, it, expect } from "vitest";
-import { SITE_NAV, type NavItem } from "@/config/siteNavigation";
+import { SITE_NAV, UTILITY_NAV, type NavItem } from "@/config/siteNavigation";
 
 const EXPECTED_TOP_LEVEL = [
   "About",
   "Africa Education Icon",
+  "CSR",
+  "NGO & Foundations",
+  "EduTech",
+  "Influencers",
   "Recognition",
   "Explore Nominees",
-  "Education Impact",
+  "Education Social Impact",
   "Participate",
 ];
 
@@ -53,6 +57,7 @@ const CROSS_SECTION_ALLOWED = new Set<string>([
   "/about/how-it-works",
   "/timeline",
 ]);
+
 
 describe("SITE_NAV configuration", () => {
   it("exposes exactly the approved top-level groups in order", () => {
