@@ -270,7 +270,7 @@ export default function LaneNomineeProfile() {
               )}
 
               <section className="mt-10">
-                <NomineeSupportPanel nomineeId={profile.id} nomineeName={profile.name} />
+                <NomineeSupportPanel nomineeId={profile.id} nomineeName={profile.name} shareUrl={url} />
               </section>
 
               {related.length > 0 && (
