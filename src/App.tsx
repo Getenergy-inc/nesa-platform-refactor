@@ -389,6 +389,8 @@ import { NRCProtectedRoute } from "@/components/nrc/arena/NRCProtectedRoute";
 import NRCProfileRevisions from "./pages/nrc/NRCProfileRevisions";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import NomineeCanonicalProfile from "./pages/nominees/NomineeCanonicalProfile";
+import LaneGalleryPage from "./pages/nominees/lane/LaneGalleryPage";
+import LaneNomineeProfile from "./pages/nominees/lane/LaneNomineeProfile";
 import NomineeProfileEditor from "./pages/nominee/NomineeProfileEditor";
 import PublicNRCMemberProfile from "./pages/nrc/PublicNRCMemberProfile";
 import NRCArenaIndex from "./pages/nrc/arena/NRCArenaIndex";
@@ -1934,6 +1936,15 @@ const App = () => (
                         <GoldNomineeProfilePage />
                       </WithLayout>
                     }
+                  />
+                  {/* Award-lane nominee galleries + shared extended profile */}
+                  <Route
+                    path="/nominees/lane/:lane"
+                    element={<WithLayout><LaneGalleryPage /></WithLayout>}
+                  />
+                  <Route
+                    path="/nominees/lane/:lane/:slug"
+                    element={<WithLayout><LaneNomineeProfile /></WithLayout>}
                   />
                   {/* Africa Education Icon Award — nested nominee ecosystem */}
                   <Route

@@ -47,6 +47,15 @@ export interface NavItem {
   panelFooter?: { note: string; ctaLabel: string; ctaHref: string };
 }
 
+/**
+ * Desktop overflow: with 10 top-level groups the bar cannot hold every item
+ * on xl without wrapping, so SiteHeader renders the first
+ * PRIMARY_NAV_VISIBLE_XL items inline and folds the rest into a "More"
+ * dropdown below 2xl. All 10 render inline at 2xl and above.
+ */
+export const PRIMARY_NAV_VISIBLE_XL = 6;
+
+
 const TIER_ORDER = [
   { tier: "africa-education-icon", title: "Tier 1 · Africa Education Icon", overview: "/awards/africa-education-icon" },
   { tier: "influencer-education-impact", title: "Tier 2 · Influencer Education Impact", overview: "/awards/influencer-education-impact" },
@@ -105,6 +114,64 @@ export const SITE_NAV: NavItem[] = [
       { label: "Africa Technical Educator Icon", href: "/nominees/africa-education-icon-award/technical-educator-icon" },
       { label: "Literary & New Curriculum Advocate Icon", href: "/nominees/africa-education-icon-award/literary-new-curriculum-advocate" },
       { label: "Nominate an Icon", href: "/nominate/africa-education-icon" },
+    ],
+  },
+  // --- Award-lane groups (real existing categories only, no new taxonomy) ---
+  {
+    label: "CSR",
+    href: "/get-involved/csr",
+    analyticsId: "nav_csr",
+    children: [
+      { label: "CSR for Education — Overview", href: "/get-involved/csr" },
+      { label: "CSR for Education (Africa Regional)", href: "/nominees/lane/csr-africa" },
+      { label: "CSR for Education (Nigeria)", href: "/nominees/lane/csr-nigeria" },
+      { label: "Nominate a Company", href: "/nominate?category=best-csr-for-education-africa-regional" },
+    ],
+  },
+  {
+    label: "NGO & Foundations",
+    shortLabel: "NGO & Foundations",
+    href: "/get-involved/ngo",
+    analyticsId: "nav_ngo_foundations",
+    sections: [
+      {
+        title: "NGOs",
+        items: [
+          { label: "NGO Lane — Overview", href: "/get-involved/ngo" },
+          { label: "NGO Contribution to Education (Nigeria)", href: "/nominees/lane/ngo-nigeria" },
+          { label: "Nominate an NGO", href: "/nominate?category=best-ngo-for-education-nigeria" },
+        ],
+      },
+      {
+        title: "Foundations",
+        items: [
+          { label: "Foundations Lane — Overview", href: "/get-involved/foundations" },
+          { label: "Africa Education Philanthropy Icon", href: "/nominees/lane/foundations" },
+          { label: "Nominate a Foundation", href: "/nominate?category=africa-education-philanthropy-icon" },
+        ],
+      },
+    ],
+  },
+  {
+    label: "EduTech",
+    href: "/get-involved/edutech",
+    analyticsId: "nav_edutech",
+    children: [
+      { label: "EduTech Lane — Overview", href: "/get-involved/edutech" },
+      { label: "EduTech Organisation (Africa) Nominees", href: "/nominees/lane/edutech-africa" },
+      { label: "Nominate an EduTech Organisation", href: "/nominate?category=best-edutech-organisation-africa" },
+    ],
+  },
+  {
+    label: "Influencers",
+    href: "/get-involved/influencers",
+    analyticsId: "nav_influencers",
+    children: [
+      { label: "Influencers Lane — Overview", href: "/get-involved/influencers" },
+      { label: "Social Media Education Impact", href: "/nominees/lane/influencer-social-media" },
+      { label: "Sports Education Impact", href: "/nominees/lane/influencer-sports" },
+      { label: "Music Education Impact", href: "/nominees/lane/influencer-music" },
+      { label: "Influencer Education Impact — Overview", href: "/awards/influencers-education-impact" },
     ],
   },
   {
@@ -184,19 +251,18 @@ export interface UtilityNavItem {
 }
 
 export const UTILITY_NAV: UtilityNavItem[] = [
-  // Growth CTAs — separately-branded front doors for the CSR / NGO /
-  // Foundations / EduTech / Influencers award lanes (real categories across
-  // Gold-Blue Garnet, the Icon tier, and Influencer Education Impact). The
-  // bar is horizontally scrollable on narrow xl widths, so the emphasized
-  // items do not break the layout — see the header's overflow-x-auto.
-  { label: "CSR", href: "/get-involved/csr", analyticsId: "util_csr", emphasis: true },
-  { label: "NGO", href: "/get-involved/ngo", analyticsId: "util_ngo", emphasis: true },
-  { label: "Foundations", href: "/get-involved/foundations", analyticsId: "util_foundations", emphasis: true },
-  { label: "EduTech", href: "/get-involved/edutech", analyticsId: "util_edutech", emphasis: true },
-  { label: "Influencers", href: "/get-involved/influencers", analyticsId: "util_influencers", emphasis: true },
+  // The CSR / NGO / Foundations / EduTech / Influencers award lanes now live
+  // in the PRIMARY nav (SITE_NAV) as their own dropdown groups, so they are
+  // deliberately NOT duplicated here. Only "Buy Award Gala Ticket" is
+  // emphasized — it is the single transactional item on this bar.
+  { label: "Buy Award Gala Ticket", href: "/tickets", analyticsId: "util_gala_ticket", emphasis: true },
   { label: "NRC", href: "/nrc", analyticsId: "util_nrc" },
   { label: "Judges", href: "/judges", analyticsId: "util_judges" },
-  { label: "Buy Award Gala Ticket", href: "/tickets", analyticsId: "util_gala_ticket", emphasis: true },
+  { label: "EduAid Africa", href: "/eduaid-africa", analyticsId: "util_eduaid" },
+  { label: "Rebuild My School Africa", href: "/rebuild-my-school", analyticsId: "util_rebuild_school" },
+  { label: "Become a Sponsor", href: "/sponsorship-packages", analyticsId: "util_sponsor" },
+  { label: "Partner With Us", href: "/partners", analyticsId: "util_partner" },
+  { label: "Support", href: "/support", analyticsId: "util_support" },
   { label: "Merchandise", href: "/merch", analyticsId: "util_merch" },
   { label: "Join Webinar", href: "/media/webinars", analyticsId: "util_webinar" },
   { label: "Join Podcast", href: "/media/podcast", analyticsId: "util_podcast" },
@@ -204,6 +270,7 @@ export const UTILITY_NAV: UtilityNavItem[] = [
   { label: "Join Our Team", href: "/vacancies", analyticsId: "util_join_team" },
   { label: "Meet Our Global Volunteer Team", href: "/meet-the-team", analyticsId: "util_meet_team" },
 ];
+
 
 // Re-export the phase-driven CTA so consumers have one import surface.
 export { NOMINATE_CTA, CURRENT_PHASE } from "./campaignPhase";

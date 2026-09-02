@@ -24,7 +24,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { LanguageSwitcher } from "@/components/i18n";
-import { SITE_NAV, UTILITY_NAV, type NavItem, type NavChild, type NavSection } from "@/config/siteNavigation";
+import { SITE_NAV, UTILITY_NAV, PRIMARY_NAV_VISIBLE_XL, type NavItem, type NavChild, type NavSection } from "@/config/siteNavigation";
 import { CURRENT_PHASE, NOMINATE_CTA } from "@/config/campaignPhase";
 import { trackNav } from "@/lib/analytics";
 import { AnnouncementBar } from "@/components/navigation/AnnouncementBar";
@@ -220,75 +220,101 @@ function DropdownSectioned({ item }: { item: NavItem }) {
 
 function DesktopNav() {
   const location = useLocation();
+
+  const triggerClsFor = (active: boolean) =>
+    cn(
+      "px-2 2xl:px-2.5 py-2 text-[13px] 2xl:text-sm font-medium rounded-md transition-colors whitespace-nowrap",
+      FOCUS_RING,
+      active ? "text-gold bg-gold/10" : "text-white/85 hover:text-gold hover:bg-gold/5",
+    );
+
+  const renderItem = (item: NavItem, extraCls?: string) => {
+    const active = isActive(location.pathname, item.href);
+    const triggerCls = triggerClsFor(active);
+    const hasPanel = !!(item.children || item.sections || item.megaMenu);
+
+    if (!hasPanel) {
+      return (
+        <NavigationMenuItem key={item.href} className={extraCls}>
+          <Link
+            to={item.href}
+            className={triggerCls}
+            aria-current={active ? "page" : undefined}
+            onClick={() =>
+              trackNav("nav_click", {
+                label: item.label,
+                href: item.href,
+                section: item.analyticsId,
+                device: "desktop",
+              })
+            }
+          >
+            {item.shortLabel ?? item.label}
+          </Link>
+        </NavigationMenuItem>
+      );
+    }
+
+    return (
+      <NavigationMenuItem key={item.href} className={extraCls}>
+        <NavigationMenuTrigger
+          className={cn(
+            triggerCls,
+            "bg-transparent data-[state=open]:bg-gold/10 data-[state=open]:text-gold",
+          )}
+          onClick={() =>
+            trackNav("dropdown_open", {
+              label: item.label,
+              section: item.analyticsId,
+              device: "desktop",
+            })
+          }
+        >
+          {item.shortLabel ?? item.label}
+        </NavigationMenuTrigger>
+        <NavigationMenuContent>
+          {item.megaMenu === "education-enablers" ? (
+            <EducationEnablersMegaMenu />
+          ) : item.sections ? (
+            <DropdownSectioned item={item} />
+          ) : (
+            <DropdownSimple item={item} />
+          )}
+        </NavigationMenuContent>
+      </NavigationMenuItem>
+    );
+  };
+
+  const inline = SITE_NAV.slice(0, PRIMARY_NAV_VISIBLE_XL);
+  const overflow = SITE_NAV.slice(PRIMARY_NAV_VISIBLE_XL);
+
+  // "More" folds the overflow groups into one sectioned panel below 2xl, so
+  // ten top-level groups never wrap or force horizontal scrolling.
+  const moreItem: NavItem = {
+    label: "More",
+    href: "#more",
+    analyticsId: "nav_more",
+    sections: overflow.map((g) => ({
+      title: g.label,
+      items: [
+        { label: `${g.label} overview`, href: g.href },
+        ...(g.children ?? []),
+        ...(g.sections ?? []).flatMap((s) => s.items),
+      ].slice(0, 8),
+    })),
+  };
+
   return (
     <NavigationMenu className="hidden xl:flex flex-1 min-w-0 justify-center" aria-label="Primary">
       <NavigationMenuList className="gap-0 flex-nowrap">
-
-        {SITE_NAV.map((item) => {
-          const active = isActive(location.pathname, item.href);
-          const triggerCls = cn(
-            "px-2 2xl:px-2.5 py-2 text-[13px] 2xl:text-sm font-medium rounded-md transition-colors whitespace-nowrap",
-            FOCUS_RING,
-            active ? "text-gold bg-gold/10" : "text-white/85 hover:text-gold hover:bg-gold/5",
-          );
-
-
-          const hasPanel = !!(item.children || item.sections || item.megaMenu);
-          if (!hasPanel) {
-            return (
-              <NavigationMenuItem key={item.href}>
-                <Link
-                  to={item.href}
-                  className={triggerCls}
-                  aria-current={active ? "page" : undefined}
-                  onClick={() =>
-                    trackNav("nav_click", {
-                      label: item.label,
-                      href: item.href,
-                      section: item.analyticsId,
-                      device: "desktop",
-                    })
-                  }
-                >
-                  {item.label}
-                </Link>
-              </NavigationMenuItem>
-            );
-          }
-
-          return (
-            <NavigationMenuItem key={item.href}>
-              <NavigationMenuTrigger
-                className={cn(
-                  triggerCls,
-                  "bg-transparent data-[state=open]:bg-gold/10 data-[state=open]:text-gold",
-                )}
-                onClick={() =>
-                  trackNav("dropdown_open", {
-                    label: item.label,
-                    section: item.analyticsId,
-                    device: "desktop",
-                  })
-                }
-              >
-                {item.shortLabel ?? item.label}
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                {item.megaMenu === "education-enablers" ? (
-                  <EducationEnablersMegaMenu />
-                ) : item.sections ? (
-                  <DropdownSectioned item={item} />
-                ) : (
-                  <DropdownSimple item={item} />
-                )}
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-          );
-        })}
+        {inline.map((item) => renderItem(item))}
+        {overflow.map((item) => renderItem(item, "hidden 2xl:list-item"))}
+        {overflow.length > 0 && renderItem(moreItem, "2xl:hidden")}
       </NavigationMenuList>
     </NavigationMenu>
   );
 }
+
 
 /* --------------------------------- CTAs --------------------------------- */
 
@@ -577,21 +603,38 @@ function MobileMenu() {
             </Accordion>
           </nav>
 
-          <div className="mt-4 border-t border-gold/20 pt-3">
-            <p className="px-3 pb-1 text-[11px] uppercase tracking-wider text-gold/70 font-semibold">
-              Quick links
-            </p>
-            {UTILITY_NAV.map((item) => (
-              <Link
-                key={item.href}
-                to={item.href}
-                onClick={close}
-                className={cn(linkCls, item.emphasis && "text-gold font-semibold")}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
+          {/* Navbar 2 → its own collapsed "Quick Links" accordion */}
+          <nav aria-label="Mobile quick links" className="mt-4 border-t border-gold/20 pt-3">
+            <Accordion type="single" collapsible className="w-full">
+              <AccordionItem value="quick-links" className="border-gold/15">
+                <AccordionTrigger className="text-white hover:text-gold px-3 text-sm rounded-md">
+                  Quick Links
+                </AccordionTrigger>
+                <AccordionContent className="pb-1">
+                  {UTILITY_NAV.map((item) => (
+                    <Link
+                      key={item.href}
+                      to={item.href}
+                      onClick={() => {
+                        close();
+                        trackNav("mobile_drawer_item_click", {
+                          parent: "Quick Links",
+                          label: item.label,
+                          href: item.href,
+                          section: item.analyticsId,
+                          device: "mobile",
+                        });
+                      }}
+                      className={cn(linkCls, item.emphasis && "text-gold font-semibold")}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </nav>
+
 
           <div className="mt-4 border-t border-gold/20 pt-3 space-y-1">
             {user ? (
