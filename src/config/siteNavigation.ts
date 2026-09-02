@@ -47,6 +47,15 @@ export interface NavItem {
   panelFooter?: { note: string; ctaLabel: string; ctaHref: string };
 }
 
+/**
+ * Desktop overflow: with 10 top-level groups the bar cannot hold every item
+ * on xl without wrapping, so SiteHeader renders the first
+ * PRIMARY_NAV_VISIBLE_XL items inline and folds the rest into a "More"
+ * dropdown below 2xl. All 10 render inline at 2xl and above.
+ */
+export const PRIMARY_NAV_VISIBLE_XL = 6;
+
+
 const TIER_ORDER = [
   { tier: "africa-education-icon", title: "Tier 1 · Africa Education Icon", overview: "/awards/africa-education-icon" },
   { tier: "influencer-education-impact", title: "Tier 2 · Influencer Education Impact", overview: "/awards/influencer-education-impact" },
