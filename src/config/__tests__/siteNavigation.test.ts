@@ -127,3 +127,50 @@ describe("SITE_NAV configuration", () => {
     }
   });
 });
+
+describe("UTILITY_NAV (Navbar 2)", () => {
+  it("no longer duplicates the five award-lane front doors", () => {
+    const laneHrefs = [
+      "/get-involved/csr",
+      "/get-involved/ngo",
+      "/get-involved/foundations",
+      "/get-involved/edutech",
+      "/get-involved/influencers",
+    ];
+    const hrefs = UTILITY_NAV.map((i) => i.href);
+    for (const h of laneHrefs) expect(hrefs, `${h} should live in SITE_NAV`).not.toContain(h);
+  });
+
+  it("keeps the confirmed-real utility destinations", () => {
+    const hrefs = UTILITY_NAV.map((i) => i.href);
+    for (const h of [
+      "/tickets",
+      "/nrc",
+      "/judges",
+      "/eduaid-africa",
+      "/rebuild-my-school",
+      "/sponsorship-packages",
+      "/partners",
+      "/support",
+      "/merch",
+      "/media/webinars",
+      "/media/podcast",
+      "/media/tv",
+      "/vacancies",
+      "/meet-the-team",
+    ]) {
+      expect(hrefs).toContain(h);
+    }
+  });
+
+  it("emphasises only the gala ticket", () => {
+    expect(UTILITY_NAV.filter((i) => i.emphasis).map((i) => i.href)).toEqual(["/tickets"]);
+  });
+
+  it("has unique hrefs and analytics ids", () => {
+    const hrefs = UTILITY_NAV.map((i) => i.href);
+    const ids = UTILITY_NAV.map((i) => i.analyticsId);
+    expect(new Set(hrefs).size).toBe(hrefs.length);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+});
