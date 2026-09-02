@@ -22,7 +22,7 @@ const EXPECTED_TOP_LEVEL = [
   "Influencers",
   "Recognition",
   "Explore Nominees",
-  "Education Social Impact",
+  "Education Impact",
   "Participate",
 ];
 
