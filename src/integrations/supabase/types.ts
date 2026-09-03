@@ -5815,6 +5815,7 @@ export type Database = {
           media_gallery: Json
           name: string
           nigeria_classification_group: string | null
+          nomination_source: string | null
           nominator_user_id: string | null
           nrc_classification_level:
             | Database["public"]["Enums"]["nrc_classification_level"]
@@ -5913,6 +5914,7 @@ export type Database = {
           media_gallery?: Json
           name: string
           nigeria_classification_group?: string | null
+          nomination_source?: string | null
           nominator_user_id?: string | null
           nrc_classification_level?:
             | Database["public"]["Enums"]["nrc_classification_level"]
@@ -6011,6 +6013,7 @@ export type Database = {
           media_gallery?: Json
           name?: string
           nigeria_classification_group?: string | null
+          nomination_source?: string | null
           nominator_user_id?: string | null
           nrc_classification_level?:
             | Database["public"]["Enums"]["nrc_classification_level"]
