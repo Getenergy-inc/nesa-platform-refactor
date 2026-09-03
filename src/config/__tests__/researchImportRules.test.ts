@@ -37,6 +37,14 @@ describe("region-scoped subcategory mapping", () => {
     expect(subcategoryMatchesRegion("ngo-africa-scholarship-east-africa", "East Africa")).toBe(true);
   });
 
+  it("accepts all 10 research regions", () => {
+    expect(subcategoryMatchesRegion("ngo-africa-basicprimary-horn-of-africa", "Horn of Africa")).toBe(true);
+    expect(subcategoryMatchesRegion("ngo-africa-refugee-sahel-africa", "Sahel Africa")).toBe(true);
+    expect(subcategoryMatchesRegion("ngo-africa-training-indian-ocean-islands", "Indian Ocean Islands")).toBe(true);
+    expect(subcategoryMatchesRegion("ngo-africa-scholarship-african-diaspora", "African Diaspora")).toBe(true);
+    expect(subcategoryMatchesRegion("ngo-africa-community-friends-of-africa", "Friends of Africa")).toBe(true);
+  });
+
   it("rejects a cross-region mapping", () => {
     expect(subcategoryMatchesRegion("ngo-africa-scholarship-east-africa", "West Africa")).toBe(false);
     const issues = validateResearchImport([

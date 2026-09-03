@@ -117,3 +117,73 @@ created; re-mapping is a pending decision.
 Resulting `under_review` total for `best-ngo-education-africa`: **25**
 (Basic & Primary West 6, Basic & Primary East 3, Refugee West 1, Refugee East 3,
 Girl-Child West 4, Girl-Child East 2, Teacher Training West 2, Teacher Training East 4).
+
+## 5. Third pass — 3 September 2026 (full 100-organisation master list)
+
+The full source research file was imported. Region-scoped subcategories were created
+only where real records existed (no speculative shells). The live counts after the
+insert are:
+
+| Region | Subcategories used | Count |
+| --- | --- | --- |
+| West Africa | Basic & Primary, Girl-Child, Refugee, Teacher Training | 13 |
+| East Africa | Basic & Primary, Girl-Child, Refugee, Teacher Training | 14 |
+| Central Africa | Basic & Primary, Community, Education Aid & Scholarships, Girl-Child, Refugee | 7 |
+| Southern Africa | Basic & Primary, Community, Girl-Child, Teacher Training | 9 |
+| North Africa | Basic & Primary, Community, Educational Materials, Girl-Child | 7 |
+| Horn of Africa | Basic & Primary, Education Aid & Scholarships, Girl-Child, Refugee | 9 |
+| Sahel Africa | Basic & Primary, Community, Girl-Child, Refugee | 10 |
+| Indian Ocean Islands | Basic & Primary, Community, Education Aid, Educational Materials, Girl-Child, Special Needs | 10 |
+| African Diaspora | Education Aid & Scholarships, Teacher Training | 6 |
+| **Total** | | **85** |
+
+**Inserted:** 60 new organisations from the master list (the other 30 rows were either
+already imported in passes 1–2 or were duplicates of an existing record by name).
+
+**Skipped duplicates / already present:**
+
+| # | Organisation | Reason |
+| --- | --- | --- |
+| 1 | Street Child | Already imported (Basic & Primary, West Africa) |
+| 2 | Plan International Nigeria | Already imported |
+| 3 | Save the Children Nigeria | Already imported |
+| 4 | ActionAid Nigeria | Already imported |
+| 5 | ActionAid Ghana | Already imported |
+| 6 | AfriKids | Already imported |
+| 7 | TEP Centre | Already imported |
+| 8 | Slum2School Africa | Already imported |
+| 9 | LEAP Africa | Already imported |
+| 10 | dRPC | Already imported |
+| 11 | I Choose Life–Africa | Already imported (East Africa) |
+| 12 | CAMFED | Already imported (East Africa) |
+| 13 | World Vision Rwanda | Already imported (Basic & Primary, East Africa) |
+| 14 | Together We Learn Ethiopia | Already imported |
+| 15 | Edukans | Already imported (Teacher Training, East Africa) — not duplicated |
+| 16 | Hope of Family | Already imported (Basic & Primary, East Africa) |
+| 17 | Children of Rwanda | Already imported (Basic & Primary, East Africa) |
+| 18 | Educate! | Already imported |
+| 19 | Room to Read | Already imported (Basic & Primary, East Africa) |
+| 20 | Right To Play | Already imported (East Africa) |
+| 25 | COOPI | Already imported (Refugee, West Africa) |
+| 60 | I Choose Life–Africa | Duplicate of #11 |
+| 82 | Education Congo | Duplicate of #22 (Central Africa scholarship) |
+| 86 | Education For Madagascar | Duplicate of #71 (Indian Ocean Islands) |
+| 87 | Somali Hope Foundation | Duplicate of #54 (Horn of Africa) |
+| 88 | Children of Rwanda | Duplicate of #17 (East Africa) |
+| 91 | Room to Read | Duplicate of #19 (Friends of Africa vs East Africa) |
+| 92 | CAMFED | Duplicate of #12 (Friends of Africa vs East Africa) |
+| 93 | Right To Play | Duplicate of #20 (Friends of Africa vs East Africa) |
+| 96 | Concern Worldwide | Duplicate of #28 (Friends of Africa vs Central Africa) |
+| 99 | International Rescue Committee | Duplicate of #30 (Friends of Africa vs Central Africa) |
+| 100 | Norwegian Refugee Council | Duplicate of #59 (Friends of Africa vs Horn of Africa) |
+
+**Not inserted — Friends of Africa region missing from `regions_v2`:**
+The source list contained three "Friends of Africa" organisations (Save the Children
+International, Oxfam International, World Vision International). Subcategories for this
+region were created, but no rows were inserted because `regions_v2` does not yet
+contain a "Friends of Africa" region record. This is a pending data fix, not a
+governance violation.
+
+**Final `under_review` total for `best-ngo-education-africa`: 85**
+research-compilation records, all governed as `under_review` / `unpublished` /
+`nrc_verified = false` / `public_display_status = hidden` / `profile_completion_score = 40`.

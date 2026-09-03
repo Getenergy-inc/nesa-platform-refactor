@@ -9,13 +9,20 @@
 
 export const RESEARCH_SOURCE_PREFIX = "Research compilation";
 
-/** Regions that region-scoped subcategory slugs may be scoped to. */
+/** Regions that region-scoped subcategory slugs may be scoped to.
+ *  Mirrors the 10-region model used for the full NGO Africa Regional research batch.
+ */
 export const SCOPED_REGIONS = [
   "West Africa",
   "East Africa",
   "Central Africa",
   "Southern Africa",
   "North Africa",
+  "Horn of Africa",
+  "Sahel Africa",
+  "Indian Ocean Islands",
+  "African Diaspora",
+  "Friends of Africa",
 ] as const;
 
 export type ScopedRegion = (typeof SCOPED_REGIONS)[number];
@@ -27,6 +34,11 @@ export const REGION_SLUG_SUFFIX: Record<ScopedRegion, string> = {
   "Central Africa": "central-africa",
   "Southern Africa": "southern-africa",
   "North Africa": "north-africa",
+  "Horn of Africa": "horn-of-africa",
+  "Sahel Africa": "sahel-africa",
+  "Indian Ocean Islands": "indian-ocean-islands",
+  "African Diaspora": "african-diaspora",
+  "Friends of Africa": "friends-of-africa",
 };
 
 export interface ResearchImportRecord {
