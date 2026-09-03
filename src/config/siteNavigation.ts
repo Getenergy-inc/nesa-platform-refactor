@@ -150,11 +150,25 @@ export const SITE_NAV: NavItem[] = [
         ],
       },
       {
-        title: "Foundations",
+        title: "Philanthropy Icon",
         items: [
           { label: "Foundations Lane — Overview", href: "/get-involved/foundations" },
           { label: "Africa Education Philanthropy Icon", href: "/nominees/lane/foundations" },
           { label: "Nominate a Foundation", href: "/nominate?category=africa-education-philanthropy-icon" },
+        ],
+      },
+      {
+        title: "Literary & Curriculum Icon",
+        items: [
+          { label: "Literary & New Curriculum Advocate Nominees", href: "/nominees/africa-education-icon-award/literary-new-curriculum-advocate" },
+          { label: "Nominate a Literary Advocate", href: "/nominate?category=africa-education-icon-award" },
+        ],
+      },
+      {
+        title: "Technical Educator Icon",
+        items: [
+          { label: "Africa Technical Educator Nominees", href: "/nominees/africa-education-icon-award/technical-educator-icon" },
+          { label: "Nominate a Technical Educator", href: "/nominate?category=africa-education-icon-award" },
         ],
       },
     ],
