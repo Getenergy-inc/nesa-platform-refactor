@@ -135,11 +135,18 @@ export const SITE_NAV: NavItem[] = [
     analyticsId: "nav_ngo_foundations",
     sections: [
       {
-        title: "NGOs",
+        title: "Nigeria NGOs",
         items: [
           { label: "NGO Lane — Overview", href: "/get-involved/ngo" },
           { label: "NGO Contribution to Education (Nigeria)", href: "/nominees/lane/ngo-nigeria" },
-          { label: "Nominate an NGO", href: "/nominate?category=best-ngo-for-education-nigeria" },
+          { label: "Nominate an NGO (Nigeria)", href: "/nominate?category=best-ngo-for-education-nigeria" },
+        ],
+      },
+      {
+        title: "Africa Regional NGOs",
+        items: [
+          { label: "Best NGO for Education (Africa Regional)", href: "/nominees/lane/ngo-africa" },
+          { label: "Nominate an NGO (Africa Regional)", href: "/nominate?category=best-ngo-education-africa" },
         ],
       },
       {
