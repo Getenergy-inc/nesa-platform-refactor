@@ -74,3 +74,46 @@ Every one of the 12 records carries identical governance fields:
   The 6 pending-decision records are shown read-only.
 - **Automated tests** in `src/config/__tests__/researchImportRules.test.ts` enforce
   region-scoped subcategory mapping and the under_review / unpublished / not-verified triple.
+
+## 4. Second pass — 3 September 2026 (new subcategories + resolution of the 6 flagged records)
+
+Four new region-scoped subcategories were created under `best-ngo-education-africa`
+(no speculative Central/Southern/North shells):
+
+- `ngo-africa-basicprimary-west-africa` — Basic & Primary Education (West Africa)
+- `ngo-africa-basicprimary-east-africa` — Basic & Primary Education (East Africa)
+- `ngo-africa-refugee-west-africa` — Refugee & Displaced Children Education (West Africa)
+- `ngo-africa-refugee-east-africa` — Refugee & Displaced Children Education (East Africa)
+
+The 6 previously flagged records were re-mapped (governance fields unchanged:
+`under_review` / `unpublished` / `nrc_verified = false`, `nomination_source =
+Research compilation — Aug 2026`):
+
+| Nominee | Subcategory | Evidence |
+| --- | --- | --- |
+| Street Child | Basic & Primary (West Africa) | A+ |
+| Save the Children Nigeria | Basic & Primary (West Africa) | A |
+| AfriKids | Basic & Primary (West Africa) | A+ |
+| Slum2School Africa | Basic & Primary (West Africa) | A |
+| World Vision Rwanda | Basic & Primary (East Africa) | A |
+| Room to Read | Basic & Primary (East Africa) | A+ |
+
+Seven new A+/A entries were added with the same governance fields:
+
+| Nominee | Subcategory | Evidence |
+| --- | --- | --- |
+| CODE (Canadian Organization for Development through Education) | Basic & Primary (West Africa) | A+ |
+| Strømme Foundation | Basic & Primary (West Africa) | A+ |
+| PEAS | Basic & Primary (East Africa) | A+ |
+| Finn Church Aid | Refugee & Displaced (East Africa) | A |
+| Windle International | Refugee & Displaced (East Africa) | A |
+| Norwegian Refugee Council (Uganda SESBiLL) | Refugee & Displaced (East Africa) | A |
+| COOPI — Cooperazione Internazionale | Refugee & Displaced (West Africa) | A |
+
+**Not imported:** Edukans was requested for Basic & Primary (East Africa) but already
+exists in this batch under Teacher Training (East Africa). No duplicate record was
+created; re-mapping is a pending decision.
+
+Resulting `under_review` total for `best-ngo-education-africa`: **25**
+(Basic & Primary West 6, Basic & Primary East 3, Refugee West 1, Refugee East 3,
+Girl-Child West 4, Girl-Child East 2, Teacher Training West 2, Teacher Training East 4).
