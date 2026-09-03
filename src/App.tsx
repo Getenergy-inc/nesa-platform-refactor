@@ -450,6 +450,7 @@ import BulkImportNominees from "./pages/admin/BulkImportNominees";
 import YouTubePipeline from "./pages/admin/YouTubePipeline";
 import AdminVolunteersCMS from "./pages/admin/AdminVolunteersCMS";
 import AdminRecruitmentTracker from "./pages/admin/AdminRecruitmentTracker";
+import AdminNGOReviewQueue from "./pages/admin/AdminNGOReviewQueue";
 
 // Optimized QueryClient with caching strategy
 const queryClient = new QueryClient({
