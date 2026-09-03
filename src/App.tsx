@@ -450,6 +450,7 @@ import BulkImportNominees from "./pages/admin/BulkImportNominees";
 import YouTubePipeline from "./pages/admin/YouTubePipeline";
 import AdminVolunteersCMS from "./pages/admin/AdminVolunteersCMS";
 import AdminRecruitmentTracker from "./pages/admin/AdminRecruitmentTracker";
+import AdminNGOReviewQueue from "./pages/admin/AdminNGOReviewQueue";
 
 // Optimized QueryClient with caching strategy
 const queryClient = new QueryClient({
@@ -2299,6 +2300,7 @@ const App = () => (
                   <Route path="/admin/contributors" element={<AdminContributorsCMS />} />
                   <Route path="/admin/volunteers" element={<AdminVolunteersCMS />} />
                   <Route path="/admin/recruitment" element={<AdminRecruitmentTracker />} />
+                  <Route path="/admin/ngo-review" element={<AdminNGOReviewQueue />} />
                   <Route path="/admin/subcategories" element={<AdminPathwaysCMS />} />
                   <Route path="/admin/gallery" element={<AdminBareShell><AdminGalleryCMS /></AdminBareShell>} />
                   <Route path="/admin/icon-migration" element={<AdminIconMigrationVerification />} />
