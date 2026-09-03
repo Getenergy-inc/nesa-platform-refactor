@@ -121,16 +121,21 @@ Girl-Child West 4, Girl-Child East 2, Teacher Training West 2, Teacher Training 
 ## 5. Third pass — 3 September 2026 (full 100-organisation master list)
 
 The full source research file was imported. Region-scoped subcategories were created
-only where real records existed (no speculative shells):
+only where real records existed (no speculative shells). The live counts after the
+insert are:
 
-- Central Africa: scholarship, refugee, community, training, basicprimary, girlchild
-- Southern Africa: girlchild, materials, basicprimary, community, training
-- North Africa: girlchild, basicprimary, training, materials, community
-- Horn of Africa: basicprimary, refugee, scholarship, girlchild
-- Sahel Africa: basicprimary, girlchild, refugee, community
-- Indian Ocean Islands: basicprimary, materials, scholarship, specialneeds, community, girlchild
-- African Diaspora: training, scholarship
-- Friends of Africa: basicprimary, community
+| Region | Subcategories used | Count |
+| --- | --- | --- |
+| West Africa | Basic & Primary, Girl-Child, Refugee, Teacher Training | 13 |
+| East Africa | Basic & Primary, Girl-Child, Refugee, Teacher Training | 14 |
+| Central Africa | Basic & Primary, Community, Education Aid & Scholarships, Girl-Child, Refugee | 7 |
+| Southern Africa | Basic & Primary, Community, Girl-Child, Teacher Training | 9 |
+| North Africa | Basic & Primary, Community, Educational Materials, Girl-Child | 7 |
+| Horn of Africa | Basic & Primary, Education Aid & Scholarships, Girl-Child, Refugee | 9 |
+| Sahel Africa | Basic & Primary, Community, Girl-Child, Refugee | 10 |
+| Indian Ocean Islands | Basic & Primary, Community, Education Aid, Educational Materials, Girl-Child, Special Needs | 10 |
+| African Diaspora | Education Aid & Scholarships, Teacher Training | 6 |
+| **Total** | | **85** |
 
 **Inserted:** 60 new organisations from the master list (the other 30 rows were either
 already imported in passes 1–2 or were duplicates of an existing record by name).
@@ -172,21 +177,13 @@ already imported in passes 1–2 or were duplicates of an existing record by nam
 | 99 | International Rescue Committee | Duplicate of #30 (Friends of Africa vs Central Africa) |
 | 100 | Norwegian Refugee Council | Duplicate of #59 (Friends of Africa vs Horn of Africa) |
 
+**Not inserted — Friends of Africa region missing from `regions_v2`:**
+The source list contained three "Friends of Africa" organisations (Save the Children
+International, Oxfam International, World Vision International). Subcategories for this
+region were created, but no rows were inserted because `regions_v2` does not yet
+contain a "Friends of Africa" region record. This is a pending data fix, not a
+governance violation.
+
 **Final `under_review` total for `best-ngo-education-africa`: 85**
 research-compilation records, all governed as `under_review` / `unpublished` /
 `nrc_verified = false` / `public_display_status = hidden` / `profile_completion_score = 40`.
-
-Per-region under_review counts:
-
-| Region | Count |
-| --- | --- |
-| West Africa | 12 |
-| East Africa | 11 |
-| Central Africa | 10 |
-| Southern Africa | 10 |
-| North Africa | 10 |
-| Horn of Africa | 9 |
-| Sahel Africa | 10 |
-| Indian Ocean Islands | 10 |
-| African Diaspora | 6 |
-| Friends of Africa | 3 |
