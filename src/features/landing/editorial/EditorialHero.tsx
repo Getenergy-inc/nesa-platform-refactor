@@ -29,9 +29,11 @@ export function EditorialHero() {
         </h1>
 
         <p className="ed-hero-sub">
-          Celebrating the people and organisations helping advance Education for All across
-          Africa.
+          {BRAND.programmeTagline}. Celebrating the people and organisations helping advance
+          Education for All across Africa.
         </p>
+
+        <p className="ed-hero-sub italic">{BRAND.closingLine}</p>
 
         <div className="ed-hero-cta-row">
           <Link
