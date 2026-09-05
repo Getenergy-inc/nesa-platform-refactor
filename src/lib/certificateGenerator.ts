@@ -164,6 +164,17 @@ export async function generateCertificatePDF(data: CertificateData): Promise<Blo
     { align: "center" }
   );
 
+  // Brand closing line
+  doc.setFont("helvetica", "italic");
+  doc.setFontSize(8);
+  doc.setTextColor(120, 120, 120);
+  doc.text(
+    "Recognising Africa's Education Enablers — Africa sees you. Africa appreciates you. Africa says thank you.",
+    pageWidth / 2,
+    194,
+    { align: "center" }
+  );
+
   // QR Code placeholder note
   doc.setFontSize(7);
   doc.text("Scan QR code on digital version to verify authenticity", pageWidth / 2, 188, { align: "center" });

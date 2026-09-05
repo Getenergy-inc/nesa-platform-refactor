@@ -37,6 +37,7 @@ function shell(title: string, inner: string): string {
         ${inner}
       </div>
       <div style="padding:16px 28px;border-top:1px solid #2a2a2a;color:#666;font-size:12px">
+        <p style="margin:0 0 8px;color:${BRAND};font-style:italic">Recognising Africa's Education Enablers<br/>Africa sees you. Africa appreciates you. Africa says thank you.</p>
         You are receiving this because you or someone acting on behalf of NESA-Africa referenced your email in a nomination.
       </div>
     </div>

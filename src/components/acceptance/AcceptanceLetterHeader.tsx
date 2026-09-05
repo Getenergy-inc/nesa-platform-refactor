@@ -31,6 +31,12 @@ export function AcceptanceLetterHeader({ nomineeName, chapterName, region }: Acc
         <p className="text-xs text-muted-foreground/70 italic tracking-wider">
           The African Blue-Garnet Awards for Africa's Education Enablers
         </p>
+        <p className="text-xs text-primary font-medium">
+          Recognising Africa's Education Enablers
+        </p>
+        <p className="text-xs text-muted-foreground/70 italic">
+          Africa sees you. Africa appreciates you. Africa says thank you.
+        </p>
         {chapterName && (
           <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
             <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 text-xs px-3 py-1">
