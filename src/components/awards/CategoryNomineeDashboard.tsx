@@ -289,22 +289,27 @@ export function CategoryNomineeDashboard({
         ) : (
           <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {visible.map((n) => {
-              const img = n.photo_url || n.logo_url;
               const sub = data.subs.find((s) => s.id === n.subcategory_id);
+              const media = resolve({
+                id: n.id,
+                slug: n.slug,
+                name: n.name,
+                organization: n.organization,
+                photo_url: n.photo_url,
+                logo_url: n.logo_url,
+              });
               const card = (
                 <div className="group h-full overflow-hidden rounded-2xl border border-gold/15 bg-gradient-to-b from-charcoal-light to-charcoal transition-colors hover:border-gold/45">
                   <div className="aspect-[4/3] w-full overflow-hidden bg-black/40">
-                    {img ? (
-                      <img
-                        src={img}
-                        alt={n.name}
-                        loading="lazy"
-                        className="h-full w-full object-cover"
-                      />
-                    ) : (
-                      <InitialsAvatar name={n.name} label={sub?.name} size="sm" />
-                    )}
+                    <NomineeMediaImage
+                      media={media}
+                      name={n.name}
+                      label={sub?.name}
+                      size="sm"
+                      fallback={<InitialsAvatar name={n.name} label={sub?.name} size="sm" />}
+                    />
                   </div>
+
                   <div className="p-3">
                     <p className="text-sm font-semibold text-white leading-snug line-clamp-2 group-hover:text-gold transition-colors">
                       {n.name}
