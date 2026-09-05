@@ -94,10 +94,9 @@ export default function InfluencerImpact2026() {
             Influencer Education Impact <span className="text-gold">2026</span>
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-sm text-white/75 md:text-base">
-            Nominate African social media creators, sports icons, and music icons
-            using their influence to enable{" "}
-            <span className="text-gold">Education for All</span> across Africa and
-            the African Diaspora.
+            <span className="font-semibold text-gold">Influence With Purpose.</span>{" "}
+            Recognising African voices using influence, visibility and public
+            platforms to enable education across Africa and the African Diaspora.
           </p>
           <p className="mx-auto mt-3 flex max-w-2xl items-start justify-center gap-2 text-xs text-white/60 md:text-sm">
             <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
@@ -125,7 +124,7 @@ export default function InfluencerImpact2026() {
                 scrollToForm();
               }}
             >
-              <Sparkles className="mr-2 h-4 w-4" /> Nominate an Education Enabler
+              <Sparkles className="mr-2 h-4 w-4" /> Nominate an Education Impact Influencer
             </Button>
             <Button
               asChild
@@ -137,7 +136,7 @@ export default function InfluencerImpact2026() {
               }
             >
               <Link to={DIRECTORY_ROUTE}>
-                View Existing Nominees <ArrowRight className="ml-2 h-4 w-4" />
+                Meet the Education Impact Influencers <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>

@@ -85,7 +85,7 @@ export default function AfricaEducationIconPage() {
           badgeIcon={Crown}
           title="Africa Education Icon Award"
           titleHighlight="2006–2026"
-          subtitle="Two decades. Three pathways. Nine laureates. A continental Hall of Fame for the educators, advocates, and philanthropists who reshaped African learning."
+          subtitle="Recognising the enduring contribution of Africa's Education Enablers. Honouring individuals whose sustained work has helped shape education, opportunity and learning across Africa."
           stats={[
             { value: total, label: "Verified Nominees" },
             { value: ICON_SUBCATEGORIES.length, label: "Subcategories" },
@@ -97,7 +97,7 @@ export default function AfricaEducationIconPage() {
             href: "/nominate?category=africa-education-icon-award",
           }}
           secondaryCta={{
-            label: "Explore Existing Nominees",
+            label: "Meet the Africa Education Icons",
             href: "#existing-nominees",
           }}
           trustLine={`${ICON_AWARD.status} · No public voting · Independent continental jury`}
