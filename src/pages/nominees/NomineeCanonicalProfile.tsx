@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { IconBreadcrumbs, NomineeCard } from "@/components/iconAward/shared";
 import { NomineeSupportPanel } from "@/components/nominees/NomineeSupportPanel";
+import { NomineeAvatar } from "@/components/nominees/NomineeAvatar";
 import { useNomineeProfile } from "@/hooks/useNomineeProfile";
 import {
   ICON_AWARD,
@@ -143,15 +144,9 @@ export default function NomineeCanonicalProfile() {
           {/* Hero */}
           <header className="mt-6 grid gap-8 md:grid-cols-[280px_1fr]">
             <div className="overflow-hidden rounded-2xl border border-gold/20 bg-black/40">
-              <img
-                src={photo || "/images/africaicons/placeholder-icon.svg"}
-                alt={`Portrait of ${name}`}
-                className="aspect-[4/5] w-full object-cover"
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src =
-                    "/images/africaicons/placeholder-icon.svg";
-                }}
-              />
+              <div className="aspect-[4/5] w-full">
+                <NomineeAvatar name={name} src={photo} shape="square" />
+              </div>
             </div>
             <div>
               <div className="flex flex-wrap gap-2">
