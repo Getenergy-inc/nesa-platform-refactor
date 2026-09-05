@@ -102,7 +102,7 @@ export const MASTER_TIMELINE_PUBLIC_NOTICE = {
   title: `Public Nominations Open ${NOMINATIONS_OPEN_LABEL}`,
   body: `Africa Education Icon Award: ${ICON_WINDOW_LABEL}. Education Impact Certificates (all six recognition families): ${CERTIFICATE_WINDOW_LABEL} — the longer window gives nominees time to request physical printed certificates ahead of the Gala.`,
   effectiveDate: "2026-09-06T00:00:00Z",
-  ctaLabel: "Nominate Now",
+  ctaLabel: "Nominate an Education Enabler",
   ctaHref: "/nominate",
 } as const;
 

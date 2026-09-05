@@ -275,7 +275,7 @@ export function CallForNominationIconAward() {
                   onClick={() => handleClick(nominateLink, `Nominate — ${title}`, "icon_award_cta_click")}
                 >
                   <Link to={nominateLink}>
-                    <Trophy className="mr-1.5 h-3.5 w-3.5" /> Nominate Now
+                    <Trophy className="mr-1.5 h-3.5 w-3.5" /> Nominate an Education Enabler
                   </Link>
                 </Button>
                 <Button
@@ -334,7 +334,7 @@ export function CallForNominationIconAward() {
                   onClick={() => handleClick(nominateLink, eventLabel, "blue_garnet_cta_click")}
                 >
                   <Link to={nominateLink}>
-                    <Trophy className="mr-1.5 h-3.5 w-3.5" /> {nominateCta ?? "Nominate Now"}
+                    <Trophy className="mr-1.5 h-3.5 w-3.5" /> {nominateCta ?? "Nominate an Education Enabler"}
                   </Link>
                 </Button>
                 <Button
@@ -407,7 +407,7 @@ export function CallForNominationIconAward() {
                     onClick={() => handleClick(nominateLink, `Nominate — ${title}`, "platinum_cta_click")}
                   >
                     <Link to={nominateLink}>
-                      <Trophy className="mr-1.5 h-3.5 w-3.5" /> Nominate Now
+                      <Trophy className="mr-1.5 h-3.5 w-3.5" /> Nominate an Education Enabler
                     </Link>
                   </Button>
                   <Button
@@ -465,7 +465,7 @@ export function CallForNominationIconAward() {
                     onClick={() => handleClick(nominateLink, `Nominate — ${title}`, "influencer_cta_click")}
                   >
                     <Link to={nominateLink}>
-                      <Trophy className="mr-1.5 h-3.5 w-3.5" /> Nominate Now
+                      <Trophy className="mr-1.5 h-3.5 w-3.5" /> Nominate an Education Enabler
                     </Link>
                   </Button>
                   <Button

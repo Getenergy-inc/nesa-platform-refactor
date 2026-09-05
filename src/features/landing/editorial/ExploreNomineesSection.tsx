@@ -1,4 +1,4 @@
-// Homepage §11 Section 5 — "Explore Existing Nominees".
+// Homepage §11 Section 5 — "Meet Africa's Education Enablers".
 // Search-first entry into the Impact Directory: no taxonomy knowledge required.
 
 import { useState } from "react";
@@ -16,7 +16,7 @@ export function ExploreNomineesSection() {
         <div className="ed-section-head">
           <div className="ed-eyebrow">Africa&apos;s Education Impact Directory</div>
           <h2 id="ed-explore-heading" className="ed-section-title">
-            Explore Existing Nominees
+            Meet Africa's Education Enablers
           </h2>
           <p className="ed-section-sub">
             Meet the people and organisations helping advance Education for All across Africa.

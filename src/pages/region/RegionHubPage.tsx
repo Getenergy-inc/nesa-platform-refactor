@@ -176,12 +176,12 @@ export function RegionHubPage() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button asChild className="rounded-full gap-2 bg-gold hover:bg-gold-dark text-charcoal px-8 py-3 font-semibold">
                   <Link to="/nominate">
-                    Nominate Now <ArrowRight className="w-4 h-4" />
+                    Nominate an Education Enabler <ArrowRight className="w-4 h-4" />
                   </Link>
                 </Button>
                 <Button asChild variant="outline" className="rounded-full gap-2 border-gold/30 text-gold hover:bg-gold/10 px-8 py-3">
                   <Link to="/nominees">
-                    Browse Nominees <ArrowRight className="w-4 h-4" />
+                    Meet Africa's Education Enablers <ArrowRight className="w-4 h-4" />
                   </Link>
                 </Button>
               </div>

@@ -10,7 +10,7 @@ const onCta = (cta: string, to: string) => () =>
 /**
  * HeroCTAStack — Conversion-focused hero CTAs (max 3).
  *
- *  1. PRIMARY    — Nominate Now (gold fill)
+ *  1. PRIMARY    — Nominate an Education Enabler (gold fill)
  *  2. SECONDARY  — Explore Award Categories (ivory / gold text)
  *  3. TERTIARY   — Accept Your Nomination (gold outline)
  *

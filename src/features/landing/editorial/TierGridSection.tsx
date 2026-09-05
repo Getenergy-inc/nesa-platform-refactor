@@ -65,7 +65,7 @@ export function TierGridSection() {
                   to={t.nomineesHref}
                   className="inline-flex h-9 items-center rounded-full border border-gold/40 px-4 text-xs font-semibold text-gold hover:bg-gold/10 transition-colors"
                 >
-                  Explore Existing Nominees
+                  Meet Africa's Education Enablers
                 </Link>
                 <button
                   type="button"

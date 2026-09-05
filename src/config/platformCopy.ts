@@ -29,7 +29,7 @@ export const PRIMARY_CTAS = {
   nominate: {
     label: "Nominate an Education Enabler",
     href: "/nominate",
-    short: "Nominate Now",
+    short: "Nominate",
   },
   directory: {
     label: "Explore the Africa Education Impact Directory",

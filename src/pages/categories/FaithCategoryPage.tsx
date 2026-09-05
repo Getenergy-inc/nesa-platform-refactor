@@ -201,7 +201,7 @@ export function FaithCategoryPage({ config }: { config: FaithCategoryConfig }) {
             <div className="flex flex-wrap gap-3 justify-center">
               <Button asChild className="bg-gold text-charcoal hover:bg-gold/90">
                 <Link to={`/nominate?subcategory=${config.primaryNominateUuid}`}>
-                  Nominate Now <ArrowRight className="w-4 h-4 ml-1" />
+                  Nominate an Education Enabler <ArrowRight className="w-4 h-4 ml-1" />
                 </Link>
               </Button>
               <Button asChild variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
@@ -360,7 +360,7 @@ export function FaithCategoryPage({ config }: { config: FaithCategoryConfig }) {
               </p>
               <Button asChild className="bg-gold text-charcoal hover:bg-gold/90">
                 <Link to={`/nominate?subcategory=${config.primaryNominateUuid}`}>
-                  Nominate Now <ArrowRight className="w-4 h-4 ml-1" />
+                  Nominate an Education Enabler <ArrowRight className="w-4 h-4 ml-1" />
                 </Link>
               </Button>
             </CardContent>

@@ -213,7 +213,7 @@ export default function CategoryPage() {
               size="lg"
               className="bg-gold text-charcoal hover:bg-gold-dark font-semibold"
             >
-              <a href="#nomination-form">Start Nomination</a>
+              <a href="#nomination-form">Start a Nomination</a>
             </Button>
             <Button
               asChild

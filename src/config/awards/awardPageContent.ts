@@ -69,8 +69,8 @@ const ICON: AwardPageContent = {
       { label: "Laureate Classifications", value: 3 },
       { label: "Final Laureates", value: finalists || 9 },
     ],
-    primaryCta: { label: "Nominate an Africa Education Icon", href: "/nominate?category=africa-education-icon-award" },
-    secondaryCta: { label: "Explore Existing Nominees", href: "/nominees/africa-education-icon-award" },
+    primaryCta: { label: "Nominate an Education Icon", href: "/nominate?category=africa-education-icon-award" },
+    secondaryCta: { label: "Meet the Africa Education Icons", href: "/nominees/africa-education-icon-award" },
     trustLine: "Jury-led · No public voting · Independent NRC verification · Continental Hall of Fame induction",
   },
   recognises:
@@ -143,8 +143,8 @@ const ICON: AwardPageContent = {
   finalCta: {
     heading: "Help Africa Recognise Its Education Icons",
     body: "Nominate an individual whose work between 2006 and 2026 has changed how Africa learns, who gains access to education, or how educational opportunity is created. Two decades. Three pathways. Nine laureates. One Continental Hall of Fame.",
-    primary: { label: "Nominate an Africa Education Icon", href: "/nominate?category=africa-education-icon-award" },
-    secondary: { label: "View the Continental Hall of Fame", href: "/nominees/africa-education-icon-award" },
+    primary: { label: "Nominate an Education Icon", href: "/nominate?category=africa-education-icon-award" },
+    secondary: { label: "Meet the Africa Education Icons", href: "/nominees/africa-education-icon-award" },
   },
 };
 
@@ -171,7 +171,7 @@ const GOLD_BLUE_GARNET: AwardPageContent = {
       { label: "Edition", value: "Qualification" },
     ],
     primaryCta: { label: "Nominate an Education Enabler", href: "/nominate?tier=gold-blue-garnet" },
-    secondaryCta: { label: "Explore Existing Nominees", href: "/nominees?tier=blue-garnet" },
+    secondaryCta: { label: "Meet Africa's Education Enablers", href: "/nominees?tier=blue-garnet" },
     trustLine: "No public voting · No competitive ranking · Independent NRC verification · Africa Education Impact Directory listing",
   },
   recognises:
@@ -337,7 +337,7 @@ const PLATINUM: AwardPageContent = {
       { label: "Vote Mechanic", value: "Jury Only" },
     ],
     primaryCta: { label: "Nominate an Institution", href: "/nominate?tier=platinum" },
-    secondaryCta: { label: "Explore Existing Nominees", href: "/nominees?tier=platinum" },
+    secondaryCta: { label: "Meet Africa's Education Enablers", href: "/nominees?tier=platinum" },
     trustLine: "Jury-only recognition · Independent NRC verification · Governance-ratified · No public voting · No political or sponsor influence",
   },
   recognises:
@@ -480,8 +480,8 @@ const INFLUENCER: AwardPageContent = {
       { label: "Model", value: "Verification" },
       { label: "Edition", value: "2026 Recognition" },
     ],
-    primaryCta: { label: "Nominate an Education Enabler", href: "/nominate?tier=influencer-2026" },
-    secondaryCta: { label: "Explore the Directory", href: "/nominees?tier=influencer" },
+    primaryCta: { label: "Nominate an Education Impact Influencer", href: "/nominate?tier=influencer-2026" },
+    secondaryCta: { label: "Meet the Education Impact Influencers", href: "/nominees?tier=influencer" },
     trustLine: "2026 Recognition & Verification Edition · NRC-verified · Directory listing · No competitive ranking · Foundation year for 2027 competitive launch",
   },
   recognises:

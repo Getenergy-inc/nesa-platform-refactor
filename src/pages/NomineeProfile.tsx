@@ -715,7 +715,7 @@ export default function NomineeProfile() {
                   <h3 className="text-sm font-display text-ivory/90 font-medium mb-1">Know Someone Deserving?</h3>
                   <p className="text-ivory/80 text-xs mb-4">Recognize an education champion making a difference in Africa.</p>
                   <Button asChild className="w-full bg-gold hover:bg-gold-dark text-charcoal font-semibold">
-                    <Link to="/nominate"><Award className="w-4 h-4 mr-2" />Nominate Now</Link>
+                    <Link to="/nominate"><Award className="w-4 h-4 mr-2" />Nominate an Education Enabler</Link>
                   </Button>
                 </CardContent>
               </Card>

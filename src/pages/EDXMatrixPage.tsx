@@ -135,7 +135,7 @@ export default function EDXMatrixPage() {
                 to="/nominate"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gold text-charcoal font-semibold text-sm hover:bg-gold/90 transition-colors shadow-md shadow-gold/20"
               >
-                Nominate Now <ArrowRight className="h-4 w-4" />
+                Nominate an Education Enabler <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 to="/governance"

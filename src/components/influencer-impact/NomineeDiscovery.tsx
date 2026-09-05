@@ -218,7 +218,7 @@ export function NomineeDiscovery({ category, onCategoryChange }: Props) {
                       to={NOMINATE_URL(c.id)}
                       className="inline-block mt-3 text-xs font-semibold text-charcoal bg-gold px-4 py-2 rounded-lg hover:bg-gold/90"
                     >
-                      Nominate Now
+                      Nominate an Education Enabler
                     </Link>
                   </div>
                 )}

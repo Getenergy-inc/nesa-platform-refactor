@@ -145,7 +145,7 @@ export default function PillarsHub() {
               size="lg"
               className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full"
             >
-              <Link to="/nominate">Start Nomination</Link>
+              <Link to="/nominate">Start a Nomination</Link>
             </Button>
           </div>
         </section>

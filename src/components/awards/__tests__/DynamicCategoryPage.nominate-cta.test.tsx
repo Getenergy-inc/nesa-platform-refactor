@@ -56,14 +56,14 @@ describe("DynamicCategoryPage Nominate CTA deep links", () => {
     mockI18n.language = "en";
   });
 
-  it("hero 'Nominate Now' and bottom 'Submit Nomination' link to /nominate?category=<slug>", () => {
+  it("hero 'Nominate an Education Enabler' and bottom 'Submit Nomination' link to /nominate?category=<slug>", () => {
     const slug = "best-csr-for-education-africa-regional";
     renderCategoryPage("Best CSR in Education (Africa Regional)", slug);
 
     const expectedHref = `/nominate?category=${slug}`;
 
     // Hero CTA
-    const heroLink = screen.getByRole("link", { name: /Nominate Now/i });
+    const heroLink = screen.getByRole("link", { name: /Nominate an Education Enabler/i });
     expect(heroLink).toHaveAttribute("href", expectedHref);
 
     // Bottom CTA
@@ -74,7 +74,7 @@ describe("DynamicCategoryPage Nominate CTA deep links", () => {
   it("falls back to plain /nominate when no nominateCategorySlug is provided", () => {
     renderCategoryPage("Best CSR in Education (Africa Regional)");
 
-    const heroLink = screen.getByRole("link", { name: /Nominate Now/i });
+    const heroLink = screen.getByRole("link", { name: /Nominate an Education Enabler/i });
     expect(heroLink).toHaveAttribute("href", "/nominate");
 
     const bottomLink = screen.getByRole("link", { name: /Submit Nomination/i });
@@ -92,7 +92,7 @@ describe("DynamicCategoryPage Nominate CTA deep links", () => {
 
       const expectedHref = `/nominate?category=${slug}`;
 
-      expect(screen.getByRole("link", { name: /Nominate Now/i })).toHaveAttribute(
+      expect(screen.getByRole("link", { name: /Nominate an Education Enabler/i })).toHaveAttribute(
         "href",
         expectedHref
       );

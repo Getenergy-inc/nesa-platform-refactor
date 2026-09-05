@@ -19,9 +19,9 @@ export interface PhaseConfig {
 export const PHASE_MAP: Record<CampaignPhase, PhaseConfig> = {
   nomination: {
     phase: "nomination",
-    primary: { label: "Nominate Now", href: "/nominate", analyticsId: "nominate_now" },
+    primary: { label: "Nominate an Education Enabler", href: "/nominate", analyticsId: "nominate_now" },
     secondary: {
-      label: "Explore Nominees",
+      label: "Meet Africa's Education Enablers",
       href: "/nominees",
       analyticsId: "explore_nominees",
     },
@@ -51,10 +51,10 @@ export const ACTIVE_PHASE: CampaignPhase = "nomination";
 
 export const CURRENT_PHASE: PhaseConfig = PHASE_MAP[ACTIVE_PHASE];
 
-// Nominate Now is the single strongest CTA regardless of phase; the phase
+// Nominate an Education Enabler is the single strongest CTA regardless of phase; the phase
 // controls the *secondary* action label.
 export const NOMINATE_CTA = {
-  label: "Nominate Now",
+  label: "Nominate an Education Enabler",
   href: "/nominate",
   analyticsId: "nominate_now",
 } as const;

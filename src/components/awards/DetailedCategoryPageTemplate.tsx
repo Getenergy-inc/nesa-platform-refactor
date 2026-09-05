@@ -259,7 +259,7 @@ export default function DetailedCategoryPageTemplate({ page, theme = "corporate"
           <h2 className="font-serif text-2xl md:text-3xl mb-3">{page.nominationCta.heading}</h2>
           <p className="text-white/80 mb-6">{page.nominationCta.body}</p>
           <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
-            <Link to={page.nominationCta.href}>Nominate Now <ArrowRight className="ml-2 h-4 w-4" /></Link>
+            <Link to={page.nominationCta.href}>Nominate an Education Enabler <ArrowRight className="ml-2 h-4 w-4" /></Link>
           </Button>
           <p className="mt-4 text-xs text-white/60">
             No account is required to begin. First-time nominators create or confirm an account only at submission.
@@ -292,7 +292,7 @@ export default function DetailedCategoryPageTemplate({ page, theme = "corporate"
       ) : (
         <section id="existing-nominees" className="bg-muted/30">
           <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
-            <h2 className="font-serif text-2xl md:text-3xl mb-2">Existing Nominees</h2>
+            <h2 className="font-serif text-2xl md:text-3xl mb-2">Meet Africa's Education Enablers</h2>
             <p className="text-muted-foreground max-w-3xl mb-6">
               Explore organisations, institutions, programmes, and leaders already identified under this
               category. Entries are updated as NRC verification progresses. Grouping:{" "}
@@ -305,7 +305,7 @@ export default function DetailedCategoryPageTemplate({ page, theme = "corporate"
             />
             <div className="mt-6 text-center">
               <Button asChild variant="outline">
-                <Link to={page.secondaryCta.href}>View All Nominees</Link>
+                <Link to={page.secondaryCta.href}>{page.secondaryCta.label}</Link>
               </Button>
             </div>
           </div>
@@ -411,10 +411,10 @@ export default function DetailedCategoryPageTemplate({ page, theme = "corporate"
           </h2>
           <div className="flex flex-wrap justify-center gap-3">
             <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
-              <Link to={page.primaryCta.href}>Nominate in This Category</Link>
+              <Link to={page.primaryCta.href}>{page.primaryCta.label}</Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
-              <Link to={page.secondaryCta.href}>Explore Existing Nominees</Link>
+              <Link to={page.secondaryCta.href}>{page.secondaryCta.label}</Link>
             </Button>
           </div>
           <Link

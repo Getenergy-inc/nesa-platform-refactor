@@ -231,7 +231,7 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
         stats={heroStats}
         primaryCta={{ label: content.nominateCta, href: "#nomination-form" }}
         secondaryCta={{
-          label: "Explore Existing Nominees",
+          label: "Meet the Education Impact Influencers",
           href: "#existing-nominees",
         }}
         trustLine="NRC impact verification · Governance approval · No public voting in 2026"
@@ -480,7 +480,7 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
           <p>{content.finalCta.body}</p>
           <div className="flex flex-wrap gap-3 pt-2">
             <Button asChild className="bg-gold text-charcoal hover:bg-gold-dark">
-              <a href="#nomination-form">Nominate Now</a>
+              <a href="#nomination-form">Nominate an Education Enabler</a>
             </Button>
             <Button
               asChild
@@ -488,7 +488,7 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
               className="border-gold/40 text-gold hover:bg-gold/10"
             >
               <Link to="/awards/influencer-education-impact/nominees">
-                Explore Existing Nominees
+                Meet Africa's Education Enablers
               </Link>
             </Button>
             <Button

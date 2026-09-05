@@ -68,7 +68,7 @@ export function GroupIndexPage({ group, seoTitle, metaDescription, intro }: Prop
             <Button asChild className="bg-gold text-charcoal hover:bg-gold/90">
               <Link to={nominateHref}>
                 <Sparkles className="mr-2 h-4 w-4" />
-                Nominate Now
+                Nominate an Education Enabler
               </Link>
             </Button>
             <Button asChild variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">

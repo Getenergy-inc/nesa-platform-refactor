@@ -142,7 +142,7 @@ export const MAIN_NAV: NavItem[] = [
     href: "/nominate",
     icon: FileCheck,
     children: [
-      { label: "Nominate Now", href: "/nominate", description: "Submit a 2026 nomination", icon: FileCheck, badge: "2026" },
+      { label: "Nominate", href: "/nominate", description: "Submit a 2026 nomination", icon: FileCheck, badge: "2026" },
       { label: "Explore Existing Nominees", href: "/nominees", description: "Africa's Education Impact Directory", icon: Users },
       { label: "Vote", href: "/awards/gold-blue-garnet", description: "Cast your public vote", icon: Vote },
       { label: "Endorse a Nominee", href: "/endorse", description: "Institutional endorsements", icon: Shield },
@@ -230,18 +230,18 @@ export const MAIN_NAV: NavItem[] = [
 ];
 
 // Right-side action CTAs per MVP brief:
-// PRIMARY   → Nominate Now (filled gold)
+// PRIMARY   → Nominate an Education Enabler (filled gold)
 // SECONDARY → Explore Existing Nominees (outline gold)
 // SUPPORT   → Become a Sponsor (outline)
 export const MAIN_NAV_CTAS: NavItem[] = [
-  { label: "Nominate Now", href: "/nominate", icon: FileCheck, badge: "2026" },
+  { label: "Nominate", href: "/nominate", icon: FileCheck, badge: "2026" },
   { label: "Explore Nominees", href: "/nominees", icon: Users },
   { label: "Become a Sponsor", href: "/sponsor", icon: Sparkles },
 ];
 
 // Legacy single-CTA export (kept for backward compatibility — now primary Nominate CTA)
 export const MAIN_NAV_CTA: NavItem = {
-  label: "Nominate Now",
+  label: "Nominate",
   href: "/nominate",
   icon: FileCheck,
   badge: "2026",

@@ -114,14 +114,14 @@ export function NESAHero() {
 
         {/* PRIMARY CTA Buttons - Conversion focused */}
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0 animate-fade-in" style={{ animationDelay: '0.5s' }}>
-          {/* Primary: Nominate Now */}
+          {/* Primary: Nominate an Education Enabler */}
           <Link to="/nominate" className="w-full sm:w-auto group">
             <Button
               size="lg"
               className="w-full sm:w-auto bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-6 sm:px-8 gap-2 shadow-lg hover:shadow-gold/30 min-h-[48px] touch-manipulation transition-all duration-300"
             >
               <Trophy className="h-4 w-4" />
-              Nominate Now
+              Nominate an Education Enabler
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>

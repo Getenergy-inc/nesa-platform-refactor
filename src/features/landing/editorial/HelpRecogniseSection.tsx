@@ -31,7 +31,7 @@ export function HelpRecogniseSection() {
               trackEvent("hero_cta_click", { slot: "secondary", href: "/nominees", surface: "home-final" })
             }
           >
-            Explore Existing Nominees →
+            Meet Africa's Education Enablers →
           </Link>
         </div>
       </div>
