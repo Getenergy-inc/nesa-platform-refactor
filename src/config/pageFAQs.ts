@@ -4,7 +4,7 @@
 // Brand architecture (do NOT deviate):
 //   Official Name:  New Education Standard Award Africa (NESA-Africa)
 //   Current Edition: NESA-Africa 2026
-//   Motto / Brand Line: "The African Blue-Garnet Awards for Education"
+//   Motto / Brand Line: "The African Blue-Garnet Awards for Africa’s Education Enablers"
 //
 // Integrity rule used across all FAQs that mention sponsorship,
 // voting, judging or award outcomes:
@@ -55,7 +55,7 @@ const INTEGRITY_SHORT =
 const DEFAULT_FAQS: FAQ[] = [
   {
     q: "What is New Education Standard Award Africa (NESA-Africa)?",
-    a: 'New Education Standard Award Africa (NESA-Africa) is a continental recognition and impact platform celebrating individuals, schools, organisations and partners advancing Education for All across Africa and the African diaspora. Its motto is "The African Blue-Garnet Awards for Education".',
+    a: 'New Education Standard Award Africa (NESA-Africa) is a continental recognition and impact platform celebrating individuals, schools, organisations and partners advancing Education for All across Africa and the African diaspora. Its motto is "The African Blue-Garnet Awards for Africa’s Education Enablers".',
   },
   {
     q: "What is NESA-Africa 2026?",
@@ -80,13 +80,13 @@ export const PAGE_FAQS: PageFAQ[] = [
     match: "/",
     title: "NESA-Africa 2026 — Frequently Asked Questions",
     subtitle:
-      'New Education Standard Award Africa (NESA-Africa) 2026 — "The African Blue-Garnet Awards for Education". Quick answers for first-time visitors.',
+      'New Education Standard Award Africa (NESA-Africa) 2026 — "The African Blue-Garnet Awards for Africa’s Education Enablers". Quick answers for first-time visitors.',
     viewAllHref: "/faq",
     viewAllLabel: "Open Full FAQ Hub",
     faqs: [
       {
         q: "What is New Education Standard Award Africa (NESA-Africa)?",
-        a: 'New Education Standard Award Africa (NESA-Africa) is a continental recognition and impact platform celebrating people, schools, organisations and partners advancing Education for All across Africa and the diaspora. Its motto is "The African Blue-Garnet Awards for Education".',
+        a: 'New Education Standard Award Africa (NESA-Africa) is a continental recognition and impact platform celebrating people, schools, organisations and partners advancing Education for All across Africa and the diaspora. Its motto is "The African Blue-Garnet Awards for Africa’s Education Enablers".',
         ctas: [{ label: "About NESA-Africa", href: "/about" }],
       },
       {
@@ -94,7 +94,7 @@ export const PAGE_FAQS: PageFAQ[] = [
         a: "NESA-Africa 2026 is the current edition of the awards cycle. It moves from public pre-nomination, through independent NRC verification, public voting, the Blue Garnet Awards Gala, and into post-award legacy impact through EduAid-Africa and Rebuild My School Africa.",
       },
       {
-        q: 'What is the motto "The African Blue-Garnet Awards for Education"?',
+        q: 'What is the motto "The African Blue-Garnet Awards for Africa’s Education Enablers"?',
         a: 'It is the official motto and premium brand line of NESA-Africa. It is not the legal name of the organisation. The official name remains New Education Standard Award Africa (NESA-Africa).',
       },
       {
@@ -158,7 +158,7 @@ export const PAGE_FAQS: PageFAQ[] = [
         a: "Through public recognition, sponsor-funded category programmes, EduAid-Africa webinars, NESA-Africa TV documentation and Rebuild My School Africa infrastructure delivery.",
       },
       {
-        q: 'What does the motto "The African Blue-Garnet Awards for Education" mean?',
+        q: 'What does the motto "The African Blue-Garnet Awards for Africa’s Education Enablers" mean?',
         a: "It is a premium brand line that signals continental prestige. The blue garnet is rare, durable and luminous — a fitting symbol for resilient education leadership in Africa.",
       },
     ],
@@ -169,7 +169,7 @@ export const PAGE_FAQS: PageFAQ[] = [
     match: "/awards",
     title: "Awards — Frequently Asked Questions",
     subtitle:
-      'The recognition structure of New Education Standard Award Africa (NESA-Africa) 2026 — "The African Blue-Garnet Awards for Education".',
+      'The recognition structure of New Education Standard Award Africa (NESA-Africa) 2026 — "The African Blue-Garnet Awards for Africa’s Education Enablers".',
     viewAllHref: "/faq",
     faqs: [
       {
@@ -427,7 +427,7 @@ export const PAGE_FAQS: PageFAQ[] = [
     match: "/sponsor",
     title: "Sponsor NESA-Africa 2026 — FAQ",
     subtitle:
-      'Sponsorship categories, benefits and integrity rules for "The African Blue-Garnet Awards for Education".',
+      'Sponsorship categories, benefits and integrity rules for "The African Blue-Garnet Awards for Africa’s Education Enablers".',
     viewAllHref: "/faq",
     faqs: [
       {
@@ -757,7 +757,7 @@ export const PAGE_FAQS: PageFAQ[] = [
     match: "/buy-your-ticket",
     title: "Blue Garnet Awards Gala — FAQ",
     subtitle:
-      'The continental finale of NESA-Africa 2026 — "The African Blue-Garnet Awards for Education".',
+      'The continental finale of NESA-Africa 2026 — "The African Blue-Garnet Awards for Africa’s Education Enablers".',
     viewAllHref: "/faq",
     faqs: [
       {
@@ -1045,7 +1045,7 @@ export const PAGE_FAQS: PageFAQ[] = [
     match: "*",
     title: "Frequently Asked Questions",
     subtitle:
-      'About New Education Standard Award Africa (NESA-Africa) 2026 — "The African Blue-Garnet Awards for Education".',
+      'About New Education Standard Award Africa (NESA-Africa) 2026 — "The African Blue-Garnet Awards for Africa’s Education Enablers".',
     faqs: DEFAULT_FAQS,
   },
 ];
@@ -1078,14 +1078,14 @@ export const FULL_FAQ_GROUPS: FAQGroup[] = [
   {
     title: "A. General NESA-Africa",
     description:
-      'New Education Standard Award Africa (NESA-Africa) and the motto "The African Blue-Garnet Awards for Education".',
+      'New Education Standard Award Africa (NESA-Africa) and the motto "The African Blue-Garnet Awards for Africa’s Education Enablers".',
     faqs: [
       {
         q: "What is New Education Standard Award Africa (NESA-Africa)?",
         a: "A continental recognition and impact platform celebrating individuals, schools, organisations and partners advancing Education for All across Africa and the diaspora.",
       },
       {
-        q: 'What is "The African Blue-Garnet Awards for Education"?',
+        q: 'What is "The African Blue-Garnet Awards for Africa’s Education Enablers"?',
         a: "It is the official motto and premium brand line of NESA-Africa. The legal name remains New Education Standard Award Africa (NESA-Africa).",
       },
       {

@@ -75,7 +75,7 @@ export const VOLUNTEER_VACANCIES_2026: VolunteerVacancy[] = [
     slug: "webinar-host",
     code: "V-01",
     title: "Volunteer Webinar Host",
-    role: "Webinar Host — Africa's Education Enablers Series",
+    role: "Webinar Host — Africa’s Education Enablers Series",
     location: "Remote",
     commitment: "One or more single sessions, ~2–3 hours each",
     intro:
@@ -101,7 +101,7 @@ export const VOLUNTEER_VACANCIES_2026: VolunteerVacancy[] = [
     slug: "podcast-host",
     code: "V-02",
     title: "Volunteer Podcast Host",
-    role: "Podcast Host — Africa's Education Enablers Series",
+    role: "Podcast Host — Africa’s Education Enablers Series",
     location: "Remote",
     commitment: "One or more single episodes, ~1–2 hours each",
     intro:

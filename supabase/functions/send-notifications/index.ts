@@ -30,13 +30,14 @@ function shell(title: string, inner: string): string {
     <div style="max-width:560px;margin:0 auto;background:#161616;border:1px solid #2a2a2a;border-radius:12px;overflow:hidden">
       <div style="padding:20px 28px;border-bottom:1px solid #2a2a2a">
         <span style="color:${BRAND};font-size:20px;font-weight:bold">NESA-Africa</span>
-        <span style="color:#888;font-size:13px"> · The African Blue Garnet Awards for Education</span>
+        <span style="color:#888;font-size:13px"> · The African Blue Garnet Awards for Africa's Education Enablers</span>
       </div>
       <div style="padding:28px;line-height:1.6;font-size:15px">
         <h1 style="color:${BRAND};font-size:20px;margin:0 0 16px">${title}</h1>
         ${inner}
       </div>
       <div style="padding:16px 28px;border-top:1px solid #2a2a2a;color:#666;font-size:12px">
+        <p style="margin:0 0 8px;color:${BRAND};font-style:italic">Recognising Africa's Education Enablers<br/>Africa sees you. Africa appreciates you. Africa says thank you.</p>
         You are receiving this because you or someone acting on behalf of NESA-Africa referenced your email in a nomination.
       </div>
     </div>

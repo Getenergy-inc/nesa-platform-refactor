@@ -9,7 +9,7 @@ export function PillarFooterNote() {
           NESA-Africa 2026
         </p>
         <p className="text-gold/90 italic text-sm md:text-base mt-1">
-          The African Blue-Garnet Awards for Education
+          The African Blue-Garnet Awards for Africa’s Education Enablers
         </p>
         <p className="text-ivory/70 text-sm mt-1">
           Africa's Highest Honour for Education Enablers

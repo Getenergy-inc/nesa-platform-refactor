@@ -1,4 +1,4 @@
-// Homepage — "Meet Africa's Education Enablers".
+// Homepage — "Meet Africa’s Education Enablers".
 //
 // One Continental Mission. Six Recognition Pathways.
 //

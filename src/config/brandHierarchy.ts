@@ -29,8 +29,10 @@ export const BRAND = {
   platform: "NESA-Africa",
   platformLong: "New Education Standard Award Africa",
   /** Umbrella programme. */
-  programme: "The African Blue-Garnet Awards for Education",
-  programmeTagline: "Recognising the Enablers of Education for All Across Africa",
+  programme: "The African Blue-Garnet Awards for Africa’s Education Enablers",
+  programmeTagline: "Recognising Africa’s Education Enablers",
+  /** Canonical closing line — must match the EduAid-Africa webinar phrasing verbatim. */
+  closingLine: "Africa sees you. Africa appreciates you. Africa says thank you.",
   /** Flagship lifetime recognition. */
   flagship: "Africa Education Icon Award",
   flagshipTagline:
