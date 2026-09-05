@@ -283,7 +283,7 @@ export function DynamicCategoryPage({ categoryTitle, nominationType, nominateCat
                   <Button asChild size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2">
                     <Link to={nominateHref}>
                       <Award className="h-4 w-4" />
-                      Nominate Now
+                      Nominate an Education Enabler
                     </Link>
                   </Button>
                   <Button asChild size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 rounded-full gap-2">

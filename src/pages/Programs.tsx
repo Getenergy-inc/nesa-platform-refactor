@@ -197,7 +197,7 @@ export default function Programs() {
                       <Link to="/nominate">
                         <Button size="lg" variant="outline" className="gap-2 border-primary/30 text-primary hover:bg-primary/10">
                           <Award className="h-4 w-4" />
-                          Nominate Now
+                          Nominate an Education Enabler
                         </Button>
                       </Link>
                     </div>

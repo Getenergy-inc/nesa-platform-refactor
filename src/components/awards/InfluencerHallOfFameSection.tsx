@@ -380,7 +380,7 @@ export function InfluencerHallOfFameSection({ category }: HallOfFameProps = {}) 
                 to={NOMINATE_URL(pathway === "all" ? "social-media" : pathway)}
                 className="inline-block mt-3 text-xs font-semibold text-charcoal bg-gold px-4 py-2 rounded-lg hover:bg-gold/90"
               >
-                Nominate Now
+                Nominate an Education Enabler
               </Link>
             </div>
           )}

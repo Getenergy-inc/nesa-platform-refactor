@@ -207,8 +207,8 @@ export function AwardsRegionPage() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button asChild className="rounded-full bg-gold hover:bg-gold-dark text-charcoal font-semibold gap-2 px-8 py-3">
-                <Link to="/nominate" onClick={() => track("Nominate Now", "/nominate")}>
-                  Nominate Now <ArrowRight className="w-4 h-4" />
+                <Link to="/nominate" onClick={() => track("Nominate an Education Enabler", "/nominate")}>
+                  Nominate an Education Enabler <ArrowRight className="w-4 h-4" />
                 </Link>
               </Button>
               <Button asChild variant="outline" className="rounded-full border-gold/30 text-gold hover:bg-gold/10 px-8 py-3 gap-2">

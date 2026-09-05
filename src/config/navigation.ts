@@ -230,7 +230,7 @@ export const MAIN_NAV: NavItem[] = [
 ];
 
 // Right-side action CTAs per MVP brief:
-// PRIMARY   → Nominate Now (filled gold)
+// PRIMARY   → Nominate an Education Enabler (filled gold)
 // SECONDARY → Explore Existing Nominees (outline gold)
 // SUPPORT   → Become a Sponsor (outline)
 export const MAIN_NAV_CTAS: NavItem[] = [

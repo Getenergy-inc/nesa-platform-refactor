@@ -259,7 +259,7 @@ export default function DetailedCategoryPageTemplate({ page, theme = "corporate"
           <h2 className="font-serif text-2xl md:text-3xl mb-3">{page.nominationCta.heading}</h2>
           <p className="text-white/80 mb-6">{page.nominationCta.body}</p>
           <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
-            <Link to={page.nominationCta.href}>Nominate Now <ArrowRight className="ml-2 h-4 w-4" /></Link>
+            <Link to={page.nominationCta.href}>Nominate an Education Enabler <ArrowRight className="ml-2 h-4 w-4" /></Link>
           </Button>
           <p className="mt-4 text-xs text-white/60">
             No account is required to begin. First-time nominators create or confirm an account only at submission.

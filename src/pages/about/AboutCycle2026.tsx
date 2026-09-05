@@ -116,7 +116,7 @@ export default function AboutCycle2026() {
         title={<>About <span className="text-gold">NESA-Africa 2026</span></>}
         positioning="The platform's first public award cycle since incorporation — 18 recognition forms across four tiers, verified end-to-end, culminating in the Recognition Gala in Lagos on 13 December 2026."
         cyclePhase="Cycle Status · Pre-Nomination · Nominations open 6 September 2026"
-        primaryCta={{ label: "Nominate Now", href: "/nominate", icon: "nominate" }}
+        primaryCta={{ label: "Nominate an Education Enabler", href: "/nominate", icon: "nominate" }}
         secondaryCta={{ label: "Non-Influence Declaration", href: "#non-influence-protocol" }}
       />
 
@@ -146,7 +146,7 @@ export default function AboutCycle2026() {
       <AboutContactBlock
         headline="Engage with the 2026 Cycle"
         intro="Nominate a changemaker, apply as a judge or NRC member, become a chapter volunteer, or attend the 13 December 2026 Gala."
-        primaryCta={{ label: "Nominate Now", href: "/nominate" }}
+        primaryCta={{ label: "Nominate an Education Enabler", href: "/nominate" }}
         secondaryCta={{ label: "Contact the Cycle Desk", href: "mailto:info@nesa.africa" }}
       />
     </>
