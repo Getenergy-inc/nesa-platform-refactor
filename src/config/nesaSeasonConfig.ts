@@ -87,7 +87,7 @@ export const PHASES: PhaseConfig[] = [
     startDate: new Date("2026-04-01"),
     endDate: new Date("2026-06-20"),
     isActive: true,
-    ctaText: "Nominate Now",
+    ctaText: "Nominate an Education Enabler",
     ctaLink: "/nominate",
   },
   {

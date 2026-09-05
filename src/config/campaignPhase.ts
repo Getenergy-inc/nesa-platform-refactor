@@ -19,7 +19,7 @@ export interface PhaseConfig {
 export const PHASE_MAP: Record<CampaignPhase, PhaseConfig> = {
   nomination: {
     phase: "nomination",
-    primary: { label: "Nominate Now", href: "/nominate", analyticsId: "nominate_now" },
+    primary: { label: "Nominate an Education Enabler", href: "/nominate", analyticsId: "nominate_now" },
     secondary: {
       label: "Explore Nominees",
       href: "/nominees",
