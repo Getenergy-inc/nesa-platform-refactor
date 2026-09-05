@@ -1,11 +1,13 @@
 import { cn } from "@/lib/utils";
 import { forwardRef } from "react";
 import nesaStamp from "@/assets/nesa-stamp.jpeg";
+import { BRAND } from "@/config/brandHierarchy";
 
 interface NESALogoProps {
   className?: string;
-  variant?: "full" | "icon" | "stamp";
+  variant?: "full" | "icon" | "stamp" | "header";
   size?: "sm" | "md" | "lg";
+  showTagline?: boolean;
 }
 
 /**
@@ -13,11 +15,11 @@ interface NESALogoProps {
  * Uses the official NESA stamp image
  */
 export const NESALogo = forwardRef<HTMLDivElement, NESALogoProps>(
-  ({ className, variant = "full", size = "md" }, ref) => {
+  ({ className, variant = "full", size = "md", showTagline = false }, ref) => {
     const sizeClasses = {
-      sm: variant === "full" ? "h-8" : "h-6 w-6",
-      md: variant === "full" ? "h-10" : "h-8 w-8",
-      lg: variant === "full" ? "h-14" : "h-12 w-12",
+      sm: variant === "full" || variant === "header" ? "h-8" : "h-6 w-6",
+      md: variant === "full" || variant === "header" ? "h-10" : "h-8 w-8",
+      lg: variant === "full" || variant === "header" ? "h-14" : "h-12 w-12",
     };
 
     if (variant === "icon" || variant === "stamp") {
@@ -35,6 +37,38 @@ export const NESALogo = forwardRef<HTMLDivElement, NESALogoProps>(
             alt="NESA Africa" 
             className="h-full w-full object-contain rounded-full"
           />
+        </div>
+      );
+    }
+
+    // Header variant: compact stamp + wordmark + optional tagline for the navbar.
+    if (variant === "header") {
+      return (
+        <div
+          ref={ref}
+          className={cn(
+            "flex items-center gap-2.5 shrink-0",
+            sizeClasses[size],
+            className
+          )}
+        >
+          <div className="relative flex items-center justify-center h-full aspect-square">
+            <img
+              src={nesaStamp}
+              alt="NESA Africa"
+              className="h-full w-full object-contain rounded-full ring-1 ring-gold/40"
+            />
+          </div>
+          <div className="hidden sm:flex flex-col leading-tight min-w-0">
+            <span className="font-playfair text-gold text-base lg:text-lg font-bold whitespace-nowrap">
+              NESA-Africa
+            </span>
+            {showTagline && (
+              <span className="hidden lg:block text-[10px] text-white/60 -mt-0.5 whitespace-nowrap">
+                {BRAND.programmeTagline}
+              </span>
+            )}
+          </div>
         </div>
       );
     }
