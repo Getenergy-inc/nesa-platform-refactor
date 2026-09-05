@@ -78,7 +78,7 @@ export function NESALandingPage() {
         pathname="/"
         title={t(
           "seo.landing.title",
-          "NESA-Africa 2026 | The African Blue-Garnet Awards for Africa’s Education Enablers",
+          "NESA-Africa 2026 | The African Blue-Garnet Awards for Recognising Africa’s Education Enablers",
         )}
         description={t(
           "seo.landing.description",
@@ -87,7 +87,7 @@ export function NESALandingPage() {
         ogTitle={t("seo.landing.ogTitle", "NESA-Africa 2026 — A Continent in Recognition")}
         ogDescription={t(
           "seo.landing.ogDescription",
-          "The African Blue-Garnet Awards for Africa’s Education Enablers. Recognition → Visibility → Partnerships → Funding → Intervention → Legacy.",
+          "The African Blue-Garnet Awards for Recognising Africa’s Education Enablers. Recognition → Visibility → Partnerships → Funding → Intervention → Legacy.",
         )}
         keywords={t("seo.landing.keywords", "")}
       />

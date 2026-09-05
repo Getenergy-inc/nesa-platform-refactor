@@ -43,7 +43,7 @@ Review Committee (NRC) on merit and evidence.
 Dear {{Nominator Full Name}},
 
 Thank you for submitting a pre-nomination to NESA-Africa 2026 — The African
-Blue-Garnet Awards for Africa's Education Enablers.
+Blue-Garnet Awards for Recognising Africa's Education Enablers.
 
 We have received your nomination with the following details:
 
@@ -148,7 +148,7 @@ Two variants based on `{{Consent to Share Contact}}`.
 Dear {{Nominee Name}},
 
 You have been recommended for pre-nomination review under NESA-Africa 2026 —
-The African Blue-Garnet Awards for Africa's Education Enablers.
+The African Blue-Garnet Awards for Recognising Africa's Education Enablers.
 
 Recommendation details
   • Award Group:         {{Award Group}}
@@ -189,7 +189,7 @@ NESA-Africa 2026 Pre-Nomination Review Team
 Dear {{Nominee Name}},
 
 You have been recommended by a supporter for pre-nomination review under
-NESA-Africa 2026 — The African Blue-Garnet Awards for Africa's Education Enablers.
+NESA-Africa 2026 — The African Blue-Garnet Awards for Recognising Africa's Education Enablers.
 
 Recommendation details
   • Award Group:         {{Award Group}}
@@ -354,7 +354,7 @@ Dear {{School Contact Person}},
 
 {{School Name}} has been recommended for review under the EduAid-Africa and
 Rebuild My School Africa (RMSA) programme of NESA-Africa 2026 — The African
-Blue-Garnet Awards for Africa's Education Enablers.
+Blue-Garnet Awards for Recognising Africa's Education Enablers.
 
 Recommendation details
   • School:              {{School Name}}
