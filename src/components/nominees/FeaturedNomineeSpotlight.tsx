@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Award, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { EnrichedDatabaseNominee } from "@/hooks/useNominees";
+import { NomineeAvatar } from "@/components/nominees/NomineeAvatar";
 
 interface Props {
   nominees: EnrichedDatabaseNominee[];
@@ -35,13 +36,12 @@ export function FeaturedNomineeSpotlight({ nominees, title = "Featured Nominees"
               className="block group relative overflow-hidden rounded-2xl border border-gold/20 hover:border-gold/50 transition-all bg-gradient-to-br from-charcoal-light to-charcoal h-full"
             >
               <div className="aspect-[4/3] overflow-hidden bg-charcoal-light flex items-center justify-center">
-                <img
+                <NomineeAvatar
+                  name={n.name}
                   src={n.photoUrl}
-                  alt={n.name}
-                  loading="lazy"
-                  className={n.imageType === "logo"
-                    ? "object-contain max-h-full max-w-full p-6 group-hover:scale-105 transition-transform duration-500"
-                    : "w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"}
+                  kind={n.imageType === "logo" ? "organization" : "individual"}
+                  shape="square"
+                  className="group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="p-4">

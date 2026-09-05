@@ -26,6 +26,7 @@ import { buildCatalogue } from "@/lib/directory/buildCatalogue";
 import { subcategoryFamilySlug } from "@/config/directory/catalogueTaxonomy";
 import { AFRICA_REGIONS } from "@/config/regions/africaRegions";
 import { toast } from "@/hooks/use-toast";
+import { NomineeAvatar } from "@/components/nominees/NomineeAvatar";
 
 const PAGE_SIZE = 24;
 const CANONICAL = "https://nesa.africa/nominees/catalogue";
@@ -511,15 +512,14 @@ export default function CatalogueIndexPage() {
                           className="flex flex-col rounded-xl border border-gold/20 bg-charcoal-light/40 p-3 transition-colors hover:border-gold/50"
                         >
                           <div className="flex gap-3">
-                            <img
-                              src={n.photoUrl}
-                              alt={n.name}
-                              loading="lazy"
-                              decoding="async"
-                              className={`h-16 w-16 shrink-0 rounded-lg border border-gold/20 bg-charcoal ${
-                                n.imageType === "logo" ? "object-contain p-1" : "object-cover"
-                              }`}
-                            />
+                            <div className="h-16 w-16 shrink-0 overflow-hidden rounded-lg border border-gold/20">
+                              <NomineeAvatar
+                                name={n.name}
+                                src={n.photoUrl}
+                                kind={n.imageType === "logo" ? "organization" : "individual"}
+                                context={n.country || undefined}
+                              />
+                            </div>
                             <div className="min-w-0">
                               <Link to={`/nominees/${n.slug}`} className="block truncate font-medium text-foreground/95 hover:text-gold">
                                 {n.name}
