@@ -147,3 +147,28 @@ export function featuredSummary(n: CategoryNomineeRow): string {
       .find((v) => v && v.length > 20) ?? ""
   );
 }
+
+/**
+ * Editorially featured nominees for a category. Featuring is a deliberate
+ * media-desk decision stored in `nominee_editorial_features`; it is entirely
+ * separate from nomination approval, NRC verification, judging and results.
+ */
+export function useEditorialFeatured(categorySlug: string, enabled = true) {
+  return useQuery({
+    enabled: enabled && Boolean(categorySlug),
+    queryKey: ["editorial-featured", categorySlug],
+    staleTime: 1000 * 60 * 5,
+    queryFn: async (): Promise<string[]> => {
+      const { data, error } = await supabase
+        .from("nominee_editorial_features")
+        .select("nominee_id")
+        .eq("is_featured", true)
+        .eq("category_slug", categorySlug);
+      if (error) {
+        console.warn("[editorial-featured] read failed:", error.message);
+        return [];
+      }
+      return (data ?? []).map((r) => r.nominee_id as string);
+    },
+  });
+}
