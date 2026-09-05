@@ -130,7 +130,7 @@ export default function AfricaEducationIcon() {
         />
         <link rel="canonical" href={PAGE_URL} />
         <meta property="og:title" content="Africa Education Icon Award 2026 · NESA-Africa" />
-        <meta property="og:description" content="Recognising the Enablers of Education for All Across Africa. Public nominations open 6 September 2026." />
+        <meta property="og:description" content="Recognising Africa's Education Enablers. Public nominations open 6 September 2026." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={PAGE_URL} />
         <meta name="twitter:card" content="summary_large_image" />
@@ -154,7 +154,7 @@ export default function AfricaEducationIcon() {
           </h1>
           <p className="mt-2 text-gold text-lg font-medium">2006–2026</p>
           <p className="mt-3 text-white/85 max-w-2xl mx-auto italic">
-            Recognising the Enablers of Education for All Across Africa
+            Recognising Africa's Education Enablers
           </p>
           <p className="mt-4 text-white/70 max-w-3xl mx-auto text-sm md:text-base leading-relaxed">
             Three Lifetime Pathways · Three Classifications · Nine Laureates. The Africa Education

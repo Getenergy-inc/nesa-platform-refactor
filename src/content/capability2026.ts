@@ -7,7 +7,7 @@ export const POSITIONING = {
   name: "NESA-Africa 2026",
   fullMeaning: "New Education Standard Award Africa",
   positioning: "Africa's Education Recognition & Impact Platform",
-  mandate: "Recognising the Enablers of Education for All Across Africa",
+  mandate: "Recognising Africa's Education Enablers",
   theme: "The African Blue-Garnet Awards for Africa's Education Enablers",
   flagshipEvent: "Gold-Blue Garnet Awards Gala",
   date: "13 December 2026",
@@ -21,7 +21,7 @@ export const POSITIONING = {
 export const HERO_COPY = {
   headline: "NESA-Africa 2026",
   subhead: "Africa's Education Recognition & Impact Platform",
-  tagline: "Recognising the Enablers of Education for All Across Africa",
+  tagline: "Recognising Africa's Education Enablers",
   body: [
     "NESA-Africa — the New Education Standard Award Africa — is a continental education recognition and impact platform created to identify, verify, recognise, celebrate, connect and support the people, organisations and institutions enabling Education for All across Africa.",
     "An initiative of Santos Creations Educational Foundation, NESA-Africa 2026 brings together Education Enablers, corporate organisations, philanthropists, governments, development partners, universities, faith-based organisations, media platforms, digital creators, diaspora Africans and Friends of Africa.",
@@ -83,7 +83,7 @@ export const CORE_IDENTITY = [
   { label: "Full Meaning", value: "New Education Standard Award Africa" },
   { label: "Theme", value: "The African Blue-Garnet Awards for Africa's Education Enablers" },
   { label: "Positioning", value: "Africa's Education Recognition & Impact Platform" },
-  { label: "Core Mandate", value: "Recognising the Enablers of Education for All Across Africa" },
+  { label: "Core Mandate", value: "Recognising Africa's Education Enablers" },
   { label: "Flagship Event", value: "Gold-Blue Garnet Awards Gala" },
   { label: "Date", value: "13 December 2026" },
   { label: "Location", value: "Lagos, Nigeria" },

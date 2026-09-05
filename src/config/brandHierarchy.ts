@@ -30,7 +30,7 @@ export const BRAND = {
   platformLong: "New Education Standard Award Africa",
   /** Umbrella programme. */
   programme: "The African Blue-Garnet Awards for Africa's Education Enablers",
-  programmeTagline: "Recognising the Enablers of Education for All Across Africa",
+  programmeTagline: "Recognising Africa's Education Enablers",
   /** Flagship lifetime recognition. */
   flagship: "Africa Education Icon Award",
   flagshipTagline:

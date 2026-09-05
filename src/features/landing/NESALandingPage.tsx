@@ -82,7 +82,7 @@ export function NESALandingPage() {
         )}
         description={t(
           "seo.landing.description",
-          "Recognising the Enablers of Education for All Across Africa. Nominations open 6 September 2026 across 4 tiers, 22 categories and 96 subcategories.",
+          "Recognising Africa's Education Enablers. Nominations open 6 September 2026 across 4 tiers, 22 categories and 96 subcategories.",
         )}
         ogTitle={t("seo.landing.ogTitle", "NESA-Africa 2026 — A Continent in Recognition")}
         ogDescription={t(

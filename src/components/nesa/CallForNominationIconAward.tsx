@@ -232,7 +232,7 @@ export function CallForNominationIconAward() {
             for Education
           </h2>
           <p className="mx-auto mt-3 max-w-3xl text-base text-gold/90 sm:text-lg">
-            Africa&apos;s Education Recognition &amp; Impact Platform — Recognising the Enablers of Education for All Across Africa.
+            Africa&apos;s Education Recognition &amp; Impact Platform — Recognising Africa's Education Enablers.
           </p>
         </motion.div>
 

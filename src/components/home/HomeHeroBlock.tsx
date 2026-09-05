@@ -17,7 +17,7 @@ export function HomeHeroBlock() {
       <HeroCompact
         eyebrow="NESA-Africa 2026 · Recognition Edition"
         title="Africa's Education Recognition & Impact Platform"
-        lede="Recognising the Enablers of Education for All Across Africa — across 8 regions and the African Diaspora, four recognition tiers, and verified profiles built to attract partnerships, funding, and intervention."
+        lede="Recognising Africa's Education Enablers — across 8 regions and the African Diaspora, four recognition tiers, and verified profiles built to attract partnerships, funding, and intervention."
         primary={{
           label: "Nominate an Education Enabler",
           href: "/nominate",
