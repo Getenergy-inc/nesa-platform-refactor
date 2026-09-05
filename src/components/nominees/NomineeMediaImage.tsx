@@ -17,15 +17,18 @@ interface Props {
   label?: string;
   size?: "sm" | "md";
   className?: string;
+  /** Optional themed fallback (dark surfaces pass their own initials avatar). */
+  fallback?: React.ReactNode;
 }
 
-export function NomineeMediaImage({ media, name, label, size = "md", className }: Props) {
+export function NomineeMediaImage({ media, name, label, size = "md", className, fallback }: Props) {
   const [failed, setFailed] = useState(false);
   useEffect(() => setFailed(false), [media.url]);
 
   if (!media.url || failed) {
-    return <LightInitialsAvatar name={name} label={label} size={size} />;
+    return <>{fallback ?? <LightInitialsAvatar name={name} label={label} size={size} />}</>;
   }
+
 
   return (
     <img
