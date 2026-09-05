@@ -70,6 +70,8 @@ export function CategoryNomineeDashboard({
   const [activeSub, setActiveSub] = useState<string>("all");
   const [query, setQuery] = useState("");
   const [formOpen, setFormOpen] = useState(false);
+  const { resolve } = useNomineeMediaResolver();
+
 
   const { data, isLoading } = useQuery({
     queryKey: ["category-nominee-dashboard", categorySlug],
