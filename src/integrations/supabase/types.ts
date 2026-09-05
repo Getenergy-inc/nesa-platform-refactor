@@ -5508,6 +5508,67 @@ export type Database = {
           },
         ]
       }
+      nominee_editorial_features: {
+        Row: {
+          category_slug: string | null
+          created_at: string
+          editorial_note: string | null
+          id: string
+          is_featured: boolean
+          nominee_id: string
+          selected_at: string
+          selected_by: string | null
+          subcategory_slug: string | null
+          updated_at: string
+        }
+        Insert: {
+          category_slug?: string | null
+          created_at?: string
+          editorial_note?: string | null
+          id?: string
+          is_featured?: boolean
+          nominee_id: string
+          selected_at?: string
+          selected_by?: string | null
+          subcategory_slug?: string | null
+          updated_at?: string
+        }
+        Update: {
+          category_slug?: string | null
+          created_at?: string
+          editorial_note?: string | null
+          id?: string
+          is_featured?: boolean
+          nominee_id?: string
+          selected_at?: string
+          selected_by?: string | null
+          subcategory_slug?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nominee_editorial_features_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominee_editorial_features_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominee_editorial_features_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+        ]
+      }
       nominee_enrichments: {
         Row: {
           approved_at: string | null
@@ -5702,6 +5763,109 @@ export type Database = {
           verified?: boolean
         }
         Relationships: []
+      }
+      nominee_media_sourcing: {
+        Row: {
+          approved_asset_url: string | null
+          approved_for_public: boolean
+          attribution: string | null
+          candidate_image_url: string | null
+          confidence: number | null
+          created_at: string
+          date_checked: string | null
+          entity_type: string
+          id: string
+          media_kind: Database["public"]["Enums"]["nominee_media_kind"]
+          media_status: Database["public"]["Enums"]["nominee_media_status"]
+          nominee_id: string
+          nominee_name: string
+          nominee_slug: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          source_domain: string | null
+          source_type: string | null
+          source_url: string | null
+          storage_path: string | null
+          submitted_by_nominee: boolean
+          updated_at: string
+          usage_confirmed: boolean
+          verification_note: string | null
+        }
+        Insert: {
+          approved_asset_url?: string | null
+          approved_for_public?: boolean
+          attribution?: string | null
+          candidate_image_url?: string | null
+          confidence?: number | null
+          created_at?: string
+          date_checked?: string | null
+          entity_type?: string
+          id?: string
+          media_kind?: Database["public"]["Enums"]["nominee_media_kind"]
+          media_status?: Database["public"]["Enums"]["nominee_media_status"]
+          nominee_id: string
+          nominee_name: string
+          nominee_slug?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          source_domain?: string | null
+          source_type?: string | null
+          source_url?: string | null
+          storage_path?: string | null
+          submitted_by_nominee?: boolean
+          updated_at?: string
+          usage_confirmed?: boolean
+          verification_note?: string | null
+        }
+        Update: {
+          approved_asset_url?: string | null
+          approved_for_public?: boolean
+          attribution?: string | null
+          candidate_image_url?: string | null
+          confidence?: number | null
+          created_at?: string
+          date_checked?: string | null
+          entity_type?: string
+          id?: string
+          media_kind?: Database["public"]["Enums"]["nominee_media_kind"]
+          media_status?: Database["public"]["Enums"]["nominee_media_status"]
+          nominee_id?: string
+          nominee_name?: string
+          nominee_slug?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          source_domain?: string | null
+          source_type?: string | null
+          source_url?: string | null
+          storage_path?: string | null
+          submitted_by_nominee?: boolean
+          updated_at?: string
+          usage_confirmed?: boolean
+          verification_note?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nominee_media_sourcing_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: true
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominee_media_sourcing_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: true
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominee_media_sourcing_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: true
+            referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+        ]
       }
       nominee_pathway_assignments: {
         Row: {
@@ -6059,6 +6223,76 @@ export type Database = {
           },
           {
             foreignKeyName: "nominee_support_messages_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+        ]
+      }
+      nominee_website_candidates: {
+        Row: {
+          candidate_domain: string
+          candidate_url: string
+          confidence: number
+          created_at: string
+          discovery_method: string | null
+          id: string
+          nominee_id: string
+          nominee_name: string
+          rejection_reason: string | null
+          review_status: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          updated_at: string
+        }
+        Insert: {
+          candidate_domain: string
+          candidate_url: string
+          confidence?: number
+          created_at?: string
+          discovery_method?: string | null
+          id?: string
+          nominee_id: string
+          nominee_name: string
+          rejection_reason?: string | null
+          review_status?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          updated_at?: string
+        }
+        Update: {
+          candidate_domain?: string
+          candidate_url?: string
+          confidence?: number
+          created_at?: string
+          discovery_method?: string | null
+          id?: string
+          nominee_id?: string
+          nominee_name?: string
+          rejection_reason?: string | null
+          review_status?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nominee_website_candidates_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominee_website_candidates_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "public_nominees"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nominee_website_candidates_nominee_id_fkey"
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
@@ -13216,6 +13450,15 @@ export type Database = {
         | "approved"
         | "rejected"
         | "platinum"
+      nominee_media_kind: "logo" | "portrait" | "fallback"
+      nominee_media_status:
+        | "missing"
+        | "candidate_found"
+        | "verification_required"
+        | "verified"
+        | "rejected"
+        | "manually_approved"
+        | "fallback"
       nominee_profile_status: "incomplete" | "partial" | "complete"
       nominee_publication_status:
         | "draft"
@@ -13635,6 +13878,16 @@ export const Constants = {
         "approved",
         "rejected",
         "platinum",
+      ],
+      nominee_media_kind: ["logo", "portrait", "fallback"],
+      nominee_media_status: [
+        "missing",
+        "candidate_found",
+        "verification_required",
+        "verified",
+        "rejected",
+        "manually_approved",
+        "fallback",
       ],
       nominee_profile_status: ["incomplete", "partial", "complete"],
       nominee_publication_status: [
