@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import nesaStamp from "@/assets/nesa-stamp.jpeg";
 import { trackNav } from "@/lib/analytics";
+import { BRAND } from "@/config/brandHierarchy";
 
 const socialLinks = [
   { icon: Twitter, href: "https://twitter.com/nesaafrica", label: "Twitter" },
@@ -126,10 +127,16 @@ export function NESAFooter() {
                   NESA-Africa 2026
                 </span>
                 <span className="text-[10px] text-white/60 italic">
-                  Africa's Education Recognition &amp; Impact Platform
+                  {BRAND.programme}
                 </span>
               </div>
             </div>
+            <p className="font-display text-sm md:text-base text-gold mb-2">
+              {BRAND.programmeTagline}
+            </p>
+            <p className="text-white/70 text-xs md:text-sm italic mb-4">
+              {BRAND.closingLine}
+            </p>
             <p className="text-white/65 text-xs md:text-sm leading-relaxed mb-4 max-w-sm">
               Enablers of Education for All across Africa — by Africans in
               Africa, Diaspora Africans, and Friends of Africa (individuals,

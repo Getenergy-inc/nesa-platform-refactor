@@ -31,6 +31,8 @@ export const BRAND = {
   /** Umbrella programme. */
   programme: "The African Blue-Garnet Awards for Africa's Education Enablers",
   programmeTagline: "Recognising Africa's Education Enablers",
+  /** Canonical closing line — must match the EduAid-Africa webinar phrasing verbatim. */
+  closingLine: "Africa sees you. Africa appreciates you. Africa says thank you.",
   /** Flagship lifetime recognition. */
   flagship: "Africa Education Icon Award",
   flagshipTagline:
