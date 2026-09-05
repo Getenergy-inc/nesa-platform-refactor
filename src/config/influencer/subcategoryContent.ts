@@ -75,10 +75,10 @@ export const INFLUENCER_SUBCATEGORIES: Record<
     supportingStatement:
       "Recognising creators, podcasters, bloggers and digital advocates using digital platforms to advance learning, literacy, mentorship, scholarships, school support and public understanding of education.",
     intro: [
-      "Digital influence can do more than attract attention. It can help a learner find a scholarship, connect a school to support, explain complex ideas, mobilise resources and inspire young people to remain in education.",
+      "Influence With Purpose. Recognising African voices using influence, visibility and public platforms to enable education — digital influence can help a learner find a scholarship, connect a school to support, explain complex ideas, mobilise resources and inspire young people to remain in education.",
       "This subcategory honours African and diaspora-based digital voices whose verified work has created measurable education impact.",
     ],
-    nominateCta: "Nominate a Social Media Education Enabler",
+    nominateCta: "Nominate an Education Impact Influencer",
     quickInfo: [
       {
         label: "Nominee type",
@@ -282,10 +282,10 @@ export const INFLUENCER_SUBCATEGORIES: Record<
     supportingStatement:
       "Recognising athletes, coaches, academies and sports leaders using the power of sport to fund learning, strengthen schools, mentor young people and expand education opportunity.",
     intro: [
-      "Sport can inspire discipline, confidence and leadership, but its impact becomes even greater when sporting influence is used to keep young people in school, finance scholarships, improve learning facilities and connect talent to education.",
+      "Influence With Purpose. Recognising African voices using influence, visibility and public platforms to enable education — sporting influence can keep young people in school, finance scholarships, improve learning facilities and connect talent to education.",
       "This subcategory honours African and diaspora sports figures whose verified education contribution extends beyond sporting achievement.",
     ],
-    nominateCta: "Nominate a Sports Education Enabler",
+    nominateCta: "Nominate an Education Impact Influencer",
     quickInfo: [
       {
         label: "Nominee type",
@@ -489,10 +489,10 @@ export const INFLUENCER_SUBCATEGORIES: Record<
     supportingStatement:
       "Recognising musicians, recording artists, producers and music-industry leaders using their voices, resources and creative platforms to expand access to education.",
     intro: [
-      "Music reaches people across borders, languages and generations. When that influence is directed toward scholarships, school support, literacy, mentorship and youth development, it becomes a powerful force for education.",
+      "Influence With Purpose. Recognising African voices using influence, visibility and public platforms to enable education — when music's reach is directed toward scholarships, school support, literacy, mentorship and youth development, it becomes a powerful force for education.",
       "This subcategory honours African and diaspora music figures whose verified education contributions have created meaningful and measurable opportunity.",
     ],
-    nominateCta: "Nominate a Music Education Enabler",
+    nominateCta: "Nominate an Education Impact Influencer",
     quickInfo: [
       {
         label: "Nominee type",
