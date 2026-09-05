@@ -1,11 +1,13 @@
 import { cn } from "@/lib/utils";
 import { forwardRef } from "react";
 import nesaStamp from "@/assets/nesa-stamp.jpeg";
+import { BRAND } from "@/config/brandHierarchy";
 
 interface NESALogoProps {
   className?: string;
-  variant?: "full" | "icon" | "stamp";
+  variant?: "full" | "icon" | "stamp" | "header";
   size?: "sm" | "md" | "lg";
+  showTagline?: boolean;
 }
 
 /**
