@@ -194,7 +194,7 @@ export default function NomineesHubPage() {
               </div>
 
               <div className="ed-kicker" style={{ marginTop: 18 }}>
-                Recognising Africa's Education Enablers
+                Recognising Africa’s Education Enablers
               </div>
 
               <h1 id="dir-heading" className="ed-dir-title">

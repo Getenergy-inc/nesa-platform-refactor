@@ -23,7 +23,7 @@ export default function ParticipatePage() {
       <LocalizedSEO
         pathname="/participate"
         title={`Participate | ${BRAND.platform} 2026`}
-        description="Nominate, sponsor, partner, endorse, volunteer, join a chapter or support Africa's Education Enablers."
+        description="Nominate, sponsor, partner, endorse, volunteer, join a chapter or support Africa’s Education Enablers."
       />
 
       <header className="border-b border-gold/15 py-14 md:py-20">

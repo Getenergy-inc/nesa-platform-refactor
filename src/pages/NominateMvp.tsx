@@ -290,7 +290,7 @@ export default function NominateMvp() {
   return (
     <>
       <Helmet>
-        <title>Nominate — NESA-Africa 2026 | The African Blue-Garnet Awards for Africa's Education Enablers</title>
+        <title>Nominate — NESA-Africa 2026 | The African Blue-Garnet Awards for Africa’s Education Enablers</title>
         <meta
           name="description"
           content="Nominate education changemakers, institutions, NGOs, CSR contributors, creators and policymakers for NESA-Africa 2026 through official category Google Forms."

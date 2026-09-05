@@ -1,4 +1,4 @@
-// Homepage — "Meet Africa's Education Enablers" living gallery.
+// Homepage — "Meet Africa’s Education Enablers" living gallery.
 //
 // Source of truth: the Africa Education Icon Award nominee dataset
 // (`bySubcategory` from @/data/iconAward), merged across ALL THREE Icon

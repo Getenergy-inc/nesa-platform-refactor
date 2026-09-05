@@ -157,7 +157,7 @@ const GOLD_BLUE_GARNET: AwardPageContent = {
   canonicalPath: "/awards/blue-garnet",
   seoTitle: "Blue Garnet Award 2026 — Recognition & Qualification Edition | NESA-Africa",
   metaDescription:
-    "The Blue Garnet Award 2026 is a Continental Recognition Edition — identifying, verifying and celebrating Africa's Education Enablers while laying the foundation for the competitive Blue Garnet Award 2027.",
+    "The Blue Garnet Award 2026 is a Continental Recognition Edition — identifying, verifying and celebrating Africa’s Education Enablers while laying the foundation for the competitive Blue Garnet Award 2027.",
   hero: {
     badge: "2026 Recognition & Qualification Edition · No Public Voting",
     title: "Blue Garnet Award",

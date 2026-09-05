@@ -44,7 +44,7 @@ export const DEFAULT_SEASON_CONFIG: SeasonConfig = {
       name: "NESA-Africa 2025",
       displayYear: 2025,
       ceremonyYear: 2026,
-      tagline: "Honouring Africa's Education Enablers",
+      tagline: "Honouring Africa’s Education Enablers",
       theme: "Building the Future of Education",
       nominationsOpen: "2025-01-15",
       nominationsClose: "2025-06-30",

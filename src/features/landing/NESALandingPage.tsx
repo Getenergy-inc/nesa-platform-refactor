@@ -3,7 +3,7 @@
 // Section order:
 //   1.  Editorial hero (Icon Award lead, 6 certificate pills, dual CTA, trophy card)
 //   2.  Public nominations notice (6 September 2026) + compact Icon key-dates ticker
-//   3.  Meet Africa's Education Enablers — living gallery (database-driven)
+//   3.  Meet Africa’s Education Enablers — living gallery (database-driven)
 //   4.  Africa Education Icon flagship + three pathway cards (ONE Icon moment)
 //   5.  Icon scale stats (live)
 //   6.  Six recognition pathways
@@ -78,16 +78,16 @@ export function NESALandingPage() {
         pathname="/"
         title={t(
           "seo.landing.title",
-          "NESA-Africa 2026 | The African Blue-Garnet Awards for Africa's Education Enablers",
+          "NESA-Africa 2026 | The African Blue-Garnet Awards for Africa’s Education Enablers",
         )}
         description={t(
           "seo.landing.description",
-          "Recognising Africa's Education Enablers. Nominations open 6 September 2026 across 4 tiers, 22 categories and 96 subcategories.",
+          "Recognising Africa’s Education Enablers. Nominations open 6 September 2026 across 4 tiers, 22 categories and 96 subcategories.",
         )}
         ogTitle={t("seo.landing.ogTitle", "NESA-Africa 2026 — A Continent in Recognition")}
         ogDescription={t(
           "seo.landing.ogDescription",
-          "The African Blue-Garnet Awards for Africa's Education Enablers. Recognition → Visibility → Partnerships → Funding → Intervention → Legacy.",
+          "The African Blue-Garnet Awards for Africa’s Education Enablers. Recognition → Visibility → Partnerships → Funding → Intervention → Legacy.",
         )}
         keywords={t("seo.landing.keywords", "")}
       />
@@ -113,7 +113,7 @@ export function NESALandingPage() {
         {/* 3b. AWARD PLAQUE + LOGO MOTION GRAPHIC */}
         <AwardPlaqueMotionSection />
 
-        {/* 4. LIVING GALLERY — Meet Africa's Education Enablers */}
+        {/* 4. LIVING GALLERY — Meet Africa’s Education Enablers */}
         <LivingGallerySection />
 
 
