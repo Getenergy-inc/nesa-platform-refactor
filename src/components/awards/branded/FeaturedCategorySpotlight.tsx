@@ -11,11 +11,13 @@ import { Link } from "react-router-dom";
 import { BadgeCheck, ShieldQuestion, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { NomineeImageOrInitials } from "./LightInitialsAvatar";
+import { NomineeMediaImage } from "@/components/nominees/NomineeMediaImage";
+import { useNomineeMediaResolver } from "@/hooks/useNomineeMediaSourcing";
+import { buildSuppressedUrlSet } from "@/lib/nomineeMediaResolver";
 import {
   featuredSummary,
-  nomineeImage,
   selectFeaturedNominees,
+  useEditorialFeatured,
   SPOTLIGHT_EXCLUDED_CATEGORY_SLUGS,
   useCategoryNominees,
 } from "./categoryNomineeData";
@@ -29,6 +31,8 @@ interface Props {
 export function FeaturedCategorySpotlight({ categorySlug, className }: Props) {
   const excluded = SPOTLIGHT_EXCLUDED_CATEGORY_SLUGS.has(categorySlug);
   const { data, isLoading } = useCategoryNominees(categorySlug, !excluded);
+  const { data: editorialIds } = useEditorialFeatured(categorySlug, !excluded);
+  const { resolve } = useNomineeMediaResolver();
 
   if (excluded) return null;
 
@@ -47,7 +51,13 @@ export function FeaturedCategorySpotlight({ categorySlug, className }: Props) {
     );
   }
 
-  const featured = selectFeaturedNominees(data?.nominees ?? []);
+  const rows = data?.nominees ?? [];
+  const suppressedUrls = buildSuppressedUrlSet(rows);
+  const editorialPicks = editorialIds?.length
+    ? rows.filter((n) => editorialIds.includes(n.id)).slice(0, 3)
+    : [];
+  const featured = editorialPicks.length ? editorialPicks : selectFeaturedNominees(rows);
+  const editorial = editorialPicks.length > 0;
   if (!data || featured.length === 0) return null;
 
   return (
@@ -67,21 +77,21 @@ export function FeaturedCategorySpotlight({ categorySlug, className }: Props) {
           Spotlight — {data.category.name}
         </h2>
         <p className="mt-2 max-w-3xl text-sm md:text-base text-muted-foreground">
-          Selected automatically from the public register: nominees with a verified
-          photograph on file, a substantially complete profile, and a documented
-          impact record. Selection is data-derived, not an award decision.
+          {editorial
+            ? "Editorially selected by the NESA-Africa media desk. Featuring is an editorial decision only — it carries no ranking, judging preference, scoring weight or award outcome."
+            : "Derived from the public register: nominees with a verified image on file, a substantially complete profile and a documented impact record. Data-derived, not an award decision."}
         </p>
 
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((n) => {
-            const img = nomineeImage(n);
+            const media = resolve(n, { suppressedUrls });
             const sub = data.subs.find((s) => s.id === n.subcategory_id);
             const summary = featuredSummary(n);
             const card = (
               <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-gold/50">
                 <div className="aspect-[4/3] w-full overflow-hidden bg-muted">
-                  <NomineeImageOrInitials
-                    src={img}
+                  <NomineeMediaImage
+                    media={media}
                     name={n.name}
                     label={sub?.name}
                     className="transition-transform duration-500 group-hover:scale-[1.03]"

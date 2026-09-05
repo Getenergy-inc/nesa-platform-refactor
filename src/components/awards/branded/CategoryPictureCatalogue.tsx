@@ -25,9 +25,10 @@ import { GoogleFormDisplay } from "@/components/nominate/GoogleFormDisplay";
 import { NativeCategoryNominationForm } from "@/components/awards/NativeCategoryNominationForm";
 import { resolveAwardForm } from "@/config/nomination/resolveAwardForm";
 import { getCategoryDisplayName } from "@/config/categoryDisplayBrand";
-import { NomineeImageOrInitials } from "./LightInitialsAvatar";
+import { NomineeMediaImage } from "@/components/nominees/NomineeMediaImage";
+import { useNomineeMediaResolver } from "@/hooks/useNomineeMediaSourcing";
+import { buildSuppressedUrlSet } from "@/lib/nomineeMediaResolver";
 import {
-  nomineeImage,
   useCategoryNominees,
   type CategoryNomineeRow,
 } from "./categoryNomineeData";
@@ -52,6 +53,11 @@ export function CategoryPictureCatalogue({
   const [formOpen, setFormOpen] = useState(false);
 
   const { data, isLoading } = useCategoryNominees(categorySlug);
+  const { resolve } = useNomineeMediaResolver();
+  const suppressedUrls = useMemo(
+    () => buildSuppressedUrlSet(data?.nominees ?? []),
+    [data],
+  );
 
   const counts = useMemo(() => {
     const map = new Map<string, number>();
@@ -241,13 +247,13 @@ export function CategoryPictureCatalogue({
                 </div>
                 <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
                   {rows.map((n) => {
-                    const img = nomineeImage(n);
                     const sub = data.subs.find((s) => s.id === n.subcategory_id);
+                    const media = resolve(n, { suppressedUrls });
                     const card = (
                       <div className="group h-full overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-gold/50">
                         <div className="aspect-[4/3] w-full overflow-hidden bg-muted">
-                          <NomineeImageOrInitials
-                            src={img}
+                          <NomineeMediaImage
+                            media={media}
                             name={n.name}
                             label={sub?.name}
                             size="sm"
