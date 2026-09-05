@@ -1514,6 +1514,11 @@ const App = () => (
                     element={<NomineeAccept />}
                   />
                   <Route
+                    path="/nominee/media/:token"
+                    element={<NomineeMediaSubmission />}
+                  />
+
+                  <Route
                     path="/nominee/decline/:token"
                     element={<NomineeDecline />}
                   />
