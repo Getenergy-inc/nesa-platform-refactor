@@ -451,6 +451,9 @@ import YouTubePipeline from "./pages/admin/YouTubePipeline";
 import AdminVolunteersCMS from "./pages/admin/AdminVolunteersCMS";
 import AdminRecruitmentTracker from "./pages/admin/AdminRecruitmentTracker";
 import AdminNGOReviewQueue from "./pages/admin/AdminNGOReviewQueue";
+import AdminNomineeMedia from "./pages/admin/AdminNomineeMedia";
+import NomineeMediaSubmission from "./pages/nominee/NomineeMediaSubmission";
+
 
 // Optimized QueryClient with caching strategy
 const queryClient = new QueryClient({
