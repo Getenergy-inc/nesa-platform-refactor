@@ -29,6 +29,9 @@ import { StageGate } from "@/components/StageGate";
 import { GoogleFormDisplay } from "@/components/nominate/GoogleFormDisplay";
 import { NativeCategoryNominationForm } from "@/components/awards/NativeCategoryNominationForm";
 import { InitialsAvatar } from "@/components/influencer-impact/InitialsAvatar";
+import { NomineeMediaImage } from "@/components/nominees/NomineeMediaImage";
+import { useNomineeMediaResolver } from "@/hooks/useNomineeMediaSourcing";
+
 import { resolveAwardForm } from "@/config/nomination/resolveAwardForm";
 import { getCategoryDisplayName } from "@/config/categoryDisplayBrand";
 import { cn } from "@/lib/utils";
