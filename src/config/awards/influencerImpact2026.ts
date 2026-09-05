@@ -302,7 +302,7 @@ export const CATEGORIES: CategoryConfig[] = [
       "primary_social_media_platform",
       "content_impact_area",
     ],
-    ctaLabel: "Explore Social Media Nominees",
+    ctaLabel: "Meet the Social Media Education Enablers",
     accent: "from-sky-500/30 to-gold/10",
   },
   {
@@ -316,7 +316,7 @@ export const CATEGORIES: CategoryConfig[] = [
     impactFieldLabel: "Sports-for-Education Impact Area",
     impactFieldOptions: SPORTS_IMPACT_AREAS,
     classificationFields: ["primary_sport_area", "sports_education_impact_area"],
-    ctaLabel: "Explore Sports Nominees",
+    ctaLabel: "Meet the Sports Education Enablers",
     accent: "from-amber-500/30 to-gold/10",
   },
   {
@@ -330,7 +330,7 @@ export const CATEGORIES: CategoryConfig[] = [
     impactFieldLabel: "Music-for-Education Impact Area",
     impactFieldOptions: MUSIC_IMPACT_AREAS,
     classificationFields: ["music_genre", "music_education_impact_area"],
-    ctaLabel: "Explore Music Nominees",
+    ctaLabel: "Meet the Music Education Enablers",
     accent: "from-rose-500/30 to-gold/10",
   },
 ];

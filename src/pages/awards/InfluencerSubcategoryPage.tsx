@@ -231,7 +231,7 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
         stats={heroStats}
         primaryCta={{ label: content.nominateCta, href: "#nomination-form" }}
         secondaryCta={{
-          label: "Explore Existing Nominees",
+          label: "Meet the Education Impact Influencers",
           href: "#existing-nominees",
         }}
         trustLine="NRC impact verification · Governance approval · No public voting in 2026"
