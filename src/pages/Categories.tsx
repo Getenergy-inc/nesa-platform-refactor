@@ -261,7 +261,7 @@ export default function Categories() {
                 </Link>
               </Button>
               <Button size="lg" variant="outline" className="border-gold/30 text-gold hover:bg-gold/10 rounded-full" asChild>
-                <Link to="/nominees">View Nominees</Link>
+                <Link to="/nominees">Meet Africa's Education Enablers</Link>
               </Button>
             </div>
           </div>
