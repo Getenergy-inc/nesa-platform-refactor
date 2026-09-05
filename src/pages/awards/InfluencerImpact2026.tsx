@@ -339,7 +339,7 @@ export default function InfluencerImpact2026() {
               }
             >
               <Link to={DIRECTORY_ROUTE}>
-                View All Existing Nominees <ArrowRight className="ml-2 h-4 w-4" />
+                Meet the Education Impact Influencers <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>
@@ -373,7 +373,7 @@ export default function InfluencerImpact2026() {
               variant="ghost"
               className="text-white/80 hover:bg-white/5 hover:text-gold"
             >
-              <Link to={DIRECTORY_ROUTE}>Explore Existing Nominees</Link>
+              <Link to={DIRECTORY_ROUTE}>Meet the Education Impact Influencers</Link>
             </Button>
           </div>
         </div>

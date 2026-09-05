@@ -169,7 +169,7 @@ export default function EighteenCategoriesPage() {
               <Link to="/nominate?tier=gold-blue-garnet">Start a Nomination</Link>
             </Button>
             <Button asChild variant="outline" className="border-ivory/30 text-ivory hover:bg-ivory/10 rounded-full px-6">
-              <Link to="/nominees">Browse Existing Nominees</Link>
+              <Link to="/nominees">Meet Africa's Education Enablers</Link>
             </Button>
           </div>
         </div>

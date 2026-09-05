@@ -327,7 +327,7 @@ export default function CategoryMasterIndex() {
           <div className="mt-8">
             <ExistingNomineesInline
               limit={9}
-              title="Explore Existing Nominees"
+              title="Meet Africa's Education Enablers"
               subtitle="A snapshot of approved nominees recognised across all categories."
             />
           </div>

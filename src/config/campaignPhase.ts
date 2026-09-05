@@ -21,7 +21,7 @@ export const PHASE_MAP: Record<CampaignPhase, PhaseConfig> = {
     phase: "nomination",
     primary: { label: "Nominate an Education Enabler", href: "/nominate", analyticsId: "nominate_now" },
     secondary: {
-      label: "Explore Nominees",
+      label: "Meet Africa's Education Enablers",
       href: "/nominees",
       analyticsId: "explore_nominees",
     },

@@ -32,7 +32,7 @@ export function DirectoryStatsSection() {
 
         <div className="text-center">
           <Link to="/nominees" className="ed-btn-primary">
-            Explore the Directory →
+            Meet Africa's Education Enablers →
           </Link>
         </div>
 

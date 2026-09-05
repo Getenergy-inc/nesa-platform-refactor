@@ -193,7 +193,7 @@ export function LivingGallerySection() {
 
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <Link to="/nominees/africa-education-icon-award" className="ed-btn-ghost">
-                Explore Existing Nominees →
+                Meet Africa's Education Enablers →
               </Link>
               <Link to={ICON_AWARD_SECTION.awardHref} className="ed-btn-ghost">
                 {tagline} →

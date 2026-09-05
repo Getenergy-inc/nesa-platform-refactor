@@ -57,7 +57,7 @@ export default function RecognitionFamilyPage({ slugOverride }: { slugOverride?:
               to={`/nominees?family=${family.slug}`}
               className="inline-flex h-11 items-center rounded-md border border-gold/40 px-6 text-sm font-semibold text-gold hover:bg-gold/10"
             >
-              Explore Existing Nominees
+              Meet Africa's Education Enablers
             </Link>
           </div>
         </div>

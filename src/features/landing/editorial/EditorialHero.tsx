@@ -52,7 +52,7 @@ export function EditorialHero() {
               trackEvent("hero_cta_click", { slot: "secondary", href: "/nominees", surface: "home" })
             }
           >
-            Explore Existing Nominees →
+            Meet Africa's Education Enablers →
           </Link>
         </div>
       </div>

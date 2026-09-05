@@ -5,7 +5,7 @@
 // This is the Education Impact Certificate counterpart to the Africa Education
 // Icon Award flagship section (IconLifetimeSection). It deliberately reuses the
 // same editorial card template (`ed-card` / `ed-grid-3`), the same CTA pattern
-// (Nominate · Explore Existing Nominees · Explore pathway →) and the same
+// (Nominate · Meet Africa's Education Enablers · Explore pathway →) and the same
 // nominee data layer — the published `public_nominees` view, read through
 // `useFamilyBuckets`, strictly scoped per recognition family.
 //
@@ -91,7 +91,7 @@ export function RecognitionFamiliesSection() {
                     to={exploreHref}
                     className="inline-flex h-9 items-center rounded-full border border-gold/40 px-4 text-xs font-semibold text-gold transition-colors hover:bg-gold/10"
                   >
-                    Explore Existing Nominees
+                    Meet Africa's Education Enablers
                   </Link>
 
                   <Link

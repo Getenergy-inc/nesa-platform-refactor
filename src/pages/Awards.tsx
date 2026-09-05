@@ -615,10 +615,10 @@ export default function AwardsPage() {
                   <Link
                     to="/nominees"
                     onClick={() =>
-                      track("final_action", "Explore Existing Nominees", "/nominees")
+                      track("final_action", "Meet Africa's Education Enablers", "/nominees")
                     }
                   >
-                    Explore Existing Nominees
+                    Meet Africa's Education Enablers
                   </Link>
                 </Button>
                 <Button

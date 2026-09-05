@@ -488,7 +488,7 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
               className="border-gold/40 text-gold hover:bg-gold/10"
             >
               <Link to="/awards/influencer-education-impact/nominees">
-                Explore Existing Nominees
+                Meet Africa's Education Enablers
               </Link>
             </Button>
             <Button
