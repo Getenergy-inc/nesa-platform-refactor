@@ -59,7 +59,7 @@ export const NESALogo = forwardRef<HTMLDivElement, NESALogoProps>(
               className="h-full w-full object-contain rounded-full ring-1 ring-gold/40"
             />
           </div>
-          <div className="flex flex-col leading-tight min-w-0">
+          <div className="hidden sm:flex flex-col leading-tight min-w-0">
             <span className="font-playfair text-gold text-base lg:text-lg font-bold whitespace-nowrap">
               NESA-Africa
             </span>
