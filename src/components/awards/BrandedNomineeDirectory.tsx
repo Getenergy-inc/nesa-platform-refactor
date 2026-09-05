@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
+import { NomineeAvatar } from "@/components/nominees/NomineeAvatar";
 import { supabase } from "@/integrations/supabase/client";
 import { useNominees, type EnrichedDatabaseNominee } from "@/hooks/useNominees";
 
@@ -277,14 +278,13 @@ export function BrandedNomineeDirectory({
               >
                 <Link to={`/nominees/${n.slug}`} className="block">
                   <div className="relative aspect-[3/4] overflow-hidden">
-                    <img
+                    <NomineeAvatar
+                      name={n.name}
                       src={n.photoUrl}
-                      alt={n.name}
-                      loading="lazy"
-                      className={cn(
-                        "w-full h-full transition-transform duration-500 group-hover:scale-105",
-                        n.imageType === "logo" ? "object-contain p-4 bg-white/[0.04]" : "object-cover",
-                      )}
+                      kind={n.imageType === "logo" ? "organization" : "individual"}
+                      shape="square"
+                      context={n.country || undefined}
+                      className="transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/30 to-transparent" />
                     {n.isPlatinum && (

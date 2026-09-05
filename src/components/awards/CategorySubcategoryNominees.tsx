@@ -4,6 +4,7 @@ import { Users, ChevronRight, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import type { AwardCategoryForm } from "@/config/nomination/types";
+import { NomineeAvatar } from "@/components/nominees/NomineeAvatar";
 
 interface Props {
   form: AwardCategoryForm;
@@ -163,19 +164,13 @@ export function CategorySubcategoryNominees({ form }: Props) {
                             to={`/nominees/${n.slug}`}
                             className="flex items-center gap-3 rounded-lg border border-gold/15 bg-charcoal/40 p-2 hover:border-gold/40 hover:bg-charcoal/60 transition-colors"
                           >
-                            <div className="h-9 w-9 shrink-0 rounded-full bg-charcoal-light overflow-hidden border border-gold/20">
-                              {img ? (
-                                <img
-                                  src={img}
-                                  alt={n.name}
-                                  className="h-full w-full object-cover"
-                                  loading="lazy"
-                                />
-                              ) : (
-                                <div className="h-full w-full flex items-center justify-center text-gold/60 text-xs">
-                                  {n.name.charAt(0)}
-                                </div>
-                              )}
+                            <div className="h-9 w-9 shrink-0 rounded-full overflow-hidden border border-gold/20">
+                              <NomineeAvatar
+                                name={n.name}
+                                src={img}
+                                kind={n.logo_url && !n.photo_url ? "organization" : "individual"}
+                                shape="circle"
+                              />
                             </div>
                             <div className="min-w-0">
                               <p className="text-xs font-medium text-foreground/90 truncate">
