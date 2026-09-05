@@ -32,7 +32,7 @@ export default function SponsorHub() {
         <title>Sponsor NESA-Africa 2026 — Premium Partnership & CSR Ecosystem</title>
         <meta
           name="description"
-          content="Sponsor New Education Standard Award Africa (NESA-Africa) 2026 — &quot;The African Blue-Garnet Awards for Education.&quot; Align your brand with Africa's continental education recognition and impact platform: gala, awards, NESA-Africa TV, EduAid-Africa and Rebuild My School Africa."
+          content="Sponsor New Education Standard Award Africa (NESA-Africa) 2026 — &quot;The African Blue-Garnet Awards for Africa's Education Enablers.&quot; Align your brand with Africa's continental education recognition and impact platform: gala, awards, NESA-Africa TV, EduAid-Africa and Rebuild My School Africa."
         />
         <link rel="canonical" href="https://nesa.africa/sponsor" />
       </Helmet>
@@ -57,7 +57,7 @@ export default function SponsorHub() {
               Sponsor New Education Standard Award Africa (NESA-Africa) 2026
             </h1>
             <p className="text-gold/90 italic text-lg md:text-xl mb-5">
-              “The African Blue-Garnet Awards for Education”
+              “The African Blue-Garnet Awards for Africa's Education Enablers”
             </p>
             <p className="text-ivory/80 text-base md:text-lg max-w-2xl mb-3">
               Align your brand with Africa's continental education recognition and impact platform.

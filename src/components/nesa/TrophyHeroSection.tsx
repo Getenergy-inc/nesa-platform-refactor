@@ -86,7 +86,7 @@ export function TrophyHeroSection() {
                 NESA-Africa <span className="text-gold">2026</span>
               </p>
               <p className="text-[18px] sm:text-lg md:text-xl italic text-gold/95 mt-2 leading-snug">
-                "The African Blue-Garnet Awards for Education"
+                "The African Blue-Garnet Awards for Africa's Education Enablers"
               </p>
             </motion.div>
 

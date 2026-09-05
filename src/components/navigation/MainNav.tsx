@@ -416,7 +416,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
             <span className="flex flex-col text-left leading-tight">
               <span className="text-gold font-display text-base">NESA-Africa 2026</span>
               <span className="text-[11px] font-medium italic tracking-wide text-white/70">
-                The African Blue-Garnet Awards for Education
+                The African Blue-Garnet Awards for Africa's Education Enablers
               </span>
             </span>
           </SheetTitle>
@@ -903,7 +903,7 @@ export function MainNav() {
                 NESA-Africa <span className="text-white/70 font-medium">2026</span>
               </span>
               <span className="block max-w-[178px] text-[9px] text-gold/70 font-medium tracking-wide italic leading-snug sm:max-w-none sm:text-[10px] min-[1200px]:whitespace-nowrap">
-                The African Blue-Garnet Awards for Education
+                The African Blue-Garnet Awards for Africa's Education Enablers
               </span>
             </div>
           </Link>

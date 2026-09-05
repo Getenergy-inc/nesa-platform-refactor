@@ -259,7 +259,7 @@ function buildNominatorAwardBody_(route, r, ts) {
     '',
     'Warm regards,',
     'NESA-Africa 2026 Pre-Nomination Review Team',
-    'The African Blue-Garnet Awards for Education'
+    'The African Blue-Garnet Awards for Africa's Education Enablers'
   ].join('\n');
 }
 
@@ -453,7 +453,7 @@ function buildNomineeAwarenessBody_(route, r, withNominatorIdentity) {
     '',
     'Warm regards,',
     'NESA-Africa 2026 Pre-Nomination Review Team',
-    'The African Blue-Garnet Awards for Education'
+    'The African Blue-Garnet Awards for Africa's Education Enablers'
   ].join('\n');
 }
 

@@ -137,7 +137,7 @@ export default function About() {
     <>
       <AboutSeo
         title="About NESA-Africa | Recognising Africa's Education Enablers"
-        description="NESA-Africa — The African Blue-Garnet Awards for Education. A continental recognition, verification, storytelling and impact platform. Evidence-first, with a strict Integrity Firewall: recognition cannot be bought."
+        description="NESA-Africa — The African Blue-Garnet Awards for Africa's Education Enablers. A continental recognition, verification, storytelling and impact platform. Evidence-first, with a strict Integrity Firewall: recognition cannot be bought."
         path="/about"
         breadcrumbs={[
           { name: "Home", path: "/" },

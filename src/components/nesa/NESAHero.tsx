@@ -96,7 +96,7 @@ export function NESAHero() {
 
         {/* Motto - Premium brand line */}
         <p className="text-lg sm:text-xl md:text-2xl font-medium italic text-gold/90 mb-4 sm:mb-6 max-w-2xl px-4 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-          “The African Blue-Garnet Awards for Education”
+          “The African Blue-Garnet Awards for Africa's Education Enablers”
         </p>
 
         {/* Compelling description paragraph */}

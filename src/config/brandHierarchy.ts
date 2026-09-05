@@ -29,7 +29,7 @@ export const BRAND = {
   platform: "NESA-Africa",
   platformLong: "New Education Standard Award Africa",
   /** Umbrella programme. */
-  programme: "The African Blue-Garnet Awards for Education",
+  programme: "The African Blue-Garnet Awards for Africa's Education Enablers",
   programmeTagline: "Recognising the Enablers of Education for All Across Africa",
   /** Flagship lifetime recognition. */
   flagship: "Africa Education Icon Award",

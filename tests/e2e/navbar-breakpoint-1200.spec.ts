@@ -5,7 +5,7 @@
  *
  *  1. Switches layouts cleanly at the 1200px threshold:
  *       - <1200px: desktop nav links are hidden, mobile hamburger is visible,
- *         and the brand motto ("The African Blue-Garnet Awards for Education")
+ *         and the brand motto ("The African Blue-Garnet Awards for Africa's Education Enablers")
  *         is hidden.
  *       - ≥1200px: desktop nav links + Nominate/Vote/Become a Sponsor CTAs
  *         are visible, hamburger is hidden, motto is visible.
@@ -50,7 +50,7 @@ for (const width of WIDTHS) {
 
       const desktopNav = header.getByRole("navigation", { name: /^primary$/i });
       const hamburger = header.getByRole("button", { name: /open navigation menu/i });
-      const motto = header.getByText(/the african blue-garnet awards for education/i);
+      const motto = header.getByText(/the african blue-garnet awards for africa's education enablers/i);
 
       if (isDesktop) {
         await expect(desktopNav).toBeVisible();
