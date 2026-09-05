@@ -33,7 +33,7 @@ import { NavSearch } from "@/components/navigation/NavSearch";
 import { AccountMenu } from "@/components/navigation/AccountMenu";
 import { WorkspaceSwitcher } from "@/components/navigation/WorkspaceSwitcher";
 import { MOBILE_MENU_OPEN_EVENT } from "@/components/navigation/MobileBottomActions";
-import nesaStamp from "@/assets/nesa-stamp.jpeg";
+import { NESALogo } from "@/components/nesa/NESALogo";
 
 function SkipLink() {
   return (
