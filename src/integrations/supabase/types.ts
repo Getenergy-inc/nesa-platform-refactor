@@ -76,6 +76,13 @@ export type Database = {
             referencedRelation: "v_nominee_contact_directory"
             referencedColumns: ["nominee_id"]
           },
+          {
+            foreignKeyName: "acceptance_letters_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: true
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
         ]
       }
       ai_nrc_assessments: {
@@ -517,6 +524,13 @@ export type Database = {
             referencedRelation: "v_nominee_contact_directory"
             referencedColumns: ["category_slug"]
           },
+          {
+            foreignKeyName: "categories_excel_alias_db_slug_fkey"
+            columns: ["db_slug"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["category_slug"]
+          },
         ]
       }
       certificate_downloads: {
@@ -574,6 +588,13 @@ export type Database = {
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "certificate_downloads_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
         ]
@@ -703,6 +724,13 @@ export type Database = {
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "certificates_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
           {
@@ -839,6 +867,13 @@ export type Database = {
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "coi_declarations_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
         ]
@@ -1553,6 +1588,13 @@ export type Database = {
             referencedRelation: "v_nominee_contact_directory"
             referencedColumns: ["nominee_id"]
           },
+          {
+            foreignKeyName: "evidence_bundles_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
         ]
       }
       faqs: {
@@ -1666,6 +1708,13 @@ export type Database = {
             columns: ["laureate_nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "final_arena_ballots_laureate_nominee_id_fkey"
+            columns: ["laureate_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
           {
@@ -1964,6 +2013,13 @@ export type Database = {
             referencedColumns: ["nominee_id"]
           },
           {
+            foreignKeyName: "icon_grand_jury_ballots_first_choice_nominee_id_fkey"
+            columns: ["first_choice_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
+          {
             foreignKeyName: "icon_grand_jury_ballots_group_id_fkey"
             columns: ["group_id"]
             isOneToOne: false
@@ -1999,6 +2055,13 @@ export type Database = {
             referencedColumns: ["nominee_id"]
           },
           {
+            foreignKeyName: "icon_grand_jury_ballots_second_choice_nominee_id_fkey"
+            columns: ["second_choice_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
+          {
             foreignKeyName: "icon_grand_jury_ballots_third_choice_nominee_id_fkey"
             columns: ["third_choice_nominee_id"]
             isOneToOne: false
@@ -2017,6 +2080,13 @@ export type Database = {
             columns: ["third_choice_nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "icon_grand_jury_ballots_third_choice_nominee_id_fkey"
+            columns: ["third_choice_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
         ]
@@ -2070,6 +2140,13 @@ export type Database = {
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "icon_grand_jury_finalists_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
         ]
@@ -2214,6 +2291,13 @@ export type Database = {
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "icon_grand_jury_results_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
         ]
@@ -3208,6 +3292,13 @@ export type Database = {
             referencedColumns: ["nominee_id"]
           },
           {
+            foreignKeyName: "icon_panel_shortlists_finalist_1_nominee_id_fkey"
+            columns: ["finalist_1_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
+          {
             foreignKeyName: "icon_panel_shortlists_finalist_2_nominee_id_fkey"
             columns: ["finalist_2_nominee_id"]
             isOneToOne: false
@@ -3229,6 +3320,13 @@ export type Database = {
             referencedColumns: ["nominee_id"]
           },
           {
+            foreignKeyName: "icon_panel_shortlists_finalist_2_nominee_id_fkey"
+            columns: ["finalist_2_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
+          {
             foreignKeyName: "icon_panel_shortlists_finalist_3_nominee_id_fkey"
             columns: ["finalist_3_nominee_id"]
             isOneToOne: false
@@ -3247,6 +3345,13 @@ export type Database = {
             columns: ["finalist_3_nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "icon_panel_shortlists_finalist_3_nominee_id_fkey"
+            columns: ["finalist_3_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
           {
@@ -3275,6 +3380,13 @@ export type Database = {
             columns: ["reserve_nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "icon_panel_shortlists_reserve_nominee_id_fkey"
+            columns: ["reserve_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
         ]
@@ -3459,6 +3571,13 @@ export type Database = {
             columns: ["resolved_nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "import_review_queue_resolved_nominee_id_fkey"
+            columns: ["resolved_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
         ]
@@ -3981,6 +4100,13 @@ export type Database = {
             referencedColumns: ["nominee_id"]
           },
           {
+            foreignKeyName: "judge_nominee_reviews_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
+          {
             foreignKeyName: "judge_nominee_reviews_pathway_id_fkey"
             columns: ["pathway_id"]
             isOneToOne: false
@@ -4317,6 +4443,13 @@ export type Database = {
             referencedColumns: ["nominee_id"]
           },
           {
+            foreignKeyName: "jury_assignments_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
+          {
             foreignKeyName: "jury_assignments_season_id_fkey"
             columns: ["season_id"]
             isOneToOne: false
@@ -4630,6 +4763,13 @@ export type Database = {
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "migration_email_jobs_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
         ]
@@ -5205,6 +5345,13 @@ export type Database = {
             referencedColumns: ["nominee_id"]
           },
           {
+            foreignKeyName: "nominations_created_nominee_id_fkey"
+            columns: ["created_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
+          {
             foreignKeyName: "nominations_nominator_id_fkey"
             columns: ["nominator_id"]
             isOneToOne: false
@@ -5389,6 +5536,13 @@ export type Database = {
             referencedRelation: "v_nominee_contact_directory"
             referencedColumns: ["nominee_id"]
           },
+          {
+            foreignKeyName: "nominee_communications_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
         ]
       }
       nominee_dossier_versions: {
@@ -5500,6 +5654,13 @@ export type Database = {
             referencedColumns: ["nominee_id"]
           },
           {
+            foreignKeyName: "nominee_dossier_versions_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
+          {
             foreignKeyName: "nominee_dossier_versions_supersedes_version_id_fkey"
             columns: ["supersedes_version_id"]
             isOneToOne: false
@@ -5565,6 +5726,13 @@ export type Database = {
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "nominee_editorial_features_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
         ]
@@ -5865,6 +6033,13 @@ export type Database = {
             referencedRelation: "v_nominee_contact_directory"
             referencedColumns: ["nominee_id"]
           },
+          {
+            foreignKeyName: "nominee_media_sourcing_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: true
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
         ]
       }
       nominee_pathway_assignments: {
@@ -5928,6 +6103,13 @@ export type Database = {
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "nominee_pathway_assignments_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
           {
@@ -6016,6 +6198,13 @@ export type Database = {
             referencedRelation: "v_nominee_contact_directory"
             referencedColumns: ["nominee_id"]
           },
+          {
+            foreignKeyName: "nominee_pipeline_status_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: true
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
         ]
       }
       nominee_pipeline_transitions: {
@@ -6085,6 +6274,13 @@ export type Database = {
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "nominee_pipeline_transitions_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
           {
@@ -6164,6 +6360,13 @@ export type Database = {
             referencedRelation: "v_nominee_contact_directory"
             referencedColumns: ["nominee_id"]
           },
+          {
+            foreignKeyName: "nominee_profile_revisions_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
         ]
       }
       nominee_support_messages: {
@@ -6226,6 +6429,13 @@ export type Database = {
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "nominee_support_messages_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
         ]
@@ -6296,6 +6506,13 @@ export type Database = {
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "nominee_website_candidates_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
         ]
@@ -6987,6 +7204,13 @@ export type Database = {
             referencedColumns: ["nominee_id"]
           },
           {
+            foreignKeyName: "nrc_edi_scores_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
+          {
             foreignKeyName: "nrc_edi_scores_nrc_row_id_fkey"
             columns: ["nrc_row_id"]
             isOneToOne: true
@@ -7215,6 +7439,13 @@ export type Database = {
             referencedRelation: "v_nominee_contact_directory"
             referencedColumns: ["nominee_id"]
           },
+          {
+            foreignKeyName: "nrc_evidence_rows_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
         ]
       }
       nrc_evidence_sources: {
@@ -7304,6 +7535,13 @@ export type Database = {
             referencedColumns: ["nominee_id"]
           },
           {
+            foreignKeyName: "nrc_evidence_sources_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
+          {
             foreignKeyName: "nrc_evidence_sources_nrc_row_id_fkey"
             columns: ["nrc_row_id"]
             isOneToOne: false
@@ -7387,6 +7625,13 @@ export type Database = {
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "nrc_icon_classifications_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
           {
@@ -7498,6 +7743,13 @@ export type Database = {
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "nrc_judge_handovers_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
           {
@@ -7727,6 +7979,13 @@ export type Database = {
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "nrc_nominee_pushes_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
           {
@@ -7977,6 +8236,13 @@ export type Database = {
             referencedColumns: ["nominee_id"]
           },
           {
+            foreignKeyName: "nrc_research_queue_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
+          {
             foreignKeyName: "nrc_research_queue_nrc_row_id_fkey"
             columns: ["nrc_row_id"]
             isOneToOne: false
@@ -8181,6 +8447,13 @@ export type Database = {
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "nrc_verification_summaries_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
         ]
@@ -8560,6 +8833,13 @@ export type Database = {
             referencedColumns: ["nominee_id"]
           },
           {
+            foreignKeyName: "pathway_clarification_requests_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
+          {
             foreignKeyName: "pathway_clarification_requests_pathway_id_fkey"
             columns: ["pathway_id"]
             isOneToOne: false
@@ -8620,6 +8900,13 @@ export type Database = {
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "pathway_deliberation_messages_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
           {
@@ -8688,6 +8975,13 @@ export type Database = {
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "pathway_finalist_selections_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
           {
@@ -8818,6 +9112,13 @@ export type Database = {
             referencedColumns: ["nominee_id"]
           },
           {
+            foreignKeyName: "pathway_scorecards_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
+          {
             foreignKeyName: "pathway_scorecards_pathway_id_fkey"
             columns: ["pathway_id"]
             isOneToOne: false
@@ -8902,6 +9203,13 @@ export type Database = {
             referencedColumns: ["nominee_id"]
           },
           {
+            foreignKeyName: "pathway_voting_ballots_first_nominee_id_fkey"
+            columns: ["first_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
+          {
             foreignKeyName: "pathway_voting_ballots_pathway_id_fkey"
             columns: ["pathway_id"]
             isOneToOne: false
@@ -8930,6 +9238,13 @@ export type Database = {
             referencedColumns: ["nominee_id"]
           },
           {
+            foreignKeyName: "pathway_voting_ballots_reserve_nominee_id_fkey"
+            columns: ["reserve_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
+          {
             foreignKeyName: "pathway_voting_ballots_second_nominee_id_fkey"
             columns: ["second_nominee_id"]
             isOneToOne: false
@@ -8951,6 +9266,13 @@ export type Database = {
             referencedColumns: ["nominee_id"]
           },
           {
+            foreignKeyName: "pathway_voting_ballots_second_nominee_id_fkey"
+            columns: ["second_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
+          {
             foreignKeyName: "pathway_voting_ballots_third_nominee_id_fkey"
             columns: ["third_nominee_id"]
             isOneToOne: false
@@ -8969,6 +9291,13 @@ export type Database = {
             columns: ["third_nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "pathway_voting_ballots_third_nominee_id_fkey"
+            columns: ["third_nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
         ]
@@ -10168,6 +10497,13 @@ export type Database = {
             referencedRelation: "v_nominee_contact_directory"
             referencedColumns: ["nominee_id"]
           },
+          {
+            foreignKeyName: "renominations_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
         ]
       }
       results: {
@@ -10287,6 +10623,13 @@ export type Database = {
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "results_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
           {
@@ -12176,6 +12519,13 @@ export type Database = {
             referencedRelation: "v_nominee_contact_directory"
             referencedColumns: ["nominee_id"]
           },
+          {
+            foreignKeyName: "nominee_support_messages_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
+            referencedColumns: ["nominee_id"]
+          },
         ]
       }
       nrc_public_members: {
@@ -12262,6 +12612,13 @@ export type Database = {
             columns: ["nominee_id"]
             isOneToOne: false
             referencedRelation: "v_nominee_contact_directory"
+            referencedColumns: ["nominee_id"]
+          },
+          {
+            foreignKeyName: "pathway_scorecards_nominee_id_fkey"
+            columns: ["nominee_id"]
+            isOneToOne: false
+            referencedRelation: "v_nominee_media_review"
             referencedColumns: ["nominee_id"]
           },
           {
@@ -12733,6 +13090,40 @@ export type Database = {
           slug: string | null
           status: Database["public"]["Enums"]["nomination_status"] | null
           subcategory_slug: string | null
+        }
+        Relationships: []
+      }
+      v_nominee_media_review: {
+        Row: {
+          approved_asset_url: string | null
+          approved_for_public: boolean | null
+          candidate_image_url: string | null
+          category_name: string | null
+          category_slug: string | null
+          confidence: number | null
+          country: string | null
+          date_checked: string | null
+          entity_type: string | null
+          logo_url: string | null
+          media_kind: string | null
+          media_status: string | null
+          nomination_status: string | null
+          nominee_id: string | null
+          nominee_name: string | null
+          nominee_slug: string | null
+          nrc_verified: boolean | null
+          organization: string | null
+          photo_url: string | null
+          publication_status: string | null
+          region: string | null
+          source_domain: string | null
+          source_type: string | null
+          source_url: string | null
+          subcategory_name: string | null
+          subcategory_slug: string | null
+          submitted_by_nominee: boolean | null
+          verification_note: string | null
+          website: string | null
         }
         Relationships: []
       }
@@ -13299,6 +13690,16 @@ export type Database = {
           p_reserve: string
         }
         Returns: string
+      }
+      submit_nominee_media: {
+        Args: {
+          p_corrected_name?: string
+          p_image_url?: string
+          p_token: string
+          p_usage_confirmed?: boolean
+          p_website?: string
+        }
+        Returns: Json
       }
       submit_public_nomination: {
         Args: {
