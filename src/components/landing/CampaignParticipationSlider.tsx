@@ -35,7 +35,7 @@ const slides: Slide[] = [
     body:
       "NESA-Africa gives the public a platform to recognise, celebrate, and amplify the people and institutions advancing education across Africa — Africans in Africa, Africans in the diaspora, and Friends of Africa.",
     bullets: ["Recognise impact", "Independently verified", "Celebrate education"],
-    cta: { label: "Start Nomination", to: "/nominate", icon: Trophy },
+    cta: { label: "Start a Nomination", to: "/nominate", icon: Trophy },
     Icon: Sparkles,
   },
   {

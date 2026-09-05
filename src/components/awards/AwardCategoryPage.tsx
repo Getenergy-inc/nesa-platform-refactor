@@ -267,7 +267,7 @@ export function AwardCategoryPage({ config, legacyHero, formPosition = "bottom" 
                 </ol>
                 <div className="mt-4 flex flex-wrap gap-2">
                   <Button asChild size="sm" className="bg-gold text-charcoal hover:bg-gold/90">
-                    <Link to={nominateHref}>Start nomination</Link>
+                    <Link to={nominateHref}>Start a Nomination</Link>
                   </Button>
                   <Button asChild size="sm" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
                     <Link to="/how-voting-works">How evaluation works</Link>
