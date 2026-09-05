@@ -54,19 +54,8 @@ function isActive(pathname: string, href: string) {
 
 function BrandBlock() {
   return (
-    <Link to="/" className="flex items-center gap-3 shrink-0 group" aria-label="NESA-Africa home">
-      <img
-        src={nesaStamp}
-        alt=""
-        className="h-10 w-10 lg:h-11 lg:w-11 rounded-full object-cover ring-1 ring-gold/40"
-      />
-      <div className="hidden sm:flex flex-col leading-tight min-w-0">
-        <span className="font-playfair text-gold text-base lg:text-lg font-bold whitespace-nowrap">NESA-Africa</span>
-        <span className="hidden min-[1700px]:block text-[10px] text-white/70 -mt-0.5 whitespace-nowrap">
-          Africa's Education Recognition & Impact Platform
-        </span>
-
-      </div>
+    <Link to="/" className="flex items-center shrink-0 group" aria-label="NESA-Africa home">
+      <NESALogo variant="header" size="md" showTagline />
     </Link>
   );
 }
