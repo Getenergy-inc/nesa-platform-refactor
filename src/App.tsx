@@ -2309,6 +2309,8 @@ const App = () => (
                   <Route path="/admin/volunteers" element={<AdminVolunteersCMS />} />
                   <Route path="/admin/recruitment" element={<AdminRecruitmentTracker />} />
                   <Route path="/admin/ngo-review" element={<AdminNGOReviewQueue />} />
+                  <Route path="/admin/nominee-media" element={<AdminNomineeMedia />} />
+
                   <Route path="/admin/subcategories" element={<AdminPathwaysCMS />} />
                   <Route path="/admin/gallery" element={<AdminBareShell><AdminGalleryCMS /></AdminBareShell>} />
                   <Route path="/admin/icon-migration" element={<AdminIconMigrationVerification />} />
