@@ -29,7 +29,7 @@ export function AcceptanceLetterHeader({ nomineeName, chapterName, region }: Acc
           New Education Standard Award Africa (NESA-Africa)
         </p>
         <p className="text-xs text-muted-foreground/70 italic tracking-wider">
-          The African Blue-Garnet Awards for Africa’s Education Enablers
+          The African Blue-Garnet Awards for Recognising Africa’s Education Enablers
         </p>
         <p className="text-xs text-primary font-medium">
           Recognising Africa’s Education Enablers

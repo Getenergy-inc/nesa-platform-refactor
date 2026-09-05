@@ -11,7 +11,7 @@ export default function EducationImpactCertificatesPage() {
       <LocalizedSEO
         pathname="/recognition/certificates"
         title={`Education Impact Certificates | ${BRAND.platform} 2026`}
-        description="Six recognition families honouring Africa's Education Enablers under The African Blue-Garnet Awards for Africa's Education Enablers."
+        description="Six recognition families honouring Africa's Education Enablers under The African Blue-Garnet Awards for Recognising Africa's Education Enablers."
       />
 
       <header className="border-b border-gold/15 py-14 md:py-20">

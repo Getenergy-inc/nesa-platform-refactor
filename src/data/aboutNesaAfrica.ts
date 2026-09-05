@@ -4,7 +4,7 @@
 export const ABOUT_BRAND = {
   name: "New Education Standard Award Africa",
   short: "NESA-Africa",
-  alias: "The African Blue-Garnet Awards for Africa’s Education Enablers",
+  alias: "The African Blue-Garnet Awards for Recognising Africa’s Education Enablers",
   tagline: "Recognising Africa’s Education Enablers",
   pathway: [
     "Recognition",

@@ -70,7 +70,7 @@ export const NESALogo = forwardRef<HTMLDivElement, NESALogoProps>(
             AFRICA
           </span>
           <span className="text-[6px] text-white/50 font-medium tracking-wider italic mt-0.5">
-            The African Blue-Garnet Awards for Africa’s Education Enablers
+            The African Blue-Garnet Awards for Recognising Africa’s Education Enablers
           </span>
         </div>
       </div>

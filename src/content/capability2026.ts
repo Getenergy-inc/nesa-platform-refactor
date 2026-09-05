@@ -8,7 +8,7 @@ export const POSITIONING = {
   fullMeaning: "New Education Standard Award Africa",
   positioning: "Africa's Education Recognition & Impact Platform",
   mandate: "Recognising Africa’s Education Enablers",
-  theme: "The African Blue-Garnet Awards for Africa’s Education Enablers",
+  theme: "The African Blue-Garnet Awards for Recognising Africa’s Education Enablers",
   flagshipEvent: "Gold-Blue Garnet Awards Gala",
   date: "13 December 2026",
   location: "Lagos, Nigeria",
@@ -41,7 +41,7 @@ export const ABOUT_INTRO = {
   body: [
     "NESA-Africa exists to celebrate and support the Enablers of Education for All Across Africa — the individuals, organisations, institutions and partnerships creating real educational impact through leadership, funding, innovation, advocacy, service, public policy, media influence and community transformation.",
     "Through nominations, verification, independent judging, public participation, media storytelling, recognition events and post-award impact programmes, NESA-Africa provides a trusted continental platform for recognising education impact.",
-    "The 2026 edition is themed The African Blue-Garnet Awards for Africa’s Education Enablers. The flagship event is the Gold-Blue Garnet Awards Gala on 13 December 2026 in Lagos, Nigeria.",
+    "The 2026 edition is themed The African Blue-Garnet Awards for Recognising Africa’s Education Enablers. The flagship event is the Gold-Blue Garnet Awards Gala on 13 December 2026 in Lagos, Nigeria.",
   ],
 } as const;
 
@@ -81,7 +81,7 @@ export const STRATEGIC_OBJECTIVES = [
 export const CORE_IDENTITY = [
   { label: "Name", value: "NESA-Africa 2026" },
   { label: "Full Meaning", value: "New Education Standard Award Africa" },
-  { label: "Theme", value: "The African Blue-Garnet Awards for Africa’s Education Enablers" },
+  { label: "Theme", value: "The African Blue-Garnet Awards for Recognising Africa’s Education Enablers" },
   { label: "Positioning", value: "Africa's Education Recognition & Impact Platform" },
   { label: "Core Mandate", value: "Recognising Africa’s Education Enablers" },
   { label: "Flagship Event", value: "Gold-Blue Garnet Awards Gala" },

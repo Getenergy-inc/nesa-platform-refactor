@@ -5,7 +5,7 @@
  *
  *  1. Switches layouts cleanly at the 1200px threshold:
  *       - <1200px: desktop nav links are hidden, mobile hamburger is visible,
- *         and the brand motto ("The African Blue-Garnet Awards for Africa's Education Enablers")
+ *         and the brand motto ("The African Blue-Garnet Awards for Recognising Africa's Education Enablers")
  *         is hidden.
  *       - ≥1200px: desktop nav links + Nominate/Vote/Become a Sponsor CTAs
  *         are visible, hamburger is hidden, motto is visible.
