@@ -9,6 +9,19 @@
  *   /nominees/lane/:lane/:slug     → shared extended nominee profile
  */
 
+export interface LaneFamily {
+  /** Key embedded in the subcategory slug, e.g. "basicprimary" in
+   *  `ngo-africa-basicprimary-west-africa`. */
+  key: string;
+  label: string;
+}
+
+export interface LaneRegion {
+  /** Slug suffix, e.g. "west-africa". */
+  key: string;
+  label: string;
+}
+
 export interface NomineeLane {
   /** URL segment */
   slug: string;
@@ -26,6 +39,11 @@ export interface NomineeLane {
   laneHref: string;
   /** Real nomination entry point */
   nominateHref: string;
+  /** Optional focus-area grouping parsed from subcategory slugs
+   *  (`<category>-<family>-<region>`). When present the gallery shows
+   *  focus-area tabs and a region filter. */
+  subFamilies?: LaneFamily[];
+  regionSuffixes?: LaneRegion[];
 }
 
 export const NOMINEE_LANES: NomineeLane[] = [
@@ -68,10 +86,31 @@ export const NOMINEE_LANES: NomineeLane[] = [
     officialName: "Best NGO Contribution to Education for All (Africa Regional)",
     tier: "Gold-Blue Garnet Recognition",
     intro:
-      "NGOs delivering education programmes across African regions. Nominations for this lane open with the 2026 season.",
+      "NGOs delivering education programmes across African regions — from basic and primary education to girl-child education, refugee and displaced children, inclusive education, scholarships, and teacher development. Public nominations for the 2026 season are open.",
     categorySlug: "best-ngo-education-africa",
     laneHref: "/get-involved/ngo",
     nominateHref: "/nominate?category=best-ngo-for-education-africa-regional",
+    subFamilies: [
+      { key: "basicprimary", label: "Basic & Primary Education" },
+      { key: "girlchild", label: "Girl-Child Education" },
+      { key: "refugee", label: "Refugee & Displaced Children" },
+      { key: "specialneeds", label: "Special Needs & Inclusive Education" },
+      { key: "training", label: "Teacher Training & Development" },
+      { key: "community", label: "Community Education & Literacy" },
+      { key: "materials", label: "Learning Materials & Resources" },
+      { key: "scholarship", label: "Scholarships & Sponsorships" },
+    ],
+    regionSuffixes: [
+      { key: "west-africa", label: "West Africa" },
+      { key: "east-africa", label: "East Africa" },
+      { key: "north-africa", label: "North Africa" },
+      { key: "central-africa", label: "Central Africa" },
+      { key: "southern-africa", label: "Southern Africa" },
+      { key: "sahel-africa", label: "Sahel Africa" },
+      { key: "horn-of-africa", label: "Horn of Africa" },
+      { key: "indian-ocean-islands", label: "Indian Ocean Islands" },
+      { key: "african-diaspora", label: "African Diaspora" },
+    ],
   },
   {
     slug: "foundations",
