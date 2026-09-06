@@ -120,7 +120,13 @@ export default function LaneGalleryPage() {
   const [search, setSearch] = useState("");
   const [country, setCountry] = useState("all");
   const [sub, setSub] = useState("all");
+  const [family, setFamily] = useState("all");
+  const [laneRegion, setLaneRegion] = useState("all");
   const [page, setPage] = useState(1);
+
+  const families = lane?.subFamilies ?? [];
+  const laneRegions = lane?.regionSuffixes ?? [];
+  const grouped = families.length > 0;
 
   const subs = useMemo(() => {
     if (!data || !lane) return [];
@@ -128,6 +134,14 @@ export default function LaneGalleryPage() {
       ? data.subs.filter((s) => s.slug === lane.subcategorySlug)
       : data.subs;
   }, [data, lane]);
+
+  /** subcategory id → { family, region } for the grouped lanes. */
+  const subMeta = useMemo(() => {
+    const map = new Map<string, { family: string | null; region: string | null }>();
+    if (!grouped) return map;
+    for (const s of subs) map.set(s.id, parseSubSlug(s, families, laneRegions));
+    return map;
+  }, [subs, families, laneRegions, grouped]);
 
   const scoped = useMemo(() => {
     if (!data) return [];
@@ -140,11 +154,47 @@ export default function LaneGalleryPage() {
     [scoped],
   );
 
+  /** Live per-focus-area counts, so no empty tab is advertised as populated. */
+  const familyCounts = useMemo(() => {
+    const counts = new Map<string, number>();
+    if (!grouped) return counts;
+    for (const n of scoped) {
+      const key = n.subcategory_id ? subMeta.get(n.subcategory_id)?.family : null;
+      if (key) counts.set(key, (counts.get(key) ?? 0) + 1);
+    }
+    return counts;
+  }, [scoped, subMeta, grouped]);
+
+  const activeFamilies = useMemo(
+    () => families.filter((f) => (familyCounts.get(f.key) ?? 0) > 0),
+    [families, familyCounts],
+  );
+
+  const regionCounts = useMemo(() => {
+    const counts = new Map<string, number>();
+    if (!grouped) return counts;
+    for (const n of scoped) {
+      const key = n.subcategory_id ? subMeta.get(n.subcategory_id)?.region : null;
+      if (key) counts.set(key, (counts.get(key) ?? 0) + 1);
+    }
+    return counts;
+  }, [scoped, subMeta, grouped]);
+
+  const activeRegions = useMemo(
+    () => laneRegions.filter((r) => (regionCounts.get(r.key) ?? 0) > 0),
+    [laneRegions, regionCounts],
+  );
+
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
     return scoped.filter((n) => {
       if (country !== "all" && n.country !== country) return false;
-      if (sub !== "all" && n.subcategory_id !== sub) return false;
+      if (!grouped && sub !== "all" && n.subcategory_id !== sub) return false;
+      if (grouped) {
+        const meta = n.subcategory_id ? subMeta.get(n.subcategory_id) : undefined;
+        if (family !== "all" && meta?.family !== family) return false;
+        if (laneRegion !== "all" && meta?.region !== laneRegion) return false;
+      }
       if (!q) return true;
       return (
         n.name.toLowerCase().includes(q) ||
@@ -152,7 +202,7 @@ export default function LaneGalleryPage() {
         (n.country ?? "").toLowerCase().includes(q)
       );
     });
-  }, [scoped, search, country, sub]);
+  }, [scoped, search, country, sub, family, laneRegion, grouped, subMeta]);
 
   if (!lane) return <Navigate to="/nominees" replace />;
 
