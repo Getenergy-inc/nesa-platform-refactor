@@ -253,11 +253,48 @@ export default function LaneGalleryPage() {
               <p className="mt-4 text-sm text-ivory/60">
                 <Users className="mr-1.5 inline h-4 w-4 text-gold/70" />
                 {scoped.length} nominee{scoped.length === 1 ? "" : "s"} on record
-                {subs.length > 1 ? ` across ${subs.length} subcategories` : ""}
+                {grouped && activeFamilies.length
+                  ? ` across ${activeFamilies.length} focus area${activeFamilies.length === 1 ? "" : "s"}`
+                  : subs.length > 1
+                    ? ` across ${subs.length} subcategories`
+                    : ""}
+                {grouped && activeRegions.length
+                  ? ` · ${activeRegions.length} regions`
+                  : ""}
                 {countries.length ? ` · ${countries.length} countries` : ""}
               </p>
             )}
           </header>
+
+          {/* Focus-area tabs (grouped lanes only) */}
+          {grouped && activeFamilies.length > 1 && (
+            <Tabs
+              value={family}
+              onValueChange={(v) => {
+                setFamily(v);
+                setPage(1);
+              }}
+              className="mb-5"
+            >
+              <TabsList className="flex h-auto w-full flex-wrap justify-start gap-1.5 bg-charcoal-light/40 p-1.5">
+                <TabsTrigger
+                  value="all"
+                  className="data-[state=active]:bg-gold data-[state=active]:text-charcoal text-ivory/70"
+                >
+                  All focus areas ({scoped.length})
+                </TabsTrigger>
+                {activeFamilies.map((f) => (
+                  <TabsTrigger
+                    key={f.key}
+                    value={f.key}
+                    className="data-[state=active]:bg-gold data-[state=active]:text-charcoal text-ivory/70"
+                  >
+                    {f.label} ({familyCounts.get(f.key)})
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
+          )}
 
           {/* Filters */}
           <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-center">
@@ -274,7 +311,31 @@ export default function LaneGalleryPage() {
                 className="pl-9 bg-charcoal-light/60 border-gold/20 text-ivory"
               />
             </div>
-            {subs.length > 1 && (
+            {grouped && activeRegions.length > 1 && (
+              <Select
+                value={laneRegion}
+                onValueChange={(v) => {
+                  setLaneRegion(v);
+                  setPage(1);
+                }}
+              >
+                <SelectTrigger
+                  className="md:w-56 bg-charcoal-light/60 border-gold/20 text-ivory"
+                  aria-label="Filter by African region"
+                >
+                  <SelectValue placeholder="All regions" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All regions</SelectItem>
+                  {activeRegions.map((r) => (
+                    <SelectItem key={r.key} value={r.key}>
+                      {r.label} ({regionCounts.get(r.key)})
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+            {!grouped && subs.length > 1 && (
               <Select
                 value={sub}
                 onValueChange={(v) => {
