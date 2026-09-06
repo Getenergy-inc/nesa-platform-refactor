@@ -14,6 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Select,
   SelectContent,
@@ -22,15 +23,33 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { NomineeBreadcrumbs } from "@/components/nominees/NomineeBreadcrumbs";
+import { NomineeAvatar } from "@/components/nominees/NomineeAvatar";
 import {
   useCategoryNominees,
   nomineeImage,
   type CategoryNomineeRow,
+  type CategorySubcategoryRow,
 } from "@/components/awards/branded/categoryNomineeData";
 import { getNomineeLane } from "@/config/nomineeLanes";
 
 const PAGE_SIZE = 24;
 const SITE = "https://nesaafrica.lovable.app";
+
+/**
+ * Parse `<category>-<family>-<region>` subcategory slugs into the lane's
+ * configured focus-area and region keys. Returns nulls when the slug does
+ * not match any configured family/region — such rows stay visible under
+ * "All" but are not miscounted.
+ */
+function parseSubSlug(
+  sub: CategorySubcategoryRow,
+  families: { key: string }[],
+  regions: { key: string }[],
+) {
+  const family = families.find((f) => sub.slug.includes(`-${f.key}-`))?.key ?? null;
+  const region = regions.find((r) => sub.slug.endsWith(`-${r.key}`))?.key ?? null;
+  return { family, region };
+}
 
 function initials(name: string) {
   return name
