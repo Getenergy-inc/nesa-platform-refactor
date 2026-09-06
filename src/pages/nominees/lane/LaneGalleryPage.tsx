@@ -80,7 +80,7 @@ export function LaneNomineeCard({
         <h3 className="font-display text-sm font-bold text-ivory line-clamp-2">
           {nominee.name}
         </h3>
-        {nominee.organization && (
+        {nominee.organization && nominee.organization !== nominee.name && (
           <p className="mt-1 text-xs text-ivory/60 line-clamp-1">{nominee.organization}</p>
         )}
         <div className="mt-3 flex flex-wrap items-center gap-2">

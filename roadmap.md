@@ -1,3 +1,3 @@
 - [x] Factual check: /nominees/lane/ngo-africa route, data source, counts, category identity
-- [ ] Finish LaneGalleryPage refactor (focus-area tabs, region filter, NomineeAvatar fallback)
-- [ ] Verify page renders 85 live nominees
+- [x] LaneGalleryPage refactor (focus-area tabs, region filter, NomineeAvatar fallback)
+- [x] Verified page renders 85 live nominees (tabs, filters, pagination OK)
