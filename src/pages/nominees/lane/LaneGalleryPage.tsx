@@ -14,6 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Select,
   SelectContent,
@@ -22,24 +23,36 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { NomineeBreadcrumbs } from "@/components/nominees/NomineeBreadcrumbs";
+import { NomineeAvatar } from "@/components/nominees/NomineeAvatar";
 import {
   useCategoryNominees,
   nomineeImage,
   type CategoryNomineeRow,
+  type CategorySubcategoryRow,
 } from "@/components/awards/branded/categoryNomineeData";
 import { getNomineeLane } from "@/config/nomineeLanes";
 
 const PAGE_SIZE = 24;
 const SITE = "https://nesaafrica.lovable.app";
 
-function initials(name: string) {
-  return name
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((w) => w[0]?.toUpperCase())
-    .join("");
+/**
+ * Parse `<category>-<family>-<region>` subcategory slugs into the lane's
+ * configured focus-area and region keys. Returns nulls when the slug does
+ * not match any configured family/region — such rows stay visible under
+ * "All" but are not miscounted.
+ */
+function parseSubSlug(
+  sub: CategorySubcategoryRow,
+  families: { key: string }[],
+  regions: { key: string }[],
+) {
+  const family = families.find((f) => sub.slug.includes(`-${f.key}-`))?.key ?? null;
+  const region = regions.find((r) => sub.slug.endsWith(`-${r.key}`))?.key ?? null;
+  return { family, region };
 }
+
+
+
 
 export function LaneNomineeCard({
   nominee,
@@ -48,32 +61,26 @@ export function LaneNomineeCard({
   nominee: CategoryNomineeRow;
   laneSlug: string;
 }) {
-  const [broken, setBroken] = useState(false);
   const img = nomineeImage(nominee);
   const to = nominee.slug ? `/nominees/lane/${laneSlug}/${nominee.slug}` : undefined;
 
   const body = (
     <div className="group h-full rounded-2xl border border-gold/15 bg-charcoal-light/50 overflow-hidden transition-colors hover:border-gold/40">
-      <div className="aspect-[4/3] bg-charcoal flex items-center justify-center overflow-hidden">
-        {img && !broken ? (
-          <img
-            src={img}
-            alt={nominee.name}
-            loading="lazy"
-            onError={() => setBroken(true)}
-            className="h-full w-full object-cover"
-          />
-        ) : (
-          <span className="font-display text-3xl font-bold text-gold/70">
-            {initials(nominee.name)}
-          </span>
-        )}
+      <div className="aspect-[4/3] bg-charcoal overflow-hidden">
+        <NomineeAvatar
+          name={nominee.name}
+          src={img}
+          kind="organization"
+          shape="square"
+          interactive
+          context={nominee.country ?? undefined}
+        />
       </div>
       <div className="p-4">
         <h3 className="font-display text-sm font-bold text-ivory line-clamp-2">
           {nominee.name}
         </h3>
-        {nominee.organization && (
+        {nominee.organization && nominee.organization !== nominee.name && (
           <p className="mt-1 text-xs text-ivory/60 line-clamp-1">{nominee.organization}</p>
         )}
         <div className="mt-3 flex flex-wrap items-center gap-2">
@@ -113,7 +120,13 @@ export default function LaneGalleryPage() {
   const [search, setSearch] = useState("");
   const [country, setCountry] = useState("all");
   const [sub, setSub] = useState("all");
+  const [family, setFamily] = useState("all");
+  const [laneRegion, setLaneRegion] = useState("all");
   const [page, setPage] = useState(1);
+
+  const families = lane?.subFamilies ?? [];
+  const laneRegions = lane?.regionSuffixes ?? [];
+  const grouped = families.length > 0;
 
   const subs = useMemo(() => {
     if (!data || !lane) return [];
@@ -121,6 +134,14 @@ export default function LaneGalleryPage() {
       ? data.subs.filter((s) => s.slug === lane.subcategorySlug)
       : data.subs;
   }, [data, lane]);
+
+  /** subcategory id → { family, region } for the grouped lanes. */
+  const subMeta = useMemo(() => {
+    const map = new Map<string, { family: string | null; region: string | null }>();
+    if (!grouped) return map;
+    for (const s of subs) map.set(s.id, parseSubSlug(s, families, laneRegions));
+    return map;
+  }, [subs, families, laneRegions, grouped]);
 
   const scoped = useMemo(() => {
     if (!data) return [];
@@ -133,11 +154,47 @@ export default function LaneGalleryPage() {
     [scoped],
   );
 
+  /** Live per-focus-area counts, so no empty tab is advertised as populated. */
+  const familyCounts = useMemo(() => {
+    const counts = new Map<string, number>();
+    if (!grouped) return counts;
+    for (const n of scoped) {
+      const key = n.subcategory_id ? subMeta.get(n.subcategory_id)?.family : null;
+      if (key) counts.set(key, (counts.get(key) ?? 0) + 1);
+    }
+    return counts;
+  }, [scoped, subMeta, grouped]);
+
+  const activeFamilies = useMemo(
+    () => families.filter((f) => (familyCounts.get(f.key) ?? 0) > 0),
+    [families, familyCounts],
+  );
+
+  const regionCounts = useMemo(() => {
+    const counts = new Map<string, number>();
+    if (!grouped) return counts;
+    for (const n of scoped) {
+      const key = n.subcategory_id ? subMeta.get(n.subcategory_id)?.region : null;
+      if (key) counts.set(key, (counts.get(key) ?? 0) + 1);
+    }
+    return counts;
+  }, [scoped, subMeta, grouped]);
+
+  const activeRegions = useMemo(
+    () => laneRegions.filter((r) => (regionCounts.get(r.key) ?? 0) > 0),
+    [laneRegions, regionCounts],
+  );
+
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
     return scoped.filter((n) => {
       if (country !== "all" && n.country !== country) return false;
-      if (sub !== "all" && n.subcategory_id !== sub) return false;
+      if (!grouped && sub !== "all" && n.subcategory_id !== sub) return false;
+      if (grouped) {
+        const meta = n.subcategory_id ? subMeta.get(n.subcategory_id) : undefined;
+        if (family !== "all" && meta?.family !== family) return false;
+        if (laneRegion !== "all" && meta?.region !== laneRegion) return false;
+      }
       if (!q) return true;
       return (
         n.name.toLowerCase().includes(q) ||
@@ -145,7 +202,7 @@ export default function LaneGalleryPage() {
         (n.country ?? "").toLowerCase().includes(q)
       );
     });
-  }, [scoped, search, country, sub]);
+  }, [scoped, search, country, sub, family, laneRegion, grouped, subMeta]);
 
   if (!lane) return <Navigate to="/nominees" replace />;
 
@@ -196,11 +253,48 @@ export default function LaneGalleryPage() {
               <p className="mt-4 text-sm text-ivory/60">
                 <Users className="mr-1.5 inline h-4 w-4 text-gold/70" />
                 {scoped.length} nominee{scoped.length === 1 ? "" : "s"} on record
-                {subs.length > 1 ? ` across ${subs.length} subcategories` : ""}
+                {grouped && activeFamilies.length
+                  ? ` across ${activeFamilies.length} focus area${activeFamilies.length === 1 ? "" : "s"}`
+                  : subs.length > 1
+                    ? ` across ${subs.length} subcategories`
+                    : ""}
+                {grouped && activeRegions.length
+                  ? ` · ${activeRegions.length} regions`
+                  : ""}
                 {countries.length ? ` · ${countries.length} countries` : ""}
               </p>
             )}
           </header>
+
+          {/* Focus-area tabs (grouped lanes only) */}
+          {grouped && activeFamilies.length > 1 && (
+            <Tabs
+              value={family}
+              onValueChange={(v) => {
+                setFamily(v);
+                setPage(1);
+              }}
+              className="mb-5"
+            >
+              <TabsList className="flex h-auto w-full flex-wrap justify-start gap-1.5 bg-charcoal-light/40 p-1.5">
+                <TabsTrigger
+                  value="all"
+                  className="data-[state=active]:bg-gold data-[state=active]:text-charcoal text-ivory/70"
+                >
+                  All focus areas ({scoped.length})
+                </TabsTrigger>
+                {activeFamilies.map((f) => (
+                  <TabsTrigger
+                    key={f.key}
+                    value={f.key}
+                    className="data-[state=active]:bg-gold data-[state=active]:text-charcoal text-ivory/70"
+                  >
+                    {f.label} ({familyCounts.get(f.key)})
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
+          )}
 
           {/* Filters */}
           <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-center">
@@ -217,7 +311,31 @@ export default function LaneGalleryPage() {
                 className="pl-9 bg-charcoal-light/60 border-gold/20 text-ivory"
               />
             </div>
-            {subs.length > 1 && (
+            {grouped && activeRegions.length > 1 && (
+              <Select
+                value={laneRegion}
+                onValueChange={(v) => {
+                  setLaneRegion(v);
+                  setPage(1);
+                }}
+              >
+                <SelectTrigger
+                  className="md:w-56 bg-charcoal-light/60 border-gold/20 text-ivory"
+                  aria-label="Filter by African region"
+                >
+                  <SelectValue placeholder="All regions" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All regions</SelectItem>
+                  {activeRegions.map((r) => (
+                    <SelectItem key={r.key} value={r.key}>
+                      {r.label} ({regionCounts.get(r.key)})
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+            {!grouped && subs.length > 1 && (
               <Select
                 value={sub}
                 onValueChange={(v) => {
