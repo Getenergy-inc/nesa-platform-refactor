@@ -67,26 +67,20 @@ export function LaneNomineeCard({
   nominee: CategoryNomineeRow;
   laneSlug: string;
 }) {
-  const [broken, setBroken] = useState(false);
   const img = nomineeImage(nominee);
   const to = nominee.slug ? `/nominees/lane/${laneSlug}/${nominee.slug}` : undefined;
 
   const body = (
     <div className="group h-full rounded-2xl border border-gold/15 bg-charcoal-light/50 overflow-hidden transition-colors hover:border-gold/40">
-      <div className="aspect-[4/3] bg-charcoal flex items-center justify-center overflow-hidden">
-        {img && !broken ? (
-          <img
-            src={img}
-            alt={nominee.name}
-            loading="lazy"
-            onError={() => setBroken(true)}
-            className="h-full w-full object-cover"
-          />
-        ) : (
-          <span className="font-display text-3xl font-bold text-gold/70">
-            {initials(nominee.name)}
-          </span>
-        )}
+      <div className="aspect-[4/3] bg-charcoal overflow-hidden">
+        <NomineeAvatar
+          name={nominee.name}
+          src={img}
+          kind="organization"
+          shape="square"
+          interactive
+          context={nominee.country ?? undefined}
+        />
       </div>
       <div className="p-4">
         <h3 className="font-display text-sm font-bold text-ivory line-clamp-2">
