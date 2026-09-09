@@ -92,15 +92,27 @@ export function CategoryPictureCatalogue({
     return [...map.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
   }, [data, activeSub]);
 
+  /** Paginate so large categories (200–300 nominees) stay fast on mobile. */
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+  const pageRows = useMemo(
+    () => filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE),
+    [filtered, safePage],
+  );
+
+  useEffect(() => {
+    setPage(1);
+  }, [activeSub, activeRegion, query, categorySlug]);
+
   const grouped = useMemo(() => {
     const map = new Map<string, CategoryNomineeRow[]>();
-    for (const n of filtered) {
+    for (const n of pageRows) {
       const key = n.region ?? UNPLACED;
       if (!map.has(key)) map.set(key, []);
       map.get(key)!.push(n);
     }
     return [...map.entries()].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
-  }, [filtered]);
+  }, [pageRows]);
 
   const brandName = getCategoryDisplayName(categorySlug, data?.category.name ?? "");
   const Heading = headingLevel;
