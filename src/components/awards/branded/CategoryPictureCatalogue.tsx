@@ -7,7 +7,7 @@
  * search, region grouping and live counts, plus the existing StageGate-guarded
  * inline nomination modal.
  */
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { BadgeCheck, Search, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -41,6 +41,7 @@ interface Props {
 }
 
 const UNPLACED = "Region not yet recorded";
+const PAGE_SIZE = 24;
 
 export function CategoryPictureCatalogue({
   categorySlug,
@@ -51,6 +52,7 @@ export function CategoryPictureCatalogue({
   const [activeRegion, setActiveRegion] = useState<string>("all");
   const [query, setQuery] = useState("");
   const [formOpen, setFormOpen] = useState(false);
+  const [page, setPage] = useState(1);
 
   const { data, isLoading } = useCategoryNominees(categorySlug);
   const { resolve } = useNomineeMediaResolver();
