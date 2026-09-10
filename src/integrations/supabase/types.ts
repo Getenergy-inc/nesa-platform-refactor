@@ -11044,6 +11044,187 @@ export type Database = {
         }
         Relationships: []
       }
+      sophia_faqs: {
+        Row: {
+          answer_am: string | null
+          answer_ar: string | null
+          answer_en: string
+          answer_fr: string | null
+          answer_ha: string | null
+          answer_hi: string | null
+          answer_ig: string | null
+          answer_pt: string | null
+          answer_sw: string | null
+          answer_yo: string | null
+          answer_zh: string | null
+          answer_zu: string | null
+          category: string
+          created_at: string
+          cta_href: string | null
+          cta_label: string | null
+          display_order: number
+          escalate: boolean
+          id: string
+          intent_keywords: string[]
+          is_active: boolean
+          question: string
+          tags: string[]
+          updated_at: string
+        }
+        Insert: {
+          answer_am?: string | null
+          answer_ar?: string | null
+          answer_en: string
+          answer_fr?: string | null
+          answer_ha?: string | null
+          answer_hi?: string | null
+          answer_ig?: string | null
+          answer_pt?: string | null
+          answer_sw?: string | null
+          answer_yo?: string | null
+          answer_zh?: string | null
+          answer_zu?: string | null
+          category?: string
+          created_at?: string
+          cta_href?: string | null
+          cta_label?: string | null
+          display_order?: number
+          escalate?: boolean
+          id?: string
+          intent_keywords?: string[]
+          is_active?: boolean
+          question: string
+          tags?: string[]
+          updated_at?: string
+        }
+        Update: {
+          answer_am?: string | null
+          answer_ar?: string | null
+          answer_en?: string
+          answer_fr?: string | null
+          answer_ha?: string | null
+          answer_hi?: string | null
+          answer_ig?: string | null
+          answer_pt?: string | null
+          answer_sw?: string | null
+          answer_yo?: string | null
+          answer_zh?: string | null
+          answer_zu?: string | null
+          category?: string
+          created_at?: string
+          cta_href?: string | null
+          cta_label?: string | null
+          display_order?: number
+          escalate?: boolean
+          id?: string
+          intent_keywords?: string[]
+          is_active?: boolean
+          question?: string
+          tags?: string[]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      sophia_unanswered: {
+        Row: {
+          best_match_id: string | null
+          best_match_score: number | null
+          channel: string
+          conversation_id: string | null
+          created_at: string
+          detected_language: string
+          id: string
+          question: string
+          reviewed: boolean
+          updated_at: string
+        }
+        Insert: {
+          best_match_id?: string | null
+          best_match_score?: number | null
+          channel?: string
+          conversation_id?: string | null
+          created_at?: string
+          detected_language?: string
+          id?: string
+          question: string
+          reviewed?: boolean
+          updated_at?: string
+        }
+        Update: {
+          best_match_id?: string | null
+          best_match_score?: number | null
+          channel?: string
+          conversation_id?: string | null
+          created_at?: string
+          detected_language?: string
+          id?: string
+          question?: string
+          reviewed?: boolean
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sophia_unanswered_best_match_id_fkey"
+            columns: ["best_match_id"]
+            isOneToOne: false
+            referencedRelation: "sophia_faqs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sophia_whatsapp_messages: {
+        Row: {
+          body: string | null
+          created_at: string
+          delivery_status: string
+          detected_language: string | null
+          direction: string
+          error_detail: string | null
+          id: string
+          matched_faq_id: string | null
+          raw: Json | null
+          wa_from: string | null
+          wa_message_id: string | null
+          wa_to: string | null
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          delivery_status?: string
+          detected_language?: string | null
+          direction: string
+          error_detail?: string | null
+          id?: string
+          matched_faq_id?: string | null
+          raw?: Json | null
+          wa_from?: string | null
+          wa_message_id?: string | null
+          wa_to?: string | null
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          delivery_status?: string
+          detected_language?: string | null
+          direction?: string
+          error_detail?: string | null
+          id?: string
+          matched_faq_id?: string | null
+          raw?: Json | null
+          wa_from?: string | null
+          wa_message_id?: string | null
+          wa_to?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sophia_whatsapp_messages_matched_faq_id_fkey"
+            columns: ["matched_faq_id"]
+            isOneToOne: false
+            referencedRelation: "sophia_faqs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       sponsor_campaigns: {
         Row: {
           created_at: string | null

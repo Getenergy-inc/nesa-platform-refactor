@@ -12,9 +12,10 @@ export interface ChatMetadata {
   detectedIntent?: string;
   suggestedCta?: string;
   isEscalated?: boolean;
+  language?: string;
 }
 
-const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`;
+const SOPHIA_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/sophia`;
 
 export function useCustomerCareChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -22,151 +23,83 @@ export function useCustomerCareChat() {
   const [error, setError] = useState<string | null>(null);
   const [metadata, setMetadata] = useState<ChatMetadata>({});
   const conversationIdRef = useRef<string>(createUuid());
+  const introducedRef = useRef(false);
+  const [language, setLanguage] = useState<string | undefined>(undefined);
 
-  const sendMessage = useCallback(async (content: string) => {
-    if (!content.trim() || isLoading) return;
+  const appendAssistant = useCallback((content: string) => {
+    setMessages((prev) => [
+      ...prev,
+      { id: createUuid(), role: "assistant", content, timestamp: new Date() },
+    ]);
+  }, []);
 
-    setError(null);
-    const userMessage: ChatMessage = {
-      id: createUuid(),
-      role: "user",
-      content: content.trim(),
-      timestamp: new Date(),
-    };
+  const sendMessage = useCallback(
+    async (content: string) => {
+      if (!content.trim() || isLoading) return;
 
-    setMessages((prev) => [...prev, userMessage]);
-    setIsLoading(true);
+      setError(null);
+      const userMessage: ChatMessage = {
+        id: createUuid(),
+        role: "user",
+        content: content.trim(),
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, userMessage]);
+      setIsLoading(true);
 
-    let assistantContent = "";
-
-    const upsertAssistant = (chunk: string) => {
-      assistantContent += chunk;
-      setMessages((prev) => {
-        const last = prev[prev.length - 1];
-        if (last?.role === "assistant") {
-          return prev.map((m, i) =>
-            i === prev.length - 1 ? { ...m, content: assistantContent } : m
-          );
-        }
-        return [
-          ...prev,
-          {
-            id: createUuid(),
-            role: "assistant",
-            content: assistantContent,
-            timestamp: new Date(),
+      try {
+        const resp = await fetch(SOPHIA_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
           },
-        ];
-      });
-    };
-
-    try {
-      const apiMessages = [...messages, userMessage].map((m) => ({
-        role: m.role,
-        content: m.content,
-      }));
-
-      const resp = await fetch(CHAT_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
-        },
-        body: JSON.stringify({ 
-          messages: apiMessages,
-          conversationId: conversationIdRef.current,
-        }),
-      });
-
-      // Extract metadata from response headers
-      const detectedIntent = resp.headers.get("X-Detected-Intent");
-      const suggestedCta = resp.headers.get("X-Suggested-CTA");
-      const isEscalated = resp.headers.get("X-Escalated") === "true";
-      
-      if (detectedIntent || suggestedCta || isEscalated) {
-        setMetadata({
-          detectedIntent: detectedIntent || undefined,
-          suggestedCta: suggestedCta || undefined,
-          isEscalated,
+          body: JSON.stringify({
+            message: userMessage.content,
+            conversationId: conversationIdRef.current,
+            language,
+            isFirstMessage: !introducedRef.current,
+          }),
         });
-      }
 
-      if (!resp.ok) {
-        const errorData = await resp.json().catch(() => ({}));
-        if (resp.status === 429) {
-          throw new Error("Too many requests. Please wait a moment and try again.");
+        const data = await resp.json().catch(() => ({}));
+
+        if (!resp.ok) {
+          throw new Error(data?.error || "Sophia could not respond right now.");
         }
-        if (resp.status === 402) {
-          throw new Error("Service temporarily unavailable. Please try again later.");
+
+        if (data.intro && !introducedRef.current) {
+          introducedRef.current = true;
+          appendAssistant(data.intro);
         }
-        throw new Error(errorData.error || "Failed to get response");
-      }
 
-      if (!resp.body) throw new Error("No response body");
-
-      const reader = resp.body.getReader();
-      const decoder = new TextDecoder();
-      let textBuffer = "";
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-
-        textBuffer += decoder.decode(value, { stream: true });
-
-        let newlineIndex: number;
-        while ((newlineIndex = textBuffer.indexOf("\n")) !== -1) {
-          let line = textBuffer.slice(0, newlineIndex);
-          textBuffer = textBuffer.slice(newlineIndex + 1);
-
-          if (line.endsWith("\r")) line = line.slice(0, -1);
-          if (line.startsWith(":") || line.trim() === "") continue;
-          if (!line.startsWith("data: ")) continue;
-
-          const jsonStr = line.slice(6).trim();
-          if (jsonStr === "[DONE]") break;
-
-          try {
-            const parsed = JSON.parse(jsonStr);
-            const deltaContent = parsed.choices?.[0]?.delta?.content;
-            if (deltaContent) upsertAssistant(deltaContent);
-          } catch {
-            textBuffer = line + "\n" + textBuffer;
-            break;
-          }
+        let reply: string = data.reply ?? "";
+        if (data.cta?.href) {
+          reply += `\n\n[${data.cta.label ?? "Continue"}](${data.cta.href})`;
         }
-      }
+        appendAssistant(reply);
 
-      // Final flush
-      if (textBuffer.trim()) {
-        for (let raw of textBuffer.split("\n")) {
-          if (!raw) continue;
-          if (raw.endsWith("\r")) raw = raw.slice(0, -1);
-          if (raw.startsWith(":") || raw.trim() === "") continue;
-          if (!raw.startsWith("data: ")) continue;
-          const jsonStr = raw.slice(6).trim();
-          if (jsonStr === "[DONE]") continue;
-          try {
-            const parsed = JSON.parse(jsonStr);
-            const deltaContent = parsed.choices?.[0]?.delta?.content;
-            if (deltaContent) upsertAssistant(deltaContent);
-          } catch {
-            /* ignore */
-          }
-        }
+        setMetadata({
+          detectedIntent: data.category ?? undefined,
+          suggestedCta: data.cta?.href ?? undefined,
+          isEscalated: Boolean(data.escalate),
+          language: data.language,
+        });
+      } catch (err) {
+        console.error("Sophia chat error:", err);
+        setError(err instanceof Error ? err.message : "Failed to send message");
+      } finally {
+        setIsLoading(false);
       }
-    } catch (err) {
-      console.error("Chat error:", err);
-      setError(err instanceof Error ? err.message : "Failed to send message");
-    } finally {
-      setIsLoading(false);
-    }
-  }, [messages, isLoading]);
+    },
+    [isLoading, language, appendAssistant]
+  );
 
   const clearChat = useCallback(() => {
     setMessages([]);
     setError(null);
     setMetadata({});
+    introducedRef.current = false;
     conversationIdRef.current = createUuid();
   }, []);
 
@@ -175,6 +108,8 @@ export function useCustomerCareChat() {
     isLoading,
     error,
     metadata,
+    language,
+    setLanguage,
     sendMessage,
     clearChat,
   };
