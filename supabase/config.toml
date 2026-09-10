@@ -88,3 +88,9 @@ verify_jwt = false
 # NRC invitation delivery (auth verified in code: admin/NRC only)
 [functions.nrc-invite]
 verify_jwt = false
+
+[functions.sophia]
+verify_jwt = false
+
+[functions.sophia-whatsapp]
+verify_jwt = false
