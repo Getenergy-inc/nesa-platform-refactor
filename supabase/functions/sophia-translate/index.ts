@@ -122,10 +122,11 @@ Deno.serve(async (req) => {
 
     for (const lang of langs) {
       const col = `answer_${lang}`;
-      const pending = (rows ?? []).filter(
+      const allPending = (rows ?? []).filter(
         (r: Record<string, unknown>) => !String(r[col] ?? "").trim(),
       );
-      results[lang] = { translated: 0, skipped: (rows?.length ?? 0) - pending.length };
+      const pending = allPending.slice(0, maxRows);
+      results[lang] = { translated: 0, skipped: (rows?.length ?? 0) - allPending.length };
       if (pending.length === 0) continue;
 
       try {
