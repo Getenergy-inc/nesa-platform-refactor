@@ -24,7 +24,7 @@ const LANGS: Record<string, string> = {
   hi: "Hindi",
 };
 
-const MODEL = "google/gemini-3-pro-preview";
+const MODEL = "google/gemini-3.1-pro-preview";
 
 async function translate(apiKey: string, lang: string, texts: string[]): Promise<string[]> {
   const payload = texts.map((t, i) => ({ i, text: t }));
