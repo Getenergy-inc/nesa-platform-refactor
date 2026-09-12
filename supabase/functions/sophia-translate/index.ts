@@ -24,7 +24,7 @@ const LANGS: Record<string, string> = {
   hi: "Hindi",
 };
 
-const MODEL = "google/gemini-3.1-pro-preview";
+const MODEL = "google/gemini-3.8-flash";
 
 async function translate(apiKey: string, lang: string, texts: string[]): Promise<string[]> {
   const payload = texts.map((t, i) => ({ i, text: t }));
@@ -110,6 +110,7 @@ Deno.serve(async (req) => {
       ? body.langs.filter((l: string) => l in LANGS)
       : Object.keys(LANGS);
     const batchSize: number = Math.min(Number(body?.batch_size) || 25, 40);
+    const maxRows: number = Math.min(Number(body?.max_rows) || 1000, 1000);
 
     const { data: rows, error } = await admin
       .from("sophia_faqs")
