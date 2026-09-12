@@ -24,7 +24,7 @@ const LANGS: Record<string, string> = {
   hi: "Hindi",
 };
 
-const MODEL = "google/gemini-3.1-pro-preview";
+const MODEL = "google/gemini-3.8-flash";
 
 async function translate(apiKey: string, lang: string, texts: string[]): Promise<string[]> {
   const payload = texts.map((t, i) => ({ i, text: t }));
@@ -85,20 +85,24 @@ Deno.serve(async (req) => {
     const apiKey = Deno.env.get("LOVABLE_API_KEY");
     if (!apiKey) return json({ error: "LOVABLE_API_KEY not configured" }, 500);
 
-    // ---- admin gate -------------------------------------------------------
-    const authHeader = req.headers.get("Authorization") ?? "";
-    const token = authHeader.replace(/^Bearer\s+/i, "");
-    if (!token) return json({ error: "Unauthorized" }, 401);
-
+    // ---- gate: platform admin, or the maintenance key ---------------------
     const admin = createClient(supabaseUrl, serviceKey);
-    const { data: userData, error: userErr } = await admin.auth.getUser(token);
-    if (userErr || !userData?.user) return json({ error: "Unauthorized" }, 401);
+    const maintenanceKey = Deno.env.get("SOPHIA_TRANSLATE_KEY");
+    const providedKey = req.headers.get("x-sophia-translate-key");
+    let allowed = Boolean(maintenanceKey && providedKey && providedKey === maintenanceKey);
 
-    const { data: isAdmin } = await admin.rpc("has_role", {
-      _user_id: userData.user.id,
-      _role: "admin",
-    });
-    if (!isAdmin) return json({ error: "Forbidden" }, 403);
+    if (!allowed) {
+      const token = (req.headers.get("Authorization") ?? "").replace(/^Bearer\s+/i, "");
+      if (!token) return json({ error: "Unauthorized" }, 401);
+      const { data: userData, error: userErr } = await admin.auth.getUser(token);
+      if (userErr || !userData?.user) return json({ error: "Unauthorized" }, 401);
+      const { data: isAdmin } = await admin.rpc("has_role", {
+        _user_id: userData.user.id,
+        _role: "admin",
+      });
+      allowed = Boolean(isAdmin);
+    }
+    if (!allowed) return json({ error: "Forbidden" }, 403);
 
     // ---- work -------------------------------------------------------------
     const body = await req.json().catch(() => ({}));
@@ -106,6 +110,7 @@ Deno.serve(async (req) => {
       ? body.langs.filter((l: string) => l in LANGS)
       : Object.keys(LANGS);
     const batchSize: number = Math.min(Number(body?.batch_size) || 25, 40);
+    const maxRows: number = Math.min(Number(body?.max_rows) || 1000, 1000);
 
     const { data: rows, error } = await admin
       .from("sophia_faqs")
@@ -117,10 +122,11 @@ Deno.serve(async (req) => {
 
     for (const lang of langs) {
       const col = `answer_${lang}`;
-      const pending = (rows ?? []).filter(
+      const allPending = (rows ?? []).filter(
         (r: Record<string, unknown>) => !String(r[col] ?? "").trim(),
       );
-      results[lang] = { translated: 0, skipped: (rows?.length ?? 0) - pending.length };
+      const pending = allPending.slice(0, maxRows);
+      results[lang] = { translated: 0, skipped: (rows?.length ?? 0) - allPending.length };
       if (pending.length === 0) continue;
 
       try {
