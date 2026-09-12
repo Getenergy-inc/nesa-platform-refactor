@@ -85,20 +85,24 @@ Deno.serve(async (req) => {
     const apiKey = Deno.env.get("LOVABLE_API_KEY");
     if (!apiKey) return json({ error: "LOVABLE_API_KEY not configured" }, 500);
 
-    // ---- admin gate -------------------------------------------------------
-    const authHeader = req.headers.get("Authorization") ?? "";
-    const token = authHeader.replace(/^Bearer\s+/i, "");
-    if (!token) return json({ error: "Unauthorized" }, 401);
-
+    // ---- gate: platform admin, or the maintenance key ---------------------
     const admin = createClient(supabaseUrl, serviceKey);
-    const { data: userData, error: userErr } = await admin.auth.getUser(token);
-    if (userErr || !userData?.user) return json({ error: "Unauthorized" }, 401);
+    const maintenanceKey = Deno.env.get("SOPHIA_TRANSLATE_KEY");
+    const providedKey = req.headers.get("x-sophia-translate-key");
+    let allowed = Boolean(maintenanceKey && providedKey && providedKey === maintenanceKey);
 
-    const { data: isAdmin } = await admin.rpc("has_role", {
-      _user_id: userData.user.id,
-      _role: "admin",
-    });
-    if (!isAdmin) return json({ error: "Forbidden" }, 403);
+    if (!allowed) {
+      const token = (req.headers.get("Authorization") ?? "").replace(/^Bearer\s+/i, "");
+      if (!token) return json({ error: "Unauthorized" }, 401);
+      const { data: userData, error: userErr } = await admin.auth.getUser(token);
+      if (userErr || !userData?.user) return json({ error: "Unauthorized" }, 401);
+      const { data: isAdmin } = await admin.rpc("has_role", {
+        _user_id: userData.user.id,
+        _role: "admin",
+      });
+      allowed = Boolean(isAdmin);
+    }
+    if (!allowed) return json({ error: "Forbidden" }, 403);
 
     // ---- work -------------------------------------------------------------
     const body = await req.json().catch(() => ({}));
