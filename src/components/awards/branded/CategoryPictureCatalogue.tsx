@@ -26,6 +26,7 @@ import { NativeCategoryNominationForm } from "@/components/awards/NativeCategory
 import { resolveAwardForm } from "@/config/nomination/resolveAwardForm";
 import { getCategoryDisplayName } from "@/config/categoryDisplayBrand";
 import { NomineeMediaImage } from "@/components/nominees/NomineeMediaImage";
+import { NomineeAvatar } from "@/components/nominees/NomineeAvatar";
 import { useNomineeMediaResolver } from "@/hooks/useNomineeMediaSourcing";
 import { buildSuppressedUrlSet } from "@/lib/nomineeMediaResolver";
 import {
@@ -279,6 +280,7 @@ export function CategoryPictureCatalogue({
                             name={n.name}
                             label={sub?.name}
                             size="sm"
+                            fallback={<NomineeAvatar name={n.name} shape="square" />}
                           />
                         </div>
                         <div className="p-3">
