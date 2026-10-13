@@ -5,6 +5,7 @@
 import type { TierSlug } from "../tiers";
 import type { GeographyModel } from "../geographyModels";
 import type { NomineeType } from "../nomineeTypes";
+import { NOMINATIONS_OPEN_ISO, CERTIFICATE_WINDOW_CLOSE_ISO, ICON_WINDOW_CLOSE_ISO } from "@/config/nominationWindows2026";
 
 export interface SubcategoryDef {
   code: string;
@@ -35,8 +36,8 @@ export interface CategoryDefinition {
   seo: { title: string; description: string };
 }
 
-const OPEN = "2026-08-01T00:00:00Z";
-const CLOSE = "2026-09-12T23:59:59Z";
+const OPEN = `${NOMINATIONS_OPEN_ISO}T00:00:00Z`;
+const CLOSE = `${CERTIFICATE_WINDOW_CLOSE_ISO}T23:59:59Z`;
 
 const COMMON_ELIGIBILITY = [
   "Nominee's contribution must fall within the recognised eligibility period.",
@@ -102,7 +103,7 @@ const ICON: CategoryDefinition = {
     "Governance Ratification",
   ],
   openingDate: OPEN,
-  closingDate: CLOSE,
+  closingDate: `${ICON_WINDOW_CLOSE_ISO}T23:59:59Z`,
   seo: {
     title: "Africa Education Icon Award 2006–2026 | NESA-Africa",
     description:

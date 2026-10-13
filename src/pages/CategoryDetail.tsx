@@ -21,6 +21,9 @@ import { categoryIconMap } from "@/config/categoryIconMap";
 import { MobileStickyNominateCTA } from "@/components/nesa/MobileStickyNominateCTA";
 import { getCategoryImage } from "@/config/categoryImages";
 import { StageGate } from "@/components/governance/StageGate";
+import { AwardResearchContext } from "@/components/awards/AwardResearchContext";
+import { CategoryPictureCatalogue } from "@/components/awards/branded/CategoryPictureCatalogue";
+import { getAwardResearch } from "@/config/awardResearch2026";
 
 // Scope badge styles
 const scopeStyles: Record<string, { label: string; className: string }> = {
@@ -39,7 +42,7 @@ const tierBadgeStyles: Record<string, { label: string; className: string; icon: 
 
 // Governance hints per track
 const governanceHints: Record<string, string> = {
-  competitive: "Top 3 finalists emerge from public voting. Finalists compete for the Blue Garnet Award.",
+  competitive: "2026 recognition requires NRC evidence review and governance approval; public voting is not used.",
   institutional: "Institutional recognition evaluated under governance and leadership criteria.",
   "special-recognition": "Cultural & influence impact recognition (2026 edition).",
   lifetime: "Continental lifetime honour.",
@@ -87,10 +90,11 @@ export default function CategoryDetail() {
   const { data: subcategories, isLoading: loadingSubcategories } = useQuery({
     queryKey: ["subcategories", category?.id],
     queryFn: async () => {
+      if (!category?.id) return [];
       const { data, error } = await supabase
         .from("subcategories")
         .select("*")
-        .eq("category_id", category!.id)
+        .eq("category_id", category.id)
         .eq("is_active", true)
         .order("display_order");
       if (error) throw error;
@@ -214,7 +218,9 @@ export default function CategoryDetail() {
           </div>
         </section>
 
-        {/* Subcategories */}
+        <AwardResearchContext categorySlug={slug} />
+        {getAwardResearch(slug) && slug && <CategoryPictureCatalogue categorySlug={slug} />}
+        {/* Existing taxonomy remains unchanged */}
         <section className="container px-6 py-12">
           <h2 className="font-display text-xl font-bold text-ivory mb-6">
             Subcategories ({displaySubcategories.length})

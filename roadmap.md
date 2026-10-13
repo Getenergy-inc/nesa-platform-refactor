@@ -1,3 +1,8 @@
 - [x] Factual check: /nominees/lane/ngo-africa route, data source, counts, category identity
 - [x] LaneGalleryPage refactor (focus-area tabs, region filter, NomineeAvatar fallback)
 - [x] Verified page renders 85 live nominees (tabs, filters, pagination OK)
+- [x] Refactor attached-document award and subcategory content, preserving existing routes and nomination rules.
+- [x] Stage 2,044 identifiable PDF candidates privately with provenance and within-pathway deduplication; no public nominees created.
+- [x] Verify public research pages, live searches, profile links, fallbacks, 320–1440px layouts, 85 frontend tests and 4 extraction tests.
+- [ ] Verify administrator staging screen end-to-end — requesting account has only user role; requires an authorised administrator session.
+- [ ] Clear public reference-table alerts — schemas and policies confirmed intentionally public, awaiting approval to dismiss false positives.

@@ -30,6 +30,8 @@ import {
   type DetailedAwardCategoryPage,
 } from "@/content/contentBible2026/pathwayPages";
 import type { BrandedCategoryTheme } from "./BrandedCategoryHero";
+import { AwardResearchContext } from "./AwardResearchContext";
+import { getAwardResearch } from "@/config/awardResearch2026";
 
 type Props = { page: DetailedAwardCategoryPage; theme?: BrandedCategoryTheme };
 
@@ -185,12 +187,14 @@ export default function DetailedCategoryPageTemplate({ page, theme = "corporate"
         </div>
       </section>
 
-      {/* S5 — Subcategories */}
+      <AwardResearchContext categorySlug={dbCategorySlug} />
+
+      {/* S5 — Existing taxonomy retained for form compatibility */}
       <section className="bg-muted/30">
         <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
           <div className="flex items-end justify-between flex-wrap gap-3 mb-6">
-            <h2 className="font-serif text-2xl md:text-3xl">Subcategories</h2>
-            <span className="text-sm text-muted-foreground">{page.subcategories.length} recognition pathways</span>
+            <h2 className="font-serif text-2xl md:text-3xl">{getAwardResearch(dbCategorySlug)?.pathways.length ? "Existing catalogue classifications" : "Subcategories"}</h2>
+            <span className="text-sm text-muted-foreground">{page.subcategories.length} existing classifications</span>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {page.subcategories.map((s) => (

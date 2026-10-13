@@ -16,6 +16,7 @@ import { FeaturedInfluencerSpotlight } from "@/components/influencer-impact/Feat
 import type { CategoryId as InfluencerCategoryId } from "@/config/awards/influencerImpact2026";
 import { BrandedCategoryHeroBand } from "@/components/awards/branded/BrandedCategoryHeroBand";
 import { useCategoryHeroStats } from "@/components/awards/branded/useCategoryHeroStats";
+import { AwardResearchContext } from "@/components/awards/AwardResearchContext";
 
 
 const CANONICAL_ORIGIN = "https://nesaafrica.lovable.app";
@@ -283,6 +284,7 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
           </ul>
         </nav>
 
+        <AwardResearchContext categorySlug={dbCategorySlug} />
         <Section id="overview" title="What This Recognition Celebrates">
           <p>This recognition celebrates work that helps to:</p>
           <BulletList items={content.celebrates} />

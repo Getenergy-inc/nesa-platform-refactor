@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { FeaturedNomineesBlock } from "@/components/nominees/FeaturedNomineesBlock";
+import { AwardResearchContext } from "@/components/awards/AwardResearchContext";
 
 import { AwardTVShowSection } from "@/components/awards/AwardTVShowSection";
 import { AwardCategoriesGrid } from "@/components/awards/AwardCategoriesGrid";
@@ -231,10 +232,11 @@ export default function IconAward() {
           faqs={[
             { q: "Can the Icon Award be self-nominated?", a: "Yes, but with the same evidence standards. Self-nominations are scored identically and audited by the NRC engine." },
             { q: "How many Icons are recognised each year?", a: "Up to 9 — 3 Africa, 3 Diaspora, 3 Friends of Africa." },
-            { q: "Is there public voting?", a: "No. The Icon Award is jury-evaluated under the EDX Matrix; public voting is reserved for Blue Garnet tracks." },
+            { q: "Is there public voting?", a: "No. The Icon Award is jury-evaluated under the EDX Matrix. Public voting is not used for recognition in 2026." },
           ]}
         />
 
+        <AwardResearchContext categorySlug="africa-education-icon-award" />
         <TierCategoriesGrid
           tier="africa-education-icon"
           heading="Africa Education Icon — Recognition Subcategories"

@@ -25,6 +25,7 @@ import {
 import type { TierSlug } from "@/config/recognition2026/tiers";
 import { getSubpageHeroImage } from "@/config/awards/subpageHeroImages";
 import { getSubpageModules } from "@/config/awards/subpageModules2026";
+import { getAwardResearch, researchPath } from "@/config/awardResearch2026";
 import {
   buildCategoryStory,
   buildSubcategoryStory,
@@ -158,6 +159,7 @@ function fromCategory(cat: CategoryDefinition): AwardSubpageContent {
   const nominateHref = `/nominate?tier=${cat.tier}&category=${cat.slug}`;
   const directoryHref = `/nominees?tier=${cat.tier}&category=${cat.slug}`;
   const modules = getSubpageModules(cat.tier, cat.shortName);
+  const research = getAwardResearch(cat.slug);
 
   return {
     slug,
@@ -225,7 +227,16 @@ function fromCategory(cat: CategoryDefinition): AwardSubpageContent {
       tagline: cat.summary,
     },
     story: buildCategoryStory(cat),
-    pathways: buildCategoryPathways(cat),
+    pathways: research?.pathways.length
+      ? {
+          heading: "Education impact pathways", label: "Pathway", intro: research.intro,
+          items: research.pathways.map((pathway) => ({
+            code: pathway.slug, name: pathway.title, description: pathway.description,
+            evidence: pathway.evidence, image: getSubpageHeroImage(cat.slug),
+            nominateHref, directoryHref: researchPath(research, pathway),
+          })),
+        }
+      : buildCategoryPathways(cat),
     videos: getCategoryVideos(cat.tier, slug, cat.shortName),
     nomination: {
       formSlug: cat.slug,
