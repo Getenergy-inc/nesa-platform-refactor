@@ -19,6 +19,8 @@ def identifiable(name):
         return False
     if re.match(r"^(?:WA|EA|CA|NA|SA|IO|Horn|Sahel|Gulf African diaspora)\s", name) and not name.startswith("Sahel Academy"):
         return False
+    if re.match(r"^(?:Local |Diaspora |Women digital |Girls digital |Global (?:tech CSR|humanitarian EdTech|offline-first)|International (?:donor|results-based)|African diaspora |African Muslim student |Regional (?:Arabic|education)|Islamic school fee |Private/NGO TVET|Bilateral TVET)", name):
+        return False
     if name in {"Ahmed", "Amadou", "Amanda", "Ashraf", "Charlotte", "Daphne", "Denise", "Dieumerci", "Erin", "Wayua"}:
         return False
     if re.search(r"^(?:CA|EA|NA|SA|WA|IO)\s+(?:LMS|Qur.anic|assessment|madrasa|mobile|offline|robotics|university|virtual|zakat|FMCG)|philanthropy\s+(?:CA|EA|Horn|Islands|NA|SA|Sahel|WA|Regional)|^(?:Bilateral emergency|Regional education|Islamic education support|Local icon|Publishing digital|Telecom established|Banking|Banks Education|Corporate CSR|Established NGO digital|International NGO|Skills philanthropy|TVET philanthropy|Literacy philanthropy|EiE philanthropy|Girls. education philanthropy|Faith-linked|University-linked|Diaspora philanthropy|African-led education philanthropy|Emergency education philanthropy)", name, re.I):
