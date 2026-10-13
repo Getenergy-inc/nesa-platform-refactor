@@ -197,6 +197,7 @@ import AwardSpinePage from "./pages/awards/AwardSpinePage";
 import EighteenCategoriesPage from "./pages/awards/EighteenCategoriesPage";
 import CategoryDetailPage from "./pages/awards/CategoryDetailPage";
 import TierCategorySubcategoryPage from "./pages/awards/TierCategorySubcategoryPage";
+import ResearchPathwayPage from "./pages/awards/ResearchPathwayPage";
 import TierClusterPage from "./pages/awards/cluster/TierClusterPage";
 import RecognitionHubPage from "./pages/recognition/RecognitionHubPage";
 import AwardSubpageRoute from "./pages/recognition/AwardSubpageRoute";
@@ -451,6 +452,7 @@ import YouTubePipeline from "./pages/admin/YouTubePipeline";
 import AdminVolunteersCMS from "./pages/admin/AdminVolunteersCMS";
 import AdminRecruitmentTracker from "./pages/admin/AdminRecruitmentTracker";
 import AdminNGOReviewQueue from "./pages/admin/AdminNGOReviewQueue";
+import AdminResearchStaging from "./pages/admin/AdminResearchStaging";
 import AdminNomineeMedia from "./pages/admin/AdminNomineeMedia";
 import NomineeMediaSubmission from "./pages/nominee/NomineeMediaSubmission";
 
@@ -1219,6 +1221,7 @@ const App = () => (
                   <Route path="/recognition/influencer-education-impact" element={<InfluencerImpact2026 />} />
                   {/* 3-segment subcategory routes remain */}
                   <Route path="/recognition/gold-blue-garnet/:categorySlug/:subcategorySlug" element={<WithLayout><TierCategorySubcategoryPage /></WithLayout>} />
+                  <Route path="/recognition/research/:categorySlug/:pathwaySlug" element={<WithLayout><ResearchPathwayPage /></WithLayout>} />
                   {/* Phase C — 22 unified subpages driven by src/config/awards/subpages2026.ts */}
                   <Route path="/recognition/pages" element={<WithLayout><AwardLandingPagesIndex /></WithLayout>} />
                   <Route path="/recognition/subpage/:slug" element={<WithLayout><AwardSubpageRoute /></WithLayout>} />
@@ -2309,6 +2312,7 @@ const App = () => (
                   <Route path="/admin/volunteers" element={<AdminVolunteersCMS />} />
                   <Route path="/admin/recruitment" element={<AdminRecruitmentTracker />} />
                   <Route path="/admin/ngo-review" element={<AdminNGOReviewQueue />} />
+                  <Route path="/admin/research-staging" element={<AdminResearchStaging />} />
                   <Route path="/admin/nominee-media" element={<AdminNomineeMedia />} />
 
                   <Route path="/admin/subcategories" element={<AdminPathwaysCMS />} />

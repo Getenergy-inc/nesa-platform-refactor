@@ -1,0 +1,10 @@
+import csr from "@/assets/award-research/NESA_Best_CSR_for_Education_10_Regions_Detailed_Work.pdf.asset.json";
+import edutech from "@/assets/award-research/NESA_Best_EduTech_Innovation_3_Categories.pdf.asset.json";
+import international from "@/assets/award-research/NESA_Best_International_Partnership_Refactored_by_Category_Region.pdf.asset.json";
+import ngo from "@/assets/award-research/NESA_Best_NGO_Foundations_Icons_8_Categories_by_Region_1.pdf.asset.json";
+import stem from "@/assets/award-research/NESA_Best_STEM_Education_Programme_4_Categories.pdf.asset.json";
+import christian from "@/assets/award-research/NESA_Christian_FaithBased_and_Theological_Education_Research.pdf.asset.json";
+import islamic from "@/assets/award-research/NESA_Excellence_in_Islamic_Education_Impact_3_Categories.pdf.asset.json";
+import influencers from "@/assets/award-research/NESA_Influencers_impact_Refactored_by_Region_2.pdf.asset.json";
+import stemLenses from "@/assets/award-research/NESA_STEM_Education_3_Categories_by_Region.pdf.asset.json";
+export const AWARD_RESEARCH_SOURCES = Object.fromEntries([csr, edutech, international, ngo, stem, christian, islamic, influencers, stemLenses].map((source) => [source.original_filename, source.url]));

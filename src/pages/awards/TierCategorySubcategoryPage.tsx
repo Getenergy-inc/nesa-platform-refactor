@@ -21,9 +21,13 @@ import { AwardOverviewHowTo } from "@/components/awards/AwardOverviewHowTo";
 import { getStoryHeroImage } from "@/config/awards/subpageHeroImages";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
+import { BRAND } from "@/config/brandHierarchy";
+import { NomineeAvatar } from "@/components/nominees/NomineeAvatar";
+import { AwardResearchContext } from "@/components/awards/AwardResearchContext";
+import { CATEGORY_TO_REGISTRY } from "@/config/recognition/categoryAlias";
 
 const SITE = "https://nesaafrica.lovable.app";
-const BRAND_TAGLINE = "Enablers of Education for All Across Africa";
+const BRAND_TAGLINE = BRAND.programmeTagline;
 
 interface Nominee {
   id: string;
@@ -62,13 +66,13 @@ export default function TierCategorySubcategoryPage() {
     setLoading(true);
     (async () => {
       const { data } = await supabase
-        .from("nominees")
+        .from("public_nominees")
         .select(
           `id,name,slug,organization,country,photo_url,logo_url,
            subcategories:subcategory_id ( slug )`,
         )
-        .eq("status", "approved")
-        .limit(120);
+        .eq("subcategories.slug", subcategorySlug)
+        .limit(1000);
       if (cancelled) return;
       const rows = ((data as unknown as Array<Record<string, unknown>>) ?? [])
         .filter((r) => {
@@ -175,8 +179,8 @@ export default function TierCategorySubcategoryPage() {
                 variant="outline"
                 className="border-ivory/30 text-ivory hover:bg-ivory/10 rounded-full px-6"
               >
-                <a href="#existing">
-                  <ThumbsUp className="mr-2 h-4 w-4" /> Endorse Existing Nominee
+                <a href="#existing-nominees">
+                  <ThumbsUp className="mr-2 h-4 w-4" /> Meet Africa's Education Enablers
                 </a>
               </Button>
               <Button
@@ -211,16 +215,16 @@ export default function TierCategorySubcategoryPage() {
             <ShieldCheck className="h-6 w-6 text-gold" />
             <h3 className="mt-3 font-serif text-lg text-ivory">NRC Verified</h3>
             <p className="mt-1 text-sm text-ivory/65">
-              Every nomination in this subcategory is evidence-checked by the Nominee
-              Review Committee before it enters public review.
+              Recognition requires evidence review by the Nominee Research Corps.
+              A public listing alone does not imply NRC verification.
             </p>
           </div>
           <div className="rounded-2xl border border-gold/20 bg-charcoal-light/50 p-5">
             <Users className="h-6 w-6 text-gold" />
-            <h3 className="mt-3 font-serif text-lg text-ivory">Public + Jury</h3>
+            <h3 className="mt-3 font-serif text-lg text-ivory">Evidence-led recognition</h3>
             <p className="mt-1 text-sm text-ivory/65">
-              Gold–Blue Garnet finalists are chosen via a combined public voting and
-              expert jury evaluation.
+              Public voting and popularity do not determine 2026 recognition.
+              Existing NRC and governance approval requirements remain unchanged.
             </p>
           </div>
           <div className="rounded-2xl border border-gold/20 bg-charcoal-light/50 p-5">
@@ -234,9 +238,10 @@ export default function TierCategorySubcategoryPage() {
         </div>
       </section>
 
+      <AwardResearchContext categorySlug={categorySlug === "stem-education" ? "best-stem-education-africa" : categorySlug === "edtech-and-ai-innovation" ? "best-edutech-organisation-africa" : CATEGORY_TO_REGISTRY[categorySlug ?? ""]?.[0]} />
       {/* Existing Nominees */}
       <section
-        id="existing"
+        id="existing-nominees"
         className="container mx-auto px-4 py-10 scroll-mt-24"
       >
         <div className="mb-5 flex items-center justify-between gap-3 flex-wrap">
@@ -270,7 +275,6 @@ export default function TierCategorySubcategoryPage() {
         ) : (
           <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {nominees.slice(0, 12).map((n) => {
-              const img = n.photo_url || n.logo_url;
               return (
                 <li key={n.id}>
                   <Link
@@ -278,18 +282,7 @@ export default function TierCategorySubcategoryPage() {
                     className="flex items-center gap-3 rounded-xl border border-gold/15 bg-charcoal-light/40 p-3 hover:border-gold/40 hover:bg-charcoal-light/70 transition-colors"
                   >
                     <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full border border-gold/25 bg-charcoal">
-                      {img ? (
-                        <img
-                          src={img}
-                          alt={n.name}
-                          className="h-full w-full object-cover"
-                          loading="lazy"
-                        />
-                      ) : (
-                        <div className="flex h-full w-full items-center justify-center text-gold/60">
-                          {n.name.charAt(0)}
-                        </div>
-                      )}
+                      <NomineeAvatar name={n.name} src={n.photo_url || n.logo_url} shape="circle" />
                     </div>
                     <div className="min-w-0">
                       <p className="truncate text-sm font-semibold text-ivory">

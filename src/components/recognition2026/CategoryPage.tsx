@@ -19,6 +19,7 @@ import {
 import { GEOGRAPHY_MODEL_LABELS } from "@/config/recognition2026/geographyModels";
 import { NOMINEE_TYPE_LABELS } from "@/config/recognition2026/nomineeTypes";
 import { Button } from "@/components/ui/button";
+import { AwardResearchContext } from "@/components/awards/AwardResearchContext";
 import { ChevronRight, ShieldCheck, ArrowRight } from "lucide-react";
 
 const CANONICAL_ORIGIN = "https://nesaafrica.lovable.app";
@@ -250,6 +251,7 @@ export default function CategoryPage() {
           <p>{cat.overview}</p>
         </Section>
 
+        <AwardResearchContext categorySlug={cat.slug} />
         {/* 4. Who Can Be Nominated */}
         <Section id="who" title="Who Can Be Nominated">
           <ul className="list-disc pl-5 space-y-1">

@@ -38,6 +38,7 @@ interface Props {
   categorySlug: string;
   headingLevel?: "h1" | "h2";
   className?: string;
+  subcategoryPrefixes?: string[];
 }
 
 const UNPLACED = "Region not yet recorded";
@@ -47,6 +48,7 @@ export function CategoryPictureCatalogue({
   categorySlug,
   headingLevel = "h2",
   className,
+  subcategoryPrefixes,
 }: Props) {
   const [activeSub, setActiveSub] = useState<string>("all");
   const [activeRegion, setActiveRegion] = useState<string>("all");
@@ -54,7 +56,13 @@ export function CategoryPictureCatalogue({
   const [formOpen, setFormOpen] = useState(false);
   const [page, setPage] = useState(1);
 
-  const { data, isLoading } = useCategoryNominees(categorySlug);
+  const { data: categoryData, isLoading } = useCategoryNominees(categorySlug);
+  const data = useMemo(() => {
+    if (!categoryData || !subcategoryPrefixes) return categoryData;
+    const subs = categoryData.subs.filter((sub) => subcategoryPrefixes.some((prefix) => sub.slug.startsWith(prefix)));
+    const ids = new Set(subs.map((sub) => sub.id));
+    return { ...categoryData, subs, nominees: categoryData.nominees.filter((nominee) => nominee.subcategory_id && ids.has(nominee.subcategory_id)) };
+  }, [categoryData, subcategoryPrefixes]);
   const { resolve } = useNomineeMediaResolver();
   const suppressedUrls = useMemo(
     () => buildSuppressedUrlSet(data?.nominees ?? []),
@@ -111,7 +119,7 @@ export function CategoryPictureCatalogue({
     for (const n of pageRows) {
       const key = n.region ?? UNPLACED;
       if (!map.has(key)) map.set(key, []);
-      map.get(key)!.push(n);
+      map.get(key)?.push(n);
     }
     return [...map.entries()].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
   }, [pageRows]);
@@ -246,7 +254,7 @@ export function CategoryPictureCatalogue({
               className="mt-5 rounded-full bg-gold text-charcoal hover:bg-gold/90"
               onClick={() => setFormOpen(true)}
             >
-              Nominate now
+              Nominate
             </Button>
           </div>
         ) : (

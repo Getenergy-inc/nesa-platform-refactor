@@ -1,3 +1,7 @@
 - [x] Factual check: /nominees/lane/ngo-africa route, data source, counts, category identity
 - [x] LaneGalleryPage refactor (focus-area tabs, region filter, NomineeAvatar fallback)
 - [x] Verified page renders 85 live nominees (tabs, filters, pagination OK)
+- [ ] Refactor attached-document award and subcategory content, preserving existing routes and nomination rules.
+- [ ] Stage identifiable PDF research candidates with provenance and within-pathway deduplication; never publish them.
+- [ ] Verify research pages, galleries, links, media fallbacks and focused tests.
+- [ ] Review flagged public reference-table policies without breaking legitimate access.
