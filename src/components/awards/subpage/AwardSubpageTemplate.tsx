@@ -32,6 +32,7 @@ import {
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
+import { AwardResearchContext } from "@/components/awards/AwardResearchContext";
 import {
   AwardBenefitsBlock,
   AwardCountdownBlock,
@@ -324,6 +325,7 @@ export function AwardSubpageTemplate({ content }: { content: AwardSubpageContent
 
         {/* 1d. Category story */}
         {content.story ? <AwardStoryBlock story={content.story} /> : null}
+        <AwardResearchContext categorySlug={content.slug} />
 
         {/* 1e. Subcategories & pathways */}
         {content.pathways ? (

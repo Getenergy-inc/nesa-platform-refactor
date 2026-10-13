@@ -240,6 +240,7 @@ export default function TierCategorySubcategoryPage() {
 
       <AwardResearchContext categorySlug={categorySlug === "stem-education" ? "best-stem-education-africa" : categorySlug === "edtech-and-ai-innovation" ? "best-edutech-organisation-africa" : CATEGORY_TO_REGISTRY[categorySlug ?? ""]?.[0]} />
       {/* Existing Nominees */}
+      <span id="existing" aria-hidden="true" />
       <section
         id="existing-nominees"
         className="container mx-auto px-4 py-10 scroll-mt-24"

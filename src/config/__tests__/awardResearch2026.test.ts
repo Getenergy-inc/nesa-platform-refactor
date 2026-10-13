@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { getAwardResearch } from "../awardResearch2026";
+import { CATEGORIES } from "../recognition2026/categories";
 import { researchCandidateSchema, dedupeResearchCandidates, type ResearchCandidate } from "@/lib/researchStaging";
 
 const candidate: ResearchCandidate = {
@@ -10,6 +11,15 @@ const candidate: ResearchCandidate = {
   nomination_source: "Research compilation — attached award PDFs", mapping_status: "requires_nrc_mapping", evidence_status: "source_claim_unverified",
 };
 describe("Confirmed research rules", () => {
+  it("opens all categories on 6 September 2026", () => {
+    expect(CATEGORIES.every((category) => category.openingDate === "2026-09-06T00:00:00Z")).toBe(true);
+  });
+  it("retains the confirmed 6 October Icon closing date", () => {
+    expect(CATEGORIES.find((category) => category.tier === "africa-education-icon")?.closingDate).toBe("2026-10-06T23:59:59Z");
+  });
+  it("retains the confirmed 21 November certificate closing date", () => {
+    expect(CATEGORIES.filter((category) => category.tier !== "africa-education-icon").every((category) => category.closingDate === "2026-11-21T23:59:59Z")).toBe(true);
+  });
   it("has four official STEM pathways, not seven", () => {
     expect(getAwardResearch("best-stem-education-africa")?.pathways.map((p) => p.slug)).toEqual(["stem-school-institution", "stem-ngo-nonprofit", "stem-edtech-digital", "stem-girls-initiative"]);
     expect(getAwardResearch("best-stem-education-africa")?.lenses).toHaveLength(3);
