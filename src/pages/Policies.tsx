@@ -272,7 +272,7 @@ export default function Policies() {
                     </ul>
                   </PolicyBlock>
 
-                  <PolicyBlock title="2. National Review Committee (NRC)" icon={Users}>
+                  <PolicyBlock title="2. Nomination Review Committee (NRC)" icon={Users}>
                     <p className="text-muted-foreground mb-4">
                       The NRC is responsible for:
                     </p>
@@ -385,7 +385,7 @@ export default function Policies() {
                     <div className="mt-4 p-4 bg-primary/5 rounded-lg border border-primary/20">
                       <p className="text-sm text-foreground flex items-start gap-2">
                         <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                        <span>Certificates are available for download immediately after approval by the National Review Committee (NRC).</span>
+                        <span>Certificates are available for download immediately after approval by the Nomination Review Committee (NRC).</span>
                       </p>
                     </div>
                   </PolicyBlock>
@@ -451,7 +451,7 @@ export default function Policies() {
                     <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
                       <li><strong>45-day reminder:</strong> You'll receive an email notification before expiry</li>
                       <li><strong>Renewal application:</strong> Submit updated evidence of continued excellence</li>
-                      <li><strong>NRC review:</strong> Your renewal is reviewed by the National Review Committee</li>
+                      <li><strong>NRC review:</strong> Your renewal is reviewed by the Nomination Review Committee</li>
                       <li><strong>New certificate:</strong> Upon approval, a new 1-year certificate is issued</li>
                     </ul>
                     <div className="mt-4 p-4 bg-primary/5 rounded-lg border border-primary/20">

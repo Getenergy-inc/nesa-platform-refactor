@@ -1,7 +1,7 @@
 /**
  * NESA-Africa API Client - NRC Workflow Endpoints
  * 
- * National Review Committee endpoints for nomination review workflow.
+ * Nomination Review Committee endpoints for nomination review workflow.
  */
 
 import api, { type PaginatedResponse } from "./http";

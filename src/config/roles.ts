@@ -12,7 +12,7 @@ export const ROLE_LABELS: Record<AppRole, string> = {
 
 export const ROLE_DESCRIPTIONS: Record<AppRole, string> = {
   user: "Standard platform user who can nominate and vote",
-  nrc: "National Review Committee member who reviews nominations",
+  nrc: "Nomination Review Committee member who reviews nominations",
   jury: "Jury member who scores Blue Garnet nominees",
   chapter: "Regional chapter leader managing local operations",
   sponsor: "Sponsor with limited dashboard access",
