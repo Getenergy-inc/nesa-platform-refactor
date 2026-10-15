@@ -94,7 +94,7 @@ export const PHASES: PhaseConfig[] = [
     id: "nrc-review",
     name: "NRC Review",
     shortName: "Review",
-    description: "National Review Committee evaluates nominations",
+    description: "Nomination Review Committee evaluates nominations",
     startDate: new Date("2026-05-01"),
     endDate: new Date("2026-06-10"),
     isActive: false,

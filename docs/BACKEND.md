@@ -126,7 +126,7 @@ verify_jwt = false
 | Role | Code | Description |
 |------|------|-------------|
 | user | USER | Standard user |
-| nrc | NRC | National Review Committee |
+| nrc | NRC | Nomination Review Committee |
 | jury | JURY | Jury scorer |
 | chapter | OLC_COORDINATOR | Chapter coordinator |
 | sponsor | SPONSOR | Sponsor access |
