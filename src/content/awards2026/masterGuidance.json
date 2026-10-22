@@ -1,0 +1,1106 @@
+{
+  "tiers": [
+    {
+      "slug": "africa-education-icon",
+      "name": "Icon of the Decade",
+      "number": 1,
+      "overview": "The NESA-Africa Icon of the Decade tier recognises individuals or eligible institutions whose exceptional, sustained and transformative contributions have significantly advanced education in Africa.\n\nThis tier celebrates educational legacy rather than isolated achievements. It acknowledges contributions that have influenced educational access, philanthropy, literacy, curriculum development, technical education or the long-term development of learners and institutions.\n\nRecognition should reflect a substantial body of work whose significance can be demonstrated through credible evidence and whose benefits extend beyond a single campaign, project or public appearance.",
+      "why": "Africa's educational progress has been shaped by people and institutions that invest resources, develop knowledge, strengthen educational systems and create opportunities for future generations.\n\nRecognising these contributions helps preserve educational history, inspire responsible philanthropy, encourage long-term investment and highlight approaches that others may learn from.\n\nIt also reinforces the principle that educational leadership should be assessed through lasting contribution rather than wealth, popularity or status alone.",
+      "evidence": [
+        "Sustained commitment: A substantial record of contribution over time.",
+        "Transformative educational value: Significant improvements in educational opportunity, practice, institutions or knowledge.",
+        "Documented outcomes: Credible evidence of beneficiaries, resources, programmes or measurable educational changes.",
+        "Leadership and influence: Evidence that the nominee's work inspired, enabled or strengthened wider educational efforts.",
+        "Enduring legacy: Benefits that remain relevant beyond the original intervention.",
+        "Integrity and credibility: Verifiable claims, responsible stewardship and appropriate independent evidence."
+      ]
+    },
+    {
+      "slug": "influencer-education-impact",
+      "name": "Influencer Awards",
+      "number": 2,
+      "overview": "The NESA-Africa Influencer Awards recognise prominent personalities who have used their public influence, creative talent, professional achievements or audience reach to make meaningful contributions to education.\n\nThis tier focuses on the conversion of influence into educational benefit.\n\nIt recognises individuals whose activities help learners access opportunities, mobilise educational support, promote literacy, encourage school participation, finance educational programmes or increase public awareness of important education challenges.\n\nThe emphasis is not on celebrity status but on what the nominee has achieved for education through that influence.",
+      "why": "Sports personalities, musicians and digital influencers can communicate with audiences that traditional educational institutions may struggle to reach.\n\nTheir platforms can inspire young people, mobilise funding, attract volunteers, promote positive educational behaviour and amplify the needs of underserved learners.\n\nWhen public influence is responsibly directed towards education, it can become a valuable tool for social development.",
+      "evidence": [
+        "Clear educational purpose: Activities directly connected to education or learning.",
+        "Effective use of influence: Evidence that the nominee mobilised attention, resources, participation or support.",
+        "Real educational beneficiaries: Identifiable learners, institutions or communities that benefited.",
+        "Verified achievements: Scholarships, campaigns, educational content, mentoring or other documented contributions.",
+        "Credible engagement: Meaningful educational action rather than follower counts or promotional impressions alone.",
+        "Continuity or significance: Sustained engagement or an intervention with substantial verified results."
+      ]
+    },
+    {
+      "slug": "platinum",
+      "name": "Platinum Awards",
+      "number": 3,
+      "overview": "The NESA-Africa Platinum Awards recognise outstanding institutions, public leaders, partnerships, research initiatives and education programmes whose work contributes meaningfully to educational quality, access, knowledge development or system improvement.\n\nThis tier emphasises the capacity to design, manage and deliver effective educational interventions.\n\nIt recognises contributions in tertiary education libraries, research and development, faith-based education, political leadership, international partnerships and diaspora engagement.\n\nPlatinum recognition should reflect credible institutional or programme performance, not merely organisational size or reputation.",
+      "why": "Education systems require more than financial investment. They depend on capable institutions, reliable research, effective policy, skilled educators, well-managed partnerships and inclusive learning opportunities.\n\nThe Platinum tier highlights the organisations and leaders whose work strengthens these foundations.\n\nRecognising institutional excellence encourages better management, evidence-based decision-making, professional standards and partnerships that produce lasting educational benefits.",
+      "evidence": [
+        "Institutional or programme excellence: Effective delivery of the nominated educational service or initiative.",
+        "Clear educational objectives: Well-defined needs, beneficiaries and intended results.",
+        "Evidence-based implementation: Documented activities, credible research or verifiable policy actions.",
+        "Quality and relevance: Services or programmes that respond appropriately to learners, educators or institutions.",
+        "Measurable outcomes: Evidence of educational access, quality, participation, skills, research use or other relevant results.",
+        "Accountability and sustainability: Responsible governance, resources and continuity.",
+        "Wider educational value: Evidence that the contribution strengthens educational practice, institutions or cooperation."
+      ]
+    },
+    {
+      "slug": "gold-blue-garnet",
+      "name": "Gold-Blue Garnet Awards",
+      "number": 4,
+      "overview": "The NESA-Africa Gold-Blue Garnet Awards recognise organisations, programmes, initiatives, institutions and eligible public authorities that demonstrate meaningful contributions to education through practical interventions and measurable results.\n\nThis tier covers corporate social responsibility, educational technology, media advocacy, NGO programmes, STEM education, creative arts and education policy implementation.\n\nIt is designed to recognise educational enablers working in different sectors and at different scales, including those whose contributions may be substantial within a particular community, country, region or educational field.\n\nGold-Blue Garnet recognition emphasises demonstrated contribution rather than organisational wealth, scale or public visibility.",
+      "why": "Educational development requires participation from businesses, civil society, technology providers, creative professionals, media organisations and public institutions.\n\nThese stakeholders help improve school facilities, provide scholarships, develop teaching resources, expand access to technology, support vulnerable learners and promote accountability.\n\nRecognising these contributions encourages responsible collaboration and helps identify practical approaches that can be strengthened or replicated.",
+      "evidence": [
+        "A clearly identified educational need: Evidence that the intervention addresses a relevant problem.",
+        "Practical delivery: Verifiable activities, services, products, resources or policies implemented.",
+        "Beneficiary impact: Evidence of learners, teachers, schools or communities benefiting.",
+        "Appropriate use of resources: Responsible programme management and delivery.",
+        "Relevant outcomes: Documented improvements in access, participation, learning, skills, facilities or educational awareness.",
+        "Inclusion and accessibility: Appropriate attention to underserved or disadvantaged groups.",
+        "Credibility and continuity: Reliable supporting evidence and reasonable prospects for sustained benefit."
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "number": 1,
+      "title": "Africa Education Philanthropy Icon of the Decade",
+      "overview": "Recognises an individual, family, foundation or philanthropic institution whose sustained generosity and leadership have made an exceptional contribution to education in Africa.",
+      "why": "Philanthropy can remove financial barriers, improve learning environments, support teachers and expand opportunities for learners who might otherwise be excluded.",
+      "evidence": [
+        "Sustained and significant support for educational access or quality.",
+        "Verifiable scholarships, infrastructure, programmes or other educational investments.",
+        "Evidence of the number and types of learners or institutions reached.",
+        "Responsible stewardship, continuity and measurable outcomes.",
+        "A contribution whose significance extends beyond a single donation or publicity event."
+      ],
+      "subcategories": []
+    },
+    {
+      "number": 2,
+      "title": "Literary & New Curriculum Advocate Icon of the Decade",
+      "overview": "Recognises an outstanding advocate, author, educator, publisher, curriculum specialist or institution that has significantly advanced educational reading, literacy, learning materials or curriculum development.",
+      "why": "Literacy and relevant curricula equip learners with knowledge, critical-thinking skills and the ability to participate meaningfully in society.",
+      "evidence": [
+        "Significant contributions to books, reading, literacy or curriculum development.",
+        "Evidence that educational materials have reached and benefited learners.",
+        "Innovation in making learning culturally relevant, accessible and useful.",
+        "Documented improvements in reading, teaching or curriculum delivery.",
+        "Sustained influence on educational practice or policy."
+      ],
+      "subcategories": []
+    },
+    {
+      "number": 3,
+      "title": "Africa Technical Educator Icon of the Decade",
+      "overview": "Recognises an exceptional technical or vocational educator whose work has advanced practical skills, technical education, vocational training or work-readiness in Africa.",
+      "why": "Technical education helps learners acquire practical competencies, supports entrepreneurship and prepares people for employment and changing economic needs.",
+      "evidence": [
+        "Excellence in technical, vocational or practical education.",
+        "Development of relevant training methods, curricula or learning facilities.",
+        "Evidence of learner skills acquisition, certification, employment or enterprise creation.",
+        "Contributions to teacher development or technical education standards.",
+        "Sustained influence on technical education and skills development."
+      ],
+      "subcategories": []
+    },
+    {
+      "number": 4,
+      "title": "African Social Media Influencers Education Impact Award",
+      "overview": "Recognises social media creators and digital communicators whose platforms are used meaningfully to improve educational awareness, access, participation or outcomes.",
+      "why": "Digital platforms can bring educational information to large audiences, draw attention to neglected issues and mobilise support for learners and schools.",
+      "evidence": [
+        "Consistent educational content or advocacy.",
+        "Verifiable audience engagement related to education.",
+        "Evidence of learning support, fundraising, mentoring or constructive mobilisation.",
+        "Responsible communication and credible information.",
+        "Demonstrable educational benefit beyond popularity or follower numbers alone."
+      ],
+      "subcategories": []
+    },
+    {
+      "number": 5,
+      "title": "African Sports Icons Supporting Education",
+      "overview": "Recognises sports personalities who have made meaningful contributions to education through scholarships, school support, mentoring, advocacy or education-focused community initiatives.",
+      "why": "Sports figures can use their visibility to encourage learning, support disadvantaged learners and connect education with discipline, teamwork and opportunity.",
+      "evidence": [
+        "Direct or sustained support for learners or educational institutions.",
+        "Evidence of scholarships, school programmes, mentoring or educational campaigns.",
+        "Documented outcomes for beneficiaries.",
+        "A credible connection between the nominee's sporting platform and educational contribution."
+      ],
+      "subcategories": []
+    },
+    {
+      "number": 6,
+      "title": "African Music Icons Supporting Education",
+      "overview": "Recognises musicians and music-industry figures who use their resources, influence or creative work to advance education.",
+      "why": "Music and popular culture can raise awareness, mobilise resources and inspire young people to pursue learning.",
+      "evidence": [
+        "Verifiable educational philanthropy, advocacy or programming.",
+        "Support for schools, scholarships, literacy or learning opportunities.",
+        "Evidence of beneficiaries and outcomes.",
+        "Sustained commitment or significant educational impact through creative influence."
+      ],
+      "subcategories": []
+    },
+    {
+      "number": 7,
+      "title": "Best Tertiary Institution Library (Nigeria)",
+      "overview": "Recognises a Nigerian tertiary institution library or library service that provides effective access to knowledge, supports teaching and research, and responds to the learning needs of its users.",
+      "why": "Libraries are essential learning and research infrastructure. Quality library services support independent learning, academic performance, innovation and knowledge preservation.",
+      "evidence": [
+        "Accessible and relevant learning and research resources.",
+        "Effective services for students, lecturers and researchers.",
+        "Digital access, user support and appropriate resource management.",
+        "Evidence of use, satisfaction, educational benefit or research support.",
+        "Innovation, inclusion and sustained service quality."
+      ],
+      "subcategories": [
+        {
+          "number": 1,
+          "title": "Best University Library",
+          "overview": "Recognises a university library that provides excellent access to learning resources, supports research and teaching, and responds effectively to the needs of its academic community.",
+          "why": "A strong university library supports independent learning, research quality and the creation of new knowledge.",
+          "evidence": "Relevant collections; accessible physical and digital services; effective support for students and researchers; evidence of resource use, user satisfaction or research impact.",
+          "examples": "University libraries and their formally operated library services in Nigeria."
+        },
+        {
+          "number": 2,
+          "title": "Best Polytechnic Library",
+          "overview": "Recognises a polytechnic library that effectively supports technical, vocational, professional and applied learning.",
+          "why": "Polytechnic learners need current technical materials and practical information to develop job-ready skills.",
+          "evidence": "Relevant technical and vocational collections; access to manuals, journals and digital resources; support for practical coursework and applied research; evidence of student and staff benefit.",
+          "examples": "Libraries serving Nigerian polytechnics and equivalent institutions, subject to the approved eligibility rules."
+        },
+        {
+          "number": 3,
+          "title": "Best College of Education Library",
+          "overview": "Recognises a college of education library that supports teacher preparation, professional learning and educational research.",
+          "why": "Teachers need reliable resources and research skills to deliver effective, inclusive teaching.",
+          "evidence": "Teaching-method resources; curriculum and subject collections; services for student teachers and lecturers; evidence that library resources improve training and teaching practice.",
+          "examples": "Libraries serving Nigerian colleges of education."
+        },
+        {
+          "number": 4,
+          "title": "Best Digital & E-Library Services",
+          "overview": "Recognises digital library services that improve access to educational resources, research materials and learning opportunities through online or electronic platforms.",
+          "why": "Digital access can help learners and researchers obtain resources beyond the limits of physical library buildings.",
+          "evidence": "Accessible digital collections; reliable online systems; evidence of use; relevant resources; support for users with different access needs; documented educational benefits.",
+          "examples": "Tertiary institution e-libraries, digital library departments and formally operated online library services."
+        },
+        {
+          "number": 5,
+          "title": "Best Law Library",
+          "overview": "Recognises a law library that provides strong access to legal information and supports legal education, research and professional preparation.",
+          "why": "Legal education depends on access to legislation, case law, legal scholarship and current reference materials.",
+          "evidence": "Relevant and current legal collections; effective research support; access to appropriate digital databases; services for law students and researchers; evidence of academic benefit.",
+          "examples": "Law libraries within Nigerian tertiary institutions and other eligible academic institutions."
+        },
+        {
+          "number": 6,
+          "title": "Best Medical & Health Sciences Library",
+          "overview": "Recognises a library that supports medical, nursing, public health or other health-sciences education through reliable learning and research resources.",
+          "why": "Health professionals require current evidence and specialist knowledge to develop and maintain their competence.",
+          "evidence": "Relevant clinical and scientific collections; access to reputable health databases; research and information-literacy support; effective services for students and educators.",
+          "examples": "Medical, nursing, public health and other health-sciences academic libraries."
+        },
+        {
+          "number": 7,
+          "title": "Best Research Collection & Archives",
+          "overview": "Recognises a library or archive that preserves, organises and makes significant research materials, historical records or specialist collections available for educational use.",
+          "why": "Well-managed collections preserve knowledge and provide a foundation for scholarship, institutional memory and future research.",
+          "evidence": "Valuable and well-maintained collections; appropriate cataloguing and preservation; access for researchers; digitisation or discovery services where applicable; documented research or educational use.",
+          "examples": "Tertiary institution archives, special collections, research libraries and comparable educational repositories."
+        },
+        {
+          "number": 8,
+          "title": "Best Library Community Outreach Programme",
+          "overview": "Recognises a library-led programme that extends reading, information access or learning support to communities beyond its usual users.",
+          "why": "Outreach can bring educational resources to underserved learners and encourage reading and lifelong learning.",
+          "evidence": "A clearly defined community need; consistent outreach activities; evidence of participation; accessible learning materials; documented benefits for readers, learners or community groups.",
+          "examples": "Library reading campaigns, mobile library programmes, community literacy initiatives and educational outreach services operated by eligible libraries."
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "title": "Excellence in Research & Development for Education (Nigeria)",
+      "overview": "Recognises Nigerian institutions, teams or initiatives that use research, evidence and innovation to improve educational knowledge, policy, curriculum or practice.",
+      "why": "Education systems improve when decisions are informed by credible evidence, evaluated interventions and solutions designed around learners' needs.",
+      "evidence": [
+        "Credible research, development or curriculum work.",
+        "Evidence that findings inform practice, policy or learning.",
+        "Clear methodology, relevant outputs and documented use.",
+        "Contributions to solving identified educational problems."
+      ],
+      "subcategories": [
+        {
+          "number": 9,
+          "title": "Best Education Research Institution",
+          "overview": "Recognises an institution that produces credible research addressing educational challenges, opportunities, policy or practice in Nigeria.",
+          "why": "Reliable research helps education stakeholders understand problems, assess interventions and make better decisions.",
+          "evidence": "Relevant research outputs; credible methods; evidence of dissemination or use; partnerships where applicable; documented influence on educational understanding, policy or practice.",
+          "examples": "Education research institutes, universities, research centres and other eligible institutions conducting education research in Nigeria."
+        },
+        {
+          "number": 10,
+          "title": "Best Curriculum Innovation & Development Initiative",
+          "overview": "Recognises an initiative that develops, improves or adapts curricula to make learning more relevant, effective, inclusive or responsive to changing needs.",
+          "why": "Relevant curricula help learners acquire useful knowledge and skills and enable teachers to respond to educational and societal changes.",
+          "evidence": "A clear curriculum need; documented development or testing; alignment with appropriate educational requirements; evidence of use by educators or institutions; learning or implementation results.",
+          "examples": "Curriculum development teams, educational institutions, research organisations and eligible curriculum innovation programmes."
+        },
+        {
+          "number": 11,
+          "title": "Best Education Policy Research & Data Initiative",
+          "overview": "Recognises research, data systems or evidence initiatives that improve understanding of education policy and support better decisions.",
+          "why": "Reliable education data helps decision-makers identify gaps, allocate resources and assess whether policies are working.",
+          "evidence": "Credible data collection or analysis; clear methods; relevance to a defined education question; responsible data management; evidence that findings informed decisions or public understanding.",
+          "examples": "Education policy research projects, data observatories, education statistics initiatives and research partnerships."
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "title": "Excellence in Christian Education Impact (Africa Regional)",
+      "overview": "Recognises Christian educational institutions and programmes that contribute meaningfully to education through teaching, scholarships, learning support, institutional development or educational outreach.",
+      "why": "Faith-based education providers can contribute to educational access, values formation, academic development and community support.",
+      "evidence": [
+        "Evidence of educational provision or support.",
+        "Quality and relevance of learning opportunities.",
+        "Documented benefits for learners and communities.",
+        "Responsible, inclusive and sustained educational practice."
+      ],
+      "subcategories": [
+        {
+          "number": 12,
+          "title": "Best Christian Faith-Based School System",
+          "overview": "Recognises a Christian school or network of schools that provides effective education and demonstrates meaningful benefits for learners and communities.",
+          "why": "Faith-based school systems can contribute to educational access, academic development, character formation and community service.",
+          "evidence": "Educational quality; documented learner participation and outcomes; effective teaching and school management; access or inclusion initiatives; responsible and sustained educational provision.",
+          "examples": "Christian school networks, individual eligible schools and formally organised Christian education systems operating in Africa."
+        },
+        {
+          "number": 13,
+          "title": "Best Christian Education Scholarship & Mission Programme",
+          "overview": "Recognises a Christian faith-based scholarship or mission initiative that expands access to education or supports learners who face financial or other barriers.",
+          "why": "Well-designed scholarship and education programmes can help learners continue their education and access opportunities otherwise beyond their reach.",
+          "evidence": "Clear beneficiary criteria; verifiable educational support; evidence of learners assisted; transparent programme delivery; documented continuation, completion or other educational outcomes where available.",
+          "examples": "Christian scholarship funds, church-led education missions, faith-based education foundations and related programmes."
+        },
+        {
+          "number": 14,
+          "title": "Best Christian Theological & Bible College Education Initiative",
+          "overview": "Recognises a theological college, Bible college or related educational initiative that provides effective and relevant religious education and training.",
+          "why": "Strong theological education can develop scholarship, teaching competence and the capacity to serve communities responsibly.",
+          "evidence": "Structured educational provision; qualified teaching; relevant learning resources; evidence of student development and completion; appropriate academic or institutional standards.",
+          "examples": "Christian theological colleges, Bible colleges and eligible theological education programmes operating in Africa."
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "title": "Excellence in Islamic Education Impact (Africa Regional)",
+      "overview": "Recognises Islamic educational institutions and programmes that contribute meaningfully to learning through formal schooling, Islamic studies, Arabic and Qur'anic education, scholarships or related educational initiatives.",
+      "why": "Islamic education providers can expand learning opportunities, preserve scholarship and support communities when educational provision is effective, accessible and responsive to learners' needs.",
+      "evidence": [
+        "Verifiable educational provision or learner support.",
+        "Evidence of learning quality, reach and continuity.",
+        "Documented learner or community outcomes.",
+        "Effective teaching, educational resources and programme management."
+      ],
+      "subcategories": [
+        {
+          "number": 15,
+          "title": "Best Islamic School System / Islamiyya Education Network",
+          "overview": "Recognises an Islamic school or network that provides effective education through an organised school system or Islamiyya education network.",
+          "why": "Well-run educational networks can expand access, strengthen teaching and provide structured learning for children and young people.",
+          "evidence": "Clear educational provision; appropriate teaching and learning arrangements; evidence of learner participation and progress; effective management; documented benefits for learners and communities.",
+          "examples": "Islamic school networks, Islamiyya education systems and eligible Islamic educational institutions operating in Africa."
+        },
+        {
+          "number": 16,
+          "title": "Best Islamic Education Scholarship & Waqf Programme",
+          "overview": "Recognises a scholarship or waqf-supported programme that provides educational funding, resources or sustained learning opportunities.",
+          "why": "Structured educational support can reduce financial barriers and provide a more reliable foundation for learners' progress.",
+          "evidence": "Verifiable scholarship or educational assistance; transparent beneficiary selection; evidence of resources delivered; documented educational outcomes; responsible management of programme funds or endowment resources.",
+          "examples": "Islamic scholarship funds, waqf-supported education initiatives and eligible educational foundations or programmes."
+        },
+        {
+          "number": 17,
+          "title": "Best Islamic Studies, Arabic & Qur'anic Education Institution",
+          "overview": "Recognises an institution that provides structured education in Islamic studies, Arabic or Qur'anic learning.",
+          "why": "Effective specialist education preserves scholarship and supports learners' development of relevant language, textual and religious knowledge.",
+          "evidence": "Structured curricula; suitable teaching methods and resources; evidence of learner progress; qualified educators; accessible and well-managed educational provision.",
+          "examples": "Islamic studies institutions, Arabic education centres and eligible Qur'anic education institutions operating in Africa."
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "title": "Excellence in Political Leadership for Education (Nigeria)",
+      "overview": "Recognises political leaders whose decisions, policies, funding or implementation efforts have contributed meaningfully to education in Nigeria.",
+      "why": "Political leadership influences education budgets, access, teacher support, infrastructure, accountability and the delivery of public education services.",
+      "evidence": [
+        "Specific policies, programmes, investments or reforms.",
+        "Evidence of implementation rather than announcements alone.",
+        "Documented benefits to schools, teachers or learners.",
+        "Credible information about results, reach and sustainability.",
+        "Accountability for public resources and education commitments."
+      ],
+      "subcategories": [
+        {
+          "number": 18,
+          "title": "Best State Governor for Education Advancement",
+          "overview": "Recognises a state governor whose leadership has contributed to measurable improvements in education within the state.",
+          "why": "State leadership influences public education priorities, funding, infrastructure, teacher support and implementation.",
+          "evidence": "Specific policies and programmes; evidence of implementation; credible funding and delivery information; measurable progress in access, quality, inclusion or learning; accountability for results.",
+          "examples": "State governors assessed under the approved award rules and relevant review period."
+        },
+        {
+          "number": 19,
+          "title": "Best Federal or National Assembly Education Champion",
+          "overview": "Recognises federal political leadership or a member of the National Assembly whose work has made a meaningful contribution to education.",
+          "why": "National laws, budgets, oversight and advocacy can shape educational opportunity and accountability across Nigeria.",
+          "evidence": "Documented legislative, policy, budgetary or oversight contributions; evidence of action rather than statements alone; educational relevance; credible results or implementation progress.",
+          "examples": "Eligible federal officeholders and National Assembly members with documented education contributions."
+        },
+        {
+          "number": 20,
+          "title": "Best Local Government / Grassroots Education Leadership",
+          "overview": "Recognises local government or grassroots leadership that has helped improve education access, school conditions, learning support or community participation.",
+          "why": "Local leadership can identify community needs, mobilise resources and help address barriers affecting learners close to where they live.",
+          "evidence": "Specific local education initiatives; evidence of delivery and community participation; documented benefits to schools or learners; responsible use of resources; continuity of effort.",
+          "examples": "Eligible local government leaders and grassroots public leaders whose contributions can be verified."
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "title": "Excellence in International Partnership for Education (Africa)",
+      "overview": "Recognises international partnerships that have made a substantial and demonstrable contribution to education in Africa.",
+      "why": "Effective partnerships can provide funding, expertise, technology, research, training and institutional cooperation that strengthen educational systems.",
+      "evidence": [
+        "A clearly defined partnership and shared educational purpose.",
+        "Verifiable resources, expertise or services delivered.",
+        "Evidence of results for learners, educators or institutions.",
+        "Meaningful collaboration with local stakeholders.",
+        "Prospects for continuity, transfer of knowledge or long-term value."
+      ],
+      "subcategories": [
+        {
+          "number": 21,
+          "title": "Best Multilateral / UN Agency Education Partnership",
+          "overview": "Recognises a partnership involving a multilateral institution or UN agency that has contributed meaningfully to education in Africa.",
+          "why": "Multilateral partnerships can bring technical expertise, coordination, resources and international experience to educational challenges.",
+          "evidence": "A defined partnership; specific resources or expertise delivered; collaboration with African institutions or communities; evidence of outcomes; clear roles and documented implementation.",
+          "examples": "Eligible education partnerships involving UN agencies or other multilateral institutions."
+        },
+        {
+          "number": 22,
+          "title": "Best Bilateral / Embassy Education Partnership",
+          "overview": "Recognises an education partnership supported by a bilateral development agency, embassy or comparable government-to-government initiative.",
+          "why": "Bilateral cooperation can support teacher development, scholarships, institutional exchange, education technology and system improvement.",
+          "evidence": "A clear partnership purpose; documented support or activities; evidence of local collaboration; educational results; responsible delivery and potential for continuity.",
+          "examples": "Eligible bilateral education programmes, embassy-supported initiatives and government-to-government education partnerships."
+        },
+        {
+          "number": 23,
+          "title": "Best International NGO Education Partnership",
+          "overview": "Recognises a partnership between an international NGO and African educational stakeholders that produces demonstrable educational benefits.",
+          "why": "International NGOs can bring specialist knowledge, funding, networks and tested approaches to education challenges.",
+          "evidence": "Defined roles and shared objectives; evidence of implementation; measurable benefits; meaningful participation by local partners; appropriate safeguarding and accountability.",
+          "examples": "Eligible education partnerships involving international NGOs, local NGOs, schools or public education bodies."
+        },
+        {
+          "number": 24,
+          "title": "Best International Development Finance & Grant Partnership for Education",
+          "overview": "Recognises a development finance, grant or funding partnership that enables a meaningful educational programme or improvement.",
+          "why": "Reliable financing can help educational initiatives scale, improve infrastructure, support teachers and reach underserved learners.",
+          "evidence": "Verifiable financial or in-kind support; a clear educational purpose; transparent deployment of resources; evidence of implementation and outcomes; appropriate monitoring and accountability.",
+          "examples": "Education programmes supported by eligible development finance institutions, grant-making bodies or international funding partnerships."
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "title": "Excellence in Diaspora Educational Impact (International)",
+      "overview": "Recognises African diaspora individuals, organisations and programmes that make a meaningful contribution to education in Africa or to African educational communities internationally.",
+      "why": "Diaspora communities can connect education initiatives with funding, mentorship, specialist expertise, professional networks and international opportunities.",
+      "evidence": [
+        "Verifiable educational support or engagement.",
+        "Evidence of beneficiaries and outcomes.",
+        "Effective transfer of skills, knowledge, resources or opportunities.",
+        "Sustained collaboration with educational institutions or communities."
+      ],
+      "subcategories": [
+        {
+          "number": 25,
+          "title": "Best Diaspora Individual Education Contributor",
+          "overview": "Recognises an African diaspora individual who makes a meaningful contribution to education through funding, mentorship, expertise, advocacy or other verifiable support.",
+          "why": "Individuals abroad can connect African learners and institutions with resources, professional experience and international opportunities.",
+          "evidence": "Specific educational contributions; evidence of beneficiaries or institutions supported; documented results; sustained engagement or a significant completed initiative.",
+          "examples": "African diaspora educators, professionals, philanthropists, researchers and other individuals with verifiable educational contributions."
+        },
+        {
+          "number": 26,
+          "title": "Best Diaspora Organisation or Association Education Impact",
+          "overview": "Recognises a diaspora organisation or association whose organised activities have improved education or educational opportunities.",
+          "why": "Collective action can pool resources, coordinate expertise and sustain support beyond what individual contributions may achieve.",
+          "evidence": "Documented programmes; evidence of resources or services delivered; identifiable beneficiaries; transparent organisation and partnerships; measurable educational outcomes.",
+          "examples": "Diaspora associations, professional networks, alumni organisations and eligible community organisations supporting education."
+        },
+        {
+          "number": 27,
+          "title": "Best Diaspora Scholarship & Mentorship Programme",
+          "overview": "Recognises a scholarship or mentorship programme led or supported by diaspora contributors that helps learners progress in education.",
+          "why": "Financial support combined with guidance can help learners overcome barriers, make informed choices and pursue further study or careers.",
+          "evidence": "Clear programme structure; evidence of scholarships or mentorship delivered; beneficiary participation; documented progress or outcomes; continuity and responsible management.",
+          "examples": "Diaspora scholarship funds, mentoring networks and organised educational support programmes."
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "title": "Best CSR for Education (Africa Regional)",
+      "overview": "Recognises corporate social responsibility initiatives that support education across African countries or regions through funding, facilities, learning resources, skills development or other educational interventions.",
+      "why": "Corporate resources and expertise can help address educational gaps and complement the work of governments, schools and civil society.",
+      "evidence": [
+        "A clearly defined education-focused CSR programme.",
+        "Evidence of resources committed and activities delivered.",
+        "Documented educational outcomes and beneficiary reach.",
+        "Responsible programme management and sustained impact.",
+        "A clear link between corporate support and educational benefit."
+      ],
+      "subcategories": [
+        {
+          "number": 28,
+          "title": "North Africa",
+          "overview": "Recognises a corporate social responsibility initiative supporting education in North Africa.",
+          "why": "Targeted corporate investment can address regional education needs, strengthen learning environments and widen access to opportunities.",
+          "evidence": "Education-focused activities in the region; documented resources and beneficiaries; credible outcomes; partnerships with relevant communities or institutions; responsible programme delivery.",
+          "examples": "Companies and corporate foundations with documented education CSR programmes in North Africa."
+        },
+        {
+          "number": 29,
+          "title": "West Africa",
+          "overview": "Recognises corporate education CSR initiatives benefiting learners, educators or educational institutions in West Africa.",
+          "why": "Corporate support can help address learning gaps, improve school facilities and extend educational opportunity across communities.",
+          "evidence": "Verifiable programme delivery in West Africa; resources committed and used; beneficiary reach; measurable educational results; appropriate local partnerships.",
+          "examples": "Companies and corporate foundations supporting education in one or more West African countries."
+        },
+        {
+          "number": 30,
+          "title": "East Africa",
+          "overview": "Recognises corporate education CSR initiatives that provide demonstrable benefits in East Africa.",
+          "why": "Corporate programmes can contribute resources, technology, skills and institutional support to local education priorities.",
+          "evidence": "Evidence of education activities and beneficiaries; documented outcomes; relevance to local needs; responsible implementation and continuity.",
+          "examples": "Companies and corporate foundations with verifiable education CSR activities in East Africa."
+        },
+        {
+          "number": 31,
+          "title": "Central Africa",
+          "overview": "Recognises corporate CSR initiatives that improve educational access, quality or support in Central Africa.",
+          "why": "Well-targeted corporate investment can help address gaps in educational resources and support local learning priorities.",
+          "evidence": "Documented activities in Central Africa; credible beneficiary and outcome information; effective delivery; evidence of alignment with educational needs.",
+          "examples": "Companies and corporate foundations with eligible education programmes in Central Africa."
+        },
+        {
+          "number": 32,
+          "title": "Southern Africa",
+          "overview": "Recognises corporate education CSR initiatives with measurable benefits in Southern Africa.",
+          "why": "Corporate resources and expertise can support learning, technical skills, educational infrastructure and access to opportunities.",
+          "evidence": "Verifiable activities in the region; evidence of resources delivered; documented educational benefits; effective partnerships and programme management.",
+          "examples": "Companies and corporate foundations operating education CSR initiatives in Southern Africa."
+        },
+        {
+          "number": 33,
+          "title": "Pan-African / Multi-Region Programme",
+          "overview": "Recognises a corporate education CSR programme operating across multiple African regions or countries, with a clear cross-border educational purpose.",
+          "why": "Multi-region programmes can scale successful approaches, connect communities and address educational challenges that extend beyond one location.",
+          "evidence": "Activity in multiple countries or regions; evidence of consistent programme delivery; documented reach and outcomes; appropriate local adaptation; credible coordination and accountability.",
+          "examples": "Corporate foundations and companies running verified education CSR programmes across more than one African region."
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "title": "Best CSR for Education (Nigeria)",
+      "overview": "Recognises companies and corporate foundations operating in Nigeria that demonstrate meaningful support for education through CSR programmes, employee engagement, infrastructure, scholarships, learning resources or other interventions.",
+      "why": "Corporate support can widen access to education, improve learning environments and mobilise sector-specific expertise to solve educational challenges.",
+      "evidence": [
+        "Documented education-focused CSR activities in Nigeria.",
+        "Verifiable expenditure, resources or services delivered.",
+        "Clear evidence of beneficiary reach and educational results.",
+        "Responsible management and appropriate community engagement.",
+        "Evidence that the programme responds to a real educational need."
+      ],
+      "subcategories": [
+        {
+          "number": 34,
+          "title": "Banking & Financial Services",
+          "overview": "Recognises education CSR initiatives by banks and financial-services companies operating in Nigeria.",
+          "why": "Financial-sector support can help fund scholarships, school improvements, financial literacy and educational access.",
+          "evidence": "Verified education programmes or funding; clear beneficiaries; evidence of delivery and outcomes; responsible management; sustained educational benefit.",
+          "examples": "Banks, financial institutions and their eligible corporate foundations."
+        },
+        {
+          "number": 35,
+          "title": "Insurance",
+          "overview": "Recognises insurance-sector initiatives that contribute to education through financial support, school programmes, learning resources or other educational interventions.",
+          "why": "Insurance-sector resources and expertise can support educational access and help communities build awareness of financial resilience.",
+          "evidence": "A clear education objective; documented activities and beneficiaries; evidence of outcomes; appropriate programme management and continuity.",
+          "examples": "Insurance companies, eligible industry foundations and insurance-sector CSR programmes."
+        },
+        {
+          "number": 36,
+          "title": "Telecommunications",
+          "overview": "Recognises telecommunications companies that support education through connectivity, digital access, scholarships, devices, learning platforms or other educational initiatives.",
+          "why": "Connectivity and digital tools can help learners and teachers access information, learning materials and educational services.",
+          "evidence": "Evidence of education-focused delivery; connectivity or learning resources provided; documented reach and use; accessible design; credible educational benefits.",
+          "examples": "Telecommunications operators and eligible telecommunications-sector foundations."
+        },
+        {
+          "number": 37,
+          "title": "Oil & Gas / Energy",
+          "overview": "Recognises oil, gas and energy companies whose CSR initiatives make a demonstrable contribution to education in Nigeria.",
+          "why": "Energy-sector resources can help improve school facilities, provide learning support and develop skills relevant to local communities.",
+          "evidence": "Verifiable education programmes; resources committed and delivered; beneficiary evidence; educational outcomes; responsible implementation and community engagement.",
+          "examples": "Oil, gas and energy companies and their eligible corporate foundations."
+        },
+        {
+          "number": 38,
+          "title": "Power & Utilities",
+          "overview": "Recognises power and utility companies that support education through infrastructure, scholarships, technical training, energy access or other educational initiatives.",
+          "why": "Reliable energy and sector-specific skills can support safer, more effective learning environments and technical education.",
+          "evidence": "Documented education support; evidence of facilities, services or training delivered; measurable beneficiary reach; relevance to educational needs; sustained impact.",
+          "examples": "Power companies, utilities and eligible corporate foundations."
+        },
+        {
+          "number": 39,
+          "title": "FMCG – Food & Beverages",
+          "overview": "Recognises fast-moving consumer goods companies in the food and beverage sector that support education through CSR programmes.",
+          "why": "Corporate support can improve learning environments, widen educational opportunity and support relevant community learning initiatives.",
+          "evidence": "Clearly documented education activities; verified beneficiaries; evidence of resources delivered and outcomes; responsible programme management.",
+          "examples": "Food and beverage manufacturers, distributors and eligible corporate foundations."
+        },
+        {
+          "number": 40,
+          "title": "FMCG – Household & Personal Care",
+          "overview": "Recognises household and personal-care companies whose CSR initiatives provide educational benefits.",
+          "why": "Such initiatives can support school resources, learning access, student welfare and educational awareness.",
+          "evidence": "A defined education programme; verifiable delivery; documented beneficiary reach; credible results; responsible and sustained implementation.",
+          "examples": "Household goods and personal-care companies and eligible corporate foundations."
+        },
+        {
+          "number": 41,
+          "title": "Manufacturing & Industrial",
+          "overview": "Recognises manufacturing and industrial companies that contribute to education through CSR, technical learning, scholarships, facilities or skills development.",
+          "why": "Industrial-sector support can connect education with practical skills, innovation and employment opportunities.",
+          "evidence": "Verifiable educational investment; relevant training or learning support; documented outcomes; effective partnerships with schools or training institutions.",
+          "examples": "Manufacturing companies, industrial firms and eligible corporate foundations."
+        },
+        {
+          "number": 42,
+          "title": "Agribusiness & Agriculture",
+          "overview": "Recognises agribusiness and agricultural-sector companies that support education, agricultural learning or relevant skills development.",
+          "why": "Agricultural education can strengthen practical knowledge, improve livelihoods and connect learning with food systems and rural development.",
+          "evidence": "Documented education or training activities; evidence of learners reached; relevant learning outcomes; effective links with schools, communities or training providers.",
+          "examples": "Agribusinesses, agricultural companies and eligible agricultural-sector foundations."
+        },
+        {
+          "number": 43,
+          "title": "Real Estate & Construction",
+          "overview": "Recognises real estate and construction companies that support education through school facilities, infrastructure, scholarships or related CSR initiatives.",
+          "why": "Safe and suitable learning spaces are essential to participation, teaching and school development.",
+          "evidence": "Verifiable construction, renovation, facility or education support; evidence of use by beneficiaries; quality and suitability of facilities; documented educational benefit.",
+          "examples": "Property developers, construction companies and eligible corporate foundations."
+        },
+        {
+          "number": 44,
+          "title": "Aviation",
+          "overview": "Recognises aviation-sector companies that support education through scholarships, technical training, school programmes or other educational initiatives.",
+          "why": "Aviation support can widen access to learning and help develop specialist technical and professional skills.",
+          "evidence": "Documented education support; evidence of programme delivery; beneficiaries and outcomes; relevant training or career-development opportunities where applicable.",
+          "examples": "Airlines, aviation service providers, airport operators and eligible corporate foundations."
+        },
+        {
+          "number": 45,
+          "title": "Maritime & Logistics",
+          "overview": "Recognises maritime, shipping, port and logistics companies that contribute to education and skills development.",
+          "why": "Sector support can help learners acquire practical skills and improve understanding of maritime, logistics and supply-chain careers.",
+          "evidence": "Verifiable educational programmes; evidence of training or school support; learner reach and outcomes; relevant industry partnerships.",
+          "examples": "Shipping companies, port and logistics operators and eligible corporate foundations."
+        },
+        {
+          "number": 46,
+          "title": "Automotive",
+          "overview": "Recognises automotive-sector companies that support education through technical training, scholarships, school partnerships or learning resources.",
+          "why": "Automotive education can develop practical engineering, maintenance, diagnostic and technical skills.",
+          "evidence": "Documented training or education support; suitable facilities and resources; evidence of learner skills development; credible industry links and outcomes.",
+          "examples": "Vehicle manufacturers, dealers, parts suppliers, automotive service companies and eligible foundations."
+        },
+        {
+          "number": 47,
+          "title": "Technology & EdTech",
+          "overview": "Recognises technology companies that contribute to education through devices, software, connectivity, digital learning, scholarships or skills programmes.",
+          "why": "Appropriate technology can improve learning access, develop digital skills and support new ways of teaching and learning.",
+          "evidence": "Verified education initiatives; evidence of use and beneficiary reach; relevance and accessibility; documented educational or skills outcomes; responsible implementation.",
+          "examples": "Technology companies, software firms, digital learning providers and eligible corporate foundations."
+        },
+        {
+          "number": 48,
+          "title": "Media & Broadcasting",
+          "overview": "Recognises media and broadcasting companies that support education through learning content, educational campaigns, school support or education-focused CSR.",
+          "why": "Media can distribute educational content widely and bring attention to educational needs.",
+          "evidence": "Documented education-related activities; evidence of audience or learner reach; credible content or support; outcomes beyond publicity alone.",
+          "examples": "Broadcast groups, publishers, media companies and eligible corporate foundations."
+        },
+        {
+          "number": 49,
+          "title": "Healthcare & Pharmaceuticals",
+          "overview": "Recognises healthcare and pharmaceutical companies that support education through scholarships, school programmes, health education or relevant skills development.",
+          "why": "Education and health are closely connected, and health-sector expertise can contribute to safer learning and specialist training.",
+          "evidence": "Verifiable educational support; relevant programmes and beneficiaries; documented outcomes; appropriate professional standards and responsible delivery.",
+          "examples": "Healthcare providers, pharmaceutical companies, medical suppliers and eligible foundations."
+        },
+        {
+          "number": 50,
+          "title": "Retail & E-commerce",
+          "overview": "Recognises retail and e-commerce companies that contribute to education through CSR initiatives, learning resources, scholarships or school support.",
+          "why": "Retail-sector resources and distribution networks can help mobilise educational materials and reach communities.",
+          "evidence": "Documented education activities; resources delivered; identifiable beneficiaries; evidence of outcomes and responsible management.",
+          "examples": "Retailers, e-commerce businesses, retail groups and eligible corporate foundations."
+        },
+        {
+          "number": 51,
+          "title": "Hospitality & Tourism",
+          "overview": "Recognises hospitality and tourism companies that support education through scholarships, school initiatives, vocational training or learning opportunities.",
+          "why": "Hospitality-sector engagement can develop practical skills, support youth employment and create opportunities for vocational education.",
+          "evidence": "Verifiable education or training programmes; learner participation; evidence of skill development or other outcomes; effective partnerships and continuity.",
+          "examples": "Hotels, tourism operators, hospitality groups and eligible corporate foundations."
+        },
+        {
+          "number": 52,
+          "title": "Cement & Building Materials",
+          "overview": "Recognises cement and building-materials companies that support education through infrastructure, scholarships, learning resources or relevant technical training.",
+          "why": "Safe school infrastructure and technical skills are important to educational participation and development.",
+          "evidence": "Documented school or education support; quality and usability of resources or facilities; evidence of beneficiaries and outcomes; responsible delivery.",
+          "examples": "Cement producers, building-material manufacturers and eligible corporate foundations."
+        },
+        {
+          "number": 53,
+          "title": "Mining & Solid Minerals",
+          "overview": "Recognises mining and solid-minerals companies that contribute to education in Nigeria through community programmes, scholarships, facilities or skills development.",
+          "why": "Well-managed educational programmes can support communities and develop relevant scientific, technical and professional skills.",
+          "evidence": "Verifiable educational support; documented beneficiary reach; relevant learning or training outcomes; effective community engagement and programme accountability.",
+          "examples": "Mining and solid-minerals companies and eligible sector foundations."
+        },
+        {
+          "number": 54,
+          "title": "Breweries & Beverages (adult and tertiary-education framing only)",
+          "overview": "Recognises eligible breweries and beverage companies whose education CSR initiatives support adult learners, tertiary education or other appropriate education programmes.",
+          "why": "Properly targeted educational support can develop skills, widen learning opportunities and support institutions while respecting relevant safeguarding and legal requirements.",
+          "evidence": "A clearly education-focused programme; appropriate adult or tertiary beneficiaries; verifiable resources and outcomes; responsible programme design and compliance with applicable requirements.",
+          "examples": "Breweries and beverage companies with documented, eligible education CSR initiatives. This subcategory is not an endorsement of alcohol consumption or marketing to children."
+        },
+        {
+          "number": 55,
+          "title": "Professional Services (Law, Consulting, Accounting)",
+          "overview": "Recognises professional services firms that support education through scholarships, mentoring, pro bono expertise, school programmes or professional learning.",
+          "why": "Professional knowledge and mentoring can strengthen institutions and help learners develop relevant skills and career pathways.",
+          "evidence": "Verifiable education support or professional services; evidence of beneficiaries; relevant skills or institutional benefits; sustained engagement and responsible delivery.",
+          "examples": "Law firms, consulting firms, accounting practices and eligible professional-services foundations."
+        },
+        {
+          "number": 56,
+          "title": "Public Sector-Owned Enterprises",
+          "overview": "Recognises publicly owned enterprises that make a demonstrable contribution to education through CSR, training, infrastructure, scholarships or other eligible initiatives.",
+          "why": "Publicly owned enterprises can use their resources and expertise to support education and public development goals.",
+          "evidence": "Documented educational activities; evidence of resources and beneficiaries; measurable outcomes; transparent programme delivery; clear public or educational benefit.",
+          "examples": "Eligible government-owned corporations and public enterprises operating in Nigeria."
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "title": "Best EduTech Innovation for Education (Africa Regional)",
+      "overview": "Recognises technology products, companies or initiatives that use digital tools to improve teaching, learning, assessment, access or education management in Africa.",
+      "why": "Educational technology can extend access to learning resources, improve delivery and help address barriers associated with location, cost or limited infrastructure.",
+      "evidence": [
+        "A clearly identified educational problem and suitable technological response.",
+        "Evidence of adoption, use and benefit.",
+        "Accessibility and relevance to the intended learners or educators.",
+        "Appropriate attention to reliability, privacy and sustainability.",
+        "Results beyond technical novelty or promotional claims."
+      ],
+      "subcategories": [
+        {
+          "number": 57,
+          "title": "Best EdTech Startup Innovation",
+          "overview": "Recognises an emerging education-technology venture that has developed an innovative solution to a clearly identified educational challenge.",
+          "why": "Startups can introduce new ways to deliver learning, assess progress, connect educators and improve access to educational resources.",
+          "evidence": "A clear educational problem; a working or demonstrably tested solution; evidence of use or pilot results; relevance to intended users; potential for responsible growth.",
+          "examples": "Early-stage EdTech companies and eligible education-technology ventures operating in Africa."
+        },
+        {
+          "number": 58,
+          "title": "Best Established EdTech Company Impact",
+          "overview": "Recognises an established education-technology company whose products or services have demonstrated meaningful educational impact.",
+          "why": "Established providers can extend effective learning solutions to larger populations and support institutions over time.",
+          "evidence": "Sustained product or service delivery; evidence of adoption; documented learning or institutional benefits; reliable support; accessibility and responsible data practices.",
+          "examples": "Established EdTech companies serving African learners, educators or educational institutions."
+        },
+        {
+          "number": 59,
+          "title": "Best EdTech Social Impact Initiative",
+          "overview": "Recognises a technology-enabled education initiative designed primarily to address a social, access or inclusion challenge.",
+          "why": "Technology can help reach underserved learners when solutions are designed around real barriers and demonstrated needs.",
+          "evidence": "A clearly defined social or educational challenge; evidence of implementation; beneficiaries reached; documented outcomes; attention to affordability, accessibility and sustainability.",
+          "examples": "Non-profit technology initiatives, social enterprises, public-interest digital learning projects and eligible collaborative programmes."
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "title": "Best Media Organisation for Education Advocacy (Nigeria)",
+      "overview": "Recognises Nigerian media organisations that consistently use journalism, broadcasting or digital communication to improve public understanding of education and support constructive education advocacy.",
+      "why": "Media can make education challenges visible, inform the public, amplify community voices and encourage accountability.",
+      "evidence": [
+        "Sustained education reporting, programming or advocacy.",
+        "Credible, accurate and balanced coverage.",
+        "Evidence of audience reach or public engagement.",
+        "Documented influence on awareness, participation or educational action.",
+        "Responsible treatment of learners and education stakeholders."
+      ],
+      "subcategories": [
+        {
+          "number": 60,
+          "title": "Best Print Media Educational Advocacy",
+          "overview": "Recognises a print media organisation that consistently promotes education through reporting, features, investigations, campaigns or other editorial work.",
+          "why": "Print journalism can explain educational challenges, inform public debate and hold decision-makers accountable.",
+          "evidence": "A body of relevant education coverage; credible reporting; evidence of public engagement; sustained attention to education issues; documented influence or educational value.",
+          "examples": "Newspapers, magazines and other eligible print publications operating in Nigeria."
+        },
+        {
+          "number": 61,
+          "title": "Best Radio Educational Programme Excellence",
+          "overview": "Recognises a radio station or programme that uses audio broadcasting to improve educational knowledge, access, participation or awareness.",
+          "why": "Radio can reach audiences who have limited access to internet-based or classroom learning resources.",
+          "evidence": "Consistent educational programming; relevant and accurate content; evidence of audience reach or participation; appropriate presentation; documented educational value.",
+          "examples": "Radio stations and radio programmes providing educational content or advocacy in Nigeria."
+        },
+        {
+          "number": 62,
+          "title": "Best Television Educational Content",
+          "overview": "Recognises television content that contributes meaningfully to learning, educational awareness or public understanding of education.",
+          "why": "Television can combine visual explanation and storytelling to make educational information accessible to broad audiences.",
+          "evidence": "Educational purpose and content quality; suitability for intended audiences; evidence of distribution or reach; accuracy and accessibility; documented learning or awareness benefits.",
+          "examples": "Television broadcasters, educational programme producers and eligible television content initiatives in Nigeria."
+        },
+        {
+          "number": 63,
+          "title": "Best Digital & Online Media Educational Advocacy",
+          "overview": "Recognises digital media platforms and online publishers that use digital communication to advance education awareness, access or advocacy.",
+          "why": "Online media can quickly distribute educational information, connect communities and amplify education-related issues.",
+          "evidence": "Sustained education-focused content; credible information; evidence of audience engagement; documented educational action or impact; responsible online communication.",
+          "examples": "Digital publishers, education news platforms, online media organisations and eligible digital advocacy initiatives in Nigeria."
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "title": "Best NGO for Education Advancement (Nigeria)",
+      "overview": "Recognises Nigerian non-governmental organisations that deliver effective programmes to expand access, improve educational quality or support learners facing barriers to education.",
+      "why": "NGOs can reach underserved communities, pilot solutions, mobilise volunteers and address needs that are not adequately met by existing services.",
+      "evidence": [
+        "A clear education mission and documented programme delivery.",
+        "Evidence of beneficiaries, outcomes and community relevance.",
+        "Responsible use of funds and programme resources.",
+        "Effective partnerships and safeguarding practices.",
+        "Continuity, learning and accountability."
+      ],
+      "subcategories": [
+        {
+          "number": 64,
+          "title": "Best NGO – Basic & Primary Education",
+          "overview": "Recognises an NGO whose work improves access to or quality of basic and primary education in Nigeria.",
+          "why": "Foundational education supports literacy, numeracy, social development and later learning.",
+          "evidence": "Verified programmes serving primary-age learners; evidence of school access or participation; documented improvements in learning conditions or outcomes; responsible programme delivery.",
+          "examples": "NGOs supporting primary schools, foundational learning, early-grade literacy or numeracy in Nigeria."
+        },
+        {
+          "number": 65,
+          "title": "Best NGO – Girl-Child Education",
+          "overview": "Recognises an NGO that works to improve girls' access to education, participation, retention, safety or learning outcomes.",
+          "why": "Removing barriers to girls' education strengthens individual opportunity and contributes to more equitable communities.",
+          "evidence": "Clearly identified barriers; documented support for girls; evidence of enrolment, attendance, retention or learning benefits; appropriate safeguarding; engagement with families or communities where relevant.",
+          "examples": "NGOs supporting girls' scholarships, retention, mentoring, school access or related educational programmes in Nigeria."
+        },
+        {
+          "number": 66,
+          "title": "Best NGO – Out-of-School Children Intervention",
+          "overview": "Recognises an NGO that helps children who are out of school access education, return to learning or participate in suitable alternative learning programmes.",
+          "why": "Children excluded from education face barriers to literacy, future opportunities and participation in society.",
+          "evidence": "Evidence of children reached; documented enrolment, re-entry or learning participation; suitable educational support; identification of barriers; safeguarding and follow-up.",
+          "examples": "NGOs operating school re-entry, catch-up learning, non-formal education or other eligible out-of-school children programmes in Nigeria."
+        },
+        {
+          "number": 67,
+          "title": "Best NGO – Special Needs & Inclusive Education",
+          "overview": "Recognises an NGO that improves educational access and participation for learners with disabilities or other additional learning needs.",
+          "why": "Inclusive education helps learners participate meaningfully and access appropriate teaching, resources and support.",
+          "evidence": "Accessible learning arrangements; suitable teaching support or assistive resources; evidence of learner participation; documented improvements; meaningful engagement with learners and caregivers.",
+          "examples": "NGOs supporting inclusive schools, disability-inclusive learning, assistive technology or specialist educational services in Nigeria."
+        },
+        {
+          "number": 68,
+          "title": "Best NGO – School Infrastructure & Rebuilding",
+          "overview": "Recognises an NGO that improves school infrastructure, restores damaged learning facilities or creates safer and more suitable learning environments.",
+          "why": "Appropriate facilities support attendance, safety, teaching and effective learning.",
+          "evidence": "Verifiable infrastructure work; evidence of completion and usability; relevance to school needs; documented schools or learners benefiting; appropriate maintenance and accountability.",
+          "examples": "NGOs engaged in school renovation, rebuilding, classroom provision, sanitation, water access or related school infrastructure initiatives in Nigeria."
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "title": "Best NGO for Education Advancement (Africa Regional)",
+      "overview": "Recognises NGOs whose education initiatives operate across African countries or regions, or whose documented impact addresses significant regional education challenges.",
+      "why": "Regional and cross-border education initiatives can share effective approaches, support displaced and underserved learners, and strengthen cooperation across education systems.",
+      "evidence": [
+        "Verifiable education programming and regional relevance.",
+        "Documented reach and outcomes in the communities served.",
+        "Effective collaboration with local partners.",
+        "Responsible programme delivery and protection of learners.",
+        "Evidence of adaptation, sustainability or wider learning."
+      ],
+      "subcategories": [
+        {
+          "number": 69,
+          "title": "Best NGO – Basic & Primary Education",
+          "overview": "Recognises an NGO whose programmes improve foundational and primary education across African communities.",
+          "why": "Strong early education supports literacy, numeracy, confidence and progression to later stages of learning.",
+          "evidence": "Documented primary education programmes; evidence of learners and communities reached; improvements in access or learning; appropriate local partnerships; credible outcome reporting.",
+          "examples": "NGOs delivering primary or foundational education programmes in African countries or across multiple African communities."
+        },
+        {
+          "number": 70,
+          "title": "Best NGO – Girl-Child Education",
+          "overview": "Recognises an NGO that advances girls' access to, participation in and completion of education in Africa.",
+          "why": "Girls' education can improve opportunities for individuals, families and communities and reduce persistent educational inequalities.",
+          "evidence": "Specific interventions addressing barriers; evidence of participation or retention; documented learner benefits; appropriate safeguarding; collaboration with relevant communities and institutions.",
+          "examples": "NGOs providing girls' scholarships, mentoring, school retention support or other eligible education programmes in Africa."
+        },
+        {
+          "number": 71,
+          "title": "Best NGO – Refugee & Displaced Children Education",
+          "overview": "Recognises an NGO that helps refugee and displaced children access suitable education and continue learning despite displacement or disruption.",
+          "why": "Displacement can interrupt schooling and deprive children of stability, learning opportunities and a sense of belonging.",
+          "evidence": "Verified education support for refugee or displaced children; accessible learning provision; evidence of participation and progress; appropriate child safeguarding; coordination with relevant local partners.",
+          "examples": "NGOs providing education in refugee settings, displacement-affected communities or eligible emergency and recovery programmes across Africa."
+        },
+        {
+          "number": 72,
+          "title": "Best NGO – Special Needs & Inclusive Education",
+          "overview": "Recognises an NGO that expands inclusive educational opportunities for learners with disabilities or additional learning needs in Africa.",
+          "why": "Inclusive education helps reduce barriers and enables learners to participate in learning and community life.",
+          "evidence": "Accessible programmes; appropriate learning support; evidence of learners reached and supported; documented outcomes; respectful engagement and safeguarding.",
+          "examples": "NGOs supporting inclusive education, disability access, assistive learning and specialist educational support in African communities."
+        },
+        {
+          "number": 73,
+          "title": "Best NGO – Teacher Training & Development",
+          "overview": "Recognises an NGO that strengthens teachers' professional knowledge, classroom practice, leadership or continuing development.",
+          "why": "Teacher capacity is central to effective instruction, learner engagement and improved educational outcomes.",
+          "evidence": "Structured teacher development; evidence of participation and skills gained; relevance to classroom needs; follow-up or application of learning; documented benefits for teaching or learners.",
+          "examples": "NGOs providing teacher training, mentoring, instructional coaching, professional learning or school leadership development across Africa."
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "title": "Best STEM Education Programme (Africa Regional)",
+      "overview": "Recognises programmes that improve education in science, technology, engineering and mathematics (STEM) through teaching, practical learning, digital resources, outreach or inclusive participation.",
+      "why": "STEM education builds problem-solving, scientific literacy and technical skills relevant to innovation and economic development.",
+      "evidence": [
+        "A clear STEM learning purpose and suitable teaching approach.",
+        "Evidence of learner participation and learning outcomes.",
+        "Practical activities, projects, laboratories or digital learning where relevant.",
+        "Support for inclusion and access.",
+        "Documented improvements in skills, confidence or progression."
+      ],
+      "subcategories": [
+        {
+          "number": 74,
+          "title": "Best STEM School / Institution Programme",
+          "overview": "Recognises a school or educational institution programme that delivers effective science, technology, engineering and mathematics learning.",
+          "why": "Strong STEM programmes build scientific understanding, practical problem-solving and skills needed for further study and work.",
+          "evidence": "A structured STEM learning programme; suitable teaching and practical activities; learner participation; evidence of learning or skills development; inclusive access and appropriate resources.",
+          "examples": "School-based STEM programmes, institutional laboratories, science clubs and structured STEM learning initiatives in Africa."
+        },
+        {
+          "number": 75,
+          "title": "Best STEM NGO / Non-Profit Initiative",
+          "overview": "Recognises a non-profit initiative that expands STEM learning opportunities through education programmes, outreach, practical activities or learner support.",
+          "why": "Non-profit programmes can reach learners and schools that have limited access to STEM resources and specialist instruction.",
+          "evidence": "A clear STEM learning objective; evidence of programme delivery; learner reach and participation; documented skills or learning outcomes; suitable partnerships and continuity.",
+          "examples": "NGOs, charitable foundations and eligible non-profit STEM education programmes operating in Africa."
+        },
+        {
+          "number": 76,
+          "title": "Best STEM EdTech / Digital Programme",
+          "overview": "Recognises a digital or technology-enabled programme that improves STEM learning, teaching, assessment or practical engagement.",
+          "why": "Digital tools can provide simulations, interactive lessons and additional ways to explore scientific and technical concepts.",
+          "evidence": "A clear educational purpose; working or demonstrably tested tools; evidence of use; learning relevance and accessibility; documented educational benefits.",
+          "examples": "Digital STEM learning platforms, virtual laboratories, coding programmes and other eligible technology-enabled STEM initiatives in Africa."
+        },
+        {
+          "number": 77,
+          "title": "Best Girls-in-STEM Initiative",
+          "overview": "Recognises an initiative that encourages and supports girls' participation, learning and progression in STEM subjects and related careers.",
+          "why": "Expanding girls' access to STEM opportunities helps reduce participation barriers and broadens the pool of future innovators and professionals.",
+          "evidence": "Clearly defined support for girls; evidence of participation and engagement; mentoring, practical learning or role-model activities where relevant; documented learning or progression outcomes; appropriate safeguarding.",
+          "examples": "Girls-in-STEM clubs, mentoring programmes, scholarships, camps and other eligible STEM inclusion initiatives in Africa."
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "title": "Best Creative Arts Contribution to Education (Nigeria)",
+      "overview": "Recognises creative practitioners, organisations or initiatives that use the arts to support education, literacy, learning, cultural knowledge or the development of learners' creative abilities in Nigeria.",
+      "why": "Creative arts can make learning engaging, develop communication and expression, preserve cultural knowledge and create additional pathways for participation.",
+      "evidence": [
+        "A clear connection between creative work and educational benefit.",
+        "Evidence of learners or communities reached.",
+        "Quality, relevance and accessibility of the creative approach.",
+        "Documented learning, participation or skills outcomes.",
+        "Responsible representation and educational purpose."
+      ],
+      "subcategories": [
+        {
+          "number": 78,
+          "title": "Music",
+          "overview": "Recognises a musician, music organisation or initiative that uses music to support education, literacy, cultural learning or learner development in Nigeria.",
+          "why": "Music can support memory, expression, cultural knowledge and engaging approaches to learning.",
+          "evidence": "A clear educational connection; documented learning activities or resources; evidence of learners or communities reached; credible educational benefits; sustained or significant contribution.",
+          "examples": "Music educators, musicians, music organisations and educational music programmes."
+        },
+        {
+          "number": 79,
+          "title": "Film & Cinema",
+          "overview": "Recognises film or cinema work that makes a meaningful contribution to education through educational storytelling, learning content, awareness or skills development.",
+          "why": "Film can communicate complex ideas, stimulate discussion and make educational topics accessible to wider audiences.",
+          "evidence": "A clear educational purpose; relevant and responsible content; evidence of educational use or reach; documented learning or awareness benefits; suitability for intended audiences.",
+          "examples": "Filmmakers, educational film producers, cinema education initiatives and eligible film-based learning programmes in Nigeria."
+        },
+        {
+          "number": 80,
+          "title": "Visual Arts",
+          "overview": "Recognises visual artists or arts initiatives that contribute to education through creative learning, educational resources, cultural knowledge or learner development.",
+          "why": "Visual arts can strengthen observation, interpretation, creativity and the communication of ideas.",
+          "evidence": "A meaningful educational connection; evidence of learning activities or resources; learner participation; documented benefits; appropriate cultural and educational relevance.",
+          "examples": "Visual artists, art educators, school arts programmes, museums and eligible educational arts initiatives."
+        },
+        {
+          "number": 81,
+          "title": "Theatre & Performing Arts",
+          "overview": "Recognises theatre and performing arts initiatives that use performance to support learning, communication, cultural understanding or educational awareness.",
+          "why": "Performance can help learners explore ideas, practise expression and engage with complex social and educational themes.",
+          "evidence": "A defined educational purpose; quality and relevance of the work; evidence of participation or audience reach; documented learning or awareness benefits; responsible presentation.",
+          "examples": "Theatre groups, performing artists, drama educators and educational performance programmes in Nigeria."
+        },
+        {
+          "number": 82,
+          "title": "Fashion & Design",
+          "overview": "Recognises fashion and design initiatives that contribute to education through practical skills, creative learning, design literacy or vocational development.",
+          "why": "Fashion and design education can build creativity, technical competence, entrepreneurship and pathways into creative industries.",
+          "evidence": "A clear educational or skills-development purpose; structured learning or mentoring; evidence of participant development; relevant practical outcomes; responsible and accessible programme delivery.",
+          "examples": "Fashion educators, design schools, training programmes and eligible fashion or design education initiatives."
+        },
+        {
+          "number": 83,
+          "title": "Literature & Publishing",
+          "overview": "Recognises authors, publishers or literary initiatives that contribute to education through books, reading programmes, learning materials or literacy advocacy.",
+          "why": "Books and publishing can improve reading access, support curriculum learning and help preserve and share knowledge.",
+          "evidence": "Educational relevance and quality; evidence of distribution or use; benefits for readers or learners; accessibility and cultural relevance; documented contribution to literacy or learning.",
+          "examples": "Authors, educational publishers, literary organisations and eligible reading or publishing initiatives in Nigeria."
+        },
+        {
+          "number": 84,
+          "title": "Digital & Animation Content",
+          "overview": "Recognises digital creators and animation initiatives that use visual storytelling, interactive content or digital media to support education.",
+          "why": "Digital and animated content can make difficult ideas easier to understand and engage learners through visual explanations and stories.",
+          "evidence": "A clear learning purpose; suitable and accurate content; evidence of use or reach; accessibility for intended learners; documented educational benefits.",
+          "examples": "Educational animators, digital content creators, animation studios and eligible digital learning content initiatives in Nigeria."
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "title": "Best Education Policy & Implementation State (Nigeria)",
+      "overview": "Recognises a Nigerian state for demonstrable progress in the design, implementation and management of policies that improve education access, quality, equity or learning outcomes.",
+      "why": "State-level policy and implementation decisions can shape school access, infrastructure, teacher support, education financing and the quality of learning.",
+      "evidence": [
+        "Clear education policies and implementation evidence.",
+        "Credible information on funding, delivery and accountability.",
+        "Improvements in access, school conditions, teacher support or learning.",
+        "Evidence of equitable attention to underserved learners.",
+        "Results that can be assessed over time, rather than policy announcements alone."
+      ],
+      "subcategories": [
+        {
+          "number": 85,
+          "title": "North Central",
+          "overview": "Represents the North Central geopolitical zone for the assessment of education policy and implementation, if the approved award framework retains zone-based classification.",
+          "why": "Zone-based assessment may help organise nominations and compare evidence within a defined geographic grouping.",
+          "evidence": "Clear identification of the state or public authority being assessed; documented education policies; evidence of implementation, resources and results; credible measures of access, quality, equity or learning.",
+          "examples": "The relevant state-level education authority or authorities within North Central, subject to the final approved classification rules."
+        },
+        {
+          "number": 86,
+          "title": "North East",
+          "overview": "Represents the North East geopolitical zone for the assessment of education policy and implementation, if retained in the approved framework.",
+          "why": "Evidence-based assessment can help identify policy implementation strengths and education needs in the zone.",
+          "evidence": "Defined policy actions; credible evidence of delivery; information about educational access, infrastructure, teacher support or learning; documented progress and accountability.",
+          "examples": "The relevant state-level education authority or authorities within North East, subject to the approved classification rules."
+        },
+        {
+          "number": 87,
+          "title": "North West",
+          "overview": "Represents the North West geopolitical zone for the assessment of education policy and implementation, if retained in the approved framework.",
+          "why": "A consistent assessment approach can help reviewers understand education implementation and outcomes across the zone.",
+          "evidence": "Specific education policies and programmes; evidence of implementation; credible information about resources and outcomes; attention to underserved learners; accountable delivery.",
+          "examples": "The relevant state-level education authority or authorities within North West, subject to the approved classification rules."
+        },
+        {
+          "number": 88,
+          "title": "South East",
+          "overview": "Represents the South East geopolitical zone for the assessment of education policy and implementation, if retained in the approved framework.",
+          "why": "Documented policy assessment can highlight effective approaches and areas requiring further educational improvement.",
+          "evidence": "Clear policy objectives; evidence of implementation; verifiable educational results; information on access, quality, infrastructure or teacher support; credible reporting and accountability.",
+          "examples": "The relevant state-level education authority or authorities within South East, subject to the approved classification rules."
+        },
+        {
+          "number": 89,
+          "title": "South South",
+          "overview": "Represents the South South geopolitical zone for the assessment of education policy and implementation, if retained in the approved framework.",
+          "why": "Evidence-based review can help distinguish announced policies from implemented measures and documented educational progress.",
+          "evidence": "Verifiable policies and programmes; implementation and resource evidence; credible measures of educational progress; attention to equity and learner needs; responsible use of public resources.",
+          "examples": "The relevant state-level education authority or authorities within South South, subject to the approved classification rules."
+        },
+        {
+          "number": 90,
+          "title": "South West",
+          "overview": "Represents the South West geopolitical zone for the assessment of education policy and implementation, if retained in the approved framework.",
+          "why": "A consistent review of policy and implementation can help identify effective practices and meaningful improvements in education.",
+          "evidence": "Documented policies and implementation; evidence of results; credible information on access, quality, school conditions or learning; attention to inclusion; accountability and continuity.",
+          "examples": "The relevant state-level education authority or authorities within South West, subject to the approved classification rules."
+        }
+      ]
+    }
+  ]
+}
