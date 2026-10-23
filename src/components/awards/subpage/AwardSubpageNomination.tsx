@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { GoogleFormDisplay } from "@/components/nominate/GoogleFormDisplay";
 import { NativeCategoryNominationForm } from "@/components/awards/NativeCategoryNominationForm";
 import { resolveAwardForm } from "@/config/nomination/resolveAwardForm";
+import { OfficialNominationForm } from "@/components/nominate/OfficialNominationForm";
 
 export interface AwardNominationConfig {
   /** Category (or pathway) slug used to resolve the tailored form. */
@@ -73,34 +74,30 @@ export function AwardSubpageNomination({ config }: { config: AwardNominationConf
         </ol>
 
         <div className="mt-8">
-          {googleReady && form ? (
-            <GoogleFormDisplay
-              title={form.name}
-              status={form.status}
-              formPublicUrl={form.formPublicUrl}
-              formEmbedUrl={form.formEmbedUrl}
-              gmail={form.gmail}
-            />
-          ) : form ? (
-            <NativeCategoryNominationForm
-              form={form}
-              defaultSubcategorySlug={config.defaultSubcategorySlug}
-              successRedirectHref={config.directoryHref}
-              successRedirectLabel="See verified Enablers"
-            />
-          ) : (
-            <div className="rounded-2xl border border-gold/30 bg-charcoal/60 p-6">
-              <p className="text-sm text-white/80">
-                The dedicated form for this category opens on the main nomination page.
-              </p>
-              <Button asChild size="lg" className="mt-4 bg-gold text-charcoal hover:bg-gold/90">
-                <Link to={config.fallbackHref}>
-                  <Sparkles className="mr-2 h-4 w-4" />
-                  Start nomination
-                </Link>
-              </Button>
-            </div>
-          )}
+          <OfficialNominationForm
+            id={`official-nomination-form-${config.formSlug}`}
+            awardName={config.name}
+            heading="Complete the official nomination form"
+            onSiteForm={
+              googleReady && form ? (
+                <GoogleFormDisplay
+                  title={form.name}
+                  status={form.status}
+                  formPublicUrl={form.formPublicUrl}
+                  formEmbedUrl={form.formEmbedUrl}
+                  gmail={form.gmail}
+                />
+              ) : form ? (
+                <NativeCategoryNominationForm
+                  withOfficialForm={false}
+                  form={form}
+                  defaultSubcategorySlug={config.defaultSubcategorySlug}
+                  successRedirectHref={config.directoryHref}
+                  successRedirectLabel="See verified Enablers"
+                />
+              ) : undefined
+            }
+          />
         </div>
 
         <ul className="mt-6 grid gap-2 sm:grid-cols-2">

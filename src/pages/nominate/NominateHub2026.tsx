@@ -47,6 +47,8 @@ import {
 } from "@/config/nominate2026/familyNarrowing";
 
 import { supabase } from "@/integrations/supabase/client";
+import { OfficialNominationForm } from "@/components/nominate/OfficialNominationForm";
+import { getMasterAwards, MASTER_COUNTS } from "@/config/awardMaster2026";
 
 /* ────────────────────────────────────────────────────────────────────────── */
 /* Tier presentation (spec Part A — Tier Selector)                            */
@@ -637,6 +639,8 @@ export default function NominateHub2026() {
   const [searchParams] = useSearchParams();
   const familyParam = searchParams.get("family");
   const nomineeTypeParam = searchParams.get("nomineeType");
+  const selectedAward = getMasterAwards(searchParams.get("category") ?? searchParams.get("award") ?? undefined)[0];
+
 
   const narrowing = useMemo(
     () => resolveFamilyNarrowing(familyParam),
@@ -747,8 +751,8 @@ export default function NominateHub2026() {
             education across Africa, the Diaspora, and among Friends of Africa.
           </p>
           <p className="mt-3 max-w-3xl text-sm text-gold/85 sm:text-base">
-            One Flagship Award · Three Certificate of Recognition Tiers ·
-            Eighteen Recognition Forms · One Verified Standard
+            Four Recognition Tiers · {MASTER_COUNTS.categories} Main Awards ·{" "}
+            {MASTER_COUNTS.subcategories} Subcategories · One Official Nomination Form
           </p>
 
           {/* Integrity Notice (persistent, above the fold) */}
@@ -766,23 +770,10 @@ export default function NominateHub2026() {
             </div>
           </div>
 
-          {/* Nomination Notice */}
-          <div className="mt-4 rounded-xl border border-gold/15 bg-[#15181f] p-4 sm:p-5">
-            <div className="flex items-start gap-3">
-              <ScrollText className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
-              <p className="text-xs text-foreground/80 sm:text-sm">
-                No account is required to begin. You'll create or confirm your
-                free account only when submitting your nomination. Your draft
-                is saved to your session and email — not this device — so you
-                can resume from anywhere.
-              </p>
-            </div>
-          </div>
-
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
-              <a href="#tier-selector">
-                Choose a tier
+              <a href="#official-nomination-form">
+                Open the nomination form
                 <ArrowRight className="ml-2 h-4 w-4" />
               </a>
             </Button>
@@ -792,12 +783,19 @@ export default function NominateHub2026() {
               variant="outline"
               className="border-gold/40 text-gold hover:bg-gold/10"
             >
-              <a href="#directory">
-                Browse 18 forms
+              <Link to="/awards">
+                See the 22 awards
                 <ChevronDown className="ml-2 h-4 w-4" />
-              </a>
+              </Link>
             </Button>
           </div>
+        </div>
+      </section>
+
+      {/* OFFICIAL GOOGLE NOMINATION FORM */}
+      <section className="border-b border-gold/15 py-12 md:py-16">
+        <div className="container mx-auto max-w-5xl px-4">
+          <OfficialNominationForm awardName={selectedAward?.title} />
         </div>
       </section>
 

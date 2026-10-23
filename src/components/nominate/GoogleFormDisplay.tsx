@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { ExternalLink, AlertCircle, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { FormStatus } from "@/config/nomination/types";
+import { OfficialNominationForm } from "@/components/nominate/OfficialNominationForm";
 
 interface Props {
   title: string;
@@ -62,6 +63,8 @@ export function GoogleFormDisplay({
 
   if (!isActive) {
     if (fallback) return <>{fallback}</>;
+    // Every nomination entry point falls back to the official form.
+    return <OfficialNominationForm heading={title} />;
 
     return (
       <div className="rounded-2xl border border-gold/30 bg-charcoal-light/40 p-6 text-white/85">

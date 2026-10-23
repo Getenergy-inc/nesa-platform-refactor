@@ -9,6 +9,8 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { BadgeCheck, ShieldCheck } from "lucide-react";
 import { IconNominationWizard } from "@/components/awards/IconNominationWizard";
+import { OfficialNominationForm } from "@/components/nominate/OfficialNominationForm";
+import { MasterAwardGuidance } from "@/components/awards/MasterAwardGuidance";
 
 export default function IconNominationFormPage() {
   return (
@@ -40,13 +42,20 @@ export default function IconNominationFormPage() {
         </div>
       </section>
 
+      <MasterAwardGuidance categorySlug="africa-education-icon" />
+
       <section id="nominate" className="py-12 md:py-16">
         <div className="container mx-auto max-w-4xl px-4">
-          <Card className="border-gold/25 bg-[#15181f]">
-            <CardContent className="p-5 md:p-8">
-              <IconNominationWizard />
-            </CardContent>
-          </Card>
+          <OfficialNominationForm
+            awardName="Africa Education Icon Award"
+            onSiteForm={
+              <Card className="border-gold/25 bg-[#15181f]">
+                <CardContent className="p-5 md:p-8">
+                  <IconNominationWizard />
+                </CardContent>
+              </Card>
+            }
+          />
           <p className="mt-4 flex items-start gap-2 text-xs text-foreground/60">
             <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold" aria-hidden />
             Every nomination is verified by the Nominee Research Corps before it reaches the

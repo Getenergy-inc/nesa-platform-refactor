@@ -28,6 +28,8 @@ import { getEDIMatrix } from "@/config/nominate2026/ediMatrix";
 import { getCategoryContent, GOVERNANCE_COPY } from "@/config/nominate2026/categoryContent";
 import CategoryNominationForm from "@/components/nominate/category/CategoryNominationForm";
 import IconNominationFormPage from "@/pages/nominate/IconNominationFormPage";
+import { OfficialNominationForm } from "@/components/nominate/OfficialNominationForm";
+import { MasterAwardGuidance } from "@/components/awards/MasterAwardGuidance";
 
 
 interface Props {
@@ -346,19 +348,15 @@ export default function NominateCategoryShell({ fixedTier, fixedCategory }: Prop
         </div>
       </section>
 
+      <MasterAwardGuidance categorySlug={content.slug} />
+
       {/* ─── 6. Nomination form ──────────────────────────────────────── */}
       <section id="nominate" className="border-b border-gold/10 py-12 md:py-16">
         <div className="container mx-auto max-w-4xl px-4">
-          <SectionHeading
-            index={5}
-            title="Nomination form"
-            subtitle="No account required to begin. You'll confirm your free account at submission."
+          <OfficialNominationForm
+            awardName={content.hero.h1}
+            onSiteForm={<CategoryNominationForm content={content} />}
           />
-          <Card className="border-gold/25 bg-[#15181f]">
-            <CardContent className="p-5 md:p-8">
-              <CategoryNominationForm content={content} />
-            </CardContent>
-          </Card>
         </div>
       </section>
 

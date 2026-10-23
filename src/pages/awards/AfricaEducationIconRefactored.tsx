@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect } from "react";
+import { OfficialNominationForm } from "@/components/nominate/OfficialNominationForm";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -225,7 +226,7 @@ export default function AfricaEducationIcon() {
               </div>
             }
           >
-            <IconNominationWizard ediDownloadHref={EDI_PDF} ediViewHref="#edi-matrix" />
+            <OfficialNominationForm awardName="Africa Education Icon Award" onSiteForm={<IconNominationWizard ediDownloadHref={EDI_PDF} ediViewHref="#edi-matrix" />} />
           </Suspense>
         </div>
       </section>

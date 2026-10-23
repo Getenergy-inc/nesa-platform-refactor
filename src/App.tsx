@@ -1,4 +1,5 @@
 import { Toaster } from "@/components/ui/toaster";
+import { WithOfficialNominationForm } from "@/components/nominate/OfficialNominationForm";
 import { AdminBareShell } from "@/components/admin/AdminBareShell";
 import { useEffect } from "react";
 import Nominees from "./pages/Nominees";
@@ -1825,7 +1826,7 @@ const App = () => (
                     element={
                       <WithLayout>
                         <WithFirewall>
-                          <IconNominatePage />
+                          <WithOfficialNominationForm><IconNominatePage /></WithOfficialNominationForm>
                         </WithFirewall>
                       </WithLayout>
                     }
@@ -1835,7 +1836,7 @@ const App = () => (
                     element={
                       <WithLayout>
                         <WithFirewall>
-                          <NGOChooser />
+                          <WithOfficialNominationForm><NGOChooser /></WithOfficialNominationForm>
                         </WithFirewall>
                       </WithLayout>
                     }
@@ -1845,7 +1846,7 @@ const App = () => (
                     element={
                       <WithLayout>
                         <WithFirewall>
-                          <NominateFlow />
+                          <WithOfficialNominationForm><NominateFlow /></WithOfficialNominationForm>
                         </WithFirewall>
                       </WithLayout>
                     }
@@ -1855,7 +1856,7 @@ const App = () => (
                     element={
                       <WithLayout>
                         <WithFirewall>
-                          <NominateOfficial />
+                          <WithOfficialNominationForm><NominateOfficial /></WithOfficialNominationForm>
                         </WithFirewall>
                       </WithLayout>
                     }
@@ -1865,7 +1866,7 @@ const App = () => (
                     element={
                       <WithLayout>
                         <WithFirewall>
-                          <NominateOfficial />
+                          <WithOfficialNominationForm><NominateOfficial /></WithOfficialNominationForm>
                         </WithFirewall>
                       </WithLayout>
                     }
@@ -1875,7 +1876,7 @@ const App = () => (
                     element={
                       <WithLayout>
                         <WithFirewall>
-                          <NominateOfficial />
+                          <WithOfficialNominationForm><NominateOfficial /></WithOfficialNominationForm>
                         </WithFirewall>
                       </WithLayout>
                     }
