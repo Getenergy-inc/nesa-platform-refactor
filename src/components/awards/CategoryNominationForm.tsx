@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { GoogleFormDisplay } from "@/components/nominate/GoogleFormDisplay";
 import { NativeCategoryNominationForm } from "@/components/awards/NativeCategoryNominationForm";
 import { CategorySubcategoryNominees } from "@/components/awards/CategorySubcategoryNominees";
+import { OfficialNominationForm } from "@/components/nominate/OfficialNominationForm";
 import {
   AWARD_CATEGORY_FORMS,
   getCategoryFormBySlug,
@@ -78,49 +79,22 @@ export function CategoryNominationForm({ config }: Props) {
       className="py-12 md:py-16 bg-charcoal border-y border-gold/20"
     >
       <div className="container mx-auto max-w-5xl px-4">
-        <div className="mb-6 md:mb-8">
-          <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 px-3 py-1 text-xs text-gold mb-3">
-            <FileCheck className="h-3.5 w-3.5" />
-            Nomination Form
-          </div>
-          <h2 className="font-playfair text-2xl sm:text-3xl md:text-4xl text-gold mb-2 leading-tight">
-            Nominate for {config.finalName}
-          </h2>
-          <p className="text-foreground/75 text-sm sm:text-base max-w-3xl">
-            {isGoogleFormReady
-              ? "Complete the official Google Form below. Submissions are reviewed by the NRC before reaching the jury."
-              : "Use the native intake form below to submit your nomination. Pick the matching subcategory — submissions are reviewed by the NRC before reaching the jury."}
-          </p>
-        </div>
-
-        {isGoogleFormReady && form ? (
-          <GoogleFormDisplay
-            title={form.name}
-            status={form.status}
-            formPublicUrl={form.formPublicUrl}
-            formEmbedUrl={form.formEmbedUrl}
-            gmail={form.gmail}
-          />
-        ) : form ? (
-          <NativeCategoryNominationForm form={form} />
-        ) : (
-          <div className="rounded-2xl border border-gold/30 bg-charcoal-light/40 p-6 text-foreground/85">
-            <p className="text-sm mb-4">
-              The dedicated nomination form for this category opens on the main
-              nomination page. Click below to continue.
-            </p>
-            <Button
-              asChild
-              size="lg"
-              className="bg-gold text-charcoal hover:bg-gold/90"
-            >
-              <Link to={nominateHref}>
-                <Sparkles className="mr-2 h-4 w-4" />
-                Start Nomination
-              </Link>
-            </Button>
-          </div>
-        )}
+        <OfficialNominationForm
+          awardName={config.finalName}
+          onSiteForm={
+            isGoogleFormReady && form ? (
+              <GoogleFormDisplay
+                title={form.name}
+                status={form.status}
+                formPublicUrl={form.formPublicUrl}
+                formEmbedUrl={form.formEmbedUrl}
+                gmail={form.gmail}
+              />
+            ) : form ? (
+              <NativeCategoryNominationForm form={form} />
+            ) : undefined
+          }
+        />
 
         <div className="mt-6 flex flex-wrap gap-3">
           <Button
