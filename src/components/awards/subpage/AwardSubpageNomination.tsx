@@ -89,6 +89,7 @@ export function AwardSubpageNomination({ config }: { config: AwardNominationConf
                 />
               ) : form ? (
                 <NativeCategoryNominationForm
+                  withOfficialForm={false}
                   form={form}
                   defaultSubcategorySlug={config.defaultSubcategorySlug}
                   successRedirectHref={config.directoryHref}

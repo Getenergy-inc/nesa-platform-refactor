@@ -91,7 +91,7 @@ export function CategoryNominationForm({ config }: Props) {
                 gmail={form.gmail}
               />
             ) : form ? (
-              <NativeCategoryNominationForm form={form} />
+              <NativeCategoryNominationForm withOfficialForm={false} form={form} />
             ) : undefined
           }
         />

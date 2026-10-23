@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { OfficialNominationForm } from "@/components/nominate/OfficialNominationForm";
 import { Link, useNavigate } from "react-router-dom";
 import { AlertCircle, Loader2, Send, ShieldCheck, Sparkles } from "lucide-react";
 import { z } from "zod";
@@ -69,6 +70,8 @@ interface Props {
   successRedirectLabel?: string;
   /** Auto-redirect delay in ms. Defaults to 2500. Set to 0 to disable auto-redirect. */
   successRedirectDelayMs?: number;
+  /** Show the official Google nomination form first (default). */
+  withOfficialForm?: boolean;
 }
 
 type NomineeType =
@@ -120,7 +123,17 @@ const INITIAL: FormState = {
  * nominee-options dropdown so users can submit immediately without waiting
  * for the external Google Form link.
  */
-export function NativeCategoryNominationForm({
+export function NativeCategoryNominationForm({ withOfficialForm = true, ...props }: Props) {
+  if (!withOfficialForm) return <NativeCategoryNominationFormInner {...props} />;
+  return (
+    <OfficialNominationForm
+      awardName={props.form.name}
+      onSiteForm={<NativeCategoryNominationFormInner {...props} />}
+    />
+  );
+}
+
+function NativeCategoryNominationFormInner({
   form,
   defaultSubcategorySlug,
   successRedirectHref,
