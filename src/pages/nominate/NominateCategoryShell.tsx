@@ -28,6 +28,8 @@ import { getEDIMatrix } from "@/config/nominate2026/ediMatrix";
 import { getCategoryContent, GOVERNANCE_COPY } from "@/config/nominate2026/categoryContent";
 import CategoryNominationForm from "@/components/nominate/category/CategoryNominationForm";
 import IconNominationFormPage from "@/pages/nominate/IconNominationFormPage";
+import { OfficialNominationForm } from "@/components/nominate/OfficialNominationForm";
+import { MasterAwardGuidance } from "@/components/awards/MasterAwardGuidance";
 
 
 interface Props {
