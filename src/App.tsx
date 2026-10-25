@@ -58,6 +58,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, useNavigationType } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { captureUtmFromSearch, captureReferralFromSearch } from "@/lib/attribution";
+import { NominationLinkRouter } from "@/components/nominate/NominationLinkRouter";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { SeasonProvider } from "@/contexts/SeasonContext";
 import { RegionProvider } from "@/contexts/RegionContext";
@@ -555,6 +556,7 @@ const App = () => (
                 <RegionPickerModal />
                 <RegionConfirmationPopup />
                 <ScrollToTop />
+                <NominationLinkRouter />
                 <AttributionCapture />
                 <Routes>
                   {/* Landing - has its own header/footer */}
