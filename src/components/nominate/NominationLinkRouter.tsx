@@ -24,8 +24,10 @@ export function NominationLinkRouter() {
 
       event.preventDefault();
       trackEvent("official_nomination_form_open", { from: href, page: window.location.pathname });
-      const opened = window.open(OFFICIAL_NOMINATION_FORM_URL, "_blank", "noopener,noreferrer");
-      if (!opened) window.location.assign(OFFICIAL_NOMINATION_FORM_URL);
+      // "noopener" makes window.open return null, so detach the opener manually.
+      const opened = window.open(OFFICIAL_NOMINATION_FORM_URL, "_blank");
+      if (opened) opened.opener = null;
+      else window.location.assign(OFFICIAL_NOMINATION_FORM_URL);
     };
     // Capture phase runs before React Router's Link, which then skips navigation.
     document.addEventListener("click", onClick, true);
