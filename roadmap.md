@@ -11,4 +11,4 @@
 - [ ] Treat individual states as nominees and six zones as geographic groupings; verify counts, guidance and nomination navigation.
 - [x] Send every website nomination button and CTA to the official Google Form (single shared link), embedded on the nomination page with open-in-new-tab.
 - [x] Remove hidden harmful start-up code that arrived via the 18 Oct GitHub merge (start scripts, style config, editor auto-run task, fake font files).
-- [ ] Confirm volunteer badge list is only public badge definitions — database unreachable this turn.
+- [ ] Confirm volunteer badge list is only public badge definitions — blocked: hosted database paused and cannot resume until the workspace has Cloud credits.
