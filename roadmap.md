@@ -13,3 +13,14 @@
 - [x] Remove hidden harmful start-up code that arrived via the 18 Oct GitHub merge (start scripts, style config, editor auto-run task, fake font files).
 - [x] Removed the same harmful start-up code again after it reappeared on 1 Nov; site rebuilt and publish requested.
 - [ ] Confirm volunteer badge list is only public badge definitions — blocked: hosted database paused and cannot resume until the workspace has Cloud credits.
+
+## NESA-Africa 2026 Master Document refactor (2 Nov 2026 brief) — stop for review after each phase
+- [x] Phase 0 — Audit (docs/refactor/audit-2026-11.md), start-up integrity check + test + workflow, superseded banners on old docs, docs/content-required.md
+- [ ] Phase 1 — taxonomy2026.ts (4/22/90, 27/63) + count/name tests + legacyCode mapping
+- [ ] Phase 2 — Remove banned terms, trust messages, homepage copy, pageMeta.ts, rendered banned-strings check
+- [ ] Phase 3 — Header/footer/mobile menu/CTABar, redirects + test, design tokens, header overlap fix (blocked on questions A–C for languages, enquiry forms, dashboard palette)
+- [ ] Phase 4 — New and restructured pages (Awards, tiers, CategoryPage, Research & Judging, Evidence, Programme, Partners, Get Involved, Support EduAid, Sponsor, Resources, FAQ, Governance, Contact, legal, Search, Nominate start/confirmation)
+- [ ] Phase 5 — Hide wallet, voting and shop publicly; keep admin access
+- [ ] Phase 6 — en/fr/ar/pt structure with RTL; non-English unpublished
+- [ ] Phase 7 — Database features (status badges, media, impact) — blocked: database paused, workspace out of Cloud credits
+- [ ] Phase 8 — QA: tests, axe, Lighthouse report; do not publish

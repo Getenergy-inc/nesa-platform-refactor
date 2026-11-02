@@ -4,3 +4,6 @@
 - Stage research manifests in the existing private import review queue with source page/row and exact normalized-name/category/pathway deduplication; never publish candidates from research imports.
 - Use the existing canonical nomination-window constants in category metadata so dates cannot drift between shared pages.
 - Serve original research PDFs through asset pointers and expose private source claims only in the protected review queue; public pages cite the supplied source documents without publishing staged candidates.
+- The NESA-Africa 2026 Master Document and 2 Nov 2026 brief override older `/docs` files; conflicting docs carry a SUPERSEDED banner and `docs/refactor/audit-2026-11.md` lists remaining code conflicts, so legacy docs are never used as requirements.
+- Keep `scripts/check-startup-integrity.sh` and `src/test/startup-integrity.test.ts` passing; they block the start-up loader, editor auto-run and fake-font patterns that were maliciously injected twice.
+- Missing approved content renders a visible "CONTENT REQUIRED" placeholder and is tracked in `docs/content-required.md`, so nothing is invented.
