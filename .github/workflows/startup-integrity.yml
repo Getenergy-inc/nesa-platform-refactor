@@ -1,0 +1,16 @@
+name: Start-up Integrity Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ripgrep
+        run: sudo apt-get update && sudo apt-get install -y ripgrep
+      - name: Fail on forbidden start-up code
+        run: bash scripts/check-startup-integrity.sh
