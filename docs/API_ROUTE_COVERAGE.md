@@ -1,3 +1,5 @@
+> **SUPERSEDED (2 Nov 2026).** Where this document conflicts with the NESA-Africa 2026 Master Document and the 2 Nov 2026 refactor brief, those win: 4 tiers · 22 main award categories · 90 subcategories (Platinum 27, Gold-Blue Garnet 63); no public voting, AGC or paid voting in 2026; online awards programme on 13 December 2026 (no gala, tickets or venue); continuous nominations via the official Google Form; 9 Independent Judges · 27 Nomination Review Committee (NRC) members. See `docs/refactor/audit-2026-11.md`.
+
 # NESA-Africa API Route Coverage Matrix
 
 **Last Updated:** 2026-01-26  
