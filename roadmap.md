@@ -18,9 +18,9 @@
 - [x] Phase 0 — Audit (docs/refactor/audit-2026-11.md), start-up integrity check + test + workflow, superseded banners on old docs, docs/content-required.md
 - [ ] Phase 1 — taxonomy2026.ts (4/22/90, 27/63) + count/name tests + legacyCode mapping
 - [ ] Phase 2 — Remove banned terms, trust messages, homepage copy, pageMeta.ts, rendered banned-strings check
-- [ ] Phase 3 — Header/footer/mobile menu/CTABar, redirects + test, design tokens, header overlap fix (blocked on questions A–C for languages, enquiry forms, dashboard palette)
+- [ ] Phase 3 — Header/footer/mobile menu/CTABar, redirects + test, design tokens, header overlap fix (answers 2 Nov: remove the 8 other languages; enquiries via Google Forms; new palette applies site-wide incl. dashboards)
 - [ ] Phase 4 — New and restructured pages (Awards, tiers, CategoryPage, Research & Judging, Evidence, Programme, Partners, Get Involved, Support EduAid, Sponsor, Resources, FAQ, Governance, Contact, legal, Search, Nominate start/confirmation)
 - [ ] Phase 5 — Hide wallet, voting and shop publicly; keep admin access
-- [ ] Phase 6 — en/fr/ar/pt structure with RTL; non-English unpublished
+- [ ] Phase 6 — en/fr/ar/pt structure with RTL; remove ha/sw/yo/ig/zu/am/zh/hi from site and Sophia chat; non-English unpublished
 - [ ] Phase 7 — Database features (status badges, media, impact) — blocked: database paused, workspace out of Cloud credits
 - [ ] Phase 8 — QA: tests, axe, Lighthouse report; do not publish

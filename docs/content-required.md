@@ -20,7 +20,7 @@ Status key: **Open** = not supplied · **Supplied** = received, not yet in the s
 | 12 | Written approval to show Get Energy Trading Services as a sponsor | Homepage "Sponsored By", `/partners` | SCEF management | Open |
 | 13 | Logo permission for FAWE and CSACEFA (`logo_permission`) | Homepage "Endorsed By", `/partners` | Institutional Relations | Open |
 | 14 | Other partner organisations by role (sponsors, institutional, media, education supporters, technical/production) with logo permission | `/partners` | Partnership Team | Open |
-| 15 | Approved EduAid-Africa payment channel (until then, donations are an enquiry form) | `/support-eduaid` | SCEF Finance | Open |
+| 15 | Approved EduAid-Africa payment channel (until then, donations go to the enquiry Google Form, item 31) | `/support-eduaid` | SCEF Finance | Open |
 | 16 | How EduAid-Africa support is used | `/support-eduaid` ("Learn How Support Is Used") | EduAid-Africa | Open |
 | 17 | Approved sponsorship prospectus and any prices | `/sponsor`, Resources | Partnership Team | Open |
 | 18 | Privacy policy text | `/privacy` | SCEF management / legal | Open |
@@ -36,5 +36,6 @@ Status key: **Open** = not supplied · **Supplied** = received, not yet in the s
 | 28 | Verified impact stories with evidence grade and consent | `/impact`, `/impact/:slug` | Content Team / NRC | Open |
 | 29 | Subscribe links for media channels | Media channel empty states | Media Team | Open |
 | 30 | Newsletter provider / sign-up destination | Footer newsletter | SCEF Tech | Open |
+| 31 | Google Form links for enquiries: Contact (8 routes or one form with a route question), EduAid-Africa donation enquiry, Sponsorship enquiry | `/contact`, `/support-eduaid`, `/sponsor` | SCEF Tech | Open |
 
 When an item is supplied, change its status here and remove the placeholder from the page in the same change.
