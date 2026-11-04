@@ -15,12 +15,14 @@
 - [ ] Confirm volunteer badge list is only public badge definitions — blocked: hosted database paused and cannot resume until the workspace has Cloud credits.
 
 ## NESA-Africa 2026 Master Document refactor (2 Nov 2026 brief) — stop for review after each phase
+Scope (4 Nov 2026): CONTENT refactor only — keep existing charcoal/gold brand, components and layouts; screenshots at 390px and 1440px after each phase; do not publish.
+- [x] Step 0 — Undo the blue/garnet/Source Serif style-rule change; restore original brand rules; keep all 12 languages
 - [x] Phase 0 — Audit (docs/refactor/audit-2026-11.md), start-up integrity check + test + workflow, superseded banners on old docs, docs/content-required.md
 - [ ] Phase 1 — taxonomy2026.ts (4/22/90, 27/63) + count/name tests + legacyCode mapping
 - [ ] Phase 2 — Remove banned terms, trust messages, homepage copy, pageMeta.ts, rendered banned-strings check
-- [ ] Phase 3 — Header/footer/mobile menu/CTABar, redirects + test, design tokens, header overlap fix (answers 2 Nov: remove the 8 other languages; enquiries via Google Forms; new palette applies site-wide incl. dashboards)
+- [ ] Phase 3 — Header/footer/mobile menu/CTABar using existing styles, redirects + test, header overlap fix, remove "Page 1 of 39" bar (no new design tokens; enquiries via SCEF Google Forms)
 - [ ] Phase 4 — New and restructured pages (Awards, tiers, CategoryPage, Research & Judging, Evidence, Programme, Partners, Get Involved, Support EduAid, Sponsor, Resources, FAQ, Governance, Contact, legal, Search, Nominate start/confirmation)
 - [ ] Phase 5 — Hide wallet, voting and shop publicly; keep admin access
-- [ ] Phase 6 — en/fr/ar/pt structure with RTL; remove ha/sw/yo/ig/zu/am/zh/hi from site and Sophia chat; non-English unpublished
+- [ ] Phase 6 — All new copy through translation files; keep all 12 languages in the switcher; Arabic RTL; non-English pages unpublished until SCEF translations
 - [ ] Phase 7 — Database features (status badges, media, impact) — blocked: database paused, workspace out of Cloud credits
 - [ ] Phase 8 — QA: tests, axe, Lighthouse report; do not publish
