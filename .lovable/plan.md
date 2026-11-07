@@ -8,13 +8,7 @@ This plan replaces the earlier plan. The latest uploaded **NESA-AFRICA 2026 — 
 Keep existing charcoal/near-black, NESA gold, cream, Playfair Display headings and Inter body; reuse existing components, cards, buttons and layouts. No new colours, fonts or tokens, including protected dashboards. Preserve the current dark hero photo. Allowed visual fixes: desktop header overlap (also check 1920px), remove the public “Page 1 of 39” bar, countdowns and carousels. Use existing dark-gold/charcoal text on light surfaces with contrast ≥4.5:1. Preserve the mobile Nominate/Explore Awards bar and position Sophia above it.
 
 ## Canonical facts
-- **4 tiers · 22 main award categories · 90 subcategories**: Africa Education Icon 3 categories; Influencers Education Impact 3; Platinum Recognition 7/27; Gold-Blue Garnet 9/63. Icon uses pathways, not subcategories.
-- **Public nominations: 9 November 2026–31 March 2027.** Verified contributors may continuously download their **2026** Certificate of Recognition throughout that window.
-- **13 December 2026: NESA-Africa 2026 Online Awards Gala**, honouring Africa Education Icons 2006–2026. Online only; about 20–30 invited live participants; authorised broadcasts; no venue, tickets or red carpet.
-- Free nominations, official Google Form only, no public voting. Sponsorship and donations carry zero judging weight.
-- Nomination Review Committee (NRC); **9 Independent Judges · 27 Nomination Review Committee members**.
-- Organisations may self-nominate; individuals only where approved category guidance allows it. Multiple category appearances remain permitted.
-- No invented content or automatic status promotion. Missing approved content: visible dashed **CONTENT REQUIRED**, tracked in `docs/content-required.md`.
+**4/22/90:** Icon 3 categories, Influencers 3, Platinum 7/27, Gold-Blue Garnet 9/63. Icon has pathways, not subcategories. **Nominations and continuous verified 2026 certificate downloads: 9 November 2026–31 March 2027.** **13 December 2026 Online Awards Gala** honours Africa Education Icons 2006–2026: online only, about 20–30 invited live participants, authorised broadcasts, no tickets/venue. Free nomination, official form only, no public voting, zero judging weight for sponsorship/donations. **9 Independent Judges · 27 Nomination Review Committee members.** Organisations may self-nominate; individuals only where category guidance permits; multiple categories remain allowed. No automatic status promotion or invented content; dashed **CONTENT REQUIRED** placeholders are tracked in `docs/content-required.md`.
 
 ## Current conflicts and dependencies
 | Area | Current conflict / affected files | Resolution phase |
@@ -32,23 +26,23 @@ Keep existing charcoal/near-black, NESA gold, cream, Playfair Display headings a
 | Fonts | Earlier visual review reported a rendered heading-font discrepancy; verify against existing CSS/config without adding fonts | 0 |
 | Cloud/security | Hosted database is currently paused. Two public-read findings for role and volunteer-badge definitions remain active; live schema verification and any safe remediation are blocked | 7 |
 
-The detailed Phase 0 audit remains the search inventory; inspect hits in context, particularly admin-only finance and historical data. Preserve protected admin/NRC/judge routes, permissions and existing review decisions.
+Inspect audit hits in context; preserve protected admin/NRC/judge routes, permissions and review decisions.
 
 ## Phases and review gates
 
 ### Phase 0 — refresh baseline and content inventory
-Confirm original brand rules remain restored; do not redesign. Update the conflict audit and superseded notices to reference the latest brief, distinguishing exact approved copy from missing body content. Locate the full Master Document before transcribing all 22 category definitions; do not infer missing names or criteria from counts. Refresh `docs/content-required.md` with missing enquiry forms, SCEF role, category purposes/eligibility/evidence, certificate method, running order/platforms, eight contact destinations and partner approval/permissions. Capture baseline at 390/1440 and inspect header at 1920. Run the existing startup-integrity checks. **Stop for review.**
+Verify original brand and heading fonts; refresh audit/superseded notices for this brief. Locate the full Master Document before transcribing category definitions; never infer names/criteria. Track missing enquiry forms, SCEF role, category bodies, certificate method, running order/platforms, eight contact destinations and partner approvals. Capture baseline at 390/1440, header at 1920; run startup-integrity checks. **Stop for review.**
 
 ### Phase 1 — taxonomy and shared dates
-Create the single public `taxonomy2026.ts` registry from Master Document §§6–26 with tier/category/subcategory metadata and legacyCode mappings. Preserve legacy nomination keys, existing records, eligibility and research registry provenance; unresolved mapping is a review item, not automatic reclassification. Use canonical shared nomination/certificate dates and event date across public consumers. Tests assert 4/22/90, 27/63 splits, three Icon categories/pathways, tier naming, legacy mapping integrity and the concrete date boundaries. **Stop for review.**
+Create public `taxonomy2026.ts` from Master Document §§6–26 with legacyCode mappings. Preserve existing nomination keys, records, eligibility and research provenance; unresolved mappings require review, never auto-reclassification. Share canonical dates across public consumers. Test 4/22/90, 27/63, Icon pathways, tier names, mappings and concrete date boundaries. **Stop for review.**
 
 ### Phase 2 — homepage, public copy and metadata foundation
-Apply supplied homepage copy verbatim in its 12-part order: alert/header, existing-photo hero, work/three steps, four tiers, recognition integrity, nomination invitation, online gala date block, seven media channels, separately labelled endorsers/sponsor rows, separate education-support/sponsorship panels, footer. Conditional sponsor approval and logo permission take precedence over displaying an unapproved sponsor. Keep a visible missing-approval placeholder where needed.
+Apply exact homepage copy/order: alert/header, existing-photo hero, work/steps, tiers, integrity, nomination, online gala, seven media channels, separate endorser/sponsor rows, separate support/sponsorship panels, footer. Sponsor approval/logo permission take precedence; missing approval uses a placeholder.
 
-Replace old public dates/counts/tier names/physical-event claims, public voting and award guarantees. Store new copy in English translation files from the start. Establish shared page metadata; update `index.html` head as part of requested SEO work. Update the banned-content check to allow “Online Awards Gala”; scope it to public rendered output so legitimate private/historical records are not rewritten. **Stop for review.**
+Replace obsolete public dates/counts/tier names/event claims, voting and guarantees. New copy uses English translation files from the start. Establish shared metadata, including requested `index.html` head updates. Banned-content checks allow “Online Awards Gala” and exclude legitimate private/historical records. **Stop for review.**
 
 ### Phase 3 — navigation, footer, public route migration
-Use the exact supplied nav items with “More” below 1440px, search, all 12 languages, Support Education and gold Nominate. Rebuild footer groups using existing components. Keep mobile Nominate/Explore Awards and Sophia clearance. Fix desktop header overlap; remove page-book bar, countdowns and carousels without unrelated styling changes. Audit ordinary, modified and mobile clicks so every Nominate CTA goes to the official form in a new tab. Do not invent SCEF enquiry URLs. Add deliberate redirects for obsolete public links while preserving protected routes. **Stop for review.**
+Use exact supplied nav with “More” below 1440px, search, 12 languages, Support Education and gold Nominate; reuse footer components. Keep mobile actions/Sophia clearance. Fix overlap; remove book bar/countdowns/carousels. Test ordinary, modified and mobile Nominate clicks to the official form in a new tab. Missing SCEF forms stay placeholders. Map obsolete public redirects without changing protected routes. **Stop for review.**
 
 ### Phase 4 — page-by-page content
 Use exact supplied H1/lead text and approved Master Document body; missing body uses tracked placeholders.
@@ -73,18 +67,18 @@ Use exact supplied H1/lead text and approved Master Document body; missing body 
 Use exact navigation labels supplied in the brief (including “2026 Awards Gala”) as specific exceptions to the broader qualified-Gala wording rule. **Stop for review.**
 
 ### Phase 5 — remove public voting, wallet and commerce
-Remove public voting/AGC/wallet/earn-AGC/shop/merchandise links and exposure through menus, search and sitemap. Redirect obsolete public addresses to relevant retained pages; keep financial records and legitimate functions admin-only. Verify public denial and authorised admin access separately; no deletion or reclassification of historical data. **Stop for review.**
+Remove public voting/AGC/wallet/shop exposure from menus, search and sitemap; redirect obsolete addresses. Preserve records/functions admin-only and test public denial versus authorised access. No historical data deletion. **Stop for review.**
 
 ### Phase 6 — language publication boundaries
-Keep all 12 existing languages, including Arabic RTL. New copy remains translation-key driven. Non-English pages remain unpublished until SCEF supplies approved translations; do not automatically translate, publish stale translated copy, or advertise unpublished alternates in sitemap/hreflang. Use existing publication controls where available and make missing approval explicit. **Stop for review.**
+Keep 12 languages/Arabic RTL; translation-key driven copy. Non-English stays unpublished until SCEF translations; no invented/stale translations or unpublished sitemap/hreflang alternates. **Stop for review.**
 
 ### Phase 7 — verified data, certificates and security
-When Cloud is active, verify status/evidence/consent before public profile publication and real certificate download authorisation; preserve protected research staging and review tools. Do not auto-promote seeded or unconfirmed candidates. Test signed-in authorised flows with real readable results.
+Once Cloud is active, verify status/evidence/consent, certificate authorisation and protected staging. Never promote unconfirmed candidates automatically. Test authorised signed-in flows with readable results.
 
-Inspect live schema/policies for the two role/badge alerts before changing access: source migrations indicate reference definitions, separate from private assignments. Keep findings active while live verification is unavailable; ask before any restriction that breaks legitimate public display. No silent dismissal or destructive security change. **Stop for review.**
+Inspect live role/badge definitions and policies; migrations indicate public reference data, separate from assignments. Findings stay active until verified; ask before restricting legitimate display. **Stop for review.**
 
 ### Phase 8 — final checks, still no publishing
-Check all retained public routes, redirects, nomination clicks, exact dates/counts, consent/status rendering, enquiry placeholders, all language states, keyboard/focus access, image loading and mobile fit. Validate route-specific titles/descriptions/canonicals and sitemap. Event JSON-LD: online attendance, VirtualLocation, 2026-12-13, no offers; do not invent a broadcast URL. Preserve single-string Helmet titles and startup-integrity protections. Run relevant tests, accessibility/performance checks and screenshots at 390/1440 plus header at 1920. Report remaining blockers. **Stop for final review; do not publish.**
+Check routes/redirects, form clicks, dates/counts, consent/statuses, placeholders, languages, keyboard/focus, images and mobile fit. Validate metadata/sitemap. Event JSON-LD: Online, VirtualLocation, 2026-12-13, no offers or invented broadcast URL. Preserve single-string Helmet titles/startup integrity. Run tests/accessibility/performance checks; screenshots 390/1440 and header 1920. Report blockers. **Stop; do not publish.**
 
 ## Small source ambiguities handled without inventing content
-The supplied homepage title is a specific exception to the general title suffix rule; other titles use concise variants under 60 characters ending `| NESA-Africa 2026`. Exact navigation labels are retained. Sponsor approval, logo permissions, authorised platforms, missing category bodies and SCEF enquiry forms remain CONTENT REQUIRED until supplied. The external Google Form's own availability/submission confirmation cannot be controlled or claimed from website copy alone.
+Keep the supplied homepage title as an exception; others are under 60 characters ending `| NESA-Africa 2026`. Missing approvals/forms/body content remain CONTENT REQUIRED. Website copy cannot establish external Google Form submission or control its availability.
