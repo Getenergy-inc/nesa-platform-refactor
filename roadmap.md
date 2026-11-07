@@ -21,6 +21,7 @@ Scope (4 Nov 2026): CONTENT refactor only — keep existing charcoal/gold brand,
 - [ ] Obtain complete approved Master Document §§6–26 before exact Phase 1 category transcription — not located in inspected project/source uploads; requires SCEF source document.
 - [ ] Apply latest brief throughout: nominations and continuous verified certificate downloads 9 Nov 2026–31 Mar 2027; 13 Dec 2026 Online Awards Gala honouring Africa Education Icons 2006–2026. Latest brief overrides older dates and the prohibition on qualified "Online Awards Gala" wording.
 - [x] Focused public cleanup: removed public ticket sales/entry points, Vote Before Gala, stale count claims and unverified 2026 archive card. Removed 404 share-image overrides to restore hosting fallback; no publishing. Six-route browser check and 15 focused tests passed; full navigation suite has two unrelated existing duplicate-link failures.
+- [ ] Add and run automated public-page regression tests for ticket sales, Vote Before Gala, outdated totals, archived gala video and ticket-address redirects; no design changes or publishing.
 - [x] Step 0 — Undo the blue/garnet/Source Serif style-rule change; restore original brand rules; keep all 12 languages
 - [x] Phase 0 — Audit (docs/refactor/audit-2026-11.md), start-up integrity check + test + workflow, superseded banners on old docs, docs/content-required.md
 - [ ] Phase 1 — taxonomy2026.ts (4/22/90, 27/63) + count/name tests + legacyCode mapping
