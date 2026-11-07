@@ -110,7 +110,7 @@ export default function CategoryDetailPage() {
             to="/awards/18-categories"
             className="inline-flex items-center gap-1.5 text-xs text-ivory/60 hover:text-gold"
           >
-            <ArrowLeft className="h-3.5 w-3.5" /> All 18 categories
+            <ArrowLeft className="h-3.5 w-3.5" /> Award categories
           </Link>
 
           <motion.div

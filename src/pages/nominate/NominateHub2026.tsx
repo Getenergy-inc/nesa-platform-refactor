@@ -563,7 +563,7 @@ function ExistingNomineesBand() {
         ) : (
           <p className="text-base text-foreground/80">
             <span className="font-playfair text-2xl text-gold">{count}</span>{" "}
-            verified nominees across 18 categories.{" "}
+            verified nominees across the award categories.{" "}
             <Link to="/nominees" className="text-gold underline-offset-2 hover:underline">
               Browse the directory →
             </Link>

@@ -1,7 +1,4 @@
-// D2 (curated public subset) — single source of truth for every count
-// rendered on the public site. "18 Categories · 96 Subcategories" stays
-// the public-facing framing; the full 250–300+ pathway list lives inside
-// nomination forms and NRC tooling via the recognition config.
+// Approved public totals; legacy operational counts cannot override these.
 //
 // USAGE
 //   const stats = useSiteStats();
@@ -60,10 +57,10 @@ export interface SiteStats {
 export const SITE_STATS_FALLBACK: SiteStats = {
   tiers: 4,
   categories: 22,
-  forms: 18,
-  subcategories: 3 + 3 + 27 + 63,
-  iconSubcategories: 3,
-  influencerSubcategories: 3,
+  forms: 1,
+  subcategories: 90,
+  iconSubcategories: 0,
+  influencerSubcategories: 0,
   platinumSubcategories: 27,
   goldBlueGarnetSubcategories: 63,
   africanRegions: 8,
@@ -96,21 +93,9 @@ export function useSiteStats(): SiteStats {
           .limit(1)
           .maybeSingle();
         if (cancelled || error || !data) return;
-        const iconSub = data.icon_subcategories ?? SITE_STATS_FALLBACK.iconSubcategories;
-        const influencerSub = data.influencer_subcategories ?? SITE_STATS_FALLBACK.influencerSubcategories;
-        const platinumSub = data.platinum_subcategories ?? SITE_STATS_FALLBACK.platinumSubcategories;
-        const gbgSub = data.gold_blue_garnet_subcategories ?? SITE_STATS_FALLBACK.goldBlueGarnetSubcategories;
         const activeChapters = data.active_volunteer_chapters ?? SITE_STATS_FALLBACK.activeVolunteerChapters;
         setStats({
           ...SITE_STATS_FALLBACK,
-          tiers: data.tiers ?? SITE_STATS_FALLBACK.tiers,
-          categories: data.total_categories ?? SITE_STATS_FALLBACK.categories,
-          forms: data.total_forms ?? SITE_STATS_FALLBACK.forms,
-          subcategories: iconSub + influencerSub + platinumSub + gbgSub,
-          iconSubcategories: iconSub,
-          influencerSubcategories: influencerSub,
-          platinumSubcategories: platinumSub,
-          goldBlueGarnetSubcategories: gbgSub,
           africanRegions: data.total_regions ?? SITE_STATS_FALLBACK.africanRegions,
           globalCommunities: data.global_communities ?? SITE_STATS_FALLBACK.globalCommunities,
           registeredChapters: data.registered_chapters ?? SITE_STATS_FALLBACK.registeredChapters,

@@ -6,12 +6,6 @@ import { MasterTimelineTable } from "@/components/timeline/MasterTimelineTable";
 
 const QUICK_LINKS = [
   {
-    label: "Buy Gala Tickets",
-    href: "/tickets",
-    description: "Reserve seats for the 13 December 2026 Recognition Gala.",
-    icon: Ticket,
-  },
-  {
     label: "Watch Live & On-Demand",
     href: "/media",
     description: "TV shows, webinars, podcasts and press briefings.",

@@ -81,9 +81,9 @@ const GROUPS: ResourceGroup[] = [
     intro: "Deep dives on the 2026 Recognition Edition.",
     items: [
       {
-        label: "18 Award Categories",
+        label: "22 Main Award Categories",
         href: "/awards",
-        description: "The full 4-tier · 18-category · 96-subcategory map.",
+        description: "The 4-tier · 22-category · 90-subcategory framework.",
         icon: GraduationCap,
       },
       {

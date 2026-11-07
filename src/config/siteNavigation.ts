@@ -69,8 +69,8 @@ const RECOGNITION_SECTIONS: NavSection[] = [
     title: "Start here",
     items: [
       { label: "Recognition Hub 2026", href: "/recognition" },
-      { label: "All 18 Award Category Pages", href: "/recognition/pages" },
-      { label: "All 18 Nomination Forms", href: "/nominate/pages" },
+      { label: "Award Category Pages", href: "/recognition/pages" },
+      { label: "Official Nomination Form", href: "/nominate" },
       { label: "How Recognition Works", href: "/about/how-it-works" },
       { label: "Full 2026–2027 Timeline", href: "/timeline" },
     ],
@@ -276,7 +276,6 @@ export const UTILITY_NAV: UtilityNavItem[] = [
   // in the PRIMARY nav (SITE_NAV) as their own dropdown groups, so they are
   // deliberately NOT duplicated here. Only "Buy Award Gala Ticket" is
   // emphasized — it is the single transactional item on this bar.
-  { label: "Buy Award Gala Ticket", href: "/tickets", analyticsId: "util_gala_ticket", emphasis: true },
   { label: "NRC", href: "/nrc", analyticsId: "util_nrc" },
   { label: "Judges", href: "/judges", analyticsId: "util_judges" },
   { label: "EduAid Africa", href: "/eduaid-africa", analyticsId: "util_eduaid" },

@@ -193,7 +193,6 @@ export const MAIN_NAV: NavItem[] = [
       { label: "Gallery", href: "/gallery", description: "Photo archives across NESA seasons", icon: Play },
       { label: "Press Releases", href: "/press", description: "Official announcements", icon: FileCheck },
       { label: "Awards Gala — 13 Dec 2026", href: "/media/gala", description: "The Blue-Garnet Gala Night", icon: Calendar, badge: "2026" },
-      { label: "Buy Gala Ticket", href: "/tickets", description: "Secure your seat", icon: Ticket },
       { label: "Buy Award Merchandise", href: "/shop", description: "Official NESA-Africa store", icon: ShoppingBag },
     ],
   },
@@ -250,7 +249,6 @@ export const MAIN_NAV_CTA: NavItem = {
 // Support-action cluster — surfaced in footer, mobile sheet, and Join the Movement.
 // Used wherever the platform invites visitors to back the cause beyond core CTAs.
 export const SUPPORT_CTAS: NavItem[] = [
-  { label: "Buy Gala Ticket", href: "/tickets", icon: Ticket },
   { label: "Buy Award Merchandise", href: "/shop", icon: ShoppingBag },
   { label: "Donate for Education Impact", href: "/donate", icon: Heart },
   { label: "Become a Sponsor", href: "/sponsor", icon: Sparkles },
@@ -281,7 +279,6 @@ export const QUICK_NAV: NavItem[] = [
   { label: "Refer", href: "#refer", icon: Users },
   { label: "Nominate", href: "/nominate", icon: FileCheck, stageGated: "nominations" },
   { label: "Vision 2035", href: "/about/vision-2035", icon: Target },
-  { label: "Tickets", href: "/tickets", icon: Ticket, stageGated: "tickets" },
   { label: "Watch", href: "/media/tv", icon: Play },
 ];
 
@@ -413,7 +410,6 @@ export const MOBILE_NAV: NavItem[] = [
   { label: "Vote", href: "/awards/gold-blue-garnet", icon: Vote },
   { label: "Engage", href: "/get-involved", icon: Users },
   { label: "GFAwzip Wallet", href: "/wallet/gfawzip", icon: Coins },
-  { label: "Tickets", href: "/tickets", icon: Ticket },
   { label: "Watch", href: "/media/tv", icon: Tv },
 ];
 
@@ -469,8 +465,6 @@ export const PAGE_REGISTRY: PageDefinition[] = [
   
   // Events
   { path: "/events", title: "Events", description: "Upcoming events", component: "Events", category: "public" },
-  { path: "/tickets", title: "Tickets", description: "Event tickets", component: "Tickets", category: "public", stageGated: "tickets" },
-  { path: "/buy-your-ticket", title: "Buy Your Ticket", description: "Gala tickets", component: "BuyYourTicket", category: "public" },
   { path: "/gfawzip", title: "GFAWzip Wallet", description: "Multi-currency payments", component: "GFAWzipWallet", category: "public" },
   { path: "/events/afri-edutourism", title: "Education Tourism", description: "Educational experiences", component: "Tourism", category: "public" },
   

@@ -42,10 +42,10 @@ export default function AwardLandingPagesIndex() {
   return (
     <>
       <Helmet>
-        <title>All 18 Award Category Pages · NESA-Africa 2026</title>
+        <title>Award Category Pages | NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Browse all 18 NESA-Africa 2026 award category pages — Africa Education Icon, Influencer Education Impact, Platinum and Gold-Blue Garnet — each with its own story, pathways and tailored nomination form."
+          content="Browse NESA-Africa 2026 award guidance — Africa Education Icon, Influencers Education Impact, Platinum Recognition and Gold-Blue Garnet."
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/recognition/pages" />
       </Helmet>
@@ -58,7 +58,7 @@ export default function AwardLandingPagesIndex() {
               NESA-Africa 2026 · Recognition Edition
             </p>
             <h1 className="font-playfair text-3xl text-white md:text-5xl">
-              The 18 Award Category Pages
+              Award Category Pages
             </h1>
             <p className="mt-3 max-w-3xl text-sm text-white/75 md:text-base">
               Enablers of Education for All Across Africa. Every category has its own page —

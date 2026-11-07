@@ -46,7 +46,6 @@ export function FinalCTASection() {
           <div className="flex flex-wrap justify-center gap-3 mb-10">
             {[
               { to: "/nominate", label: "Nominate an Education Enabler", icon: Award, cta: "nominate" },
-              { to: "/buy-your-ticket", label: "Buy Gala Ticket", icon: Ticket, cta: "tickets" },
               { to: "/judges-arena", label: "Judges Arena", icon: Scale, cta: "judges_arena" },
               { to: "/sponsor", label: "Sponsor the Timeline", icon: Handshake, cta: "sponsor" },
               { to: "/media/webinars", label: "Join Pre-Award Webinars", icon: Video, cta: "webinars" },

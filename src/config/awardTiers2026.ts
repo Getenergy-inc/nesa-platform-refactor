@@ -1,5 +1,5 @@
 // NESA-Africa 2026 — Canonical Award Tiers
-// 4 tiers · 18 categories · 96 subcategories
+// Public totals are approved separately from legacy category records.
 // Source of truth for the public landing Award Tiers Summary section.
 
 export type VoteMechanic =
@@ -139,9 +139,6 @@ export const AWARD_TIERS_2026: AwardTier2026[] = [
 
 export const AWARD_TIERS_TOTALS = {
   tiers: 4,
-  categories: AWARD_TIERS_2026.reduce((sum, t) => sum + t.categories.length, 0),
-  subcategories: AWARD_TIERS_2026.reduce(
-    (sum, t) => sum + t.categories.reduce((s, c) => s + c.subcategoryCount, 0),
-    0,
-  ),
+  categories: 22,
+  subcategories: 90,
 };

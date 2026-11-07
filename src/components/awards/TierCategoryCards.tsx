@@ -110,7 +110,7 @@ export function TierCategoryCards({
 
         <div className="mt-8 flex flex-wrap gap-3">
           <Button asChild variant="outline" className="border-gold/40 text-white hover:bg-gold/10 rounded-full">
-            <Link to="/awards/18-categories">Browse all 18 categories</Link>
+            <Link to="/awards">Explore all 22 categories</Link>
           </Button>
         </div>
       </div>
