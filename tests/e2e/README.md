@@ -1,5 +1,21 @@
 # Visual regression tests (Playwright)
 
+## Public cleanup regression
+
+`public-cleanup-regression.spec.ts` checks rendered public pages for ticket-sales
+links/actions, “Vote Before Gala”, outdated category totals and the unverified
+2026 Gala Highlights archive. It also checks legacy ticket redirects and mobile
+navigation. Sensitivity tests reintroduce each prohibited item in browser-only
+fixtures and verify the guard rejects it. Existing `src/test/public-counts.test.ts`
+checks the approved 4/22/90 totals and 27/63 subcategory split.
+
+Run against the already running local app (no build or server restart):
+
+```bash
+PLAYWRIGHT_BASE_URL=http://localhost:8080 bunx playwright test tests/e2e/public-cleanup-regression.spec.ts --project=chromium-desktop --workers=2
+bunx vitest run src/test/public-counts.test.ts
+```
+
 Catches subtle layout shifts and placeholder-fallback regressions on nominee
 surfaces (`/nominees/:slug`, directory cards, landing carousel, search results).
 
