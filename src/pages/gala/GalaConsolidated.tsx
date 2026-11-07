@@ -2,13 +2,9 @@
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Gala from "@/pages/media/Gala";
-import Tickets from "@/pages/Tickets";
-import BuyYourTicket from "@/pages/BuyYourTicket";
 
 const SECTIONS = [
   { id: "overview", label: "Overview" },
-  { id: "tickets", label: "Tickets" },
-  { id: "tables", label: "Tables" },
   { id: "delegates", label: "Delegates" },
   { id: "hospitality", label: "Sponsor Hospitality" },
   { id: "media", label: "Media Accreditation" },
@@ -29,7 +25,7 @@ export default function GalaConsolidated() {
     <>
       <Helmet>
         <title>Gold-Blue Garnet Awards Gala · NESA-Africa 2026</title>
-        <meta name="description" content="NESA-Africa 2026 Gold-Blue Garnet Awards Gala — Lagos, 13 December 2026. Individual tickets, tables, delegates, sponsor hospitality, invitations, media accreditation and QR check-in." />
+        <meta name="description" content="NESA-Africa 2026 Gold-Blue Garnet Awards Gala — Lagos, 13 December 2026. Online only. No tickets are sold." />
       </Helmet>
       <nav aria-label="Gala sections" className="sticky top-14 sm:top-16 z-30 bg-charcoal/95 backdrop-blur border-b border-gold/20 overflow-x-auto">
         <ul className="flex gap-4 px-4 py-3 text-sm whitespace-nowrap">
@@ -41,8 +37,6 @@ export default function GalaConsolidated() {
         </ul>
       </nav>
       <section id="overview"><Gala /></section>
-      <section id="tickets"><Tickets /></section>
-      <section id="tables"><BuyYourTicket /></section>
       <section id="delegates" className="py-16 px-4 max-w-4xl mx-auto text-center">
         <h2 className="text-3xl font-bold text-gold mb-4">Institutional Delegates</h2>
         <p className="text-white/80">Ministries, universities, NGOs and corporate partners can register delegate parties via <a href="/support#contact" className="text-gold underline">Contact & Help</a>.</p>

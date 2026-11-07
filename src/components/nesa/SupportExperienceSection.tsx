@@ -21,18 +21,6 @@ interface CardItem {
 
 const items: CardItem[] = [
   {
-    icon: Ticket,
-    eyebrow: "Awards Gala",
-    title: "Buy Your Gala Ticket",
-    description:
-      "Reserve your seat at the NESA-Africa Blue Garnet Awards Gala — an unforgettable night honoring Africa's education changemakers.",
-    cta: "Buy Tickets",
-    href: "/buy-your-ticket",
-    accent: "from-gold/20 to-gold/5",
-    image: galaImg,
-    imageAlt: "NESA-Africa Blue Garnet Awards Gala ballroom with golden trophy",
-  },
-  {
     icon: ShoppingBag,
     eyebrow: "Shop & Support",
     title: "Buy Official Merchandise",
@@ -90,7 +78,7 @@ export function SupportExperienceSection() {
             Be Part of the <span className="text-gold">Movement</span>
           </h2>
           <p className="text-white/65 text-base md:text-lg leading-relaxed">
-            Attend the gala, wear the brand, play the anthem, or join a local chapter — four
+            Wear the brand, play the anthem, or join a local chapter — three
             ways to celebrate and lead Africa's education movement.
           </p>
         </motion.div>

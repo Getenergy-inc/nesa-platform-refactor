@@ -111,7 +111,7 @@ const SPONSORSHIP_TIERS = [
     icon: Star,
     benefits: [
       "Category branding + on-stage presentation",
-      "2 VIP Gala Passes",
+      
     ],
     cta: "Sponsor a Category",
   },
@@ -121,22 +121,22 @@ const INDIVIDUAL_TIERS = [
   {
     tier: "Bronze",
     range: "$500–$999",
-    perks: ["1 Gala Ticket", "Downloadable Certificate of Social Impact"],
+    perks: ["Downloadable Certificate of Social Impact"],
   },
   {
     tier: "Silver",
     range: "$1,000–$2,499",
-    perks: ["2 Gala Tickets", "Sponsor Wall + Recognition Roll"],
+    perks: ["Sponsor Wall + Recognition Roll"],
   },
   {
     tier: "Gold",
     range: "$2,500–$4,999",
-    perks: ["Reserved/VVIP seats for 3 (where applicable)", "Sponsor Wall + featured recognition"],
+    perks: ["Sponsor Wall + featured recognition"],
   },
   {
     tier: "Platinum",
     range: "$5,000+",
-    perks: ["5 Gala Tickets", "Premium sponsor label + enhanced recognition (Sponsor Wall + Annual Report mention)"],
+    perks: ["Premium sponsor label + enhanced recognition (Sponsor Wall + Annual Report mention)"],
   },
 ];
 
