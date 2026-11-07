@@ -33,10 +33,10 @@ export default function EighteenCategoriesPage() {
   return (
     <div className="min-h-screen bg-charcoal text-ivory">
       <Helmet>
-        <title>18 Award Categories · Enablers of Education for All Across Africa | NESA-Africa 2026</title>
+        <title>Award Category Guide | NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Browse the 18 Gold–Blue Garnet Award Categories of NESA-Africa 2026 — Enablers of Education for All Across Africa. Jump directly into each category and its subcategories."
+          content="Browse NESA-Africa 2026 category guidance and existing recognition pathways."
         />
         <link rel="canonical" href={`${SITE}/awards/18-categories`} />
       </Helmet>
@@ -44,7 +44,7 @@ export default function EighteenCategoriesPage() {
         crumbs={[
           { name: "Home", path: "/" },
           { name: "Awards", path: "/awards" },
-          { name: "18 Award Categories", path: "/awards/18-categories" },
+          { name: "Award Category Guide", path: "/awards/18-categories" },
         ]}
       />
 
@@ -61,7 +61,7 @@ export default function EighteenCategoriesPage() {
               <Sparkles className="mr-1.5 h-3 w-3" /> {BRAND_TAGLINE}
             </Badge>
             <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-ivory">
-              The 18 Award Categories
+              Award Category Guide
             </h1>
             <p className="mt-4 text-lg text-ivory/75 leading-relaxed">
               Africa's competitive recognition for individuals and organisations serving as{" "}
@@ -70,7 +70,7 @@ export default function EighteenCategoriesPage() {
             </p>
 
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-sm text-ivory/70">
-              <span className="inline-flex items-center gap-2"><Trophy className="h-4 w-4 text-gold" /> 18 Categories</span>
+              <span className="inline-flex items-center gap-2"><Trophy className="h-4 w-4 text-gold" /> Category guidance</span>
               <span className="opacity-30">•</span>
               <span className="inline-flex items-center gap-2"><Users className="h-4 w-4 text-gold" /> Jury + Public</span>
               <span className="opacity-30">•</span>
@@ -131,10 +131,10 @@ export default function EighteenCategoriesPage() {
                       <CardContent className="p-6">
                         <div className="mb-3 flex items-center justify-between">
                           <span className="font-mono text-xs text-gold/80">
-                            {String(globalIdx + 1).padStart(2, "0")} / 18
+                            {String(globalIdx + 1).padStart(2, "0")}
                           </span>
                           <Badge variant="outline" className="border-gold/30 text-gold/90 text-[10px]">
-                            {subCount > 0 ? `${subCount} subcategories` : "Open call"}
+                            Category guidance
                           </Badge>
                         </div>
                         <h2 className="font-serif text-xl text-ivory leading-snug group-hover:text-gold transition-colors">
@@ -163,7 +163,7 @@ export default function EighteenCategoriesPage() {
           <h3 className="mt-2 font-serif text-2xl text-ivory">
             Know an Enabler who deserves recognition?
           </h3>
-          <p className="mt-2 text-ivory/70">Nominations are open across all 18 categories.</p>
+          <p className="mt-2 text-ivory/70">Nomination is free across the award categories.</p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Button asChild className="bg-gold text-charcoal hover:bg-gold/90 rounded-full px-6">
               <Link to="/nominate?tier=gold-blue-garnet">Start a Nomination</Link>

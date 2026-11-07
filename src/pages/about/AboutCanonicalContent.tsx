@@ -98,8 +98,8 @@ export function AboutCanonicalContent() {
           <div className="grid grid-cols-3 gap-3 text-center">
             {[
               ["4", "Tiers"],
-              ["18", "Categories"],
-              ["96", "Subcategories"],
+              ["22", "Categories"],
+              ["90", "Subcategories"],
             ].map(([v, l]) => (
               <div key={l} className="rounded-xl border border-gold/20 bg-white/[0.03] py-5">
                 <p className="font-mono text-3xl md:text-4xl text-gold">{v}</p>

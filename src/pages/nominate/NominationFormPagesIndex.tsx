@@ -42,10 +42,10 @@ export default function NominationFormPagesIndex() {
   return (
     <>
       <Helmet>
-        <title>All 18 Nomination Forms · NESA-Africa 2026</title>
+        <title>Nomination Category Guide | NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Open any of the 18 NESA-Africa 2026 nomination forms — one tailored form per award category, free to submit, verified by the Nominee Research Corps (NRC)."
+          content="Explore award category guidance and nominate free through the official Google Form."
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/nominate/pages" />
       </Helmet>
@@ -58,7 +58,7 @@ export default function NominationFormPagesIndex() {
               Nominations Open · NESA-Africa 2026
             </p>
             <h1 className="font-playfair text-3xl text-white md:text-5xl">
-              The 18 Nomination Forms
+              Nomination Category Guide
             </h1>
             <p className="mt-3 max-w-3xl text-sm text-white/75 md:text-base">
               Enablers of Education for All Across Africa. One tailored form per category —

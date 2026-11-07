@@ -68,8 +68,8 @@ export const PLATFORM_IDENTITY_SENTENCE =
 // Scale-at-a-glance chips for hero and overview rails.
 export const RECOGNITION_ARCHITECTURE_SUMMARY = [
   { label: "4 Recognition Tiers", href: "/awards" },
-  { label: "18 Award Categories", href: "/awards#categories" },
-  { label: "96 Subcategories", href: "/awards#subcategories" },
+  { label: "22 Main Award Categories", href: "/awards#categories" },
+  { label: "90 Subcategories", href: "/awards#subcategories" },
   { label: "8 African Regions", href: "/regions" },
   { label: "2 Global Communities", href: "/regions#communities" },
   { label: "27 Independent Icon Judges", href: "/judges" },

@@ -1074,14 +1074,14 @@
       "voting": {
         "title": "Public Voting",
         "subtitle": "Gold-Blue Garnet Awards",
-        "description": "9 categories. 135 subcategories. Public + Jury weighted.",
+        "description": "9 categories · 63 subcategories. Independent assessment.",
         "cta": "Nominate",
         "ctaSecondary": "How It Works"
       },
       "expert": {
         "title": "Expert Selection",
         "subtitle": "Platinum Certificate of Merit",
-        "description": "17 categories. No voting. Expert evaluation only.",
+        "description": "7 categories · 27 subcategories. Independent assessment.",
         "cta": "Learn More"
       }
     },

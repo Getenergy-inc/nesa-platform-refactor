@@ -37,7 +37,7 @@ export const PHASE_MAP: Record<CampaignPhase, PhaseConfig> = {
   },
   gala: {
     phase: "gala",
-    primary: { label: "Get Gala Tickets", href: "/tickets", analyticsId: "gala_tickets" },
+    primary: { label: "Online Awards Gala", href: "/media/gala", analyticsId: "online_gala" },
     secondary: {
       label: "Explore Finalists",
       href: "/nominees",

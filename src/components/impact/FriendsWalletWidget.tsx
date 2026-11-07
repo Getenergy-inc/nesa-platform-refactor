@@ -187,12 +187,6 @@ export default function FriendsWalletWidget() {
               >
                 <ShoppingBag className="h-4 w-4" /> Visit the store
               </Link>
-              <Link
-                to="/tickets"
-                className="inline-flex items-center gap-2 rounded-full border border-gold/40 px-6 py-3 text-sm font-semibold text-gold hover:bg-gold/10"
-              >
-                Gala tickets <ArrowRight className="h-4 w-4" />
-              </Link>
             </div>
           </TabsContent>
         </Tabs>

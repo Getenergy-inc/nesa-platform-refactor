@@ -51,7 +51,6 @@ export const PAGE_SEQUENCE: PageEntry[] = [
   // Media & Gala
   { path: "/media", label: "Media & Stories", section: "Media" },
   { path: "/gala", label: "Award Gala", section: "Media" },
-  { path: "/tickets", label: "Buy Gala Ticket", section: "Media" },
 
   // Support
   { path: "/support", label: "Support NESA-Africa", section: "Support" },

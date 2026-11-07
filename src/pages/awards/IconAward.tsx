@@ -153,8 +153,8 @@ export default function IconAward() {
         {/* Icon slot inside the 18-category registry */}
         <TierCategoryCards
           tier="africa-education-icon"
-          heading="Africa Education Icon in the 18-Category Registry"
-          sub="Icon is the lifetime meta-category among the 18. Explore how it sits alongside the Gold–Blue Garnet, Platinum and Influencer tiers."
+          heading="Africa Education Icon Category Guidance"
+          sub="Explore lifetime recognition alongside Gold-Blue Garnet, Platinum Recognition and Influencers Education Impact."
         />
 
 

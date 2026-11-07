@@ -787,8 +787,7 @@ export const PAGE_FAQS: PageFAQ[] = [
       { q: "Can Gala sponsors influence winners?", a: INTEGRITY_SHORT },
       {
         q: "Are tickets available?",
-        a: "Tickets and table packages will open at [CONFIRM DATE] via the official ticket page.",
-        ctas: [{ label: "Tickets & Tables", href: "/buy-your-ticket" }],
+        a: "No. The 2026 Online Awards Gala is online only; no tickets are sold.",
       },
       {
         q: "Will the Gala be broadcast?",

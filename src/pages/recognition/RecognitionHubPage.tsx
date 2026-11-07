@@ -113,7 +113,7 @@ export default function RecognitionHubPage() {
         <title>Recognition Hub · NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Enablers of Education for All Across Africa — explore the 4 tiers, 18 categories and 96 subcategories of the 2026 Recognition Architecture."
+          content="Enablers of Education for All Across Africa — explore the 4 tiers, 22 categories and 90 subcategories of the 2026 Recognition Architecture."
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/recognition" />
       </Helmet>

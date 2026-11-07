@@ -95,15 +95,6 @@ const venueZones = [
   { icon: Mic, label: "Main Stage", desc: "Cinematic LED stage, immersive lighting and orchestral pit." },
 ];
 
-// ============== TICKETS ==============
-const tickets = [
-  { name: "General Access", price: "$30", tier: "Standard", perks: ["Gala entry", "General seating", "Instant QR e-ticket", "Digital receipt"], cta: "Reserve Seat", featured: false },
-  { name: "Premium Seat", price: "$60", tier: "Priority", perks: ["Priority mid-front seating", "Welcome drink", "QR e-ticket", "Digital receipt"], cta: "Get Premium", featured: false },
-  { name: "VIP Access", price: "$120", tier: "VIP", perks: ["Front-row VIP seating", "VIP lounge & bar", "Red-carpet photo", "Priority entry"], cta: "Go VIP", featured: true },
-  { name: "VVIP Platinum", price: "$200", tier: "Platinum", perks: ["VVIP reserved seating", "Platinum lounge", "Gourmet dinner", "Backstage tour", "Nominee meet & greet", "Luxury gift collection"], cta: "Reserve Platinum", featured: false },
-  { name: "Sponsor Table", price: "Custom", tier: "Partner", perks: ["10-seat branded table", "On-stage acknowledgement", "Logo on broadcast", "Media interview slot"], cta: "Request Table", featured: false },
-];
-
 // ============== SPONSORSHIP TIERS ==============
 const sponsorBenefits = [
   { icon: Globe2, label: "Continental Exposure", desc: "Reach 1M+ viewers across 7 African regions and the diaspora." },
@@ -134,19 +125,9 @@ const eventJsonLd = {
     name: GALA.venue,
     address: { "@type": "PostalAddress", addressLocality: "Lagos", addressCountry: "NG" },
   },
-  image: ["https://nesaafrica.lovable.app/og/gala.jpg"],
   description: "The NESA-Africa Blue Garnet Awards Gala — Africa's premier celebration of education changemakers.",
   organizer: { "@type": "Organization", name: "NESA-Africa", url: "https://nesaafrica.lovable.app" },
-  offers: tickets
-    .filter((t) => t.price.startsWith("$"))
-    .map((t) => ({
-      "@type": "Offer",
-      name: t.name,
-      price: t.price.replace("$", ""),
-      priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
-      url: "https://nesaafrica.lovable.app/tickets",
-    })),
+
 };
 
 // ============== ANIMATIONS ==============
@@ -273,12 +254,6 @@ export default function Gala() {
 
               {/* CTA stack */}
               <div className="flex flex-wrap gap-3">
-                <Button asChild size="lg" className="bg-gradient-to-r from-gold to-yellow-500 text-charcoal shadow-lg shadow-gold/30 hover:shadow-gold/50">
-                  <Link to="/tickets"><Ticket className="mr-2 h-5 w-5" /> Buy Gala Ticket</Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="border-indigo-400/60 bg-indigo-500/10 text-white backdrop-blur hover:bg-indigo-500/20">
-                  <Link to="/awards/gold-blue-garnet"><Vote className="mr-2 h-5 w-5" /> Vote Before Gala</Link>
-                </Button>
                 <Button asChild size="lg" variant="outline" className="border-white/20 bg-white/5 text-white backdrop-blur hover:bg-white/10">
                   <Link to="/sponsors"><Handshake className="mr-2 h-5 w-5" /> Become a Sponsor</Link>
                 </Button>
@@ -479,65 +454,6 @@ export default function Gala() {
           </div>
         </section>
 
-        {/* ============== 6. TICKETS ============== */}
-        <section className="relative overflow-hidden bg-charcoal py-20 lg:py-28">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(212,175,55,0.06),_transparent_70%)]" />
-          <div className="container relative mx-auto px-4">
-            <div className="mx-auto mb-14 max-w-2xl text-center">
-              <Badge className="mb-4 border-gold/40 bg-gold/10 text-gold">Tickets & Access</Badge>
-              <h2 className="font-display text-3xl font-bold text-white md:text-5xl">
-                Reserve Your <span className="text-gold">Seat at History</span>
-              </h2>
-              <p className="mt-4 text-white/70">From general access to platinum lounges — choose how you experience the gala.</p>
-            </div>
-
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-              {tickets.map((t, i) => (
-                <motion.div
-                  key={t.name}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={fadeUp}
-                  transition={{ delay: i * 0.05 }}
-                  className={t.featured ? "lg:-mt-4" : ""}
-                >
-                  <Card className={`relative h-full overflow-hidden ${t.featured ? "border-gold/60 bg-gradient-to-b from-gold/10 to-charcoal-light shadow-xl shadow-gold/20" : "border-white/10 bg-charcoal-light"}`}>
-                    {t.featured && (
-                      <div className="absolute inset-x-0 top-0 bg-gradient-to-r from-gold to-yellow-400 py-1 text-center text-[10px] font-bold uppercase tracking-widest text-charcoal">
-                        Most Popular
-                      </div>
-                    )}
-                    <CardContent className={`p-6 ${t.featured ? "pt-9" : ""}`}>
-                      <div className="mb-1 text-[10px] uppercase tracking-widest text-gold">{t.tier}</div>
-                      <h3 className="mb-1 font-display text-xl font-bold text-white">{t.name}</h3>
-                      <div className="mb-5 flex items-baseline gap-1">
-                        <span className="font-display text-3xl font-bold text-gold">{t.price}</span>
-                        {t.price.startsWith("$") && <span className="text-xs text-white/50">USD</span>}
-                      </div>
-                      <ul className="mb-6 space-y-2 text-sm text-white/70">
-                        {t.perks.map((p) => (
-                          <li key={p} className="flex gap-2">
-                            <Sparkles className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold" />
-                            <span>{p}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <Button asChild size="sm" className={`w-full ${t.featured ? "bg-gradient-to-r from-gold to-yellow-500 text-charcoal" : "bg-white/10 text-white hover:bg-white/20"}`}>
-                        <Link to={t.price === "Custom" ? "/sponsors" : "/tickets"}>{t.cta}</Link>
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-
-            <p className="mt-8 text-center text-xs text-white/40">
-              Instant QR e-ticket · Digital receipt · Pay via GFA Wallet, Paystack, Transactpay, Zelle, TapTap Send or Bancable.
-            </p>
-          </div>
-        </section>
-
         {/* ============== 7. SPONSORSHIP ============== */}
         <section className="relative overflow-hidden bg-gradient-to-br from-indigo-950 via-charcoal to-charcoal py-20 lg:py-28">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_right,_rgba(99,102,241,0.15),_transparent_60%)]" />
@@ -692,9 +608,6 @@ export default function Gala() {
               </div>
 
               <div className="mt-10 flex flex-wrap justify-center gap-3">
-                <Button asChild size="lg" className="bg-gradient-to-r from-gold to-yellow-500 text-charcoal shadow-lg shadow-gold/40">
-                  <Link to="/tickets"><Ticket className="mr-2 h-5 w-5" /> Buy Ticket</Link>
-                </Button>
                 <Button asChild size="lg" variant="outline" className="border-indigo-400/60 bg-indigo-500/10 text-white hover:bg-indigo-500/20">
                   <Link to="/awards/gold-blue-garnet"><Vote className="mr-2 h-5 w-5" /> Learn More</Link>
                 </Button>

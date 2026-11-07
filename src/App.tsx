@@ -1603,17 +1603,13 @@ const App = () => (
                   <Route
                     path="/tickets"
                     element={
-                      <WithLayout>
-                        <Tickets />
-                      </WithLayout>
+                      <Navigate to="/media/gala" replace />
                     }
                   />
                   <Route
                     path="/buy-your-ticket"
                     element={
-                      <WithLayout>
-                        <BuyYourTicket />
-                      </WithLayout>
+                      <Navigate to="/media/gala" replace />
                     }
                   />
 

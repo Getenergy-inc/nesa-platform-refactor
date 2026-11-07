@@ -144,7 +144,6 @@ describe("UTILITY_NAV (Navbar 2)", () => {
   it("keeps the confirmed-real utility destinations", () => {
     const hrefs = UTILITY_NAV.map((i) => i.href);
     for (const h of [
-      "/tickets",
       "/nrc",
       "/judges",
       "/eduaid-africa",
@@ -163,8 +162,9 @@ describe("UTILITY_NAV (Navbar 2)", () => {
     }
   });
 
-  it("emphasises only the gala ticket", () => {
-    expect(UTILITY_NAV.filter((i) => i.emphasis).map((i) => i.href)).toEqual(["/tickets"]);
+  it("does not expose a ticket-sales destination", () => {
+    expect(UTILITY_NAV.map((i) => i.href)).not.toContain("/tickets");
+    expect(UTILITY_NAV.filter((i) => i.emphasis)).toEqual([]);
   });
 
   it("has unique hrefs and analytics ids", () => {

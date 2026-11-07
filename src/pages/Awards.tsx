@@ -49,8 +49,8 @@ const SITE = "https://nesaafrica.lovable.app";
 
 const HERO_STATS = [
   { value: "4", label: "Award Tiers" },
-  { value: "18", label: "Categories" },
-  { value: "96", label: "Recognition Subcategories" },
+  { value: "22", label: "Categories" },
+  { value: "90", label: "Recognition Subcategories" },
   { value: "10", label: "Education Regions" },
 ];
 
@@ -461,7 +461,7 @@ export default function AwardsPage() {
                 How Recognition Is <span className="text-gold">Structured</span>
               </h2>
               <p className="mt-3 text-ivory/70 text-sm md:text-base">
-                18 Categories · 96 Recognition Subcategories · One Continental Mission
+                22 Main Award Categories · 90 Recognition Subcategories · One Continental Mission
               </p>
             </div>
 

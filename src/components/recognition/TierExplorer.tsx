@@ -235,7 +235,7 @@ export function TierExplorer({ className = "" }: Props) {
           Four Recognition Tiers
         </h2>
         <p className="mt-3 text-sm text-white/70 md:text-base">
-          One continental platform · 4 tiers · 18 main categories · ~100 recognition
+          One continental platform · 4 tiers · 22 main categories · 90 recognition
           subcategories. Lifetime honours, competitive excellence, institutional
           leadership, and public-voted influence.
         </p>

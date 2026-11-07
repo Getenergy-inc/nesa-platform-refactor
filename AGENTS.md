@@ -7,3 +7,5 @@
 - The NESA-Africa 2026 Master Document and 2 Nov 2026 brief override older `/docs` files; conflicting docs carry a SUPERSEDED banner and `docs/refactor/audit-2026-11.md` lists remaining code conflicts, so legacy docs are never used as requirements.
 - Keep `scripts/check-startup-integrity.sh` and `src/test/startup-integrity.test.ts` passing; they block the start-up loader, editor auto-run and fake-font patterns that were maliciously injected twice.
 - Missing approved content renders a visible "CONTENT REQUIRED" placeholder and is tracked in `docs/content-required.md`, so nothing is invented.
+- Public award totals remain approved presentation constants rather than legacy catalogue aggregates; live operational statistics cannot overwrite them.
+- Social-preview metadata must not default to missing image files; omit unspecified images so hosting can supply its preview, retaining explicit page images only when available.
