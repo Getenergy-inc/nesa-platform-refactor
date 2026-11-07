@@ -17,6 +17,8 @@
 ## NESA-Africa 2026 Master Document refactor (2 Nov 2026 brief) — stop for review after each phase
 Scope (4 Nov 2026): CONTENT refactor only — keep existing charcoal/gold brand, components and layouts; screenshots at 390px and 1440px after each phase; do not publish.
 - [x] Read latest uploaded content brief and prepare replacement phased plan before changing application code.
+- [x] Latest-brief Phase 0 — refresh audit/content register/superseded guidance; capture unchanged before/after at 390/1440 and overlap at 1920; startup check and four tests passed. Stop for review, no publishing.
+- [ ] Obtain complete approved Master Document §§6–26 before exact Phase 1 category transcription — not located in inspected project/source uploads; requires SCEF source document.
 - [ ] Apply latest brief throughout: nominations and continuous verified certificate downloads 9 Nov 2026–31 Mar 2027; 13 Dec 2026 Online Awards Gala honouring Africa Education Icons 2006–2026. Latest brief overrides older dates and the prohibition on qualified "Online Awards Gala" wording.
 - [x] Step 0 — Undo the blue/garnet/Source Serif style-rule change; restore original brand rules; keep all 12 languages
 - [x] Phase 0 — Audit (docs/refactor/audit-2026-11.md), start-up integrity check + test + workflow, superseded banners on old docs, docs/content-required.md

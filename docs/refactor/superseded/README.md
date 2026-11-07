@@ -1,5 +1,7 @@
 # Superseded Refactor Specs
 
+> **Current authority (7 Nov 2026):** latest uploaded NESA-Africa 2026 content-refactor brief, with approved body/taxonomy from the Master Document. Older replacement documents mentioned below are historical and cannot override the latest brief. Public nominations/continuous verified 2026 certificate downloads: 9 Nov 2026–31 Mar 2027. Online Awards Gala: 13 Dec 2026, online only. 4/22/90; no public voting. Preserve existing brand; do not publish. See `../audit-2026-11.md`.
+
 Documents in this folder describe approaches that were **explicitly rejected**
 after further review. They are preserved for auditability only — **do not
 implement anything from them**.
