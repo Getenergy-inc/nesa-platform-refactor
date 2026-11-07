@@ -34,8 +34,10 @@ async function assertNoOutdatedCounts(page: Page) {
   const text = (await page.locator("body").innerText()).replace(/\s+/g, " ");
   expect(text).not.toMatch(/\b(?:17|18)\s+(?:(?:main|award)\s+)*categories\b/i);
   expect(text).not.toMatch(/\b(?:96|135)\s+(?:award\s+)?sub[\s-]?categories\b/i);
-  expect(text).not.toMatch(/\b(?:main\s+|award\s+)?categories\s*[:·–—-]?\s*(?:17|18)\b/i);
-  expect(text).not.toMatch(/\bsub[\s-]?categories\s*[:·–—-]?\s*(?:96|135)\b/i);
+  // Require punctuation for label-first totals: do not join an unrelated
+  // category link and the following “18-Form Directory” heading.
+  expect(text).not.toMatch(/\b(?:main\s+|award\s+)?categories\s*[:·–—-]\s*(?:17|18)\b/i);
+  expect(text).not.toMatch(/\bsub[\s-]?categories\s*[:·–—-]\s*(?:96|135)\b/i);
 }
 
 async function assertNoArchivedVideo(page: Page) {
@@ -51,7 +53,10 @@ test.describe("public cleanup regression", () => {
     test(`${route} keeps retired public content absent`, async ({ page }) => {
       await page.goto(route);
       // A blank, loading-only or missing-page response must not pass absence checks.
-      await expect(page.locator("h1").first()).toBeVisible();
+      const heading = route === "/upcoming-events"
+        ? page.getByRole("heading", { name: "Upcoming TV Shows, Voting & Events", exact: true })
+        : page.locator("h1").first();
+      await expect(heading).toBeVisible();
       await expect(page.locator("body")).not.toContainText(/page not found|404 not found|something went wrong/i);
       await test.step("no gala ticket sales or entry points", () => assertNoTicketSales(page));
       await test.step("no Vote Before Gala", () => assertNoVoteBeforeGala(page));
@@ -72,8 +77,8 @@ test.describe("public cleanup regression", () => {
   test("mobile navigation has no ticket-sales entry points", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/");
-    await page.getByRole("button", { name: /open navigation menu/i }).click();
-    await expect(page.locator("#mobile-nav-drawer")).toBeVisible();
+    await page.getByRole("button", { name: "Open navigation", exact: true }).click();
+    await expect(page.getByRole("navigation", { name: "Mobile primary", exact: true })).toBeVisible();
     await assertNoTicketSales(page);
     await assertNoVoteBeforeGala(page);
   });
