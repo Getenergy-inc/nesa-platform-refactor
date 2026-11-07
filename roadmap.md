@@ -5,14 +5,14 @@
 - [x] Stage 2,044 identifiable PDF candidates privately with provenance and within-pathway deduplication; no public nominees created.
 - [x] Verify public research pages, live searches, profile links, fallbacks, 320–1440px layouts, 85 frontend tests and 4 extraction tests.
 - [ ] Verify administrator staging screen end-to-end — requesting account has only user role; requires an authorised administrator session.
-- [ ] Fix unrestricted role-definition and volunteer-badge reads; user rejected dismissal. Await decision on retaining approved public labels versus sign-in-only access.
+- [x] Fixed both unrestricted role-definition and volunteer-badge reads with approval-only public access, private defaults and administrator publication control; four live access tests passed and findings marked fixed, not ignored.
 - [ ] Replace public award hierarchy with the approved four tiers, 22 main awards and 90 subcategories from the two master documents.
 - [ ] Apply tier/category/subcategory editorial guidance to award pages and nomination selections while preserving existing nominations, links and review rules.
 - [ ] Treat individual states as nominees and six zones as geographic groupings; verify counts, guidance and nomination navigation.
 - [x] Send every website nomination button and CTA to the official Google Form (single shared link), embedded on the nomination page with open-in-new-tab.
 - [x] Remove hidden harmful start-up code that arrived via the 18 Oct GitHub merge (start scripts, style config, editor auto-run task, fake font files).
 - [x] Removed the same harmful start-up code again after it reappeared on 1 Nov; site rebuilt and publish requested.
-- [x] Confirm live volunteer_badges and roles contain public catalogue definitions, not private assignments; user_roles remains own-user/admin scoped. Security dismissal requires approval.
+- [x] Confirm live volunteer_badges and roles contain catalogue definitions; approved entries stay public under scoped policies and user_roles remains own-user/admin scoped.
 
 ## NESA-Africa 2026 Master Document refactor (2 Nov 2026 brief) — stop for review after each phase
 Scope (4 Nov 2026): CONTENT refactor only — keep existing charcoal/gold brand, components and layouts; screenshots at 390px and 1440px after each phase; do not publish.
@@ -29,5 +29,5 @@ Scope (4 Nov 2026): CONTENT refactor only — keep existing charcoal/gold brand,
 - [ ] Phase 4 — New and restructured pages (Awards, tiers, CategoryPage, Research & Judging, Evidence, Programme, Partners, Get Involved, Support EduAid, Sponsor, Resources, FAQ, Governance, Contact, legal, Search, Nominate start/confirmation)
 - [ ] Phase 5 — Hide wallet, voting and shop publicly; keep admin access
 - [ ] Phase 6 — All new copy through translation files; keep all 12 languages in the switcher; Arabic RTL; non-English pages unpublished until SCEF translations
-- [ ] Phase 7 — Database features (status badges, media, impact) — blocked: database paused, workspace out of Cloud credits
+- [ ] Phase 7 — Database features (status badges, media, impact) — Cloud is healthy again; pending the phased review gate and approved content.
 - [ ] Phase 8 — QA: tests, axe, Lighthouse report; do not publish
