@@ -37,7 +37,6 @@ const QUICK_ACTIONS = [
     icon: CreditCard,
     color: "hsl(var(--primary))",
     links: [
-      { label: "Buy Gala Ticket", href: "/buy-your-ticket", icon: Ticket, description: "NESA-Africa Gala 2026" },
       { label: "Donate Now", href: "/donate", icon: Heart, description: "Support education causes" },
       { label: "Become a Sponsor", href: "/partners", icon: Award, description: "Corporate partnerships" },
     ],

@@ -102,12 +102,6 @@ export default function GFAWzipWallet() {
                       <ExternalLink className="ml-2 h-4 w-4" />
                     </a>
                   </Button>
-                  <Button size="lg" variant="outline" asChild>
-                    <Link to="/buy-your-ticket">
-                      <Ticket className="mr-2 h-5 w-5" />
-                      Buy Your Ticket
-                    </Link>
-                  </Button>
                 </div>
 
                 <div className="flex flex-wrap justify-center lg:justify-start gap-3">
@@ -358,12 +352,6 @@ export default function GFAWzipWallet() {
                     Open GFAWzip Wallet
                     <ExternalLink className="ml-2 h-4 w-4" />
                   </a>
-                </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <Link to="/buy-your-ticket">
-                    <Ticket className="mr-2 h-5 w-5" />
-                    Buy Your Ticket
-                  </Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild>
                   <Link to="/wallet">

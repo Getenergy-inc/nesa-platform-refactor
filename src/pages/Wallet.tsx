@@ -179,12 +179,6 @@ export default function Wallet() {
                       </Link>
                     </Button>
                     <Button variant="outline" asChild>
-                      <Link to="/buy-your-ticket">
-                        <Ticket className="mr-2 h-4 w-4" />
-                        Gala Tickets
-                      </Link>
-                    </Button>
-                    <Button variant="outline" asChild>
                       <Link to="/gfawzip">
                         <GFAWalletIcon size={16} />
                         <span className="ml-2">Top Up</span>

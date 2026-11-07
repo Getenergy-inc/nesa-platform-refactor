@@ -50,12 +50,6 @@ export default function NigeriaChapterTrack() {
               </p>
 
               <div className="flex flex-wrap gap-3 mt-8">
-                <Link to="/buy-your-ticket">
-                  <Button className="bg-emerald-500 hover:bg-emerald-600 text-white gap-2 rounded-full">
-                    <Ticket className="h-4 w-4" />
-                    Get Gala Tickets
-                  </Button>
-                </Link>
                 <Link to="/media/gala">
                   <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 gap-2 rounded-full">
                     <Play className="h-4 w-4" />
