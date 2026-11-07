@@ -5,7 +5,7 @@
 - [x] Stage 2,044 identifiable PDF candidates privately with provenance and within-pathway deduplication; no public nominees created.
 - [x] Verify public research pages, live searches, profile links, fallbacks, 320–1440px layouts, 85 frontend tests and 4 extraction tests.
 - [ ] Verify administrator staging screen end-to-end — requesting account has only user role; requires an authorised administrator session.
-- [ ] Clear public reference-table alerts — schemas and policies confirmed intentionally public, awaiting approval to dismiss false positives.
+- [ ] Fix unrestricted role-definition and volunteer-badge reads; user rejected dismissal. Await decision on retaining approved public labels versus sign-in-only access.
 - [ ] Replace public award hierarchy with the approved four tiers, 22 main awards and 90 subcategories from the two master documents.
 - [ ] Apply tier/category/subcategory editorial guidance to award pages and nomination selections while preserving existing nominations, links and review rules.
 - [ ] Treat individual states as nominees and six zones as geographic groupings; verify counts, guidance and nomination navigation.
