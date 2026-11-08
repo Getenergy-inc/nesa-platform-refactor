@@ -1,9 +1,12 @@
 ## Backend migration package — 8 Nov 2026
-- [ ] Stage a clean, secret-free source export with frontend, backend, migrations and Edge Functions.
-- [ ] Export available live schema/RLS/function/storage metadata without changing production.
-- [ ] Add taxonomy files, environment template, dependency audit, Docker development environment and restore guide.
-- [ ] Add cross-environment validation scripts and an honest manifest of manual export steps.
-- [ ] Scan, inspect and deliver the downloadable ZIP; do not publish or modify production.
+- [x] Stage a clean, secret-free source export with frontend, backend, migrations and Edge Functions.
+- [x] Export available live schema/RLS/function/storage metadata without changing production.
+- [x] Add taxonomy files, environment template, dependency audit, Docker development environment and restore guide.
+- [x] Add cross-environment validation scripts and an honest manifest of manual export steps.
+- [x] Scan, inspect and deliver the downloadable ZIP; do not publish or modify production.
+- [ ] Authorised project owner: run the full database/auth export in Lovable Cloud and add it to the package.
+- [ ] Authorised project owner: download storage objects from More → Storage and add them with bucket paths preserved.
+- [ ] Engineering team: restore into an isolated target, validate clean-schema reconstruction and complete cutover rehearsal.
 
 ## Existing product work
 - [x] Factual check: /nominees/lane/ngo-africa route, data source, counts, category identity
