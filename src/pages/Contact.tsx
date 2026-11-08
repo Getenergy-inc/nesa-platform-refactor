@@ -12,16 +12,13 @@ import {
   Phone, 
   MapPin, 
   Clock, 
-  Send,
   MessageSquare,
   Building2,
   Globe,
   Mic,
   Video,
-  Award,
   Upload,
 } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
 import { FollowLinks } from "@/components/nesa/FollowLinks";
 import { ScefFormRequired } from "@/components/nesa/ContentRequired";
 
@@ -73,7 +70,6 @@ const regionalOffices = [
 ];
 
 export default function Contact() {
-  const { toast } = useToast();
   const [searchParams] = useSearchParams();
   const subjectParam = searchParams.get("subject");
   const isPresenterApplication = subjectParam === "presenter";
@@ -100,8 +96,6 @@ export default function Contact() {
     bio: "",
     motivation: "",
   });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (isPresenterApplication) {

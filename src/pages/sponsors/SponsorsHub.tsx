@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { PublicLayout } from "@/components/layout/PublicLayout";
 import { ExploreNomineesCTA } from "@/components/nominees/ExploreNomineesCTA";
+import { ScefFormRequired } from "@/components/nesa/ContentRequired";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -95,9 +96,7 @@ export default function SponsorsHub() {
               NESA Africa collaborates with visionary organizations, institutions, foundations, and brands supporting education transformation across the continent.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
-                <Link to="/contact?topic=sponsorship">Become a Sponsor</Link>
-              </Button>
+              <ScefFormRequired kind="sponsorship" className="max-w-xl" />
               <Button asChild size="lg" variant="outline" className="border-gold/60 text-gold hover:bg-gold/10">
                 <Link to="#packages">View Partnership Opportunities</Link>
               </Button>
@@ -222,9 +221,7 @@ export default function SponsorsHub() {
                       </li>
                     ))}
                   </ul>
-                  <Button asChild className="mt-5 w-full bg-gold text-charcoal hover:bg-gold/90">
-                    <Link to="/contact?topic=sponsorship">Request Deck</Link>
-                  </Button>
+                  <ScefFormRequired kind="sponsorship" className="mt-5" />
                 </CardContent>
               </Card>
             ))}
