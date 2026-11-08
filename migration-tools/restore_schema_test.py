@@ -192,13 +192,19 @@ def compare_rows(kind: str, expected: list[dict], actual: list[dict], key: tuple
         result["unexpected"].append({"key": list(identity), "row": target[identity]})
     for identity in sorted(source.keys() & target.keys()):
         fields = {}
+        unverified_fields = []
         names = set(source[identity]) | set(target[identity])
         for name in sorted(names - set(key) - set(ignore)):
             before, after = normalize(source[identity].get(name), name), normalize(target[identity].get(name), name)
-            if before != after:
+            if name in optional_when_empty and not before:
+                if after:
+                    unverified_fields.append(name)
+            elif before != after:
                 fields[name] = {"expected": before, "actual": after}
         if fields:
             result["changed"].append({"key": list(identity), "fields": fields})
+        if unverified_fields:
+            result["unverified"].append({"key": list(identity), "fields": unverified_fields})
     result["passed"] = not (result["missing"] or result["unexpected"] or result["changed"])
     return result
 
