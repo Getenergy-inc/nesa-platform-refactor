@@ -419,9 +419,11 @@ def main() -> int:
             (args.report_dir / "migration-logs" / f"{migration.name}.log").write_text(result.stdout + result.stderr, encoding="utf-8")
         report["comparison"] = capture_metadata(database_url, args.metadata.resolve(), args.report_dir / "actual-metadata")
         differences = sum(len(v.get("missing", [])) + len(v.get("unexpected", [])) + len(v.get("changed", [])) for v in report["comparison"].values())
+        unverified = sum(len(v.get("unverified", [])) for v in report["comparison"].values())
         errors = [k for k, v in report["comparison"].items() if "error" in v]
-        report["comparison_status"] = "passed" if not differences and not errors else "failed"
+        report["comparison_status"] = "passed" if not differences and not errors and not unverified else "failed"
         report["difference_count"] = differences
+        report["unverified_count"] = unverified
         report["status"] = "passed" if report["applied_count"] == len(migrations) and report["comparison_status"] == "passed" else "failed"
     except Exception as error:
         report["error"] = str(error)
