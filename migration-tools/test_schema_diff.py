@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from restore_schema_test import compare_rows, discover_migrations
+from restore_schema_test import compare_rows, discover_migrations, exclude_platform_rows
 
 
 class SchemaDiffTests(unittest.TestCase):
@@ -43,6 +43,18 @@ class SchemaDiffTests(unittest.TestCase):
         actual = [{"schema": "public", "name": "profiles", "raw_acl": "{a=r/postgres,b=r/postgres}"}]
         result = compare_rows("grants", expected, actual, ("schema", "name"))
         self.assertEqual(result["changed"], [])
+
+    def test_harness_role_does_not_create_false_acl_drift(self):
+        expected = [{"schema": "public", "name": "profiles", "raw_acl": "{sandbox_exec=ar/postgres,a=r/postgres}"}]
+        actual = [{"schema": "public", "name": "profiles", "raw_acl": "{a=r/postgres}"}]
+        result = compare_rows("grants", expected, actual, ("schema", "name"))
+        self.assertEqual(result["changed"], [])
+
+    def test_platform_exclusion_is_explicit(self):
+        rows = [{"extname": "pgcrypto"}, {"extname": "supabase_vault"}]
+        kept, excluded = exclude_platform_rows(rows, "extname", {"supabase_vault": "hosted only"})
+        self.assertEqual(kept, [{"extname": "pgcrypto"}])
+        self.assertEqual(excluded, [{"name": "supabase_vault", "reason": "hosted only"}])
 
     def test_migration_discovery_sorts_and_enforces_count(self):
         with tempfile.TemporaryDirectory() as directory:

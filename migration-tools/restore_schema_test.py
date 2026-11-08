@@ -48,8 +48,10 @@ ORDER BY table_name,ordinal_position
         "key": ("table_schema", "table_name"),
         "optional_when_empty": ("view_definition",),
         "query": """
-SELECT table_schema,table_name,view_definition FROM information_schema.views
-WHERE table_schema='public' ORDER BY 1,2
+SELECT n.nspname AS table_schema,c.relname AS table_name,
+pg_get_viewdef(c.oid,true) AS view_definition
+FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
+WHERE n.nspname='public' AND c.relkind='v' ORDER BY 1,2
 """,
     },
     "matviews": {
@@ -143,6 +145,9 @@ WHERE n.nspname='public' AND c.relkind IN ('r','v','m','f','p') ORDER BY 1,2
     },
     "extensions": {
         "key": ("extname",),
+        "platform_exclusions": {
+            "supabase_vault": "Hosted-only extension; no fake local implementation is created."
+        },
         "query": """
 SELECT e.extname,n.nspname AS schema_name,e.extversion FROM pg_extension e
 JOIN pg_namespace n ON n.oid=e.extnamespace ORDER BY 1
@@ -155,7 +160,9 @@ def normalize(value: object, field: str = "") -> str:
     text = "" if value is None else str(value)
     text = text.replace("\r\n", "\n").replace("\r", "\n").strip()
     if field == "raw_acl" and text.startswith("{") and text.endswith("}"):
-        return "{" + ",".join(sorted(text[1:-1].split(","))) + "}"
+        # sandbox_exec is a test-harness role, not an application schema grant.
+        entries = [entry for entry in text[1:-1].split(",") if not entry.startswith("sandbox_exec=")]
+        return "{" + ",".join(sorted(entries)) + "}"
     if field == "roles" and text.startswith("{") and text.endswith("}"):
         return "{" + ",".join(sorted(text[1:-1].split(","))) + "}"
     if field == "proconfig" and "," in text:
@@ -254,6 +261,17 @@ def read_csv(path: Path) -> list[dict]:
         return list(csv.DictReader(handle))
 
 
+def exclude_platform_rows(rows: list[dict], field: str, exclusions: dict[str, str]) -> tuple[list[dict], list[dict]]:
+    kept, excluded = [], []
+    for row in rows:
+        name = row.get(field, "")
+        if name in exclusions:
+            excluded.append({"name": name, "reason": exclusions[name]})
+        else:
+            kept.append(row)
+    return kept, excluded
+
+
 def capture_metadata(database_url: str, metadata_dir: Path, output_dir: Path) -> dict:
     output_dir.mkdir(parents=True, exist_ok=True)
     comparison = {}
@@ -267,7 +285,15 @@ def capture_metadata(database_url: str, metadata_dir: Path, output_dir: Path) ->
         target_path = output_dir / f"{kind}.csv"
         target_path.write_text(result.stdout, encoding="utf-8")
         expected, actual = read_csv(source_path), read_csv(target_path)
+        exclusions = config.get("platform_exclusions", {})
+        excluded_rows = []
+        if exclusions:
+            expected, expected_excluded = exclude_platform_rows(expected, config["key"][0], exclusions)
+            actual, actual_excluded = exclude_platform_rows(actual, config["key"][0], exclusions)
+            excluded_rows = expected_excluded + actual_excluded
         comparison[kind] = compare_rows(kind, expected, actual, config["key"], config.get("ignore", ()), config.get("optional_when_empty", ()))
+        if excluded_rows:
+            comparison[kind]["platform_exclusions"] = excluded_rows
     return comparison
 
 
@@ -313,7 +339,7 @@ class TemporaryPostgres:
         log = self.work / "postgres.log"
         if self.user:
             shutil.chown(log.parent, self.user)
-        options = f"-F -h 127.0.0.1 -k {self.socket} -p {self.port}"
+        options = f"-F -h 127.0.0.1 -k {self.socket} -p {self.port} -c shared_preload_libraries=pg_stat_statements"
         result = run(self.command("pg_ctl", ["-D", str(self.data), "-l", str(log), "-o", options, "-w", "start"]))
         require_success(result, "PostgreSQL startup failed; see " + str(log))
         self.started = True
@@ -351,6 +377,13 @@ def write_reports(report_dir: Path, report: dict) -> None:
             else:
                 lines.append(f"| {kind} | {diff['expected']} | {diff['actual']} | {len(diff['missing'])} | {len(diff['unexpected'])} | {len(diff['changed'])} | {len(diff['unverified'])} | {'PASS' if diff['passed'] and not diff['unverified'] else 'FAIL'} |")
         lines.append("")
+        exclusions = report.get("platform_exclusions", {})
+        if exclusions:
+            lines.append("Explicit platform exclusions (not counted as application-schema parity):")
+            for kind, items in exclusions.items():
+                for item in items:
+                    lines.append(f"- `{kind}` / `{item['name']}`: {item['reason']}")
+            lines.append("")
     lines.append("Full expected/actual differences are in `restore-schema-report.json`; restored metadata is in `actual-metadata/`.")
     (report_dir / "RESTORE_SCHEMA_REPORT.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
@@ -413,6 +446,12 @@ def main() -> int:
         report["comparison_status"] = "passed" if not differences and not errors and not unverified else "failed"
         report["difference_count"] = differences
         report["unverified_count"] = unverified
+        report["platform_exclusions"] = {
+            kind: diff.get("platform_exclusions", [])
+            for kind, diff in report["comparison"].items()
+            if diff.get("platform_exclusions")
+        }
+        report["platform_exclusion_count"] = sum(len(items) for items in report["platform_exclusions"].values())
         report["status"] = "passed" if report["applied_count"] == len(migrations) and report["comparison_status"] == "passed" else "failed"
     except Exception as error:
         report["error"] = str(error)
