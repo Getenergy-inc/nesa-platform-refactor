@@ -5,12 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { 
-  Youtube, 
-  Linkedin, 
-  Twitter, 
-  Instagram, 
-  Play, 
+import {
+  Play,
   ChevronRight,
   Users,
   Award,
@@ -33,6 +29,7 @@ import {
   Star
 } from "lucide-react";
 import { NESALogo } from "@/components/nesa/NESALogo";
+import { FollowLinks } from "@/components/nesa/FollowLinks";
 import { 
   getAwards, 
   getAllNominees, 
@@ -57,14 +54,6 @@ const TIER_SUMMARY: { tier: AwardTier; description: string }[] = [
   { tier: "gold", description: "9 categories, 135 subcategories — 100% public voting" },
   { tier: "blue-garnet", description: "9 categories — feeds from Gold winners (40% public + 60% jury)" },
   { tier: "icon", description: "Africa Education Icon Blue Garnet — 1 category, 3 subcategories" },
-];
-
-// Social media links for NESA Africa TV
-const socialLinks = [
-  { icon: Youtube, href: "https://www.youtube.com/@Nesa.africaTV", label: "YouTube", color: "hover:text-red-500" },
-  { icon: Linkedin, href: "https://linkedin.com/company/nesa-africa", label: "LinkedIn", color: "hover:text-blue-500" },
-  { icon: Twitter, href: "https://twitter.com/nesaafrica", label: "Twitter", color: "hover:text-sky-400" },
-  { icon: Instagram, href: "https://instagram.com/nesaafrica", label: "Instagram", color: "hover:text-pink-500" },
 ];
 
 export function NomineesShowcaseSection() {
@@ -134,20 +123,7 @@ export function NomineesShowcaseSection() {
           {/* Social Media Links */}
           <div className="flex items-center justify-center gap-4 mb-8">
             <span className="text-white/50 text-sm">Watch on NESA Africa TV:</span>
-            <div className="flex gap-2">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`h-10 w-10 rounded-lg bg-white/5 flex items-center justify-center text-white/60 ${social.color} transition-all border border-white/10 hover:border-gold/30 hover:bg-gold/10`}
-                  aria-label={social.label}
-                >
-                  <social.icon className="h-5 w-5" />
-                </a>
-              ))}
-            </div>
+            <FollowLinks />
           </div>
         </motion.div>
 

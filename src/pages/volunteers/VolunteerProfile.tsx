@@ -26,9 +26,12 @@ const SOCIAL_ICONS = {
   website: Link2, email: Mail,
 } as const;
 
-function normalizeSocialUrl(key: string, value: string): string {
-  if (key === "email") return `mailto:${value}`;
-  if (value.startsWith("http")) return value;
+function normalizeSocialUrl(key: string, value: string): string | null {
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+  if (key === "email") return trimmed.includes("@") ? `mailto:${trimmed}` : null;
+  if (/^https?:\/\/(www\.)?(twitter|x|linkedin|instagram|facebook|youtube|github|tiktok)\.com\/?$/i.test(trimmed)) return null;
+  if (trimmed.startsWith("http")) return trimmed;
   const map: Record<string, string> = {
     twitter: "https://twitter.com/",
     linkedin: "https://linkedin.com/in/",
@@ -38,7 +41,8 @@ function normalizeSocialUrl(key: string, value: string): string {
     github: "https://github.com/",
     tiktok: "https://tiktok.com/@",
   };
-  return (map[key] ?? "https://") + value.replace(/^@/, "");
+  const handle = trimmed.replace(/^@/, "");
+  return handle ? (map[key] ?? "https://") + handle : null;
 }
 
 export default function VolunteerProfile() {
@@ -194,8 +198,10 @@ export default function VolunteerProfile() {
               <div className="flex flex-wrap gap-2">
                 {socials.map(([k, val]) => {
                   const Icon = (SOCIAL_ICONS as Record<string, typeof Link2>)[k] ?? Link2;
+                  const href = normalizeSocialUrl(k, val as string);
+                  if (!href) return null;
                   return (
-                    <a key={k} href={normalizeSocialUrl(k, val as string)} target="_blank" rel="noopener noreferrer"
+                    <a key={k} href={href} target="_blank" rel="noopener noreferrer"
                        className="flex items-center gap-1.5 rounded-md border border-gold/20 bg-black/30 px-3 py-1.5 text-xs text-white/80 hover:bg-gold/10 hover:border-gold/50 transition capitalize">
                       <Icon className="h-3.5 w-3.5" /> {k}
                     </a>

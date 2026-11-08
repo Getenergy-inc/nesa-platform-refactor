@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Sparkles, Search, ShieldCheck, Coins } from "lucide-react";
+import { Sparkles, Search, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HERO_STATS, NOMINATE_URL } from "@/config/awards/influencerImpact2026";
 
@@ -72,15 +72,6 @@ export function HeroSection() {
                 className="text-white/80 hover:text-gold hover:bg-white/5 gap-2"
               >
                 <ShieldCheck className="h-4 w-4" /> Become a Reviewer
-              </Button>
-            </Link>
-            <Link to="/earn-agc">
-              <Button
-                size="lg"
-                variant="ghost"
-                className="text-white/80 hover:text-gold hover:bg-white/5 gap-2"
-              >
-                <Coins className="h-4 w-4" /> GFAwzip Wallet
               </Button>
             </Link>
           </div>

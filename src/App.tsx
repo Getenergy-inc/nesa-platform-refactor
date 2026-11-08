@@ -227,7 +227,6 @@ import NESATV from "./pages/media/NESATV";
 import Shows from "./pages/media/Shows";
 import Webinars from "./pages/media/Webinars";
 import Podcast from "./pages/media/Podcast";
-import Gala from "./pages/media/Gala";
 
 // Support Pages
 import Donate from "./pages/Donate";
@@ -1580,14 +1579,7 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route
-                    path="/media/gala"
-                    element={
-                      <WithLayout>
-                        <Gala />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/media/gala" element={<Navigate to="/programme-2026" replace />} />
                   <Route path="/tickets" element={<Navigate to="/programme-2026" replace />} />
                   <Route path="/buy-your-ticket" element={<Navigate to="/programme-2026" replace />} />
 

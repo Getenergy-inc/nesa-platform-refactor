@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 
 import { awardTVShows, type AwardTVShow } from "@/config/awardTVShows";
+import { SOCIAL_PROFILE_URLS } from "@/config/socialLinks";
 
 type Show = AwardTVShow;
 
@@ -269,7 +270,7 @@ export default function Shows() {
                   className="border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2"
                   asChild
                 >
-                  <a href="https://www.youtube.com/@Nesa.africaTV" target="_blank" rel="noopener noreferrer">
+                  <a href={SOCIAL_PROFILE_URLS.youtube} target="_blank" rel="noopener noreferrer">
                     <Youtube className="h-5 w-5" />
                     YouTube
                   </a>
@@ -280,7 +281,7 @@ export default function Shows() {
                   className="border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2"
                   asChild
                 >
-                  <a href="https://facebook.com/nesaafrica" target="_blank" rel="noopener noreferrer">
+                  <a href={SOCIAL_PROFILE_URLS.facebook} target="_blank" rel="noopener noreferrer">
                     <Facebook className="h-5 w-5" />
                     Facebook
                   </a>

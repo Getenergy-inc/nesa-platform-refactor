@@ -17,7 +17,6 @@ import {
   LayoutDashboard,
   Vote,
   Trophy,
-  Wallet,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -838,9 +837,6 @@ function GovernanceBar() {
         </nav>
         {/* Right: utility */}
         <div className="flex items-center gap-3 xl:gap-4 shrink-0">
-          <Link to="/wallet" className="text-white/70 hover:text-gold whitespace-nowrap transition-colors flex items-center gap-1">
-            <Wallet className="h-3.5 w-3.5" aria-hidden="true" /> Wallet
-          </Link>
           {!user && (
             <Link to="/login" className="text-white/70 hover:text-gold whitespace-nowrap transition-colors">
               Login

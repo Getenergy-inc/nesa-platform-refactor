@@ -12,21 +12,15 @@ import {
   Phone, 
   MapPin, 
   Clock, 
-  Send,
   MessageSquare,
   Building2,
   Globe,
-  Facebook,
-  Twitter,
-  Linkedin,
-  Instagram,
   Mic,
   Video,
-  Award,
   Upload,
-  Youtube,
 } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { FollowLinks } from "@/components/nesa/FollowLinks";
+import { ScefFormRequired } from "@/components/nesa/ContentRequired";
 
 const contactInfo = [
   {
@@ -76,7 +70,6 @@ const regionalOffices = [
 ];
 
 export default function Contact() {
-  const { toast } = useToast();
   const [searchParams] = useSearchParams();
   const subjectParam = searchParams.get("subject");
   const isPresenterApplication = subjectParam === "presenter";
@@ -104,54 +97,14 @@ export default function Contact() {
     motivation: "",
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   useEffect(() => {
     if (isPresenterApplication) {
       setActiveTab("presenter");
     }
   }, [isPresenterApplication]);
 
-  const handleGeneralSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for contacting us. We'll respond within 24-48 hours.",
-    });
-    
-    setFormData({ name: "", email: "", subject: "", department: "", message: "" });
-    setIsSubmitting(false);
-  };
-
-  const handlePresenterSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    toast({
-      title: "Application Submitted!",
-      description: "Thank you for applying to be a Gala presenter. Our team will review your application and contact you within 7 business days.",
-    });
-    
-    setPresenterData({
-      name: "",
-      email: "",
-      phone: "",
-      country: "",
-      experience: "",
-      languages: "",
-      portfolioUrl: "",
-      socialMedia: "",
-      bio: "",
-      motivation: "",
-    });
-    setIsSubmitting(false);
-  };
+  const handleGeneralSubmit = (e: React.FormEvent) => e.preventDefault();
+  const handlePresenterSubmit = (e: React.FormEvent) => e.preventDefault();
 
   return (
     <div className="min-h-screen bg-charcoal">
@@ -279,18 +232,7 @@ export default function Contact() {
                           required
                         />
                       </div>
-                      <Button 
-                        type="submit" 
-                        className="w-full bg-primary hover:bg-primary/90"
-                        disabled={isSubmitting}
-                      >
-                        {isSubmitting ? "Sending..." : (
-                          <>
-                            <Send className="w-4 h-4 mr-2" />
-                            Send Message
-                          </>
-                        )}
-                      </Button>
+                      <ScefFormRequired kind="contact" />
                     </form>
                   </TabsContent>
 
@@ -299,11 +241,11 @@ export default function Contact() {
                     <div className="mb-6 rounded-lg bg-primary/10 p-4">
                       <div className="flex items-center gap-3 mb-2">
                         <Mic className="h-5 w-5 text-primary" />
-                        <h3 className="font-semibold">Become a Gala Presenter</h3>
+                        <h3 className="font-semibold">Become an Online Awards Gala Presenter</h3>
                       </div>
                       <p className="text-sm text-muted-foreground">
                         We're looking for dynamic presenters and anchors to host segments of the 
-                        NESA-Africa Awards Gala. Share your experience and portfolio below.
+                        NESA-Africa Online Awards Gala. Share your experience and portfolio below.
                       </p>
                     </div>
 
@@ -414,7 +356,7 @@ export default function Contact() {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="p-motivation">Why do you want to host the NESA-Africa Gala? *</Label>
+                        <Label htmlFor="p-motivation">Why do you want to host the NESA-Africa Online Awards Gala? *</Label>
                         <Textarea
                           id="p-motivation"
                           placeholder="Share your motivation and what you would bring to the event..."
@@ -425,18 +367,7 @@ export default function Contact() {
                         />
                       </div>
 
-                      <Button 
-                        type="submit" 
-                        className="w-full bg-primary hover:bg-primary/90"
-                        disabled={isSubmitting}
-                      >
-                        {isSubmitting ? "Submitting Application..." : (
-                          <>
-                            <Award className="w-4 h-4 mr-2" />
-                            Submit Application
-                          </>
-                        )}
-                      </Button>
+                      <ScefFormRequired kind="contact" />
                     </form>
                   </TabsContent>
                 </Tabs>
@@ -474,20 +405,7 @@ export default function Contact() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex gap-4">
-                    <a href="https://facebook.com/nesaafrica" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-nesa-gold hover:text-black transition-colors">
-                      <Facebook className="w-5 h-5" />
-                    </a>
-                    <a href="https://twitter.com/nesaafrica" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-nesa-gold hover:text-black transition-colors">
-                      <Twitter className="w-5 h-5" />
-                    </a>
-                    <a href="https://linkedin.com/company/nesa-africa" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-nesa-gold hover:text-black transition-colors">
-                      <Linkedin className="w-5 h-5" />
-                    </a>
-                    <a href="https://www.youtube.com/@Nesa.africaTV" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-nesa-gold hover:text-black transition-colors">
-                      <Youtube className="w-5 h-5" />
-                    </a>
-                  </div>
+                  <FollowLinks className="flex-wrap gap-3" linkClassName="rounded-full bg-muted text-foreground hover:bg-nesa-gold hover:text-black" />
                   <p className="text-sm text-muted-foreground mt-4">
                     Stay connected with NESA-Africa for the latest updates, 
                     nominee stories, and education enablers news.

@@ -1,5 +1,6 @@
 // NESA Africa TV — Showcase Configuration
 // Two flagship showcases, each pairing two recognition families.
+import { SOCIAL_PROFILE_URLS } from "@/config/socialLinks";
 
 export interface AwardTVShow {
   /** Primary identifier for the showcase. */
@@ -30,15 +31,15 @@ export interface AwardTVShow {
 }
 
 // Channel URL for linking (not embedding)
-export const NESA_YOUTUBE_CHANNEL = "https://www.youtube.com/@Nesa.africaTV";
+export const NESA_YOUTUBE_CHANNEL = SOCIAL_PROFILE_URLS.youtube;
 
 // Social links shared across all shows
 const sharedSocialLinks = {
-  youtube: NESA_YOUTUBE_CHANNEL,
-  linkedin: "https://linkedin.com/company/nesa-africa",
-  twitter: "https://twitter.com/nesaafrica",
-  instagram: "https://instagram.com/nesaafrica",
-  facebook: "https://facebook.com/nesaafrica",
+  youtube: SOCIAL_PROFILE_URLS.youtube,
+  linkedin: SOCIAL_PROFILE_URLS.linkedin,
+  twitter: SOCIAL_PROFILE_URLS.twitter,
+  instagram: SOCIAL_PROFILE_URLS.instagram,
+  facebook: SOCIAL_PROFILE_URLS.facebook,
 };
 
 export const awardTVShows: AwardTVShow[] = [

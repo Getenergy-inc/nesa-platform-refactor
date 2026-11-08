@@ -93,6 +93,9 @@ export const REFACTOR_REDIRECTS_2026: RefactorRedirect[] = [
 
   // Online Awards Gala — no physical attendance or ticket sales in 2026.
   { from: "/gala", to: "/programme-2026", reason: "Canonical Online Awards Gala" },
+  { from: "/media/gala", to: "/programme-2026", reason: "Canonical Online Awards Gala" },
+  { from: "/gala-2026", to: "/programme-2026", reason: "Canonical Online Awards Gala" },
+  { from: "/events/gala", to: "/programme-2026", reason: "Canonical Online Awards Gala" },
   { from: "/events/gala-2026", to: "/programme-2026", reason: "Canonical Online Awards Gala" },
   { from: "/events/tickets", to: "/programme-2026", reason: "No ticket sales" },
   { from: "/events/media-accreditation", to: "/programme-2026", reason: "Online programme" },

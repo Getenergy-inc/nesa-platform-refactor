@@ -10,6 +10,7 @@ import {
   GALLERY_CATEGORIES,
   type GalleryCategory,
 } from "@/data/gallery";
+import { SOCIAL_PROFILE_URLS } from "@/config/socialLinks";
 
 const GalleryLanding = () => {
   const [active, setActive] = useState<GalleryCategory | "all">("all");
@@ -164,7 +165,7 @@ const GalleryLanding = () => {
               </p>
               <div className="mt-5 flex flex-wrap gap-3">
                 <a
-                  href="https://www.youtube.com/@NESAAfricaTV"
+                  href={SOCIAL_PROFILE_URLS.youtube}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full bg-[hsl(0_72%_51%)] px-4 py-2 text-xs sm:text-sm font-semibold text-white transition hover:brightness-110"
@@ -172,7 +173,7 @@ const GalleryLanding = () => {
                   <Youtube className="h-4 w-4" /> NESA Africa TV
                 </a>
                 <a
-                  href="https://www.linkedin.com/company/nesa-africa"
+                  href={SOCIAL_PROFILE_URLS.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full bg-[hsl(201_100%_35%)] px-4 py-2 text-xs sm:text-sm font-semibold text-white transition hover:brightness-110"

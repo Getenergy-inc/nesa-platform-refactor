@@ -1139,6 +1139,20 @@
       "terms": "Terms of Service"
     }
   },
+  "contentRequired": {
+    "contact": {
+      "title": "SCEF contact Google Form link required",
+      "description": "The approved link has not been supplied. This on-site form does not send messages."
+    },
+    "donation": {
+      "title": "SCEF donation-enquiry Google Form link required",
+      "description": "Donation checkout, pledges and bank-transfer actions are paused until the approved enquiry channel is supplied."
+    },
+    "sponsorship": {
+      "title": "SCEF sponsorship-enquiry Google Form link required",
+      "description": "Sponsorship enquiries and deck requests are paused until the approved form is supplied."
+    }
+  },
   "errors": {
     "notFound": {
       "title": "Page Not Found",

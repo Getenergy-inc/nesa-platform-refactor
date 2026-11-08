@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 
 interface ContentRequiredProps {
@@ -15,5 +16,14 @@ export function ContentRequired({ title, children, className }: ContentRequiredP
       <p className="mt-1 text-sm font-medium text-foreground">{title}</p>
       <div className="mt-1 text-sm text-muted-foreground">{children}</div>
     </div>
+  );
+}
+
+export function ScefFormRequired({ kind, className }: { kind: "contact" | "donation" | "sponsorship"; className?: string }) {
+  const { t } = useTranslation("pages");
+  return (
+    <ContentRequired title={t(`contentRequired.${kind}.title`)} className={className}>
+      {t(`contentRequired.${kind}.description`)}
+    </ContentRequired>
   );
 }

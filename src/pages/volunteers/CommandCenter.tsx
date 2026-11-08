@@ -16,6 +16,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { LocalizedSEO } from "@/components/seo/LocalizedSEO";
+import { SOCIAL_PROFILE_URLS } from "@/config/socialLinks";
 
 // ============================================================================
 // DATA — sourced verbatim from the NESA-Africa 2026 volunteer brief
@@ -25,15 +26,15 @@ const MISSION_STATEMENT =
   "To architect a world-class digital ecosystem that amplifies African educational excellence, unifies global diaspora advocacy, and drives transparent institutional accountability by turning multi-platform visibility into direct structural investments for marginalized learners across the continent.";
 
 const SOCIAL_CHANNELS: Array<{ platform: string; handle: string; url?: string }> = [
-  { platform: "Instagram", handle: "@nesaafrica", url: "https://instagram.com/nesaafrica" },
-  { platform: "TikTok", handle: "@nesa_africa", url: "https://tiktok.com/@nesa_africa" },
-  { platform: "Facebook", handle: "NESA Africa", url: "https://facebook.com/nesaafrica" },
-  { platform: "X (Twitter)", handle: "@Nesa_Award", url: "https://x.com/Nesa_Award" },
+  { platform: "Instagram", handle: "@nesaafrica", url: SOCIAL_PROFILE_URLS.instagram },
+  { platform: "Facebook", handle: "NESA Africa", url: SOCIAL_PROFILE_URLS.facebook },
+  { platform: "X (Twitter)", handle: "@nesaafrica", url: SOCIAL_PROFILE_URLS.twitter },
   {
     platform: "LinkedIn",
     handle: "New Education Standard Award Africa (NESA-Africa)",
-    url: "https://linkedin.com/company/nesa-africa",
+    url: SOCIAL_PROFILE_URLS.linkedin,
   },
+  { platform: "YouTube", handle: "@Nesa.africaTV", url: SOCIAL_PROFILE_URLS.youtube },
 ];
 
 const REQUIRED_HASHTAGS = ["#NESAAfrica", "#EducationForAll", "#SDG4", "#Agenda2063"];

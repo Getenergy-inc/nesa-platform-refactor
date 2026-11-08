@@ -1,8 +1,14 @@
-import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Twitter, Youtube, type LucideIcon } from "lucide-react";
 import { SOCIAL_LINKS, type SocialPlatform } from "@/config/socialLinks";
 import { cn } from "@/lib/utils";
 
-const ICONS = { Facebook, Instagram, Linkedin, Twitter, Youtube };
+const ICONS: Record<SocialPlatform, LucideIcon> = {
+  facebook: Facebook,
+  instagram: Instagram,
+  linkedin: Linkedin,
+  twitter: Twitter,
+  youtube: Youtube,
+};
 
 interface FollowLinksProps {
   platforms?: readonly SocialPlatform[];
@@ -17,7 +23,7 @@ export function FollowLinks({ platforms, className, linkClassName, showLabels = 
   return (
     <div className={cn("flex items-center gap-2", className)} aria-label="Follow NESA-Africa">
       {links.map((link) => {
-        const Icon = ICONS[link.label === "X (Twitter)" ? "Twitter" : link.label as keyof typeof ICONS];
+        const Icon = ICONS[link.platform];
         return (
           <a
             key={link.platform}
