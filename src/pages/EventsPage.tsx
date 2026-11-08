@@ -1,15 +1,14 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { ArrowRight, CalendarDays, Ticket, Radio } from "lucide-react";
+import { ArrowRight, CalendarDays, Trophy, Radio } from "lucide-react";
 import { UpcomingEventsSection } from "@/components/nesa/UpcomingEventsSection";
-import { MasterTimelineTable } from "@/components/timeline/MasterTimelineTable";
 
 const QUICK_LINKS = [
   {
-    label: "Buy Gala Tickets",
-    href: "/tickets",
-    description: "Reserve seats for the 13 December 2026 Recognition Gala.",
-    icon: Ticket,
+    label: "Explore the Online Awards Gala",
+    href: "/programme-2026",
+    description: "13 December 2026 · Online only · No ticket sales.",
+    icon: Trophy,
   },
   {
     label: "Watch Live & On-Demand",
@@ -19,8 +18,8 @@ const QUICK_LINKS = [
   },
   {
     label: "Full Master Timeline",
-    href: "/about#timeline",
-    description: "All 13 phases from 1 July 2026 through the Gala.",
+    href: "/timeline",
+    description: "The approved 2026–2027 programme and recognition milestones.",
     icon: CalendarDays,
   },
 ];
@@ -29,10 +28,10 @@ export default function EventsPage() {
   return (
     <>
       <Helmet>
-        <title>Events & Gala Calendar | NESA-Africa 2026</title>
+        <title>Events & Online Awards Gala | NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Consolidated calendar for NESA-Africa 2026 — TV shows, public activations, webinars, the Recognition Gala on 13 December 2026, and the EduAid-Africa launch."
+          content="NESA-Africa 2026 programme dates, media events and the Online Awards Gala on 13 December 2026."
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/events" />
       </Helmet>
@@ -44,12 +43,11 @@ export default function EventsPage() {
               Enablers of Education for All Across Africa
             </p>
             <h1 className="mt-3 font-serif text-3xl md:text-5xl">
-              Events & Gala Calendar
+              Events & Online Awards Gala
             </h1>
             <p className="mt-4 max-w-2xl text-white/70">
-              One canonical calendar for every NESA-Africa 2026 milestone —
-              nominations, public activations, TV shows, and the Gold–Blue
-              Garnet Recognition Gala on 13 December 2026 in Lagos.
+              Programme dates for nominations, verified recognition and media,
+              plus the Online Awards Gala on 13 December 2026. Online only; no ticket sales.
             </p>
           </div>
         </header>
@@ -77,9 +75,6 @@ export default function EventsPage() {
           <UpcomingEventsSection />
         </section>
 
-        <section className="container pb-16">
-          <MasterTimelineTable hideNotice hideOpenItems />
-        </section>
       </div>
     </>
   );

@@ -7,10 +7,10 @@ export default function UpcomingEventsPage() {
   return (
     <>
       <Helmet>
-        <title>Upcoming TV Shows, Voting & Events | NESA Africa 2026</title>
+        <title>2026–2027 Programme | NESA-Africa</title>
         <meta
           name="description"
-          content="Live countdown to NESA-Africa 2026's major milestones — TV shows, public voting windows, the Blue Garnet Awards Gala, and the Rebuild My School Africa launch."
+          content="NESA-Africa nomination, verified recognition, media and Online Awards Gala programme dates."
         />
         <link rel="canonical" href="https://nesa.africa/upcoming-events" />
       </Helmet>
