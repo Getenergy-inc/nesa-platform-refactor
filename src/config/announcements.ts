@@ -1,7 +1,7 @@
-// Announcement bar messages — max 3 rotate. Update copy here, no code changes.
-// Dates are imported from the canonical config — never retyped.
-import { NOMINATIONS_OPEN_LABEL } from "@/config/nominationWindows2026";
+// One static announcement; no carousel or countdown.
+import { NOMINATION_WINDOW_LABEL } from "@/config/nominationWindows2026";
 import { PROGRAMME_END_LABEL } from "@/config/programme";
+import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
 
 export interface Announcement {
   id: string;
@@ -12,22 +12,10 @@ export interface Announcement {
 
 export const ANNOUNCEMENTS: Announcement[] = [
   {
-    id: "nominations-open",
-    text: `Public Nominations Open ${NOMINATIONS_OPEN_LABEL} · NESA-Africa 2026`,
-    href: "/nominate",
-    analyticsId: "announcement_nominate",
-  },
-  {
-    id: "explore-enablers",
-    text: "Explore Education Enablers Across Africa",
-    href: "/education-enablers",
-    analyticsId: "announcement_enablers",
-  },
-  {
-    id: "gala-2026",
-    text: `NESA-Africa 2026 Recognition Gala · ${PROGRAMME_END_LABEL} · Lagos, Nigeria`,
-    href: "/gala",
-    analyticsId: "announcement_gala",
+    id: "nominations-and-online-gala",
+    text: `Public Nominations Open ${NOMINATION_WINDOW_LABEL} · Online Awards Gala: ${PROGRAMME_END_LABEL}. Learn More`,
+    href: PUBLIC_ACTIONS_2026.onlineGala.href,
+    analyticsId: "announcement_programme",
   },
 ];
 
