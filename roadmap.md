@@ -1,3 +1,10 @@
+## Restore repair and site-wide CTA/follow refactor — 8 Nov 2026
+- [ ] Repair the five failing package migrations so a clean restore needs no production rows.
+- [ ] Reconcile all reported schema differences with authoritative live metadata; distinguish real drift from comparator/bootstrap artefacts.
+- [ ] Rerun strict mode across all 169 migrations and require zero verified schema differences.
+- [ ] Run restore unit tests and rebuild the validated migration package without touching production.
+- [ ] Refactor CTAs and follow actions across public pages under the approved content brief, with 390px and 1440px review screenshots; do not publish.
+
 ## Automated clean-database restore test — 8 Nov 2026
 - [x] Add an isolated runner for all 169 migrations with a clean-database safety guard.
 - [x] Compare restored schema objects with the exported live metadata and write machine-readable and human-readable reports.
