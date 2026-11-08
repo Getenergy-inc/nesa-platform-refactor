@@ -174,7 +174,7 @@ def normalize(value: object, field: str = "") -> str:
     return text
 
 
-def compare_rows(kind: str, expected: list[dict], actual: list[dict], key: tuple[str, ...], ignore: tuple[str, ...] = ()) -> dict:
+def compare_rows(kind: str, expected: list[dict], actual: list[dict], key: tuple[str, ...], ignore: tuple[str, ...] = (), optional_when_empty: tuple[str, ...] = ()) -> dict:
     def keyed(rows):
         result = {}
         for row in rows:
