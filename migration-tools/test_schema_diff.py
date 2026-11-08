@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Unit tests for deterministic schema comparison; no database required."""
+import tempfile
 import unittest
+from pathlib import Path
 
 from restore_schema_test import compare_rows, discover_migrations
 

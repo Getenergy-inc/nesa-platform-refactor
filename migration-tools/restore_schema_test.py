@@ -121,7 +121,7 @@ FROM pg_sequences WHERE schemaname='public' ORDER BY 1,2
 SELECT n.nspname AS schema_name,p.proname AS function_name,
 pg_get_function_arguments(p.oid) AS arguments,pg_get_function_result(p.oid) AS return_type,
 p.prosecdef AS security_definer,p.provolatile,p.prokind,l.lanname AS language,
-p.prosrc AS source_body,COALESCE(array_to_string(p.proconfig,','),'') AS proconfig
+p.prosrc AS source_body,COALESCE(p.proconfig::text,'') AS proconfig
 FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace
 JOIN pg_language l ON l.oid=p.prolang
 WHERE n.nspname='public' ORDER BY 1,2,3
