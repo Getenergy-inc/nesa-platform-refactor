@@ -351,11 +351,11 @@ def write_reports(report_dir: Path, report: dict) -> None:
         "- Production contacted or modified: **NO**", "",
         "This checks reconstruction from migrations against the exported metadata snapshot. It is not a data restore, an Auth/Storage implementation test, or proof of application parity.", "",
     ]
-    if report.get("failed_migration"):
-        failure = report["failed_migration"]
-        lines.extend([f"Migration failed: `{failure['file']}`", "", "```text", failure["error"], "```", ""])
+    if report.get("failed_migrations"):
+        for failure in report["failed_migrations"]:
+            lines.extend([f"Migration failed: `{failure['file']}`", "", "```text", failure["error"], "```", ""])
     if report.get("comparison"):
-        lines.extend(["| Object | Live rows | Restored rows | Missing | Unexpected | Changed | Result |", "|---|---:|---:|---:|---:|---:|---|"])
+        lines.extend(["| Object | Live rows | Restored rows | Missing | Unexpected | Changed | Unverified | Result |", "|---|---:|---:|---:|---:|---:|---:|---|"])
         for kind, diff in report["comparison"].items():
             if "error" in diff:
                 lines.append(f"| {kind} | — | — | — | — | — | ERROR: {diff['error']} |")
