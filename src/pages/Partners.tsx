@@ -488,7 +488,6 @@ export default function Partners() {
                     <ul className="space-y-2">
                       {[
                         "Matching campaigns (match public support up to agreed amount)",
-                        "Buy-to-donate merchandise (cause collections + bulk corporate orders)",
                         "EduAid webinars (sponsor training + receive reporting)",
                       ].map((item, i) => (
                         <li key={i} className="flex items-start gap-2 text-sm">
@@ -512,12 +511,6 @@ export default function Partners() {
                 </Button>
                 <Button variant="outline" asChild>
                   <Link to="/contact?type=impact-report">Get Impact Report</Link>
-                </Button>
-                <Button variant="ghost" asChild>
-                  <Link to="/shop">
-                    <ShoppingBag className="mr-2 h-5 w-5" />
-                    Shop for Impact
-                  </Link>
                 </Button>
               </div>
             </div>
@@ -658,64 +651,6 @@ export default function Partners() {
                   </Link>
                 </Button>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ================================================================
-            MERCHANDISE GRID
-        ================================================================ */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-display font-bold text-center mb-4">
-              <ShoppingBag className="inline-block mr-2 h-8 w-8 text-gold" />
-              Sponsor Through Merchandise (Buy-to-Donate)
-            </h2>
-            <p className="text-center text-muted-foreground mb-8">Official NESA-Africa merchandise — every purchase funds impact</p>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto mb-8">
-              {MERCHANDISE.map((item, i) => (
-                <Card key={i} className="bg-card border-border overflow-hidden group hover:border-primary/50 transition-colors">
-                  <Link to={`/shop/${item.slug}`}>
-                    <div className="aspect-square bg-muted relative overflow-hidden">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                        onError={(e) => {
-                          e.currentTarget.style.display = 'none';
-                        }}
-                      />
-                    </div>
-                  </Link>
-                  <CardContent className="p-3">
-                    <p className="text-sm font-medium text-foreground line-clamp-2 mb-1">{item.name}</p>
-                    <p className="text-lg font-bold text-gold">${item.price}</p>
-                    <Button size="sm" className="w-full mt-2" variant="outline" asChild>
-                      <Link to={`/shop/${item.slug}`}>Buy to Sponsor</Link>
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-            <div className="flex flex-wrap justify-center gap-3">
-              <Button size="lg" className="bg-gradient-gold text-secondary font-semibold" asChild>
-                <Link to="/shop">
-                  <ShoppingBag className="mr-2 h-5 w-5" />
-                  Shop Merchandise
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link to="/shop/bulk-orders">
-                  <Building2 className="mr-2 h-5 w-5" />
-                  Bulk Corporate Order
-                </Link>
-              </Button>
-              <Button size="lg" variant="ghost" asChild>
-                <Link to="/donate">
-                  <Heart className="mr-2 h-5 w-5" />
-                  Sponsor Teacher Kits
-                </Link>
-              </Button>
             </div>
           </div>
         </section>

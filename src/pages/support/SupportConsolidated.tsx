@@ -19,7 +19,6 @@ const SECTIONS = [
   { id: "volunteers", label: "Volunteer" },
   { id: "ambassadors", label: "Ambassadors" },
   { id: "chapters", label: "Chapters" },
-  { id: "merchandise", label: "Merchandise" },
   { id: "contact", label: "Contact" },
   { id: "faq", label: "FAQs" },
 ];
@@ -38,7 +37,7 @@ export default function SupportConsolidated() {
     <>
       <Helmet>
         <title>Support & Get Involved · NESA-Africa 2026</title>
-        <meta name="description" content="Sponsor, partner, donate, volunteer, become an ambassador, join a local chapter, buy merchandise, or contact NESA-Africa — all in one place." />
+        <meta name="description" content="Sponsor, partner, volunteer, become an ambassador, join a local chapter, or contact NESA-Africa — all in one place." />
       </Helmet>
       <nav aria-label="Support sections" className="sticky top-14 sm:top-16 z-30 bg-charcoal/95 backdrop-blur border-b border-gold/20 overflow-x-auto">
         <ul className="flex gap-4 px-4 py-3 text-sm whitespace-nowrap">
@@ -56,13 +55,6 @@ export default function SupportConsolidated() {
       <section id="volunteers"><Volunteer /></section>
       <section id="ambassadors"><Ambassadors /></section>
       <section id="chapters"><Chapters /></section>
-      <section id="merchandise" className="py-16 px-4 text-center">
-        <h2 className="text-3xl font-bold text-gold mb-4">Merchandise</h2>
-        <p className="text-white/80 max-w-2xl mx-auto">
-          Explore official NESA-Africa merchandise — apparel, accessories, and legacy items that support our education programmes.
-        </p>
-        <a href="/shop" className="inline-block mt-6 px-6 py-3 bg-gold text-charcoal font-semibold rounded-lg">Visit the Shop</a>
-      </section>
       <section id="contact"><Contact /></section>
       <section id="faq" aria-label="Help and FAQs"><FAQ /></section>
     </>
