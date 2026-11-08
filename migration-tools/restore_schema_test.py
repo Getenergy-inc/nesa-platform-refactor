@@ -222,6 +222,8 @@ def psql(database_url: str, sql: str | None = None, file: Path | None = None, cs
     command = ["psql", database_url, "-X", "-v", "ON_ERROR_STOP=1", "--no-psqlrc"]
     if csv_output:
         command.append("--csv")
+    elif file is None:
+        command.extend(["--quiet", "--tuples-only", "--no-align"])
     if file is not None:
         command.extend(["-f", str(file)])
     else:
