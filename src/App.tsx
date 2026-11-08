@@ -345,24 +345,11 @@ import {
 } from "./pages/guidelines";
 import { VOTING_SUNSET_REDIRECT } from "./config/featureFlags";
 import Trending from "./pages/Trending";
-import Tickets from "./pages/Tickets";
-import BuyYourTicket from "./pages/BuyYourTicket";
-import GFAWzipWallet from "./pages/GFAWzipWallet";
-import GFAWzipLinks from "./pages/GFAWzipLinks";
-import {
-  Shop,
-  ProductDetail,
-  Cart,
-  Checkout,
-  OrderConfirmation,
-  BulkOrders,
-} from "./pages/shop";
 import { SponsorLanding, SponsorsHub } from "./pages/sponsors";
 import SponsorHub from "./pages/sponsor/SponsorHub";
 import SponsorCategoryPage from "./pages/sponsor/SponsorCategoryPage";
 import SponsorshipPackages from "./pages/sponsor/SponsorshipPackages";
 
-import Wallet from "./pages/Wallet";
 import EndorseNESA from "./pages/EndorseNESA";
 import RegionDashboard from "./pages/region/RegionDashboard";
 import NigeriaChapterTrack from "./pages/region/NigeriaChapterTrack";
@@ -585,9 +572,9 @@ const App = () => (
                   />
 
                   {/* Retired AGC/voting-credit surfaces → GFAwzip Wallet */}
-                  <Route path="/earn-agc" element={<Navigate to="/wallet/gfawzip" replace />} />
-                  <Route path="/agc-rewards" element={<Navigate to="/wallet/gfawzip" replace />} />
-                  <Route path="/earn-voting-coins" element={<Navigate to="/wallet/gfawzip" replace />} />
+                  <Route path="/earn-agc" element={<Navigate to="/" replace />} />
+                  <Route path="/agc-rewards" element={<Navigate to="/" replace />} />
+                  <Route path="/earn-voting-coins" element={<Navigate to="/" replace />} />
 
                   {/* === 301 LEGACY REDIRECTS === */}
                   {/* Auth legacy */}
@@ -619,8 +606,8 @@ const App = () => (
                       (Stage B: make the register's short/canonical paths resolve). */}
                   <Route path="/awards/influencer" element={<Navigate to="/awards/influencer-education-impact" replace />} />
                   <Route path="/judges/apply" element={<Navigate to="/judgeapply" replace />} />
-                  <Route path="/gala/tickets" element={<Navigate to="/tickets" replace />} />
-                  <Route path="/gala/attendance" element={<Navigate to="/tickets" replace />} />
+                  <Route path="/gala/tickets" element={<Navigate to="/programme-2026" replace />} />
+                  <Route path="/gala/attendance" element={<Navigate to="/programme-2026" replace />} />
                   <Route path="/prenominate" element={<Navigate to="/nominate" replace />} />
                   <Route path="/verify" element={<Navigate to="/certificates/verify" replace />} />
                   <Route path="/membership" element={<Navigate to="/get-involved" replace />} />
@@ -654,8 +641,8 @@ const App = () => (
                   <Route path="/jury" element={<Navigate to="/judges" replace />} />
                   <Route path="/music" element={<Navigate to="/media" replace />} />
                   <Route path="/media/nesa-tv" element={<Navigate to="/media/tv" replace />} />
-                  <Route path="/dashboard/wallet" element={<Navigate to="/wallet" replace />} />
-                  <Route path="/earn-credits" element={<Navigate to="/wallet/gfawzip" replace />} />
+                  <Route path="/dashboard/wallet" element={<Navigate to="/dashboard" replace />} />
+                  <Route path="/earn-credits" element={<Navigate to="/" replace />} />
                   <Route path="/volunteer-bod" element={<Navigate to="/volunteer" replace />} />
                   <Route path="/policies/coi" element={<Navigate to="/policies" replace />} />
                   <Route path="/policies/privacy" element={<Navigate to="/policies" replace />} />
@@ -713,7 +700,7 @@ const App = () => (
                   <Route path="/education-enabler-features" element={<Navigate to="/media#features" replace />} />
                   <Route path="/interviews" element={<Navigate to="/media#interviews" replace />} />
                   <Route path="/press-room" element={<Navigate to="/media#press" replace />} />
-                  <Route path="/gala/tables" element={<Navigate to="/tickets" replace />} />
+                  <Route path="/gala/tables" element={<Navigate to="/programme-2026" replace />} />
                   <Route path="/events/calendar" element={<Navigate to="/media#events" replace />} />
                   <Route path="/events/afri-edutourism" element={<Navigate to="/afri-edutourism" replace />} />
 
@@ -738,8 +725,8 @@ const App = () => (
                   <Route path="/organisations" element={<Navigate to="/education-enablers" replace />} />
                   <Route path="/organizations" element={<Navigate to="/education-enablers" replace />} />
                   <Route path="/enabler-database" element={<Navigate to="/education-enablers" replace />} />
-                  <Route path="/gala" element={<Navigate to="/events/gala-2026" replace />} />
-                  <Route path="/gala/tickets" element={<Navigate to="/tickets" replace />} />
+                  <Route path="/gala" element={<Navigate to="/programme-2026" replace />} />
+                  <Route path="/gala/tickets" element={<Navigate to="/programme-2026" replace />} />
                   <Route path="/partner" element={<Navigate to="/get-involved/partner" replace />} />
                   <Route path="/sponsor" element={<Navigate to="/sponsors" replace />} />
 
@@ -1249,7 +1236,8 @@ const App = () => (
 
 
                   {/* Core spec URLs — render existing content at canonical paths */}
-                  <Route path="/gala" element={<WithLayout><GalaConsolidated /></WithLayout>} />
+                  <Route path="/programme-2026" element={<WithLayout><GalaConsolidated /></WithLayout>} />
+                  <Route path="/gala" element={<Navigate to="/programme-2026" replace />} />
                   <Route path="/support" element={<WithLayout><SupportConsolidated /></WithLayout>} />
                   <Route path="/participate" element={<WithLayout><ParticipatePage /></WithLayout>} />
                   <Route path="/trust" element={<WithLayout><TrustIntegrityPage /></WithLayout>} />
@@ -1600,148 +1588,25 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route
-                    path="/tickets"
-                    element={
-                      <WithLayout>
-                        <Tickets />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/buy-your-ticket"
-                    element={
-                      <WithLayout>
-                        <BuyYourTicket />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/tickets" element={<Navigate to="/programme-2026" replace />} />
+                  <Route path="/buy-your-ticket" element={<Navigate to="/programme-2026" replace />} />
 
-                  {/* Shop / Merchandise - specific routes before dynamic :slug */}
-                  <Route
-                    path="/shop"
-                    element={
-                      <WithLayout>
-                        <Shop />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/shop/cart"
-                    element={
-                      <WithLayout>
-                        <Cart />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/shop/checkout"
-                    element={
-                      <WithLayout>
-                        <Checkout />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/shop/bulk-orders"
-                    element={
-                      <WithLayout>
-                        <BulkOrders />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/shop/orders/:id"
-                    element={
-                      <WithLayout>
-                        <OrderConfirmation />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/shop/:slug"
-                    element={
-                      <WithLayout>
-                        <ProductDetail />
-                      </WithLayout>
-                    }
-                  />
-
-                  {/* Shop route aliases - redirect old/guessed URLs to /shop */}
-                  <Route
-                    path="/merchandise"
-                    element={
-                      <WithLayout>
-                        <Shop />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/merch"
-                    element={
-                      <WithLayout>
-                        <Shop />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/store"
-                    element={
-                      <WithLayout>
-                        <Shop />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/buy-merchandise"
-                    element={
-                      <WithLayout>
-                        <Shop />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/shop-now"
-                    element={
-                      <WithLayout>
-                        <Shop />
-                      </WithLayout>
-                    }
-                  />
-
-                  {/* Cart, Checkout, and Orders route aliases */}
-                  <Route
-                    path="/cart"
-                    element={
-                      <WithLayout>
-                        <Cart />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/checkout"
-                    element={
-                      <WithLayout>
-                        <Checkout />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/orders/:id"
-                    element={
-                      <WithLayout>
-                        <OrderConfirmation />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/bulk-orders"
-                    element={
-                      <WithLayout>
-                        <BulkOrders />
-                      </WithLayout>
-                    }
-                  />
+                  {/* Public commerce is retired in 2026; admin records are preserved. */}
+                  <Route path="/shop" element={<Navigate to="/" replace />} />
+                  <Route path="/shop/cart" element={<Navigate to="/" replace />} />
+                  <Route path="/shop/checkout" element={<Navigate to="/" replace />} />
+                  <Route path="/shop/bulk-orders" element={<Navigate to="/" replace />} />
+                  <Route path="/shop/orders/:id" element={<Navigate to="/" replace />} />
+                  <Route path="/shop/:slug" element={<Navigate to="/" replace />} />
+                  <Route path="/merchandise" element={<Navigate to="/" replace />} />
+                  <Route path="/merch" element={<Navigate to="/" replace />} />
+                  <Route path="/store" element={<Navigate to="/" replace />} />
+                  <Route path="/buy-merchandise" element={<Navigate to="/" replace />} />
+                  <Route path="/shop-now" element={<Navigate to="/" replace />} />
+                  <Route path="/cart" element={<Navigate to="/" replace />} />
+                  <Route path="/checkout" element={<Navigate to="/" replace />} />
+                  <Route path="/orders/:id" element={<Navigate to="/" replace />} />
+                  <Route path="/bulk-orders" element={<Navigate to="/" replace />} />
 
                   {/* Auth - standalone layout (dark branded) */}
                   <Route path="/login" element={<Login />} />
@@ -2037,73 +1902,17 @@ const App = () => (
                   <Route path="/vote-with-agc" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
                   <Route path="/vote/gold" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
                   <Route path="/vote/blue-garnet" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />
-                  <Route path="/about-agc" element={<Navigate to="/wallet/gfawzip" replace />} />
-                  <Route path="/earn-voting-credits" element={<Navigate to="/wallet/gfawzip" replace />} />
-                  <Route path="/claim-voting-credits" element={<Navigate to="/wallet/gfawzip" replace />} />
-                  <Route
-                    path="/gfawzip"
-                    element={
-                      <WithLayout>
-                        <GFAWzipWallet />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/gfawzip/links"
-                    element={
-                      <WithLayout>
-                        <GFAWzipLinks />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/wallet/gfawzip"
-                    element={
-                      <WithLayout>
-                        <GFAWzipWallet />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/payments/gfawzip"
-                    element={
-                      <WithLayout>
-                        <GFAWzipWallet />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/getfinance"
-                    element={
-                      <WithLayout>
-                        <GFAWzipWallet />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/gfawzip-wallet"
-                    element={
-                      <WithLayout>
-                        <GFAWzipWallet />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/links"
-                    element={
-                      <WithLayout>
-                        <GFAWzipLinks />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/wallet"
-                    element={
-                      <WithLayout>
-                        <Wallet />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/about-agc" element={<Navigate to="/" replace />} />
+                  <Route path="/earn-voting-credits" element={<Navigate to="/" replace />} />
+                  <Route path="/claim-voting-credits" element={<Navigate to="/" replace />} />
+                  <Route path="/gfawzip" element={<Navigate to="/" replace />} />
+                  <Route path="/gfawzip/links" element={<Navigate to="/" replace />} />
+                  <Route path="/wallet/gfawzip" element={<Navigate to="/" replace />} />
+                  <Route path="/payments/gfawzip" element={<Navigate to="/" replace />} />
+                  <Route path="/getfinance" element={<Navigate to="/" replace />} />
+                  <Route path="/gfawzip-wallet" element={<Navigate to="/" replace />} />
+                  <Route path="/links" element={<Navigate to="/" replace />} />
+                  <Route path="/wallet" element={<Navigate to="/" replace />} />
                   <Route path="/sponsors" element={<WithLayout><SponsorsPartners /></WithLayout>} />
                   <Route path="/sponsors/:slug" element={<SponsorLanding />} />
                   <Route path="/results" element={<Navigate to={VOTING_SUNSET_REDIRECT} replace />} />

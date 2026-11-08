@@ -1,6 +1,5 @@
-// Campaign phase configuration for NESA-Africa 2026.
-// Single source of truth for the header's primary + secondary CTA labels
-// and the announcement bar's active messaging. Flip `ACTIVE_PHASE` to switch.
+// Campaign actions for the public header. No voting or ticket phase is public in 2026.
+import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
 
 export type CampaignPhase = "nomination" | "voting" | "gala";
 
@@ -19,42 +18,26 @@ export interface PhaseConfig {
 export const PHASE_MAP: Record<CampaignPhase, PhaseConfig> = {
   nomination: {
     phase: "nomination",
-    primary: { label: "Nominate an Education Enabler", href: "/nominate", analyticsId: "nominate_now" },
-    secondary: {
-      label: "Meet Africa's Education Enablers",
-      href: "/nominees",
-      analyticsId: "explore_nominees",
-    },
+    primary: { label: PUBLIC_ACTIONS_2026.nominate.label, href: PUBLIC_ACTIONS_2026.nominate.href, analyticsId: "nominate_now" },
+    secondary: { label: PUBLIC_ACTIONS_2026.supportEducation.label, href: PUBLIC_ACTIONS_2026.supportEducation.href, analyticsId: "support_education" },
   },
   voting: {
     phase: "voting",
-    primary: { label: "Follow NRC Verification", href: "/awards/gold-blue-garnet", analyticsId: "nrc_verification" },
-    secondary: {
-      label: "Explore Categories",
-      href: "/awards/categories",
-      analyticsId: "explore_categories",
-    },
+    primary: { label: "Research & Judging", href: "/governance#judging", analyticsId: "research_judging" },
+    secondary: { label: PUBLIC_ACTIONS_2026.exploreAwards.label, href: PUBLIC_ACTIONS_2026.exploreAwards.href, analyticsId: "explore_awards" },
   },
   gala: {
     phase: "gala",
-    primary: { label: "Get Gala Tickets", href: "/tickets", analyticsId: "gala_tickets" },
-    secondary: {
-      label: "Explore Finalists",
-      href: "/nominees",
-      analyticsId: "explore_finalists",
-    },
+    primary: { label: PUBLIC_ACTIONS_2026.onlineGala.label, href: PUBLIC_ACTIONS_2026.onlineGala.href, analyticsId: "online_gala" },
+    secondary: { label: PUBLIC_ACTIONS_2026.exploreAwards.label, href: PUBLIC_ACTIONS_2026.exploreAwards.href, analyticsId: "explore_awards" },
   },
 };
 
-// Flip this to switch the header + announcement bar campaign phase.
 export const ACTIVE_PHASE: CampaignPhase = "nomination";
-
 export const CURRENT_PHASE: PhaseConfig = PHASE_MAP[ACTIVE_PHASE];
 
-// Nominate an Education Enabler is the single strongest CTA regardless of phase; the phase
-// controls the *secondary* action label.
 export const NOMINATE_CTA = {
-  label: "Nominate an Education Enabler",
-  href: "/nominate",
+  label: PUBLIC_ACTIONS_2026.nominate.label,
+  href: PUBLIC_ACTIONS_2026.nominate.href,
   analyticsId: "nominate_now",
 } as const;

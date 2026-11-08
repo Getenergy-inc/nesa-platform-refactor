@@ -1,38 +1,26 @@
 /**
- * NESA-Africa 2026 — CANONICAL NOMINATION WINDOWS.
- * -----------------------------------------------
- * Source: "NESA-Africa 2026 — Corrected Complete Timeline Set".
- *
- * These labels supersede the earlier (30 Aug / 12 Sep / 14 Nov) schedule.
- * Every surface that displays a nomination window — the homepage Icon
- * flagship section, the public notice banner, /timeline, award and category
- * pages — must import from here. Never retype a date literal.
- *
- * The Gala date itself lives in `@/config/programme` (13 December 2026,
- * unchanged and re-confirmed by the corrected schedule).
+ * NESA-Africa 2026 — canonical public nomination and certificate window.
+ * Every public surface imports these values; no earlier September/October/
+ * November windows remain valid.
  */
+export const NOMINATIONS_OPEN_ISO = "2026-11-09";
+export const NOMINATIONS_CLOSE_ISO = "2027-03-31";
+export const NOMINATIONS_OPEN_LABEL = "9 November 2026";
+export const NOMINATIONS_CLOSE_LABEL = "31 March 2027";
+export const NOMINATION_WINDOW_LABEL = "9 November 2026 – 31 March 2027";
 
-/** All nomination pathways open on this day. */
-export const NOMINATIONS_OPEN_ISO = "2026-09-06";
-export const NOMINATIONS_OPEN_LABEL = "6 September 2026";
+/** All pathways, including Africa Education Icon, use the same public window. */
+export const ICON_WINDOW_OPEN_ISO = NOMINATIONS_OPEN_ISO;
+export const ICON_WINDOW_CLOSE_ISO = NOMINATIONS_CLOSE_ISO;
+export const ICON_WINDOW_LABEL = NOMINATION_WINDOW_LABEL;
+export const ICON_WINDOW_CLOSE_LABEL = NOMINATIONS_CLOSE_LABEL;
 
-/** Africa Education Icon Award — one-month window so judging can complete. */
-export const ICON_WINDOW_OPEN_ISO = "2026-09-06";
-export const ICON_WINDOW_CLOSE_ISO = "2026-10-06";
-export const ICON_WINDOW_LABEL = "6 September – 6 October 2026";
-export const ICON_WINDOW_CLOSE_LABEL = "6 October 2026";
+/** Verified contributors may download continuously throughout this window. */
+export const CERTIFICATE_WINDOW_OPEN_ISO = NOMINATIONS_OPEN_ISO;
+export const CERTIFICATE_WINDOW_CLOSE_ISO = NOMINATIONS_CLOSE_ISO;
+export const CERTIFICATE_WINDOW_LABEL = NOMINATION_WINDOW_LABEL;
+export const CERTIFICATE_WINDOW_CLOSE_LABEL = NOMINATIONS_CLOSE_LABEL;
 
-/**
- * Gold-Blue Garnet, Platinum Recognition and Influencer Education Impact —
- * extended window so nominees can request physical printed certificates.
- */
-export const CERTIFICATE_WINDOW_OPEN_ISO = "2026-09-06";
-export const CERTIFICATE_WINDOW_CLOSE_ISO = "2026-11-21";
-export const CERTIFICATE_WINDOW_LABEL = "6 September – 21 November 2026";
-export const CERTIFICATE_WINDOW_CLOSE_LABEL = "21 November 2026";
-
-/** Icon judging window (onboarding through final selection). */
-export const ICON_JUDGING_WINDOW_LABEL = "6 October – 24 November 2026";
-
-/** Date all nine Africa Education Icon recipients are confirmed. */
-export const ICON_RECIPIENTS_CONFIRMED_LABEL = "24 November 2026";
+/** Detailed judging milestones are not supplied by the approved brief. */
+export const ICON_JUDGING_WINDOW_LABEL = "CONTENT REQUIRED";
+export const ICON_RECIPIENTS_CONFIRMED_LABEL = "CONTENT REQUIRED";
