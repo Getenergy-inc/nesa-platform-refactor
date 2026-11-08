@@ -288,7 +288,10 @@ class TemporaryPostgres:
         self.user = None
         self.started = False
         if os.geteuid() == 0:
-            self.user = "nobody"
+            candidates = [os.environ.get("SUDO_USER"), "lovable", "nobody"]
+            self.user = next((name for name in candidates if name and name in {entry.pw_name for entry in pwd.getpwall()}), None)
+            if not self.user:
+                raise RuntimeError("PostgreSQL refuses root; run as a non-root user or provide --database-url")
         self.data.mkdir()
         self.socket.mkdir()
         if self.user:
