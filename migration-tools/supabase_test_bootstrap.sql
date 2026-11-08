@@ -58,3 +58,15 @@ CREATE OR REPLACE FUNCTION auth.jwt() RETURNS jsonb
 LANGUAGE sql STABLE AS $$ SELECT COALESCE(NULLIF(current_setting('request.jwt.claims', true), '')::jsonb, '{}'::jsonb) $$;
 CREATE OR REPLACE FUNCTION storage.foldername(name text) RETURNS text[]
 LANGUAGE sql IMMUTABLE AS $$ SELECT (string_to_array(name, '/'))[1:cardinality(string_to_array(name, '/')) - 1] $$;
+
+CREATE TABLE IF NOT EXISTS realtime.messages (
+  id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  topic text,
+  payload jsonb,
+  event text,
+  private boolean DEFAULT false,
+  inserted_at timestamptz DEFAULT now()
+);
+ALTER TABLE realtime.messages ENABLE ROW LEVEL SECURITY;
+CREATE OR REPLACE FUNCTION realtime.topic() RETURNS text
+LANGUAGE sql STABLE AS $$ SELECT NULLIF(current_setting('realtime.topic', true), '') $$;
