@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Copy, Check, Share2, Gift, Youtube, Users } from "lucide-react";
 import { toast } from "sonner";
+import { SOCIAL_PROFILE_URLS } from "@/config/socialLinks";
 
 interface NomineeReferralCardProps {
   nomineeName: string;
@@ -22,7 +23,7 @@ export function NomineeReferralCard({
   // Generate the referral link for this nominee
   const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
   const referralLink = `${baseUrl}/nominees/${encodeURIComponent(nomineeSlug)}?ref=share`;
-  const youtubeChannelUrl = "https://www.youtube.com/@Nesa.africaTV";
+  const youtubeChannelUrl = SOCIAL_PROFILE_URLS.youtube;
 
   const handleCopy = async () => {
     try {
@@ -36,7 +37,7 @@ export function NomineeReferralCard({
   };
 
   const handleShare = async () => {
-    const shareText = `Support ${nomineeName} in the NESA Africa Awards 2026! 🏆 Vote and help them win recognition for their contribution to education in Africa.`;
+    const shareText = `Discover ${nomineeName}'s education-impact profile on NESA-Africa 2026.`;
     
     if (navigator.share) {
       try {
@@ -54,12 +55,12 @@ export function NomineeReferralCard({
   };
 
   const handleShareToTwitter = () => {
-    const text = encodeURIComponent(`Support ${nomineeName} in the NESA Africa Awards 2026! 🏆 Vote now:`);
+    const text = encodeURIComponent(`Discover ${nomineeName}'s education-impact profile on NESA-Africa 2026:`);
     window.open(`https://twitter.com/intent/tweet?text=${text}&url=${encodeURIComponent(referralLink)}`, "_blank");
   };
 
   const handleShareToWhatsApp = () => {
-    const text = encodeURIComponent(`Support ${nomineeName} in the NESA Africa Awards 2026! 🏆 Vote and help them win: ${referralLink}`);
+    const text = encodeURIComponent(`Discover ${nomineeName}'s education-impact profile on NESA-Africa 2026: ${referralLink}`);
     window.open(`https://wa.me/?text=${text}`, "_blank");
   };
 
@@ -156,7 +157,7 @@ export function NomineeReferralCard({
             href={youtubeChannelUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-red-600/10 hover:bg-red-600/20 border border-red-600/20 text-red-400 transition-colors"
+            className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-gold/5 hover:bg-gold/10 border border-gold/20 text-gold transition-colors"
           >
             <Youtube className="h-5 w-5" />
             <span className="text-sm font-medium">Watch on NESA Africa TV</span>
@@ -169,7 +170,7 @@ export function NomineeReferralCard({
             Pro Tip
           </Badge>
           <span className="text-xs text-ivory/60">
-            More shares = more endorsements = Platinum Certificate!
+            Sharing a profile helps more people discover documented education impact.
           </span>
         </div>
       </CardContent>

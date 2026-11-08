@@ -1,6 +1,7 @@
 import { Youtube, Facebook, Tv } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
+import { SOCIAL_PROFILE_URLS } from "@/config/socialLinks";
 
 export function WatchLiveSection() {
   const { t } = useTranslation("pages");
@@ -20,23 +21,17 @@ export function WatchLiveSection() {
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2"
-              onClick={() => window.open("https://www.youtube.com/@Nesa.africaTV", "_blank", "noopener,noreferrer")}
-            >
-              <Youtube className="h-5 w-5" />
-              YouTube
+            <Button variant="outline" size="lg" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2" asChild>
+              <a href={SOCIAL_PROFILE_URLS.youtube} target="_blank" rel="noopener noreferrer" aria-label="Follow NESA-Africa on YouTube">
+                <Youtube className="h-5 w-5" />
+                YouTube
+              </a>
             </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2"
-              onClick={() => window.open("https://facebook.com/nesaafrica", "_blank", "noopener,noreferrer")}
-            >
-              <Facebook className="h-5 w-5" />
-              Facebook
+            <Button variant="outline" size="lg" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full gap-2" asChild>
+              <a href={SOCIAL_PROFILE_URLS.facebook} target="_blank" rel="noopener noreferrer" aria-label="Follow NESA-Africa on Facebook">
+                <Facebook className="h-5 w-5" />
+                Facebook
+              </a>
             </Button>
             <Button
               variant="outline"

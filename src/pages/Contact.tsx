@@ -16,17 +16,14 @@ import {
   MessageSquare,
   Building2,
   Globe,
-  Facebook,
-  Twitter,
-  Linkedin,
-  Instagram,
   Mic,
   Video,
   Award,
   Upload,
-  Youtube,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { FollowLinks } from "@/components/nesa/FollowLinks";
+import { ContentRequired } from "@/components/nesa/ContentRequired";
 
 const contactInfo = [
   {
@@ -474,20 +471,7 @@ export default function Contact() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex gap-4">
-                    <a href="https://facebook.com/nesaafrica" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-nesa-gold hover:text-black transition-colors">
-                      <Facebook className="w-5 h-5" />
-                    </a>
-                    <a href="https://twitter.com/nesaafrica" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-nesa-gold hover:text-black transition-colors">
-                      <Twitter className="w-5 h-5" />
-                    </a>
-                    <a href="https://linkedin.com/company/nesa-africa" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-nesa-gold hover:text-black transition-colors">
-                      <Linkedin className="w-5 h-5" />
-                    </a>
-                    <a href="https://www.youtube.com/@Nesa.africaTV" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-nesa-gold hover:text-black transition-colors">
-                      <Youtube className="w-5 h-5" />
-                    </a>
-                  </div>
+                  <FollowLinks className="flex-wrap gap-3" linkClassName="rounded-full bg-muted text-foreground hover:bg-nesa-gold hover:text-black" />
                   <p className="text-sm text-muted-foreground mt-4">
                     Stay connected with NESA-Africa for the latest updates, 
                     nominee stories, and education enablers news.
