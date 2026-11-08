@@ -2,7 +2,7 @@
 - [x] Repair the five failing package migrations so a clean restore needs no production rows.
 - [x] Reconcile all reported schema differences with authoritative live metadata; distinguish real drift from comparator/bootstrap artefacts.
 - [x] Rerun strict mode across all 169 migrations and require zero verified schema differences.
-- [ ] Run restore unit tests and rebuild the validated migration package without touching production.
+- [x] Run restore unit tests and rebuild the validated migration package without touching production.
 - [ ] Refactor CTAs and follow actions across public pages under the approved content brief, with 390px and 1440px review screenshots; do not publish.
 
 ## Automated clean-database restore test — 8 Nov 2026
