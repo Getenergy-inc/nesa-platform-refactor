@@ -313,8 +313,10 @@ function NominateButton({ className }: { className?: string }) {
       asChild
       className={cn("bg-gold text-charcoal hover:bg-gold/90 font-semibold shadow-sm", className)}
     >
-      <Link
-        to={NOMINATE_CTA.href}
+      <a
+        href={NOMINATE_CTA.href}
+        target="_blank"
+        rel="noopener noreferrer"
         onClick={() =>
           trackNav("nominate_now_click", {
             href: NOMINATE_CTA.href,
@@ -324,7 +326,7 @@ function NominateButton({ className }: { className?: string }) {
         }
       >
         {NOMINATE_CTA.label}
-      </Link>
+      </a>
     </Button>
   );
 }
@@ -525,14 +527,6 @@ function MobileMenu() {
               </Link>
             </Button>
           </div>
-
-          <Link
-            to="/"
-            onClick={close}
-            className={cn(linkCls, "border-b border-gold/15", isActive(location.pathname, "/") && "text-gold")}
-          >
-            Home
-          </Link>
 
           <nav aria-label="Mobile primary">
             <Accordion type="single" collapsible className="w-full">

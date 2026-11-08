@@ -1,122 +1,44 @@
-// Mobile bottom actions bar — 4 actions only: Enablers · Nominate · Gala · Menu.
-// Menu opens the same mobile drawer used in SiteHeader (dispatches a
-// window-level event that SiteHeader listens for).
-
+// Two persistent mobile actions: Nominate · Explore Awards.
 import { Link, useLocation } from "react-router-dom";
-import { Compass, Award, Ticket, Menu as MenuIcon } from "lucide-react";
+import { Compass, Award } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NOMINATE_CTA } from "@/config/campaignPhase";
+import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
 import { trackNav } from "@/lib/analytics";
 
 export const MOBILE_MENU_OPEN_EVENT = "nesa:mobile-menu-open";
 
-interface Action {
-  id: string;
-  label: string;
-  href?: string;
-  icon: typeof Compass;
-  onClick?: () => void;
-  matchPrefix?: string;
-}
-
 export function MobileBottomActions() {
   const { pathname } = useLocation();
-
-  // 2026: no public award voting. Third slot surfaces the Gala instead.
-  const galaTarget = { label: "Gala", href: "/gala" };
-
-  const actions: Action[] = [
-    {
-      id: "explore",
-      label: "Enablers",
-      href: "/nominees",
-      icon: Compass,
-      matchPrefix: "/nominees",
-    },
-    {
-      id: "nominate",
-      label: "Nominate",
-      href: NOMINATE_CTA.href,
-      icon: Award,
-      matchPrefix: "/nominate",
-    },
-    {
-      id: "gala",
-      label: galaTarget.label,
-      href: galaTarget.href,
-      icon: Ticket,
-      matchPrefix: "/gala",
-    },
-    {
-      id: "menu",
-      label: "Menu",
-      icon: MenuIcon,
-      onClick: () => {
-        trackNav("mobile_bottom_menu_click", { device: "mobile" });
-        window.dispatchEvent(new CustomEvent(MOBILE_MENU_OPEN_EVENT));
-      },
-    },
-  ];
-
-  const isActive = (a: Action) =>
-    !!a.matchPrefix &&
-    (pathname === a.matchPrefix || pathname.startsWith(a.matchPrefix + "/"));
+  const awardsActive = pathname === "/awards" || pathname.startsWith("/awards/");
+  const linkCls = (active = false) => cn(
+    "flex min-h-14 items-center justify-center gap-2 px-3 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-inset",
+    active ? "text-gold" : "text-white/80 hover:text-gold",
+  );
 
   return (
-    <nav
-      aria-label="Mobile quick actions"
-      className={cn(
-        "fixed bottom-0 left-0 right-0 z-40 min-[1360px]:hidden",
-        "bg-charcoal/95 backdrop-blur border-t border-gold/20",
-        "pb-[env(safe-area-inset-bottom)]",
-      )}
-    >
-      <ul className="grid grid-cols-4">
-        {actions.map((a) => {
-          const active = isActive(a);
-          const cls = cn(
-            "flex flex-col items-center justify-center gap-0.5 py-2.5 min-h-12",
-            "text-[11px] font-medium",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-inset",
-            active ? "text-gold" : "text-white/75 hover:text-gold",
-          );
-          const inner = (
-            <>
-              <a.icon className="h-5 w-5" aria-hidden />
-              <span>{a.label}</span>
-            </>
-          );
-          return (
-            <li key={a.id} className="contents">
-              {a.href ? (
-                <Link
-                  to={a.href}
-                  aria-current={active ? "page" : undefined}
-                  onClick={() =>
-                    trackNav("mobile_bottom_action_click", {
-                      label: a.label,
-                      href: a.href,
-                      device: "mobile",
-                    })
-                  }
-                  className={cls}
-                >
-                  {inner}
-                </Link>
-              ) : (
-                <button
-                  type="button"
-                  onClick={a.onClick}
-                  className={cls}
-                  aria-label={a.label}
-                >
-                  {inner}
-                </button>
-              )}
-            </li>
-          );
-        })}
-      </ul>
+    <nav aria-label="Mobile quick actions" className="fixed bottom-0 left-0 right-0 z-40 border-t border-gold/20 bg-charcoal/95 pb-[env(safe-area-inset-bottom)] backdrop-blur min-[1360px]:hidden">
+      <div className="grid grid-cols-2">
+        <a
+          href={NOMINATE_CTA.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => trackNav("mobile_bottom_action_click", { label: "Nominate", href: NOMINATE_CTA.href, device: "mobile" })}
+          className={cn(linkCls(), "bg-gold text-charcoal hover:bg-gold/90 hover:text-charcoal")}
+        >
+          <Award className="h-5 w-5" aria-hidden />
+          <span>Nominate</span>
+        </a>
+        <Link
+          to={PUBLIC_ACTIONS_2026.exploreAwards.href}
+          aria-current={awardsActive ? "page" : undefined}
+          onClick={() => trackNav("mobile_bottom_action_click", { label: "Explore Awards", href: PUBLIC_ACTIONS_2026.exploreAwards.href, device: "mobile" })}
+          className={linkCls(awardsActive)}
+        >
+          <Compass className="h-5 w-5" aria-hidden />
+          <span>Explore Awards</span>
+        </Link>
+      </div>
     </nav>
   );
 }

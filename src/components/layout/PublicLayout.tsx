@@ -4,7 +4,6 @@
 import { ReactNode } from "react";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
-import { BottomPageNav } from "@/components/navigation/PageNavigation";
 import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
 import { PageFAQSection, FloatingFAQButton } from "@/components/nesa/PageFAQ";
 import { TrustSpine } from "@/components/trust/TrustSpine";
@@ -54,7 +53,6 @@ export function PublicLayout({
       {showTrustSpine && <TrustSpine variant={trustSpineVariant} />}
       {showFAQ && <PageFAQSection />}
       {showFooter && <NESAFooter />}
-      <BottomPageNav />
       <ExitIntentPopup />
       <FloatingFAQButton />
       <MobileBottomActions />
