@@ -403,8 +403,8 @@ def main() -> int:
         report["database_url"] = database_url if cluster else "supplied (redacted)"
         assert_clean(database_url)
         require_success(psql(database_url, file=BOOTSTRAP), "managed-service compatibility bootstrap failed")
-        for migration in migrations:
-            print(f"[{report['applied_count'] + 1}/{len(migrations)}] {migration.name}", flush=True)
+        for attempt, migration in enumerate(migrations, 1):
+            print(f"[{attempt}/{len(migrations)}] {migration.name}", flush=True)
             result = psql(database_url, file=migration)
             if result.returncode:
                 report["failed_migrations"].append({"file": migration.name, "error": (result.stderr + result.stdout).strip()})
