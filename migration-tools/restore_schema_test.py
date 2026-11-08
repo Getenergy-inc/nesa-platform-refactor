@@ -407,8 +407,12 @@ def main() -> int:
             print(f"[{report['applied_count'] + 1}/{len(migrations)}] {migration.name}", flush=True)
             result = psql(database_url, file=migration)
             if result.returncode:
-                report["failed_migration"] = {"file": migration.name, "error": (result.stderr + result.stdout).strip()}
-                break
+                report["failed_migrations"].append({"file": migration.name, "error": (result.stderr + result.stdout).strip()})
+                (args.report_dir / "migration-logs").mkdir(parents=True, exist_ok=True)
+                (args.report_dir / "migration-logs" / f"{migration.name}.log").write_text(result.stdout + result.stderr, encoding="utf-8")
+                if not args.continue_on_error:
+                    break
+                continue
             report["applied_count"] += 1
             report["applied_migrations"].append(migration.name)
             (args.report_dir / "migration-logs").mkdir(parents=True, exist_ok=True)
