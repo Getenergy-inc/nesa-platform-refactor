@@ -102,9 +102,6 @@ LEFT JOIN information_schema.constraint_column_usage ccu
  ON (tc.constraint_type='FOREIGN KEY' AND ccu.constraint_catalog=rc.unique_constraint_catalog
  AND ccu.constraint_schema=rc.unique_constraint_schema AND ccu.constraint_name=rc.unique_constraint_name
  AND ccu.column_name=fk.column_name)
- OR (tc.constraint_type<>'FOREIGN KEY' AND ccu.constraint_catalog=tc.constraint_catalog
- AND ccu.constraint_schema=tc.constraint_schema AND ccu.constraint_name=tc.constraint_name
- AND ccu.column_name=kcu.column_name)
 WHERE tc.table_schema='public' ORDER BY 1,2,3,4,5
 """,
     },
@@ -220,6 +217,8 @@ def run(command: list[str], **kwargs) -> subprocess.CompletedProcess:
 
 def psql(database_url: str, sql: str | None = None, file: Path | None = None, csv_output: bool = False) -> subprocess.CompletedProcess:
     command = ["psql", database_url, "-X", "-v", "ON_ERROR_STOP=1", "--no-psqlrc"]
+    if file is not None:
+        command.append("--single-transaction")
     if csv_output:
         command.append("--csv")
     elif file is None:
