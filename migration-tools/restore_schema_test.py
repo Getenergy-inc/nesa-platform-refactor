@@ -301,7 +301,10 @@ class TemporaryPostgres:
 
     def command(self, executable: str, args: list[str]) -> list[str]:
         base = [executable, *args]
-        return ["runuser", "-u", self.user, "--", *base] if self.user else base
+        if not self.user:
+            return base
+        account = pwd.getpwnam(self.user)
+        return ["setpriv", f"--reuid={account.pw_uid}", f"--regid={account.pw_gid}", "--clear-groups", *base]
 
     def start(self) -> str:
         for executable in ("initdb", "pg_ctl", "psql"):
