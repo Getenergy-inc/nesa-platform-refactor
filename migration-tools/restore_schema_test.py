@@ -79,32 +79,21 @@ WHERE schemaname='public' ORDER BY 1,2,3
     "constraints": {
         "key": ("table_schema", "table_name", "constraint_name", "column_name", "ordinality"),
         "query": """
-SELECT tc.table_schema,tc.table_name,tc.constraint_name,tc.constraint_type,
-COALESCE(kcu.column_name,'') AS column_name,COALESCE(kcu.ordinal_position,0) AS ordinality,
-COALESCE(ccu.table_schema,'') AS foreign_table_schema,
-COALESCE(ccu.table_name,'') AS foreign_table_name,
-COALESCE(ccu.column_name,'') AS foreign_column_name,
-pg_get_constraintdef(pc.oid) AS definition
-FROM information_schema.table_constraints tc
-JOIN pg_namespace ns ON ns.nspname=tc.constraint_schema
-JOIN pg_constraint pc ON pc.connamespace=ns.oid AND pc.conname=tc.constraint_name
-JOIN pg_class rel ON rel.oid=pc.conrelid AND rel.relname=tc.table_name
-LEFT JOIN information_schema.key_column_usage kcu
- ON kcu.constraint_catalog=tc.constraint_catalog AND kcu.constraint_schema=tc.constraint_schema
- AND kcu.constraint_name=tc.constraint_name AND kcu.table_name=tc.table_name
-LEFT JOIN information_schema.referential_constraints rc
- ON rc.constraint_catalog=tc.constraint_catalog AND rc.constraint_schema=tc.constraint_schema
- AND rc.constraint_name=tc.constraint_name
-LEFT JOIN information_schema.key_column_usage fk
- ON fk.ordinal_position=kcu.ordinal_position
- AND fk.constraint_catalog=rc.unique_constraint_catalog
- AND fk.constraint_schema=rc.unique_constraint_schema
- AND fk.constraint_name=rc.unique_constraint_name
-LEFT JOIN information_schema.constraint_column_usage ccu
- ON (tc.constraint_type='FOREIGN KEY' AND ccu.constraint_catalog=rc.unique_constraint_catalog
- AND ccu.constraint_schema=rc.unique_constraint_schema AND ccu.constraint_name=rc.unique_constraint_name
- AND ccu.column_name=fk.column_name)
-WHERE tc.table_schema='public' ORDER BY 1,2,3,4,5
+SELECT ns.nspname AS table_schema,rel.relname AS table_name,pc.conname AS constraint_name,
+CASE pc.contype WHEN 'p' THEN 'PRIMARY KEY' WHEN 'f' THEN 'FOREIGN KEY'
+ WHEN 'u' THEN 'UNIQUE' WHEN 'c' THEN 'CHECK' WHEN 'x' THEN 'EXCLUDE' ELSE pc.contype::text END AS constraint_type,
+COALESCE(att.attname,'') AS column_name,COALESCE(keys.ordinality,0) AS ordinality,
+COALESCE(fns.nspname,'') AS foreign_table_schema,COALESCE(frel.relname,'') AS foreign_table_name,
+COALESCE(fatt.attname,'') AS foreign_column_name,pg_get_constraintdef(pc.oid) AS definition
+FROM pg_constraint pc
+JOIN pg_namespace ns ON ns.oid=pc.connamespace
+JOIN pg_class rel ON rel.oid=pc.conrelid
+LEFT JOIN LATERAL unnest(pc.conkey) WITH ORDINALITY keys(attnum,ordinality) ON true
+LEFT JOIN pg_attribute att ON att.attrelid=rel.oid AND att.attnum=keys.attnum
+LEFT JOIN pg_class frel ON frel.oid=pc.confrelid
+LEFT JOIN pg_namespace fns ON fns.oid=frel.relnamespace
+LEFT JOIN pg_attribute fatt ON fatt.attrelid=frel.oid AND fatt.attnum=pc.confkey[keys.ordinality]
+WHERE ns.nspname='public' ORDER BY 1,2,3,4,5
 """,
     },
     "sequences": {
