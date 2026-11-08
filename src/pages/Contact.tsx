@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { FollowLinks } from "@/components/nesa/FollowLinks";
-import { ContentRequired } from "@/components/nesa/ContentRequired";
+import { ScefFormRequired } from "@/components/nesa/ContentRequired";
 
 const contactInfo = [
   {
@@ -109,46 +109,8 @@ export default function Contact() {
     }
   }, [isPresenterApplication]);
 
-  const handleGeneralSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for contacting us. We'll respond within 24-48 hours.",
-    });
-    
-    setFormData({ name: "", email: "", subject: "", department: "", message: "" });
-    setIsSubmitting(false);
-  };
-
-  const handlePresenterSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    toast({
-      title: "Application Submitted!",
-      description: "Thank you for applying to be a Gala presenter. Our team will review your application and contact you within 7 business days.",
-    });
-    
-    setPresenterData({
-      name: "",
-      email: "",
-      phone: "",
-      country: "",
-      experience: "",
-      languages: "",
-      portfolioUrl: "",
-      socialMedia: "",
-      bio: "",
-      motivation: "",
-    });
-    setIsSubmitting(false);
-  };
+  const handleGeneralSubmit = (e: React.FormEvent) => e.preventDefault();
+  const handlePresenterSubmit = (e: React.FormEvent) => e.preventDefault();
 
   return (
     <div className="min-h-screen bg-charcoal">
@@ -276,18 +238,7 @@ export default function Contact() {
                           required
                         />
                       </div>
-                      <Button 
-                        type="submit" 
-                        className="w-full bg-primary hover:bg-primary/90"
-                        disabled={isSubmitting}
-                      >
-                        {isSubmitting ? "Sending..." : (
-                          <>
-                            <Send className="w-4 h-4 mr-2" />
-                            Send Message
-                          </>
-                        )}
-                      </Button>
+                      <ScefFormRequired kind="contact" />
                     </form>
                   </TabsContent>
 
@@ -296,11 +247,11 @@ export default function Contact() {
                     <div className="mb-6 rounded-lg bg-primary/10 p-4">
                       <div className="flex items-center gap-3 mb-2">
                         <Mic className="h-5 w-5 text-primary" />
-                        <h3 className="font-semibold">Become a Gala Presenter</h3>
+                        <h3 className="font-semibold">Become an Online Awards Gala Presenter</h3>
                       </div>
                       <p className="text-sm text-muted-foreground">
                         We're looking for dynamic presenters and anchors to host segments of the 
-                        NESA-Africa Awards Gala. Share your experience and portfolio below.
+                        NESA-Africa Online Awards Gala. Share your experience and portfolio below.
                       </p>
                     </div>
 
@@ -411,7 +362,7 @@ export default function Contact() {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="p-motivation">Why do you want to host the NESA-Africa Gala? *</Label>
+                        <Label htmlFor="p-motivation">Why do you want to host the NESA-Africa Online Awards Gala? *</Label>
                         <Textarea
                           id="p-motivation"
                           placeholder="Share your motivation and what you would bring to the event..."
@@ -422,18 +373,7 @@ export default function Contact() {
                         />
                       </div>
 
-                      <Button 
-                        type="submit" 
-                        className="w-full bg-primary hover:bg-primary/90"
-                        disabled={isSubmitting}
-                      >
-                        {isSubmitting ? "Submitting Application..." : (
-                          <>
-                            <Award className="w-4 h-4 mr-2" />
-                            Submit Application
-                          </>
-                        )}
-                      </Button>
+                      <ScefFormRequired kind="contact" />
                     </form>
                   </TabsContent>
                 </Tabs>
