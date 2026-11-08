@@ -10702,6 +10702,7 @@ export type Database = {
           created_at: string | null
           description: string | null
           id: string
+          is_public: boolean
           label: string
         }
         Insert: {
@@ -10709,6 +10710,7 @@ export type Database = {
           created_at?: string | null
           description?: string | null
           id?: string
+          is_public?: boolean
           label: string
         }
         Update: {
@@ -10716,6 +10718,7 @@ export type Database = {
           created_at?: string | null
           description?: string | null
           id?: string
+          is_public?: boolean
           label?: string
         }
         Relationships: []
@@ -11893,6 +11896,7 @@ export type Database = {
           description: string | null
           icon: string | null
           id: string
+          is_public: boolean
           label: string
           tier: string
         }
@@ -11902,6 +11906,7 @@ export type Database = {
           description?: string | null
           icon?: string | null
           id?: string
+          is_public?: boolean
           label: string
           tier?: string
         }
@@ -11911,6 +11916,7 @@ export type Database = {
           description?: string | null
           icon?: string | null
           id?: string
+          is_public?: boolean
           label?: string
           tier?: string
         }
