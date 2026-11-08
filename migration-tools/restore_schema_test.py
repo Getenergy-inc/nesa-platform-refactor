@@ -319,7 +319,7 @@ class TemporaryPostgres:
         result = run(self.command("pg_ctl", ["-D", str(self.data), "-l", str(log), "-o", options, "-w", "start"]))
         require_success(result, "PostgreSQL startup failed; see " + str(log))
         self.started = True
-        return f"postgresql://postgres@127.0.0.1:{self.port}/postgres"
+        return f"postgresql://postgres@127.0.0.1:{self.port}/postgres?sslmode=disable"
 
     def create_database(self, admin_url: str) -> str:
         require_success(psql(admin_url, sql="CREATE DATABASE nesa_restore"), "could not create isolated test database")
