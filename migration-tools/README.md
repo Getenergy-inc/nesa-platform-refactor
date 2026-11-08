@@ -9,6 +9,9 @@
 - Each migration runs in its own transaction. A failed migration is rolled back.
 - The small bootstrap represents hosted Auth, Storage and Realtime prerequisites; it is not an implementation of those services.
 - No production data is required or copied. This is a schema reconstruction test, not a data restore or application-parity test.
+- Optional historical business-data fixtures live under `database/seed/` in the migration package and are not replayed by the schema test.
+- Hosted creator default table grants are reproduced in the bootstrap; RLS remains the row-access control. The harness-only `sandbox_exec` ACL entry is ignored during comparison.
+- `supabase_vault` is the sole explicit platform exclusion because it is hosted-only. No fake local replacement is created; every exclusion is printed in the report.
 
 ## Run
 
@@ -39,7 +42,9 @@ python3 migration-tools/restore_schema_test.py \
   --report-dir migration-results/restore-schema
 ```
 
-The test expects 169 migrations by default. Reports contain applied/failed migrations, expected/actual/missing/unexpected/changed object counts, detailed field differences, and blank exported fields marked unverified. A nonzero exit is required for any failed migration, schema drift or incomplete comparison.
+The test expects 169 migrations by default. Reports contain applied/failed migrations, expected/actual/missing/unexpected/changed object counts, detailed field differences, blank exported fields marked unverified, and explicit platform exclusions. A nonzero exit is required for any failed migration, schema drift or incomplete comparison.
+
+The supplied repaired strict run applies 169/169 migrations with zero application-schema differences and zero unverified views. All 17 expected view definitions were exported from the authoritative live schema and compared using PostgreSQL's canonical view deparser.
 
 Run comparator unit tests with:
 
