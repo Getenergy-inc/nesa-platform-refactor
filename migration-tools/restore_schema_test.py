@@ -185,7 +185,7 @@ def compare_rows(kind: str, expected: list[dict], actual: list[dict], key: tuple
         return result
 
     source, target = keyed(expected), keyed(actual)
-    result = {"expected": len(source), "actual": len(target), "missing": [], "unexpected": [], "changed": []}
+    result = {"expected": len(source), "actual": len(target), "missing": [], "unexpected": [], "changed": [], "unverified": []}
     for identity in sorted(source.keys() - target.keys()):
         result["missing"].append({"key": list(identity), "row": source[identity]})
     for identity in sorted(target.keys() - source.keys()):
