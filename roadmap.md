@@ -1,6 +1,6 @@
 ## Automated clean-database restore test — 8 Nov 2026
-- [ ] Add an isolated runner for all 169 migrations with a clean-database safety guard.
-- [ ] Compare restored schema objects with the exported live metadata and write machine-readable and human-readable reports.
+- [x] Add an isolated runner for all 169 migrations with a clean-database safety guard.
+- [x] Compare restored schema objects with the exported live metadata and write machine-readable and human-readable reports.
 - [ ] Run the restore test, package the scripts and honest results in a new migration ZIP, and verify archive integrity.
 
 - [x] Factual check: /nominees/lane/ngo-africa route, data source, counts, category identity
