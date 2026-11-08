@@ -35,6 +35,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import eduaidLogo from "@/assets/partners/eduaid-africa-logo.jpeg";
+import { ScefFormRequired } from "@/components/nesa/ContentRequired";
 
 // EduAid-Africa brand colors
 const eduaidColors = {
@@ -216,12 +217,6 @@ const successStories = [
 export default function EduAid() {
   const [selectedAmount, setSelectedAmount] = useState("50");
   const [customAmount, setCustomAmount] = useState("");
-
-  const handleDonate = () => {
-    const amount = customAmount || selectedAmount;
-    // TODO: Integrate with payment provider
-    console.log(`Donating $${amount} to EduAid-Africa`);
-  };
 
   return (
     <>
@@ -760,46 +755,9 @@ export default function EduAid() {
                         ${customAmount || selectedAmount}
                       </span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-white/50 mb-4">
-                      <Shield className="h-4 w-4" />
-                      100% goes to education programs • Secure payment via Paystack / Flutterwave
-                    </div>
-                    <Button 
-                      onClick={handleDonate}
-                      size="lg"
-                      className="w-full text-white text-lg h-14"
-                      style={{ backgroundColor: eduaidColors.green }}
-                    >
-                      <CreditCard className="mr-2 h-5 w-5" />
-                      Donate ${customAmount || selectedAmount} to EduAid-Africa
-                    </Button>
+                    <ScefFormRequired kind="donation" />
                   </div>
                   
-                  {/* GFAwzip Wallet */}
-                  <div 
-                    className="flex items-center gap-4 p-4 rounded-xl"
-                    style={{ backgroundColor: `${eduaidColors.brown}15` }}
-                  >
-                    <Sparkles className="h-8 w-8" style={{ color: eduaidColors.brown }} />
-                    <div className="flex-1">
-                      <p className="text-white font-medium">Pay with the GFAwzip Wallet</p>
-                      <p className="text-white/60 text-sm">
-                        Get recognition points with every donation — unlock benefits and voting power.
-                      </p>
-                    </div>
-                    <Button 
-                      asChild 
-                      variant="outline" 
-                      size="sm"
-                      style={{ borderColor: `${eduaidColors.brown}50` }}
-                      className="text-white hover:bg-white/10"
-                    >
-                      <Link to="/wallet">
-                        <Wallet className="mr-2 h-4 w-4" />
-                        Learn More
-                      </Link>
-                    </Button>
-                  </div>
                 </CardContent>
               </Card>
             </div>
