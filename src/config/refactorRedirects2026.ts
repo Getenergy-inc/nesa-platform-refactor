@@ -91,14 +91,14 @@ export const REFACTOR_REDIRECTS_2026: RefactorRedirect[] = [
   { from: "/media/gallery", to: "/gallery", reason: "Media Centre consolidation" },
   { from: "/media/press", to: "/press-room", reason: "Media Centre consolidation" },
 
-  // Events & Gala consolidation
-  { from: "/gala", to: "/events", reason: "Events & Gala consolidation" },
-  { from: "/events/gala-2026", to: "/events#gala-2026", reason: "Events & Gala consolidation" },
-  { from: "/events/tickets", to: "/events#tickets", reason: "Events & Gala consolidation" },
-  { from: "/events/media-accreditation", to: "/events#accreditation", reason: "Events & Gala consolidation" },
-  { from: "/events/attendance-request", to: "/events#attendance", reason: "Events & Gala consolidation" },
-  { from: "/events/calendar", to: "/events", reason: "Events & Gala consolidation" },
-  { from: "/webinars", to: "/events", reason: "Events & Gala consolidation" },
+  // Online Awards Gala — no physical attendance or ticket sales in 2026.
+  { from: "/gala", to: "/programme-2026", reason: "Canonical Online Awards Gala" },
+  { from: "/events/gala-2026", to: "/programme-2026", reason: "Canonical Online Awards Gala" },
+  { from: "/events/tickets", to: "/programme-2026", reason: "No ticket sales" },
+  { from: "/events/media-accreditation", to: "/programme-2026", reason: "Online programme" },
+  { from: "/events/attendance-request", to: "/programme-2026", reason: "No physical attendance" },
+  { from: "/events/calendar", to: "/media#events", reason: "Media events calendar" },
+  { from: "/webinars", to: "/media/webinars", reason: "Canonical webinar page" },
 
   // Policies hub
   { from: "/privacy", to: "/policies#privacy", reason: "Policies hub" },
