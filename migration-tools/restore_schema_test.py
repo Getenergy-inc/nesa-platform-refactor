@@ -379,7 +379,8 @@ def main() -> int:
     started = datetime.now(timezone.utc)
     report = {
         "status": "failed", "started_at": started.isoformat(), "migration_count": 0,
-        "applied_count": 0, "applied_migrations": [], "failed_migration": None,
+        "applied_count": 0, "applied_migrations": [], "failed_migrations": [],
+        "continue_on_error": args.continue_on_error,
         "comparison_status": "not run", "comparison": {}, "production_modified": False,
         "bootstrap_note": "Minimal auth/storage compatibility only; not a managed-service implementation.",
     }
