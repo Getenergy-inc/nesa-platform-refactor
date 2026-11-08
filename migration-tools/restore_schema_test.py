@@ -323,7 +323,7 @@ class TemporaryPostgres:
 
     def create_database(self, admin_url: str) -> str:
         require_success(psql(admin_url, sql="CREATE DATABASE nesa_restore"), "could not create isolated test database")
-        return f"postgresql://postgres@127.0.0.1:{self.port}/nesa_restore"
+        return f"postgresql://postgres@127.0.0.1:{self.port}/nesa_restore?sslmode=disable"
 
     def stop(self) -> None:
         if self.started:
