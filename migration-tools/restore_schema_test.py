@@ -358,9 +358,9 @@ def write_reports(report_dir: Path, report: dict) -> None:
         lines.extend(["| Object | Live rows | Restored rows | Missing | Unexpected | Changed | Unverified | Result |", "|---|---:|---:|---:|---:|---:|---:|---|"])
         for kind, diff in report["comparison"].items():
             if "error" in diff:
-                lines.append(f"| {kind} | — | — | — | — | — | ERROR: {diff['error']} |")
+                lines.append(f"| {kind} | — | — | — | — | — | — | ERROR: {diff['error']} |")
             else:
-                lines.append(f"| {kind} | {diff['expected']} | {diff['actual']} | {len(diff['missing'])} | {len(diff['unexpected'])} | {len(diff['changed'])} | {'PASS' if diff['passed'] else 'FAIL'} |")
+                lines.append(f"| {kind} | {diff['expected']} | {diff['actual']} | {len(diff['missing'])} | {len(diff['unexpected'])} | {len(diff['changed'])} | {len(diff['unverified'])} | {'PASS' if diff['passed'] and not diff['unverified'] else 'FAIL'} |")
         lines.append("")
     lines.append("Full expected/actual differences are in `restore-schema-report.json`; restored metadata is in `actual-metadata/`.")
     (report_dir / "RESTORE_SCHEMA_REPORT.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
