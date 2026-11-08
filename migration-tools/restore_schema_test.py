@@ -46,6 +46,7 @@ ORDER BY table_name,ordinal_position
     },
     "views": {
         "key": ("table_schema", "table_name"),
+        "optional_when_empty": ("view_definition",),
         "query": """
 SELECT table_schema,table_name,view_definition FROM information_schema.views
 WHERE table_schema='public' ORDER BY 1,2
@@ -53,6 +54,7 @@ WHERE table_schema='public' ORDER BY 1,2
     },
     "matviews": {
         "key": ("schemaname", "matviewname"),
+        "optional_when_empty": ("definition",),
         "query": """
 SELECT schemaname,matviewname,matviewowner,definition FROM pg_matviews
 WHERE schemaname='public' ORDER BY 1,2
