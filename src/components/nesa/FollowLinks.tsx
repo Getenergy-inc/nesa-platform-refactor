@@ -1,5 +1,6 @@
 import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 import { SOCIAL_LINKS, type SocialPlatform } from "@/config/socialLinks";
+import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const ICONS = { Facebook, Instagram, Linkedin, Twitter, Youtube };
