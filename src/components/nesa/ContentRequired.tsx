@@ -18,3 +18,12 @@ export function ContentRequired({ title, children, className }: ContentRequiredP
     </div>
   );
 }
+
+export function ScefFormRequired({ kind, className }: { kind: "contact" | "donation" | "sponsorship"; className?: string }) {
+  const { t } = useTranslation("pages");
+  return (
+    <ContentRequired title={t(`contentRequired.${kind}.title`)} className={className}>
+      {t(`contentRequired.${kind}.description`)}
+    </ContentRequired>
+  );
+}
