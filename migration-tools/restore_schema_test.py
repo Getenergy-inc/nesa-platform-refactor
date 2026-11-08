@@ -373,6 +373,7 @@ def main() -> int:
     parser.add_argument("--metadata", type=Path, default=ROOT / "database/metadata")
     parser.add_argument("--report-dir", type=Path, default=ROOT / "migration-results/restore-schema")
     parser.add_argument("--expected-count", type=int, default=169)
+    parser.add_argument("--continue-on-error", action="store_true", help="audit all migrations atomically; any failure still fails the test")
     parser.add_argument("--keep-database", action="store_true", help="keep the temporary cluster running for debugging (prints its URL)")
     args = parser.parse_args()
     started = datetime.now(timezone.utc)
