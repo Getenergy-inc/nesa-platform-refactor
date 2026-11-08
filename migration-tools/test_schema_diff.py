@@ -31,6 +31,13 @@ class SchemaDiffTests(unittest.TestCase):
             "expected": "SELECT 1", "actual": "SELECT 9"
         })
 
+    def test_blank_exported_view_definition_is_unverified_not_changed(self):
+        expected = [{"schema": "public", "name": "profiles", "view_definition": ""}]
+        actual = [{"schema": "public", "name": "profiles", "view_definition": "SELECT 1"}]
+        result = compare_rows("views", expected, actual, ("schema", "name"), optional_when_empty=("view_definition",))
+        self.assertEqual(result["changed"], [])
+        self.assertEqual(result["unverified"], [{"key": ["public", "profiles"], "fields": ["view_definition"]}])
+
     def test_acl_order_does_not_create_false_drift(self):
         expected = [{"schema": "public", "name": "profiles", "raw_acl": "{b=r/postgres,a=r/postgres}"}]
         actual = [{"schema": "public", "name": "profiles", "raw_acl": "{a=r/postgres,b=r/postgres}"}]

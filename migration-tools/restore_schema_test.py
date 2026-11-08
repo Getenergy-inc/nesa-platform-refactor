@@ -278,7 +278,7 @@ def capture_metadata(database_url: str, metadata_dir: Path, output_dir: Path) ->
         target_path = output_dir / f"{kind}.csv"
         target_path.write_text(result.stdout, encoding="utf-8")
         expected, actual = read_csv(source_path), read_csv(target_path)
-        comparison[kind] = compare_rows(kind, expected, actual, config["key"], config.get("ignore", ()))
+        comparison[kind] = compare_rows(kind, expected, actual, config["key"], config.get("ignore", ()), config.get("optional_when_empty", ()))
     return comparison
 
 
