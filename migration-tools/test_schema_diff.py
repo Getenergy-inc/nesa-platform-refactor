@@ -37,8 +37,17 @@ class SchemaDiffTests(unittest.TestCase):
         result = compare_rows("grants", expected, actual, ("schema", "name"))
         self.assertEqual(result["changed"], [])
 
-    def test_migration_names_are_sorted_and_unique(self):
-        self.assertEqual(discover_migrations, discover_migrations)
+    def test_migration_discovery_sorts_and_enforces_count(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "20260202_second.sql").write_text("SELECT 2;")
+            (root / "20260101_first.sql").write_text("SELECT 1;")
+            migrations = discover_migrations(root, expected_count=2)
+            self.assertEqual([path.name for path in migrations], [
+                "20260101_first.sql", "20260202_second.sql"
+            ])
+            with self.assertRaisesRegex(ValueError, "expected 3 migrations, found 2"):
+                discover_migrations(root, expected_count=3)
 
 
 if __name__ == "__main__":
