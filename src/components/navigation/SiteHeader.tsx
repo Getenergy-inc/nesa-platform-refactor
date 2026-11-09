@@ -34,6 +34,7 @@ import { AccountMenu } from "@/components/navigation/AccountMenu";
 import { WorkspaceSwitcher } from "@/components/navigation/WorkspaceSwitcher";
 import { MOBILE_MENU_OPEN_EVENT } from "@/components/navigation/MobileBottomActions";
 import { NESALogo } from "@/components/nesa/NESALogo";
+import { SchoolSupportChoice } from "@/components/impact/SchoolSupportActions";
 
 function SkipLink() {
   return (
@@ -528,6 +529,7 @@ function MobileMenu() {
             </Button>
           </div>
 
+          <div className="mb-3"><SchoolSupportChoice /></div>
           <nav aria-label="Mobile primary">
             <Accordion type="single" collapsible className="w-full">
               {SITE_NAV.map((item) => {
