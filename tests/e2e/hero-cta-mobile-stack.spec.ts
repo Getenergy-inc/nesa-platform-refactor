@@ -16,13 +16,10 @@ const MOBILE_WIDTHS = [320, 360, 375, 390, 414] as const;
 // Stable selector: every CTA in HeroCTAStack has aria-label and lives in
 // the first <section> of the landing page. We scope to anchors that point
 // to the known CTA routes to avoid pulling in nav/footer links.
-const CTA_HREFS = [
-  "/nominate",
-  "/nominees",
-  "/vote",
-  "/earn-agc",
-  "/volunteer",
-];
+const CTA_SELECTOR = [
+  'a[aria-label="Nominate an Education Enabler for NESA-Africa 2026"]',
+  'a[aria-label="Explore the Awards"]',
+].join(", ");
 
 for (const width of MOBILE_WIDTHS) {
   test.describe(`hero CTA stack @ ${width}px`, () => {
@@ -33,14 +30,13 @@ for (const width of MOBILE_WIDTHS) {
       await page.waitForLoadState("domcontentloaded");
       await page.evaluate(() => (document as any).fonts?.ready);
 
-      // Grab CTAs by href within the hero section.
+      // Grab the two approved 2026 CTAs within the hero section.
       const hero = page.locator("section").first();
       await hero.waitFor({ state: "visible" });
 
-      const ctaSelector = CTA_HREFS.map((h) => `a[href="${h}"]`).join(", ");
-      const ctas = hero.locator(ctaSelector);
+      const ctas = hero.locator(CTA_SELECTOR);
       const count = await ctas.count();
-      expect(count, "expected hero CTAs to render").toBeGreaterThanOrEqual(5);
+      expect(count, "expected both approved hero CTAs to render").toBe(2);
 
       type Box = { href: string; x: number; y: number; w: number; h: number; sw: number; cw: number };
       const boxes: Box[] = [];

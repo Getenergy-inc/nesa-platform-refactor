@@ -41,3 +41,16 @@ masked so diffs only fire on real UI regressions.
 
 Baselines live under `tests/e2e/nominee-visuals.spec.ts-snapshots/` and
 should be committed. Regenerate intentionally with `--update-snapshots`.
+
+## Public 2026 cleanup regression
+
+`public-cleanup-regression.spec.ts` checks 14 public routes for retired Gala
+ticket sales, “Vote Before Gala”, outdated category totals and the archived
+Gala video. It also checks legacy ticket redirects, the two mobile actions,
+and all five canonical Follow destinations.
+
+Run it against the development server without a production build:
+
+```bash
+PLAYWRIGHT_BASE_URL=http://localhost:8080 bunx playwright test tests/e2e/public-cleanup-regression.spec.ts --project=chromium-desktop
+```
