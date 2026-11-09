@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import { ArrowRight, CalendarDays, Crown, Radio, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ContentRequired } from "@/components/nesa/ContentRequired";
+import { IconSelectionCriteria } from "@/components/awards/IconSelectionCriteria";
 import { ONLINE_GALA, PROGRAMME_END_LABEL } from "@/config/programme";
 import { useTranslation } from "react-i18next";
 
 const SECTIONS = [
   { id: "overview", label: "overview" },
   { id: "icons", label: "icons" },
+  { id: "selection-criteria", label: "criteriaNav" },
   { id: "broadcast", label: "broadcastNav" },
   { id: "faq", label: "faqsNav" },
 ];
@@ -76,6 +78,8 @@ export default function GalaConsolidated() {
           </article>
         </div>
       </section>
+
+      <IconSelectionCriteria />
 
       <section className="bg-charcoal py-16 text-white">
         <div className="container mx-auto max-w-4xl space-y-8 px-4">
