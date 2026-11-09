@@ -1,11 +1,24 @@
 /**
  * Global programme configuration — SINGLE SOURCE OF TRUTH.
  *
- * The NESA-Africa 2026 programme end date (Gold-Blue Garnet Awards Gala)
+ * The NESA-Africa 2026 Online Awards Gala date
  * must never be hard-coded in components. Import from here instead.
  */
 
-/** ISO date (no time) of the programme end / Gala day. */
+import commonEnglish from "@/locales/en/common.json";
+
+/** Presentation-only gala scope; never changes legacy award eligibility. */
+export const ONLINE_GALA = {
+  maximumIcons: 9,
+  productionParticipants: { approximateMinimum: 20, approximateMaximum: 30 },
+  onlineOnly: true,
+  publicVoting: false,
+  ticketSales: false,
+  continuingRecognitionEndsOn: "2027-03-31",
+  copy: commonEnglish.onlineGala,
+} as const;
+
+/** ISO date (no time) of the Online Awards Gala day. */
 export const PROGRAMME_END_DATE = "2026-12-28";
 
 /** Full ISO timestamp of the Gala start (West Africa Time). */
