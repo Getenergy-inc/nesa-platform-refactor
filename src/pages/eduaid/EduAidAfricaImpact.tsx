@@ -8,6 +8,7 @@ import EduAid from "@/pages/EduAid";
 import Rebuild from "@/pages/Rebuild";
 import AfriEduTourismPage from "@/pages/AfriEduTourismPage";
 import NominateSchool from "@/pages/impact/NominateSchool";
+import { SchoolSupportFundSection } from "@/components/impact/SchoolSupportFundSection";
 
 const SECTIONS = [
   { id: "overview", label: "Overview" },
@@ -47,6 +48,7 @@ export default function EduAidAfricaImpact() {
       </nav>
 
       <section id="overview"><EduAid /></section>
+      <SchoolSupportFundSection />
       <section id="webinars" className="py-16 px-4 max-w-4xl mx-auto text-center">
         <h2 className="text-3xl font-bold text-gold mb-4">Pre-Award Webinars, FGDs & Podcasts</h2>
         <p className="text-white/80 mb-2">

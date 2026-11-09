@@ -17,6 +17,7 @@ import {
 } from "@/data/iconAward";
 import { getYouTubeEmbedUrl } from "@/lib/youtube";
 import { NesaTvLink } from "@/components/common/NesaTvLink";
+import { SchoolSupportFundSection } from "@/components/impact/SchoolSupportFundSection";
 import { ExternalLink, MapPin, ShieldCheck, Trophy } from "lucide-react";
 
 const SITE = "https://nesaafrica.lovable.app";
@@ -261,6 +262,7 @@ export default function NomineeCanonicalProfile() {
           )}
         </div>
       </div>
+      <SchoolSupportFundSection />
     </>
   );
 }

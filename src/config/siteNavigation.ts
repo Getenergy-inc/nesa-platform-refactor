@@ -3,6 +3,7 @@
 // 2026 Awards Gala · Media · Impact · Partners · Get Involved · Resources · Contact.
 import { AWARD_CATEGORY_PAGES_2026 } from "./awards/subpages2026";
 import { IMPACT_BRAND, IMPACT_NAV_ITEMS, IMPACT_NAV_FOOTER } from "./educationSocialImpact";
+import { SCHOOL_SUPPORT_ACTIONS } from "./schoolSupport";
 
 export interface NavChild { label: string; href: string; description?: string }
 export interface NavSection { title: string; items: NavChild[] }
@@ -113,6 +114,16 @@ export const SITE_NAV: NavItem[] = [
     panelFooter: { note: IMPACT_NAV_FOOTER.note, ctaLabel: IMPACT_NAV_FOOTER.ctaLabel, ctaHref: IMPACT_NAV_FOOTER.ctaHref },
   },
   { label: "Partners", href: "/partners", analyticsId: "nav_partners" },
+  {
+    label: "Support Special Needs Education",
+    href: SCHOOL_SUPPORT_ACTIONS.support.href,
+    analyticsId: "nav_school_support",
+    children: [
+      { label: SCHOOL_SUPPORT_ACTIONS.nominate.shortLabel, href: SCHOOL_SUPPORT_ACTIONS.nominate.href },
+      { label: SCHOOL_SUPPORT_ACTIONS.support.shortLabel, href: SCHOOL_SUPPORT_ACTIONS.support.href },
+      { label: "View Impact Reports", href: "/impact/stories" },
+    ],
+  },
   {
     label: "Get Involved",
     href: "/support",

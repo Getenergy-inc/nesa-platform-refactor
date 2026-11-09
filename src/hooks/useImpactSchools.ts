@@ -12,6 +12,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { getRegionByCountry, type AfricaRegionDefinition } from "@/config/regions/africaRegions";
 
 export interface ImpactSchool {
+  verificationStatus?: string | null;
+  publicationApproved?: boolean | null;
   id: string;
   name: string;
   schoolType: string | null;

@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { BookOpen, Camera, Video, Users } from "lucide-react";
 import { IMPACT_BRAND, IMPACT_CTAS, IMPACT_NAV_FOOTER } from "@/config/educationSocialImpact";
+import { SchoolSupportFundSection } from "@/components/impact/SchoolSupportFundSection";
 
 const STORY_STRANDS = [
   { icon: BookOpen, title: "School stories", body: "How a school changed once its learning environment was rebuilt, restored or made accessible." },
@@ -80,6 +81,7 @@ export default function ImpactStories() {
           </div>
         </div>
       </section>
+      <SchoolSupportFundSection />
     </>
   );
 }
