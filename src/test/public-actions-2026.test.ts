@@ -4,6 +4,8 @@ import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
 import { OFFICIAL_NOMINATION_FORM_URL } from "@/config/nomination/officialGoogleForm";
 import { NOMINATION_WINDOW_LABEL } from "@/config/nominationWindows2026";
 import { REFACTOR_REDIRECTS_2026 } from "@/config/refactorRedirects2026";
+import { AWARD_TIERS_TOTALS } from "@/config/awardTiers2026";
+import { SITE_STATS_FALLBACK } from "@/config/siteStats";
 
 describe("2026 public actions", () => {
   it("uses the official Google Form as the only nomination destination", () => {
@@ -13,6 +15,13 @@ describe("2026 public actions", () => {
 
   it("publishes the approved nomination and certificate window", () => {
     expect(NOMINATION_WINDOW_LABEL).toBe("9 November 2026 – 31 March 2027");
+  });
+
+  it("keeps every public taxonomy source at 4 tiers, 22 categories and 90 subcategories", () => {
+    expect(AWARD_TIERS_TOTALS).toEqual({ tiers: 4, categories: 22, subcategories: 90 });
+    expect(SITE_STATS_FALLBACK.tiers).toBe(4);
+    expect(SITE_STATS_FALLBACK.categories).toBe(22);
+    expect(SITE_STATS_FALLBACK.subcategories).toBe(90);
   });
 
   it("keeps public actions away from tickets, voting, wallet and commerce", () => {

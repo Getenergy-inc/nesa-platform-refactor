@@ -25,7 +25,7 @@ const PILLARS = [
 
 const CANNOT_INFLUENCE = [
   "Nominations",
-  "Voting",
+  "Assessment",
   "Judging",
   "Finalists",
   "Winners",

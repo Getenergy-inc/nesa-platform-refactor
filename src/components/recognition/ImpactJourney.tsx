@@ -22,7 +22,7 @@ export const IMPACT_STAGES: ImpactStage[] = [
   { label: "Recognition", description: "Identify and verify Africa's education changemakers.", Icon: Award },
   { label: "Visibility", description: "Amplify their stories across the continent and diaspora.", Icon: Eye },
   { label: "Partnerships", description: "Connect verified impact with institutions and allies.", Icon: Handshake },
-  { label: "Funding", description: "Unlock sponsorship, grants, and AGC-backed support.", Icon: Coins },
+  { label: "Funding", description: "Connect verified education interventions with approved sponsorship and grants.", Icon: Coins },
   { label: "Educational Intervention", description: "Translate recognition into classrooms, programmes, and outcomes.", Icon: GraduationCap },
   { label: "Legacy", description: "Document a generational record of African education transformation.", Icon: Sparkles },
 ];

@@ -30,11 +30,9 @@ for (const width of MOBILE_WIDTHS) {
       await page.waitForLoadState("domcontentloaded");
       await page.evaluate(() => (document as any).fonts?.ready);
 
-      // Grab the two approved 2026 CTAs within the hero section.
-      const hero = page.locator("section").first();
-      await hero.waitFor({ state: "visible" });
-
-      const ctas = hero.locator(CTA_SELECTOR);
+      // These accessible names are unique to the two hero CTAs.
+      const ctas = page.locator(CTA_SELECTOR);
+      await expect(ctas.first()).toBeVisible();
       const count = await ctas.count();
       expect(count, "expected both approved hero CTAs to render").toBe(2);
 

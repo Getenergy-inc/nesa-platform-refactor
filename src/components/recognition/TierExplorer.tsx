@@ -46,7 +46,7 @@ const TIERS: Tier[] = [
     selectionBadge: "Jury Only",
     winners: "9 Icons",
     purpose:
-      "Highest lifetime honour for transformative education impact. 3 honorees per subcategory (Africa residents · Diaspora · Friends of Africa).",
+      "Highest lifetime honour for transformative education impact. 3 honorees per category across three pathways (Africa residents · Diaspora · Friends of Africa).",
     icon: Crown,
     href: "/awards/africa-education-icon",
     exploreHref: "/awards/explore/africa-education-icon",
@@ -58,12 +58,12 @@ const TIERS: Tier[] = [
   },
   {
     slug: "blue-garnet",
-    tierNumber: 2,
-    name: "Blue Garnet Award",
+    tierNumber: 4,
+    name: "Gold-Blue Garnet Award",
     type: "Competitive Excellence",
-    selection: "60% Jury + 40% Public AGC Vote",
-    selectionBadge: "Hybrid 60/40",
-    winners: "9 Winners",
+    selection: "Independent verification and assessment · No public voting",
+    selectionBadge: "Verified",
+    winners: "Verified honorees",
     purpose: "Premier competitive recognition across 9 main categories and 63 subcategories.",
     icon: Trophy,
     href: "/awards/blue-garnet",
@@ -200,13 +200,13 @@ const TIERS: Tier[] = [
   },
   {
     slug: "influencers-education-impact",
-    tierNumber: 4,
+    tierNumber: 2,
     name: "Influencers Education Impact Award",
-    type: "Public Recognition",
+    type: "Verified Education Impact",
     selection: "Verification-led assessment · No public voting",
-    selectionBadge: "Public Vote",
-    winners: "3 Winners",
-    purpose: "Public-driven recognition for influencers using their platforms to advance education.",
+    selectionBadge: "Verified",
+    winners: "Verified honorees",
+    purpose: "Recognition for influencers using their platforms to advance education.",
     icon: Sparkles,
     href: "/awards/influencers-education-impact-2026-recognition",
     exploreHref: "/awards/explore/influencers-education-impact",
@@ -235,14 +235,14 @@ export function TierExplorer({ className = "" }: Props) {
           Four Recognition Tiers
         </h2>
         <p className="mt-3 text-sm text-white/70 md:text-base">
-          One continental platform · 4 tiers · 18 main categories · ~100 recognition
-          subcategories. Lifetime honours, competitive excellence, institutional
-          leadership, and public-voted influence.
+          One continental platform · 4 tiers · 22 main categories · 90 recognition
+          subcategories. Lifetime honours, verified influence, institutional
+          leadership, and competitive excellence without public voting.
         </p>
       </header>
 
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
-        {TIERS.map((tier) => {
+        {[...TIERS].sort((a, b) => a.tierNumber - b.tierNumber).map((tier) => {
           const Icon = tier.icon;
           const isOpen = expanded === tier.slug;
           return (

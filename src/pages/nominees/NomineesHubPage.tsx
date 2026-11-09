@@ -17,8 +17,7 @@ import { Search, Sparkles } from "lucide-react";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { UtilityBar } from "@/components/nesa/UtilityBar";
-import { BottomPageNav } from "@/components/navigation/PageNavigation";
-import { MobileBottomNav } from "@/components/navigation/MainNav";
+import { MobileBottomActions } from "@/components/navigation/MobileBottomActions";
 import { BackToTopButton } from "@/components/ui/back-to-top";
 import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicator";
 import { GeographicReachMap } from "@/components/nominees/GeographicReachMap";
@@ -433,11 +432,10 @@ export default function NomineesHubPage() {
         </main>
 
         <NESAFooter />
-        <BottomPageNav />
       </div>
 
       <BackToTopButton />
-      <MobileBottomNav />
+      <MobileBottomActions />
     </>
   );
 }

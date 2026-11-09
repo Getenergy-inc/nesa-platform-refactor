@@ -3,8 +3,8 @@
 - [x] Reconcile all reported schema differences with authoritative live metadata; distinguish real drift from comparator/bootstrap artefacts.
 - [x] Rerun strict mode across all 169 migrations and require zero verified schema differences.
 - [x] Run restore unit tests and rebuild the validated migration package without touching production.
-- [ ] Fix the current homepage preview while completing the shared header, CTA, Follow-link and mobile-bar cleanup.
-- [ ] Refactor CTAs and follow actions across public pages under the approved content brief, with 390px and 1440px review screenshots; do not publish.
+- [x] Fix the current homepage preview while completing the shared header, CTA, Follow-link and mobile-bar cleanup.
+- [x] Complete Phase 1 CTA and Follow-link cleanup across shared public pages, with 390px and 1440px review screenshots and 34 passing checks; do not publish.
 
 ## Automated clean-database restore test — 8 Nov 2026
 - [x] Add an isolated runner for all 169 migrations with a clean-database safety guard.
