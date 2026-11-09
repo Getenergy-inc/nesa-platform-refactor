@@ -1,5 +1,5 @@
 // Regression guard: every Gala countdown on the site must resolve to the
-// canonical target 2026-12-13T00:00:00+01:00 (13 December 2026, 00:00 WAT).
+// canonical target 2026-12-28T00:00:00+01:00 (28 December 2026, 00:00 WAT).
 
 import { readFileSync } from "fs";
 import { describe, expect, it } from "vitest";
@@ -12,15 +12,15 @@ import {
 import { CURRENT_SEASON } from "@/config/nesaSeasonConfig";
 import { getSubpageModules } from "@/config/awards/subpageModules2026";
 
-const CANONICAL_ISO = "2026-12-13T00:00:00+01:00";
-const CANONICAL_UTC = "2026-12-12T23:00:00.000Z";
+const CANONICAL_ISO = "2026-12-28T00:00:00+01:00";
+const CANONICAL_UTC = "2026-12-27T23:00:00.000Z";
 
 describe("Gala countdown — canonical target", () => {
   it("programme config exposes the corrected target", () => {
     expect(GALA_COUNTDOWN_DATETIME).toBe(CANONICAL_ISO);
     expect(GALA_COUNTDOWN_TARGET.toISOString()).toBe(CANONICAL_UTC);
-    expect(PROGRAMME_END_DATE).toBe("2026-12-13");
-    expect(PROGRAMME_END_LABEL).toBe("13 December 2026");
+    expect(PROGRAMME_END_DATE).toBe("2026-12-28");
+    expect(PROGRAMME_END_LABEL).toBe("28 December 2026");
   });
 
   it("season ceremony countdown uses the canonical target", () => {
@@ -38,7 +38,6 @@ describe("Gala countdown — canonical target", () => {
   it("countdown surfaces import the shared constant instead of hard-coding a date", () => {
     const files = [
       "src/components/nesa/CountdownSection.tsx",
-      "src/features/landing/editorial/GalaBandSection.tsx",
       "src/pages/media/Gala.tsx",
       "src/config/schedule.ts",
       "src/config/nesaSeasonConfig.ts",

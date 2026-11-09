@@ -11,7 +11,7 @@
 //   8.  Impact directory + live stats
 //   9.  From recognition to impact
 //   10. Built for trust
-//   11. Gala countdown — 13 December 2026 — with the Icon closing message adjacent
+//   11. Gala countdown — 28 December 2026 — with the Icon closing message adjacent
 //   12. Volunteer band + SCEF's Board of Advisors
 //   13. Join the movement · final CTA · governance firewall
 //
@@ -155,7 +155,7 @@ export function NESALandingPage() {
 
 
 
-        {/* 10. GALA COUNTDOWN — 13 December 2026 */}
+        {/* 10. GALA COUNTDOWN — 28 December 2026 */}
         <GalaBandSection />
 
         {/* SUPPORTING BANDS — people and moments */}

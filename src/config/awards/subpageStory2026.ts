@@ -48,7 +48,7 @@ const TIER_FRAME: Record<
     standard:
       "Icon recognition is not awarded for a good year. It is awarded for twenty years of documented, independently verifiable contribution that changed institutions, curricula or the life-chances of learners at continental scale.",
     route:
-      "Nomination → NRC verification → Icon Jury assessment → Governance Board ratification → Hall of Fame induction at the 13 December 2026 Gala.",
+      "Nomination → NRC verification → Icon Jury assessment → Governance Board ratification → Hall of Fame induction at the 28 December 2026 Gala.",
   },
   "influencer-education-impact": {
     label: "Influencer Education Impact",

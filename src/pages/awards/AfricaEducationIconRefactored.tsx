@@ -81,7 +81,7 @@ const TIMELINE = [
   { date: "14–30 Sept 2026", label: "Judges Arena — Panel Screening" },
   { date: "1–7 Oct 2026", label: "Grand Jury Ranked-Choice Voting" },
   { date: "8–15 Oct 2026", label: "Governance Ratification" },
-  { date: "13 Dec 2026", label: "Recognition Gala · Lagos, Nigeria" },
+  { date: "28 Dec 2026", label: "Recognition Gala · Lagos, Nigeria" },
 ];
 
 const FAQ = [

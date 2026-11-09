@@ -7,7 +7,7 @@ import { GALA_COUNTDOWN_TARGET } from "@/config/programme";
 /**
  * MAIN LANDING-PAGE COUNTDOWN
  *
- * Hard-locked to the canonical target: 13 December 2026, 00:00 WAT (UTC+1).
+ * Hard-locked to the canonical target: 28 December 2026, 00:00 WAT (UTC+1).
  * Do NOT reintroduce "first future event" auto-selection here.
  * Other intermediate milestones (TV shows, voting windows) live in
  * <UpcomingEventsSection /> and have their own countdowns.
@@ -59,7 +59,7 @@ export function CountdownSection() {
           {GALA_LABEL}
         </h2>
         <p className="text-xs sm:text-sm text-white/60 mb-2">
-          13 December 2026 · Lagos, Nigeria
+          28 December 2026 · Lagos, Nigeria
         </p>
         <p className="text-xs sm:text-sm text-white/55 mb-6 max-w-xl mx-auto">
           A continental gathering celebrating verified Education Enablers from across Africa, the African Diaspora and Friends of Africa — bringing together recognised individuals, organisations, institutions, partners, media, development leaders and education advocates committed to advancing Education for All.

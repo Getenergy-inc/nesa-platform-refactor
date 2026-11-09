@@ -125,7 +125,7 @@ export interface ScheduleTemplate {
 // Pre-nomination activation 1–31 Jul · Jury onboarding 29 Jun – 10 Sep
 // PUBLIC NOMINATIONS OPEN FOR ALL 4 TIERS: 6 September 2026
 // Icon nominations 1 Aug – 12 Sep · Platinum show 7 Aug · Icon show 21 Aug
-// Gold voting 15 Aug – 15 Sep · Gold winners 16 Sep · Blue Garnet voting 16 Sep – 22 Oct · Gala 13 Dec 2026
+// Gold voting 15 Aug – 15 Sep · Gold winners 16 Sep · Blue Garnet voting 16 Sep – 22 Oct · Gala 28 Dec 2026
 export const DEFAULT_SCHEDULE_TEMPLATE: ScheduleTemplate = {
   nominationReview: {
     nrcReviewStart: { monthDay: "05-01", yearOffset: 0 },
@@ -146,7 +146,7 @@ export const DEFAULT_SCHEDULE_TEMPLATE: ScheduleTemplate = {
     blueGarnetVotingCloses: { monthDay: "10-22", yearOffset: 0 },
   },
   galas: {
-    blueGarnetGala: { monthDay: "12-13", yearOffset: 0 },
+    blueGarnetGala: { monthDay: "12-28", yearOffset: 0 },
   },
   legacy: {
     rebuildMySchoolLaunch: { monthDay: "10-23", yearOffset: 0 },
@@ -217,7 +217,7 @@ export function buildScheduledEvents(
         id: "blue-garnet-gala",
         name: "Blue Garnet Awards Gala",
         type: "gala",
-        // Canonical Gala countdown target: 13 Dec 2026, 00:00 WAT (see config/programme.ts)
+        // Canonical Gala countdown target: 28 Dec 2026, 00:00 WAT (see config/programme.ts)
         date: awardYear === 2026 ? GALA_COUNTDOWN_TARGET : createSeasonDate(awardYear, template.galas.blueGarnetGala.monthDay, template.galas.blueGarnetGala.yearOffset),
         description: "Grand ceremony — 9 Blue Garnet winners",
         venue: "Lagos, Nigeria",
@@ -401,9 +401,9 @@ export function buildTimeline(
     {
       id: "phase-7-gala",
       phase: "Phase 7 · Gold–Blue Garnet Awards Gala",
-      dateRange: `13 December ${ceremonyYear}`,
+      dateRange: `28 December ${ceremonyYear}`,
       description:
-        "Africa's flagship education recognition ceremony on 13 December 2026 celebrating the continent's leading Education Enablers across 15 regions (8 Africa + 7 Global).",
+        "Africa's flagship education recognition ceremony on 28 December 2026 celebrating the continent's leading Education Enablers across 15 regions (8 Africa + 7 Global).",
       type: "gala",
     },
     {
@@ -476,7 +476,7 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
       title: "Blue Garnet Award",
       subtitle: "Highest Competitive Honour",
       period: `16 September – 13 December ${ceremonyYear}`,
-      showDate: `13 December ${ceremonyYear} (Gala)`,
+      showDate: `28 December ${ceremonyYear} (Gala)`,
       iconName: "Gem",
       features: [
         "From 135 Gold Certificate winners",

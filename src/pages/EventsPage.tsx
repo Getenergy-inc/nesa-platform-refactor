@@ -7,7 +7,7 @@ const QUICK_LINKS = [
   {
     label: "Explore the Online Awards Gala",
     href: "/programme-2026",
-    description: "13 December 2026 · Online only · No ticket sales.",
+    description: "28 December 2026 · Online only · No ticket sales.",
     icon: Trophy,
   },
   {
@@ -31,7 +31,7 @@ export default function EventsPage() {
         <title>Events & Online Awards Gala | NESA-Africa 2026</title>
         <meta
           name="description"
-          content="NESA-Africa 2026 programme dates, media events and the Online Awards Gala on 13 December 2026."
+          content="NESA-Africa 2026 programme dates, media events and the Online Awards Gala on 28 December 2026."
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/events" />
       </Helmet>
@@ -47,7 +47,7 @@ export default function EventsPage() {
             </h1>
             <p className="mt-4 max-w-2xl text-white/70">
               Programme dates for nominations, verified recognition and media,
-              plus the Online Awards Gala on 13 December 2026. Online only; no ticket sales.
+              plus the Online Awards Gala on 28 December 2026. Online only; no ticket sales.
             </p>
           </div>
         </header>
