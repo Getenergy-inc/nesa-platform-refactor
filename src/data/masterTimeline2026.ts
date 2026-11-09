@@ -116,7 +116,7 @@ export const MASTER_TIMELINE_OPEN_ITEMS: { id: string; item: string; detail: str
     item:
       "Gold-Blue Garnet verification (closes 13 December) extends 5 days past TV Showcase 2 (8 December)",
     detail:
-      "TV Showcase 2 on 8 December 2026 presents Gold-Blue Garnet recipients, but rolling NRC verification for that family runs to Gala day, 13 December 2026. Recipients verified between 9 and 13 December cannot appear in the broadcast. Flagged for the team — not silently resolved.",
+      "TV Showcase 2 on 8 December 2026 presents Gold-Blue Garnet recipients, but the independent rolling NRC verification deadline for that family remains 13 December 2026. Recipients verified between 9 and 13 December cannot appear in the broadcast. Flagged for the team — not silently resolved.",
   },
 ];
 

@@ -146,7 +146,7 @@ export const DEFAULT_SCHEDULE_TEMPLATE: ScheduleTemplate = {
     blueGarnetVotingCloses: { monthDay: "10-22", yearOffset: 0 },
   },
   galas: {
-    blueGarnetGala: { monthDay: "12-13", yearOffset: 0 },
+    blueGarnetGala: { monthDay: "12-28", yearOffset: 0 },
   },
   legacy: {
     rebuildMySchoolLaunch: { monthDay: "10-23", yearOffset: 0 },
