@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect } from "react";
 import { OfficialNominationForm } from "@/components/nominate/OfficialNominationForm";
+import { IconSelectionCriteria } from "@/components/awards/IconSelectionCriteria";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -61,17 +62,6 @@ const CLASSIFICATION_CARDS = [
   { title: "African in Africa", body: "Africans resident on the continent whose work has advanced Education for All." },
   { title: "Diaspora African", body: "Africans in the diaspora sustaining education impact back on the continent." },
   { title: "Friend of Africa", body: "Non-Africans whose lifetime contribution has advanced African education." },
-];
-
-const EDI_DIMENSIONS = [
-  "Lifetime education impact",
-  "Scale and reach",
-  "Inclusion and equity",
-  "Innovation and knowledge contribution",
-  "Sustainability and legacy",
-  "Leadership and integrity",
-  "Evidence quality",
-  "Continental relevance",
 ];
 
 const TIMELINE = [
@@ -385,34 +375,13 @@ export default function AfricaEducationIcon() {
         </div>
       </section>
 
-      {/* 8. EDI Matrix */}
-      <section id="edi-matrix" className="py-12 md:py-16 border-t border-gold/10 bg-black/30">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <div className="flex flex-wrap items-end justify-between gap-3 mb-6">
-            <div>
-              <h2 className="font-display text-2xl md:text-3xl font-bold text-white">
-                Education Development Index (EDI) Matrix
-              </h2>
-              <p className="text-white/65 mt-1 text-sm">
-                The eight dimensions used to assess every Icon nominee.
-              </p>
-            </div>
-            <Button asChild className="bg-gold text-charcoal hover:bg-gold/90">
-              <a href={EDI_PDF} target="_blank" rel="noreferrer">
-                <Download className="mr-2 h-4 w-4" /> Download EDI Matrix PDF
-              </a>
-            </Button>
-          </div>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {EDI_DIMENSIONS.map((d, i) => (
-              <div key={d} className="rounded-xl border border-gold/20 bg-charcoal-light/50 p-4">
-                <div className="text-gold text-xs font-bold">EDI · {String(i + 1).padStart(2, "0")}</div>
-                <div className="text-white font-semibold mt-1 text-sm">{d}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* 8. Selection criteria — EDI Matrix */}
+      <IconSelectionCriteria
+        id="edi-matrix"
+        className="py-12 md:py-16"
+        showDownload
+        downloadHref={EDI_PDF}
+      />
 
       {/* 9. NRC verification */}
       <section className="py-12 md:py-16">

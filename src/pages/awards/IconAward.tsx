@@ -9,6 +9,7 @@ import { BrandedCategoryHero } from "@/components/awards/BrandedCategoryHero";
 import { BrandedDocumentaryPreview } from "@/components/awards/BrandedDocumentaryPreview";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { AwardStandardStack } from "@/components/awards/AwardStandardSections";
+import { IconSelectionCriteria } from "@/components/awards/IconSelectionCriteria";
 import { SubcategoryPathways } from "@/components/awards/standard/sections";
 import { TierCategoryCards } from "@/components/awards/TierCategoryCards";
 import TierCategoriesGrid from "@/components/recognition2026/TierCategoriesGrid";
@@ -18,7 +19,7 @@ import { getCategoriesGrouped } from "@/config/nesaCategories";
 import { Button } from "@/components/ui/button";
 
 import { Badge } from "@/components/ui/badge";
-import { Award, Globe, Heart, Star, Trophy, Users, Shield, Clock, BookOpen } from "lucide-react";
+import { Award, Globe, Heart, Star, Users, Shield, Clock, BookOpen } from "lucide-react";
 
 const iconTVShow = getTVShowByAward("icon");
 
@@ -160,32 +161,8 @@ export default function IconAward() {
 
 
 
-        {/* Criteria */}
-        <section className="bg-charcoal/95 py-16 lg:py-24">
-          <div className="container mx-auto px-4">
-            <div className="mx-auto max-w-3xl">
-              <h2 className="mb-8 text-center font-display text-3xl font-bold text-white">
-                Selection Criteria
-              </h2>
-              <div className="space-y-4">
-                {[
-                  "Minimum 20 years of documented contribution to education",
-                  "10-year activity profile evaluated via the EDI Matrix",
-                  "Demonstrated impact at national or continental level",
-                  "Innovation or pioneering work in education sector",
-                  "Mentorship and development of other education leaders",
-                  "Advocacy for Education for All principles",
-                  "Once-in-a-lifetime award — not repeatable for the same individual",
-                ].map((criterion, i) => (
-                  <div key={i} className="flex items-start gap-3 rounded-lg bg-white/5 p-4">
-                    <Trophy className="mt-0.5 h-5 w-5 flex-shrink-0 text-gold" />
-                    <span className="text-white/80">{criterion}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Shared EDI selection criteria */}
+        <IconSelectionCriteria />
 
         {/* TV Show Section */}
         {iconTVShow && <AwardTVShowSection show={iconTVShow} accentColor="gold" />}
