@@ -13,7 +13,6 @@ import {
   CheckCircle,
   ArrowRight,
   Handshake,
-  Calendar,
   FileText,
   Tv,
   Gift,

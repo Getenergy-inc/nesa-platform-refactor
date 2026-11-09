@@ -11,7 +11,6 @@ import {
   BookOpen,
   Building,
   CheckCircle,
-  CreditCard,
   Droplets,
   ExternalLink,
   Film,
@@ -24,14 +23,11 @@ import {
   MapPin,
   Play,
   School,
-  Shield,
-  Sparkles,
   Stethoscope,
   Target,
   Trophy,
   Users,
   Video,
-  Wallet,
 } from "lucide-react";
 import { useState } from "react";
 import eduaidLogo from "@/assets/partners/eduaid-africa-logo.jpeg";

@@ -46,7 +46,7 @@ const TIERS: Tier[] = [
     selectionBadge: "Jury Only",
     winners: "9 Icons",
     purpose:
-      "Highest lifetime honour for transformative education impact. 3 honorees per subcategory (Africa residents · Diaspora · Friends of Africa).",
+      "Highest lifetime honour for transformative education impact. 3 honorees per category across three pathways (Africa residents · Diaspora · Friends of Africa).",
     icon: Crown,
     href: "/awards/africa-education-icon",
     exploreHref: "/awards/explore/africa-education-icon",
