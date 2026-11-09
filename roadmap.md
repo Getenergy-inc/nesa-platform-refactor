@@ -1,3 +1,7 @@
+## Africa Education Icon selection criteria — 9 Nov 2026
+- [ ] Add the shared eight-criterion, 100%-weighted EDI selection section and ten-year evidence notice to the gala and Icon pages.
+- [ ] Verify all four public URLs, focused tests and 390px/1440px layouts; do not publish.
+
 ## Online Awards Gala recognition focus — 9 Nov 2026
 - [x] Approve the focused gala-content plan: up to nine verified Africa Education Icons of the Decade; preserve design and do not publish.
 - [x] Align connected public gala descriptions and metadata; preserve legacy taxonomy, protected records and certificate timing.

@@ -2,6 +2,11 @@
   "onlineGala": {
     "focus": "Africa Education Icons of the Decade",
     "summary": "The 28 December 2026 Online Awards Gala principally recognises up to nine verified Africa Education Icons of the Decade from across Africa.",
+    "selectionEyebrow": "EDI Matrix · 100% weighted assessment",
+    "selectionTitle": "Selection Criteria",
+    "selectionIntro": "Up to nine Africa Education Icons of the Decade may be selected. Every nominee must provide a 10-year documented activity profile for evaluation against these eight weighted criteria.",
+    "selectionNote": "Independent verification, jury review and authorised governance confirmation are required. A nomination or score does not guarantee selection. Public voting, sponsorship and donations do not influence selection.",
+    "downloadEdi": "Download EDI Matrix PDF",
     "categories": ["Education Philanthropy Icon", "Literary and New Curriculum Advocate Icon", "Technical Educator Icon"],
     "production": "The programme is online and focused. Approximately 20–30 approved participants may join the live production; there is no public physical attendance or ticket sales.",
     "presentation": "Recipients may be presented through approved documentary profiles, short interviews, verified education-impact stories, digital presentations, Certificates of Recognition and authorised NESA-Africa media.",
@@ -27,6 +32,7 @@
     "restrictions": "No physical attendance · No ticket sales · No public voting",
     "overview": "Overview",
     "icons": "Africa Education Icons",
+    "criteriaNav": "Selection Criteria",
     "broadcastNav": "Broadcast",
     "faqsNav": "FAQs"
   },
