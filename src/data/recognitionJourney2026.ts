@@ -2,6 +2,8 @@
 // continental roadmap. Used by the Timeline page and every "Voting Timeline" /
 // "Recognition Timeline" section site-wide.
 
+import { ONLINE_GALA, PROGRAMME_END_LABEL } from "@/config/programme";
+
 export type JourneyStatus =
   | "completed"
   | "current"
@@ -258,9 +260,9 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     purpose:
       "All 27 judges deliberate, score and lock results across the 9 Africa Education Icon pathways (3 subcategories × 3 origin groups).",
     description:
-      "Deliberation and scoring take place in the Judges Arena under full audit logging. All 9 Icon recipients are confirmed by 24 November 2026.",
+      "Deliberation and scoring take place in the Judges Arena under full audit logging. Up to nine verified Africa Education Icons of the Decade may be confirmed through authorised recognition decisions.",
     selection: "Independent Icon Judges · Locked per pathway",
-    outcomes: ["All 9 Africa Education Icon recipients confirmed"],
+    outcomes: ["Authorised Africa Education Icon recognition decisions"],
     ctas: [{ label: "Judging Governance", to: "/governance" }],
   },
   {
@@ -304,9 +306,9 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
   {
     id: "recognition-gala",
     number: 12,
-    name: "NESA-Africa 2026 Recognition Gala",
-    shortName: "Recognition Gala",
-    dateRange: "28 December 2026 · Lagos",
+    name: "NESA-Africa 2026 Online Awards Gala",
+    shortName: "Online Awards Gala",
+    dateRange: `${PROGRAMME_END_LABEL} · Online only`,
     startsAt: "2026-12-28T00:00:00Z",
     endsAt: "2026-12-28T23:59:59Z",
     status: "upcoming",
@@ -314,18 +316,18 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     iconName: "Trophy",
     accent: "yellow",
     purpose:
-      "Honour the 9 Africa Education Icons and every NRC-verified Education Enabler across the four recognition tiers.",
+      ONLINE_GALA.copy.summary,
     description:
-      "A live continental broadcast bringing together honourees, sponsors, partners, judges, ambassadors and media — with TV Show 3 providing live Gala coverage on the same day.",
+      ONLINE_GALA.copy.production,
     activities: [
-      "Recognition ceremony",
-      "Hall of Fame induction",
-      "Sponsor recognition",
-      "Live media coverage",
-      "Continental networking",
+      "Approved documentary profiles",
+      "Short interviews",
+      "Verified education-impact stories",
+      "Digital presentations",
+      "Authorised NESA-Africa media",
     ],
-    outcomes: ["Recognition stage concluded"],
-    ctas: [{ label: "Attend the Gala", to: "/media/gala" }],
+    outcomes: [ONLINE_GALA.copy.continuation],
+    ctas: [{ label: "Explore the Online Awards Gala", to: "/programme-2026" }],
   },
   {
     id: "impact-legacy",

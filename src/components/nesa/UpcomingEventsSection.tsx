@@ -2,7 +2,7 @@ import { Tv, Trophy, CalendarDays, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { NOMINATION_WINDOW_LABEL } from "@/config/nominationWindows2026";
-import { PROGRAMME_END_LABEL } from "@/config/programme";
+import { ONLINE_GALA, PROGRAMME_END_LABEL } from "@/config/programme";
 import countdownTvImg from "@/assets/cards/countdown-tv-show.jpg";
 import countdownVotingImg from "@/assets/cards/countdown-voting.jpg";
 import countdownGalaImg from "@/assets/cards/countdown-gala.jpg";
@@ -68,6 +68,7 @@ export function UpcomingEventsSection() {
 
           <ProgrammeCard icon={Trophy} title={t("landing.upcomingEvents.galaEvents", { defaultValue: "Online Awards Gala" })} image={countdownGalaImg}>
             <p className="font-semibold text-white">{PROGRAMME_END_LABEL}</p>
+            <p className="mt-2">{ONLINE_GALA.copy.summary}</p>
             <p className="mt-2">{t("landing.upcomingEvents.onlineOnly", { defaultValue: "Online only · No physical attendance · No ticket sales" })}</p>
             <Link to="/programme-2026" className="mt-4 inline-flex items-center gap-1 font-semibold text-gold hover:underline">
               Explore the Online Awards Gala <ArrowRight className="h-4 w-4" aria-hidden />

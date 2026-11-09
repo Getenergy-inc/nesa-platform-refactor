@@ -6,3 +6,4 @@
 - Serve original research PDFs through asset pointers and expose private source claims only in the protected review queue; public pages cite the supplied source documents without publishing staged candidates.
 - Keep clean-database restore tooling in `migration-tools/`; use disposable or explicitly empty isolated databases, atomic migration runs and honest nonzero results for any migration failure or schema drift.
 - Keep school-intervention CTAs separate from award nomination and centralised in the school-support registry; public school support fails closed without explicit verification and publication approval to avoid treating nominations as beneficiaries.
+- Keep public gala scope in the shared programme presentation configuration backed by English translations; never derive legacy eligibility or certificate-release rules from event copy.

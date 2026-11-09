@@ -1,13 +1,14 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { ArrowRight, CalendarDays, Trophy, Radio } from "lucide-react";
+import { ONLINE_GALA } from "@/config/programme";
 import { UpcomingEventsSection } from "@/components/nesa/UpcomingEventsSection";
 
 const QUICK_LINKS = [
   {
     label: "Explore the Online Awards Gala",
     href: "/programme-2026",
-    description: "28 December 2026 · Online only · No ticket sales.",
+    description: ONLINE_GALA.copy.summary,
     icon: Trophy,
   },
   {
@@ -31,7 +32,7 @@ export default function EventsPage() {
         <title>Events & Online Awards Gala | NESA-Africa 2026</title>
         <meta
           name="description"
-          content="NESA-Africa 2026 programme dates, media events and the Online Awards Gala on 28 December 2026."
+          content={ONLINE_GALA.copy.summary}
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/events" />
       </Helmet>
@@ -46,8 +47,7 @@ export default function EventsPage() {
               Events & Online Awards Gala
             </h1>
             <p className="mt-4 max-w-2xl text-white/70">
-              Programme dates for nominations, verified recognition and media,
-              plus the Online Awards Gala on 28 December 2026. Online only; no ticket sales.
+              {ONLINE_GALA.copy.summary} {ONLINE_GALA.copy.continuation}
             </p>
           </div>
         </header>
