@@ -44,7 +44,7 @@ import {
   type MasterTimelineTrack,
 } from "@/data/masterTimeline2026";
 import { EDUAID_WEBINAR_SERIES_2026 } from "@/data/eduaidWebinarSeries2026";
-import { PROGRAMME_END_LABEL, GALA_COUNTDOWN_TARGET } from "@/config/programme";
+import { ONLINE_GALA, PROGRAMME_END_LABEL, GALA_COUNTDOWN_TARGET } from "@/config/programme";
 import {
   NOMINATIONS_OPEN_LABEL,
   NOMINATIONS_OPEN_ISO,
@@ -219,8 +219,8 @@ export default function Timeline() {
     },
     {
       step: "04",
-      title: "The Gala",
-      body: `${PROGRAMME_END_LABEL} · Lagos, Nigeria.`,
+      title: "Online Awards Gala",
+      body: ONLINE_GALA.copy.summary,
       statusLabel: countdown.isExpired ? "Celebrated" : `${countdown.days} days to go`,
       tone: "sapphire",
       metric: countdown.isExpired ? undefined : String(countdown.days),
@@ -251,7 +251,7 @@ export default function Timeline() {
     <div className="nesa-ed min-h-screen">
       <AboutSeo
         title="NESA-Africa 2026 Recognition Journey | Full Timeline"
-        description={`Every dated milestone in the NESA-Africa 2026 cycle — nominations from ${NOMINATIONS_OPEN_LABEL}, NRC verification, Icon judging, the EduAid-Africa webinar weeks, TV showcases and the Recognition Gala in Lagos on ${PROGRAMME_END_LABEL}.`}
+        description={ONLINE_GALA.copy.summary}
         path="/timeline"
         breadcrumbs={[
           { name: "Home", path: "/" },
@@ -267,12 +267,10 @@ export default function Timeline() {
             The NESA-Africa 2026 Recognition Journey
           </h1>
           <p className="mt-4 text-lg text-[#e8c468]">
-            From public activation in July 2026 to the Recognition Gala in Lagos on{" "}
-            {PROGRAMME_END_LABEL}.
+            {ONLINE_GALA.copy.summary}
           </p>
           <p className="mt-4 text-[#b0afa8]">
-            One continuous cycle — nomination, verification, judging, broadcast and the
-            year-long Impact &amp; Legacy phase that follows.
+            {ONLINE_GALA.copy.continuation}
           </p>
         </div>
       </section>

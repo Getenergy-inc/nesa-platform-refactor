@@ -11,6 +11,7 @@
 
 import { CATEGORIES, type CategoryDefinition } from "@/config/recognition2026/categories";
 import {
+  ONLINE_GALA,
   PROGRAMME_END_LABEL,
   PROGRAMME_END_LONG_LABEL,
   GALA_COUNTDOWN_DATETIME,
@@ -114,7 +115,7 @@ export const ICON_AWARD_SECTION = {
     lede:
       "These are the {count} people and institutions already nominated for the 2026 Africa Education Icon Award — Africans living in Africa, Diaspora Africans and Friends of Africa, enabling education for all across Africa.",
     invite:
-      "Join us at the Gala on {date} in Lagos to celebrate the nine eventual Icon laureates drawn from this pool.",
+      ONLINE_GALA.copy.summary,
   },
   awardHref: "/awards/africa-education-icon",
   nominateHref: "/nominate/africa-education-icon",
@@ -209,13 +210,13 @@ export const ICON_NOMINATION_TIMELINE = {
       key: "selection",
       label: "Icon Selection",
       when: ICON_RECIPIENTS_CONFIRMED_LABEL,
-      body: "Judges complete their final review (3 October – 7 November) and all nine Africa Education Icon recipients are confirmed.",
+      body: "Judges complete their final review (3 October – 7 November) and up to nine verified Africa Education Icons of the Decade may be confirmed.",
     },
     {
       key: "gala",
-      label: "Recognition Gala",
-      when: `${PROGRAMME_END_LABEL} · Lagos, Nigeria`,
-      body: "Africa Education Icon laureates are celebrated at the NESA-Africa 2026 Gala.",
+      label: "Online Awards Gala",
+      when: `${PROGRAMME_END_LABEL} · Online only`,
+      body: ONLINE_GALA.copy.summary,
     },
   ],
 } as const;
@@ -223,7 +224,7 @@ export const ICON_NOMINATION_TIMELINE = {
 /** Closing Icon band copy. */
 export const ICON_CLOSING_SECTION = {
   title: "Join Africa in Celebrating Its Education Icons",
-  body: `On ${PROGRAMME_END_LABEL}, Lagos becomes the meeting point for celebrating the people whose lifetime contributions have helped advance education across Africa.`,
+  body: ONLINE_GALA.copy.summary,
   lines: [
     "Africa Education Icon Award",
     "Africa's Flagship Lifetime Education Honour",

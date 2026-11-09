@@ -13,7 +13,7 @@ import type {
   SubpageTimelineEntry,
 } from "@/components/awards/subpage/AwardSubpageTemplate";
 import type { TierSlug } from "@/config/recognition2026/tiers";
-import { GALA_COUNTDOWN_DATETIME, PROGRAMME_END_LABEL } from "@/config/programme";
+import { ONLINE_GALA, GALA_COUNTDOWN_DATETIME, PROGRAMME_END_LABEL } from "@/config/programme";
 
 export interface SubpageModules {
   benefits: { heading?: string; items: SubpageBenefit[] };
@@ -76,7 +76,7 @@ const COMMON_BENEFITS: SubpageBenefit[] = [
   },
   {
     title: "Enabler network access",
-    body: `Introductions to chapters, partners and fellow Enablers across 15 regions, culminating at the Recognition Gala on ${PROGRAMME_END_LABEL}.`,
+    body: ONLINE_GALA.copy.continuation,
   },
 ];
 
@@ -122,8 +122,8 @@ const ICON_TIMELINE: SubpageTimelineEntry[] = [
   { date: "6 September 2026", title: "Nominations open", description: "Public nominations open for the Africa Education Icon tier.", status: "upcoming" },
   { date: "6 October 2026", title: "Nominations close", description: "Icon nominations close at 23:59 WAT.", status: "upcoming" },
   { date: "7 October – 10 November 2026", title: "Verification & Assessment", description: "NRC verification and Icon Jury independent assessment.", status: "upcoming" },
-  { date: "24 November 2026", title: "Icon confirmation", description: "All 9 Africa Education Icon recipients confirmed and locked.", status: "upcoming" },
-  { date: PROGRAMME_END_LABEL, title: "Recognition Gala", description: "Icons honoured at the NESA-Africa 2026 Recognition Gala, Lagos.", status: "upcoming" },
+  { date: "24 November 2026", title: "Icon confirmation", description: "Up to nine verified Africa Education Icons of the Decade may be confirmed following authorised recognition decisions.", status: "upcoming" },
+  { date: PROGRAMME_END_LABEL, title: "Online Awards Gala", description: ONLINE_GALA.copy.summary, status: "upcoming" },
 ];
 
 const STANDARD_TIMELINE: SubpageTimelineEntry[] = [
@@ -131,7 +131,7 @@ const STANDARD_TIMELINE: SubpageTimelineEntry[] = [
   { date: "6 September 2026", title: "Nominations open", description: "Public nominations open across all four recognition tiers.", status: "upcoming" },
   { date: "6 September – 21 November 2026", title: "Rolling NRC verification", description: "Evidence checks begin as soon as a nomination is complete.", status: "upcoming" },
   { date: "22 November – 10 December 2026", title: "Final curation", description: "Final profile verification and certification production.", status: "upcoming" },
-  { date: PROGRAMME_END_LABEL, title: "Recognition Gala", description: "Verified Enablers honoured in Lagos, Nigeria.", status: "upcoming" },
+  { date: PROGRAMME_END_LABEL, title: "Online Awards Gala", description: ONLINE_GALA.copy.continuation, status: "upcoming" },
 ];
 
 // ── Countdowns ───────────────────────────────────────────────────────────────
@@ -146,8 +146,8 @@ const ICON_COUNTDOWN: SubpageCountdown = {
 const STANDARD_COUNTDOWN: SubpageCountdown = {
   heading: "Countdown to the 2026 Recognition Gala",
   targetIso: GALA_COUNTDOWN_DATETIME,
-  label: `NESA-Africa 2026 Recognition Gala · ${PROGRAMME_END_LABEL}, Lagos`,
-  note: "Nominations open 6 September 2026. Verification runs continuously until the Gala.",
+  label: `NESA-Africa 2026 Online Awards Gala · ${PROGRAMME_END_LABEL} · Online only`,
+  note: ONLINE_GALA.copy.continuation,
 };
 
 // ── Public API ───────────────────────────────────────────────────────────────

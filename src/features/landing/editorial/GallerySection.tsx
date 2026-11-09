@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ONLINE_GALA } from "@/config/programme";
 import { getFeaturedImages } from "@/data/gallery";
 
 export function GallerySection() {
@@ -14,8 +15,7 @@ export function GallerySection() {
             A Continent in Recognition
           </h2>
           <p className="ed-section-sub">
-            The stages, stories and standing ovations that set the scene for the Blue-Garnet Awards
-            Gala on 28 December 2026 in Lagos.
+            {ONLINE_GALA.copy.summary}
           </p>
         </div>
 
