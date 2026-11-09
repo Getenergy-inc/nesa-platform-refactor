@@ -1,7 +1,7 @@
 ## Online Awards Gala recognition focus — 9 Nov 2026
-- [ ] Approve the focused gala-content plan: up to nine verified Africa Education Icons of the Decade; preserve design and do not publish.
-- [ ] Align connected public gala descriptions and metadata; preserve legacy taxonomy, protected records and certificate timing.
-- [ ] Verify gala content, links and mobile/desktop screenshots at 390px and 1440px, then stop for review.
+- [x] Approve the focused gala-content plan: up to nine verified Africa Education Icons of the Decade; preserve design and do not publish.
+- [x] Align connected public gala descriptions and metadata; preserve legacy taxonomy, protected records and certificate timing.
+- [x] Verify gala content, award link and 390px/1440px screenshots; 25 unit tests and 21 public cleanup browser checks passed. Stop for review; no publishing.
 
 ## Online Awards Gala reschedule — 9 Nov 2026
 - [x] Update all website gala date references to Monday 28 December 2026; preserve independent nomination, verification and webinar dates.
