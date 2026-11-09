@@ -36,6 +36,10 @@ for (const route of ICON_ROUTES) {
     }
 
     await expect(section.getByText(/does not guarantee selection/i)).toBeVisible();
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
+      `${route} must not overflow horizontally`,
+    ).toBe(true);
     expect(errors, `${route} must render without browser errors`).toEqual([]);
   });
 }

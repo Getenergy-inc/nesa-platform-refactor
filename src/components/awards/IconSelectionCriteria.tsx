@@ -25,7 +25,7 @@ export function IconSelectionCriteria({
     <section
       id={id}
       aria-labelledby={headingId}
-      className={cn("border-t border-gold/15 bg-charcoal-light/20 py-16 text-foreground", className)}
+      className={cn("scroll-mt-32 border-t border-gold/15 bg-charcoal-light/20 py-16 text-foreground", className)}
     >
       <div className="container mx-auto max-w-6xl px-4">
         <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
