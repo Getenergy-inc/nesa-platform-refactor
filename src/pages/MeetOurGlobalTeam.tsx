@@ -114,7 +114,7 @@ export default function MeetOurGlobalTeam() {
           </div>
           <p className="text-center text-white/60 text-sm mt-6 max-w-2xl mx-auto">
             Real people, real hours, real impact — building toward the NESA-Africa 2026
-            Recognition Gala on 13 December in Lagos.
+            Recognition Gala on 28 December in Lagos.
           </p>
         </div>
       </section>

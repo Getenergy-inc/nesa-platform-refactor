@@ -161,7 +161,7 @@ export default function InfluencerImpact2026() {
             <StatCard value="6 Sep 2026" label="Nominations Open" />
             <StatCard value={CERTIFICATE_WINDOW_CLOSE_LABEL} label="Nominations Close" />
             <StatCard value="16 Sep – 13 Dec 2026" label="Rolling NRC Verification" />
-            <StatCard value="13 Dec 2026" label="Gold-Blue Garnet Gala" />
+            <StatCard value="28 Dec 2026" label="Gold-Blue Garnet Gala" />
           </div>
         </div>
       </section>

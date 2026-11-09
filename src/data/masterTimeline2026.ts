@@ -7,7 +7,7 @@
 //  • Africa Education Icon nominations: 6 September – 6 October 2026.
 //  • Gold-Blue Garnet, Platinum & Influencer Education Impact:
 //    6 September – 21 November 2026.
-//  • Recognition Gala: 13 December 2026, Lagos — re-confirmed, unchanged.
+//  • Recognition Gala: 28 December 2026, Lagos — rescheduled on 9 November 2026.
 //  • Retired terminology: "voting", "public vote", "winners" (outside the Icon
 //    judges-only internal ranking). Gold-Blue Garnet, Platinum and Influencer
 //    Education Impact are NRC-verified Certificates of Recognition.
@@ -291,7 +291,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
   },
   {
     id: "gold-blue-garnet-verification",
-    dateLabel: `23 September – ${PROGRAMME_END_LABEL}`,
+    dateLabel: `23 September – 13 December 2026`,
     startsAt: "2026-09-23T00:00:00Z",
     endsAt: "2026-12-13T23:59:59Z",
     milestone: "Gold-Blue Garnet NRC Verification (rolling)",
@@ -587,8 +587,8 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
   },
   {
     id: "tv-show-3",
-    dateLabel: `Sunday, ${PROGRAMME_END_LABEL}`,
-    startsAt: "2026-12-13T00:00:00Z",
+    dateLabel: `Monday, ${PROGRAMME_END_LABEL}`,
+    startsAt: "2026-12-28T00:00:00Z",
     milestone: "TV Showcase 3 — Gala Live Coverage",
     activity: "Live broadcast of the NESA-Africa 2026 Recognition Gala.",
     outcome: "Continental live coverage",
@@ -597,8 +597,8 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
   },
   {
     id: "recognition-gala",
-    dateLabel: `Sunday, ${PROGRAMME_END_LABEL}`,
-    startsAt: "2026-12-13T00:00:00Z",
+    dateLabel: `Monday, ${PROGRAMME_END_LABEL}`,
+    startsAt: "2026-12-28T00:00:00Z",
     milestone: "NESA-Africa 2026 Recognition Gala, Lagos",
     activity:
       "Honour the 9 Africa Education Icons and every NRC-verified Education Enabler across the four recognition tiers.",

@@ -6,7 +6,7 @@ import { CalendarDays, Megaphone, ShieldCheck, Trophy, Sparkles, FileCheck } fro
  * Dates are fixed to the "NESA-Africa 2026 — Complete Timeline Set":
  *   • Nominations: 6 September – 21 November 2026 (Influencer tier)
  *   • Rolling NRC verification: 16 September – 13 December 2026
- *   • Gala: Sunday, 13 December 2026
+ *   • Gala: Monday, 28 December 2026
  * There is no public voting in this tier — recognition is NRC-verified.
  */
 
@@ -53,7 +53,7 @@ const MILESTONES: TimelineMilestone[] = [
   },
   {
     id: "gala",
-    date: "Sunday, 13 December 2026",
+    date: "Monday, 28 December 2026",
     phase: "NESA-Africa 2026 Gold-Blue Garnet Awards Gala",
     description:
       "Recognised Education Enablers are celebrated at the NESA-Africa 2026 Gala with live broadcast across Africa and the African Diaspora.",
@@ -78,7 +78,7 @@ export function ProjectTimelineSection() {
             Project Timeline
           </p>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-            From 6 September 2026 to the 13 December 2026 Gala
+            From 6 September 2026 to the 28 December 2026 Gala
           </h2>
           <p className="text-white/70">
             The complete project timeline for the NESA-Africa 2026 Influencer Education

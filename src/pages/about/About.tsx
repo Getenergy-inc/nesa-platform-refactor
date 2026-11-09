@@ -591,7 +591,7 @@ export default function About() {
         id="nesa-africa-2026"
         eyebrow="Current Cycle"
         title="NESA-Africa 2026"
-        lede="The current recognition cycle culminates in the NESA-Africa Recognition Gala in Lagos, Nigeria on 13 December 2026."
+        lede="The current recognition cycle culminates in the NESA-Africa Recognition Gala in Lagos, Nigeria on 28 December 2026."
       >
         <p className="max-w-3xl text-sm leading-relaxed text-ivory/75 md:text-base">
           The cycle combines public nomination, NRC verification, EDI assessment, Africa Education

@@ -57,7 +57,7 @@ const INTEGRITY = [
   },
   {
     title: "Listing is not an award",
-    body: "Appearing in the directory records a nomination. Recognition is only conferred at the Gold-Blue Garnet Awards Gala, 13 December 2026.",
+    body: "Appearing in the directory records a nomination. Recognition is only conferred at the Gold-Blue Garnet Awards Gala, 28 December 2026.",
   },
 ];
 

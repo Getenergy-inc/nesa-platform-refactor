@@ -173,7 +173,7 @@ describe("Timeline anchors — Complete Timeline Set source values", () => {
     ["final-verification-gala-production", "2026-11-25", "2026-11-29"],
     ["tv-show-1", "2026-11-22", undefined],
     ["tv-show-2", "2026-12-08", undefined],
-    ["recognition-gala", "2026-12-13", undefined],
+    ["recognition-gala", "2026-12-28", undefined],
   ];
 
   for (const [id, start, end] of CASES) {
@@ -185,10 +185,10 @@ describe("Timeline anchors — Complete Timeline Set source values", () => {
     });
   }
 
-  it("the Gala is the highlighted 13 December 2026 milestone", () => {
+  it("the Gala is the highlighted 28 December 2026 milestone", () => {
     const gala = anchor("recognition-gala");
     expect(gala.highlight).toBe(true);
-    expect(gala.dateLabel).toBe("Sunday, 13 December 2026");
+    expect(gala.dateLabel).toBe("Monday, 28 December 2026");
   });
 
   it("nomination windows state the Icon split correctly", () => {
@@ -224,8 +224,8 @@ const ALLOWLIST = new Set<string>([
 const RETIRED: { pattern: RegExp; reason: string }[] = [
   { pattern: /\b1\s+August\s+2026\b/i, reason: "Retired nominations-open date — now 6 September 2026" },
   { pattern: /\b30\s+August\s+2026\b/i, reason: "Retired nominations-open date — now 6 September 2026" },
-  { pattern: /(gala|ceremony)[^.\n]{0,60}\b22\s+October\s+2026\b/i, reason: "Retired Gala date — now 13 December 2026" },
-  { pattern: /\b14\s+December\s+2026\b/i, reason: "Retired Gala date — now 13 December 2026" },
+  { pattern: /(gala|ceremony)[^.\n]{0,60}\b22\s+October\s+2026\b/i, reason: "Retired Gala date — now 28 December 2026" },
+  { pattern: /\b14\s+December\s+2026\b/i, reason: "Retired Gala date — now 28 December 2026" },
   { pattern: /\b5\s+July\s+2026\b/i, reason: "Retired Platinum Recognition Show date" },
   { pattern: /\b10\s+July\s+2026\b/i, reason: "Retired Icon nominations close date — now 19 September 2026" },
   { pattern: /\b29\s+June\s*[–—-]\s*10\s+July\s+2026\b/i, reason: "Retired Icon nominations window" },
