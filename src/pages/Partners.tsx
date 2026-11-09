@@ -54,7 +54,7 @@ const SPONSORSHIP_TIERS = [
     benefits: [
       "Title sponsorship + headline branding",
       "NESA Africa TV feature segment",
-      "15 VIP Gala Passes",
+      "Headline acknowledgement during the Online Awards Gala",
       "Certificate + press mentions",
     ],
     cta: "Sponsor Now",
@@ -67,7 +67,7 @@ const SPONSORSHIP_TIERS = [
     icon: Sparkles,
     benefits: [
       "Premium branding + major co-sponsorship",
-      "13 VIP Gala Passes",
+      "Online Awards Gala acknowledgement",
     ],
     cta: "Select Diamond",
   },
@@ -78,7 +78,7 @@ const SPONSORSHIP_TIERS = [
     icon: Trophy,
     benefits: [
       "Sponsor a major category/segment",
-      "8 VIP Gala Passes",
+      "Online Awards Gala acknowledgement",
     ],
     cta: "Select Gold",
   },
@@ -89,7 +89,7 @@ const SPONSORSHIP_TIERS = [
     icon: Medal,
     benefits: [
       "Print + digital branding",
-      "4 VIP Gala Passes",
+      "Online Awards Gala acknowledgement",
     ],
     cta: "Select Silver",
   },
@@ -100,7 +100,7 @@ const SPONSORSHIP_TIERS = [
     icon: Award,
     benefits: [
       "Website + program branding",
-      "3 VIP Gala Passes",
+      "Online Awards Gala acknowledgement",
     ],
     cta: "Select Bronze",
   },
@@ -111,7 +111,7 @@ const SPONSORSHIP_TIERS = [
     icon: Star,
     benefits: [
       "Category branding + on-stage presentation",
-      "2 VIP Gala Passes",
+      "Online Awards Gala acknowledgement",
     ],
     cta: "Sponsor a Category",
   },
@@ -121,22 +121,22 @@ const INDIVIDUAL_TIERS = [
   {
     tier: "Bronze",
     range: "$500–$999",
-    perks: ["1 Gala Ticket", "Downloadable Certificate of Social Impact"],
+    perks: ["Digital sponsor acknowledgement", "Downloadable Certificate of Social Impact"],
   },
   {
     tier: "Silver",
     range: "$1,000–$2,499",
-    perks: ["2 Gala Tickets", "Sponsor Wall + Recognition Roll"],
+    perks: ["Online sponsor acknowledgement", "Sponsor Wall + Recognition Roll"],
   },
   {
     tier: "Gold",
     range: "$2,500–$4,999",
-    perks: ["Reserved/VVIP seats for 3 (where applicable)", "Sponsor Wall + featured recognition"],
+    perks: ["Featured online sponsor acknowledgement", "Sponsor Wall + featured recognition"],
   },
   {
     tier: "Platinum",
     range: "$5,000+",
-    perks: ["5 Gala Tickets", "Premium sponsor label + enhanced recognition (Sponsor Wall + Annual Report mention)"],
+    perks: ["Premium sponsor label + enhanced recognition (Sponsor Wall + Annual Report mention)"],
   },
 ];
 
@@ -194,7 +194,7 @@ export default function Partners() {
         <title>Partner with NESA-Africa 2026 | Sponsorship, Media &amp; Impact Opportunities</title>
         <meta
           name="description"
-          content="Partner with NESA-Africa 2026 (Recognition Gala Sunday, 13 December 2026). Sponsor awards, Rebuild My School (2026–2027), NESA Africa TV, media rights, and public participation. Multi-currency payments available. Receipts and reporting provided."
+          content="Partner with NESA-Africa 2026 and the Online Awards Gala on 13 December 2026. Sponsorship enquiries are handled through SCEF's approved Google Form."
         />
       </Helmet>
 
@@ -213,7 +213,7 @@ export default function Partners() {
                 Partner with <span className="text-gold">NESA-Africa 2026</span>
               </h1>
               <p className="text-lg md:text-xl text-primary font-medium mb-2">
-                Recognition Gala: Sunday, 13 December 2026 · Lagos, Nigeria
+                Online Awards Gala: Sunday, 13 December 2026 · Online only
               </p>
               <p className="text-lg text-muted-foreground mb-8 max-w-3xl mx-auto">
                 Put your brand at the center of Africa's education story—celebrating champions and funding real impact through{" "}
@@ -269,7 +269,7 @@ export default function Partners() {
             <h2 className="text-3xl font-display font-bold text-center mb-8">Why Partner</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
               {[
-                { icon: Target, text: "High-trust visibility across the awards season and Gala Weekend" },
+                { icon: Target, text: "High-trust visibility across the awards season and Online Awards Gala programme" },
                 { icon: Users, text: "Audience growth through content + public participation campaigns" },
                 { icon: School, text: "Measurable impact via verified school interventions (Rebuild My School 2026–2027)" },
                 { icon: Award, text: "Sponsor recognition (Sponsor Wall, certificates, annual report mentions)" },
@@ -313,46 +313,6 @@ export default function Partners() {
                   Talk to Partnerships
                 </Link>
               </Button>
-            </div>
-          </div>
-        </section>
-
-        {/* ================================================================
-            2026 VOTING CALENDAR
-        ================================================================ */}
-        <section className="py-16 bg-card/30">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-display font-bold text-center mb-8">
-              <Calendar className="inline-block mr-2 h-8 w-8 text-gold" />
-              2026 Voting Calendar (Key Dates)
-            </h2>
-            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-              <Card className="bg-card border-gold/30">
-                <CardHeader>
-                  <Badge className="w-fit bg-gold/20 text-gold border-gold/30 mb-2">Phase 4</Badge>
-                  <CardTitle>Gold Certificate</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground mb-2">
-                    <strong>10 April – 16 May 2026</strong>
-                  </p>
-                  <p className="text-sm text-muted-foreground">Results Show: 17 May 2026</p>
-                  <p className="text-xs text-primary mt-2">Public voting only</p>
-                </CardContent>
-              </Card>
-              <Card className="bg-card border-blue-500/30">
-                <CardHeader>
-                  <Badge className="w-fit bg-blue-500/20 text-blue-400 border-blue-500/30 mb-2">Phase 5</Badge>
-                  <CardTitle>Blue Garnet Award</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground mb-2">
-                    <strong>6 September – 21 November 2026</strong>
-                  </p>
-                  <p className="text-sm text-muted-foreground">Recognition Gala: 13 December 2026</p>
-                  <p className="text-xs text-primary mt-2">40% Public Voting + 60% Jury Review</p>
-                </CardContent>
-              </Card>
             </div>
           </div>
         </section>
@@ -412,7 +372,7 @@ export default function Partners() {
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-display font-bold text-center mb-4">Individual &amp; SME Recognition (2026)</h2>
             <p className="text-center text-muted-foreground mb-8">
-              For individuals and small businesses who want recognition + seats
+              For individuals and small businesses who want recognition and programme visibility
             </p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto mb-8">
               {INDIVIDUAL_TIERS.map((t, i) => (
@@ -528,7 +488,7 @@ export default function Partners() {
                 NESA Africa TV (Ads + Show Sponsorship)
               </h2>
               <p className="text-center text-muted-foreground mb-8">
-                Sponsor online award shows: Platinum Spotlight → Gold Results Show → Gala Broadcast
+                Sponsor online award shows: Platinum Spotlight → Gold Results Show → Online Awards Gala broadcast
               </p>
               <Card className="bg-card border-border mb-6">
                 <CardHeader>
