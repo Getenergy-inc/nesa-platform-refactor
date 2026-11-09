@@ -8,7 +8,7 @@ import { QuickActionBar } from "@/components/nesa/QuickActionBar";
 import { WhatsLiveSection } from "@/components/nesa/WhatsLiveSection";
 import { NominationPathsCards } from "@/components/nesa/NominationPathsCards";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
-import { MobileBottomNav } from "@/components/navigation/MainNav";
+import { MobileBottomActions } from "@/components/navigation/MobileBottomActions";
 import { LazySection } from "@/components/ui/lazy-section";
 import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicator";
 
@@ -102,7 +102,7 @@ export default function NESAAfrica() {
         <NESAFooter />
       </div>
       
-      <MobileBottomNav />
+      <MobileBottomActions />
     </>
   );
 }

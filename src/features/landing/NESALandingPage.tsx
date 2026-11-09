@@ -29,7 +29,7 @@ import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { UtilityBar } from "@/components/nesa/UtilityBar";
 import { LazySection } from "@/components/ui/lazy-section";
 import { BottomPageNav } from "@/components/navigation/PageNavigation";
-import { MobileBottomNav } from "@/components/navigation/MainNav";
+import { MobileBottomActions } from "@/components/navigation/MobileBottomActions";
 import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicator";
 import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
 import { BackToTopButton } from "@/components/ui/back-to-top";
@@ -187,7 +187,7 @@ export function NESALandingPage() {
 
       <ExitIntentPopup />
       <BackToTopButton />
-      <MobileBottomNav />
+      <MobileBottomActions />
       <MobileStickyNominateCTA source="homepage" />
       <FloatingFAQButton />
     </>
