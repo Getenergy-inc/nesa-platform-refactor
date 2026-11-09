@@ -33,6 +33,7 @@ import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicat
 import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
 import { BackToTopButton } from "@/components/ui/back-to-top";
 import { FloatingFAQButton } from "@/components/nesa/PageFAQ";
+import { SchoolSupportFundSection } from "@/components/impact/SchoolSupportFundSection";
 
 import "./editorial/editorial.css";
 import {
@@ -144,6 +145,7 @@ export function NESALandingPage() {
 
         {/* 8. FROM RECOGNITION TO IMPACT */}
         <RecognitionToImpactSection />
+        <SchoolSupportFundSection />
 
         {/* 9. BUILT FOR TRUST */}
         <TrustBandSection />

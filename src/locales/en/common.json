@@ -1,4 +1,19 @@
 {
+  "schoolSupport": {
+    "fund": "Africa Special Needs Education Support Fund",
+    "heading": "Support Special Needs Education Across Africa",
+    "intro": "Help identify and support verified special-needs schools across all 54 African countries through the eight approved African regions.",
+    "delivery": "The Africa Special Needs Education Support Fund is delivered jointly by NESA-Africa and EduAid-Africa under Santos Creations Educational Foundation. Fundraising and supporter mobilisation are coordinated through Friends of EduAid-Africa and the Africa Education Enablers Network.",
+    "nominate": "Nominate a Special-Needs School in Africa",
+    "support": "Support a Special-Needs School in Africa",
+    "nominateShort": "Nominate a School",
+    "supportShort": "Support a Verified School",
+    "mobile": "Support a School",
+    "notice": "Nomination begins a verification and needs-assessment process. It does not automatically qualify a school for publication, voting, funding or intervention.",
+    "independence": "Donations and sponsorship do not influence NESA-Africa award recognition. School support and award judging remain separate.",
+    "approvalPending": "School profiles will appear only after verification and explicit publication approval are confirmed.",
+    "channelsRequired": "CONTENT REQUIRED — authorised EduAid-Africa school-support links and publication approvals."
+  },
   "nav": {
     "home": "Home",
     "about": "About",

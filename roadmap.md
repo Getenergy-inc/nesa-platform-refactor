@@ -1,9 +1,11 @@
 ## Africa Special Needs Education Support Fund — 9 Nov 2026
-- [ ] Review and approve the phased school-support addition plan; retain existing design and do not publish.
-- [ ] Add shared school CTAs, homepage section, navigation/mobile/footer and relevant programme/impact surfaces.
+- [x] Review and approve the phased school-support addition plan; retain existing design and do not publish.
+- [x] Phase 1: Add shared school CTAs, homepage section, navigation/mobile/footer, canonical public profile and programme/impact-story surfaces; 12 unit and 28 browser tests passed.
+- [ ] Review Phase 1 before starting Phase 2 country-first nomination and Phase 3 approved-school support.
 - [ ] Update country-first nomination with verification notice; official regional form URLs are not supplied.
 - [ ] Enforce verified-and-approved school visibility, filters, distinct progress states and controlled support options.
-- [ ] Verify safeguards and end-to-end actions with tests and 390px/1440px before/after screenshots per phase.
+- [x] Phase 1: Verify school actions and fail-closed publication safeguard; review 390px/1440px before/after screenshots and 762px layout.
+- [ ] Verify Phase 2/3 nomination, approved-school filtering and support processes after the phase review gates.
 - [ ] Activate official nomination/support channels — blocked by missing authorised URLs.
 
 ## Restore repair and site-wide CTA/follow refactor — 8 Nov 2026

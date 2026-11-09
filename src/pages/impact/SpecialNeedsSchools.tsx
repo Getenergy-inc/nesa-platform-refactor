@@ -3,14 +3,16 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { IMPACT_BRAND, SPECIAL_NEEDS_FIELDS, IMPACT_CTAS, IMPACT_NAV_FOOTER } from "@/config/educationSocialImpact";
 import { useImpactSchools } from "@/hooks/useImpactSchools";
-import EducationImpactStatsGrid from "@/components/impact/EducationImpactStatsGrid";
+import { canPublishSupportSchool } from "@/config/schoolSupport";
+import { useTranslation } from "react-i18next";
 
 const dash = (v: unknown) => (v === null || v === undefined || v === "" ? "—" : String(v));
 
 export default function SpecialNeedsSchools() {
+  const { t } = useTranslation("common");
   const { schools, loading, error } = useImpactSchools();
   const specialNeeds = schools.filter(
-    (s) => (s.schoolType || "").toLowerCase().includes("special") || (s.description || "").toLowerCase().includes("special needs"),
+    (s) => canPublishSupportSchool(s) && ((s.schoolType || "").toLowerCase().includes("special") || (s.description || "").toLowerCase().includes("special needs")),
   );
 
   return (
@@ -58,7 +60,7 @@ export default function SpecialNeedsSchools() {
       <section className="bg-charcoal text-white px-4 pb-12">
         <div className="max-w-6xl mx-auto">
           <h2 className="font-playfair text-2xl font-bold text-gold mb-5">Inclusive Education Impact</h2>
-          <EducationImpactStatsGrid only={["schools", "learners", "communities", "countries", "completed"]} />
+          <p className="text-cream/75 text-sm">{t("schoolSupport.channelsRequired")}</p>
         </div>
       </section>
 
@@ -79,7 +81,7 @@ export default function SpecialNeedsSchools() {
           ) : specialNeeds.length === 0 ? (
             <div className="rounded-2xl border border-gold/20 bg-white/[0.03] p-8 text-center">
               <p className="text-white/75">
-                No special-needs school has completed verification for publication yet.
+                {t("schoolSupport.approvalPending")}
               </p>
               <p className="mt-2 text-sm text-white/55">
                 Schools appear here only after programme eligibility and verification are complete. Nominate a

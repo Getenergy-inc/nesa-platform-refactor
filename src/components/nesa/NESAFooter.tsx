@@ -4,6 +4,7 @@ import { ChevronDown } from "lucide-react";
 import nesaStamp from "@/assets/nesa-stamp.jpeg";
 import { trackNav } from "@/lib/analytics";
 import { FollowLinks } from "@/components/nesa/FollowLinks";
+import { SCHOOL_SUPPORT_ACTIONS } from "@/config/schoolSupport";
 
 interface FooterSection {
   id: string;
@@ -45,6 +46,8 @@ const SECTIONS: FooterSection[] = [
     title: "Get Involved",
     links: [
       { label: "Donate", href: "/donate" },
+      { label: SCHOOL_SUPPORT_ACTIONS.nominate.shortLabel, href: SCHOOL_SUPPORT_ACTIONS.nominate.href },
+      { label: SCHOOL_SUPPORT_ACTIONS.support.shortLabel, href: SCHOOL_SUPPORT_ACTIONS.support.href },
       { label: "Sponsor", href: "/sponsors" },
       { label: "Partner", href: "/partners" },
       { label: "Volunteer", href: "/volunteer" },

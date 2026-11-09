@@ -34,6 +34,7 @@ import { AccountMenu } from "@/components/navigation/AccountMenu";
 import { WorkspaceSwitcher } from "@/components/navigation/WorkspaceSwitcher";
 import { MOBILE_MENU_OPEN_EVENT } from "@/components/navigation/MobileBottomActions";
 import { NESALogo } from "@/components/nesa/NESALogo";
+import { SchoolSupportChoice } from "@/components/impact/SchoolSupportActions";
 
 function SkipLink() {
   return (
@@ -506,7 +507,7 @@ function MobileMenu() {
         <div className="p-3">
           <div className="mb-3"><NavSearch className="!h-9 !w-full" /></div>
           <div className="grid grid-cols-2 gap-2 mb-3">
-            <NominateButton className="w-full" />
+            <NominateButton className="w-full h-auto min-h-11 whitespace-normal text-center py-2" />
             <Button
               asChild
               variant="outline"
@@ -528,6 +529,7 @@ function MobileMenu() {
             </Button>
           </div>
 
+          <div className="mb-3"><SchoolSupportChoice /></div>
           <nav aria-label="Mobile primary">
             <Accordion type="single" collapsible className="w-full">
               {SITE_NAV.map((item) => {
