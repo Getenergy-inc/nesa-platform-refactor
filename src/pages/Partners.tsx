@@ -40,6 +40,7 @@ import {
   Wallet,
 } from "lucide-react";
 import { PartnershipProspectsSection } from "@/components/partners/PartnershipProspectsSection";
+import { ScefFormRequired } from "@/components/nesa/ContentRequired";
 
 // ============================================================================
 // DATA
@@ -48,7 +49,7 @@ import { PartnershipProspectsSection } from "@/components/partners/PartnershipPr
 const SPONSORSHIP_TIERS = [
   {
     name: "Africa Blue Garnet Sponsor",
-    investment: "$250,000+",
+    investment: "CONTENT REQUIRED",
     color: "from-blue-500 to-indigo-600",
     icon: Crown,
     benefits: [
@@ -62,7 +63,7 @@ const SPONSORSHIP_TIERS = [
   },
   {
     name: "Diamond Partner",
-    investment: "$180,000",
+    investment: "CONTENT REQUIRED",
     color: "from-cyan-400 to-blue-500",
     icon: Sparkles,
     benefits: [
@@ -73,7 +74,7 @@ const SPONSORSHIP_TIERS = [
   },
   {
     name: "Gold Partner",
-    investment: "$150,000",
+    investment: "CONTENT REQUIRED",
     color: "from-amber-400 to-amber-600",
     icon: Trophy,
     benefits: [
@@ -84,7 +85,7 @@ const SPONSORSHIP_TIERS = [
   },
   {
     name: "Silver Partner",
-    investment: "$75,000",
+    investment: "CONTENT REQUIRED",
     color: "from-gray-300 to-gray-500",
     icon: Medal,
     benefits: [
@@ -95,7 +96,7 @@ const SPONSORSHIP_TIERS = [
   },
   {
     name: "Bronze Partner",
-    investment: "$30,000",
+    investment: "CONTENT REQUIRED",
     color: "from-orange-400 to-orange-600",
     icon: Award,
     benefits: [
@@ -106,7 +107,7 @@ const SPONSORSHIP_TIERS = [
   },
   {
     name: "Award Category Sponsor",
-    investment: "$20,000",
+    investment: "CONTENT REQUIRED",
     color: "from-primary to-primary/80",
     icon: Star,
     benefits: [
@@ -120,22 +121,22 @@ const SPONSORSHIP_TIERS = [
 const INDIVIDUAL_TIERS = [
   {
     tier: "Bronze",
-    range: "$500–$999",
+    range: "CONTENT REQUIRED",
     perks: ["Digital sponsor acknowledgement", "Downloadable Certificate of Social Impact"],
   },
   {
     tier: "Silver",
-    range: "$1,000–$2,499",
+    range: "CONTENT REQUIRED",
     perks: ["Online sponsor acknowledgement", "Sponsor Wall + Recognition Roll"],
   },
   {
     tier: "Gold",
-    range: "$2,500–$4,999",
+    range: "CONTENT REQUIRED",
     perks: ["Featured online sponsor acknowledgement", "Sponsor Wall + featured recognition"],
   },
   {
     tier: "Platinum",
-    range: "$5,000+",
+    range: "CONTENT REQUIRED",
     perks: ["Premium sponsor label + enhanced recognition (Sponsor Wall + Annual Report mention)"],
   },
 ];
@@ -163,24 +164,11 @@ const PARTNER_CATEGORIES = [
   },
 ];
 
-const MERCHANDISE = [
-  { name: "Impact Wristband", price: 5, image: "/merch/impact-wristband.png?v=2", slug: "impact-wristband" },
-  { name: "Sticker Pack (5pcs)", price: 7, image: "/merch/sticker-pack.png?v=2", slug: "sticker-pack" },
-  { name: "NESA Lapel Pin / Badge", price: 10, image: "/merch/lapel-pin-badge.png?v=2", slug: "lapel-pin-badge" },
-  { name: "Branded Cap", price: 15, image: "/merch/branded-cap.png?v=2", slug: "branded-cap" },
-  { name: "Classic T-Shirt", price: 25, image: "/merch/classic-tshirt.png?v=2", slug: "classic-tshirt" },
-  { name: "Eco Tote Bag", price: 20, image: "/merch/eco-tote-bag.png?v=2", slug: "eco-tote-bag" },
-  { name: "Polo Shirt", price: 35, image: "/merch/polo-shirt.png?v=2", slug: "polo-shirt" },
-  { name: "Desk Flag + Stand (Limited)", price: 45, image: "/merch/desk-flag-stand.png?v=2", slug: "desk-flag-stand" },
-  { name: "Hoodie / Sweatshirt", price: 60, image: "/merch/hoodie-sweatshirt.png?v=2", slug: "hoodie-sweatshirt" },
-  { name: "Legacy Sponsor Jacket (Limited)", price: 100, image: "/merch/legacy-sponsor-jacket.png?v=2", slug: "legacy-sponsor-jacket" },
-];
-
 const AD_RATES = [
-  { type: "Pre-roll", rate: "$50–$200" },
-  { type: "Mid-roll", rate: "$150–$500" },
-  { type: "Post-roll", rate: "$30–$120" },
-  { type: "Lower-third", rate: "$25–$100" },
+  { type: "Pre-roll", rate: "CONTENT REQUIRED" },
+  { type: "Mid-roll", rate: "CONTENT REQUIRED" },
+  { type: "Post-roll", rate: "CONTENT REQUIRED" },
+  { type: "Lower-third", rate: "CONTENT REQUIRED" },
 ];
 
 // ============================================================================

@@ -48,10 +48,10 @@ const benefits = [
 ];
 
 const packages = [
-  { name: "Platinum Anchor", price: "From $250,000", perks: ["Title rights", "Plenary stage", "Bespoke laureate program", "Global PR push"] },
-  { name: "Gold Champion", price: "From $100,000", perks: ["Category sponsorship", "Co-branded campaign", "VIP gala table", "Annual report feature"] },
-  { name: "Silver Ally", price: "From $40,000", perks: ["Regional spotlight", "Digital ad placements", "5 gala invitations", "Press kit inclusion"] },
-  { name: "Community Partner", price: "From $10,000", perks: ["Logo wall placement", "Newsletter feature", "2 gala invitations", "Impact certificate"] },
+  { name: "Platinum Anchor", price: "CONTENT REQUIRED", perks: ["Title rights", "Online programme acknowledgement", "Bespoke laureate program", "Global PR push"] },
+  { name: "Gold Champion", price: "CONTENT REQUIRED", perks: ["Category sponsorship", "Co-branded campaign", "Online programme acknowledgement", "Annual report feature"] },
+  { name: "Silver Ally", price: "CONTENT REQUIRED", perks: ["Regional spotlight", "Digital ad placements", "Online sponsor acknowledgement", "Press kit inclusion"] },
+  { name: "Community Partner", price: "CONTENT REQUIRED", perks: ["Logo wall placement", "Newsletter feature", "Online sponsor acknowledgement", "Impact certificate"] },
 ];
 
 const metrics = [
