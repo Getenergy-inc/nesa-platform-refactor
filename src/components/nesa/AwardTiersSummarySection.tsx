@@ -1,6 +1,6 @@
 /**
  * AwardTiersSummarySection — landing page summary of all 4 award tiers,
- * 18 categories, 96 subcategories for NESA-Africa 2026.
+ * 22 categories, 90 subcategories for NESA-Africa 2026.
  *
  * Subcategory names are only displayed for confirmed categories; the rest
  * show counts only with a deep link to the dedicated tier route.
@@ -46,7 +46,7 @@ function TierCard({ tier }: { tier: AwardTier2026 }) {
       <div className="p-5 space-y-3 flex-1">
         <div>
           <div className="text-[10px] uppercase tracking-wider text-ivory/50 mb-1">
-            Vote mechanic
+            Selection method
           </div>
           <div className="text-ivory/85 text-xs leading-relaxed">{tier.voteMechanicLabel}</div>
         </div>
@@ -64,7 +64,7 @@ function TierCard({ tier }: { tier: AwardTier2026 }) {
             </div>
           </div>
           <div className="rounded-lg border border-gold/15 bg-charcoal/50 px-3 py-2 text-center">
-            <div className="text-gold font-bold text-lg leading-none">{subTotal}</div>
+            <div className="text-gold font-bold text-lg leading-none">{subTotal || "—"}</div>
             <div className="text-ivory/55 text-[10px] uppercase tracking-wider mt-1">
               Subcategories
             </div>
@@ -95,7 +95,7 @@ function TierCard({ tier }: { tier: AwardTier2026 }) {
                     {c.name}
                   </div>
                   <span className="shrink-0 text-gold text-[10px] font-semibold">
-                    {c.subcategoryCount} sub
+                    {c.subcategoryCount > 0 ? `${c.subcategoryCount} sub` : tier.id === "icon" ? "3 pathways" : "No subcategories"}
                   </span>
                 </div>
                 {c.subcategoryNames && c.subcategoryNames.length > 0 ? (
@@ -106,7 +106,9 @@ function TierCard({ tier }: { tier: AwardTier2026 }) {
                   </ul>
                 ) : (
                   <div className="mt-1 ml-6 text-ivory/45 italic text-[11px]">
-                    Subcategory names listed on the platform
+                    {c.subcategoryCount === 0
+                      ? tier.id === "icon" ? "Africans in Africa · Africans in the Diaspora · Friends of Africa" : "No subcategories"
+                      : "Subcategory names listed on the platform"}
                   </div>
                 )}
               </li>

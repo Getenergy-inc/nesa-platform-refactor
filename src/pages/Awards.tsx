@@ -49,8 +49,8 @@ const SITE = "https://nesaafrica.lovable.app";
 
 const HERO_STATS = [
   { value: "4", label: "Award Tiers" },
-  { value: "18", label: "Categories" },
-  { value: "96", label: "Recognition Subcategories" },
+  { value: "22", label: "Categories" },
+  { value: "90", label: "Recognition Subcategories" },
   { value: "10", label: "Education Regions" },
 ];
 
@@ -70,12 +70,12 @@ const PATHWAYS = [
   {
     id: "blue-garnet",
     icon: Gem,
-    title: "Blue Garnet Award",
+    title: "Gold-Blue Garnet Award",
     subtitle: "Competitive Excellence",
-    stats: ["9 Categories", "63 Subcategories", "Jury + Public Vote"],
+    stats: ["9 Categories", "63 Subcategories", "Verified Assessment"],
     description: "Recognising measurable excellence in education across Africa.",
-    href: "/awards/blue-garnet-categories",
-    cta: "Explore Blue Garnet",
+    href: "/awards/gold-blue-garnet",
+    cta: "Explore Gold-Blue Garnet",
     accent: "from-blue-500/30 via-indigo-500/15 to-transparent",
     border: "border-blue-400/30 hover:border-blue-400/60",
     pill: "bg-blue-500/15 text-blue-200 border-blue-500/30",
@@ -98,7 +98,7 @@ const PATHWAYS = [
     icon: Crown,
     title: "Africa Education Icon Award",
     subtitle: "Lifetime Achievement · 2006–2026",
-    stats: ["3 Icon Subcategories", "Jury Selection", "Continental Honour"],
+    stats: ["3 Categories", "3 Pathways Each", "Jury Selection"],
     description: "Recognising transformational educational leaders with sustained 10+ year impact.",
     href: "/awards/icon",
     cta: "Explore Icon Award",
@@ -111,7 +111,7 @@ const PATHWAYS = [
     icon: Sparkles,
     title: "Influencers Education Impact Award",
     subtitle: "Public Impact · 2026 Edition",
-    stats: ["Sports", "Music", "Social Media"],
+    stats: ["3 Categories", "No Public Voting", "Verified Impact"],
     description: "Recognising education advocacy through cultural influence.",
     href: "/awards/influencers-education-impact",
     cta: "Explore Influencer Awards",
@@ -122,10 +122,10 @@ const PATHWAYS = [
 ];
 
 const TIER_ARCHITECTURE = [
-  { tier: "Tier 1", name: "Blue Garnet Award", a: "9 Categories", b: "63 Subcategories", icon: Gem },
-  { tier: "Tier 2", name: "Platinum Recognition", a: "7 Categories", b: "27 Subcategories", icon: Medal },
-  { tier: "Tier 3", name: "Africa Education Icon", a: "3 Icon Subcategories", b: "Lifetime Honour", icon: Crown },
-  { tier: "Tier 4", name: "Influencers Education Impact", a: "3 Public Categories", b: "Editorial Selection", icon: Sparkles },
+  { tier: "Tier 1", name: "Africa Education Icon", a: "3 Categories", b: "3 pathways each · 9 Icons", icon: Crown },
+  { tier: "Tier 2", name: "Influencers Education Impact", a: "3 Categories", b: "Verified education impact", icon: Sparkles },
+  { tier: "Tier 3", name: "Platinum Recognition", a: "7 Categories", b: "27 Subcategories", icon: Medal },
+  { tier: "Tier 4", name: "Gold-Blue Garnet Award", a: "9 Categories", b: "63 Subcategories", icon: Gem },
 ];
 
 const NOMINEE_TYPES = [
@@ -172,7 +172,7 @@ export default function AwardsPage() {
         <title>The NESA-Africa Recognition Framework | Awards 2026</title>
         <meta
           name="description"
-          content="Four Recognition Subcategories. One Continent. One Mission. NESA-Africa recognises educational excellence, leadership, innovation, advocacy, philanthropy, and lifelong contribution across Africa, the diaspora, and Friends of Africa."
+          content="Four tiers · 22 main categories · 90 subcategories. NESA-Africa recognises educational excellence, leadership, innovation, advocacy, philanthropy, and lifelong contribution across Africa, the diaspora, and Friends of Africa."
         />
         <link rel="canonical" href={`${SITE}/awards`} />
         <meta property="og:title" content="The NESA-Africa Recognition Framework | Awards 2026" />
@@ -461,7 +461,7 @@ export default function AwardsPage() {
                 How Recognition Is <span className="text-gold">Structured</span>
               </h2>
               <p className="mt-3 text-ivory/70 text-sm md:text-base">
-                18 Categories · 96 Recognition Subcategories · One Continental Mission
+                22 Categories · 90 Recognition Subcategories · One Continental Mission
               </p>
             </div>
 
