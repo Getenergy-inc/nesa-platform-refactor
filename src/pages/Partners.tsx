@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { DonorTrustPanel } from "@/components/governance/DonorTrustPanel";
-import { GFAWalletIcon } from "@/components/ui/GFAWalletIcon";
 import {
   Building2,
   Globe,
@@ -25,19 +24,15 @@ import {
   Award,
   Target,
   Heart,
-  ShoppingBag,
-  Link as LinkIcon,
   Play,
   Film,
   Newspaper,
-  CreditCard,
   Download,
   Phone,
   ExternalLink,
   Sparkles,
   School,
   BookOpen,
-  Wallet,
 } from "lucide-react";
 import { PartnershipProspectsSection } from "@/components/partners/PartnershipProspectsSection";
 import { ScefFormRequired } from "@/components/nesa/ContentRequired";
@@ -340,12 +335,7 @@ export default function Partners() {
                         </li>
                       ))}
                     </ul>
-                    <Button className="w-full" variant={tier.featured ? "default" : "outline"} asChild>
-                      <Link to={`/contact?type=sponsorship&tier=${tier.name}`}>
-                        {tier.cta}
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Link>
-                    </Button>
+                    <ScefFormRequired kind="sponsorship" />
                   </CardContent>
                 </Card>
               ))}
