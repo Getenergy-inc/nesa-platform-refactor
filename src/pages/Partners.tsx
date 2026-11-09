@@ -518,55 +518,6 @@ export default function Partners() {
         </section>
 
         {/* ================================================================
-            SPONSOR REFERRAL LINKS
-        ================================================================ */}
-        <section className="py-16 bg-primary/5">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-display font-bold text-center mb-4">
-                <LinkIcon className="inline-block mr-2 h-8 w-8 text-primary" />
-                Sponsor Referral Links
-              </h2>
-              <p className="text-center text-muted-foreground mb-8">Advertising + Public Participation</p>
-              <Card className="bg-card border-border mb-6">
-                <CardContent className="p-6">
-                  <ul className="space-y-3">
-                    <li className="flex items-start gap-3">
-                      <ExternalLink className="w-5 h-5 text-primary mt-0.5" />
-                      <span className="text-muted-foreground">Your brand gets a sponsor landing page (products/services featured)</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Users className="w-5 h-5 text-primary mt-0.5" />
-                      <span className="text-muted-foreground">The public visits via your link and verified users can claim sponsor-funded programme credit through the GFAwzip Wallet</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <GFAWalletIcon size={20} />
-                      <span className="text-muted-foreground">Credits used across SCEF services (non-tradeable)</span>
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
-              <div className="bg-warning/10 border border-warning/30 rounded-xl p-4 text-center mb-6">
-                <p className="text-sm text-warning font-medium">
-                  ⚠️ AGC is non-tradeable—no withdrawals, no cash-out, no payouts.
-                </p>
-              </div>
-              <div className="flex flex-wrap justify-center gap-3">
-                <Button size="lg" className="bg-gradient-gold text-secondary font-semibold" asChild>
-                  <Link to="/contact?type=sponsor-link">
-                    <LinkIcon className="mr-2 h-5 w-5" />
-                    Activate Sponsor Referral Link
-                  </Link>
-                </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <Link to="/contact?type=campaign-options">View Sponsor Campaign Options</Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ================================================================
             NESA AFRICA TV
         ================================================================ */}
         <section className="py-16">
@@ -650,46 +601,6 @@ export default function Partners() {
                     Request Media Rights Proposal
                   </Link>
                 </Button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ================================================================
-            PAYMENTS & REPORTING
-        ================================================================ */}
-        <section className="py-16 bg-card/30">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-display font-bold text-center mb-8">
-                <CreditCard className="inline-block mr-2 h-8 w-8 text-primary" />
-                Payments &amp; Reporting
-              </h2>
-              <Accordion type="single" collapsible className="mb-6">
-                <AccordionItem value="payments">
-                  <AccordionTrigger className="text-foreground">View Payment Options</AccordionTrigger>
-                  <AccordionContent>
-                    <div className="py-4">
-                      <p className="text-muted-foreground mb-4">
-                        <strong>Pay in any currency</strong> (options appear by location):
-                      </p>
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {["GFA Wallet", "Paystack", "Transactpay", "TapTap Send", "Zelle", "Bancable"].map((p) => (
-                          <Badge key={p} variant="secondary">{p}</Badge>
-                        ))}
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <GFAWalletIcon size={20} />
-                        <span>Multi-currency checkout powered by GetFinance.africa</span>
-                      </div>
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-              <div className="bg-warning/10 border border-warning/30 rounded-xl p-4 text-center">
-                <p className="text-sm text-warning font-medium">
-                  ⚠️ AGC is non-tradeable—no withdrawals, no cash-out, no payouts.
-                </p>
               </div>
             </div>
           </div>
