@@ -507,7 +507,7 @@ function MobileMenu() {
         <div className="p-3">
           <div className="mb-3"><NavSearch className="!h-9 !w-full" /></div>
           <div className="grid grid-cols-2 gap-2 mb-3">
-            <NominateButton className="w-full" />
+            <NominateButton className="w-full h-auto min-h-11 whitespace-normal text-center py-2" />
             <Button
               asChild
               variant="outline"

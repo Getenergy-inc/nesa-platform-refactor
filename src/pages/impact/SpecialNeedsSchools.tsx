@@ -3,7 +3,6 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { IMPACT_BRAND, SPECIAL_NEEDS_FIELDS, IMPACT_CTAS, IMPACT_NAV_FOOTER } from "@/config/educationSocialImpact";
 import { useImpactSchools } from "@/hooks/useImpactSchools";
-import EducationImpactStatsGrid from "@/components/impact/EducationImpactStatsGrid";
 import { canPublishSupportSchool } from "@/config/schoolSupport";
 import { useTranslation } from "react-i18next";
 
