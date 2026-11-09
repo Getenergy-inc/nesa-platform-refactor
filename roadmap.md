@@ -1,3 +1,11 @@
+## Africa Special Needs Education Support Fund — 9 Nov 2026
+- [ ] Review and approve the phased school-support addition plan; retain existing design and do not publish.
+- [ ] Add shared school CTAs, homepage section, navigation/mobile/footer and relevant programme/impact surfaces.
+- [ ] Update country-first nomination with verification notice; official regional form URLs are not supplied.
+- [ ] Enforce verified-and-approved school visibility, filters, distinct progress states and controlled support options.
+- [ ] Verify safeguards and end-to-end actions with tests and 390px/1440px before/after screenshots per phase.
+- [ ] Activate official nomination/support channels — blocked by missing authorised URLs.
+
 ## Restore repair and site-wide CTA/follow refactor — 8 Nov 2026
 - [x] Repair the five failing package migrations so a clean restore needs no production rows.
 - [x] Reconcile all reported schema differences with authoritative live metadata; distinguish real drift from comparator/bootstrap artefacts.
