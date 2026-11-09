@@ -25,6 +25,7 @@ const RETIRED_PATTERNS = [
   /2026 gala highlights\s*[–-]\s*archive/i,
   /\b(?:17|18|64)\s+(?:award\s+)?categories\b/i,
   /\b(?:54|64|143)\s+subcategories\b/i,
+  /\bPage\s+\d+\s+of\s+\d+\b/i,
 ] as const;
 
 for (const route of PUBLIC_ROUTES) {

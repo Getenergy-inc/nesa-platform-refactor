@@ -28,13 +28,11 @@ import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { UtilityBar } from "@/components/nesa/UtilityBar";
 import { LazySection } from "@/components/ui/lazy-section";
-import { BottomPageNav } from "@/components/navigation/PageNavigation";
 import { MobileBottomActions } from "@/components/navigation/MobileBottomActions";
 import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicator";
 import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
 import { BackToTopButton } from "@/components/ui/back-to-top";
 import { FloatingFAQButton } from "@/components/nesa/PageFAQ";
-import { MobileStickyNominateCTA } from "@/components/nesa/MobileStickyNominateCTA";
 
 import "./editorial/editorial.css";
 import {
@@ -82,7 +80,7 @@ export function NESALandingPage() {
         )}
         description={t(
           "seo.landing.description",
-          "Recognising Africa’s Education Enablers. Nominations open 6 September 2026 across 4 tiers, 22 categories and 96 subcategories.",
+          "Recognising Africa’s Education Enablers. Nominations open 9 November 2026–31 March 2027 across 4 tiers, 22 categories and 90 subcategories.",
         )}
         ogTitle={t("seo.landing.ogTitle", "NESA-Africa 2026 — A Continent in Recognition")}
         ogDescription={t(
@@ -182,13 +180,11 @@ export function NESALandingPage() {
 
 
         <NESAFooter />
-        <BottomPageNav />
       </div>
 
       <ExitIntentPopup />
       <BackToTopButton />
       <MobileBottomActions />
-      <MobileStickyNominateCTA source="homepage" />
       <FloatingFAQButton />
     </>
   );

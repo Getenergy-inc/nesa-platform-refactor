@@ -1,40 +1,17 @@
 import { Link } from "react-router-dom";
-import { useCountdown } from "@/hooks/useCountdown";
-import { GALA_COUNTDOWN_DATETIME } from "@/config/programme";
+import { PROGRAMME_END_LABEL } from "@/config/programme";
 
+/** Static online-programme band; countdowns and physical attendance are retired. */
 export function GalaBandSection() {
-  const { days, hours, minutes, seconds } = useCountdown(GALA_COUNTDOWN_DATETIME);
-
-
-  const cells = [
-    { v: days, l: "Days" },
-    { v: hours, l: "Hours" },
-    { v: minutes, l: "Minutes" },
-    { v: seconds, l: "Seconds" },
-  ];
-
   return (
     <section className="ed-gala" aria-labelledby="ed-gala-heading">
-      <div className="ed-eyebrow">The Blue-Garnet Awards Gala</div>
-      <h2 id="ed-gala-heading">NESA-Africa 2026 Gold-Blue Garnet Awards Gala</h2>
-      <div className="ed-gala-date">13 DECEMBER 2026 · LAGOS, NIGERIA</div>
-
-      <div className="ed-countdown">
-        {cells.map((c) => (
-          <div key={c.l} className="ed-cd-cell">
-            <div className="ed-cd-value">{String(c.v).padStart(2, "0")}</div>
-            <div className="ed-cd-label">{c.l}</div>
-          </div>
-        ))}
-      </div>
-
+      <div className="ed-eyebrow">NESA-Africa 2026 Online Awards Gala</div>
+      <h2 id="ed-gala-heading">Honouring Africa Education Icons 2006–2026</h2>
+      <div className="ed-gala-date">{PROGRAMME_END_LABEL.toUpperCase()} · ONLINE ONLY</div>
+      <p className="mx-auto mt-4 max-w-2xl text-white/70">Africa's highest award for Africa's Education Enablers. No physical attendance or ticket sales.</p>
       <div className="ed-hero-cta-row" style={{ justifyContent: "center" }}>
-        <Link to="/gala" className="ed-btn-primary">
-          Secure Your Gala Seat
-        </Link>
-        <Link to="/timeline" className="ed-btn-ghost">
-          View the Full Timeline →
-        </Link>
+        <Link to="/programme-2026" className="ed-btn-primary">Explore the Online Awards Gala</Link>
+        <Link to="/timeline" className="ed-btn-ghost">View the Full Timeline →</Link>
       </div>
     </section>
   );
