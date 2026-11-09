@@ -1,6 +1,6 @@
 ## Online Awards Gala reschedule — 9 Nov 2026
-- [ ] Update all website gala date references to Monday 28 December 2026; preserve independent nomination, verification and webinar dates.
-- [ ] Verify shared dates, announcement, public pages and mobile/desktop rendering; do not publish.
+- [x] Update all website gala date references to Monday 28 December 2026; preserve independent nomination, verification and webinar dates.
+- [x] Verify shared dates, announcement, seven public routes and 390px/1440px/762px rendering; 19 focused tests passed; do not publish. Existing broad timeline checks still report seven unrelated nomination-date inconsistencies; no nomination deadlines changed in this task.
 
 ## Africa Special Needs Education Support Fund — 9 Nov 2026
 - [x] Review and approve the phased school-support addition plan; retain existing design and do not publish.
