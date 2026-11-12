@@ -56,28 +56,25 @@ export function CustomerCareChat() {
   return (
     <>
       {/* Floating Chat Button */}
-      <AnimatePresence>
-        {!isOpen && (
-          <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            className="fixed bottom-20 lg:bottom-6 right-4 z-50"
+      {!isOpen && (
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="fixed bottom-20 lg:bottom-6 right-4 z-50"
+        >
+          <Button
+            onClick={() => setIsOpen(true)}
+            size="lg"
+            aria-label="Chat with Sophia — Official NESA-Africa Support Assistant"
+            className="h-14 w-14 rounded-full bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all relative"
           >
-            <Button
-              onClick={() => setIsOpen(true)}
-              size="lg"
-              aria-label="Chat with Sophia — Official NESA-Africa Support Assistant"
-              className="h-14 w-14 rounded-full bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all relative"
-            >
-              <MessageCircle className="h-6 w-6" aria-hidden="true" />
-              <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-background border border-primary flex items-center justify-center">
-                <Sparkles className="h-2.5 w-2.5 text-primary" />
-              </span>
-            </Button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <MessageCircle className="h-6 w-6" aria-hidden="true" />
+            <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-background border border-primary flex items-center justify-center">
+              <Sparkles className="h-2.5 w-2.5 text-primary" />
+            </span>
+          </Button>
+        </motion.div>
+      )}
 
       {/* Chat Window */}
       <AnimatePresence>
