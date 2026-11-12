@@ -642,6 +642,18 @@ function MobileMenu() {
             )}
           </div>
         </div>
+        <div className="shrink-0 border-t border-gold/20 bg-charcoal p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+          <Button asChild className="w-full min-h-11 bg-gold text-charcoal hover:bg-gold/90 font-semibold">
+            <a
+              href={NOMINATE_CTA.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackNav("nominate_now_click", { href: NOMINATE_CTA.href, phase: CURRENT_PHASE.phase, device: "mobile_sticky" })}
+            >
+              Submit a Nomination
+            </a>
+          </Button>
+        </div>
       </SheetContent>
     </Sheet>
   );

@@ -56,6 +56,8 @@ const SECTIONS: FooterSection[] = [
       { label: SCHOOL_SUPPORT_ACTIONS.support.shortLabel, href: SCHOOL_SUPPORT_ACTIONS.support.href },
       { label: "Sponsor", href: "/sponsors" },
       { label: "Partner", href: "/partners" },
+      { label: "Join the NRC", href: "/nrc/apply" },
+      { label: "Receive Programme Updates", contentRequired: true },
       { label: "Volunteer", href: "/volunteer" },
     ],
   },
