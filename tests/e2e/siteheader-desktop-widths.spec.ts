@@ -65,11 +65,13 @@ for (const width of WIDTHS) {
       expect(nomBox).not.toBeNull();
       expect(nomBox!.height).toBeLessThan(56);
 
-      // The text node itself should not wrap: clientHeight ~= lineHeight.
+      // Measure the text itself, not the button's vertical padding.
       const wraps = await nominate.evaluate((el) => {
         const cs = getComputedStyle(el);
         const lh = parseFloat(cs.lineHeight) || parseFloat(cs.fontSize) * 1.2;
-        return el.getBoundingClientRect().height > lh * 1.8;
+        const range = el.ownerDocument.createRange();
+        range.selectNodeContents(el);
+        return range.getBoundingClientRect().height > lh * 1.5;
       });
       expect(wraps, "Nominate CTA text should not wrap").toBe(false);
 
