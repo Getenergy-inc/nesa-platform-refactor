@@ -40,7 +40,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "How is the final score calculated?",
-    a: "Jury scores account for 60% of the final Blue Garnet score. The remaining 40% comes from public voting. Your individual scores are aggregated with other jury members' scores for each nominee.",
+    a: "Jury scores account for 60% of the final Blue Garnet score. The remaining 40% comes from independent jury review. Your individual scores are aggregated with other jury members' scores for each nominee.",
   },
   {
     q: "What should I look for in the evidence dossier?",

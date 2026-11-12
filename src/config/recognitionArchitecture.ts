@@ -5,7 +5,7 @@
 // Hierarchy:
 //   Pathway (4) → Category (18) → Subcategory (~100) → Region (10) → Nominee
 //
-// The brief lists 18 categories. Source data in awardTiers2026.ts shows 22
+// The brief lists 22 categories. Source data in awardTiers2026.ts shows 22
 // (9 Blue Garnet + 7 Platinum + 3 Icon + 3 Influencer). The brief mandates
 // consolidation: regional duplicates of CSR / EduTech / NGO / STEM collapse
 // into single category records with `regionScope: 'multi'` exposed via a

@@ -563,7 +563,7 @@ function ExistingNomineesBand() {
         ) : (
           <p className="text-base text-foreground/80">
             <span className="font-playfair text-2xl text-gold">{count}</span>{" "}
-            verified nominees across 18 categories.{" "}
+            verified nominees across 22 categories.{" "}
             <Link to="/nominees" className="text-gold underline-offset-2 hover:underline">
               Browse the directory →
             </Link>
@@ -762,7 +762,7 @@ export default function NominateHub2026() {
               <p className="text-xs text-foreground/85 sm:text-sm">
                 Recognition is based on verified educational impact, evaluated
                 through the Education Development Index (EDI) Matrix — not
-                popularity, sponsorship, or public vote. Sponsorship,
+                popularity, sponsorship, or jury review. Sponsorship,
                 donations, ticket purchases, endorsements, and visibility
                 opportunities do not influence nominee approval, judging, or
                 Governance decisions.

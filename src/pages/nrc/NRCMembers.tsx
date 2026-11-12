@@ -200,7 +200,7 @@ function NRCMembersContent() {
           <div>
             <h2 className="font-display text-2xl font-bold">Hybrid NRC Members</h2>
             <p className="text-muted-foreground">
-              Manage the 30-member Nominee Research Corps (Hybrid Model: core + volunteer support)
+              Manage the 27-member Nomination Review Committee (Hybrid Model: core + volunteer support)
             </p>
           </div>
 

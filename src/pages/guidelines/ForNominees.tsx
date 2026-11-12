@@ -74,7 +74,7 @@ const NRC_OUTCOMES = [
     icon: CheckCircle,
     nextSteps: [
       "Platinum: Download certificate once renomination threshold is met",
-      "Competitive (Gold/Blue Garnet): Enter public voting phase",
+      "Competitive (Gold/Blue Garnet): Enter independent jury review phase",
       "Icon: Proceed to jury evaluation",
     ],
   },
@@ -120,9 +120,9 @@ const TIER_NEXT_STEPS = [
     tier: "Competitive Awards (Gold-Blue Garnet)",
     icon: Star,
     color: "blue",
-    description: "Public voting (30–50%) combined with jury assessment (50–70%).",
+    description: "Independent jury assessment.",
     steps: [
-      "Your profile appears in the public voting portal",
+      "Your profile appears in the independent jury review portal",
       "Share your profile to encourage verified votes",
       "Top scorers enter Top 3 screening",
       "Final winners determined by combined public + jury scores",
@@ -335,7 +335,7 @@ export default function ForNominees() {
                     </div>
                     <div className="bg-white/5 rounded-lg p-4 text-center">
                       <p className="text-2xl font-bold text-blue-400">1,250</p>
-                      <p className="text-xs text-white/60">Public Votes</p>
+                      <p className="text-xs text-white/60">Jury review</p>
                     </div>
                   </div>
                   <div className="flex items-center justify-between border-t border-white/10 pt-4">

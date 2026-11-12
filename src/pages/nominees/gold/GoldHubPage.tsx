@@ -11,7 +11,7 @@ import { HonoureeImage } from "@/components/honourees/HonoureeImage";
 const HERO_STATS = [
   { icon: Trophy, label: "3 Recognition Categories" },
   { icon: Globe, label: "Africa-wide Participation" },
-  { icon: Vote, label: "Public Voting Enabled" },
+  { icon: Vote, label: "Independent jury review Enabled" },
   { icon: Sparkles, label: "Cultural Impact Recognition" },
 ];
 

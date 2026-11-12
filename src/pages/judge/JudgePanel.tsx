@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Users, MapPin, Building, GraduationCap } from "lucide-react";
 
-// Mock data for the 27 judges panel
+// Mock data for the 9 independent judges panel
 const JUDGES_PANEL = [
   { name: "Prof. Amina Okonkwo", country: "Nigeria", org: "University of Lagos", expertise: "Higher Education", avatar: null },
   { name: "Dr. Kwame Asante", country: "Ghana", org: "Ghana Education Service", expertise: "Policy & Governance", avatar: null },

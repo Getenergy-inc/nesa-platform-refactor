@@ -54,7 +54,7 @@ const COMMON_QUICK_INFO_TAIL = [
     label: "Decision method",
     value: "NRC impact verification and governance approval",
   },
-  { label: "Public voting", value: "None" },
+  { label: "Independent jury review", value: "None" },
   { label: "Nominations close", value: "21 November 2026" },
 ];
 

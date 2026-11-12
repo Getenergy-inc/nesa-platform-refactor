@@ -198,7 +198,7 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     description:
       "Conflict-of-interest declarations, rubric training and sample scoring take place in the Judges Arena with no live nominee data present.",
     activities: [
-      "Confirm 27 judges",
+      "Confirm 9 independent judges",
       "Conflict of interest declarations",
       "Rubric training",
       "Sample scoring calibration",
@@ -258,7 +258,7 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     iconName: "Gavel",
     accent: "amber",
     purpose:
-      "All 27 judges deliberate, score and lock results across the 9 Africa Education Icon pathways (3 subcategories × 3 origin groups).",
+      "All 9 independent judges deliberate, score and lock results across the 9 Africa Education Icon pathways (3 subcategories × 3 origin groups).",
     description:
       "Deliberation and scoring take place in the Judges Arena under full audit logging. Up to nine verified Africa Education Icons of the Decade may be confirmed through authorised recognition decisions.",
     selection: "Independent Icon Judges · Locked per pathway",

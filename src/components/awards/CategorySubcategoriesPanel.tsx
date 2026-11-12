@@ -73,7 +73,7 @@ export function CategorySubcategoriesPanel({ formSlug, categoryTitle }: Props) {
             {categoryTitle ?? form.name} — Subcategories
           </h2>
           <p className="text-foreground/75 text-sm sm:text-base max-w-3xl">
-            Expand any subcategory below to nominate directly{isGBG ? " or cast your vote when public voting is live." : "."}
+            Expand any subcategory below to nominate directly{isGBG ? "." : "."}
             {" "}All submissions are reviewed by the NRC before reaching the jury.
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
@@ -84,7 +84,7 @@ export function CategorySubcategoriesPanel({ formSlug, categoryTitle }: Props) {
             </Badge>
             {isGBG && (
               <Badge variant="outline" className="border-gold/40 text-gold">
-                <Vote className="mr-1 h-3 w-3" /> Public voting enabled
+                <Vote className="mr-1 h-3 w-3" /> Independent jury review enabled
               </Badge>
             )}
           </div>
@@ -247,7 +247,7 @@ function SubcategoryAccordion({
                       <div className="flex items-center gap-2 text-gold mb-2">
                         <Vote className="h-4 w-4" />
                         <span className="text-xs font-semibold uppercase tracking-wide">
-                          Public voting
+                          Independent jury review
                         </span>
                       </div>
                       <StageGate
@@ -271,8 +271,8 @@ function SubcategoryAccordion({
                         }
                       >
                         <p className="text-xs text-foreground/65 mb-3">
-                          Cast your weighted public vote — counts towards the
-                          Blue Garnet final score.
+                          Explore verified nominees — recognition is decided by
+                          independent jury review.
                         </p>
                         <Button
                           asChild

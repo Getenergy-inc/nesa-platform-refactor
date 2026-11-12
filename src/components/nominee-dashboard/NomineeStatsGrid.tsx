@@ -31,7 +31,7 @@ export function NomineeStatsGrid({
       bgColor: "bg-blue-100 dark:bg-blue-900/30",
     },
     {
-      label: "Public Votes",
+      label: "Jury review",
       value: publicVotes,
       subtext: "From community",
       icon: Vote,

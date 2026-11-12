@@ -247,7 +247,7 @@ const TIER_3: SubcategoryEntry[] = [
 ];
 
 // ---------------------------------------------------------------------------
-// TIER 4 — Influencers Education Impact (100% public vote)
+// TIER 4 — Influencers Education Impact (independent jury review)
 // ---------------------------------------------------------------------------
 const TIER_4: SubcategoryEntry[] = [
   {

@@ -121,7 +121,7 @@ const PATHWAY_STEPS = [
   { label: "EDI Review", icon: ShieldCheck, description: "Education Development Index evaluation" },
   { label: "Influencers Award", icon: Star, description: "Gold Certificate of Recognition" },
   { label: "Platinum", icon: CheckCircle2, description: "Platinum verification subcategory" },
-  { label: "Public Voting", icon: Users, description: "Community-validated recognition" },
+  { label: "Independent jury review", icon: Users, description: "Community-validated recognition" },
   { label: "Blue Garnet", icon: Globe, description: "Africa Education Icon — Lifetime" },
 ];
 

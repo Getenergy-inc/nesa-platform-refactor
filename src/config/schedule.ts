@@ -125,7 +125,7 @@ export interface ScheduleTemplate {
 // Pre-nomination activation 1–31 Jul · Jury onboarding 29 Jun – 10 Sep
 // PUBLIC NOMINATIONS OPEN FOR ALL 4 TIERS: 6 September 2026
 // Icon nominations 1 Aug – 12 Sep · Platinum show 7 Aug · Icon show 21 Aug
-// Gold voting 15 Aug – 15 Sep · Gold winners 16 Sep · Blue Garnet voting 16 Sep – 22 Oct · Gala 28 Dec 2026
+// Gold review 15 Aug – 15 Sep · Gold winners 16 Sep · Blue Garnet review 16 Sep – 22 Oct · Gala 28 Dec 2026
 export const DEFAULT_SCHEDULE_TEMPLATE: ScheduleTemplate = {
   nominationReview: {
     nrcReviewStart: { monthDay: "05-01", yearOffset: 0 },
@@ -199,17 +199,17 @@ export function buildScheduledEvents(
     votingWindows: [
       {
         id: "gold-voting",
-        name: "Gold Public Voting Opens",
+        name: "Gold Review Opens",
         type: "voting",
         date: createSeasonDate(awardYear, template.votingWindows.goldVotingOpens.monthDay, template.votingWindows.goldVotingOpens.yearOffset, "00:00:00"),
         description: "Mass participation voting across 135 sub-categories — Top 3 per subcategory",
       },
       {
         id: "blue-garnet-voting",
-        name: "Blue Garnet Voting Opens",
+        name: "Blue Garnet Review Opens",
         type: "voting",
         date: createSeasonDate(awardYear, template.votingWindows.blueGarnetVotingOpens.monthDay, template.votingWindows.blueGarnetVotingOpens.yearOffset, "00:00:00"),
-        description: "40% public vote + 60% independent jury review",
+        description: "40% jury review + 60% independent jury review",
       },
     ],
     galas: [
@@ -331,7 +331,7 @@ export function buildTimeline(
       phase: "NESA-Africa Weekly News",
       dateRange: `Every Friday · July – October ${ceremonyYear}`,
       description:
-        "Weekly Friday news broadcast tracking nominations, jury updates, regional stories, sponsor features and public voting momentum across the full campaign cycle.",
+        "Weekly Friday news broadcast tracking nominations, jury updates, regional stories, sponsor features and independent jury review momentum across the full campaign cycle.",
       type: "awareness",
     },
     {
@@ -391,10 +391,10 @@ export function buildTimeline(
     },
     {
       id: "phase-6-blue-garnet-voting",
-      phase: "Phase 6 · Gold–Blue Garnet Public Voting",
+      phase: "Phase 6 · Gold–Blue Garnet Review",
       dateRange: `16 September – 13 December ${ceremonyYear}`,
       description:
-        "Transparent public participation via the AGC framework combined with independent jury review (40% public + 60% jury) determines the final Gold–Blue Garnet honourees.",
+        "Transparent public participation via the AGC framework combined with independent jury review (independent jury review) determines the final Gold–Blue Garnet honourees.",
       type: "voting",
       stageAction: "jury_scoring",
     },
@@ -466,7 +466,7 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
         "9 Award Categories",
         "135 Sub-Categories",
         "1 Gold Winner per Sub-Category",
-        "Public voting only — no judges",
+        "Independent jury review only — no judges",
         "Transparent digital audit trail",
       ],
       colorHex: "#FFD700",
@@ -481,7 +481,7 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
       features: [
         "From 135 Gold Certificate winners",
         "9 Blue Garnet Recognition recipients",
-        "40% Public Voting + 60% Jury Review",
+        "independent jury review",
         "Elite continental honour",
         "Blue Garnet stone in certificate & plaque",
       ],

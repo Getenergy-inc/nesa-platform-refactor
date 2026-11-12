@@ -64,8 +64,8 @@ const experiencePillars = [
 
 // ============== JOURNEY TIMELINE ==============
 const timeline = [
-  { phase: "Pre-Gala", time: "Oct 1", title: "Gold Voting Closes", desc: "Public Gold tier voting concludes across all regions." },
-  { phase: "Pre-Gala", time: "Oct 15", title: "Final Blue Garnet Voting", desc: "Jury + public final scoring sealed under audit." },
+  { phase: "Pre-Gala", time: "Oct 1", title: "Gold Review Closes", desc: "Public Gold tier voting concludes across all regions." },
+  { phase: "Pre-Gala", time: "Oct 15", title: "Final Blue Garnet Review", desc: "Jury + public final scoring sealed under audit." },
   { phase: "Gala Night", time: "17:00", title: "Nominee Arrival", desc: "Laureates, dignitaries and partners arrive on-site." },
   { phase: "Gala Night", time: "18:00", title: "Red Carpet & Media", desc: "Garnet carpet walk, press interviews, live broadcast opens." },
   { phase: "Gala Night", time: "19:00", title: "Opening & Performances", desc: "Cinematic opening, anthem and cultural showcase." },

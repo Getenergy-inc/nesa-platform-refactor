@@ -73,7 +73,7 @@ export function RegionLegacySection({ slug }: { slug: string }) {
               EduAid.Africa
             </a>{" "}
             during an approved nomination window. Each school is mapped to one of the
-            eight approved legacy regions, may enter a regional public voting process, and
+            eight approved legacy regions, may enter a regional independent jury review process, and
             may qualify for intervention based on verified need, regional relevance and
             community participation. Each region also has a dedicated funding portal and{" "}
             <span className="text-gold font-semibold">GFA Wzip Regional Legacy Wallet</span>{" "}

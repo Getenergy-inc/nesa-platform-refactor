@@ -103,9 +103,9 @@ export const PHASES: PhaseConfig[] = [
   },
   {
     id: "public-voting",
-    name: "Public Voting",
+    name: "Independent jury review",
     shortName: "Vote",
-    description: "Cast your vote for your favorite Gold tier nominees",
+    description: "Explore verified nominees for your favorite Gold tier nominees",
     startDate: new Date("2026-07-13"),
     endDate: new Date("2026-09-25"),
     isActive: false,
@@ -323,9 +323,9 @@ export const TIER_INFO: Record<AwardTier, { name: string; description: string; c
   },
   gold: {
     name: "Gold",
-    description: "Public voting determines winners",
+    description: "Independent jury review determines winners",
     color: "#FFD700",
-    votingMethod: "Public Voting (100%)",
+    votingMethod: "Independent jury review (100%)",
   },
   "blue-garnet": {
     name: "Blue Garnet",

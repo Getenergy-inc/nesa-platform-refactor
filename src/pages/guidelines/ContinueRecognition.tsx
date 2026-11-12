@@ -63,7 +63,7 @@ const PATHWAYS = [
     accent: "border-blue-500/30 bg-blue-500/5",
     badgeClass: "border-blue-500/30 text-blue-400 bg-blue-500/10",
     points: [
-      "Public voting decides finalists",
+      "Independent jury review decides finalists",
       "AGC participation rewards apply",
       "Competitive recognition route",
       "Two-stage Blue Garnet scoring",
@@ -276,7 +276,7 @@ export default function ContinueRecognition() {
             </CardHeader>
             <CardContent className="space-y-4 text-ivory/80 text-sm md:text-base leading-relaxed">
               <p>
-                For NESA-Africa, not all categories are <strong className="text-ivory">Blue Garnet voting categories</strong>.
+                For NESA-Africa, not all categories are <strong className="text-ivory">competitive Blue Garnet categories</strong>.
                 Blue Garnet categories are voting-driven.
               </p>
               <p>

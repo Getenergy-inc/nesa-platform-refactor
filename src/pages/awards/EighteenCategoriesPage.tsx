@@ -70,7 +70,7 @@ export default function EighteenCategoriesPage() {
             </p>
 
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-sm text-ivory/70">
-              <span className="inline-flex items-center gap-2"><Trophy className="h-4 w-4 text-gold" /> 18 Categories</span>
+              <span className="inline-flex items-center gap-2"><Trophy className="h-4 w-4 text-gold" /> 22 categories</span>
               <span className="opacity-30">•</span>
               <span className="inline-flex items-center gap-2"><Users className="h-4 w-4 text-gold" /> Jury + Public</span>
               <span className="opacity-30">•</span>
@@ -163,7 +163,7 @@ export default function EighteenCategoriesPage() {
           <h3 className="mt-2 font-serif text-2xl text-ivory">
             Know an Enabler who deserves recognition?
           </h3>
-          <p className="mt-2 text-ivory/70">Nominations are open across all 18 categories.</p>
+          <p className="mt-2 text-ivory/70">Nominations are open across all 22 categories.</p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Button asChild className="bg-gold text-charcoal hover:bg-gold/90 rounded-full px-6">
               <Link to="/nominate?tier=gold-blue-garnet">Start a Nomination</Link>

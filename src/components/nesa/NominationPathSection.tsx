@@ -27,14 +27,14 @@ export function NominationPathSection() {
     },
     {
       icon: Vote,
-      badge: "Public Voting",
+      badge: "Independent jury review",
       title: "Gold-Blue Garnet Certificate Awards",
       period: "Annual Competition",
       description: "Open competition with public nominations, independent verification and expert judging.",
       bullets: [
         "Nominate verified changemakers",
         "Independent NRC verification of every nomination",
-        "Explore Recognition during official public voting windows",
+        "Explore Recognition during official independent jury review windows",
         "Winners protected by integrity controls"
       ],
       cta: { label: "Nominate for Voting Categories", href: "/nominate?tier=voting" },

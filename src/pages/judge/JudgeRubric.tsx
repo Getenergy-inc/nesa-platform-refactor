@@ -93,10 +93,10 @@ export default function JudgeRubric() {
                   </p>
                   <div className="flex flex-wrap gap-3">
                     <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30">
-                      60% Jury Weight
+                      Independent Jury Review
                     </Badge>
                     <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
-                      40% Public Vote
+                      NRC-Verified Evidence
                     </Badge>
                     <Badge className="bg-gold/20 text-gold border-gold/30">
                       5 Criteria

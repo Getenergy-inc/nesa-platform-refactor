@@ -3,7 +3,7 @@
  * Single source of truth for the 9 voting categories
  * 
  * These categories represent the criteria by which nominees are evaluated
- * during both Gold Garnet and Blue Garnet voting.
+ * during both Gold Garnet and Blue Garnet review.
  */
 
 export interface VoteCategory {
@@ -78,13 +78,13 @@ export const VOTE_TYPES: { id: VoteType; label: string; description: string; col
   {
     id: "gold_garnet",
     label: "Gold Garnet",
-    description: "100% public vote for approved nominees",
+    description: "independent jury review for approved nominees",
     color: "gold",
   },
   {
     id: "blue_garnet",
     label: "Blue Garnet",
-    description: "40% public + 60% jury evaluation",
+    description: "independent jury review",
     color: "blue",
   },
 ];

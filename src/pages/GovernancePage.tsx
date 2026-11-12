@@ -49,7 +49,7 @@ const sections: Section[] = [
     icon: Shield,
     title: "Independent Verification (NRC)",
     content: [
-      "30 NRC (Nominee Research Corps) volunteers verify every nomination against an 18-point rubric.",
+      "27 Nomination Review Committee (NRC) members verify every nomination against an 18-point rubric.",
       "2-of-3 quorum rule: two independent reviewers must agree for approval or rejection.",
       "72-hour SLA per reviewer, with automatic escalation to NRC Lead after 96 hours.",
       "All state changes are recorded in an append-only audit log.",
@@ -62,7 +62,7 @@ const sections: Section[] = [
     content: [
       "Every vote is recorded with a device fingerprint and timestamp; duplicate-voting attempts are blocked at the database layer.",
       "Recognition in the 2026 cycle uses no public voting: outcomes are decided by verification, assessment and governance ratification.",
-      "Blue Garnet voting is hybrid: 40% public vote weight + 60% jury evaluation.",
+      "Blue Garnet review is hybrid: independent jury review.",
       "Automated fraud detection monitors for burst voting (>10 votes/60s) and device reuse across accounts.",
     ],
   },

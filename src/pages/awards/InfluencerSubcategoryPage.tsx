@@ -428,7 +428,7 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
                   NRC impact verification and governance approval
                 </p>
                 <p>
-                  <span className="text-gold font-semibold">Public voting:</span>{" "}
+                  <span className="text-gold font-semibold">Independent jury review:</span>{" "}
                   Not applicable in 2026
                 </p>
               </div>

@@ -93,7 +93,7 @@ export type Subcategory = {
   scope?: string;
   /** Number of subcategories within this category. */
   subcategoryCount?: number;
-  /** Vote split label e.g. "60% jury / 40% public". */
+  /** Vote split label e.g. "independent jury review". */
   voteSplit?: string;
 };
 

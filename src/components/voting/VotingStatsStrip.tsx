@@ -19,7 +19,7 @@ export function VotingStatsStrip({ variant = "amber" }: VotingStatsStripProps) {
 
   const periodText = variant === "amber" ? "Apr 10 – May 16, 2026" : "May 18 – Jun 17, 2026";
   const awardText = variant === "amber" ? "Gold Certificate Award" : "Blue Garnet Award";
-  const voteText = variant === "amber" ? "100% Public Vote" : "40% Public + 60% Jury";
+  const voteText = variant === "amber" ? "independent jury review" : "independent jury review";
 
   return (
     <section className={`${colors} border-b py-4`}>

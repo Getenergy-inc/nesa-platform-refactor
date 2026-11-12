@@ -23,7 +23,7 @@ import ediVotingImg from "@/assets/cards/edi-voting.jpg";
 const FOUNDATION_STEP = {
   title: "EDI Matrix",
   subtitle: "The Integrity Backbone",
-  description: "The Education Development Index defines evaluation standards across 3 levels and 17 categories — the foundation every nomination, judge score, and vote is measured against.",
+  description: "The Education Development Index defines evaluation standards across 3 levels and 22 categories — the foundation every nomination, judge score, and vote is measured against.",
   icon: Shield,
   image: ediMatrixImg,
   href: "/guidelines/edi-matrix",
@@ -74,9 +74,9 @@ const JOURNEY_STEPS = [
   },
   {
     step: 4,
-    title: "Public Voting",
+    title: "Independent jury review",
     subtitle: "For Voters",
-    description: "AGC credits, Gold-Blue Garnet voting windows, and ethical rules.",
+    description: "AGC credits, Gold-Blue Garnet review windows, and ethical rules.",
     icon: Vote,
     image: ediVotingImg,
     href: "/guidelines/voters",

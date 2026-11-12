@@ -274,7 +274,7 @@ export default function SubcategoryLandingPage({ entry }: Props) {
                     "Provide verifiable evidence — links, reports, beneficiary metrics.",
                     "NRC reviewers screen every submission for integrity and eligibility.",
                     isGBG
-                      ? "Approved nominees enter the 60/40 jury + public voting flow."
+                      ? "Approved nominees enter the 60/40 jury + independent jury review flow."
                       : "Approved nominees advance to independent jury evaluation.",
                   ].map((step, i) => (
                     <li

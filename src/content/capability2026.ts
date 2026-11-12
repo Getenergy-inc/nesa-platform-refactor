@@ -64,7 +64,7 @@ export const STRATEGIC_OBJECTIVES = [
   {
     number: "02",
     title: "Amplify Education Impact Through Media, Storytelling and Public Participation",
-    body: "Use nominations, nominee profiles, NESA Africa TV, webinars, documentaries, digital campaigns, public voting and regional engagement to make the work of Education Enablers visible, trusted and widely celebrated.",
+    body: "Use nominations, nominee profiles, NESA Africa TV, webinars, documentaries, digital campaigns, independent jury review and regional engagement to make the work of Education Enablers visible, trusted and widely celebrated.",
   },
   {
     number: "03",
@@ -102,7 +102,7 @@ export const WHAT_WE_DO = [
   },
   {
     title: "Awards and Public Recognition",
-    body: "Recognition campaigns, showcases, media features, public voting, jury review processes and award events that celebrate measurable education impact.",
+    body: "Recognition campaigns, showcases, media features, independent jury review, jury review processes and award events that celebrate measurable education impact.",
   },
   {
     title: "Media and Storytelling",
@@ -117,7 +117,7 @@ export const WHAT_WE_DO = [
     body: "Visibility and engagement opportunities for organisations investing in education through CSR, grants, sponsorships, scholarships, institutional support and social impact programmes.",
   },
   {
-    title: "Public Voting and Participation",
+    title: "Independent jury review and Participation",
     body: "Public participation through AGC-powered voting, nominee discovery, awareness campaigns, digital engagement and continental mobilisation.",
   },
   {
@@ -211,7 +211,7 @@ export const KEY_PROGRAMMES = [
   },
   {
     title: "GFAwzip Wallet Payment Operations",
-    body: "Supports public voting, digital engagement and transparent community involvement.",
+    body: "Supports independent jury review, digital engagement and transparent community involvement.",
   },
 ] as const;
 

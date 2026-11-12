@@ -12,7 +12,7 @@
 
 export type SelectionMethod =
   | "Jury Selected"
-  | "Jury + Public Voting"
+  | "Independent Jury Review"
   | "Invitation / Nomination"
   | "100% Public Recognition";
 
@@ -94,8 +94,8 @@ const BLUE_GARNET_TIER: Tier2026 = {
   slug: "gold-blue-garnet",
   shortLabel: "Gold-Blue Garnet",
   fullName: "Gold-Blue Garnet Awards",
-  tagline: "Africa's Competitive Recognition · Jury + Public Voting",
-  selectionMethod: "Jury + Public Voting",
+  tagline: "Africa's Competitive Recognition · Independent Jury Review",
+  selectionMethod: "Independent Jury Review",
   votingMode: "hybrid",
   description:
     "Competitive recognition for individuals and organisations driving measurable education impact across Africa's eight regions, the Diaspora and Friends of Africa.",
@@ -182,7 +182,7 @@ const INFLUENCER_TIER: Tier2026 = {
   selectionMethod: "100% Public Recognition",
   votingMode: "public",
   description:
-    "Recognising influence that advances Education for All — across social media, sports and music. Public voting only.",
+    "Recognising influence that advances Education for All — across social media, sports and music. Independent jury review only.",
   url: "/awards/influencer-education-impact",
   subPages: [
     { label: "Social Media Education Champions", href: "/nominees/category/social-media" },

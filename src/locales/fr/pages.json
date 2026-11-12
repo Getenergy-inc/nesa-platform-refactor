@@ -161,7 +161,7 @@
         },
         "blueGarnet": {
           "title": "Blue Garnet",
-          "description": "60% jury + 40% public. Journaux d'audit et contrôles anti-fraude."
+          "description": "independent jury review. Journaux d'audit et contrôles anti-fraude."
         },
         "sponsors": {
           "title": "Sponsors",
@@ -448,7 +448,7 @@
       },
       "blueGarnet": {
         "title": "Prix Blue Garnet",
-        "description": "Plus haute distinction — 60% jury, 40% vote public."
+        "description": "Plus haute distinction — évaluation par un jury indépendant, sans vote public."
       }
     },
     "learnMore": "En Savoir Plus",
