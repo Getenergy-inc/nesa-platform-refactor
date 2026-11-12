@@ -1,3 +1,12 @@
+## Africa Special Needs Education Support Fund 2027 — 12 Nov 2026
+- [x] Read the latest programme brief and prepare a staged plan preserving the security hold and existing branding.
+- [ ] Obtain security clearance and written phase approval before executing application code or implementing website changes.
+- [ ] Confirm authorised EduAid-Africa project access, official forms, approved regional mapping and voting governance inputs.
+- [ ] Add matching programme and participation pages, eight service groups, timetable and shared safeguards on both websites after clearance.
+- [ ] Implement approved-only school visibility, source-recorded participation and separate donation-interest/payment statuses.
+- [ ] Implement and verify controlled school-only voting; keep disabled until all authorisation conditions are met.
+- [ ] Test both sites' actual flows, mobile/desktop accessibility and privacy; supply 390px/1440px before/after evidence and stop for written review without publishing.
+
 ## Security recovery and CTA master prompt — 12 Nov 2026
 - [x] Phase 0: Deliver local/repository recovery inventory, security findings and rotation checklist using static inspection and read-only Cloud queries; no application code executed.
 - [x] Inventory both public GitHub repositories, branch revisions/authors, protection flags, manifests and available divergence comparisons.
