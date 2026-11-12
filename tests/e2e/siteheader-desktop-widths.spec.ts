@@ -53,9 +53,10 @@ for (const width of WIDTHS) {
       page,
     }) => {
       const header = page.locator("header").first();
-      const nominate = header
-        .getByRole("link", { name: /nominate/i })
-        .first();
+      const nominate = header.getByRole("link", {
+        name: "Nominate an Education Enabler",
+        exact: true,
+      });
       await expect(nominate).toBeVisible();
 
       // Single-line: rendered height should be close to the line-height of
@@ -93,7 +94,10 @@ for (const width of WIDTHS) {
 
     test("header content sits on a single row", async ({ page }) => {
       const header = page.locator("header").first();
-      const nominate = header.getByRole("link", { name: /nominate/i }).first();
+      const nominate = header.getByRole("link", {
+        name: "Nominate an Education Enabler",
+        exact: true,
+      });
       const brand = header.locator('a[aria-label="NESA-Africa home"]').first();
 
       const nb = await nominate.boundingBox();
