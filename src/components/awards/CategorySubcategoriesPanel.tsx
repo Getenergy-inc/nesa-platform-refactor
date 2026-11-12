@@ -271,8 +271,8 @@ function SubcategoryAccordion({
                         }
                       >
                         <p className="text-xs text-foreground/65 mb-3">
-                          Explore verified nominees — counts towards the
-                          Blue Garnet final score.
+                          Explore verified nominees — recognition is decided by
+                          independent jury review.
                         </p>
                         <Button
                           asChild
