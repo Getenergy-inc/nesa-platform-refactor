@@ -375,10 +375,6 @@
     "schoolofhope.example": [
       "src/lib/nominations/__tests__/mapRawRow.test.ts"
     ],
-    "sjghitoydzpirpqjules.supabase.co": [
-      "scripts/catalogue-migration-report.ts",
-      "supabase/functions/nesa-bulk-stage/index.ts"
-    ],
     "t.me": [
       "src/components/shared/SocialShareBar.tsx"
     ],
@@ -516,6 +512,10 @@
       "src/config/awards/influencerImpact2026.ts",
       "src/pages/Contact.tsx",
       "src/pages/volunteers/VolunteerProfile.tsx"
+    ],
+    "[managed Cloud host withheld]": [
+      "scripts/catalogue-migration-report.ts",
+      "supabase/functions/nesa-bulk-stage/index.ts"
     ]
   },
   "credential_literal_flags": [],
