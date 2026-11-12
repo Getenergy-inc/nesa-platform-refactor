@@ -28,3 +28,12 @@ All entries below are **TBC — needs management decision**. Website copy, certi
 | Taxonomy mapping | Code has 17 categories / 138 subcategories; approved 4 tiers / 22 awards / 90 subcategories; Tier 2 has no code entries; Icon label 2005–2025 vs 2006–2026. | Presentation-only registry in WP-5; legacy keys unchanged. |
 | Icon criteria weights | Weights already shown on Icon and gala pages. | Confirm governance approval is recorded. |
 | Official URLs | Special Needs School Support Forms (NESA and EduAid), live-stream link, payment instructions. | TBC — needs management decision; shown as CONTENT REQUIRED. |
+
+## Recommended decisions from Lean Website Pack brief v2 (12 Nov 2026) — pending management confirmation
+- Gala: Monday 28 December 2026; certificates from 29 December 2026 (supersedes 13 Dec option).
+- NRC: 36 members, 9 per tier; /nrc/members cap from config = 36. CONFLICT: live copy currently says "27-member" / "27 NRC members" (prior Master Document rule). Needs sign-off before WP-2/WP-9.
+- Regions: award zones unchanged; Support Fund shows 8 regions without names/country lists until mapping approved.
+- Icon criteria: show names; hide percentage weights unless a governance approval record exists. CONFLICT: weights are currently shown on gala/Icon pages.
+- URLs (Support forms, live stream, payment instructions): config values; buttons hidden until set.
+- Hosting: keep host serving nesa.africa; turn off the other's auto-deploy.
+- Stage Control (management setting): close tickets, public_voting, votingOpenGold, votingOpenBlueGarnet; keep nominations open; 2026 active season.

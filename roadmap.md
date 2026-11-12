@@ -82,3 +82,4 @@
 - [x] Send every website nomination button and CTA to the official Google Form (single shared link), embedded on the nomination page with open-in-new-tab.
 - [x] Remove hidden harmful start-up code that arrived via the 18 Oct GitHub merge (start scripts, style config, editor auto-run task, fake font files).
 - [ ] Confirm volunteer badge list is only public badge definitions — database unreachable this turn.
+- [ ] Lean Website Pack v2 (WP-1–WP-12) — blocked on "Gate 0 approved"; NRC 36 vs 27 and Icon weight visibility need confirmation
