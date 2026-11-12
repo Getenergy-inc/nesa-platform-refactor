@@ -58,6 +58,16 @@
 /privacy-policy                                              /policies            301
 /terms                                                       /policies            301
 /cookie-policy                                               /policies            301
+/tickets                                                     /media/gala          301
+/events                                                      /media/gala          301
+/events/tourism                                              /media/gala          301
+/vote                                                        /                    301
+/dashboard/votes                                             /                    301
+/dashboard/wallet                                            /                    301
+/rebuild                                                     /support-a-special-needs-school 301
+/donate                                                      /support-a-special-needs-school 301
+/eduaid                                                      /support-a-special-needs-school 301
+/special-needs-education-support                             /support-a-special-needs-school 301
 /language                                                    /                    301
 
 # --- 2. SPA routes (558 explicit paths from src/App.tsx) ---

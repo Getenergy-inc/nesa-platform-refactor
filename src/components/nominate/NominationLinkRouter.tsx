@@ -14,6 +14,7 @@ function upgradeNominationAnchors(root: ParentNode) {
     ? [root]
     : Array.from(root.querySelectorAll<HTMLAnchorElement>("a[href]"));
   for (const anchor of anchors) {
+    if (anchor.dataset.preserveNominationRoute === "true") continue;
     const href = anchor.getAttribute("href");
     if (!href || !isNominationHref(href)) continue;
     if (!href.startsWith(OFFICIAL_NOMINATION_FORM_URL)) {
@@ -43,7 +44,7 @@ export function NominationLinkRouter() {
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       const target = event.target as Element | null;
       const anchor = target?.closest?.("a[href]") as HTMLAnchorElement | null;
-      if (!anchor) return;
+      if (!anchor || anchor.dataset.preserveNominationRoute === "true") return;
       const href = anchor.dataset.nominationOriginalHref ?? anchor.getAttribute("href");
       if (!href || !isNominationHref(href)) return;
       trackEvent("official_nomination_form_open", { from: href, page: window.location.pathname });

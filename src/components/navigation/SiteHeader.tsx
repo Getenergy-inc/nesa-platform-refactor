@@ -228,6 +228,7 @@ function DesktopNav() {
         <NavigationMenuItem key={item.href} className={extraCls}>
           <Link
             to={item.href}
+            data-preserve-nomination-route={item.href === "/nominate" ? "true" : undefined}
             className={triggerCls}
             aria-current={active ? "page" : undefined}
             onClick={() =>
@@ -499,12 +500,12 @@ function MobileMenu() {
       </SheetTrigger>
       <SheetContent
         side="right"
-        className="w-[92vw] sm:w-[380px] bg-charcoal border-l border-gold/20 p-0 overflow-y-auto"
+        className="flex flex-col w-[92vw] sm:w-[380px] bg-charcoal border-l border-gold/20 p-0 overflow-hidden"
       >
-        <SheetHeader className="p-4 border-b border-gold/20">
+        <SheetHeader className="shrink-0 p-4 border-b border-gold/20">
           <SheetTitle className="text-gold text-left">NESA-Africa 2026</SheetTitle>
         </SheetHeader>
-        <div className="p-3">
+        <div className="flex-1 overflow-y-auto p-3">
           <div className="mb-3"><NavSearch className="!h-9 !w-full" /></div>
           <div className="grid grid-cols-2 gap-2 mb-3">
             <NominateButton className="w-full h-auto min-h-11 whitespace-normal text-center py-2" />
@@ -539,6 +540,7 @@ function MobileMenu() {
                     <div key={item.href} className="border-b border-gold/15">
                       <Link
                         to={item.href}
+                        data-preserve-nomination-route={item.href === "/nominate" ? "true" : undefined}
                         onClick={close}
                         aria-current={isActive(location.pathname, item.href) ? "page" : undefined}
                         className="block px-3 py-3 text-sm text-white hover:text-gold rounded-md"
@@ -641,6 +643,18 @@ function MobileMenu() {
               </>
             )}
           </div>
+        </div>
+        <div className="shrink-0 border-t border-gold/20 bg-charcoal p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+          <Button asChild className="w-full min-h-11 bg-gold text-charcoal hover:bg-gold/90 font-semibold">
+            <a
+              href={NOMINATE_CTA.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackNav("nominate_now_click", { href: NOMINATE_CTA.href, phase: CURRENT_PHASE.phase, device: "mobile" })}
+            >
+              Submit a Nomination
+            </a>
+          </Button>
         </div>
       </SheetContent>
     </Sheet>
