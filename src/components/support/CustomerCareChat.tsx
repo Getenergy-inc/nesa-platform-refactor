@@ -116,6 +116,7 @@ export function CustomerCareChat() {
                   variant="ghost"
                   size="icon"
                   onClick={() => setIsOpen(false)}
+                  aria-label="Close support chat"
                   className="h-8 w-8 text-primary-foreground hover:bg-primary-foreground/20"
                 >
                   <X className="h-4 w-4" />
