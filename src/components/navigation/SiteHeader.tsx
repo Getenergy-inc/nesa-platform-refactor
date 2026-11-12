@@ -228,6 +228,7 @@ function DesktopNav() {
         <NavigationMenuItem key={item.href} className={extraCls}>
           <Link
             to={item.href}
+            data-preserve-nomination-route={item.href === "/nominate" ? "true" : undefined}
             className={triggerCls}
             aria-current={active ? "page" : undefined}
             onClick={() =>
@@ -539,6 +540,7 @@ function MobileMenu() {
                     <div key={item.href} className="border-b border-gold/15">
                       <Link
                         to={item.href}
+                        data-preserve-nomination-route={item.href === "/nominate" ? "true" : undefined}
                         onClick={close}
                         aria-current={isActive(location.pathname, item.href) ? "page" : undefined}
                         className="block px-3 py-3 text-sm text-white hover:text-gold rounded-md"
@@ -648,7 +650,7 @@ function MobileMenu() {
               href={NOMINATE_CTA.href}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackNav("nominate_now_click", { href: NOMINATE_CTA.href, phase: CURRENT_PHASE.phase, device: "mobile_sticky" })}
+              onClick={() => trackNav("nominate_now_click", { href: NOMINATE_CTA.href, phase: CURRENT_PHASE.phase, device: "mobile" })}
             >
               Submit a Nomination
             </a>

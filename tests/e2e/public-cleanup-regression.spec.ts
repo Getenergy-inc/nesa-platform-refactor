@@ -95,7 +95,7 @@ test("footer includes NRC, programme-update and volunteer destinations", async (
   const footer = page.getByRole("contentinfo");
   await expect(footer.getByRole("link", { name: "Join the NRC", exact: true })).toHaveAttribute("href", "/nrc/apply");
   await expect(footer.getByRole("link", { name: "Volunteer", exact: true })).toHaveAttribute("href", "/volunteer");
-  await expect(footer.getByText("Receive Programme Updates — CONTENT REQUIRED", { exact: true })).toBeVisible();
+  await expect(footer.getByText("Receive Programme Updates — CONTENT REQUIRED", { exact: true }).filter({ visible: true })).toBeVisible();
   await expect(footer.getByRole("link", { name: "Privacy", exact: true })).toHaveAttribute("href", "/policies#privacy");
   await expect(footer.getByRole("link", { name: "Terms", exact: true })).toHaveAttribute("href", "/policies#terms");
 });

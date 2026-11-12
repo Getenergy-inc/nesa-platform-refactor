@@ -29,6 +29,7 @@ export function MobileBottomActions() {
             <Link
               key={item.href}
               to={item.href}
+              data-preserve-nomination-route={item.href === "/nominate" ? "true" : undefined}
               aria-current={active ? "page" : undefined}
               onClick={() => trackNav("mobile_bottom_action_click", { label: item.label, href: item.href, device: "mobile" })}
               className={cn(
