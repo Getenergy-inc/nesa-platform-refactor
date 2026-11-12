@@ -238,7 +238,7 @@ export const PAGE_FAQS: PageFAQ[] = [
       },
       {
         q: "What is the difference between Blue Garnet and Platinum Certificate categories?",
-        a: "Blue Garnet is competitive and combines jury scoring with public voting. Platinum Certificate is governance-led, evidence-based recognition without public voting.",
+        a: "Blue Garnet is competitive and decided by independent jury scoring with no public voting. Platinum Certificate is governance-led, evidence-based recognition without public voting.",
       },
       {
         q: "Can one nominee enter more than one category?",
@@ -353,7 +353,7 @@ export const PAGE_FAQS: PageFAQ[] = [
       },
       {
         q: "Does public voting alone determine winners?",
-        a: "Not in Blue Garnet — public votes are combined with independent jury scoring. In Gold and Influencer Impact categories, public voting is the primary signal, audited for integrity.",
+        a: "No. There is no public voting in 2026; recognition is decided by NRC verification, independent jury review and governance approval.",
       },
       {
         q: "How does NESA-Africa prevent manipulation?",

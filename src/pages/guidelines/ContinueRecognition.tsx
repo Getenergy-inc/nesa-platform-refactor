@@ -276,7 +276,7 @@ export default function ContinueRecognition() {
             </CardHeader>
             <CardContent className="space-y-4 text-ivory/80 text-sm md:text-base leading-relaxed">
               <p>
-                For NESA-Africa, not all categories are <strong className="text-ivory">Blue Garnet voting categories</strong>.
+                For NESA-Africa, not all categories are <strong className="text-ivory">competitive Blue Garnet categories</strong>.
                 Blue Garnet categories are voting-driven.
               </p>
               <p>

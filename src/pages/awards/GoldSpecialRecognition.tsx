@@ -85,7 +85,7 @@ export default function GoldSpecialRecognition() {
           faqs={[
             { q: "Does follower count alone qualify?", a: "No. Reach matters, but it is one of three pillars — Education Impact and Development Contribution evidence is still required." },
             { q: "Can teams or labels be nominated?", a: "Yes, where a named lead figure represents the work and accepts the recognition responsibilities." },
-            { q: "Is public voting used?", a: "Public participation is used in eligible tracks; final recognition is governed by the EDX Matrix and integrity rules." },
+            { q: "Is public voting used?", a: "No. There is no public voting in 2026; recognition is governed by NRC verification, the EDX Matrix and integrity rules." },
           ]}
         />
 

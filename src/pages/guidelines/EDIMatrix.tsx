@@ -62,7 +62,7 @@ const BLUE_GARNET_EDI = {
   subtitle: "10 categories · Independent jury assessment",
   description: "The pinnacle competitive track. Nominees progress through independent jury review and expert jury evaluation. Top 3 finalists in each subcategory compete for the Blue Garnet Award.",
   scoringBreakdown: [
-    { label: "Independent Jury Review", weight: 40, description: "Scored by independent judges — no public voting in the 2026 cycle" },
+    { label: "NRC Evidence Verification", weight: 40, description: "Verified evidence review — no public voting in the 2026 cycle" },
     { label: "Jury Assessment", weight: 60, description: "Independent expert panel scoring on 20-point scale" },
   ],
   judgingCriteria: [
