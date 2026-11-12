@@ -78,6 +78,26 @@ function trackFooter(section: string, label: string, href: string) {
   trackNav("footer_click", { section, label, href });
 }
 
+function FooterNavLink({ section, link }: { section: string; link: FooterLink }) {
+  if (link.contentRequired) {
+    return (
+      <span className="text-white/45 text-sm py-1">
+        {link.label} — CONTENT REQUIRED
+      </span>
+    );
+  }
+
+  return (
+    <Link
+      to={link.href!}
+      onClick={() => trackFooter(section, link.label, link.href!)}
+      className="text-white/60 hover:text-gold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded"
+    >
+      {link.label}
+    </Link>
+  );
+}
+
 export function NESAFooter() {
   return (
     <footer className="bg-charcoal border-t border-gold/20 pb-24 lg:pb-8" aria-labelledby="footer-heading">
