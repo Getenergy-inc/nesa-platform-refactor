@@ -37,7 +37,7 @@ export default function SpecialNeedsSchoolParticipate() {
           </nav>
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-gold">{SCHOOL_SUPPORT_PROGRAMME.presenters}</p>
           <h1 className="mt-4 font-display text-4xl font-bold leading-tight text-ivory md:text-5xl">Participate in the {SCHOOL_SUPPORT_PROGRAMME.name}</h1>
-          <p className="mt-5 max-w-3xl leading-relaxed text-ivory/75">Choose one of eight ways to take part. The authorised NESA-Africa form opens in a new tab.</p>
+          <p className="mt-5 max-w-3xl leading-relaxed text-ivory/75">Choose one of eight ways to take part. Once its authorised URL is supplied, the NESA-Africa form opens in a new tab.</p>
         </div>
       </Section>
 

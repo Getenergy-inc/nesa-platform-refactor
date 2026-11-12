@@ -1,7 +1,8 @@
 ## Special Needs School programme and participation pages — 12 Nov 2026
-- [ ] Extend the existing programme page and school-support registry with the supplied programme copy; preserve the current theme and fail-closed school visibility.
-- [ ] Add the canonical programme and eight-option participation routes, config-driven NESA form link and config-gated voting label.
-- [ ] Verify focused rules, both routes, mobile/desktop rendering and the missing-form/voting-disabled states; do not publish.
+- [x] Extend the existing programme page and school-support registry with the supplied programme copy; preserve the current theme and fail-closed school visibility.
+- [x] Add the canonical programme and eight-option participation routes, config-driven NESA form link and config-gated voting label.
+- [x] Verify seven focused rules, both routes, 390px/1440px rendering and the missing-form/voting-disabled states; build OK; do not publish.
+- [ ] Activate the external NESA-Africa participation form — authorised SNS_FORM_URL not supplied; page currently displays CONTENT REQUIRED and no external link.
 
 ## Page-specific refactor template — 12 Nov 2026
 - [ ] Await the concrete route, file, Section 3 page copy and word budget; the received template contains placeholders only, so no page files changed.
