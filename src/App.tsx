@@ -266,6 +266,7 @@ import SupportConsolidated from "./pages/support/SupportConsolidated";
 // deleted) but is superseded by EducationSocialImpactOverview at /impact.
 import EducationSocialImpactOverview from "./pages/impact/EducationSocialImpactOverview";
 import SpecialNeedsSchools from "./pages/impact/SpecialNeedsSchools";
+import SpecialNeedsSchoolParticipate from "./pages/impact/SpecialNeedsSchoolParticipate";
 import RegionalInterventions from "./pages/impact/RegionalInterventions";
 import EduAidJournal from "./pages/journal/EduAidJournal";
 import ImpactStories from "./pages/impact/ImpactStories";
@@ -801,6 +802,22 @@ const App = () => (
                     element={
                       <WithLayout>
                         <EducationSocialImpactOverview />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/support-a-special-needs-school"
+                    element={
+                      <WithLayout>
+                        <SpecialNeedsSchools />
+                      </WithLayout>
+                    }
+                  />
+                  <Route
+                    path="/support-a-special-needs-school/participate"
+                    element={
+                      <WithLayout>
+                        <SpecialNeedsSchoolParticipate />
                       </WithLayout>
                     }
                   />
