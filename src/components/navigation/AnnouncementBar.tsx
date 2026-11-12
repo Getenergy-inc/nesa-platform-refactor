@@ -38,7 +38,7 @@ export function AnnouncementBar() {
   };
 
   const inner = (
-    <span className="block truncate max-w-full">{current.text}</span>
+    <span className="block max-w-full leading-snug text-balance">{current.text}</span>
   );
 
 
@@ -48,7 +48,7 @@ export function AnnouncementBar() {
       aria-label="Site announcement"
       className="w-full bg-gold text-charcoal text-xs sm:text-[13px]"
     >
-      <div className="container mx-auto px-4 h-8 flex items-center justify-between gap-2">
+      <div className="container mx-auto px-4 min-h-8 py-1.5 flex items-center justify-between gap-2">
         <div className="flex-1 min-w-0 flex items-center justify-center">
           {current.href ? (
             <Link
