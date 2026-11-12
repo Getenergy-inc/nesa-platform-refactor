@@ -1,5 +1,6 @@
 ## Africa Special Needs Education Support Fund 2027 — 12 Nov 2026
 - [x] Read the latest programme brief and prepare a staged plan preserving the security hold and existing branding.
+- [x] Receive approval of the staged programme plan; approval does not clear the mandatory Phase 0 security hold.
 - [ ] Obtain security clearance and written phase approval before executing application code or implementing website changes.
 - [ ] Confirm authorised EduAid-Africa project access, official forms, approved regional mapping and voting governance inputs.
 - [ ] Add matching programme and participation pages, eight service groups, timetable and shared safeguards on both websites after clearance.
