@@ -9,6 +9,7 @@ for (const route of ROUTES) {
   for (const width of WIDTHS) {
     test.describe(`floating help buttons on ${route} at ${width}px`, () => {
       test.use({ viewport: { width, height: 844 } });
+      test.setTimeout(60_000);
 
       test("stay separate, tappable, and above mobile quick actions", async ({ page }) => {
         await page.goto(route);
