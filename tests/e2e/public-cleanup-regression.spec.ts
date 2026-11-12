@@ -50,13 +50,21 @@ for (const route of ["/tickets", "/buy-your-ticket", "/gala/tickets", "/events/t
   });
 }
 
-test("mobile quick actions contain only Nominate and Explore Awards", async ({ page }) => {
+test("mobile quick actions expose the four canonical destinations and official-form CTA", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/", { waitUntil: "domcontentloaded" });
   const actions = page.getByRole("navigation", { name: "Mobile quick actions" });
-  await expect(actions.getByRole("link")).toHaveCount(2);
-  await expect(actions.getByRole("link", { name: "Nominate", exact: true })).toHaveAttribute("href", /^https:\/\/docs\.google\.com\/forms\//);
-  await expect(actions.getByRole("link", { name: "Explore Awards", exact: true })).toHaveAttribute("href", "/awards");
+  await expect(actions.getByRole("link")).toHaveCount(4);
+  await expect(actions.getByRole("link", { name: "Home", exact: true })).toHaveAttribute("href", "/");
+  await expect(actions.getByRole("link", { name: "Awards", exact: true })).toHaveAttribute("href", "/categories");
+  await expect(actions.getByRole("link", { name: "Nominate", exact: true })).toHaveAttribute("href", "/nominate");
+  await expect(actions.getByRole("link", { name: "Support a School", exact: true })).toHaveAttribute("href", "/support-a-special-needs-school");
+
+  await page.getByRole("button", { name: "Open navigation" }).click();
+  const submit = page.getByRole("link", { name: "Submit a Nomination", exact: true });
+  await expect(submit).toBeVisible();
+  await expect(submit).toHaveAttribute("href", /^https:\/\/docs\.google\.com\/forms\//);
+  await expect(submit).toHaveAttribute("target", "_blank");
 });
 
 test("home exposes the five canonical Follow destinations", async ({ page }) => {

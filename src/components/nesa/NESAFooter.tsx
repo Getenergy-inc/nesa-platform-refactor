@@ -6,10 +6,16 @@ import { trackNav } from "@/lib/analytics";
 import { FollowLinks } from "@/components/nesa/FollowLinks";
 import { SCHOOL_SUPPORT_ACTIONS } from "@/config/schoolSupport";
 
+interface FooterLink {
+  label: string;
+  href?: string;
+  contentRequired?: boolean;
+}
+
 interface FooterSection {
   id: string;
   title: string;
-  links: { label: string; href: string }[];
+  links: FooterLink[];
 }
 
 const SECTIONS: FooterSection[] = [

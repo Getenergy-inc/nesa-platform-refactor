@@ -499,12 +499,12 @@ function MobileMenu() {
       </SheetTrigger>
       <SheetContent
         side="right"
-        className="w-[92vw] sm:w-[380px] bg-charcoal border-l border-gold/20 p-0 overflow-y-auto"
+        className="flex flex-col w-[92vw] sm:w-[380px] bg-charcoal border-l border-gold/20 p-0 overflow-hidden"
       >
-        <SheetHeader className="p-4 border-b border-gold/20">
+        <SheetHeader className="shrink-0 p-4 border-b border-gold/20">
           <SheetTitle className="text-gold text-left">NESA-Africa 2026</SheetTitle>
         </SheetHeader>
-        <div className="p-3">
+        <div className="flex-1 overflow-y-auto p-3">
           <div className="mb-3"><NavSearch className="!h-9 !w-full" /></div>
           <div className="grid grid-cols-2 gap-2 mb-3">
             <NominateButton className="w-full h-auto min-h-11 whitespace-normal text-center py-2" />
