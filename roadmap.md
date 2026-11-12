@@ -1,3 +1,10 @@
+## Page-specific refactor template — 12 Nov 2026
+- [ ] Await the concrete route, file, Section 3 page copy and word budget; the received template contains placeholders only, so no page files changed.
+
+## Public navigation, mobile actions, footer and redirects — 12 Nov 2026
+- [ ] Confirm use of the live header/mobile files and resolve the missing footer-link list and programme-updates destination.
+- [ ] Apply the seven-item main menu, four-item mobile grid, official nomination CTA, requested footer additions and legacy redirects without editing page content.
+
 ## Africa Special Needs Education Support Fund 2027 — 12 Nov 2026
 - [x] Read the latest programme brief and prepare a staged plan preserving the security hold and existing branding.
 - [x] Receive approval of the staged programme plan; approval does not clear the mandatory Phase 0 security hold.
