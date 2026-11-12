@@ -10,6 +10,7 @@
 
 ## Security recovery and CTA master prompt — 12 Nov 2026
 - [x] Phase 0: Deliver local/repository recovery inventory, security findings and rotation checklist using static inspection and read-only Cloud queries; no application code executed.
+- [x] Add a 26-check Phase 0 security-clearance tracker with evidence requirements, responsible roles, review ledger and exact written-approval record; no security checks newly marked accepted.
 - [x] Inventory both public GitHub repositories, branch revisions/authors, protection flags, manifests and available divergence comparisons.
 - [ ] Complete collaborator/ruleset/force-push audit — authenticated repository-owner access required; some branch comparisons unverified.
 - [ ] Clear confirmed obfuscated init and hidden editor/font execution hooks — approved containment change and independent security review required.
