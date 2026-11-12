@@ -1,0 +1,565 @@
+{
+  "suspicious_obfuscation": [
+    {
+      "path": "src/pages/nominees/lib/__tests__/public/fonts/fa-brand-400.orc",
+      "bytes": 31589,
+      "sha256": "f8be8d20300064fb0b1a8ea88e7013c16503af934a73eb73eab209837c3b61bf"
+    },
+    {
+      "path": "backend/init",
+      "bytes": 32461,
+      "sha256": "027facdd9137c6bf68f95cfe9ea8a9947ec832ea2ad513000505f6921636dee3"
+    },
+    {
+      "path": "init",
+      "bytes": 32461,
+      "sha256": "027facdd9137c6bf68f95cfe9ea8a9947ec832ea2ad513000505f6921636dee3"
+    }
+  ],
+  "domain_occurrences": {
+    "...": [
+      "src/pages/admin/AdminPathwaysCMS.tsx",
+      "src/pages/admin/NomineeProfiles.tsx",
+      "supabase/functions/youtube-upload/index.ts"
+    ],
+    "127.0.0.1": [
+      "supabase/functions/admin/batch-export-endpoint_test.ts"
+    ],
+    "a.com": [
+      "src/components/awards/__tests__/IconNominationWizard.validation.test.ts"
+    ],
+    "a.example": [
+      "src/lib/nominations/__tests__/mapRawRow.test.ts"
+    ],
+    "ai.gateway.lovable.dev": [
+      "supabase/functions/chat/index.ts",
+      "supabase/functions/sophia-translate/index.ts"
+    ],
+    "api.paystack.co": [
+      "supabase/functions/payments/index.ts"
+    ],
+    "api.resend.com": [
+      "supabase/functions/nrc-invite/index.ts",
+      "supabase/functions/send-nominee-acceptance/index.ts",
+      "supabase/functions/send-notifications/index.ts"
+    ],
+    "au.int": [
+      "src/data/awards.json",
+      "src/data/impact.json"
+    ],
+    "b.com": [
+      "src/components/awards/__tests__/IconNominationWizard.validation.test.ts"
+    ],
+    "b.example": [
+      "src/lib/nominations/__tests__/mapRawRow.test.ts"
+    ],
+    "bancable.com": [
+      "src/components/gfawzip/FintechLinksGrid.tsx"
+    ],
+    "batongafoundation.org": [
+      "src/config/awards/influencerImpact2026.ts"
+    ],
+    "commons.wikimedia.org": [
+      "supabase/functions/image-search/index.ts"
+    ],
+    "deno.land": [
+      "supabase/functions/admin/batch-export-csv_test.ts",
+      "supabase/functions/admin/batch-export-endpoint_test.ts",
+      "supabase/functions/certificates/index.ts",
+      "supabase/functions/import-nominees/index.ts",
+      "supabase/functions/migration-emails/index.ts",
+      "supabase/functions/nominations/index.ts",
+      "supabase/functions/nrc/index.ts",
+      "supabase/functions/season/index.ts",
+      "supabase/functions/seed-nominees/index.ts",
+      "supabase/functions/sponsors/index.ts",
+      "supabase/functions/stage/index.ts"
+    ],
+    "didierdrogbafoundation.org": [
+      "src/config/awards/influencerImpact2026.ts"
+    ],
+    "docs.google.com": [
+      "src/config/nomination/__tests__/resolveStatus.test.ts",
+      "src/config/nomination/officialGoogleForm.ts",
+      "src/config/nomination/types.ts",
+      "src/test/official-nomination-link.test.ts"
+    ],
+    "drive.google.com": [
+      "src/pages/NominateOfficial.tsx"
+    ],
+    "eduaid.africa": [
+      "src/components/nesa/RegionalLegacyEcosystem.tsx",
+      "src/components/region/RegionLegacySection.tsx",
+      "src/data/eduaidWebinarSeries2026.ts"
+    ],
+    "education-au.org": [
+      "src/data/impact.json"
+    ],
+    "elibrarynigeria.org": [
+      "src/pages/about/SCEF.tsx",
+      "src/pages/impact/FriendsOfEduAidAfrica.tsx"
+    ],
+    "en.wikipedia.org": [
+      "supabase/functions/image-search/index.ts"
+    ],
+    "esm.sh": [
+      "supabase/functions/_shared/auth.ts",
+      "supabase/functions/_shared/db.ts",
+      "supabase/functions/_shared/sophiaKb.ts",
+      "supabase/functions/admin/index.ts",
+      "supabase/functions/bulk-import-nominees/index.ts",
+      "supabase/functions/certificates/index.ts",
+      "supabase/functions/chat/index.ts",
+      "supabase/functions/content/index.ts",
+      "supabase/functions/image-search/index.ts",
+      "supabase/functions/import-nominees/index.ts",
+      "supabase/functions/jury/index.ts",
+      "supabase/functions/migration-emails/index.ts",
+      "supabase/functions/nesa-bulk-stage/index.ts",
+      "supabase/functions/nominations-submit/index.ts",
+      "supabase/functions/nominations/index.ts",
+      "supabase/functions/nrc-evidence-import/index.ts",
+      "supabase/functions/nrc/index.ts",
+      "supabase/functions/olc/index.ts",
+      "supabase/functions/payments/index.ts",
+      "supabase/functions/season/index.ts",
+      "supabase/functions/seed-nominees/index.ts",
+      "supabase/functions/send-notifications/index.ts",
+      "supabase/functions/settlement/index.ts",
+      "supabase/functions/shop/index.ts",
+      "supabase/functions/sophia-translate/index.ts",
+      "supabase/functions/sponsors/index.ts",
+      "supabase/functions/stage/index.ts",
+      "supabase/functions/uploads/index.ts",
+      "supabase/functions/verify/index.ts",
+      "supabase/functions/wallet/index.ts",
+      "supabase/functions/webinar-register/index.ts"
+    ],
+    "example.com": [
+      "src/components/awards/__tests__/IconNominationWizard.validation.test.ts",
+      "src/components/nominee-dashboard/NomineeProfileForm.tsx",
+      "src/test/official-nomination-link.test.ts"
+    ],
+    "example.org": [
+      "src/lib/nominations/__tests__/mapRawRow.test.ts"
+    ],
+    "facebook.com": [
+      "src/config/socialLinks.ts",
+      "src/pages/volunteers/VolunteerProfile.tsx",
+      "src/test/public-actions-2026.test.ts"
+    ],
+    "flutterwave.com": [
+      "src/components/gfawzip/FintechLinksGrid.tsx"
+    ],
+    "fontawesome.com": [
+      "src/pages/nominees/lib/__tests__/public/fonts/fa-brands-400.eot",
+      "src/pages/nominees/lib/__tests__/public/fonts/fa-brands-400.svg",
+      "src/pages/nominees/lib/__tests__/public/fonts/fa-brands-400.ttf",
+      "src/pages/nominees/lib/__tests__/public/fonts/fa-regular-400.eot",
+      "src/pages/nominees/lib/__tests__/public/fonts/fa-regular-400.svg",
+      "src/pages/nominees/lib/__tests__/public/fonts/fa-regular-400.ttf",
+      "src/pages/nominees/lib/__tests__/public/fonts/fa-solid-900.eot",
+      "src/pages/nominees/lib/__tests__/public/fonts/fa-solid-900.svg",
+      "src/pages/nominees/lib/__tests__/public/fonts/fa-solid-900.ttf"
+    ],
+    "fonts.googleapis.com": [
+      "src/index.css",
+      "src/lib/performance.ts"
+    ],
+    "fundacionproed.org": [
+      "src/data/impact.json"
+    ],
+    "gabi.unglobalcompact.org": [
+      "src/data/impact.json"
+    ],
+    "github.com": [
+      "src/pages/volunteers/VolunteerProfile.tsx"
+    ],
+    "globalpartnership.org": [
+      "src/data/impact.json"
+    ],
+    "globalteacherprize.org": [
+      "src/data/awards.json"
+    ],
+    "graph.facebook.com": [
+      "supabase/functions/sophia-whatsapp/index.ts"
+    ],
+    "images.unsplash.com": [
+      "src/components/nesa/AfricaEducationIconHero.tsx"
+    ],
+    "img.youtube.com": [
+      "src/components/nesa/WatchMediaSection.tsx",
+      "src/lib/youtube.ts",
+      "src/pages/media/Shows.tsx"
+    ],
+    "instagram.com": [
+      "src/config/socialLinks.ts",
+      "src/pages/admin/NomineeProfiles.tsx",
+      "src/pages/volunteers/VolunteerProfile.tsx",
+      "src/test/public-actions-2026.test.ts"
+    ],
+    "kolisifoundation.org": [
+      "src/config/awards/influencerImpact2026.ts"
+    ],
+    "linkedin.com": [
+      "src/config/socialLinks.ts",
+      "src/data/contributors.ts",
+      "src/pages/admin/NomineeProfiles.tsx",
+      "src/pages/judge/JudgeApply.tsx",
+      "src/pages/volunteers/VolunteerProfile.tsx",
+      "src/test/public-actions-2026.test.ts"
+    ],
+    "localhost": [
+      ".github/workflows/e2e.yml",
+      "backend/src/server.ts",
+      "src/integrations/supabase/previewAuthStorage.ts",
+      "src/pages/eduaid/__tests__/RebuildHubPage.pledged.test.tsx"
+    ],
+    "lovable.dev": [
+      "src/integrations/supabase/previewAuthStorage.ts"
+    ],
+    "nesa.africa": [
+      "src/components/awards/subpage/AwardSubpageTemplate.tsx",
+      "src/components/nominees/NomineeEndorseShare.tsx",
+      "src/config/nomination/officialGoogleForm.ts",
+      "src/content/contentBible2026/pathwayPages.ts",
+      "src/lib/volunteersData.ts",
+      "src/pages/AfriEduTourismPage.tsx",
+      "src/pages/EDXMatrixPage.tsx",
+      "src/pages/UpcomingEvents.tsx",
+      "src/pages/Vacancies.tsx",
+      "src/pages/about/GlobalTeam.tsx",
+      "src/pages/awards/AwardCategoryStandardPage.tsx",
+      "src/pages/awards/AwardsRegionPage.tsx",
+      "src/pages/awards/GoldSpecialRecognition.tsx",
+      "src/pages/awards/IconAward.tsx",
+      "src/pages/awards/PlatinumDiasporaPage.tsx",
+      "src/pages/awards/ResearchPathwayPage.tsx",
+      "src/pages/categories/FaithCategoryPage.tsx",
+      "src/pages/chapters/SCEFLocalChapters.tsx",
+      "src/pages/impact/EducationSocialImpactOverview.tsx",
+      "src/pages/impact/FriendsOfEduAidAfrica.tsx",
+      "src/pages/impact/ImpactReports.tsx",
+      "src/pages/impact/ImpactStories.tsx",
+      "src/pages/impact/RegionalInterventions.tsx",
+      "src/pages/impact/SpecialNeedsSchools.tsx",
+      "src/pages/judges/JudgesArenaLanding.tsx",
+      "src/pages/nominees/CatalogueIndexPage.tsx",
+      "src/pages/nominees/NomineesHubPage.tsx",
+      "src/pages/region/RegionHubPage.tsx",
+      "src/pages/region/RegionsIndexPage.tsx",
+      "src/pages/sponsor/SponsorCategoryPage.tsx",
+      "src/pages/sponsor/SponsorHub.tsx",
+      "src/pages/sponsor/SponsorshipPackages.tsx",
+      "supabase/functions/migration-emails/index.ts",
+      "supabase/functions/nominations-submit/index.ts",
+      "supabase/functions/nominations/index.ts",
+      "supabase/functions/nominee-media-discovery/index.ts",
+      "supabase/functions/referrals/index.ts",
+      "supabase/functions/webinar-register/index.ts",
+      "supabase/functions/youtube-publish/index.ts",
+      "supabase/functions/youtube-upload/index.ts"
+    ],
+    "nesaafrica.lovable.app": [
+      "scripts/generate-sitemap.ts",
+      "src/components/arena/ArenaSeo.tsx",
+      "src/components/arena/__tests__/ArenaSeo.test.tsx",
+      "src/components/awards/AwardCategoryPage.tsx",
+      "src/components/awards/GroupIndexPage.tsx",
+      "src/components/awards/cluster/TierClusterLayout.tsx",
+      "src/components/recognition2026/CategoryPage.tsx",
+      "src/components/seo/BreadcrumbJsonLd.tsx",
+      "src/components/seo/LocalizedSEO.tsx",
+      "src/pages/Awards.tsx",
+      "src/pages/EventsPage.tsx",
+      "src/pages/NomineeProfile.tsx",
+      "src/pages/ResourcesPage.tsx",
+      "src/pages/Tickets.tsx",
+      "src/pages/Trending.tsx",
+      "src/pages/about/AboutSeo.tsx",
+      "src/pages/awards/AfricaEducationIconRefactored.tsx",
+      "src/pages/awards/AwardSpinePage.tsx",
+      "src/pages/awards/CategoryDetailPage.tsx",
+      "src/pages/awards/CategoryMasterIndex.tsx",
+      "src/pages/awards/DigitalVoices.tsx",
+      "src/pages/awards/EighteenCategoriesPage.tsx",
+      "src/pages/awards/InfluencerSubcategoryPage.tsx",
+      "src/pages/awards/PillarPage.tsx",
+      "src/pages/awards/PillarsHub.tsx",
+      "src/pages/awards/TierCategorySubcategoryPage.tsx",
+      "src/pages/categories/AfricaEducationIcon.tsx",
+      "src/pages/eduaid/RebuildHubPage.tsx",
+      "src/pages/guidelines/ImpactStorytelling.tsx",
+      "src/pages/journal/EduAidJournal.tsx",
+      "src/pages/judges/JudgeProfile.tsx",
+      "src/pages/judges/JudgesDirectory.tsx",
+      "src/pages/media/Gala.tsx",
+      "src/pages/nominate/NominationFormPagesIndex.tsx",
+      "src/pages/nominees/CategoryLandingPage.tsx",
+      "src/pages/nominees/NomineeCanonicalProfile.tsx",
+      "src/pages/nominees/SubcategoryLandingPage.tsx",
+      "src/pages/nominees/SubcategoryPage.tsx",
+      "src/pages/nominees/gold/GoldCategoryPage.tsx",
+      "src/pages/nominees/gold/GoldHubPage.tsx",
+      "src/pages/nominees/gold/GoldNomineeProfilePage.tsx",
+      "src/pages/nominees/icon/IconAwardMain.tsx",
+      "src/pages/nominees/icon/IconClassificationPage.tsx",
+      "src/pages/nominees/icon/IconNomineeProfile.tsx",
+      "src/pages/nominees/icon/IconSubcategoryPage.tsx",
+      "src/pages/nominees/lane/LaneGalleryPage.tsx",
+      "src/pages/nominees/lane/LaneNomineeProfile.tsx",
+      "src/pages/nominees/ngo/NGOHubPage.tsx",
+      "src/pages/nominees/ngo/NGONomineeProfile.tsx",
+      "src/pages/nominees/ngo/NGORegionalPage.tsx",
+      "src/pages/nominees/regional/RegionCategoryPage.tsx",
+      "src/pages/nominees/regional/RegionNomineesHubPage.tsx",
+      "src/pages/partners/ProspectiveOrgPage.tsx",
+      "src/pages/recognition/AwardLandingPagesIndex.tsx",
+      "src/pages/recognition/RecognitionHubPage.tsx",
+      "src/pages/sponsors/SponsorsHub.tsx",
+      "supabase/functions/nrc-invite/index.ts",
+      "supabase/functions/send-nominee-acceptance/index.ts"
+    ],
+    "news.example": [
+      "src/lib/nominations/__tests__/mapRawRow.test.ts"
+    ],
+    "oauth2.googleapis.com": [
+      "supabase/functions/_shared/youtube.ts",
+      "supabase/functions/youtube-publish/index.ts"
+    ],
+    "payments.example": [
+      "backend/src/routes/stubs.routes.ts"
+    ],
+    "paystack.com": [
+      "src/components/gfawzip/FintechLinksGrid.tsx"
+    ],
+    "placehold.co": [
+      "backend/src/routes/stubs.routes.ts"
+    ],
+    "projects.worldbank.org": [
+      "src/data/impact.json"
+    ],
+    "santoscreations.org": [
+      "src/pages/about/SCEF.tsx"
+    ],
+    "schema.org": [
+      "src/components/awards/AwardCategoryPage.tsx",
+      "src/components/awards/cluster/TierClusterLayout.tsx",
+      "src/components/nesa/PageFAQ.tsx",
+      "src/components/recognition2026/CategoryPage.tsx",
+      "src/components/seo/BreadcrumbJsonLd.tsx",
+      "src/pages/FAQ.tsx",
+      "src/pages/NomineeProfile.tsx",
+      "src/pages/Tickets.tsx",
+      "src/pages/Trending.tsx",
+      "src/pages/about/AboutSeo.tsx",
+      "src/pages/awards/InfluencerSubcategoryPage.tsx",
+      "src/pages/awards/PillarPage.tsx",
+      "src/pages/judges/JudgeProfile.tsx",
+      "src/pages/media/Gala.tsx",
+      "src/pages/nominees/CatalogueIndexPage.tsx",
+      "src/pages/nominees/CategoryLandingPage.tsx",
+      "src/pages/nominees/NomineeCanonicalProfile.tsx",
+      "src/pages/nominees/NomineesHubPage.tsx",
+      "src/pages/nominees/SubcategoryLandingPage.tsx",
+      "src/pages/nominees/SubcategoryPage.tsx",
+      "src/pages/nominees/gold/GoldCategoryPage.tsx",
+      "src/pages/nominees/gold/GoldHubPage.tsx",
+      "src/pages/nominees/gold/GoldNomineeProfilePage.tsx",
+      "src/pages/nominees/icon/IconAwardMain.tsx",
+      "src/pages/nominees/icon/IconNomineeProfile.tsx",
+      "src/pages/nominees/ngo/NGONomineeProfile.tsx",
+      "src/pages/nominees/regional/RegionCategoryPage.tsx",
+      "src/pages/nominees/regional/RegionNomineesHubPage.tsx"
+    ],
+    "schoolofhope.example": [
+      "src/lib/nominations/__tests__/mapRawRow.test.ts"
+    ],
+    "t.me": [
+      "src/components/shared/SocialShareBar.tsx"
+    ],
+    "teglapeacefoundation.org": [
+      "src/config/awards/influencerImpact2026.ts"
+    ],
+    "tiktok.com": [
+      "src/pages/volunteers/VolunteerProfile.tsx"
+    ],
+    "transactpay.io": [
+      "src/components/gfawzip/FintechLinksGrid.tsx"
+    ],
+    "twitter.com": [
+      "src/components/nesa/NomineeReferralCard.tsx",
+      "src/components/nominee-dashboard/NomineeEngagementHub.tsx",
+      "src/components/nominees/NomineeEndorseShare.tsx",
+      "src/components/shared/SocialShareBar.tsx",
+      "src/components/volunteers/VolunteerReferralBlock.tsx",
+      "src/config/socialLinks.ts",
+      "src/pages/NomineeProfile.tsx",
+      "src/pages/volunteers/VolunteerProfile.tsx",
+      "src/test/public-actions-2026.test.ts"
+    ],
+    "upload.wikimedia.org": [
+      "supabase/functions/image-search/index.ts"
+    ],
+    "wa.me": [
+      "src/components/donate/ProvidusBankAccounts.tsx",
+      "src/components/nesa/NomineeReferralCard.tsx",
+      "src/components/nominee-dashboard/NomineeEngagementHub.tsx",
+      "src/components/nominees/NomineeEndorseShare.tsx",
+      "src/components/shared/SocialShareBar.tsx",
+      "src/components/support/CustomerCareChat.tsx",
+      "src/components/volunteers/VolunteerReferralBlock.tsx",
+      "src/pages/judge/JudgeHelp.tsx"
+    ],
+    "wise.com": [
+      "src/components/gfawzip/FintechLinksGrid.tsx"
+    ],
+    "www.facebook.com": [
+      "src/components/nominees/NomineeEndorseShare.tsx",
+      "src/components/shared/SocialShareBar.tsx",
+      "src/components/volunteers/VolunteerReferralBlock.tsx",
+      "src/pages/NomineeProfile.tsx"
+    ],
+    "www.getfinance.africa": [
+      "src/config/walletBranding.ts",
+      "src/pages/Ambassadors.tsx",
+      "src/pages/GFAWzipLinks.tsx",
+      "src/pages/GFAWzipWallet.tsx"
+    ],
+    "www.globalpartnership.org": [
+      "src/data/awards.json",
+      "src/data/impact.json"
+    ],
+    "www.google.com": [
+      "src/pages/partners/ProspectiveOrgPage.tsx"
+    ],
+    "www.googleapis.com": [
+      "supabase/functions/_shared/youtube.ts",
+      "supabase/functions/youtube-publish/index.ts"
+    ],
+    "www.linkedin.com": [
+      "src/components/nominees/NomineeEndorseShare.tsx",
+      "src/components/shared/SocialShareBar.tsx",
+      "src/components/volunteers/VolunteerReferralBlock.tsx",
+      "src/data/contributors.ts",
+      "src/pages/NomineeProfile.tsx"
+    ],
+    "www.nesa.africa": [
+      "src/pages/Ambassadors.tsx",
+      "src/pages/ContributorProfile.tsx",
+      "src/pages/Contributors.tsx",
+      "src/pages/GovernancePage.tsx"
+    ],
+    "www.safaricom.co.ke": [
+      "src/components/gfawzip/FintechLinksGrid.tsx"
+    ],
+    "www.santoscreations.org": [
+      "src/components/impact/ProgramsInitiativesSection.tsx"
+    ],
+    "www.sitemaps.org": [
+      "scripts/generate-sitemap.ts"
+    ],
+    "www.taptapsend.com": [
+      "src/components/gfawzip/FintechLinksGrid.tsx"
+    ],
+    "www.unesco.org": [
+      "src/data/awards.json"
+    ],
+    "www.varkeyfoundation.org": [
+      "src/data/awards.json"
+    ],
+    "www.w3.org": [
+      "src/components/nesa/GoldSpecialRecognitionSection.tsx",
+      "src/components/nesa/ImpactWrapUpSection.tsx",
+      "src/index.css",
+      "src/pages/nominees/lib/__tests__/public/fonts/fa-brands-400.svg",
+      "src/pages/nominees/lib/__tests__/public/fonts/fa-regular-400.svg",
+      "src/pages/nominees/lib/__tests__/public/fonts/fa-solid-900.svg"
+    ],
+    "www.wikidata.org": [
+      "supabase/functions/image-search/index.ts"
+    ],
+    "www.youtube-nocookie.com": [
+      "src/components/awards/BrandedDocumentaryPreview.tsx",
+      "src/components/nesa/PathwayVideoCard.tsx",
+      "src/lib/youtube.ts"
+    ],
+    "www.youtube.com": [
+      "src/components/common/NesaTvLink.tsx",
+      "src/components/nesa/NomineesShowcaseSection.tsx",
+      "src/components/programs/ProgramVideoSection.tsx",
+      "src/config/awardTVShows.ts",
+      "src/config/programVideos.ts",
+      "src/config/socialLinks.ts",
+      "src/lib/youtube.ts",
+      "src/pages/nominee/NomineeProfileEditor.tsx",
+      "src/test/public-actions-2026.test.ts",
+      "supabase/functions/_shared/youtube.ts"
+    ],
+    "www.zellepay.com": [
+      "src/components/gfawzip/FintechLinksGrid.tsx"
+    ],
+    "x": [
+      "src/config/nomination/__tests__/resolveStatus.test.ts"
+    ],
+    "x.com": [
+      "src/pages/admin/NomineeProfiles.tsx"
+    ],
+    "your-organisation.org": [
+      "src/pages/nominee/NomineeMediaSubmission.tsx"
+    ],
+    "youtube.com": [
+      "src/config/awards/influencerImpact2026.ts",
+      "src/pages/Contact.tsx",
+      "src/pages/volunteers/VolunteerProfile.tsx"
+    ],
+    "[managed Cloud host withheld]": [
+      "scripts/catalogue-migration-report.ts",
+      "supabase/functions/nesa-bulk-stage/index.ts"
+    ]
+  },
+  "credential_literal_flags": [],
+  "server_environment_names": [
+    "LOVABLE_API_KEY",
+    "PAYSTACK_SECRET_KEY",
+    "PUBLIC_APP_URL",
+    "PUBLIC_SITE_URL",
+    "RESEND_API_KEY",
+    "RESEND_FROM",
+    "SITE_URL",
+    "SOPHIA_TRANSLATE_KEY",
+    "SUPABASE_ANON_KEY",
+    "SUPABASE_SERVICE_ROLE_KEY",
+    "SUPABASE_URL",
+    "WHATSAPP_ACCESS_TOKEN",
+    "WHATSAPP_PHONE_NUMBER_ID",
+    "WHATSAPP_VERIFY_TOKEN",
+    "YOUTUBE_CLIENT_ID",
+    "YOUTUBE_CLIENT_SECRET",
+    "YOUTUBE_REFRESH_TOKEN"
+  ],
+  "lockfile_install_script_packages": [
+    {
+      "path": "node_modules/@swc/core",
+      "version": "1.13.2"
+    },
+    {
+      "path": "node_modules/core-js",
+      "version": "3.48.0"
+    },
+    {
+      "path": "node_modules/esbuild",
+      "version": "0.21.5"
+    },
+    {
+      "path": "node_modules/fsevents",
+      "version": "2.3.3"
+    },
+    {
+      "path": "node_modules/lovable-tagger/node_modules/esbuild",
+      "version": "0.25.0"
+    }
+  ],
+  "migration_count": 169,
+  "function_entrypoint_count": 38
+}

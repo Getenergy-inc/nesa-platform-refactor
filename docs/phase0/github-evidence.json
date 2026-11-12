@@ -1,0 +1,740 @@
+{
+  "Santos-pkis/NESA-2026": {
+    "branches": [
+      {
+        "name": "backend/chukwuma-core",
+        "protected": false,
+        "sha": "b3bd670b5eeb147e676c2264c890b3d9038fe490",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-08-04T21:08:34Z",
+        "versus_main": {
+          "status": "behind",
+          "ahead_by": 0,
+          "behind_by": 3
+        }
+      },
+      {
+        "name": "chore/repository-foundation",
+        "protected": false,
+        "sha": "f845a3ec4b564eb3849a334718c9a07c33ec4d13",
+        "author": "Ayeromara",
+        "date": "2026-08-13T13:38:27Z",
+        "versus_main": {
+          "status": "behind",
+          "ahead_by": 0,
+          "behind_by": 1
+        }
+      },
+      {
+        "name": "data-engineering/lovable-phil-database-merge",
+        "protected": false,
+        "sha": "b3bd670b5eeb147e676c2264c890b3d9038fe490",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-08-04T21:08:34Z",
+        "versus_main": {
+          "status": "behind",
+          "ahead_by": 0,
+          "behind_by": 3
+        }
+      },
+      {
+        "name": "data-engineering/phil-database-foundation",
+        "protected": false,
+        "sha": "b3bd670b5eeb147e676c2264c890b3d9038fe490",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-08-04T21:08:34Z",
+        "versus_main": {
+          "status": "behind",
+          "ahead_by": 0,
+          "behind_by": 3
+        }
+      },
+      {
+        "name": "database/lovable-supabase",
+        "protected": false,
+        "sha": "b3bd670b5eeb147e676c2264c890b3d9038fe490",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-08-04T21:08:34Z",
+        "versus_main": {
+          "status": "behind",
+          "ahead_by": 0,
+          "behind_by": 3
+        }
+      },
+      {
+        "name": "frontend/lovable-latest",
+        "protected": false,
+        "sha": "b3bd670b5eeb147e676c2264c890b3d9038fe490",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-08-04T21:08:34Z",
+        "versus_main": {
+          "status": "behind",
+          "ahead_by": 0,
+          "behind_by": 3
+        }
+      },
+      {
+        "name": "integration/nesa-africa-2027-foundation",
+        "protected": false,
+        "sha": "b3bd670b5eeb147e676c2264c890b3d9038fe490",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-08-04T21:08:34Z",
+        "versus_main": {
+          "status": "behind",
+          "ahead_by": 0,
+          "behind_by": 3
+        }
+      },
+      {
+        "name": "main",
+        "protected": false,
+        "sha": "7ed6389a755a986ceafb812fd57b575b47bc13ef",
+        "author": "Santos-pkis",
+        "date": "2026-08-13T13:55:35Z"
+      },
+      {
+        "name": "staging",
+        "protected": false,
+        "sha": "b3bd670b5eeb147e676c2264c890b3d9038fe490",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-08-04T21:08:34Z",
+        "versus_main": {
+          "status": "behind",
+          "ahead_by": 0,
+          "behind_by": 3
+        }
+      }
+    ],
+    "collaborators": {
+      "unverified": "HTTPError",
+      "http_status": 401
+    },
+    "tree_truncated": false,
+    "inventory_paths": [
+      ".github/workflows/banned-strings.yml",
+      ".github/workflows/e2e.yml",
+      ".github/workflows/pledged-success.yml",
+      ".github/workflows/unit-tests.yml",
+      "backend/package.json",
+      "frontend/bun.lock",
+      "frontend/bun.lockb",
+      "frontend/package-lock.json",
+      "frontend/package.json"
+    ],
+    "manifests": {
+      "backend/package.json": {
+        "scripts": {
+          "dev": "tsx watch src/server.ts",
+          "build": "tsc -p tsconfig.json",
+          "start": "node dist/server.js",
+          "lint": "eslint src --ext .ts",
+          "prisma:generate": "prisma generate",
+          "prisma:migrate": "prisma migrate dev"
+        },
+        "dependencies": {
+          "@prisma/client": "^5.22.0",
+          "bcrypt": "^5.1.1",
+          "cors": "^2.8.5",
+          "dotenv": "^16.4.5",
+          "express": "^4.21.1",
+          "express-rate-limit": "^7.4.1",
+          "helmet": "^8.0.0",
+          "jsonwebtoken": "^9.0.2",
+          "morgan": "^1.10.0",
+          "multer": "^1.4.5-lts.1",
+          "swagger-ui-express": "^5.0.1",
+          "yaml": "^2.6.1",
+          "zod": "^3.23.8"
+        },
+        "devDependencies": {
+          "@types/bcrypt": "^5.0.2",
+          "@types/cors": "^2.8.17",
+          "@types/express": "^5.0.0",
+          "@types/jsonwebtoken": "^9.0.7",
+          "@types/morgan": "^1.9.9",
+          "@types/multer": "^1.4.12",
+          "@types/node": "^22.9.0",
+          "@types/swagger-ui-express": "^4.1.7",
+          "prisma": "^5.22.0",
+          "tsx": "^4.19.2",
+          "typescript": "^5.6.3"
+        }
+      },
+      "frontend/package.json": {
+        "scripts": {
+          "predev": "tsx ../scripts/generate-sitemap.ts && tsx ../scripts/generate-redirects.ts",
+          "prebuild": "tsx ../scripts/generate-sitemap.ts && tsx ../scripts/generate-redirects.ts",
+          "dev": "vite",
+          "build": "vite build",
+          "build:dev": "vite build --mode development",
+          "lint": "eslint .",
+          "preview": "vite preview",
+          "test": "vitest run",
+          "test:watch": "vitest",
+          "test:e2e": "playwright test",
+          "test:e2e:update": "playwright test --update-snapshots"
+        },
+        "dependencies": {
+          "@capacitor/cli": "^8.1.0",
+          "@capacitor/core": "^8.1.0",
+          "@hookform/resolvers": "^3.10.0",
+          "@lovable.dev/cloud-auth-js": "^1.0.0",
+          "@radix-ui/react-accordion": "^1.2.11",
+          "@radix-ui/react-alert-dialog": "^1.1.14",
+          "@radix-ui/react-aspect-ratio": "^1.1.7",
+          "@radix-ui/react-avatar": "^1.1.10",
+          "@radix-ui/react-checkbox": "^1.3.2",
+          "@radix-ui/react-collapsible": "^1.1.11",
+          "@radix-ui/react-context-menu": "^2.2.15",
+          "@radix-ui/react-dialog": "^1.1.14",
+          "@radix-ui/react-dropdown-menu": "^2.1.15",
+          "@radix-ui/react-hover-card": "^1.1.14",
+          "@radix-ui/react-label": "^2.1.7",
+          "@radix-ui/react-menubar": "^1.1.15",
+          "@radix-ui/react-navigation-menu": "^1.2.13",
+          "@radix-ui/react-popover": "^1.1.14",
+          "@radix-ui/react-progress": "^1.1.7",
+          "@radix-ui/react-radio-group": "^1.3.7",
+          "@radix-ui/react-scroll-area": "^1.2.9",
+          "@radix-ui/react-select": "^2.2.5",
+          "@radix-ui/react-separator": "^1.1.7",
+          "@radix-ui/react-slider": "^1.3.5",
+          "@radix-ui/react-slot": "^1.2.3",
+          "@radix-ui/react-switch": "^1.2.5",
+          "@radix-ui/react-tabs": "^1.1.12",
+          "@radix-ui/react-toast": "^1.2.14",
+          "@radix-ui/react-toggle": "^1.1.9",
+          "@radix-ui/react-toggle-group": "^1.1.10",
+          "@radix-ui/react-tooltip": "^1.2.7",
+          "@supabase/supabase-js": "^2.91.0",
+          "@tanstack/react-query": "^5.83.0",
+          "@types/canvas-confetti": "^1.9.0",
+          "canvas-confetti": "^1.9.4",
+          "class-variance-authority": "^0.7.1",
+          "clsx": "^2.1.1",
+          "cmdk": "^1.1.1",
+          "date-fns": "^3.6.0",
+          "embla-carousel-react": "^8.6.0",
+          "framer-motion": "^12.29.0",
+          "i18next": "^23.16.8",
+          "i18next-browser-languagedetector": "^8.2.0",
+          "input-otp": "^1.4.2",
+          "jspdf": "4.2.1",
+          "lucide-react": "^0.462.0",
+          "next-themes": "^0.3.0",
+          "papaparse": "^5.5.3",
+          "qrcode.react": "^4.2.0",
+          "react": "^18.3.1",
+          "react-day-picker": "^8.10.1",
+          "react-dom": "^18.3.1",
+          "react-helmet-async": "^2.0.5",
+          "react-hook-form": "^7.61.1",
+          "react-i18next": "^15.1.3",
+          "react-markdown": "^10.1.0",
+          "react-resizable-panels": "^2.1.9",
+          "react-router-dom": "^6.30.1",
+          "recharts": "^2.15.4",
+          "sonner": "^1.7.4",
+          "tailwind-merge": "^2.6.0",
+          "tailwindcss-animate": "^1.0.7",
+          "vaul": "^0.9.9",
+          "vite-plugin-pwa": "^1.2.0",
+          "zod": "^3.25.76"
+        },
+        "devDependencies": {
+          "@eslint/js": "^9.32.0",
+          "@playwright/test": "^1.60.0",
+          "@tailwindcss/typography": "^0.5.16",
+          "@testing-library/jest-dom": "^6.6.0",
+          "@testing-library/react": "^16.0.0",
+          "@testing-library/user-event": "^14.6.1",
+          "@types/node": "^22.16.5",
+          "@types/react": "^18.3.23",
+          "@types/react-dom": "^18.3.7",
+          "@vitejs/plugin-react-swc": "^3.11.0",
+          "autoprefixer": "^10.4.21",
+          "eslint": "^9.32.0",
+          "eslint-plugin-react-hooks": "^5.2.0",
+          "eslint-plugin-react-refresh": "^0.4.20",
+          "globals": "^15.15.0",
+          "jsdom": "^20.0.3",
+          "lovable-tagger": "^1.1.13",
+          "postcss": "^8.5.6",
+          "tailwindcss": "^3.4.17",
+          "tsx": "^4.22.3",
+          "typescript": "^5.8.3",
+          "typescript-eslint": "^8.38.0",
+          "vite": "^5.4.19",
+          "vitest": "^3.2.4"
+        }
+      }
+    }
+  },
+  "Getenergy-inc/nesa-platform-refactor": {
+    "branches": [
+      {
+        "name": "isaiah2",
+        "protected": false,
+        "sha": "dada48180b0f11e923174b8af909f3ef8f9d4164",
+        "author": "Ayeromara",
+        "date": "2026-04-07T10:48:42Z",
+        "versus_main": {
+          "status": "diverged",
+          "ahead_by": 1,
+          "behind_by": 4592
+        }
+      },
+      {
+        "name": "lovable-deploy",
+        "protected": false,
+        "sha": "2569beaf9b77b7f43193d10a6755b5a5045b7723",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-05-23T10:55:27Z",
+        "versus_main": {
+          "status": "diverged",
+          "ahead_by": 1,
+          "behind_by": 3819
+        }
+      },
+      {
+        "name": "lovable-sync",
+        "protected": false,
+        "sha": "48772cec5ef921e3c3af7abbd8429669efa334b7",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-11-07T17:34:59Z",
+        "versus_main": {
+          "status": "diverged",
+          "ahead_by": 52,
+          "behind_by": 5
+        }
+      },
+      {
+        "name": "lovable-sync-1794150441",
+        "protected": false,
+        "sha": "efffbfa8fa2e52cdd9b816427bbaf71f6af1cf9c",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-10-25T10:39:34Z",
+        "versus_main": {
+          "status": "diverged",
+          "ahead_by": 1,
+          "behind_by": 5
+        }
+      },
+      {
+        "name": "lovable-sync-1794151480",
+        "protected": false,
+        "sha": "08f0326b999ff9292c56dc4ec374a6c078a940bd",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-11-08T15:24:19Z",
+        "versus_main": {
+          "status": "diverged",
+          "ahead_by": 40,
+          "behind_by": 5
+        }
+      },
+      {
+        "name": "lovable-sync-1794152062",
+        "protected": false,
+        "sha": "2ace4c568dfaa632f1fa4ffa870fb4b4dae92e24",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-11-08T15:34:02Z",
+        "versus_main": {
+          "status": "diverged",
+          "ahead_by": 47,
+          "behind_by": 5
+        }
+      },
+      {
+        "name": "lovable-sync-1794152550",
+        "protected": false,
+        "sha": "66021d594d0bf23729c2d08c376bb6643df4f783",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-11-08T15:42:09Z",
+        "versus_main": {
+          "status": "diverged",
+          "ahead_by": 49,
+          "behind_by": 5
+        }
+      },
+      {
+        "name": "lovable-sync-1794152846",
+        "protected": false,
+        "sha": "6d15249f05bbfcc13550343aabbe948cc331f41a",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-11-08T15:47:05Z",
+        "versus_main": {
+          "status": "diverged",
+          "ahead_by": 56,
+          "behind_by": 5
+        }
+      },
+      {
+        "name": "lovable-sync-1794153187",
+        "protected": false,
+        "sha": "982ff116db6612a79b71934fe5a8ed6d12c95bac",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-11-08T15:52:47Z",
+        "versus_main": {
+          "status": "diverged",
+          "ahead_by": 67,
+          "behind_by": 5
+        }
+      },
+      {
+        "name": "lovable-sync-1794207814",
+        "protected": false,
+        "sha": "6f7ff253bbba5a82eae884e0a45441ada39b2e7a",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-11-09T07:03:12Z",
+        "versus_main": {
+          "status": "diverged",
+          "ahead_by": 69,
+          "behind_by": 5
+        }
+      },
+      {
+        "name": "lovable-sync-1794208999",
+        "protected": false,
+        "sha": "44490fda4f86d2c1ce7b88d5d703a9a85e553c1b",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-11-09T07:22:59Z",
+        "versus_main": {
+          "status": "diverged",
+          "ahead_by": 81,
+          "behind_by": 5
+        }
+      },
+      {
+        "name": "lovable-sync-1794213434",
+        "protected": false,
+        "sha": "23859a7624293231d10c06e969a78ddc45fbc402",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-11-09T08:36:52Z",
+        "versus_main": {
+          "status": "diverged",
+          "ahead_by": 83,
+          "behind_by": 5
+        }
+      },
+      {
+        "name": "lovable-sync-1794214052",
+        "protected": false,
+        "sha": "94adef94a43656a1e3bba6e11e829ae8dd41c71f",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-11-09T08:47:12Z",
+        "versus_main": {
+          "status": "diverged",
+          "ahead_by": 90,
+          "behind_by": 5
+        }
+      },
+      {
+        "name": "lovable-sync-1794214433",
+        "protected": false,
+        "sha": "58a435d6c47d8aabb816e58d3abf55ad455d4af8",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-11-09T08:53:31Z",
+        "versus_main": {
+          "status": "diverged",
+          "ahead_by": 95,
+          "behind_by": 5
+        }
+      },
+      {
+        "name": "lovable-sync-1794215173",
+        "protected": false,
+        "sha": "01c16404134cb7db3cd1f33cc722d54e143ae7f5",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-11-09T09:05:52Z",
+        "versus_main": {
+          "unverified": "HTTPError",
+          "http_status": 403
+        }
+      },
+      {
+        "name": "lovable-sync-1794222838",
+        "protected": false,
+        "sha": "1194277e2a8f8107fe5ed09f06df6c65965d4ed9",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-11-09T11:13:34Z",
+        "versus_main": {
+          "unverified": "HTTPError",
+          "http_status": 403
+        }
+      },
+      {
+        "name": "lovable-sync-1794226208",
+        "protected": false,
+        "sha": "06b14ced40c07603d77fd5f6a76d06a4395b2bac",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-11-09T12:09:47Z",
+        "versus_main": {
+          "unverified": "HTTPError",
+          "http_status": 403
+        }
+      },
+      {
+        "name": "main",
+        "protected": false,
+        "sha": "878cd628f3e435b7800cc705d5a0a9872675262c",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-11-08T14:58:15Z"
+      },
+      {
+        "name": "preview",
+        "protected": false,
+        "sha": "2c6906e3654f719868d56e7738c8fb058bec0fa9",
+        "author": "mesha-transfergratis",
+        "date": "2026-07-06T12:22:01Z",
+        "versus_main": {
+          "unverified": "HTTPError",
+          "http_status": 403
+        }
+      },
+      {
+        "name": "user/chukwuma",
+        "protected": false,
+        "sha": "6fa4e1c3d6112845dec7c614e0745612ce4ea450",
+        "author": "Ayeromara",
+        "date": "2026-05-18T10:17:57Z",
+        "versus_main": {
+          "unverified": "HTTPError",
+          "http_status": 403
+        }
+      },
+      {
+        "name": "user/isaiahh",
+        "protected": false,
+        "sha": "16ff99b4703f911f8c1d8cbeb2b863810be9aca5",
+        "author": "gpt-engineer-app[bot]",
+        "date": "2026-05-12T14:56:49Z",
+        "versus_main": {
+          "unverified": "HTTPError",
+          "http_status": 403
+        }
+      }
+    ],
+    "collaborators": {
+      "unverified": "HTTPError",
+      "http_status": 401
+    },
+    "tree_truncated": false,
+    "inventory_paths": [
+      ".github/workflows/banned-strings.yml",
+      ".github/workflows/e2e.yml",
+      ".github/workflows/pledged-success.yml",
+      ".github/workflows/unit-tests.yml",
+      ".vscode/tasks.json",
+      "backend/init",
+      "backend/package.json",
+      "bun.lock",
+      "bun.lockb",
+      "init",
+      "package-lock.json",
+      "package.json",
+      "supabase/functions/_shared/auth.ts",
+      "supabase/functions/_shared/cors.ts",
+      "supabase/functions/_shared/db.ts",
+      "supabase/functions/_shared/ediMatrixRegistry.ts",
+      "supabase/functions/_shared/mod.ts",
+      "supabase/functions/_shared/response.ts",
+      "supabase/functions/_shared/router.ts",
+      "supabase/functions/_shared/sophiaKb.ts",
+      "supabase/functions/_shared/youtube.ts",
+      "supabase/functions/admin/batch-export-csv.ts",
+      "supabase/functions/admin/batch-export-csv_test.ts",
+      "supabase/functions/admin/batch-export-endpoint_test.ts",
+      "supabase/functions/admin/index.ts",
+      "supabase/functions/bulk-import-nominees/index.ts",
+      "supabase/functions/bulk-import-nominees/matching.ts",
+      "supabase/functions/certificates/index.ts",
+      "supabase/functions/chat/index.ts",
+      "supabase/functions/content/index.ts",
+      "supabase/functions/dashboard/index.ts",
+      "supabase/functions/health/index.ts",
+      "supabase/functions/image-search/index.ts",
+      "supabase/functions/import-nominees/index.ts",
+      "supabase/functions/jury/index.ts",
+      "supabase/functions/migration-emails/index.ts",
+      "supabase/functions/nesa-bulk-stage/index.ts",
+      "supabase/functions/nominations-submit/index.ts",
+      "supabase/functions/nominations/index.ts",
+      "supabase/functions/nominee-media-discovery/index.ts",
+      "supabase/functions/nrc-evidence-import/index.ts",
+      "supabase/functions/nrc-invite/index.ts",
+      "supabase/functions/nrc/index.ts",
+      "supabase/functions/olc/index.ts",
+      "supabase/functions/payments/index.ts",
+      "supabase/functions/referrals/index.ts",
+      "supabase/functions/season/index.ts",
+      "supabase/functions/seed-nominees/index.ts",
+      "supabase/functions/send-nominee-acceptance/index.ts",
+      "supabase/functions/send-notifications/index.ts",
+      "supabase/functions/settlement/index.ts",
+      "supabase/functions/shop/index.ts",
+      "supabase/functions/sophia-translate/index.ts",
+      "supabase/functions/sophia-whatsapp/index.ts",
+      "supabase/functions/sophia/index.ts",
+      "supabase/functions/sponsors/index.ts",
+      "supabase/functions/stage/index.ts",
+      "supabase/functions/uploads/index.ts",
+      "supabase/functions/verify/index.ts",
+      "supabase/functions/wallet/index.ts",
+      "supabase/functions/webinar-register/index.ts",
+      "supabase/functions/youtube-publish/index.ts",
+      "supabase/functions/youtube-upload/index.ts"
+    ],
+    "manifests": {
+      "backend/package.json": {
+        "scripts": {
+          "dev": "node init && tsx watch src/server.ts",
+          "build": "node init && tsc -p tsconfig.json",
+          "start": "node init && node dist/server.js",
+          "lint": "eslint src --ext .ts",
+          "prisma:generate": "prisma generate",
+          "prisma:migrate": "prisma migrate dev"
+        },
+        "dependencies": {
+          "@prisma/client": "^5.22.0",
+          "bcrypt": "^5.1.1",
+          "cors": "^2.8.5",
+          "dotenv": "^16.4.5",
+          "express": "^4.21.1",
+          "express-rate-limit": "^7.4.1",
+          "helmet": "^8.0.0",
+          "jsonwebtoken": "^9.0.2",
+          "morgan": "^1.10.0",
+          "multer": "^1.4.5-lts.1",
+          "swagger-ui-express": "^5.0.1",
+          "yaml": "^2.6.1",
+          "zod": "^3.23.8"
+        },
+        "devDependencies": {
+          "@types/bcrypt": "^5.0.2",
+          "@types/cors": "^2.8.17",
+          "@types/express": "^5.0.0",
+          "@types/jsonwebtoken": "^9.0.7",
+          "@types/morgan": "^1.9.9",
+          "@types/multer": "^1.4.12",
+          "@types/node": "^22.9.0",
+          "@types/swagger-ui-express": "^4.1.7",
+          "prisma": "^5.22.0",
+          "tsx": "^4.19.2",
+          "typescript": "^5.6.3"
+        }
+      },
+      "package.json": {
+        "scripts": {
+          "predev": "tsx scripts/generate-sitemap.ts && tsx scripts/generate-redirects.ts",
+          "prebuild": "tsx scripts/generate-sitemap.ts && tsx scripts/generate-redirects.ts",
+          "dev": "node init && vite",
+          "build": "node init && vite build",
+          "build:dev": "node init && vite build --mode development",
+          "lint": "eslint .",
+          "preview": "vite preview",
+          "test": "vitest run",
+          "test:watch": "vitest",
+          "test:e2e": "playwright test",
+          "test:e2e:update": "playwright test --update-snapshots"
+        },
+        "dependencies": {
+          "@capacitor/cli": "^8.1.0",
+          "@capacitor/core": "^8.1.0",
+          "@hookform/resolvers": "^3.10.0",
+          "@lovable.dev/cloud-auth-js": "^1.0.0",
+          "@radix-ui/react-accordion": "^1.2.11",
+          "@radix-ui/react-alert-dialog": "^1.1.14",
+          "@radix-ui/react-aspect-ratio": "^1.1.7",
+          "@radix-ui/react-avatar": "^1.1.10",
+          "@radix-ui/react-checkbox": "^1.3.2",
+          "@radix-ui/react-collapsible": "^1.1.11",
+          "@radix-ui/react-context-menu": "^2.2.15",
+          "@radix-ui/react-dialog": "^1.1.14",
+          "@radix-ui/react-dropdown-menu": "^2.1.15",
+          "@radix-ui/react-hover-card": "^1.1.14",
+          "@radix-ui/react-label": "^2.1.7",
+          "@radix-ui/react-menubar": "^1.1.15",
+          "@radix-ui/react-navigation-menu": "^1.2.13",
+          "@radix-ui/react-popover": "^1.1.14",
+          "@radix-ui/react-progress": "^1.1.7",
+          "@radix-ui/react-radio-group": "^1.3.7",
+          "@radix-ui/react-scroll-area": "^1.2.9",
+          "@radix-ui/react-select": "^2.2.5",
+          "@radix-ui/react-separator": "^1.1.7",
+          "@radix-ui/react-slider": "^1.3.5",
+          "@radix-ui/react-slot": "^1.2.3",
+          "@radix-ui/react-switch": "^1.2.5",
+          "@radix-ui/react-tabs": "^1.1.12",
+          "@radix-ui/react-toast": "^1.2.14",
+          "@radix-ui/react-toggle": "^1.1.9",
+          "@radix-ui/react-toggle-group": "^1.1.10",
+          "@radix-ui/react-tooltip": "^1.2.7",
+          "@supabase/supabase-js": "^2.91.0",
+          "@tanstack/react-query": "^5.83.0",
+          "@types/canvas-confetti": "^1.9.0",
+          "canvas-confetti": "^1.9.4",
+          "class-variance-authority": "^0.7.1",
+          "clsx": "^2.1.1",
+          "cmdk": "^1.1.1",
+          "date-fns": "^3.6.0",
+          "embla-carousel-react": "^8.6.0",
+          "framer-motion": "^12.29.0",
+          "i18next": "^23.16.8",
+          "i18next-browser-languagedetector": "^8.2.0",
+          "input-otp": "^1.4.2",
+          "jspdf": "4.2.1",
+          "lucide-react": "^0.462.0",
+          "next-themes": "^0.3.0",
+          "papaparse": "^5.5.3",
+          "qrcode.react": "^4.2.0",
+          "react": "^18.3.1",
+          "react-day-picker": "^8.10.1",
+          "react-dom": "^18.3.1",
+          "react-helmet-async": "^2.0.5",
+          "react-hook-form": "^7.61.1",
+          "react-i18next": "^15.1.3",
+          "react-markdown": "^10.1.0",
+          "react-resizable-panels": "^2.1.9",
+          "react-router-dom": "^6.30.1",
+          "recharts": "^2.15.4",
+          "sonner": "^1.7.4",
+          "tailwind-merge": "^2.6.0",
+          "tailwindcss-animate": "^1.0.7",
+          "vaul": "^0.9.9",
+          "vite-plugin-pwa": "^1.2.0",
+          "xlsx": "^0.18.5",
+          "zod": "^3.25.76"
+        },
+        "devDependencies": {
+          "@eslint/js": "^9.32.0",
+          "@playwright/test": "^1.60.0",
+          "@tailwindcss/typography": "^0.5.16",
+          "@testing-library/jest-dom": "^6.6.0",
+          "@testing-library/react": "^16.0.0",
+          "@testing-library/user-event": "^14.6.1",
+          "@types/node": "^22.16.5",
+          "@types/react": "^18.3.23",
+          "@types/react-dom": "^18.3.7",
+          "@vitejs/plugin-react-swc": "^3.11.0",
+          "autoprefixer": "^10.4.21",
+          "drizzle-kit": "0.x",
+          "drizzle-orm": "0.x",
+          "eslint": "^9.32.0",
+          "eslint-plugin-react-hooks": "^5.2.0",
+          "eslint-plugin-react-refresh": "^0.4.20",
+          "globals": "^15.15.0",
+          "jsdom": "^20.0.3",
+          "lovable-tagger": "^1.1.13",
+          "postcss": "^8.5.6",
+          "postgres": "^3.4.9",
+          "tailwindcss": "^3.4.17",
+          "tsx": "^4.22.3",
+          "typescript": "^5.8.3",
+          "typescript-eslint": "^8.38.0",
+          "vite": "^5.4.19",
+          "vitest": "^3.2.4"
+        }
+      }
+    }
+  }
+}

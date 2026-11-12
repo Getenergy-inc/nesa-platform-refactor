@@ -1,3 +1,12 @@
+## Security recovery and CTA master prompt — 12 Nov 2026
+- [x] Phase 0: Deliver local/repository recovery inventory, security findings and rotation checklist using static inspection and read-only Cloud queries; no application code executed.
+- [x] Inventory both public GitHub repositories, branch revisions/authors, protection flags, manifests and available divergence comparisons.
+- [ ] Complete collaborator/ruleset/force-push audit — authenticated repository-owner access required; some branch comparisons unverified.
+- [ ] Clear confirmed obfuscated init and hidden editor/font execution hooks — approved containment change and independent security review required.
+- [ ] Obtain a dated full database/Auth export and storage-file backup with tested rollback — existing package contains metadata only.
+- [ ] Obtain Phase 0 clearance and written "Phase 0 approved" before Phase 1; no application execution, installation, deployment or publishing.
+- [ ] Resolve uploaded-brief conflicts with earlier gala-date, certificate-window, social-channel and selection-criteria approvals before content changes.
+
 ## Africa Education Icon selection criteria — 9 Nov 2026
 - [x] Add the shared eight-criterion, 100%-weighted EDI selection section and ten-year evidence notice to the gala and Icon pages.
 - [x] Verify all four public URLs, 22 focused unit tests, eight desktop/mobile browser checks and 390px/1440px layouts; build OK; do not publish.
