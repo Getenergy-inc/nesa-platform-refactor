@@ -23,6 +23,12 @@ for (const route of ROUTES) {
         await expect(faqButton).toBeVisible();
         await expect(chatButton).toBeVisible();
         await expect(quickActions).toBeVisible();
+        await expect
+          .poll(async () => (await faqButton.boundingBox())?.width ?? 0)
+          .toBeGreaterThanOrEqual(MINIMUM_TARGET_SIZE);
+        await expect
+          .poll(async () => (await chatButton.boundingBox())?.width ?? 0)
+          .toBeGreaterThanOrEqual(MINIMUM_TARGET_SIZE);
 
         const faqBox = await faqButton.boundingBox();
         const chatBox = await chatButton.boundingBox();
