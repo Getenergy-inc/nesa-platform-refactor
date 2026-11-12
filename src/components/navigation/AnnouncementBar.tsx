@@ -38,7 +38,7 @@ export function AnnouncementBar() {
   };
 
   const inner = (
-    <span className="block truncate max-w-full">{current.text}</span>
+    <span className="block max-w-full leading-snug text-balance">{current.text}</span>
   );
 
 
