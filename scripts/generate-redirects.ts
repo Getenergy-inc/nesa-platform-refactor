@@ -114,6 +114,17 @@ const legacy301: Array<[string, string]> = [
   ["/privacy-policy", "/policies"],
   ["/terms", "/policies"],
   ["/cookie-policy", "/policies"],
+  // Public programme and retired participation aliases
+  ["/tickets", "/media/gala"],
+  ["/events", "/media/gala"],
+  ["/events/tourism", "/media/gala"],
+  ["/vote", "/"],
+  ["/dashboard/votes", "/"],
+  ["/dashboard/wallet", "/"],
+  ["/rebuild", "/support-a-special-needs-school"],
+  ["/donate", "/support-a-special-needs-school"],
+  ["/eduaid", "/support-a-special-needs-school"],
+  ["/special-needs-education-support", "/support-a-special-needs-school"],
   // Misc
   ["/language", "/"],
 ];
