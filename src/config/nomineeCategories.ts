@@ -160,7 +160,7 @@ export interface TierStyle {
 export const TIER_BADGE_STYLES: Record<RecognitionTier, TierStyle> = {
   blue_garnet: {
     label: "Blue Garnet",
-    longLabel: "Blue Garnet Voting Award",
+    longLabel: "Blue Garnet Review Award",
     className: "bg-blue-900/40 text-blue-100 border-blue-400/50",
     cardBorderClass: "border-blue-400/40 hover:border-blue-300/70",
     cardBgClass: "bg-gradient-to-br from-blue-950/60 via-charcoal-light to-charcoal",

@@ -45,7 +45,7 @@ const STEPS = [
     title: "Select Award Category",
     description: "Choose the appropriate award category and subcategory that best matches your nominee's contributions.",
     icon: Award,
-    tips: ["Review all 17 categories before selecting", "Check if nominee fits Platinum, Icon, or Competitive track"],
+    tips: ["Review all 22 categories before selecting", "Check if nominee fits Platinum, Icon, or Competitive track"],
   },
   {
     step: 3,

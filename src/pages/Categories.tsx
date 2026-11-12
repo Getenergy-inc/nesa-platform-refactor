@@ -131,7 +131,7 @@ export default function Categories() {
       label: "Blue Garnet",
       icon: <Trophy className="h-4 w-4" />,
       categories: groups.blueGarnet,
-      subtitle: "Competitive Excellence — Public voting → Jury evaluation",
+      subtitle: "Competitive Excellence — NRC verification → jury evaluation",
     },
     {
       key: "platinum",

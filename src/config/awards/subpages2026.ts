@@ -388,7 +388,7 @@ function bundleSubcategories(cat: CategoryDefinition, page: AwardSubpageContent)
       ? {
           kind: "icon",
           heading: "Jury-nominated tier",
-          body: "The Africa Education Icon Award is decided by an independent jury of 27 judges, producing 9 final Icons. There is no public nomination form on this tier.",
+          body: "The Africa Education Icon Award is decided by an independent jury of 9 independent judges, producing 9 final Icons. There is no public nomination form on this tier.",
         }
       : page.notice,
   };

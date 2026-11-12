@@ -279,7 +279,7 @@ export default function Policies() {
                     <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
                       <li>Reviewing and verifying all nominations</li>
                       <li>Ensuring nominees meet eligibility criteria</li>
-                      <li>Approving nominees for public voting or Platinum recognition</li>
+                      <li>Approving nominees for independent jury review or Platinum recognition</li>
                       <li>Documenting review decisions with supporting rationale</li>
                     </ul>
                     <p className="text-muted-foreground mt-4">
@@ -317,7 +317,7 @@ export default function Policies() {
                       <li>Commitment to confidentiality and ethical conduct</li>
                     </ul>
                     <p className="text-muted-foreground mt-4">
-                      Blue Garnet awards are determined by a weighted formula: 60% Jury Score + 40% Public Vote.
+                      Blue Garnet awards are determined by a weighted formula: independent jury review.
                     </p>
                   </PolicyBlock>
 

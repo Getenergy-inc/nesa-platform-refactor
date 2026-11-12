@@ -342,7 +342,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     endsAt: "2026-10-19T23:59:59Z",
     milestone: "Icon Judges' Onboarding & Calibration",
     activity:
-      "Confirm 27 judges, conflict-of-interest declarations, rubric training and sample scoring. Judges Arena opens for onboarding with no live nominee data.",
+      "Confirm 9 independent judges, conflict-of-interest declarations, rubric training and sample scoring. Judges Arena opens for onboarding with no live nominee data.",
     outcome: "Calibrated judging panel ready",
     track: "judging",
     href: "/judges/directory",
@@ -434,7 +434,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     endsAt: "2026-11-24T23:59:59Z",
     milestone: "Judges' Final Review & Selection — all 9 Icon pathways",
     activity:
-      "All 27 judges deliberate, score and lock results per pathway in the Judges Arena (3 Icon subcategories × 3 origin groups).",
+      "All 9 independent judges deliberate, score and lock results per pathway in the Judges Arena (3 Icon subcategories × 3 origin groups).",
     outcome: "Up to nine verified Africa Education Icons of the Decade may be confirmed",
     track: "judging",
     href: "/judges/directory",

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const SOCIAL_PROOF_MESSAGES = [
   { icon: Users, text: "243 nominations submitted this week", delay: 15000 },
   { icon: TrendingUp, text: "Vote counts doubled in the last 24 hours", delay: 35000 },
-  { icon: Award, text: "17 categories open for nominations", delay: 55000 },
+  { icon: Award, text: "22 categories open for nominations", delay: 55000 },
 ];
 
 const STORAGE_KEY = "nesa_engagement_toast_shown";

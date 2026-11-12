@@ -1,4 +1,4 @@
-// Nominee types available across the 18 categories.
+// Nominee types available across the 22 categories.
 
 export type NomineeType =
   | "individual"

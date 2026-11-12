@@ -6,7 +6,7 @@ import goldCertificateImage from "@/assets/certificates/gold-certificate-showcas
 
 export function GoldCertificateSection() {
   const features = [
-    { icon: Vote, label: "100% Public Voting", description: "No jury influence — your votes decide winners" },
+    { icon: Vote, label: "independent jury review", description: "No jury influence — your votes decide winners" },
     { icon: Globe, label: "8 African Regions", description: "West, East, Central, Southern, North, Horn, Sahel & Indian Ocean Islands + 2 Global Communities" },
     { icon: Users, label: "Top 3 Per Subcategory", description: "405 Gold Certificate winners across 135 subcategories" },
     { icon: Trophy, label: "Feeds Blue Garnet", description: "All 405 Gold winners compete for the 9 Blue Garnet Awards" },
@@ -42,7 +42,7 @@ export function GoldCertificateSection() {
 
             <p className="text-lg text-white/70 mb-6 leading-relaxed">
               The competitive stage of NESA recognition. Winners are determined entirely by{" "}
-              <span className="text-amber-400 font-semibold">public votes</span> — your participation 
+              <span className="text-amber-400 font-semibold">jury review</span> — your participation 
               decides who represents Africa's education enablers.
             </p>
 
@@ -135,7 +135,7 @@ export function GoldCertificateSection() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-amber-400 font-display font-bold text-lg">Gold Certificate</p>
-                      <p className="text-white/60 text-sm">100% Public Voting Winner</p>
+                      <p className="text-white/60 text-sm">independent jury review Winner</p>
                     </div>
                     <div className="text-right">
                       <p className="text-white text-sm font-semibold">2026 Edition</p>

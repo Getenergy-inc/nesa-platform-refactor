@@ -454,7 +454,7 @@ export const CANONICAL_PIPELINE: PipelineStage[] = [
   { step: "Submission", title: "Public Nomination", detail: "Any tier · self-check gate · non-influence disclaimer" },
   { step: "NRC", title: "Verification", detail: "Data Entry → Automated Review → Human Review" },
   { step: "EDI Matrix", title: "Weighted Scoring", detail: "Category-specific standard across 10 dimensions" },
-  { step: "Judges Arena", title: "Panel + Grand Jury", detail: "Icon Award only · 27 judges · 9 panels" },
+  { step: "Judges Arena", title: "Panel + Grand Jury", detail: "Icon Award only · 9 independent judges · 9 panels" },
   { step: "Finalists", title: "TV Show Reveals", detail: "Two online shows · Certificate + Icon finalists" },
   { step: "Ratification", title: "Gala Recognition", detail: "Governance-ratified Laureates + Certificates presented" },
 ];

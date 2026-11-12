@@ -101,7 +101,7 @@ export interface SeasonStageResponse {
 
 export const STAGE_LABELS: Record<StageAction, string> = {
   nominations: "Nominations",
-  public_voting: "Public Voting",
+  public_voting: "Independent jury review",
   jury_scoring: "Jury Scoring",
   results: "Results",
   certificates: "Certificates",
@@ -109,7 +109,7 @@ export const STAGE_LABELS: Record<StageAction, string> = {
 
 export const STAGE_DESCRIPTIONS: Record<StageAction, string> = {
   nominations: "Submit nominations for outstanding individuals and organizations",
-  public_voting: "Cast your vote for your favorite nominees",
+  public_voting: "Explore verified nominees for your favorite nominees",
   jury_scoring: "Expert jury evaluates Blue Garnet category nominees",
   results: "View the winners and finalists",
   certificates: "Download and verify award certificates",

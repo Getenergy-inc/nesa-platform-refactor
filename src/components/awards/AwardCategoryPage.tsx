@@ -57,8 +57,8 @@ const NOMINATION_FLOW: Array<{ title: string; description: string }> = [
     description: "Independent judges review qualified nominees against the EDX Matrix rubric.",
   },
   {
-    title: "Public vote (where applicable)",
-    description: "Blue Garnet and influencer tracks open for verified public voting.",
+    title: "Jury review (where applicable)",
+    description: "Blue Garnet and influencer tracks open for verified independent jury review.",
   },
   {
     title: "Finalists & recognition",

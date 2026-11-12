@@ -22,8 +22,8 @@ export const REBUILD_MILESTONES: RebuildMilestone[] = [
     icon: MapPin,
   },
   {
-    label: "Regional Public Voting",
-    description: "Shortlisted schools go to public voting across all 8 Africa regions",
+    label: "Regional Independent jury review",
+    description: "Shortlisted schools go to independent jury review across all 8 Africa regions",
     date: "2026-12-01",
     displayDate: "December 2026",
     icon: Vote,

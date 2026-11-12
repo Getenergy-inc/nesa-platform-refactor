@@ -86,7 +86,7 @@ const PATHWAY_CARDS: Array<{
     title: "Blue Garnet Awards",
     tagline: "Competitive Excellence Recognition",
     description:
-      "The competitive, voting-enabled track. NRC eligibility, jury shortlist, then a combined public vote and final jury score.",
+      "The competitive, voting-enabled track. NRC eligibility, jury shortlist, then a final jury score.",
     qualifies:
       "NGOs, CSR programs, EduTech, STEM, Media, Creative Arts and State leadership.",
     cta: "Explore Blue Garnet",
@@ -227,7 +227,7 @@ function edxPillsFor(c: AwardCategoryConfig): string[] {
 const MASTER_FAQS = [
   {
     q: "What is the NESA-Africa 2026 award structure?",
-    a: "Four canonical groups: Blue Garnet (competitive, public voting + jury), Platinum Certificate (jury-only institutional recognition), Africa Education Icon Lifetime Achievement (2006–2026, hall-of-fame), and Influencers Education Impact 2026 (jury-led with a public engagement signal).",
+    a: "Four canonical groups: Blue Garnet (competitive, independent jury review + jury), Platinum Certificate (jury-only institutional recognition), Africa Education Icon Lifetime Achievement (2006–2026, hall-of-fame), and Influencers Education Impact 2026 (jury-led with a public engagement signal).",
   },
   {
     q: "How do I find the right category to nominate in?",

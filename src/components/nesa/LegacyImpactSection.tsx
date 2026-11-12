@@ -44,7 +44,7 @@ export function LegacyImpactSection() {
           </div>
 
           <p className="text-white/60 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
-            Nominations open {REBUILD_MILESTONES[0].displayDate}. Shortlisted schools go to public voting in{" "}
+            Nominations open {REBUILD_MILESTONES[0].displayDate}. Shortlisted schools go to independent jury review in{" "}
             {REBUILD_MILESTONES[1].displayDate}. Intervention begins {REBUILD_MILESTONES[2].displayDate}.
             Impact report published {REBUILD_MILESTONES[3].displayDate}.
           </p>

@@ -357,7 +357,7 @@ export default function NominateMvp() {
                 </p>
                 <p>
                   Sponsorship, donation, ticket purchase, merchandise purchase,
-                  endorsement, media visibility, public voting, AGC participation
+                  endorsement, media visibility, independent jury review, AGC participation
                   or any GFAwzip Wallet payment does not influence nominee
                   approval, finalist selection, judging, regional intervention
                   selection, school selection or award winner selection.

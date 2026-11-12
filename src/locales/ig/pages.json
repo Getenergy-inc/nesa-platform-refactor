@@ -1,7 +1,7 @@
 {
   "landing": {
     "hero": {
-      "badge": "Public Voting Now Open",
+      "badge": "Independent jury review Now Open",
       "title": "Honoring Africa's",
       "titleHighlight": "Education Changemakers",
       "tagline": "Advocating & Achieving Education For All In Africa",
@@ -29,9 +29,9 @@
     },
     "upcomingEvents": {
       "title": "Upcoming TV Shows, Voting & Events",
-      "description": "Live countdown to NESA-Africa's major milestones, public voting windows, and broadcast events",
+      "description": "Live countdown to NESA-Africa's major milestones, independent jury review windows, and broadcast events",
       "tvShows": "📺 Live TV Shows",
-      "votingWindows": "🗳️ Public Voting Windows",
+      "votingWindows": "🗳️ Independent jury review Windows",
       "galaEvents": "🏆 Gala & Legacy Events"
     },
     "phase1": {
@@ -129,11 +129,11 @@
           ]
         },
         "blueGarnetGold": {
-          "badge": "Public Voting",
+          "badge": "Independent jury review",
           "title": "Gold-Blue Garnet Certificate Awards",
           "description": "Open competition with public participation through independent verification and expert judging.",
           "bullets": [
-            "Public Voting",
+            "Independent jury review",
             "Expert Judging",
             "138+ Subcategories"
           ]
@@ -182,11 +182,11 @@
         },
         "gold": {
           "title": "Gold Stage",
-          "description": "100% public voting only — no judges."
+          "description": "independent jury review only — no judges."
         },
         "blueGarnet": {
           "title": "Blue Garnet",
-          "description": "60% jury + 40% public. Audit logs & anti-fraud controls."
+          "description": "independent jury review. Audit logs & anti-fraud controls."
         },
         "sponsors": {
           "title": "Sponsors",
@@ -331,7 +331,7 @@
       "icon": "Icon",
       "iconDesc": "Lifetime Achievement",
       "gold": "Gold",
-      "goldDesc": "Public Voting",
+      "goldDesc": "Independent jury review",
       "blueGarnet": "Blue Garnet",
       "blueGarnetDesc": "Jury + Public",
       "legacy": "Legacy",
@@ -399,7 +399,7 @@
       "badge": "Post-Award Legacy • SCEF Social Impact",
       "title": "Rebuild My School",
       "titleAccent": "Africa",
-      "description": "One special needs school per African region — nominated by communities, selected through public voting, and transformed through EduAid-Africa. Recognition becomes real impact.",
+      "description": "One special needs school per African region — nominated by communities, selected through independent jury review, and transformed through EduAid-Africa. Recognition becomes real impact.",
       "cta": "Explore Rebuild My School Africa",
       "attribution": "A post-award legacy initiative of Santos Creations Educational Foundation"
     },
@@ -419,7 +419,7 @@
       "iconFeature2": "Legacy recognition",
       "iconFeature3": "Expert panel selection",
       "iconCta": "Nominate an Icon",
-      "votingBadge": "Public Voting",
+      "votingBadge": "Independent jury review",
       "votingTitle": "Gold-Blue Garnet",
       "votingSubtitle": "Annual Competition",
       "votingFeature1": "Earn voting points through participation",
@@ -462,7 +462,7 @@
       "title": "Our Four Pillars",
       "recognition": {
         "title": "Recognition",
-        "description": "Celebrating Africa's education champions through merit-based awards across 17 categories."
+        "description": "Celebrating Africa's education champions through merit-based awards across 22 categories."
       },
       "accountability": {
         "title": "Accountability",
@@ -490,11 +490,11 @@
       },
       "gold": {
         "title": "Gold Certificate",
-        "description": "Competitive recognition through 100% public voting. Region-first approach feeds into Blue Garnet."
+        "description": "Competitive recognition through independent jury review. Region-first approach feeds into Blue Garnet."
       },
       "blueGarnet": {
         "title": "Blue Garnet Award",
-        "description": "Highest honour — 60% Jury scoring, 40% Public voting. 9 winners announced at the live Gala."
+        "description": "Highest honour — 60% Jury scoring, 40% Independent jury review. 9 winners announced at the live Gala."
       }
     },
     "learnMore": "Learn More",
@@ -598,17 +598,17 @@
   },
   "vote": {
     "title": "Vote for Excellence",
-    "description": "Cast your vote for Africa's education champions",
+    "description": "Explore verified nominees for Africa's education champions",
     "votingOpen": "Voting is Open",
     "votingClosed": "Voting is Closed",
     "voteNow": "Learn More",
     "yourVote": "Your Vote Matters",
     "meta": {
       "title": "Vote for Nominees | {{editionName}}",
-      "description": "Cast your vote for outstanding education changemakers in the {{editionName}} awards. Support nominees making a difference across Africa."
+      "description": "Explore verified nominees for outstanding education changemakers in the {{editionName}} awards. Support nominees making a difference across Africa."
     },
     "hero": {
-      "badge": "Public Voting",
+      "badge": "Independent jury review",
       "title": "Vote for Africa's",
       "titleAccent": "Education Champions",
       "description": "Your vote helps recognize and celebrate the outstanding individuals and organizations transforming education across the continent."
@@ -750,7 +750,7 @@
     },
     "register": {
       "title": "Join NESA Africa",
-      "subtitle": "Create your account to nominate, vote, and celebrate African excellence",
+      "subtitle": "Create your account to nominate and celebrate African excellence",
       "fullName": "Full Name",
       "fullNamePlaceholder": "Enter your full name",
       "email": "Email",
@@ -914,7 +914,7 @@
         "cta": "Nominate an Icon"
       },
       "voting": {
-        "badge": "Public Voting",
+        "badge": "Independent jury review",
         "title": "Gold-Blue Garnet",
         "subtitle": "Annual Competition",
         "features": [
@@ -947,7 +947,7 @@
       "ediMatrix": {
         "title": "EDI Matrix",
         "subtitle": "Integrity Backbone",
-        "description": "The Education Development Index defines evaluation standards across 3 levels and 17 categories.",
+        "description": "The Education Development Index defines evaluation standards across 3 levels and 22 categories.",
         "badge": "Foundation"
       },
       "nomination": {
@@ -969,9 +969,9 @@
         "badge": "Step 3"
       },
       "voting": {
-        "title": "Public Voting",
+        "title": "Independent jury review",
         "subtitle": "For Voters",
-        "description": "AGC participation credits, Gold & Blue Garnet voting windows, and ethical voting rules.",
+        "description": "AGC participation credits, Gold & Blue Garnet review windows, and ethical voting rules.",
         "badge": "Step 4"
       }
     }
@@ -1038,7 +1038,7 @@
       "transparent": "Transparent",
       "openProcess": "Open process",
       "expertReview": "Expert Review",
-      "judges": "27 Judges",
+      "judges": "9 independent judges",
       "fairVoting": "Fair Voting",
       "verified": "Verified",
       "years": "20 Years",
@@ -1072,7 +1072,7 @@
         "ctaSecondary": "Past Icons"
       },
       "voting": {
-        "title": "Public Voting",
+        "title": "Independent jury review",
         "subtitle": "Gold-Blue Garnet Awards",
         "description": "9 categories. 135 subcategories. Public + Jury weighted.",
         "cta": "Nominate",
@@ -1081,7 +1081,7 @@
       "expert": {
         "title": "Expert Selection",
         "subtitle": "Platinum Certificate of Merit",
-        "description": "17 categories. No voting. Expert evaluation only.",
+        "description": "22 categories. No voting. Expert evaluation only.",
         "cta": "Learn More"
       }
     },

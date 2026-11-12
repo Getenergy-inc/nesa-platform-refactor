@@ -96,7 +96,7 @@ export default function JudgeRubric() {
                       60% Jury Weight
                     </Badge>
                     <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
-                      40% Public Vote
+                      40% Jury review
                     </Badge>
                     <Badge className="bg-gold/20 text-gold border-gold/30">
                       5 Criteria

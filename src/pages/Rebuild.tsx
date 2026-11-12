@@ -55,7 +55,7 @@ const regions = [
 
 const timeline = [
   { phase: "Nominate", period: "Post-Ceremony 2026", description: "Communities nominate deserving special needs schools in their region", icon: Trophy },
-  { phase: "Vote", period: "Jul – Sep 2026", description: "Public voting via AGC points determines the winning school per region", icon: Vote },
+  { phase: "Vote", period: "Jul – Sep 2026", description: "Independent jury review via AGC points determines the winning school per region", icon: Vote },
   { phase: "Intervene", period: "Oct 2026 – Jun 2027", description: "EduAid-Africa delivers facility upgrades, resources, and teacher training", icon: Heart },
 ];
 
@@ -145,7 +145,7 @@ export default function Rebuild() {
               <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed"
                 style={{ color: `hsla(210, 20%, 90%, 0.7)` }}
               >
-                One special needs school per region — nominated by communities, selected by public vote,
+                One special needs school per region — nominated by communities, selected by jury review,
                 and upgraded through EduAid-Africa. Recognition becomes real impact.
               </p>
 
@@ -505,7 +505,7 @@ export default function Rebuild() {
                 <div className="grid sm:grid-cols-2 gap-4">
                   {[
                     "Schools nominated publicly by communities",
-                    "Public voting determines regional selection",
+                    "Independent jury review determines regional selection",
                     "Independent needs assessment conducted",
                     "Funds deployed transparently with audit trails",
                     "Quarterly reporting published for all stakeholders",

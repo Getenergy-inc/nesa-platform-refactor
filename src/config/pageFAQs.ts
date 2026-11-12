@@ -59,11 +59,11 @@ const DEFAULT_FAQS: FAQ[] = [
   },
   {
     q: "What is NESA-Africa 2026?",
-    a: "NESA-Africa 2026 is the current edition of the awards cycle, running from pre-nomination through verification, public voting, the Blue Garnet Awards Gala and the post-award EduAid-Africa impact phase.",
+    a: "NESA-Africa 2026 is the current edition of the awards cycle, running from pre-nomination through verification, independent jury review, the Blue Garnet Awards Gala and the post-award EduAid-Africa impact phase.",
   },
   {
     q: "How can I participate?",
-    a: "You can nominate a changemaker, support a nominee with public voting, sponsor a category, endorse the programme as an institution, or partner with NESA-Africa on media, technology, hospitality or implementation.",
+    a: "You can nominate a changemaker, support a nominee with independent jury review, sponsor a category, endorse the programme as an institution, or partner with NESA-Africa on media, technology, hospitality or implementation.",
   },
   {
     q: "Is NESA-Africa influenced by sponsors?",
@@ -91,7 +91,7 @@ export const PAGE_FAQS: PageFAQ[] = [
       },
       {
         q: "What does NESA-Africa 2026 represent?",
-        a: "NESA-Africa 2026 is the current edition of the awards cycle. It moves from public pre-nomination, through independent NRC verification, public voting, the Blue Garnet Awards Gala, and into post-award legacy impact through EduAid-Africa and Rebuild My School Africa.",
+        a: "NESA-Africa 2026 is the current edition of the awards cycle. It moves from public pre-nomination, through independent NRC verification, independent jury review, the Blue Garnet Awards Gala, and into post-award legacy impact through EduAid-Africa and Rebuild My School Africa.",
       },
       {
         q: 'What is the motto "The African Blue-Garnet Awards for Recognising Africa’s Education Enablers"?',
@@ -179,7 +179,7 @@ export const PAGE_FAQS: PageFAQ[] = [
       },
       {
         q: "What are the Blue Garnet Award Categories?",
-        a: "Premier continental categories combining independent jury evaluation with public voting. They represent the highest competitive recognition tier of NESA-Africa 2026.",
+        a: "Premier continental categories combining independent jury evaluation with independent jury review. They represent the highest competitive recognition tier of NESA-Africa 2026.",
         ctas: [{ label: "Blue Garnet Awards", href: "/awards/blue-garnet" }],
       },
       {
@@ -207,11 +207,11 @@ export const PAGE_FAQS: PageFAQ[] = [
       },
       {
         q: "How are winners selected?",
-        a: "Selection varies by tier: Icon and Platinum are governance/panel selected; Blue Garnet combines independent jury scoring with public voting; Gold Certificate categories are public-vote driven within official voting windows.",
+        a: "Selection varies by tier: Icon and Platinum are governance/panel selected; Blue Garnet combines independent jury scoring with independent jury review; Gold Certificate categories are public-vote driven within official voting windows.",
       },
       {
         q: "Can public voting influence results?",
-        a: "Public voting contributes to Blue Garnet and Gold Certificate categories within official windows. It does not override governance verification or jury evaluation, and is subject to anti-fraud audit.",
+        a: "Independent jury review contributes to Blue Garnet and Gold Certificate categories within official windows. It does not override governance verification or jury evaluation, and is subject to anti-fraud audit.",
       },
       {
         q: "How does NESA-Africa protect award integrity?",
@@ -234,7 +234,7 @@ export const PAGE_FAQS: PageFAQ[] = [
     faqs: [
       {
         q: "How are NESA-Africa categories organised?",
-        a: "Categories sit within four tiers: Africa Education Icon (lifetime), Blue Garnet (jury + public), Platinum Certificate (governance/merit) and Gold Certificate / Influencer Impact (public voting and digital impact).",
+        a: "Categories sit within four tiers: Africa Education Icon (lifetime), Blue Garnet (jury + public), Platinum Certificate (governance/merit) and Gold Certificate / Influencer Impact (independent jury review and digital impact).",
       },
       {
         q: "What is the difference between Blue Garnet and Platinum Certificate categories?",
@@ -332,7 +332,7 @@ export const PAGE_FAQS: PageFAQ[] = [
     match: "/awards/gold-blue-garnet",
     title: "Voting — Frequently Asked Questions",
     subtitle:
-      "How public voting works in NESA-Africa 2026 and how its integrity is protected.",
+      "How independent jury review works in NESA-Africa 2026 and how its integrity is protected.",
     viewAllHref: "/faq",
     faqs: [
       {
@@ -409,7 +409,7 @@ export const PAGE_FAQS: PageFAQ[] = [
       },
       {
         q: "Does a profile guarantee finalist or winner status?",
-        a: "No. A profile confirms eligibility and NRC verification only. Finalist and winner status follow the governance, jury and (where applicable) public voting process.",
+        a: "No. A profile confirms eligibility and NRC verification only. Finalist and winner status follow the governance, jury and (where applicable) independent jury review process.",
       },
       {
         q: "Can sponsors contact nominees directly?",
@@ -735,7 +735,7 @@ export const PAGE_FAQS: PageFAQ[] = [
       },
       {
         q: "How are schools selected?",
-        a: "Communities nominate, the public votes and the NRC plus the EduAid-Africa technical team verify needs against the EDI matrix before funding is released.",
+        a: "Communities nominate, the jury review and the NRC plus the EduAid-Africa technical team verify needs against the EDI matrix before funding is released.",
       },
       {
         q: "What safeguarding rules apply?",
@@ -1090,7 +1090,7 @@ export const FULL_FAQ_GROUPS: FAQGroup[] = [
       },
       {
         q: "What is NESA-Africa 2026?",
-        a: "The current edition of the awards cycle, covering pre-nomination, verification, public voting, the Blue Garnet Awards Gala and post-award legacy impact.",
+        a: "The current edition of the awards cycle, covering pre-nomination, verification, independent jury review, the Blue Garnet Awards Gala and post-award legacy impact.",
       },
       {
         q: "Who hosts NESA-Africa?",
@@ -1108,7 +1108,7 @@ export const FULL_FAQ_GROUPS: FAQGroup[] = [
       },
       {
         q: "How are winners selected?",
-        a: "Icon and Platinum are governance/panel selected; Blue Garnet combines independent jury scoring with public voting; Gold and Influencer Impact are public-vote driven, audited for integrity.",
+        a: "Icon and Platinum are governance/panel selected; Blue Garnet combines independent jury scoring with independent jury review; Gold and Influencer Impact are public-vote driven, audited for integrity.",
       },
       {
         q: "Can sponsors influence award outcomes?",

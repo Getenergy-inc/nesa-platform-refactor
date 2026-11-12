@@ -15,7 +15,7 @@ const reasons = [
   {
     icon: Vote,
     title: "Transparent Voting",
-    description: "Public votes recorded with full audit trail.",
+    description: "Jury review recorded with full audit trail.",
   },
   {
     icon: Building,

@@ -47,7 +47,7 @@ export default defineConfig(({ mode }) => {
       manifest: {
         name: "NESA-Africa — New Education Standard Award",
         short_name: "NESA-Africa",
-        description: "Africa's premier education recognition platform. Nominate, vote, and celebrate education changemakers.",
+        description: "Africa's premier education recognition platform. Nominate and celebrate education changemakers.",
         theme_color: "#1a1a2e",
         background_color: "#1a1a2e",
         display: "standalone",

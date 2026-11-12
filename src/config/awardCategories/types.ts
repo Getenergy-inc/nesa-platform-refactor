@@ -60,7 +60,7 @@ export const GROUP_META: Record<
     label: "Blue Garnet Award Categories",
     indexUrl: "/awards/blue-garnet-categories",
     tagline: "Competitive, voting-enabled awards across NGO, CSR, EduTech, STEM, Media, Creative Arts and State leadership.",
-    tone: "Public voting + jury review",
+    tone: "Independent jury review + jury review",
   },
   platinum: {
     label: "Platinum Certificate Categories",

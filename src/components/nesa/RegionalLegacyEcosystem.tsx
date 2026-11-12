@@ -442,7 +442,7 @@ export const FLOW_STEPS: { icon: React.ComponentType<{ className?: string }>; ti
   { icon: School, title: "Nominate a Special Needs School", copy: "Nominations open on EduAid.Africa for a defined campaign window." },
   { icon: ClipboardCheck, title: "Verify School Information", copy: "EduAid-Africa & RMSA review need level, evidence, location and relevance." },
   { icon: MapIcon, title: "Map School to Region", copy: "Each approved school is assigned to one of the eight legacy hubs." },
-  { icon: Vote, title: "Open Regional Voting", copy: "Communities, supporters, chapters and the public vote per region." },
+  { icon: Vote, title: "Open Regional Voting", copy: "Communities, supporters, chapters and the jury review per region." },
   { icon: Coins, title: "Activate Regional Funding Portal", copy: "GFA Wzip Legacy Wallet opens for donations, CSR and crowdfunding." },
   { icon: Award, title: "Select Intervention Beneficiaries", copy: "Selection blends verified need, voting outcome and funding readiness." },
   { icon: Wrench, title: "Implement Legacy Project", copy: "Infrastructure, accessibility, assistive tech, teacher and learning support." },
@@ -495,7 +495,7 @@ export function RegionalLegacyEcosystem() {
               EduAid.Africa
             </a>{" "}
             during an approved nomination window. Each school is mapped to one of the eight
-            approved legacy regions, may enter a regional public voting process, and may
+            approved legacy regions, may enter a regional independent jury review process, and may
             qualify for intervention based on verified need, regional relevance, and
             community participation. Each region also has a dedicated funding portal and{" "}
             <span className="text-gold font-semibold">GFA Wzip Regional Legacy Wallet</span>{" "}

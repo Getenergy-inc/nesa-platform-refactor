@@ -178,5 +178,5 @@ export const NRC_DESCRIPTION = {
   shortDescription:
     "30 Hybrid NRC Volunteers verifying nominations across all 8 Africa regions and the African Diaspora",
   fullDescription:
-    "The Hybrid NRC is a blended verification model combining core NRC members with volunteer NRC support. Operating both remotely and in-person, the 30-member Hybrid NRC ensures thorough, region-aware verification across the 8 Africa regions and the African Diaspora community before nominations advance to voting or jury evaluation.",
+    "The Hybrid NRC is a blended verification model combining core NRC members with volunteer NRC support. Operating both remotely and in-person, the 27-member Hybrid NRC ensures thorough, region-aware verification across the 8 Africa regions and the African Diaspora community before nominations advance to voting or jury evaluation.",
 };

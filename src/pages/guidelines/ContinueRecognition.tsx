@@ -63,7 +63,7 @@ const PATHWAYS = [
     accent: "border-blue-500/30 bg-blue-500/5",
     badgeClass: "border-blue-500/30 text-blue-400 bg-blue-500/10",
     points: [
-      "Public voting decides finalists",
+      "Independent jury review decides finalists",
       "AGC participation rewards apply",
       "Competitive recognition route",
       "Two-stage Blue Garnet scoring",

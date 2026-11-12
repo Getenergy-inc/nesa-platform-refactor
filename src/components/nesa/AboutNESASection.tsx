@@ -92,7 +92,7 @@ const PANELS: Panel[] = [
     render: () => (
       <p>
         Public nominations → NRC verification → jury onboarding → Gold
-        Certificate public voting → Blue Garnet final voting → Awards Gala →
+        Certificate independent jury review → Blue Garnet final voting → Awards Gala →
         post-award impact.
       </p>
     ),

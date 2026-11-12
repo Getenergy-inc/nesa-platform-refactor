@@ -58,7 +58,7 @@ const SPECIAL_RECOGNITION = [
   },
   {
     id: "voting",
-    title: "Public Voting",
+    title: "Independent jury review",
     subtitle: "Gold-Blue Garnet Awards",
     description: "9 categories. 135 subcategories. Top 3 winners each = 405 Gold Certificate winners.",
     icon: Star,
@@ -71,7 +71,7 @@ const SPECIAL_RECOGNITION = [
     id: "expert",
     title: "Expert Selection",
     subtitle: "Platinum Certificate of Merit",
-    description: "17 categories. No voting. Expert evaluation only.",
+    description: "22 categories. No voting. Expert evaluation only.",
     tier: "platinum" as AwardTier,
     icon: Shield,
     href: "/awards/platinum",
@@ -89,7 +89,7 @@ const BADGE_HIERARCHY = [
 
 const TRUST_SIGNALS = [
   { icon: Shield, label: "Transparent", sublabel: "Open process" },
-  { icon: Users, label: "Expert Review", sublabel: "27 Judges" },
+  { icon: Users, label: "Expert Review", sublabel: "9 independent judges" },
   { icon: CheckCircle, label: "Fair Voting", sublabel: "Verified" },
   { icon: Clock, label: "20 Years", sublabel: "Since 2006" },
 ];

@@ -45,7 +45,7 @@ const certificates: CertificateInfo[] = [
     validity: "Annual",
     description: "Blue Garnet Award Category Winner recognition",
     features: [
-      "Competitive 100% public voting",
+      "Competitive independent jury review",
       "Qualifies for Blue Garnet",
       "Regional representation",
       "QR verification enabled"
@@ -61,7 +61,7 @@ const certificates: CertificateInfo[] = [
     description: "For Achieving Education Enablers Across Africa",
     features: [
       "Highest competitive honor",
-      "60% Jury / 40% Public scoring",
+      "independent jury review scoring",
       "9 continental winners",
       "QR verification enabled"
     ],

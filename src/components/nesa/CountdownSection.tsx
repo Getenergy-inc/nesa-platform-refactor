@@ -88,7 +88,7 @@ export function CountdownSection() {
             Countdown offers a secondary (outline) + tertiary (text link) only. */}
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <Link
-            to="/gala#tickets"
+            to="/media/gala"
             className="inline-flex min-h-11 items-center gap-2 rounded-full border border-gold/40 bg-transparent px-5 py-2.5 text-sm font-semibold text-gold transition-colors hover:bg-gold/10"
           >
             Request Gala Invitation

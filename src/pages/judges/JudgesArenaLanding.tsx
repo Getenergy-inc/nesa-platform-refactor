@@ -183,7 +183,7 @@ export default function JudgesArenaLanding() {
             },
             {
               title: "Nine-Panel Jury Matrix",
-              body: "27 judges are divided into nine specialist panels of three. Each panel screens only its assigned pathway and classification, then all 27 judges vote in the grand jury round.",
+              body: "9 independent judges are divided into nine specialist panels of three. Each panel screens only its assigned pathway and classification, then all 9 independent judges vote in the grand jury round.",
             },
             {
               title: "Screening to Final Vote Timeline",

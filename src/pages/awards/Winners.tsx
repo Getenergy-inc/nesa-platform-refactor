@@ -108,10 +108,10 @@ export default function Winners() {
                   <Award className="mx-auto mb-4 h-12 w-12 text-yellow-400" />
                   <h3 className="mb-2 text-xl font-semibold text-white">Voting in Progress</h3>
                   <p className="mb-6 text-white/60">
-                    Gold Certificate winners are determined through public voting. Results will be announced soon.
+                    Gold Certificate winners are determined through independent jury review. Results will be announced soon.
                   </p>
                   <Button asChild className="bg-primary text-primary-foreground">
-                    <Link to="/awards/gold-blue-garnet">Cast Your Vote</Link>
+                    <Link to="/awards/gold-blue-garnet">Explore verified nominees</Link>
                   </Button>
                 </div>
               </TabsContent>

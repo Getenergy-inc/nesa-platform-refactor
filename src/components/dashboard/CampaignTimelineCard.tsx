@@ -33,7 +33,7 @@ const campaigns: Campaign[] = [
     badge: "Gold",
   },
   {
-    name: "Blue Garnet Voting",
+    name: "Blue Garnet Review",
     startDate: new Date("2026-09-16"),
     endDate: new Date(PROGRAMME_END_DATE),
     color: "bg-[#1E3A5F]",
