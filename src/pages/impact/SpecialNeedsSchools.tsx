@@ -164,7 +164,7 @@ export default function SpecialNeedsSchools() {
             <div className="mt-8 rounded-2xl border border-gold/20 bg-ivory/[0.03] p-8 text-center">
               <p className="text-ivory/80">No verified and explicitly approved school profiles are currently available.</p>
               <p className="mt-2 text-sm text-ivory/60">Only verified and approved schools may be publicly profiled or admitted to voting.</p>
-              <ParticipationLink id="nominate" primary>Nominate a Special-Needs School</ParticipationLink>
+              <div className="mt-5"><ParticipationLink id="nominate" primary>Nominate a Special-Needs School</ParticipationLink></div>
             </div>
           ) : (
             <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
