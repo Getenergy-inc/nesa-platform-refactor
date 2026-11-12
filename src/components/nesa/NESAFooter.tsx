@@ -127,9 +127,7 @@ export function NESAFooter() {
                 </summary>
                 <nav aria-label={section.title} className="flex flex-col gap-2.5 pb-4 text-left">
                   {section.links.map((link) => (
-                    <Link key={link.label} to={link.href} onClick={() => trackFooter(section.id, link.label, link.href)} className="text-white/65 hover:text-gold transition-colors text-sm py-1">
-                      {link.label}
-                    </Link>
+                    <FooterNavLink key={link.label} section={section.id} link={link} />
                   ))}
                 </nav>
               </details>
@@ -137,9 +135,7 @@ export function NESAFooter() {
                 <h3 className="text-white font-semibold mb-4 text-sm tracking-wide">{section.title}</h3>
                 <nav aria-label={section.title} className="flex flex-col gap-2.5 text-sm">
                   {section.links.map((link) => (
-                    <Link key={link.label} to={link.href} onClick={() => trackFooter(section.id, link.label, link.href)} className="text-white/60 hover:text-gold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded">
-                      {link.label}
-                    </Link>
+                    <FooterNavLink key={link.label} section={section.id} link={link} />
                   ))}
                 </nav>
               </div>
