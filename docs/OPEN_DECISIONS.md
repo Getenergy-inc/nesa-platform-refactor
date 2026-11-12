@@ -19,3 +19,12 @@ All entries below are **TBC — needs management decision**. Website copy, certi
 | School programme regional mapping | Latest school-support brief prohibits publication without written approval; earlier brief requested automatic country-to-region assignment. | Latest school-programme brief controls: no public mapping or automatic assignment until written regional approval. |
 | School programme voting authorisation | September 2027 is conditional; exact opening/closing times, entitlement scope, regional eligibility, dispute/recount rules and recorded governance authorisation are not supplied. | Display the conditional opening notice; no active voting or impact on NESA 2026 award decisions. |
 | Two-site delivery and official participation channels | Matching NESA/EduAid paths requested; EduAid project access and authorised Google Form URLs/source-capture configuration are not established. | Plan both sites without claiming either proposed domain or form is live; missing official links remain CONTENT REQUIRED. |
+## Lean Website Pack brief (12 Nov 2026) — confirm before WP-2
+| Decision | Conflict | Interim handling |
+|---|---|---|
+| Gala date | Site shows Monday 28 December 2026 (user instruction 9 Nov); 12 Nov briefs say Sunday 13 December 2026. | Keep 28 December 2026 until management confirms in writing. |
+| NRC size | Approved 36 (9 per tier); one brief says 9 across all tiers; /nrc/members enforces a 30-member cap. | TBC — needs management decision; no cap change. |
+| Regions | /regions shows 10 award zones; Support Fund uses 8 programme regions (mapping unapproved). | Keep both separate; no mapping published. |
+| Taxonomy mapping | Code has 17 categories / 138 subcategories; approved 4 tiers / 22 awards / 90 subcategories; Tier 2 has no code entries; Icon label 2005–2025 vs 2006–2026. | Presentation-only registry in WP-5; legacy keys unchanged. |
+| Icon criteria weights | Weights already shown on Icon and gala pages. | Confirm governance approval is recorded. |
+| Official URLs | Special Needs School Support Forms (NESA and EduAid), live-stream link, payment instructions. | TBC — needs management decision; shown as CONTENT REQUIRED. |
