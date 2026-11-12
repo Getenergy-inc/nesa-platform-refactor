@@ -59,9 +59,10 @@ for (const route of ROUTES) {
         await expect(faqDialog).toBeHidden();
 
         await chatButton.click();
-        await expect(page.getByRole("heading", { name: "Sophia" })).toBeVisible();
+        const chatHeading = page.getByRole("heading", { name: "Sophia", exact: true });
+        await expect(chatHeading).toBeVisible();
         await page.getByRole("button", { name: "Close support chat" }).click();
-        await expect(page.getByRole("heading", { name: "Sophia" })).toBeHidden();
+        await expect(chatHeading).toBeHidden();
         await expect(chatButton).toBeVisible();
       });
     });
