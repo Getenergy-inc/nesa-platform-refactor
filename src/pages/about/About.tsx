@@ -662,7 +662,7 @@ export default function About() {
             variant="outline"
             className="rounded-full border-gold/50 text-gold hover:bg-gold/10"
           >
-            <Link to="/about/timeline">
+            <Link to="/about/nesa-africa-2026">
               <Sparkles className="mr-2 h-4 w-4" aria-hidden="true" />
               Explore NESA-Africa 2026
             </Link>
