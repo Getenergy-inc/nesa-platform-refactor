@@ -219,7 +219,7 @@ export default function Timeline() {
     },
     {
       step: "04",
-      title: "Online Awards Gala",
+      title: "Online Recognition Programme",
       body: ONLINE_GALA.copy.summary,
       statusLabel: countdown.isExpired ? "Celebrated" : `${countdown.days} days to go`,
       tone: "sapphire",
