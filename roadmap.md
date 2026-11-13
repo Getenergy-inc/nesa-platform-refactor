@@ -1,4 +1,7 @@
 ## Unified NESA-Africa & EduAid-Africa framework — 13 Nov 2026
+- [x] Record owner's 19:03 update in the framework memory: NRRC naming/description/CTAs, eight programme-operational regions, separate school-support service, US$1.2 million 2027 fundraising target (US$150,000 per region) and exact separation notice; no website changes or publishing.
+- [ ] After Phase 0 clearance and applicable phase review, apply NRRC visible wording across existing pages/navigation/dashboards/forms/emails/appointment-letter templates/role descriptions/metadata/notifications; update existing school-support and operational-region wording without design or geographic-data changes. Recruitment remains closed unless formally opened; no regional totals before an approved country-to-region register.
+- [ ] Separate future scope only: preferred /nrrc routes and permanent /nrc/* redirects, and nrc→nrrc role/status/assignment mappings after security clearance and migration testing; preserve user IDs, audit logs, assignments, timestamps, evidence, access rules and history. Excluded from the wording-only pass.
 - [x] Apply owner's 18:55 correction to scope: wording and existing link destinations only; preserve every layout, component, section order, colour, font, spacing, image, card style and page structure. No application design edits occurred during the preceding plan/review step, so no design rollback is needed.
 - [ ] Apply permitted Unified Framework wording after Phase 0 clearance; skip homepage reordering, added/removed sections, participation cards, new controls, new workflows and backend changes under the text-only correction.
 - [x] Record the latest owner-approved framework and inspect the existing navigation, redirects, official accounts and Phase 0 evidence.
@@ -8,7 +11,7 @@
 - [ ] Text phase 2: homepage, About, recognition and online programme wording in their unchanged existing sections.
 - [ ] Text phase 3: school support, volunteers, chapters, sponsors and official account text on existing support/donate pages; no added controls or payment functionality.
 - [ ] Text phase 4: existing nomination/profile/contact notices only; status-model, publication-rule and contact-save functionality changes excluded.
-- [ ] Text phase 5: existing NRC/judge/sign-in labels and notices after clearance; no new cards, dashboards or role/access logic.
+- [ ] Text phase 5: existing NRRC/judge/sign-in labels and notices after clearance; no new cards, dashboards or role/access logic.
 - [ ] Text phase 6: legacy English copy, metadata/Open Graph, alt text, FAQs and email-template wording; report every wording/link change and excluded design/functionality work; no publishing.
 
 ## Phase 0 protected-page publishing guard — 13 Nov 2026
