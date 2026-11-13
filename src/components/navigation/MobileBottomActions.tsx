@@ -1,4 +1,4 @@
-// Four persistent mobile shortcuts: Home · Awards · Nominate · Support a School.
+// Four persistent mobile shortcuts: Home · Recognition · Nominate · Get Involved.
 import { Link, useLocation } from "react-router-dom";
 import { Award, FileCheck, Heart, Home } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -9,9 +9,9 @@ export const MOBILE_MENU_OPEN_EVENT = "nesa:mobile-menu-open";
 
 const ACTION_ICONS = {
   Home,
-  Awards: Award,
+  Recognition: Award,
   Nominate: FileCheck,
-  "Support a School": Heart,
+  "Get Involved": Heart,
 } as const;
 
 export function MobileBottomActions() {
