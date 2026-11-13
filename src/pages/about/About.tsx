@@ -583,6 +583,53 @@ export default function About() {
         </div>
       </Section>
 
+      {/* ─── OUR PRINCIPLES ───────────────────────────────── */}
+      <Section id="our-principles" eyebrow="Principles" title="Our principles">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            {
+              title: "Evidence before acclaim",
+              detail: "Recognition claims should be supported by credible information.",
+              Icon: BadgeCheck,
+            },
+            {
+              title: "Consent before publicity",
+              detail: "Nominees must be treated with dignity and appropriate privacy controls.",
+              Icon: ShieldCheck,
+            },
+            {
+              title: "Research before judging",
+              detail:
+                "The Nominee Research and Review Corps prepares the factual foundation before an eligible Icon dossier reaches the judges.",
+              Icon: Search,
+            },
+            {
+              title: "Independence from financial influence",
+              detail: "Sponsors, donors and partners cannot buy recognition or judge access.",
+              Icon: Scale,
+            },
+            {
+              title: "Pan-African participation",
+              detail:
+                "The programme supports participation across African countries, the Diaspora and Friends of Africa.",
+              Icon: Globe,
+            },
+            {
+              title: "Responsible storytelling",
+              detail:
+                "Media content must educate and inform without exaggerating nominee status or programme achievements.",
+              Icon: BookOpenCheck,
+            },
+          ].map(({ title, detail, Icon }) => (
+            <article key={title} className="rounded-2xl border border-gold/20 bg-charcoal-light p-5">
+              <Icon className="h-5 w-5 text-gold" aria-hidden="true" />
+              <h3 className="mt-3 font-display text-base font-bold text-ivory">{title}</h3>
+              <p className="mt-1 text-sm text-ivory/70">{detail}</p>
+            </article>
+          ))}
+        </div>
+      </Section>
+
       {/* ─── 14. CONTINENTAL REACH ────────────────────────── */}
       <Section
         id="continental-reach"
