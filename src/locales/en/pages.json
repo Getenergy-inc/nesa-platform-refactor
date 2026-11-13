@@ -105,7 +105,7 @@
       "phase": "Phase"
     },
     "keyDates": {
-      "blueGarnetGala": "Blue Garnet Awards Gala",
+      "blueGarnetGala": "Online Recognition Programme",
       "comingSoon": "To Be Announced",
       "location": "Lagos, Nigeria",
       "eduAidWebinars": "EduAid Webinars"
@@ -848,7 +848,7 @@
     "description": "Secure your seat at Africa's premier education awards ceremony",
     "meta": {
       "title": "Tickets | NESA-Africa Gala",
-      "description": "Purchase tickets for the NESA-Africa Awards Gala ceremony."
+      "description": "Purchase tickets for the NESA-Africa Online Recognition Programme ceremony."
     },
     "tiers": {
       "standard": {

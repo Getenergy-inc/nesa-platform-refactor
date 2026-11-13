@@ -80,7 +80,7 @@ export interface SponsorLaneCard {
  */
 export const SPONSOR_LANE_CARDS: SponsorLaneCard[] = [
   {
-    title: "Sponsor the Blue Garnet Awards Gala",
+    title: "Sponsor the Online Recognition Programme",
     description:
       "Headline the Gala night, hospitality, red carpet, broadcast and VIP reception.",
     startingAmount: `Main ${SPONSOR_LANE_COPY["gala-main"].amount} · Supporting ${SPONSOR_LANE_COPY["gala-supporting"].amount}`,

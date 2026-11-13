@@ -65,7 +65,7 @@ const ticketTiers: TicketTier[] = [
     name: "Standard",
     price: 150,
     currency: "USD",
-    description: "General admission to the Awards Gala",
+    description: "General admission to the Online Recognition Programme",
     features: [
       "General seating area",
       "Live ceremony viewing",
@@ -206,12 +206,12 @@ export default function Tickets() {
         <title>{`Gala Tickets · ${PROGRAMME_END_LABEL} · NESA-Africa 2026`}</title>
         <meta
           name="description"
-          content={`Buy tickets for the NESA-Africa 2026 Gold-Blue Garnet Awards Gala on ${PROGRAMME_END_LONG_LABEL}. Attendance only — tickets confer no nomination, judging or voting rights.`}
+          content={`Buy tickets for the NESA-Africa 2026 Online Recognition Programme on ${PROGRAMME_END_LONG_LABEL}. Attendance only — tickets confer no nomination, judging or voting rights.`}
         />
         <meta property="og:title" content={`Gala Tickets · ${PROGRAMME_END_LABEL} · NESA-Africa 2026`} />
         <meta
           property="og:description"
-          content={`NESA-Africa 2026 Gold-Blue Garnet Awards Gala — ${PROGRAMME_END_LONG_LABEL}.`}
+          content={`NESA-Africa 2026 Online Recognition Programme — ${PROGRAMME_END_LONG_LABEL}.`}
         />
         <meta property="og:type" content="event" />
         <meta property="og:url" content="https://nesaafrica.lovable.app/tickets" />
@@ -233,7 +233,7 @@ export default function Tickets() {
         <section className="relative h-64 overflow-hidden">
           <img
             src={galaHeroImage}
-            alt="NESA-Africa Awards Gala"
+            alt="NESA-Africa Online Recognition Programme"
             className="h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/80 to-transparent" />
@@ -250,7 +250,7 @@ export default function Tickets() {
                 Get Your <span className="text-primary">Gala Tickets</span>
               </h1>
               <p className="mt-2 text-sm text-white/80 md:text-base">
-                NESA-Africa 2026 Gold-Blue Garnet Awards Gala · {PROGRAMME_END_LONG_LABEL}
+                NESA-Africa 2026 Online Recognition Programme · {PROGRAMME_END_LONG_LABEL}
               </p>
             </div>
           </div>
@@ -330,7 +330,7 @@ export default function Tickets() {
                 <CardContent className="space-y-3 text-sm text-muted-foreground">
                   <p>
                     <strong className="text-foreground">Includes:</strong> physical
-                    admission to the NESA-Africa 2026 Gold-Blue Garnet Awards Gala on{" "}
+                    admission to the NESA-Africa 2026 Online Recognition Programme on{" "}
                     {PROGRAMME_END_LONG_LABEL}, plus the seating and hospitality listed
                     in your chosen tier.
                   </p>

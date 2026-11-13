@@ -193,7 +193,7 @@ export const PAYMENT_METHODS: PaymentMethod[] = [
 // Canonical Gala date lives in @/config/programme — never retype it here.
 
 export const GALA_EVENT = {
-  name: 'NESA-Africa 2026 Gold-Blue Garnet Awards Gala',
+  name: 'NESA-Africa 2026 Online Recognition Programme',
   date: `Sunday, ${PROGRAMME_END_LABEL}`,
   year: 2026,
   time: '18:00 WAT',

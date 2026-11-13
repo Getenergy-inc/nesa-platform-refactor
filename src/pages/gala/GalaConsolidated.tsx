@@ -21,15 +21,15 @@ export default function GalaConsolidated() {
   return (
     <>
       <Helmet>
-        <title>NESA-Africa 2026 Online Awards Gala</title>
+        <title>NESA-Africa 2026 Online Recognition Programme</title>
         <meta name="description" content={t("onlineGala.summary")} />
-        <meta property="og:title" content="NESA-Africa 2026 Online Awards Gala" />
+        <meta property="og:title" content="NESA-Africa 2026 Online Recognition Programme" />
         <meta property="og:description" content={t("onlineGala.summary")} />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
-      <nav aria-label="Online Awards Gala sections" className="sticky top-14 z-30 overflow-x-auto border-b border-gold/20 bg-charcoal/95 backdrop-blur sm:top-16">
+      <nav aria-label="Online Recognition Programme sections" className="sticky top-14 z-30 overflow-x-auto border-b border-gold/20 bg-charcoal/95 backdrop-blur sm:top-16">
         <ul className="flex gap-4 whitespace-nowrap px-4 py-3 text-sm">
           {SECTIONS.map((section) => (
             <li key={section.id}><a href={`#${section.id}`} className="text-white/80 transition-colors hover:text-gold">{t(`onlineGala.${section.label}`)}</a></li>
@@ -40,7 +40,7 @@ export default function GalaConsolidated() {
       <section id="overview" className="border-b border-gold/15 bg-charcoal py-16 text-white md:py-24">
         <div className="container mx-auto max-w-5xl px-4 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">28 December 2026 · Online only</p>
-          <h1 className="mt-4 font-display text-4xl font-bold md:text-6xl">NESA-Africa 2026 <span className="text-gold">Online Awards Gala</span></h1>
+          <h1 className="mt-4 font-display text-4xl font-bold md:text-6xl">NESA-Africa 2026 <span className="text-gold">Online Recognition Programme</span></h1>
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-white/75">
             {t("onlineGala.summary")}
           </p>

@@ -79,11 +79,11 @@ export const SPONSOR_LANE_COPY: Record<SponsorLaneSlug, SponsorLaneCopy> = {
   "gala-main": {
     slug: "gala-main",
     headline: "Award Gala Night Main Sponsor",
-    subheadline: "Headline the Blue Garnet Awards Gala — premium event positioning.",
+    subheadline: "Headline the Online Recognition Programme — premium event positioning.",
     amount: "$200,000",
     sponsorLimit: "1",
     purpose:
-      "Anchor the Blue Garnet Awards Gala night — Africa's flagship education recognition ceremony — with premium naming-right visibility.",
+      "Anchor the Online Recognition Programme night — Africa's flagship education recognition ceremony — with premium naming-right visibility.",
     benefits: [
       "“Presented by” naming visibility on Gala communications and stage",
       "Premium logo placement on ceremony backdrop, programme and broadcast lower-thirds",

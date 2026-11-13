@@ -22,15 +22,15 @@ interface CardItem {
 const items: CardItem[] = [
   {
     icon: Ticket,
-    eyebrow: "Awards Gala",
+    eyebrow: "Online Recognition Programme",
     title: "Buy Your Gala Ticket",
     description:
-      "Reserve your seat at the NESA-Africa Blue Garnet Awards Gala — an unforgettable night honoring Africa's education changemakers.",
+      "Reserve your seat at the NESA-Africa Online Recognition Programme — an unforgettable night honoring Africa's education changemakers.",
     cta: "Buy Tickets",
     href: "/buy-your-ticket",
     accent: "from-gold/20 to-gold/5",
     image: galaImg,
-    imageAlt: "NESA-Africa Blue Garnet Awards Gala ballroom with golden trophy",
+    imageAlt: "NESA-Africa Online Recognition Programme ballroom with golden trophy",
   },
   {
     icon: ShoppingBag,

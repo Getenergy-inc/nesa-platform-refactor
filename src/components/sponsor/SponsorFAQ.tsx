@@ -20,7 +20,7 @@ const FAQS: FAQ[] = [
   },
   {
     q: "What sponsorship categories are available?",
-    a: "Blue Diamond, Blue Garnet Awards Gala, Award Categories, Africa Education Icon, Gold/Blue Garnet, Platinum Recognition, Influencers Education Impact, EduAid-Africa Webinars, NESA-Africa TV Features, Sub-Category Pages, Rebuild My School Africa, Strategic Partnership and Supporter Visibility Listing.",
+    a: "Blue Diamond, Online Recognition Programme, Award Categories, Africa Education Icon, Gold/Blue Garnet, Platinum Recognition, Influencers Education Impact, EduAid-Africa Webinars, NESA-Africa TV Features, Sub-Category Pages, Rebuild My School Africa, Strategic Partnership and Supporter Visibility Listing.",
   },
   {
     q: "What is Blue Diamond Sponsorship?",
