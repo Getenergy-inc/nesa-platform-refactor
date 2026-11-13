@@ -52,6 +52,7 @@
 - [ ] Clear confirmed obfuscated init and hidden editor/font execution hooks — approved containment change and independent security review required.
 - [ ] Obtain a dated full database/Auth export and storage-file backup with tested rollback — existing package contains metadata only.
 - [ ] Obtain Phase 0 clearance and written "Phase 0 approved" before Phase 1; no application execution, installation, deployment or publishing.
+- [ ] After Phase 0 clearance: replace the NRRC page description with the approved wording (incl. "The NRRC does not make the final Africa Education Icon recognition decisions."), wording only. Blocked by Phase 0.
 - [ ] Resolve uploaded-brief conflicts with earlier gala-date, certificate-window, social-channel and selection-criteria approvals before content changes.
 
 ## Africa Education Icon selection criteria — 9 Nov 2026
