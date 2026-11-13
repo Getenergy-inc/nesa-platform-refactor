@@ -34,7 +34,7 @@ export function OfficialNominationForm({ awardName, subcategory, heading, onSite
           Official nomination form
         </div>
         <h2 className="mt-3 font-playfair text-2xl text-gold sm:text-3xl">
-          {heading ?? (awardName ? `Nominate for ${awardName}` : "Nominate an Education Enabler")}
+          {heading ?? (awardName ? `Nominate for ${awardName}` : "Submit a Nomination")}
         </h2>
         <p className="mt-2 max-w-3xl text-sm text-foreground/75">
           Complete the official NESA-Africa 2026 nomination form below. Nomination is free and every

@@ -27,7 +27,7 @@ export const RECOGNITION_LEGACY_STEPS = [
 // The three primary journeys — every page funnels visitors here.
 export const PRIMARY_CTAS = {
   nominate: {
-    label: "Nominate an Education Enabler",
+    label: "Submit a Nomination",
     href: "/nominate",
     short: "Nominate",
   },

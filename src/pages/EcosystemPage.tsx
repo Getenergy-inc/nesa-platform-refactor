@@ -198,7 +198,7 @@ export default function EcosystemPage() {
                   size="lg"
                   className="bg-gold hover:bg-gold-dark text-charcoal font-bold rounded-full gap-2"
                 >
-                  Nominate an Education Enabler
+                  Submit a Nomination
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>

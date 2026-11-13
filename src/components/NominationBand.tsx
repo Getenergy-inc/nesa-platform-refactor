@@ -5,7 +5,7 @@ import Section from "@/components/Section";
 const NominationBand = () => (
   <Section tone="charcoal" className="border-y border-gold/30 text-center">
     <h2 className="font-display text-3xl md:text-4xl text-gold">Nominate for NESA-Africa 2026</h2>
-    <p className="mt-3 text-ivory/80">Nominations are open 9 November 2026 – 31 March 2027.</p>
+    <p className="mt-3 text-ivory/80">Nominations are open. Nomination is free.</p>
     <a
       href={OFFICIAL_NOMINATION_FORM_URL}
       target="_blank"

@@ -110,7 +110,7 @@ function EmptySpotlight({ category }: { category: CategoryId }) {
         Nominations are open — featured spotlights are selected after NRC impact verification.
       </p>
       <Button asChild size="sm" className="mt-4 bg-gold text-charcoal hover:bg-gold/90">
-        <Link to={NOMINATE_URL(category)}>Nominate an Education Enabler</Link>
+        <Link to={NOMINATE_URL(category)}>Submit a Nomination</Link>
       </Button>
     </div>
   );

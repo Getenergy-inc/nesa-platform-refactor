@@ -305,7 +305,7 @@ export const EDUAID_PRODUCTION_MODEL = {
 
 /** Standard call-to-action set, identical for every episode. */
 export const EDUAID_STANDARD_CTAS: { label: string; href: string }[] = [
-  { label: "Nominate an Education Enabler", href: "/nominate" },
+  { label: "Submit a Nomination", href: "/nominate" },
   { label: "Suggest a School for Rebuild My School Africa verification", href: "/impact/nominate-school" },
   { label: "Become a Sponsor or Partner", href: "/sponsor" },
   { label: "Donate or Adopt a School Project through EduAid-Africa", href: "/donate" },

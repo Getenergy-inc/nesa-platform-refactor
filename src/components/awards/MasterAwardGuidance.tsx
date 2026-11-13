@@ -39,7 +39,7 @@ export function MasterAwardGuidance({ categorySlug, selection, compact = false }
             <h3 className="font-playfair text-xl">Subcategories · {award.subcategories.length}</h3>
             <ul className="mt-4 grid gap-3 sm:grid-cols-2">{award.subcategories.map((s) => <li key={s.number}><Link to={s.href} className="flex items-start justify-between gap-3 border-b border-border py-3 text-sm text-primary"><span>{s.title}</span><ArrowRight className="mt-0.5 h-4 w-4 shrink-0" /></Link></li>)}</ul>
           </div>}
-          {!compact && <Button asChild variant="outline" className="mt-6"><Link to={award.nominationHref}>Nominate an Education Enabler<ArrowRight className="ml-2 h-4 w-4" /></Link></Button>}
+          {!compact && <Button asChild variant="outline" className="mt-6"><Link to={award.nominationHref}>Submit a Nomination<ArrowRight className="ml-2 h-4 w-4" /></Link></Button>}
         </div>;
       })}
       <p className="text-xs leading-relaxed text-muted-foreground">These descriptions guide nominations. Formal eligibility, evidence requirements and approved review rules remain applicable. A nomination does not guarantee recognition.</p>

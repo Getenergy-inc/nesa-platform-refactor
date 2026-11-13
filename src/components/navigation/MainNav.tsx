@@ -613,7 +613,7 @@ function MobileNav({ onOpenCVOMessage }: { onOpenCVOMessage: () => void }) {
                 {/* Secondary: Nominate (voting sunset for 2026 — no public award voting) */}
                 <Link to="/nominate" onClick={handleLinkClick} className="block">
                   <Button variant="outline" className="w-full border-gold/40 text-gold hover:bg-gold/10 hover:text-gold bg-transparent min-h-[48px] py-3 h-auto touch-manipulation">
-                    Nominate an Education Enabler
+                    Submit a Nomination
                   </Button>
                 </Link>
                 {/* Tertiary: Get Started (guided landing — does not compete with primary CTAs) */}

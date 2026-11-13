@@ -41,7 +41,7 @@ export default function InfluencerNomineesDirectoryPage() {
               className="bg-gold font-semibold text-charcoal hover:bg-gold/90"
             >
               <Link to="/awards/influencer-education-impact#influencer-nomination-form">
-                Nominate an Education Enabler
+                Submit a Nomination
               </Link>
             </Button>
             <Button

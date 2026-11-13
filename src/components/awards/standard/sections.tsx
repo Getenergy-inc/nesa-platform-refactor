@@ -812,7 +812,7 @@ export function IntegrityFirewallBlock() {
 export function FinalAwardCTA({
   pageSlug,
   heading = "Know someone who belongs in this category?",
-  body = "Nominate an Education Enabler whose work deserves continental recognition.",
+  body = "Submit a Nomination whose work deserves continental recognition.",
   primaryCta,
   secondaryCta,
 }: {

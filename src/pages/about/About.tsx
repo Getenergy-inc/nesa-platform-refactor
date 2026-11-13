@@ -202,14 +202,14 @@ export default function About() {
                   onClick={() =>
                     trackEvent("about_cta_click", {
                       section: "hero",
-                      cta_label: "Nominate an Education Enabler",
+                      cta_label: "Submit a Nomination",
                       destination: "/nominate",
                       page: "/about",
                     })
                   }
                 >
                   <Award className="mr-2 h-5 w-5" aria-hidden="true" />
-                  Nominate an Education Enabler
+                  Submit a Nomination
                 </Link>
               </Button>
               <Button

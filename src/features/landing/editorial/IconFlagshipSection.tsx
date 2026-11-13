@@ -43,7 +43,7 @@ export function IconFlagshipSection() {
               Explore Africa Education Icons →
             </Link>
             <Link to="/nominate" className="ed-btn-ghost">
-              Nominate an Education Enabler →
+              Submit a Nomination →
             </Link>
           </div>
 

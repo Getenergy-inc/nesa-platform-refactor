@@ -22,7 +22,7 @@ export function JoinMovementSection() {
 
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link to="/nominate" className="ed-btn-primary">
-            Nominate an Education Enabler
+            Submit a Nomination
           </Link>
           <Link to="/participate" className="ed-btn-ghost">
             Participate →

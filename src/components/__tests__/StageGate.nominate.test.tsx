@@ -29,7 +29,7 @@ import { StageGate, StageLocked } from "@/components/StageGate";
 function NominateCta() {
   return (
     <a href="/nominate?category=best-csr-for-education-nigeria" data-testid="nominate-cta">
-      Nominate an Education Enabler
+      Submit a Nomination
     </a>
   );
 }
@@ -57,7 +57,7 @@ describe("StageGate — Nominate CTAs", () => {
 
     // CTA must NOT render
     expect(screen.queryByTestId("nominate-cta")).toBeNull();
-    expect(screen.queryByText(/Nominate an Education Enabler/i)).toBeNull();
+    expect(screen.queryByText(/Submit a Nomination/i)).toBeNull();
 
     // StageLocked UI is shown
     expect(screen.getByText(/Currently Closed/i)).toBeInTheDocument();

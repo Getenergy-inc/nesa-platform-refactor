@@ -230,7 +230,7 @@ const pages: Record<string, DetailedAwardCategoryPage> = {
     subtitle: "Recognising companies and corporate foundations investing in measurable education impact across Africa's eight regions.",
     scope: "africa-8",
     heroAlt: "Corporate-supported African school with learners and teachers",
-    primaryCta: { label: "Nominate an Education Enabler", href: nominateHref("gold-blue-garnet", "best-csr-for-education-africa-regional") },
+    primaryCta: { label: "Submit a Nomination", href: nominateHref("gold-blue-garnet", "best-csr-for-education-africa-regional") },
     secondaryCta: { label: "Meet Existing Nominees", href: exploreHref("Best CSR for Education (Africa Regional)") },
     overview: [
       "Across Africa, corporate investment is a decisive lever for education access, quality, and inclusion — often reaching learners public systems cannot serve alone.",
@@ -278,7 +278,7 @@ const pages: Record<string, DetailedAwardCategoryPage> = {
     subtitle: "Recognising Nigerian companies turning corporate investment into lasting educational opportunity.",
     scope: "nigeria",
     heroAlt: "Nigerian corporate-supported classroom with students",
-    primaryCta: { label: "Nominate an Education Enabler", href: nominateHref("gold-blue-garnet", "best-csr-for-education-nigeria") },
+    primaryCta: { label: "Submit a Nomination", href: nominateHref("gold-blue-garnet", "best-csr-for-education-nigeria") },
     secondaryCta: { label: "Meet Existing Nominees", href: exploreHref("Best CSR in Education (Nigeria)") },
     overview: [
       "Nigeria's education gap is one of the world's largest — and corporate CSR is one of its most effective closers when it is sustained, transparent, and outcome-driven.",
@@ -365,7 +365,7 @@ const pages: Record<string, DetailedAwardCategoryPage> = {
     subtitle: "Recognising media institutions that inform, educate, advocate, and keep learning in the national conversation.",
     scope: "nigeria",
     heroAlt: "Nigerian media newsroom covering education stories",
-    primaryCta: { label: "Nominate an Education Enabler", href: nominateHref("gold-blue-garnet", "best-media-organisation-for-education-advocacy-nigeria") },
+    primaryCta: { label: "Submit a Nomination", href: nominateHref("gold-blue-garnet", "best-media-organisation-for-education-advocacy-nigeria") },
     secondaryCta: { label: "Meet Existing Nominees", href: exploreHref("Best Media Organisation in Educational Advocacy (Nigeria)") },
     overview: [
       "Public understanding of education shapes what governments prioritise, what parents demand, and what learners believe is possible.",
@@ -486,7 +486,7 @@ const pages: Record<string, DetailedAwardCategoryPage> = {
     subtitle: "Enabling Africa's STEM Future. Recognising programmes preparing African learners for science, technology, engineering, mathematics, and innovation.",
     scope: "africa-8",
     heroAlt: "African students in a STEM lab",
-    primaryCta: { label: "Nominate an Education Enabler", href: nominateHref("gold-blue-garnet", "best-stem-education-programme-africa-regional") },
+    primaryCta: { label: "Submit a Nomination", href: nominateHref("gold-blue-garnet", "best-stem-education-programme-africa-regional") },
     secondaryCta: { label: "Explore STEM Education Enablers", href: exploreHref("Best STEM Education Programme (Africa Regional)") },
     overview: [
       "Africa's future economies will be shaped by learners fluent in science, mathematics, engineering, and technology — and by programmes that make these fields inclusive and practical.",
@@ -527,7 +527,7 @@ const pages: Record<string, DetailedAwardCategoryPage> = {
     subtitle: "Recognising creative organisations using culture, media, and storytelling to make learning visible and engaging.",
     scope: "nigeria",
     heroAlt: "Nigerian creatives producing educational content",
-    primaryCta: { label: "Nominate an Education Enabler", href: nominateHref("gold-blue-garnet", "best-creative-arts-contribution-to-education-nigeria") },
+    primaryCta: { label: "Submit a Nomination", href: nominateHref("gold-blue-garnet", "best-creative-arts-contribution-to-education-nigeria") },
     secondaryCta: { label: "Meet Existing Nominees", href: exploreHref("Creative Arts Industry Contribution to Education (Nigeria)") },
     overview: [
       "Culture is one of Nigeria's most powerful teachers — its films, books, music, and design shape how young people see themselves and what they aspire to.",
@@ -568,7 +568,7 @@ const pages: Record<string, DetailedAwardCategoryPage> = {
     subtitle: "Recognising Nigerian states translating education commitments into measurable results.",
     scope: "nigeria",
     heroAlt: "Nigerian state education officials at a school",
-    primaryCta: { label: "Nominate an Education Enabler", href: nominateHref("gold-blue-garnet", "best-education-policy-implementation-state-nigeria") },
+    primaryCta: { label: "Submit a Nomination", href: nominateHref("gold-blue-garnet", "best-education-policy-implementation-state-nigeria") },
     secondaryCta: { label: "Meet Existing Nominees", href: exploreHref("Best Education-Friendly State (Nigeria)") },
     overview: [
       "Policy only matters when it reaches learners — through classrooms built, teachers paid, and outcomes measured.",
@@ -610,7 +610,7 @@ const pages: Record<string, DetailedAwardCategoryPage> = {
     subtitle: "Recognising libraries that expand knowledge, research, digital access, and academic success.",
     scope: "nigeria",
     heroAlt: "Nigerian university library reading room",
-    primaryCta: { label: "Nominate an Education Enabler", href: nominateHref("platinum-recognition", "best-tertiary-institution-library-nigeria") },
+    primaryCta: { label: "Submit a Nomination", href: nominateHref("platinum-recognition", "best-tertiary-institution-library-nigeria") },
     secondaryCta: { label: "Meet Existing Nominees", href: exploreHref("Best Library in Nigerian Tertiary Institutions") },
     overview: [
       "A strong library is intellectual infrastructure — the quiet engine of scholarship, research quality, and academic excellence.",
@@ -651,7 +651,7 @@ const pages: Record<string, DetailedAwardCategoryPage> = {
     subtitle: "Recognising institutions producing evidence, innovation, and solutions for stronger education systems.",
     scope: "nigeria",
     heroAlt: "Education research team reviewing data",
-    primaryCta: { label: "Nominate an Education Enabler", href: nominateHref("platinum-recognition", "excellence-in-research-and-development-for-education") },
+    primaryCta: { label: "Submit a Nomination", href: nominateHref("platinum-recognition", "excellence-in-research-and-development-for-education") },
     secondaryCta: { label: "Meet Existing Nominees", href: exploreHref("Excellence in Research and Development for Education") },
     overview: [
       "Education improves when decisions are guided by credible evidence — assessments, data, and applied research.",
@@ -692,7 +692,7 @@ const pages: Record<string, DetailedAwardCategoryPage> = {
     subtitle: "Recognising Christian institutions and leaders whose sustained service expands learning and opportunity.",
     scope: "continental",
     heroAlt: "Christian mission school in Africa",
-    primaryCta: { label: "Nominate an Education Enabler", href: nominateHref("platinum-recognition", "christian-organizations-enabling-education") },
+    primaryCta: { label: "Submit a Nomination", href: nominateHref("platinum-recognition", "christian-organizations-enabling-education") },
     secondaryCta: { label: "Meet Existing Nominees", href: exploreHref("Christian Organisations Enabling Education") },
     overview: [
       "Christian missions, churches, and foundations have shaped African education for over a century — through schools, universities, scholarships, and community service.",
@@ -732,7 +732,7 @@ const pages: Record<string, DetailedAwardCategoryPage> = {
     subtitle: "Recognising Islamic institutions and leaders strengthening education, knowledge, skills, and community development.",
     scope: "continental",
     heroAlt: "Islamic school students studying",
-    primaryCta: { label: "Nominate an Education Enabler", href: nominateHref("platinum-recognition", "islamic-organizations-enabling-education") },
+    primaryCta: { label: "Submit a Nomination", href: nominateHref("platinum-recognition", "islamic-organizations-enabling-education") },
     secondaryCta: { label: "Meet Existing Nominees", href: exploreHref("Islamic Organisations Enabling Education") },
     overview: [
       "Islamic institutions have advanced African learning through universities, schools, scholarships, and community service across generations.",
@@ -772,7 +772,7 @@ const pages: Record<string, DetailedAwardCategoryPage> = {
     subtitle: "Recognising public leaders whose decisions and implementation have improved education outcomes.",
     scope: "nigeria",
     heroAlt: "Public officials commissioning a school",
-    primaryCta: { label: "Nominate an Education Enabler", href: nominateHref("platinum-recognition", "political-leaders-championing-education") },
+    primaryCta: { label: "Submit a Nomination", href: nominateHref("platinum-recognition", "political-leaders-championing-education") },
     secondaryCta: { label: "Meet Existing Nominees", href: exploreHref("Political Leaders Championing Education") },
     overview: [
       "Leadership becomes meaningful when policies reach classrooms — through budgets executed, teachers hired, and outcomes measured.",
@@ -812,7 +812,7 @@ const pages: Record<string, DetailedAwardCategoryPage> = {
     subtitle: "Global Partnerships Enabling African Education. Celebrating international partners advancing education across Africa — partnership or sponsorship never influences judging.",
     scope: "continental",
     heroAlt: "International education partners meeting with African stakeholders",
-    primaryCta: { label: "Nominate an Education Enabler", href: "/nominate?subcategory=51dcefcf-e410-4372-85de-65c997c587bf" },
+    primaryCta: { label: "Submit a Nomination", href: "/nominate?subcategory=51dcefcf-e410-4372-85de-65c997c587bf" },
     secondaryCta: { label: "Explore Education Partnerships", href: exploreHref("International Partners Supporting Education") },
     overview: [
       "International partners — embassies, agencies, foundations, and UN bodies — extend the reach of African education systems through funding, expertise, and collaboration.",
@@ -851,7 +851,7 @@ const pages: Record<string, DetailedAwardCategoryPage> = {
     subtitle: "Africa's Education Enablers Beyond the Continent. Recognising diaspora organisations investing knowledge, resources, mentorship, and partnerships back into African education.",
     scope: "african-diaspora",
     heroAlt: "African diaspora professionals mentoring students",
-    primaryCta: { label: "Nominate an Education Enabler", href: nominateHref("platinum-recognition", "african-diaspora-organisations-supporting-education") },
+    primaryCta: { label: "Submit a Nomination", href: nominateHref("platinum-recognition", "african-diaspora-organisations-supporting-education") },
     secondaryCta: { label: "Meet Diaspora Education Enablers", href: exploreHref("African Diaspora Organisations Supporting Education") },
     overview: [
       "African diaspora communities remain deeply connected to the continent through scholarships, schools, mentorship, and institutional partnerships.",

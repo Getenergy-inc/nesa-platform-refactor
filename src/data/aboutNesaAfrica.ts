@@ -214,7 +214,7 @@ export const ABOUT_PROMISE = [
 
 export const ABOUT_TAKE_PART = [
   {
-    title: "Nominate an Education Enabler",
+    title: "Submit a Nomination",
     detail: "Nominate for NESA-Africa 2026",
     href: "/nominate",
   },

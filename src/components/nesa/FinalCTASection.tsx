@@ -26,13 +26,13 @@ export function FinalCTASection() {
           </h2>
 
           <p className="text-white/70 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
-            Don't just applaud impact — help the continent see it. Nominate an Education Enabler and join a movement recognising the people and institutions enabling Education for All Across Africa and the Diaspora.
+            Don't just applaud impact — help the continent see it. Submit a Nomination and join a movement recognising the people and institutions enabling Education for All Across Africa and the Diaspora.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
             <Link to="/nominate" className="group" onClick={() => trackEvent("final_cta_click", { cta: "nominate", to: "/nominate", location: "final_cta" })}>
               <Button size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-bold rounded-full px-10 gap-2.5 shadow-xl shadow-gold/25 hover:shadow-gold/40 transition-all min-h-[56px] text-lg">
-                Nominate an Education Enabler Now
+                Submit a Nomination Now
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
@@ -45,7 +45,7 @@ export function FinalCTASection() {
 
           <div className="flex flex-wrap justify-center gap-3 mb-10">
             {[
-              { to: "/nominate", label: "Nominate an Education Enabler", icon: Award, cta: "nominate" },
+              { to: "/nominate", label: "Submit a Nomination", icon: Award, cta: "nominate" },
               { to: "/buy-your-ticket", label: "Buy Gala Ticket", icon: Ticket, cta: "tickets" },
               { to: "/judges-arena", label: "Judges Arena", icon: Scale, cta: "judges_arena" },
               { to: "/sponsor", label: "Sponsor the Timeline", icon: Handshake, cta: "sponsor" },

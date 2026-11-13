@@ -170,7 +170,7 @@ const GOLD_BLUE_GARNET: AwardPageContent = {
       { label: "Recognition Subcategories", value: 63 },
       { label: "Edition", value: "Qualification" },
     ],
-    primaryCta: { label: "Nominate an Education Enabler", href: "/nominate?tier=gold-blue-garnet" },
+    primaryCta: { label: "Submit a Nomination", href: "/nominate?tier=gold-blue-garnet" },
     secondaryCta: { label: "Meet Africa's Education Enablers", href: "/nominees?tier=blue-garnet" },
     trustLine: "No public voting · No competitive ranking · Independent NRC verification · Africa Education Impact Directory listing",
   },
@@ -309,7 +309,7 @@ const GOLD_BLUE_GARNET: AwardPageContent = {
   finalCta: {
     heading: "Join the Movement",
     body: "If your organisation is helping to build stronger education systems, expand learning opportunities, empower teachers, support learners or advance educational innovation, we invite you to become part of Africa's growing community of Education Enablers. The Blue Garnet Award 2026 is the beginning of a continental journey — recognising today's Education Enablers while building the trusted foundation for Africa's premier competitive education recognition programme from 2027 onward.",
-    primary: { label: "Nominate an Education Enabler", href: "/nominate?tier=gold-blue-garnet" },
+    primary: { label: "Submit a Nomination", href: "/nominate?tier=gold-blue-garnet" },
     secondary: { label: "Explore the Africa Education Impact Directory", href: "/nominees?tier=blue-garnet" },
   },
 };
@@ -549,7 +549,7 @@ const INFLUENCER: AwardPageContent = {
   finalCta: {
     heading: "Recognise the Public Figures Educating Africa",
     body: "If an African creator, athlete or music icon is converting their platform into measurable education impact, they belong in Africa's Education Impact Directory. 2026 is the Recognition & Verification Edition — the foundation for competitive honours from 2027.",
-    primary: { label: "Nominate an Education Enabler", href: "/nominate?tier=influencer-2026" },
+    primary: { label: "Submit a Nomination", href: "/nominate?tier=influencer-2026" },
     secondary: { label: "Explore the Africa Education Impact Directory", href: "/nominees?tier=influencer" },
   },
 };
