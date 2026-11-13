@@ -611,7 +611,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     id: "impact-legacy",
     dateLabel: "22 December 2026 – 28 December 2027",
     startsAt: "2026-12-22T00:00:00Z",
-    endsAt: "2027-12-13T23:59:59Z",
+    endsAt: "2027-12-28T23:59:59Z",
     milestone: "Impact & Legacy Phase",
     activity:
       "EduAid-Africa, Rebuild My School Africa, Afri-EduTourism and Scholarships programmes run through the year.",

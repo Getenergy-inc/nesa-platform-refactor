@@ -22,7 +22,7 @@ All entries below are **TBC — needs management decision**. Website copy, certi
 ## Lean Website Pack brief (12 Nov 2026) — confirm before WP-2
 | Decision | Conflict | Interim handling |
 |---|---|---|
-| Gala date | Site shows Monday 28 December 2026 (user instruction 9 Nov); 12 Nov briefs say Sunday 13 December 2026. | Keep 28 December 2026 until management confirms in writing. |
+| Gala date | Earlier site copy and 12 Nov briefs used different dates. | RESOLVED 13 November 2026 at 21:31 UTC: Monday 28 December 2026 is the site-wide date. |
 | NRC size | Approved 36 (9 per tier); one brief says 9 across all tiers; /nrc/members enforces a 30-member cap. | TBC — needs management decision; no cap change. |
 | Regions | /regions shows 10 award zones; Support Fund uses 8 programme regions (mapping unapproved). | Keep both separate; no mapping published. |
 | Taxonomy mapping | Code has 17 categories / 138 subcategories; approved 4 tiers / 22 awards / 90 subcategories; Tier 2 has no code entries; Icon label 2005–2025 vs 2006–2026. | Presentation-only registry in WP-5; legacy keys unchanged. |

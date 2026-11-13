@@ -39,7 +39,7 @@ export const GALA_COUNTDOWN_TARGET = new Date(GALA_COUNTDOWN_DATETIME);
 export const PROGRAMME_END_LABEL = "28 December 2026";
 
 /** Long label including the approved attendance mode. */
-export const PROGRAMME_END_LONG_LABEL = "Sunday, 28 December 2026 · Online";
+export const PROGRAMME_END_LONG_LABEL = "Monday, 28 December 2026 · Online";
 
 /** Post-award legacy window (Rebuild My School Africa etc.). */
 export const LEGACY_WINDOW_LABEL = "December 2026 – December 2027";

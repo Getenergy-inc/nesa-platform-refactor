@@ -336,7 +336,7 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     shortName: "Impact & Legacy",
     dateRange: "December 2026 – December 2027",
     startsAt: "2026-12-15T00:00:00Z",
-    endsAt: "2027-12-13T23:59:59Z",
+    endsAt: "2027-12-28T23:59:59Z",
     status: "upcoming",
     tier: "Legacy",
     iconName: "Heart",
