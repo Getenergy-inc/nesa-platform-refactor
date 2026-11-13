@@ -1,0 +1,32 @@
+name: Phase 0 Protected Pages Guard
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Test the fail-closed approval rules
+        run: node --test scripts/check-phase0-publishing-guard.test.mjs
+
+      - name: Check pull-request changes
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: node scripts/check-phase0-publishing-guard.mjs --base "origin/${BASE_REF}"
+
+      - name: Check pushed changes
+        if: github.event_name == 'push'
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+        run: node scripts/check-phase0-publishing-guard.mjs --base "${BEFORE_SHA}"
