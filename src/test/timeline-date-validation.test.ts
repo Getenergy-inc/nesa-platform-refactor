@@ -223,6 +223,7 @@ const ALLOWLIST = new Set<string>([
 ]);
 
 const RETIRED: { pattern: RegExp; reason: string }[] = [
+  { pattern: /\b13\s+(?:December|Dec)\b|\bDecember\s+13\b|2026-12-13|2027-12-13/i, reason: "Retired December 13 date — use December 28" },
   { pattern: /\b1\s+August\s+2026\b/i, reason: "Retired nominations-open date — now 6 September 2026" },
   { pattern: /\b30\s+August\s+2026\b/i, reason: "Retired nominations-open date — now 6 September 2026" },
   { pattern: /(gala|ceremony)[^.\n]{0,60}\b22\s+October\s+2026\b/i, reason: "Retired Gala date — now 28 December 2026" },
