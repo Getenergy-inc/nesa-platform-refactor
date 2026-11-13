@@ -1,7 +1,7 @@
 ## Unified NESA-Africa & EduAid-Africa framework — 13 Nov 2026
 - [x] Record the latest owner-approved framework and inspect the existing navigation, redirects, official accounts and Phase 0 evidence.
-- [ ] Review and approve the incremental implementation plan.
-- [ ] Clear Phase 0: independent security sign-off and exact written "Phase 0 approved" evidence remain missing; protected changes cannot proceed.
+- [x] Review and approve the incremental implementation plan.
+- [ ] Clear Phase 0: approval record and clearance checklist still BLOCKED after plan approval; independent security sign-off and exact written "Phase 0 approved" evidence remain missing. Existing recovery restrictions block application execution and protected changes; plan approval is not security clearance.
 - [ ] Phase 1: shared facts, full navigation, nomination destination, announcement and retirement redirects.
 - [ ] Phase 2: original-design homepage, About, recognition tiers and online programme.
 - [ ] Phase 3: school support, volunteers, chapters, sponsors and official accounts; no connected wallet checkout.
