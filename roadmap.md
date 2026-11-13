@@ -1,13 +1,15 @@
 ## Unified NESA-Africa & EduAid-Africa framework — 13 Nov 2026
+- [x] Apply owner's 18:55 correction to scope: wording and existing link destinations only; preserve every layout, component, section order, colour, font, spacing, image, card style and page structure. No application design edits occurred during the preceding plan/review step, so no design rollback is needed.
+- [ ] Apply permitted Unified Framework wording after Phase 0 clearance; skip homepage reordering, added/removed sections, participation cards, new controls, new workflows and backend changes under the text-only correction.
 - [x] Record the latest owner-approved framework and inspect the existing navigation, redirects, official accounts and Phase 0 evidence.
 - [x] Review and approve the incremental implementation plan.
 - [ ] Clear Phase 0: approval record and clearance checklist still BLOCKED after plan approval; independent security sign-off and exact written "Phase 0 approved" evidence remain missing. Existing recovery restrictions block application execution and protected changes; plan approval is not security clearance.
-- [ ] Phase 1: shared facts, full navigation, nomination destination, announcement and retirement redirects.
-- [ ] Phase 2: original-design homepage, About, recognition tiers and online programme.
-- [ ] Phase 3: school support, volunteers, chapters, sponsors and official accounts; no connected wallet checkout.
-- [ ] Phase 4: nomination receipt/privacy/status separation, consent-controlled profiles and saved contact cases.
-- [ ] Phase 5: invitation-only participation sign-in, NRC and judge workflows and access boundaries after security clearance.
-- [ ] Phase 6: site-wide legacy-copy cleanup, focused tests, real-flow checks, mobile/accessibility review and complete change/redirect report; no publishing.
+- [ ] Text phase 1: shared facts, existing menu labels/link destinations, nomination destination and exact announcement; no navigation restructuring.
+- [ ] Text phase 2: homepage, About, recognition and online programme wording in their unchanged existing sections.
+- [ ] Text phase 3: school support, volunteers, chapters, sponsors and official account text on existing support/donate pages; no added controls or payment functionality.
+- [ ] Text phase 4: existing nomination/profile/contact notices only; status-model, publication-rule and contact-save functionality changes excluded.
+- [ ] Text phase 5: existing NRC/judge/sign-in labels and notices after clearance; no new cards, dashboards or role/access logic.
+- [ ] Text phase 6: legacy English copy, metadata/Open Graph, alt text, FAQs and email-template wording; report every wording/link change and excluded design/functionality work; no publishing.
 
 ## Phase 0 protected-page publishing guard — 13 Nov 2026
 - [x] Add fail-closed protected governance/judges diff checks, structured approval evidence, a prebuild hook, CI workflow and focused tests; no protected pages changed or publishing performed.
