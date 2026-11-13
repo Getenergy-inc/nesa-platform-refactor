@@ -381,6 +381,7 @@ function AccountActions() {
 
 function MobileMenu() {
   const [open, setOpen] = useState(false);
+  const [signInOpen, setSignInOpen] = useState("");
   const { user, signOut } = useAuth();
   const location = useLocation();
 
@@ -509,8 +510,12 @@ function MobileMenu() {
           <div className="mb-3"><NavSearch className="!h-9 !w-full" /></div>
           <div className="grid grid-cols-1 gap-2 mb-3">
             <NominateButton className="w-full h-auto min-h-11 whitespace-normal text-center py-2" />
-            {!user && <Button asChild variant="outline" className="border-gold/60 text-gold hover:bg-gold/10 hover:text-gold min-h-11">
-              <a href="#mobile-sign-in">Sign In</a>
+            {!user && <Button variant="outline" className="border-gold/60 text-gold hover:bg-gold/10 hover:text-gold min-h-11"
+              onClick={() => {
+                setSignInOpen("sign-in");
+                requestAnimationFrame(() => document.getElementById("mobile-sign-in")?.scrollIntoView({ block: "nearest" }));
+              }}>
+              Sign In
             </Button>}
           </div>
 
@@ -626,7 +631,7 @@ function MobileMenu() {
             ) : (
               <>
                 <div className="px-3 py-2"><LanguageSwitcher /></div>
-                <Accordion type="single" collapsible id="mobile-sign-in" className="w-full">
+                <Accordion type="single" collapsible value={signInOpen} onValueChange={setSignInOpen} id="mobile-sign-in" className="w-full">
                   <AccordionItem value="sign-in" className="border-gold/15">
                     <AccordionTrigger className="text-white hover:text-gold px-3 text-sm rounded-md">Sign In</AccordionTrigger>
                     <AccordionContent>
