@@ -31,7 +31,7 @@ export function SponsorPreviewSection() {
           <p className="text-white/75 text-sm md:text-base leading-relaxed mb-6 text-center md:text-left">
             Connect your brand to Africa's education recognition, media visibility,
             and post-award legacy impact. Sponsorship opportunities are available
-            across award categories, the Blue Garnet Awards Gala, NESA-Africa TV,
+            across award categories, the Online Recognition Programme, NESA-Africa TV,
             EduAid-Africa, and Rebuild My School Africa.
           </p>
 

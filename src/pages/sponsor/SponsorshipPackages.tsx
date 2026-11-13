@@ -63,7 +63,7 @@ const GROUPS: { id: string; title: string; slugs: SponsorLaneSlug[] }[] = [
   },
   {
     id: "gala",
-    title: "Blue Garnet Awards Gala",
+    title: "Online Recognition Programme",
     slugs: ["gala-main", "gala-supporting"],
   },
   {

@@ -42,11 +42,11 @@ export interface SponsorCategory {
 export const SPONSOR_CATEGORIES: SponsorCategory[] = [
   {
     slug: "gala",
-    label: "Sponsor the Blue Garnet Awards Gala",
+    label: "Sponsor the Online Recognition Programme",
     shortLabel: "Blue Garnet Gala",
     tagline: "Headline Africa's premier education awards night.",
     description:
-      "Headline, table, red-carpet, broadcast and branding partnerships for the Blue Garnet Awards Gala — 28 December 2026, Lagos.",
+      "Headline, table, red-carpet, broadcast and branding partnerships for the Online Recognition Programme — 28 December 2026, Lagos.",
     icon: Sparkles,
     accent: "from-gold/30 via-gold/10 to-transparent",
     audience: "C-suite executives, ministers, philanthropists, media and dignitaries from 54 African countries",

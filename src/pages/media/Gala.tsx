@@ -42,7 +42,7 @@ import galaHeroImage from "@/assets/events/award-gala.jpeg";
 // ============== EVENT DETAILS ==============
 const GALA_DATE = GALA_COUNTDOWN_TARGET;
 const GALA = {
-  title: "Blue Garnet Awards Gala",
+  title: "Online Recognition Programme",
   tagline: "The Night Africa Celebrates Education Changemakers",
   date: PROGRAMME_END_LABEL,
   time: "18:00 WAT",
@@ -135,7 +135,7 @@ const eventJsonLd = {
     address: { "@type": "PostalAddress", addressLocality: "Lagos", addressCountry: "NG" },
   },
   image: ["https://nesaafrica.lovable.app/og/gala.jpg"],
-  description: "The NESA-Africa Blue Garnet Awards Gala — Africa's premier celebration of education changemakers.",
+  description: "The NESA-Africa Online Recognition Programme — Africa's premier celebration of education changemakers.",
   organizer: { "@type": "Organization", name: "NESA-Africa", url: "https://nesaafrica.lovable.app" },
   offers: tickets
     .filter((t) => t.price.startsWith("$"))
@@ -182,13 +182,13 @@ export default function Gala() {
   return (
     <>
       <Helmet>
-        <title>{`NESA-Africa ${year} Blue Garnet Awards Gala | Lagos · 28 Dec 2026`}</title>
+        <title>{`NESA-Africa ${year} Online Recognition Programme | Lagos · 28 Dec 2026`}</title>
         <meta
           name="description"
-          content={`The NESA-Africa ${year} Blue Garnet Awards Gala — a cinematic continental celebration of Africa's education changemakers. Lagos · 28 Dec 2026.`}
+          content={`The NESA-Africa ${year} Online Recognition Programme — a cinematic continental celebration of Africa's education changemakers. Lagos · 28 Dec 2026.`}
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/media/gala" />
-        <meta property="og:title" content={`NESA-Africa ${year} Blue Garnet Awards Gala`} />
+        <meta property="og:title" content={`NESA-Africa ${year} Online Recognition Programme`} />
         <meta property="og:description" content="The night Africa celebrates education changemakers." />
         <meta property="og:url" content="https://nesaafrica.lovable.app/media/gala" />
         <meta property="og:type" content="event" />
@@ -199,7 +199,7 @@ export default function Gala() {
         crumbs={[
           { name: "Home", path: "/" },
           { name: "Media", path: "/media" },
-          { name: "Awards Gala", path: "/media/gala" },
+          { name: "Online Recognition Programme", path: "/media/gala" },
         ]}
       />
 
@@ -210,7 +210,7 @@ export default function Gala() {
           <div className="absolute inset-0">
             <img
               src={galaHeroImage}
-              alt="NESA-Africa Blue Garnet Awards Gala"
+              alt="NESA-Africa Online Recognition Programme"
               className="h-full w-full object-cover scale-110"
             />
             {/* Layered cinematic gradients */}
@@ -242,7 +242,7 @@ export default function Gala() {
                   <Gem className="mr-2 inline h-3 w-3" /> Blue Garnet · {year}
                 </Badge>
                 <Badge className="border-white/20 bg-white/5 px-4 py-1.5 text-xs uppercase tracking-[0.25em] text-white/80 backdrop-blur">
-                  Continental Awards Gala
+                  Online Recognition Programme
                 </Badge>
               </div>
 
@@ -256,7 +256,7 @@ export default function Gala() {
               </h1>
 
               <p className="mb-8 max-w-2xl text-base text-white/75 sm:text-lg md:text-xl">
-                NESA-Africa {year} <span className="text-gold">Blue Garnet Awards Gala</span> — a cinematic continental celebration of the educators, innovators and institutions reshaping Africa's future.
+                NESA-Africa {year} <span className="text-gold">Online Recognition Programme</span> — a cinematic continental celebration of the educators, innovators and institutions reshaping Africa's future.
               </p>
 
               {/* Event meta strip */}

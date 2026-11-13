@@ -63,8 +63,7 @@ export default function SponsorHub() {
               Align your brand with Africa's continental education recognition and impact platform.
             </p>
             <p className="text-ivory/70 text-sm md:text-base max-w-2xl mb-5">
-              Partner with NESA-Africa 2026 to support verified education changemakers, the Blue
-              Garnet Awards Gala, Africa Education Icon recognition, EduAid-Africa webinars,
+              Partner with NESA-Africa 2026 to support verified education changemakers, the Online Recognition Programme, Africa Education Icon recognition, EduAid-Africa webinars,
               NESA-Africa TV, Rebuild My School Africa and post-award legacy impact across Africa
               and the diaspora.
             </p>

@@ -37,7 +37,7 @@ const mediaCategories = [
     icon: Mic,
   },
   {
-    title: "Awards Gala",
+    title: "Online Recognition Programme",
     description: "Live 6-hour ceremony announcing all winners.",
     href: "/media/gala",
     icon: Trophy,
@@ -61,7 +61,7 @@ export default function MediaHub() {
         <title>Media Hub | NESA-Africa TV, Shows & Webinars</title>
         <meta
           name="description"
-          content="Watch NESA Africa TV, online shows, webinars, and the Awards Gala. Your hub for education content across Africa."
+          content="Watch NESA Africa TV, online shows, webinars, and the Online Recognition Programme. Your hub for education content across Africa."
         />
       </Helmet>
 
@@ -81,7 +81,7 @@ export default function MediaHub() {
               </h1>
               <p className="mb-8 text-lg text-white/70">
                 Your gateway to NESA-Africa's rich media content — from live TV broadcasts
-                to educational webinars and the annual Awards Gala.
+                to educational webinars and the annual Online Recognition Programme.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button asChild size="lg" className="bg-primary text-primary-foreground">

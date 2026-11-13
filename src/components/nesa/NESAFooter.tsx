@@ -25,7 +25,7 @@ const SECTIONS: FooterSection[] = [
     links: [
       { label: "Awards", href: "/awards" },
       { label: "Nominate", href: "/nominate" },
-      { label: "2026 Awards Gala", href: "/programme-2026" },
+      { label: "2026 Online Recognition Programme", href: "/programme-2026" },
     ],
   },
   {
