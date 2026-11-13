@@ -25,7 +25,7 @@ export function EditorialHero() {
         </h1>
 
         <p className="ed-hero-sub">
-          NESA-Africa identifies, documents and recognises the people, institutions and initiatives expanding educational opportunity across Africa.
+          The African Blue-Garnet Awards for Education identify, document and recognise people and institutions whose verified work expands education access, quality, inclusion, innovation and opportunity across Africa.
         </p>
         <p className="ed-hero-sub italic">Evidence-led research. Independent Icon judging. No public voting in 2026.</p>
 
