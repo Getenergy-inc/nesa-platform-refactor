@@ -24,7 +24,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { LanguageSwitcher } from "@/components/i18n";
-import { SITE_NAV, UTILITY_NAV, PRIMARY_NAV_VISIBLE_XL, type NavItem, type NavChild, type NavSection } from "@/config/siteNavigation";
+import { SITE_NAV, MOBILE_SITE_NAV, SIGN_IN_WORKSPACES, UTILITY_NAV, PRIMARY_NAV_VISIBLE_XL, type NavItem, type NavChild, type NavSection } from "@/config/siteNavigation";
 import { CURRENT_PHASE, NOMINATE_CTA } from "@/config/campaignPhase";
 import { trackNav } from "@/lib/analytics";
 import { AnnouncementBar } from "@/components/navigation/AnnouncementBar";
@@ -80,7 +80,7 @@ function DropdownSimple({ item }: { item: NavItem }) {
         </div>
       )}
       <ul className="grid gap-1 p-2">
-        {item.children!.map((c) => {
+        {item.children?.map((c) => {
           const active = isActive(location.pathname, c.href);
           return (
             <li key={c.href}>
@@ -118,9 +118,9 @@ function DropdownSimple({ item }: { item: NavItem }) {
               to={item.panelFooter.ctaHref}
               onClick={() =>
                 trackNav("dropdown_cta_click", {
-                  parent: item.label,
-                  label: item.panelFooter!.ctaLabel,
-                  href: item.panelFooter!.ctaHref,
+                      parent: item.label,
+                      label: item.panelFooter?.ctaLabel,
+                      href: item.panelFooter?.ctaHref,
                   section: item.analyticsId,
                   device: "desktop",
                 })
@@ -141,7 +141,7 @@ function DropdownSimple({ item }: { item: NavItem }) {
 
 function DropdownSectioned({ item }: { item: NavItem }) {
   const location = useLocation();
-  const sections = item.sections!;
+  const sections = item.sections ?? [];
   const cols = sections.length;
   const widthCls =
     cols >= 4
@@ -381,10 +381,18 @@ function AccountActions() {
 
 function MobileMenu() {
   const [open, setOpen] = useState(false);
+  const [signInOpen, setSignInOpen] = useState("");
   const { user, signOut } = useAuth();
   const location = useLocation();
 
   useEffect(() => { setOpen(false); }, [location.pathname]);
+  useEffect(() => {
+    if (signInOpen !== "sign-in") return;
+    const timer = window.setTimeout(() => {
+      document.getElementById("mobile-sign-in")?.scrollIntoView({ block: "start", behavior: "auto" });
+    }, 250);
+    return () => window.clearTimeout(timer);
+  }, [signInOpen]);
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -509,12 +517,18 @@ function MobileMenu() {
           <div className="mb-3"><NavSearch className="!h-9 !w-full" /></div>
           <div className="grid grid-cols-1 gap-2 mb-3">
             <NominateButton className="w-full h-auto min-h-11 whitespace-normal text-center py-2" />
+            {!user && <Button variant="outline" className="border-gold/60 text-gold hover:bg-gold/10 hover:text-gold min-h-11"
+              onClick={() => {
+                setSignInOpen("sign-in");
+              }}>
+              Sign In
+            </Button>}
           </div>
 
           <div className="mb-3"><SchoolSupportChoice /></div>
           <nav aria-label="Mobile primary">
             <Accordion type="single" collapsible className="w-full">
-              {SITE_NAV.map((item) => {
+              {MOBILE_SITE_NAV.map((item) => {
                 const hasPanel = !!(item.children || item.sections || item.megaMenu);
                 if (!hasPanel) {
                   return (
@@ -580,9 +594,11 @@ function MobileMenu() {
                 </AccordionTrigger>
                 <AccordionContent className="pb-1">
                   {UTILITY_NAV.map((item) => (
-                    <Link
+                    <a
                       key={item.href}
-                      to={item.href}
+                      href={item.href}
+                      target={item.external ? "_blank" : undefined}
+                      rel={item.external ? "noopener noreferrer" : undefined}
                       onClick={() => {
                         close();
                         trackNav("mobile_drawer_item_click", {
@@ -596,7 +612,7 @@ function MobileMenu() {
                       className={cn(linkCls, item.emphasis && "text-gold font-semibold")}
                     >
                       {item.label}
-                    </Link>
+                    </a>
                   ))}
                 </AccordionContent>
               </AccordionItem>
@@ -609,18 +625,31 @@ function MobileMenu() {
               <>
                 <Link to="/dashboard" onClick={close} className={linkCls}>My Account</Link>
                 <div className="px-3 py-2"><LanguageSwitcher /></div>
-                <button
+                <Button
+                  variant="ghost"
                   type="button"
                   onClick={async () => { close(); await signOut(); }}
                   className={cn(linkCls, "w-full text-left")}
                 >
                   Sign Out
-                </button>
+                </Button>
               </>
             ) : (
               <>
                 <div className="px-3 py-2"><LanguageSwitcher /></div>
-                <Link to="/login" onClick={close} className={linkCls}>Sign In</Link>
+                <Accordion type="single" collapsible value={signInOpen} onValueChange={setSignInOpen} id="mobile-sign-in" className="w-full">
+                  <AccordionItem value="sign-in" className="border-gold/15">
+                    <AccordionTrigger className="text-white hover:text-gold px-3 text-sm rounded-md">Sign In</AccordionTrigger>
+                    <AccordionContent>
+                      <p className="px-3 py-2 text-xs text-gold">Select Your Workspace</p>
+                      {SIGN_IN_WORKSPACES.map(({ label, href, description }) => (
+                        <Link key={href} to={href} onClick={close} className={cn(linkCls, FOCUS_RING)}>
+                          {label}{description && <span className="block text-xs text-muted-foreground">{description}</span>}
+                        </Link>
+                      ))}
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
               </>
             )}
           </div>
@@ -655,9 +684,11 @@ function UtilityNavBar() {
         {UTILITY_NAV.map((item) => {
           const active = isActive(location.pathname, item.href);
           return (
-            <Link
+            <a
               key={item.href}
-              to={item.href}
+              href={item.href}
+              target={item.external ? "_blank" : undefined}
+              rel={item.external ? "noopener noreferrer" : undefined}
               aria-current={active ? "page" : undefined}
               onClick={() =>
                 trackNav("utility_nav_click", {
@@ -678,7 +709,7 @@ function UtilityNavBar() {
               )}
             >
               {item.label}
-            </Link>
+            </a>
           );
         })}
       </nav>
@@ -703,8 +734,8 @@ export function SiteHeader() {
           <DesktopNav />
           <div className="flex items-center gap-1.5 shrink-0">
             <NavSearch className="hidden 2xl:inline-flex" />
-            <NominateButton className="text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 h-9 sm:h-10 whitespace-nowrap" />
             <AccountActions />
+            <NominateButton className="text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 h-9 sm:h-10 whitespace-nowrap" />
             <MobileMenu />
           </div>
         </div>
