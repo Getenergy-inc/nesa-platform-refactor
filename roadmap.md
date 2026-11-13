@@ -1,3 +1,14 @@
+## Unified NESA-Africa & EduAid-Africa framework — 13 Nov 2026
+- [x] Record the latest owner-approved framework and inspect the existing navigation, redirects, official accounts and Phase 0 evidence.
+- [ ] Review and approve the incremental implementation plan.
+- [ ] Clear Phase 0: independent security sign-off and exact written "Phase 0 approved" evidence remain missing; protected changes cannot proceed.
+- [ ] Phase 1: shared facts, full navigation, nomination destination, announcement and retirement redirects.
+- [ ] Phase 2: original-design homepage, About, recognition tiers and online programme.
+- [ ] Phase 3: school support, volunteers, chapters, sponsors and official accounts; no connected wallet checkout.
+- [ ] Phase 4: nomination receipt/privacy/status separation, consent-controlled profiles and saved contact cases.
+- [ ] Phase 5: invitation-only participation sign-in, NRC and judge workflows and access boundaries after security clearance.
+- [ ] Phase 6: site-wide legacy-copy cleanup, focused tests, real-flow checks, mobile/accessibility review and complete change/redirect report; no publishing.
+
 ## Phase 0 protected-page publishing guard — 13 Nov 2026
 - [x] Add fail-closed protected governance/judges diff checks, structured approval evidence, a prebuild hook, CI workflow and focused tests; no protected pages changed or publishing performed.
 - [ ] Make the Phase 0 Protected Pages Guard a required status check in repository branch protection — repository administration is required.
