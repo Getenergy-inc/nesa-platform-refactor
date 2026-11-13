@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "predev": "tsx scripts/generate-sitemap.ts && tsx scripts/generate-redirects.ts",
-    "prebuild": "tsx scripts/generate-sitemap.ts && tsx scripts/generate-redirects.ts",
+    "prebuild": "node scripts/check-phase0-publishing-guard.mjs && tsx scripts/generate-sitemap.ts && tsx scripts/generate-redirects.ts",
     "dev": "node init && vite",
     "build": "node init && vite build",
     "build:dev": "node init && vite build --mode development",
@@ -14,7 +14,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "test:e2e:update": "playwright test --update-snapshots"
+    "test:e2e:update": "playwright test --update-snapshots",
+    "guard:phase0": "node scripts/check-phase0-publishing-guard.mjs",
+    "test:phase0-guard": "node --test scripts/check-phase0-publishing-guard.test.mjs"
   },
   "dependencies": {
     "@capacitor/cli": "^8.1.0",

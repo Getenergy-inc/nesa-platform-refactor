@@ -1,3 +1,7 @@
+## Phase 0 protected-page publishing guard — 13 Nov 2026
+- [x] Add fail-closed protected governance/judges diff checks, structured approval evidence, a prebuild hook, CI workflow and focused tests; no protected pages changed or publishing performed.
+- [ ] Make the Phase 0 Protected Pages Guard a required status check in repository branch protection — repository administration is required.
+
 ## Special Needs School programme and participation pages — 12 Nov 2026
 - [x] Extend the existing programme page and school-support registry with the supplied programme copy; preserve the current theme and fail-closed school visibility.
 - [x] Add the canonical programme and eight-option participation routes, config-driven NESA form link and config-gated voting label.

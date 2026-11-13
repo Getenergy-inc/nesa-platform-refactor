@@ -1,0 +1,17 @@
+{
+  "status": "BLOCKED",
+  "evidencePackVersion": null,
+  "recoveryRevision": null,
+  "independentSecuritySignOff": {
+    "reviewer": null,
+    "independenceConfirmed": false,
+    "evidenceReference": null,
+    "signedAtUtc": null
+  },
+  "writtenPhase0Approval": {
+    "approver": null,
+    "exactMessage": null,
+    "evidenceReference": null,
+    "approvedAtUtc": null
+  }
+}
