@@ -562,6 +562,27 @@ export default function About() {
         </p>
       </Section>
 
+      {/* ─── PARTICIPATION PATHWAYS ───────────────────────── */}
+      <Section
+        id="participation-pathways"
+        eyebrow="Pathways"
+        title="Participation pathways"
+      >
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            { title: "Africans in Africa", detail: "Individuals and institutions working within African countries and communities." },
+            { title: "Africans in the Diaspora", detail: "Africans outside the continent whose verified work advances education for African learners, institutions or communities." },
+            { title: "Friends of Africa", detail: "Non-African individuals and organisations making sustained and responsible contributions to education in Africa." },
+          ].map((item) => (
+            <article key={item.title} className="rounded-2xl border border-gold/20 bg-charcoal-light p-5">
+              <Globe className="h-5 w-5 text-gold" aria-hidden="true" />
+              <h3 className="mt-3 font-display text-base font-bold text-ivory">{item.title}</h3>
+              <p className="mt-1 text-sm text-ivory/70">{item.detail}</p>
+            </article>
+          ))}
+        </div>
+      </Section>
+
       {/* ─── 14. CONTINENTAL REACH ────────────────────────── */}
       <Section
         id="continental-reach"
