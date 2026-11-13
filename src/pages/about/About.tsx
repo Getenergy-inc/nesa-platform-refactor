@@ -775,6 +775,37 @@ export default function About() {
             ))}
           </div>
 
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Button
+              asChild
+              variant="outline"
+              className="rounded-full border-gold/50 text-gold hover:bg-gold/10"
+            >
+              <Link to="/about/nesa-africa-2026">Explore NESA-Africa 2026</Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="rounded-full border-gold/50 text-gold hover:bg-gold/10"
+            >
+              <a href="#how-recognition-works">How Recognition Works</a>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="rounded-full border-gold/50 text-gold hover:bg-gold/10"
+            >
+              <a href="#scef-ecosystem">About SCEF</a>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="rounded-full border-gold/50 text-gold hover:bg-gold/10"
+            >
+              <Link to="/about/team">Meet the Global Team</Link>
+            </Button>
+          </div>
+
           <div className="mt-12 border-t border-gold/15 pt-8 text-center">
             <p className="font-display text-lg font-bold text-ivory">{ABOUT_BRAND.name}</p>
             <p className="mt-1 text-sm italic text-gold/90">{ABOUT_BRAND.alias}</p>
