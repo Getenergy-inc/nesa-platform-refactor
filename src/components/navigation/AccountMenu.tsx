@@ -1,5 +1,5 @@
 // Account dropdown for the desktop SiteHeader.
-// Signed-out: Sign In · Create Account
+// Signed-out: destination selector; existing route guards remain authoritative.
 // Signed-in : My Dashboard · My Nominations · Saved Enablers · My Voting Activity
 //             AGC Activity · Account Settings · Sign Out
 // One click → one analytics event via trackNav.
@@ -12,9 +12,7 @@ import {
   LayoutDashboard,
   ClipboardList,
   Bookmark,
-  Coins,
   Settings,
-  UserPlus,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -28,12 +26,12 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { trackNav } from "@/lib/analytics";
+import { SIGN_IN_WORKSPACES } from "@/config/siteNavigation";
 
 const SIGNED_IN = [
   { label: "My Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { label: "My Nominations", href: "/dashboard/nominations", icon: ClipboardList },
   { label: "Saved Enablers", href: "/dashboard/profile", icon: Bookmark },
-  { label: "AGC Activity", href: "/wallet", icon: Coins },
   { label: "Account Settings", href: "/dashboard/settings", icon: Settings },
 ] as const;
 
@@ -51,41 +49,29 @@ export function AccountMenu({ className }: { className?: string }) {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <button
+          <Button
+            variant="ghost"
             type="button"
             className={triggerCls}
             aria-label="Sign in menu"
             onClick={() => trackNav("account_menu_open", { device: "desktop", state: "signed_out" })}
           >
             <UserCircle2 className="h-4 w-4" aria-hidden /> Sign In
-          </button>
+          </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-56 bg-charcoal border-gold/20 text-white/90">
           <DropdownMenuLabel className="text-gold/80 text-xs uppercase tracking-wider">
-            Welcome
+            Select Your Workspace
           </DropdownMenuLabel>
-          <DropdownMenuItem asChild>
-            <Link
-              to="/login"
-              onClick={() =>
-                trackNav("account_menu_item_click", { label: "Sign In", href: "/login" })
-              }
-              className="flex items-center gap-2 cursor-pointer"
-            >
-              <LogIn className="h-4 w-4" aria-hidden /> Sign In
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link
-              to="/signup"
-              onClick={() =>
-                trackNav("account_menu_item_click", { label: "Create Account", href: "/signup" })
-              }
-              className="flex items-center gap-2 cursor-pointer"
-            >
-              <UserPlus className="h-4 w-4" aria-hidden /> Create Account
-            </Link>
-          </DropdownMenuItem>
+          {SIGN_IN_WORKSPACES.map(({ label, href, description }) => (
+            <DropdownMenuItem asChild key={href}>
+              <Link to={href} onClick={() => trackNav("account_menu_item_click", { label, href })}
+                className="flex items-start gap-2 cursor-pointer">
+                <LogIn className="h-4 w-4 shrink-0 mt-0.5" aria-hidden />
+                <span>{label}{description && <span className="block text-xs text-muted-foreground">{description}</span>}</span>
+              </Link>
+            </DropdownMenuItem>
+          ))}
         </DropdownMenuContent>
       </DropdownMenu>
     );
@@ -94,7 +80,8 @@ export function AccountMenu({ className }: { className?: string }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button
+        <Button
+          variant="ghost"
           type="button"
           className={triggerCls}
           aria-label="Account menu"
@@ -102,7 +89,7 @@ export function AccountMenu({ className }: { className?: string }) {
         >
           <UserCircle2 className="h-4 w-4" aria-hidden />
           <span className="max-w-[8rem] truncate">My Account</span>
-        </button>
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-60 bg-charcoal border-gold/20 text-white/90">
         <DropdownMenuLabel className="text-gold/80 text-xs uppercase tracking-wider">

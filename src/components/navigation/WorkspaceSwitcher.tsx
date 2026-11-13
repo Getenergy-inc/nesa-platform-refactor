@@ -27,7 +27,7 @@ type Workspace = {
 const WORKSPACES: Workspace[] = [
   {
     key: "nrc",
-    label: "NRC Dashboard",
+    label: "NRRC Portal",
     href: "/nrc/dashboard",
     icon: Search,
     match: (r) => r.includes("nrc") || r.includes("admin"),

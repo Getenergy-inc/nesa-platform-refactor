@@ -7,3 +7,4 @@
 - Keep clean-database restore tooling in `migration-tools/`; use disposable or explicitly empty isolated databases, atomic migration runs and honest nonzero results for any migration failure or schema drift.
 - Keep school-intervention CTAs separate from award nomination and centralised in the school-support registry; public school support fails closed without explicit verification and publication approval to avoid treating nominations as beneficiaries.
 - Keep public gala scope in the shared programme presentation configuration backed by English translations; never derive legacy eligibility or certificate-release rules from event copy.
+- Keep public desktop/mobile menus and sign-in destination choices in the canonical site-navigation registry; existing route guards and stored roles remain authoritative so navigation never grants workspace access.
