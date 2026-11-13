@@ -85,8 +85,8 @@ export default function AboutConsolidated() {
   return (
     <>
       <AboutSeo
-        title="About NESA-Africa · Vision, Mission, SCEF & Vision 2035"
-        description="About NESA-Africa — vision, mission, our SCEF relationship, history, Vision 2035 continental roadmap, and answers to frequently asked questions."
+        title="About NESA-Africa | African Blue-Garnet Awards for Education"
+        description="Learn about NESA-Africa, its purpose, values, host organisation and approach to responsible education recognition."
         path="/about/overview"
         breadcrumbs={[
           { name: "Home", path: "/" },
@@ -110,7 +110,7 @@ export default function AboutConsolidated() {
         id="scef"
         eyebrow="Parent organisation"
         title="Santos Creations Educational Foundation"
-        line="NESA-Africa is a service of SCEF — a registered Pan-African foundation building toward Education for All since 1997."
+        line="Santos Creations Educational Foundation provides the organisational and governance structure for NESA-Africa."
         standalone="/about/scef"
       >
         <SCEF />
@@ -138,7 +138,7 @@ export default function AboutConsolidated() {
 
       <section className="py-8 px-4 max-w-4xl mx-auto text-center border-t border-gold/10">
         <p className="text-white/70 text-sm">
-          Governance, Integrity Firewall, NRC and Conflict-of-Interest policies now live on the dedicated{" "}
+          Governance, Integrity Firewall, NRRC and Conflict-of-Interest policies now live on the dedicated{" "}
           <a href="/governance" className="text-gold underline">Governance & Integrity</a> page.
         </p>
       </section>

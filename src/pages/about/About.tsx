@@ -136,8 +136,8 @@ export default function About() {
   return (
     <>
       <AboutSeo
-        title="About NESA-Africa | Recognising Africa’s Education Enablers"
-        description="NESA-Africa — The African Blue-Garnet Awards for Recognising Africa’s Education Enablers. A continental recognition, verification, storytelling and impact platform. Evidence-first, with a strict Integrity Firewall: recognition cannot be bought."
+        title="About NESA-Africa | African Blue-Garnet Awards for Education"
+        description="Learn about NESA-Africa, its purpose, values, host organisation and approach to responsible education recognition."
         path="/about"
         breadcrumbs={[
           { name: "Home", path: "/" },
@@ -176,14 +176,10 @@ export default function About() {
 
             <div className="mt-6 max-w-3xl space-y-4 text-base leading-relaxed text-ivory/80 md:text-lg">
               <p>
-                {ABOUT_BRAND.name} (NESA-Africa) is a continental education recognition,
-                verification, storytelling and impact platform. We identify, document, celebrate
-                and connect the individuals and institutions enabling Education for All across
-                Africa.
+                NESA-Africa—the New Education Standard Award Africa—is a pan-African education-recognition and documentation programme hosted by Santos Creations Educational Foundation.
               </p>
               <p>
-                Known as <strong className="text-ivory">{ABOUT_BRAND.alias}</strong>, NESA-Africa
-                goes beyond an annual ceremony. It creates a structured pathway:
+                It exists to make credible education contributions visible, preserve evidence of impact and encourage stronger cooperation around education for all.
               </p>
             </div>
 
@@ -243,7 +239,7 @@ export default function About() {
         id="purpose"
         eyebrow="Our Purpose"
         title="Why NESA-Africa Exists"
-        lede="Across Africa, thousands of people and organisations quietly make education possible."
+        lede="To identify, document, verify, recognise, celebrate and connect people and institutions enabling education across Africa."
       >
         <div className="grid gap-10 md:grid-cols-2">
           <ul className="space-y-2 border-l-2 border-gold/30 pl-5">
@@ -285,8 +281,7 @@ export default function About() {
               <Compass className="h-6 w-6 text-gold" aria-hidden="true" />
               <h3 className="mt-4 font-display text-2xl font-bold text-ivory">Vision</h3>
               <p className="mt-4 text-base leading-relaxed text-ivory/80">
-                An Africa where every genuine Education Enabler can be seen, verified and
-                supported.
+                An Africa in which meaningful contributions to education are visible, responsibly documented and strengthened through recognition, learning and partnership.
               </p>
               <p className="mt-3 text-sm leading-relaxed text-ivory/65">
                 We envision a continent where recognition strengthens credibility, visibility,
@@ -297,10 +292,7 @@ export default function About() {
               <Target className="h-6 w-6 text-gold" aria-hidden="true" />
               <h3 className="mt-4 font-display text-2xl font-bold text-ivory">Mission</h3>
               <p className="mt-4 text-base leading-relaxed text-ivory/80">
-                To operate a credible, transparent and evidence-driven continental platform that
-                identifies and verifies Education Enablers, celebrates outstanding contributions to
-                education, amplifies their impact stories, and connects recognition to
-                opportunities capable of expanding educational access and quality across Africa.
+                To operate a credible pan-African recognition platform combining open nomination, consent, structured research, evidence review, independent Icon judging and responsible storytelling.
               </p>
             </article>
           </div>
@@ -414,8 +406,8 @@ export default function About() {
       <Section
         id="nrc"
         eyebrow="Verification"
-        title="The Nominee Research Corps (NRC)"
-        lede="Research. Verify. Protect Credibility. The NRC is NESA-Africa's research and verification system. Its role is not to create fame or manufacture candidates."
+        title="The Nominee Research and Review Corps (NRRC)"
+        lede="The Nominee Research and Review Corps prepares the factual foundation before an eligible Icon dossier reaches the judges."
         alt
       >
         <p className="mb-5 text-sm font-semibold uppercase tracking-[0.18em] text-gold">
@@ -423,7 +415,7 @@ export default function About() {
         </p>
         <TickList items={ABOUT_NRC_QUESTIONS} />
         <p className="mt-8 max-w-3xl text-sm leading-relaxed text-ivory/75 md:text-base">
-          The NRC combines data entry, automated review (identity matching, duplicate detection,
+          The NRRC combines data entry, automated review (identity matching, duplicate detection,
           source analysis) and independent human review. Artificial intelligence may assist
           research, but final verification decisions remain subject to accountable human review.
         </p>
@@ -431,7 +423,7 @@ export default function About() {
           to="/nrc"
           className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-gold hover:underline"
         >
-          <Search className="h-4 w-4" aria-hidden="true" /> Inside the NRC
+          <Search className="h-4 w-4" aria-hidden="true" /> Learn About the NRRC
         </Link>
       </Section>
 
@@ -440,7 +432,7 @@ export default function About() {
         id="edi"
         eyebrow="Assessment"
         title="Education Development Index (EDI)"
-        lede="The EDI provides the structured evidence framework used during NRC assessment. Depending on category, it evaluates:"
+        lede="The EDI provides the structured evidence framework used during NRRC assessment. Depending on category, it evaluates:"
       >
         <TickList items={ABOUT_EDI_CRITERIA} />
         <p className="mt-6 text-sm leading-relaxed text-ivory/70 md:text-base">
@@ -548,7 +540,7 @@ export default function About() {
         id="scef-ecosystem"
         eyebrow="Parent Ecosystem"
         title="The SCEF Ecosystem"
-        lede="NESA-Africa operates within the broader education-impact ecosystem of Santos Creations Educational Foundation (SCEF)."
+        lede="Santos Creations Educational Foundation provides the organisational and governance structure for NESA-Africa. NESA-Africa operates alongside EduAid-Africa and other SCEF education-support services. Participation in one programme does not guarantee recognition in another."
       >
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {ABOUT_ECOSYSTEM.map((item) => (
@@ -591,12 +583,10 @@ export default function About() {
         id="nesa-africa-2026"
         eyebrow="Current Cycle"
         title="NESA-Africa 2026"
-        lede="The current recognition cycle culminates in the NESA-Africa Recognition Gala in Lagos, Nigeria on 28 December 2026."
+        lede="The NESA-Africa 2026 Online Recognition Programme is scheduled for Sunday, 13 December 2026."
       >
         <p className="max-w-3xl text-sm leading-relaxed text-ivory/75 md:text-base">
-          The cycle combines public nomination, NRC verification, EDI assessment, Africa Education
-          Icon judging, media storytelling, EduAid-Africa webinars, partnership mobilisation,
-          continental documentation and post-recognition legacy programmes.
+          The programme will involve approximately 20–30 invited live participants and will principally recognise up to nine Africa Education Icons, supported by approved Certificates of Recognition, documentaries, interviews and education-impact media.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <Button
@@ -606,7 +596,7 @@ export default function About() {
           >
             <Link to="/about/timeline">
               <Sparkles className="mr-2 h-4 w-4" aria-hidden="true" />
-              View the 2026 timeline
+              Explore NESA-Africa 2026
             </Link>
           </Button>
           <Button
