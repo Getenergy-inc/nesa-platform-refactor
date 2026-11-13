@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Sparkles } from "lucide-react";
 import stageBackdrop from "@/assets/nesa-stage-backdrop.jpg";
 import { trackEvent } from "@/lib/analytics";
+import { BRAND } from "@/config/brandHierarchy";
 import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
 
 export function EditorialHero() {
