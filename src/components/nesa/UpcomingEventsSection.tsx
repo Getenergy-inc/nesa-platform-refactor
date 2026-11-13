@@ -66,12 +66,12 @@ export function UpcomingEventsSection() {
             </Link>
           </ProgrammeCard>
 
-          <ProgrammeCard icon={Trophy} title={t("landing.upcomingEvents.galaEvents", { defaultValue: "Online Awards Gala" })} image={countdownGalaImg}>
+          <ProgrammeCard icon={Trophy} title={t("landing.upcomingEvents.galaEvents", { defaultValue: "Online Recognition Programme" })} image={countdownGalaImg}>
             <p className="font-semibold text-white">{PROGRAMME_END_LABEL}</p>
             <p className="mt-2">{ONLINE_GALA.copy.summary}</p>
             <p className="mt-2">{t("landing.upcomingEvents.onlineOnly", { defaultValue: "Online only · No physical attendance · No ticket sales" })}</p>
             <Link to="/programme-2026" className="mt-4 inline-flex items-center gap-1 font-semibold text-gold hover:underline">
-              Explore the Online Awards Gala <ArrowRight className="h-4 w-4" aria-hidden />
+              Explore the Online Recognition Programme <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           </ProgrammeCard>
         </div>

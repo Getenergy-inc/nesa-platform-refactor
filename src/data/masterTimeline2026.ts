@@ -590,7 +590,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     dateLabel: `Monday, ${PROGRAMME_END_LABEL}`,
     startsAt: "2026-12-28T00:00:00Z",
     milestone: "TV Showcase 3 — Gala Live Coverage",
-    activity: "Live broadcast of the Online Awards Gala, principally recognising up to nine verified Africa Education Icons of the Decade.",
+    activity: "Live broadcast of the Online Recognition Programme, principally recognising up to nine verified Africa Education Icons of the Decade.",
     outcome: "Continental live coverage",
     track: "showcase",
     href: "/media",
@@ -599,7 +599,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     id: "recognition-gala",
     dateLabel: `Monday, ${PROGRAMME_END_LABEL}`,
     startsAt: "2026-12-28T00:00:00Z",
-    milestone: "NESA-Africa 2026 Online Awards Gala",
+    milestone: "NESA-Africa 2026 Online Recognition Programme",
     activity:
       "Principally recognise up to nine verified Africa Education Icons of the Decade through approved documentary profiles, interviews and digital presentations. Online only; approximately 20–30 approved participants may join the live production.",
     outcome: "Tier 2–4 nominations, verification and documentary recognition continue through 31 March 2027; recognition is not guaranteed",
@@ -629,7 +629,7 @@ export const MASTER_TIMELINE_TRACK_LABELS: Record<MasterTimelineTrack, string> =
   podcast: "Education Enablers Podcast",
   judging: "Icon Judging",
   showcase: "TV Showcase",
-  gala: "Online Awards Gala",
+  gala: "Online Recognition Programme",
   news: "Weekly News",
   legacy: "Impact & Legacy",
 };

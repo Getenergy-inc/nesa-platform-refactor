@@ -10,7 +10,7 @@ export default function UpcomingEventsPage() {
         <title>2026–2027 Programme | NESA-Africa</title>
         <meta
           name="description"
-          content="NESA-Africa nomination, verified recognition, media and Online Awards Gala programme dates."
+          content="NESA-Africa nomination, verified recognition, media and Online Recognition Programme dates."
         />
         <link rel="canonical" href="https://nesa.africa/upcoming-events" />
       </Helmet>
