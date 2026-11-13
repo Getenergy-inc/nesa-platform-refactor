@@ -1,6 +1,6 @@
 ## Navigation bars 1 and 2 — 13 Nov 2026, 21:44 UTC
 - [x] Read the supplied Draft Lean NESA-Africa Navigation Bar and inspect the live shared header, primary/utility menu configuration and sign-in menu.
-- [ ] Confirm a navigation-only exemption from the existing Phase 0 hold, or wait for independent security sign-off and written clearance; the earlier exemption covers lean page wording only.
+- [x] Owner granted “Exempt navigation only”; limited to bars 1 and 2 and their desktop/mobile menus, not wider security clearance or publication.
 - [ ] Review the navigation plan: group existing links under About, Recognition, Impact, Media and Get Involved; keep Contact, both existing bars and original visual styling; place NRRC/Judges under Sign In, preserve destinations/access rules, and retain Nominees at the mobile first level as supplied.
 - [ ] Apply approved desktop/mobile navigation changes, verify existing destinations, keyboard interactions and narrow-screen layout; no publishing, route migration, access-rule changes or database changes.
 
