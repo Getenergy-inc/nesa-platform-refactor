@@ -1,3 +1,9 @@
+## Navigation bars 1 and 2 — 13 Nov 2026, 21:44 UTC
+- [x] Read the supplied Draft Lean NESA-Africa Navigation Bar and inspect the live shared header, primary/utility menu configuration and sign-in menu.
+- [ ] Confirm a navigation-only exemption from the existing Phase 0 hold, or wait for independent security sign-off and written clearance; the earlier exemption covers lean page wording only.
+- [ ] Review the navigation plan: group existing links under About, Recognition, Impact, Media and Get Involved; keep Contact, both existing bars and original visual styling; place NRRC/Judges under Sign In, preserve destinations/access rules, and retain Nominees at the mobile first level as supplied.
+- [ ] Apply approved desktop/mobile navigation changes, verify existing destinations, keyboard interactions and narrow-screen layout; no publishing, route migration, access-rule changes or database changes.
+
 ## Site-wide December date correction — 13 Nov 2026, 21:31 UTC
 - [x] Replaced every active-source 13 December/13 Dec/2026-12-13 occurrence with 28 December/28 Dec/2026-12-28 across website content, connected timelines, saved project copy and date checks; used Monday for the 2026 programme and updated the connected 2027 anniversary endpoint. Updated three live FAQ answers through a new migration; historical migrations and the regression-test pattern intentionally retain the old value.
 - [x] Verified eight affected routes plus 390px About rendering, zero remaining live FAQ matches, build OK and all new date checks. Focused run: 68 passed; seven pre-existing nomination-window checks still fail over September/November vs 9 November–31 March mismatches, unrelated to this correction. Uploaded source documents are read-only historical inputs. Nothing published.
