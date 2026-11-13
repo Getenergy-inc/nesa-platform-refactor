@@ -174,6 +174,7 @@ describe("Timeline anchors — Complete Timeline Set source values", () => {
     ["tv-show-1", "2026-11-22", undefined],
     ["tv-show-2", "2026-12-08", undefined],
     ["recognition-gala", "2026-12-28", undefined],
+    ["impact-legacy", "2026-12-22", "2027-12-28"],
   ];
 
   for (const [id, start, end] of CASES) {

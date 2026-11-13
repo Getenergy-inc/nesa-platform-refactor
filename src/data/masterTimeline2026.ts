@@ -114,7 +114,7 @@ export const MASTER_TIMELINE_OPEN_ITEMS: { id: string; item: string; detail: str
   {
     id: "gbg-verification-past-showcase-2",
     item:
-      "Gold-Blue Garnet verification (closes 28 December) extends 5 days past TV Showcase 2 (8 December)",
+      "Gold-Blue Garnet verification (closes 28 December) extends 20 days past TV Showcase 2 (8 December)",
     detail:
       "TV Showcase 2 on 8 December 2026 presents Gold-Blue Garnet recipients, but the independent rolling NRC verification deadline for that family remains 28 December 2026. Recipients verified between 9 and 28 December cannot appear in the broadcast. Flagged for the team — not silently resolved.",
   },

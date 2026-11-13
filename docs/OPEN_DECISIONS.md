@@ -30,7 +30,7 @@ All entries below are **TBC — needs management decision**. Website copy, certi
 | Official URLs | Special Needs School Support Forms (NESA and EduAid), live-stream link, payment instructions. | TBC — needs management decision; shown as CONTENT REQUIRED. |
 
 ## Recommended decisions from Lean Website Pack brief v2 (12 Nov 2026) — pending management confirmation
-- Gala: Monday 28 December 2026; certificates from 29 December 2026 (supersedes 13 Dec option).
+- Gala: Monday 28 December 2026; certificates from 29 December 2026 (programme date reconfirmed by the owner on 13 November 2026 at 21:31 UTC).
 - NRC: CONFIRMED by user 12 Nov 2026 — 9 members per award tier, 36 total; /nrc/members cap = 36. Site copy still says 27; update in WP-2/WP-9 after Gate 0.
 - Icon judges: CONFIRMED by user 12 Nov 2026 — exactly 9 independent judges for the Africa Education Icon category only; judges are separate from NRC members, and no judge total is inferred for other categories. Reconcile affected copy after Gate 0.
 - Regions: award zones unchanged; Support Fund shows 8 regions without names/country lists until mapping approved.
