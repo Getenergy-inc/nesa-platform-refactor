@@ -415,7 +415,7 @@ export default function About() {
         </p>
         <TickList items={ABOUT_NRC_QUESTIONS} />
         <p className="mt-8 max-w-3xl text-sm leading-relaxed text-ivory/75 md:text-base">
-          The NRC combines data entry, automated review (identity matching, duplicate detection,
+          The NRRC combines data entry, automated review (identity matching, duplicate detection,
           source analysis) and independent human review. Artificial intelligence may assist
           research, but final verification decisions remain subject to accountable human review.
         </p>
@@ -423,7 +423,7 @@ export default function About() {
           to="/nrc"
           className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-gold hover:underline"
         >
-          <Search className="h-4 w-4" aria-hidden="true" /> Inside the NRC
+          <Search className="h-4 w-4" aria-hidden="true" /> Learn About the NRRC
         </Link>
       </Section>
 
