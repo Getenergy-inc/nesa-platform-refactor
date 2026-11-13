@@ -207,7 +207,7 @@ function SubcategoryAccordion({
             <AccordionContent>
               <div className="space-y-4 pt-2 pb-3">
                 <p className="text-sm text-foreground/75 leading-relaxed">
-                  Nominate an Education Enabler that exemplifies excellence in{" "}
+                  Submit a Nomination that exemplifies excellence in{" "}
                   <span className="text-gold">{sub.name}</span>. NRC reviewers
                   verify every submission before it reaches the independent jury.
                 </p>

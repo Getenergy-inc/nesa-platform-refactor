@@ -19,7 +19,7 @@ export function HomeHeroBlock() {
         title="Africa's Education Recognition & Impact Platform"
         lede="Recognising Africa’s Education Enablers — across 8 regions and the African Diaspora, four recognition tiers, and verified profiles built to attract partnerships, funding, and intervention."
         primary={{
-          label: "Nominate an Education Enabler",
+          label: "Submit a Nomination",
           href: "/nominate",
           onClick: fire("primary", "/nominate"),
         }}

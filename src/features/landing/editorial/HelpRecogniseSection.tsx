@@ -22,7 +22,7 @@ export function HelpRecogniseSection() {
               trackEvent("hero_cta_click", { slot: "primary", href: "/nominate", surface: "home-final" })
             }
           >
-            Nominate an Education Enabler
+            Submit a Nomination
           </Link>
           <Link
             to="/nominees"

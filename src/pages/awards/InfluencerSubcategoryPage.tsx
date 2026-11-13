@@ -482,7 +482,7 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
           <p>{content.finalCta.body}</p>
           <div className="flex flex-wrap gap-3 pt-2">
             <Button asChild className="bg-gold text-charcoal hover:bg-gold-dark">
-              <a href="#nomination-form">Nominate an Education Enabler</a>
+              <a href="#nomination-form">Submit a Nomination</a>
             </Button>
             <Button
               asChild

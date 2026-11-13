@@ -237,7 +237,7 @@ export default function NomineesHubPage() {
 
               <div className="ed-hero-cta-row" style={{ justifyContent: "center" }}>
                 <Link to="/nominate" className="ed-btn-primary">
-                  Nominate an Education Enabler
+                  Submit a Nomination
                 </Link>
                 <Link to="/nominees/catalogue" className="ed-btn-ghost">
                   Browse the Full Catalogue →

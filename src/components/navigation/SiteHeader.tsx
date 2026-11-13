@@ -468,7 +468,7 @@ function MobileMenu() {
           </div>
           <Link to="/education-enablers/edtech" onClick={close} className={linkCls}>EdTech Education Enablers</Link>
           <Link to="/nominate" onClick={close} className={cn(linkCls, "text-gold font-semibold")}>
-            Nominate an Education Enabler
+            Submit a Nomination
           </Link>
         </>
       );

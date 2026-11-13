@@ -68,7 +68,7 @@ export const EDTECH_SUBCATS: TaxonomyItem[] = [
 
 // Enabler action links (right column of the mega menu).
 export const ENABLER_ACTIONS: TaxonomyItem[] = [
-  { slug: "nominate", label: "Nominate an Education Enabler", href: "/nominate" },
+  { slug: "nominate", label: "Submit a Nomination", href: "/nominate" },
   { slug: "claim-profile", label: "Claim or Update an Organisation Profile", href: "/education-enablers/claim-profile" },
   { slug: "submit-evidence", label: "Submit Programme Evidence", href: "/education-enablers/submit-evidence" },
   { slug: "verification", label: "Become a Verified Education Enabler", href: "/education-enablers/verification" },

@@ -167,7 +167,7 @@ export function TierNominateSection({ tier }: { tier: TierClusterConfig }) {
       <div className="md:col-span-2 rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6">
         <div className="flex items-center gap-2 flex-wrap">
           <Sparkles className="h-5 w-5" aria-hidden />
-          <h2 className="font-display text-lg sm:text-xl font-bold">Nominate an Education Enabler</h2>
+          <h2 className="font-display text-lg sm:text-xl font-bold">Submit a Nomination</h2>
           <StageStatusBadge action="nominations" showLabel={false} />
         </div>
         <p className="mt-2 text-sm sm:text-base text-white/80">{nominate.intro}</p>

@@ -3,7 +3,7 @@ import { OFFICIAL_NOMINATION_FORM_URL } from "@/config/nomination/officialGoogle
 /** Public actions shared by navigation, page CTAs and regression tests. */
 export const PUBLIC_ACTIONS_2026 = {
   nominate: {
-    label: "Nominate an Education Enabler",
+    label: "Submit a Nomination",
     href: OFFICIAL_NOMINATION_FORM_URL,
     external: true,
   },

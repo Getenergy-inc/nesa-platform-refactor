@@ -28,7 +28,7 @@ export const HERO_COPY = {
     "NESA-Africa turns recognition into visibility, credibility, partnerships, investment and measurable education impact.",
   ],
   primaryCTAs: [
-    { label: "Nominate an Education Enabler", href: "/nominate" },
+    { label: "Submit a Nomination", href: "/nominate" },
     { label: "Become a Sponsor", href: "/sponsors" },
     { label: "Join as a Volunteer", href: "/volunteer" },
     { label: "Explore Award Categories", href: "/awards" },

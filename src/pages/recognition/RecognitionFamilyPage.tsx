@@ -51,7 +51,7 @@ export default function RecognitionFamilyPage({ slugOverride }: { slugOverride?:
               to={`/nominate?family=${family.slug}`}
               className="inline-flex h-11 items-center rounded-md bg-gold px-6 text-sm font-bold text-charcoal hover:bg-gold/90"
             >
-              Nominate an Education Enabler
+              Submit a Nomination
             </Link>
             <Link
               to={`/nominees?family=${family.slug}`}

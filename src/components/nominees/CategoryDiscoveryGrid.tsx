@@ -262,7 +262,7 @@ function CategoryCard({ cat, index }: { cat: CategoryEntry; index: number }) {
         >
           {isEmpty ? (
             <Link to={nominateHref}>
-              Nominate an Education Enabler <ArrowRight className="w-3.5 h-3.5" />
+              Submit a Nomination <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           ) : (
             <Link to={`/nominees/category/${cat.slug}`}>

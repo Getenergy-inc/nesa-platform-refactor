@@ -25,7 +25,7 @@ export function WhoCanBeEnablerSection() {
 
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           <Link to="/nominate" className="ed-btn-primary">
-            Nominate an Education Enabler
+            Submit a Nomination
           </Link>
           <Link to="/nominate/help-me-choose" className="ed-btn-ghost">
             Not sure which recognition applies? →

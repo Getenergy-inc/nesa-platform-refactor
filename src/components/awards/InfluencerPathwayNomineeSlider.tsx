@@ -108,7 +108,7 @@ function PathwayRow({ pathway }: { pathway: InfluencerPathwayBucket }) {
             appear here as NRC verification completes.
           </p>
           <Button asChild size="sm" className="mt-3 bg-gold font-semibold text-charcoal hover:bg-gold/90">
-            <Link to={pathway.nominateHref}>Nominate an Education Enabler</Link>
+            <Link to={pathway.nominateHref}>Submit a Nomination</Link>
           </Button>
         </div>
       ) : (

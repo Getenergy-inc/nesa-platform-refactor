@@ -608,7 +608,7 @@ export default function Timeline() {
           </h2>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Link to="/nominate" className="ed-btn-primary">
-              Nominate an Education Enabler
+              Submit a Nomination
             </Link>
             <Link to="/nominees" className="ed-btn-ghost">
               Explore Existing Nominees
