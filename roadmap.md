@@ -1,3 +1,7 @@
+## Site-wide December date correction — 13 Nov 2026, 21:31 UTC
+- [ ] Replace every 13 December/13 Dec/2026-12-13 occurrence with 28 December/28 Dec/2026-12-28 across website content, connected timelines, saved project copy and date checks; use Monday for the 2026 programme and update the connected 2027 anniversary endpoint.
+- [ ] Verify affected pages, run focused date tests, confirm no December 13 variants remain in project content, and do not publish.
+
 ## Unified NESA-Africa & EduAid-Africa framework — 13 Nov 2026
 - [x] Review the final NESA-Africa/EduAid-Africa/SCEF page-copy deck received at 20:56 UTC and record its source, notices, unconfirmed facts and retained wording-only/Phase 0 restrictions in framework memory; no application changes.
 - [ ] After Phase 0 clearance and applicable phase approval, use the final deck's exact copy on existing NESA-Africa surfaces only; defer new pages, reordered sections, new controls/forms, signup/payment workflows and route/role migrations. Other-site updates require authorised project access; bracketed facts and conditional funding allocations require confirmation.
