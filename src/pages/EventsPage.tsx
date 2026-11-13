@@ -6,7 +6,7 @@ import { UpcomingEventsSection } from "@/components/nesa/UpcomingEventsSection";
 
 const QUICK_LINKS = [
   {
-    label: "Explore the Online Awards Gala",
+    label: "Explore the Online Recognition Programme",
     href: "/programme-2026",
     description: ONLINE_GALA.copy.summary,
     icon: Trophy,
@@ -29,7 +29,7 @@ export default function EventsPage() {
   return (
     <>
       <Helmet>
-        <title>Events & Online Awards Gala | NESA-Africa 2026</title>
+        <title>Events & Online Recognition Programme | NESA-Africa 2026</title>
         <meta
           name="description"
           content={ONLINE_GALA.copy.summary}
@@ -44,7 +44,7 @@ export default function EventsPage() {
               Enablers of Education for All Across Africa
             </p>
             <h1 className="mt-3 font-serif text-3xl md:text-5xl">
-              Events & Online Awards Gala
+              Events & Online Recognition Programme
             </h1>
             <p className="mt-4 max-w-2xl text-white/70">
               {ONLINE_GALA.copy.summary} {ONLINE_GALA.copy.continuation}

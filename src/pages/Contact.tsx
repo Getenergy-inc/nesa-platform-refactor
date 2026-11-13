@@ -241,11 +241,11 @@ export default function Contact() {
                     <div className="mb-6 rounded-lg bg-primary/10 p-4">
                       <div className="flex items-center gap-3 mb-2">
                         <Mic className="h-5 w-5 text-primary" />
-                        <h3 className="font-semibold">Become an Online Awards Gala Presenter</h3>
+                        <h3 className="font-semibold">Become an Online Recognition Programme Presenter</h3>
                       </div>
                       <p className="text-sm text-muted-foreground">
                         We're looking for dynamic presenters and anchors to host segments of the 
-                        NESA-Africa Online Awards Gala. Share your experience and portfolio below.
+                        NESA-Africa Online Recognition Programme. Share your experience and portfolio below.
                       </p>
                     </div>
 
@@ -356,7 +356,7 @@ export default function Contact() {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="p-motivation">Why do you want to host the NESA-Africa Online Awards Gala? *</Label>
+                        <Label htmlFor="p-motivation">Why do you want to host the NESA-Africa Online Recognition Programme? *</Label>
                         <Textarea
                           id="p-motivation"
                           placeholder="Share your motivation and what you would bring to the event..."
