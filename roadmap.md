@@ -1,6 +1,6 @@
 ## Site-wide December date correction — 13 Nov 2026, 21:31 UTC
-- [ ] Replace every 13 December/13 Dec/2026-12-13 occurrence with 28 December/28 Dec/2026-12-28 across website content, connected timelines, saved project copy and date checks; use Monday for the 2026 programme and update the connected 2027 anniversary endpoint.
-- [ ] Verify affected pages, run focused date tests, confirm no December 13 variants remain in project content, and do not publish.
+- [x] Replaced every active-source 13 December/13 Dec/2026-12-13 occurrence with 28 December/28 Dec/2026-12-28 across website content, connected timelines, saved project copy and date checks; used Monday for the 2026 programme and updated the connected 2027 anniversary endpoint. Updated three live FAQ answers through a new migration; historical migrations and the regression-test pattern intentionally retain the old value.
+- [x] Verified eight affected routes plus 390px About rendering, zero remaining live FAQ matches, build OK and all new date checks. Focused run: 68 passed; seven pre-existing nomination-window checks still fail over September/November vs 9 November–31 March mismatches, unrelated to this correction. Uploaded source documents are read-only historical inputs. Nothing published.
 
 ## Unified NESA-Africa & EduAid-Africa framework — 13 Nov 2026
 - [x] Review the final NESA-Africa/EduAid-Africa/SCEF page-copy deck received at 20:56 UTC and record its source, notices, unconfirmed facts and retained wording-only/Phase 0 restrictions in framework memory; no application changes.
