@@ -49,7 +49,7 @@ const SPONSORSHIP_TIERS = [
     benefits: [
       "Title sponsorship + headline branding",
       "NESA Africa TV feature segment",
-      "Headline acknowledgement during the Online Awards Gala",
+      "Headline acknowledgement during the Online Recognition Programme",
       "Certificate + press mentions",
     ],
     cta: "Sponsor Now",
@@ -62,7 +62,7 @@ const SPONSORSHIP_TIERS = [
     icon: Sparkles,
     benefits: [
       "Premium branding + major co-sponsorship",
-      "Online Awards Gala acknowledgement",
+      "Online Recognition Programme acknowledgement",
     ],
     cta: "Select Diamond",
   },
@@ -73,7 +73,7 @@ const SPONSORSHIP_TIERS = [
     icon: Trophy,
     benefits: [
       "Sponsor a major category/segment",
-      "Online Awards Gala acknowledgement",
+      "Online Recognition Programme acknowledgement",
     ],
     cta: "Select Gold",
   },
@@ -84,7 +84,7 @@ const SPONSORSHIP_TIERS = [
     icon: Medal,
     benefits: [
       "Print + digital branding",
-      "Online Awards Gala acknowledgement",
+      "Online Recognition Programme acknowledgement",
     ],
     cta: "Select Silver",
   },
@@ -95,7 +95,7 @@ const SPONSORSHIP_TIERS = [
     icon: Award,
     benefits: [
       "Website + program branding",
-      "Online Awards Gala acknowledgement",
+      "Online Recognition Programme acknowledgement",
     ],
     cta: "Select Bronze",
   },
@@ -106,7 +106,7 @@ const SPONSORSHIP_TIERS = [
     icon: Star,
     benefits: [
       "Category branding + on-stage presentation",
-      "Online Awards Gala acknowledgement",
+      "Online Recognition Programme acknowledgement",
     ],
     cta: "Sponsor a Category",
   },
@@ -176,7 +176,7 @@ export default function Partners() {
         <title>Partner with NESA-Africa 2026 | Sponsorship, Media &amp; Impact Opportunities</title>
         <meta
           name="description"
-          content="Partner with NESA-Africa 2026 and the Online Awards Gala on 28 December 2026. Sponsorship enquiries are handled through SCEF's approved Google Form."
+          content="Partner with NESA-Africa 2026 and the Online Recognition Programme on 28 December 2026. Sponsorship enquiries are handled through SCEF's approved Google Form."
         />
       </Helmet>
 
@@ -195,7 +195,7 @@ export default function Partners() {
                 Partner with <span className="text-gold">NESA-Africa 2026</span>
               </h1>
               <p className="text-lg md:text-xl text-primary font-medium mb-2">
-                Online Awards Gala: Monday, 28 December 2026 · Online only
+                Online Recognition Programme: Sunday, 13 December 2026 · Online only
               </p>
               <p className="text-lg text-muted-foreground mb-8 max-w-3xl mx-auto">
                 Put your brand at the center of Africa's education story—celebrating champions and funding real impact through{" "}
@@ -251,7 +251,7 @@ export default function Partners() {
             <h2 className="text-3xl font-display font-bold text-center mb-8">Why Partner</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
               {[
-                { icon: Target, text: "High-trust visibility across the awards season and Online Awards Gala programme" },
+                { icon: Target, text: "High-trust visibility across the awards season and Online Recognition Programme programme" },
                 { icon: Users, text: "Audience growth through content + public participation campaigns" },
                 { icon: School, text: "Measurable impact via verified school interventions (Rebuild My School 2026–2027)" },
                 { icon: Award, text: "Sponsor recognition (Sponsor Wall, certificates, annual report mentions)" },
@@ -465,7 +465,7 @@ export default function Partners() {
                 NESA Africa TV (Ads + Show Sponsorship)
               </h2>
               <p className="text-center text-muted-foreground mb-8">
-                Sponsor online award shows: Platinum Spotlight → Gold Results Show → Online Awards Gala broadcast
+                Sponsor online award shows: Platinum Spotlight → Gold Results Show → Online Recognition Programme broadcast
               </p>
               <Card className="bg-card border-border mb-6">
                 <CardHeader>
