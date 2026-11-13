@@ -432,7 +432,7 @@ export default function About() {
         id="edi"
         eyebrow="Assessment"
         title="Education Development Index (EDI)"
-        lede="The EDI provides the structured evidence framework used during NRC assessment. Depending on category, it evaluates:"
+        lede="The EDI provides the structured evidence framework used during NRRC assessment. Depending on category, it evaluates:"
       >
         <TickList items={ABOUT_EDI_CRITERIA} />
         <p className="mt-6 text-sm leading-relaxed text-ivory/70 md:text-base">
