@@ -293,7 +293,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     id: "gold-blue-garnet-verification",
     dateLabel: `23 September – 28 December 2026`,
     startsAt: "2026-09-23T00:00:00Z",
-    endsAt: "2026-12-13T23:59:59Z",
+    endsAt: "2026-12-28T23:59:59Z",
     milestone: "Gold-Blue Garnet NRC Verification (rolling)",
     activity:
       "Rolling Nominee Research Corps verification of Gold-Blue Garnet nominations against the EDI Matrix and evidence standards, capped at the Gala.",

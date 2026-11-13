@@ -12,7 +12,7 @@ describe("rescheduled Online Recognition Programme", () => {
   });
   it("links the announcement to the online programme with the new date", () => {
     const announcement = ANNOUNCEMENTS.find((item) => item.id === "nominations-and-online-gala");
-    expect(announcement?.text).toContain("Online Recognition Programme: 13 December 2026. Learn More");
+    expect(announcement?.text).toContain("Online Recognition Programme: 28 December 2026. Learn More");
     expect(announcement?.href).toBe("/programme-2026");
   });
   it("moves the gala and its live coverage together", () => {

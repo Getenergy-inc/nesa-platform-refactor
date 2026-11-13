@@ -6,7 +6,7 @@ All entries below are **TBC — needs management decision**. Website copy, certi
 
 | Decision | Conflict / missing evidence | Current handling |
 |---|---|---|
-| Gala date | Latest upload repeatedly states 13 December 2026; explicit 9 November reschedule approved 28 December 2026. | Preserve the explicit 28 December approval pending management reconciliation; do not silently revert. |
+| Gala date | Earlier uploads conflicted over the programme date. | RESOLVED 13 November 2026 at 21:31 UTC: use Monday 28 December 2026 everywhere and replace every December 13 variant with December 28. |
 | Certificate release window | Upload requires post-gala release from 14 December; earlier content brief approved continuous verified downloads 9 November–31 March. | No timing changes; require an explicit authoritative release decision independent of gala copy. |
 | Icon criteria and weights | Latest upload marks criteria/weights unapproved; recently approved public EDI section uses eight weighted criteria. | No criteria changes; confirm whether existing criteria have governance approval before Arena use. |
 | Confirmed social profiles | Latest upload permits NESA YouTube/LinkedIn and EduAid LinkedIn only; current approved follow registry has additional profiles. | No social changes in Phase 0; management to reconcile channel approval. |

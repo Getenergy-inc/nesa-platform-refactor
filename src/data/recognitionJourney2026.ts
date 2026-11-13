@@ -232,7 +232,7 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     shortName: "Gold-Blue Garnet Verification",
     dateRange: "23 September – 28 December 2026",
     startsAt: "2026-09-23T00:00:00Z",
-    endsAt: "2026-12-13T23:59:59Z",
+    endsAt: "2026-12-28T23:59:59Z",
     status: "upcoming",
     tier: "Tier 2",
     iconName: "ShieldCheck",

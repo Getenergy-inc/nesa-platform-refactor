@@ -7,7 +7,7 @@
  *   2. Weekday prefixes ("Tuesday, 18 August 2026") are the real weekday.
  *   3. The canonical anchor dates from the source set are present, unchanged.
  *   4. Entries are chronological, uniquely identified and inside the programme
- *      window (1 July 2026 – 13 December 2027 legacy tail).
+ *      window (1 July 2026 – 28 December 2027 legacy tail).
  *   5. No retired date or retired terminology survives anywhere in src/.
  */
 import { describe, it, expect } from "vitest";
