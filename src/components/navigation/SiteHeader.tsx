@@ -387,6 +387,13 @@ function MobileMenu() {
 
   useEffect(() => { setOpen(false); }, [location.pathname]);
   useEffect(() => {
+    if (signInOpen !== "sign-in") return;
+    const timer = window.setTimeout(() => {
+      document.getElementById("mobile-sign-in")?.scrollIntoView({ block: "start", behavior: "auto" });
+    }, 250);
+    return () => window.clearTimeout(timer);
+  }, [signInOpen]);
+  useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [open]);
@@ -513,7 +520,6 @@ function MobileMenu() {
             {!user && <Button variant="outline" className="border-gold/60 text-gold hover:bg-gold/10 hover:text-gold min-h-11"
               onClick={() => {
                 setSignInOpen("sign-in");
-                requestAnimationFrame(() => document.getElementById("mobile-sign-in")?.scrollIntoView({ block: "nearest" }));
               }}>
               Sign In
             </Button>}
