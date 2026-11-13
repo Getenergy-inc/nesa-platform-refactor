@@ -36,7 +36,6 @@ import { FloatingFAQButton } from "@/components/nesa/PageFAQ";
 import { SchoolSupportFundSection } from "@/components/impact/SchoolSupportFundSection";
 
 import "./editorial/editorial.css";
-import { HomeFramework2026 } from "@/components/framework2026/HomeFramework2026";
 import {
   EditorialHero,
   LivingGallerySection,
@@ -98,11 +97,94 @@ export function NESALandingPage() {
         <UtilityBar />
         <NESAHeader />
 
-        <HomeFramework2026 />
+        {/* 1. HERO */}
+        <EditorialHero />
+
+        {/* 2. PUBLIC NOTICE — nominations open 6 September 2026 */}
+        <PublicNominationsNotice />
+
+        {/* 3. AFRICA EDUCATION ICON — the single flagship moment: intro band,
+            three pathway cards, then the Icon governance statement. */}
+        <IconFlagshipSection />
+        <IconLifetimeSection />
+        <IconGovernanceNote />
+
+        {/* 3b. AWARD PLAQUE + LOGO MOTION GRAPHIC */}
+        <AwardPlaqueMotionSection />
+
+        {/* 4. LIVING GALLERY — Meet Africa’s Education Enablers */}
+        <LivingGallerySection />
+
+
+
+
+
+        {/* 5. ONE CONTINENTAL MISSION. SIX RECOGNITION PATHWAYS. */}
+        <RecognitionFamiliesSection />
+
+        {/* 5b. INFLUENCER EDUCATION IMPACT — the three live pathway sliders
+            (Music · Social Media · Sports), same data source as
+            /awards/influencer-education-impact so the two never drift. */}
+        <LazySection>
+          <InfluencerPathwayNomineeSlider
+            eyebrow="Influencer Education Impact"
+            headingLead="Three Influencer Pathways,"
+            headingHighlight="One Education Mission"
+            footerLink={{
+              to: "/awards/influencer-education-impact",
+              label: "Explore Influencer Education Impact",
+            }}
+          />
+        </LazySection>
+
+        {/* 6. WHO CAN BE AN EDUCATION ENABLER? */}
+        <WhoCanBeEnablerSection />
+
+        {/* 7. IMPACT DIRECTORY + LIVE STATS */}
+        <DirectoryStatsSection />
+
+        {/* 8. FROM RECOGNITION TO IMPACT */}
+        <RecognitionToImpactSection />
+        <SchoolSupportFundSection />
+
+        {/* 9. BUILT FOR TRUST */}
+        <TrustBandSection />
+
+        {/* 9b. ENDORSERS & PARTNERS */}
+        <PartnersBandSection />
+
+
+
+        {/* 10. GALA COUNTDOWN — 28 December 2026 */}
+        <GalaBandSection />
+
+        {/* SUPPORTING BANDS — people and moments */}
+        <VolunteerBandSection />
+        <BoardOfAdvisorsSection />
+
+
+
+        {/* 9. JOIN THE MOVEMENT */}
+        <JoinMovementSection />
+
+        {/* 10. FINAL CTA */}
+        <HelpRecogniseSection />
+
+
+        {/* GOVERNANCE & INTEGRITY FIREWALL */}
+        <LazySection>
+          <GovernanceFirewallSection />
+        </LazySection>
+
+        <LazySection>
+          <FinalCTASection />
+        </LazySection>
+
 
         <NESAFooter />
       </div>
 
+      <ExitIntentPopup />
       <BackToTopButton />
       <MobileBottomActions />
       <FloatingFAQButton />

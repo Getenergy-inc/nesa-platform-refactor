@@ -1,27 +1,154 @@
-// About NESA-Africa 2026 — 2026–2027 Content Framework, section 10.
+// About NESA-Africa 2026 — inaugural public award cycle.
+// Institutional-register refactor: seal-anchored hero (AU/UN),
+// Nobel-style stat strip, Oscar-style tier spotlight, process
+// pipeline, awards-season timeline, non-influence declaration.
 import { AboutSeo } from "@/pages/about/AboutSeo";
-import { ABOUT_2026, CERTIFICATE_NOTICE } from "@/config/contentFramework2026";
-import { FwCtas, FwList, FwSection } from "@/components/framework2026/FwBlocks";
+import {
+  AboutSealHero,
+  AboutStatStrip,
+  AboutRecognitionTiers,
+  AboutProcessPipeline,
+  AboutCycleTimeline,
+  AboutGovernanceProtocol,
+  AboutContactBlock,
+  CANONICAL_TIERS,
+  CANONICAL_PIPELINE,
+  type TimelinePhase,
+} from "@/pages/about/AboutSharedBlocks";
+import { AboutCanonicalContent } from "@/pages/about/AboutCanonicalContent";
+
+const STATS_2026 = [
+  { value: "4", label: "Recognition Tiers", sub: "22 awards · 90 subcategories" },
+  { value: "9", label: "Africa Education Icons", sub: "Up to nine recognised" },
+  { value: "9", label: "Icon NRC Members", sub: "Three per Icon category" },
+  { value: "9", label: "Independent Icon Judges", sub: "Icon tier only" },
+  { value: "0", label: "Public Voting", sub: "No public voting in 2026" },
+  { value: "13 Dec", label: "Online Programme", sub: "Sunday, 13 December 2026" },
+];
+
+const PHASES_2026: TimelinePhase[] = [
+  {
+    phaseName: "Pre-Nomination",
+    window: "15 Jan – 29 Aug 2026",
+    status: "active",
+    events: [
+      { date: "15 Jan – 29 Aug", title: "NRC Data Entry", detail: "~2,700 pre-nominees populated; each requires acceptance" },
+      { date: "15 Aug", title: "All four NRC teams activate" },
+      { date: "20 Aug", title: "EduAid-Africa Webinar Series begins" },
+    ],
+  },
+  {
+    phaseName: "Nominations Open",
+    window: "6 Sep – 21 Nov 2026",
+    status: "upcoming",
+    spotlight: true,
+    events: [
+      { date: "6 Sep", title: "Public Nominations Open — all four tiers" },
+      { date: "6 Sep – 6 Oct", title: "Africa Education Icon window", detail: "Independent, shorter closing date" },
+    ],
+  },
+  {
+    phaseName: "NRC Verification",
+    window: "6 Sep – 21 Nov 2026",
+    status: "upcoming",
+    events: [
+      { date: "By 10 Sep", title: "Icon NRC verification complete" },
+      { date: "By 20 Dec", title: "Influencer / Platinum / Gold-Blue Garnet verification complete" },
+    ],
+  },
+  {
+    phaseName: "Judges & Grand Jury",
+    window: "1 Sep – 12 Oct 2026",
+    status: "upcoming",
+    events: [
+      { date: "1 Sep – 12 Oct", title: "Panel Scoring & Grand Jury Deliberation", detail: "Africa Education Icon Award only" },
+    ],
+  },
+  {
+    phaseName: "Finalists Revealed",
+    window: "Nov – Dec 2026",
+    status: "upcoming",
+    events: [
+      { date: "28 Nov", title: "First Online TV Award Show", detail: "Certificate of Recognition finalists" },
+      { date: "6 Dec", title: "Second Online TV Award Show", detail: "Africa Education Icon finalists" },
+    ],
+  },
+  {
+    phaseName: "Recognition Gala",
+    window: "28 December 2026 · Lagos",
+    status: "upcoming",
+    spotlight: true,
+    events: [
+      { date: "28 Dec", title: "NESA-Africa 2026 Recognition Gala", detail: "9 Icon Laureates announced; Certificates presented" },
+    ],
+  },
+  {
+    phaseName: "Certificate Window",
+    window: "14 – 30 Dec 2026",
+    status: "upcoming",
+    events: [
+      { date: "14 – 30 Dec", title: "Certificate & digital badge downloads", detail: "1-year validity from download" },
+    ],
+  },
+];
 
 export default function AboutCycle2026() {
   return (
     <>
       <AboutSeo
-        title="NESA-Africa 2026 · Four Tiers, 22 Awards, 90 Subcategories"
-        description="Four tiers, 22 awards and 90 subcategories. Online programme, up to nine Africa Education Icons, nine Icon NRC members, nine independent Icon judges, no public voting."
+        title="About NESA-Africa 2026 · Inaugural Public Award Cycle"
+        description="NESA-Africa 2026 — the inaugural public award cycle: 18 recognition forms across 4 tiers and 15 regions (8 Africa + 7 Global), culminating in the 28 December 2026 Recognition Gala in Lagos."
         path="/about/nesa-africa-2026"
-        breadcrumbs={[{ name: "Home", path: "/" }, { name: "About", path: "/about" }, { name: "NESA-Africa 2026", path: "/about/nesa-africa-2026" }]}
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+          { name: "NESA-Africa 2026", path: "/about/nesa-africa-2026" },
+        ]}
+        faqs={[
+          { question: "When do NESA-Africa 2026 nominations open?", answer: "Public nominations open 6 September 2026 across all four tiers. The Africa Education Icon Award nomination window runs 6 September – 6 October 2026." },
+          { question: "When is the NESA-Africa 2026 Recognition Gala?", answer: "The Recognition Gala takes place on 28 December 2026 in Lagos, Nigeria, where the 9 Icon Laureates are announced and all Certificates of Recognition are formally presented." },
+          { question: "Is there any public voting in the 2026 cycle?", answer: "No. There is no public voting mechanism at any stage of the 2026 cycle. Recognition is determined exclusively through Nominee Research Corps verification, the EDI Matrix, and — for the Icon Award only — independent judging and Governance ratification." },
+        ]}
       />
-      <section className="bg-charcoal text-ivory">
-        <div className="container mx-auto max-w-5xl px-4 py-16 md:py-24">
-          <h1 className="font-display text-4xl md:text-6xl font-bold">{ABOUT_2026.title}</h1>
-          <FwList items={ABOUT_2026.points} />
-          <FwCtas ctas={ABOUT_2026.ctas} />
-        </div>
-      </section>
-      <FwSection title="Certificates of Recognition" light>
-        <p className="mt-4 max-w-3xl">{CERTIFICATE_NOTICE}</p>
-      </FwSection>
+
+      <AboutSealHero
+        eyebrow="Inaugural Public Cycle"
+        title={<>About <span className="text-gold">NESA-Africa 2026</span></>}
+        positioning="The platform's first public award cycle since incorporation — 18 recognition forms across four tiers, verified end-to-end, culminating in the Recognition Gala in Lagos on 28 December 2026."
+        cyclePhase="Cycle Status · Pre-Nomination · Nominations open 6 September 2026"
+        primaryCta={{ label: "Nominate an Education Enabler", href: "/nominate", icon: "nominate" }}
+        secondaryCta={{ label: "Non-Influence Declaration", href: "#non-influence-protocol" }}
+      />
+
+      <AboutStatStrip stats={STATS_2026} title="The 2026 Cycle in Numbers" />
+
+      <AboutRecognitionTiers
+        tiers={CANONICAL_TIERS}
+        footerCta={{ label: "See all 18 recognition forms", href: "/nominate" }}
+      />
+
+      <AboutProcessPipeline
+        stages={CANONICAL_PIPELINE}
+        note="No submission automatically becomes a finalist, winner, or honouree. Every entry is evidence-reviewed, verified, and governance-ratified before recognition."
+      />
+
+      <AboutCycleTimeline
+        title="The Road to the 28 December 2026 Gala"
+        subtitle="Phase-based awards-season roadmap with confirmed dates from the 2026 cycle calendar."
+        phases={PHASES_2026}
+        footerCta={{ label: "View full cycle calendar", href: "/events/calendar" }}
+      />
+
+      <AboutCanonicalContent />
+
+      <AboutGovernanceProtocol downloadHref="/governance" />
+
+      <AboutContactBlock
+        headline="Engage with the 2026 Cycle"
+        intro="Nominate a changemaker, apply as a judge or NRC member, become a chapter volunteer, or attend the 28 December 2026 Gala."
+        primaryCta={{ label: "Nominate an Education Enabler", href: "/nominate" }}
+        secondaryCta={{ label: "Contact the Cycle Desk", href: "mailto:info@nesa.africa" }}
+      />
     </>
   );
 }

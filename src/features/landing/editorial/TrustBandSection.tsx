@@ -14,9 +14,9 @@ const PILLARS = [
   },
   {
     num: "03",
-    title: "No Public Voting (2026–2027)",
+    title: "No Public Voting in 2026",
     body:
-      "Recognition is determined by judges (Icon only) and Governance — never by vote. Learn about our disclosed 2028 phase.",
+      "Nine independent Icon judges and nine Icon NRC members. Nomination is free.",
   },
 ];
 
@@ -34,8 +34,7 @@ export function TrustBandSection() {
           ))}
         </div>
         <p className="ed-disclaimer">
-          Sponsorship, donations, and endorsements do not influence nominee approval, judging, or
-          Governance decisions. <Link to="/governance">Read our integrity policy →</Link>
+          Recognition Cannot Be Bought. Nomination is free. Sponsorship, donations, partnerships, endorsements, publicity and media participation do not influence eligibility, scoring, judging or recognition decisions. <Link to="/governance">Read our integrity policy →</Link>
         </p>
       </div>
     </section>
