@@ -230,7 +230,7 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     number: 8,
     name: "Gold-Blue Garnet NRC Verification (rolling)",
     shortName: "Gold-Blue Garnet Verification",
-    dateRange: "23 September – 13 December 2026",
+    dateRange: "23 September – 28 December 2026",
     startsAt: "2026-09-23T00:00:00Z",
     endsAt: "2026-12-13T23:59:59Z",
     status: "upcoming",

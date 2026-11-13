@@ -15,8 +15,8 @@ describe("2026–2027 navigation", () => {
 });
 
 describe("online programme date", () => {
-  it("is Sunday 13 December 2026", () => {
-    expect(PROGRAMME_END_DATE).toBe("2026-12-13");
-    expect(PROGRAMME_END_LONG_LABEL).toBe("Sunday, 13 December 2026 · Online");
+  it("is Monday 28 December 2026", () => {
+    expect(PROGRAMME_END_DATE).toBe("2026-12-28");
+    expect(PROGRAMME_END_LONG_LABEL).toBe("Monday, 28 December 2026 · Online");
   });
 });

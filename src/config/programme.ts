@@ -19,10 +19,10 @@ export const ONLINE_GALA = {
 } as const;
 
 /** ISO date (no time) of the Online Awards Gala day. */
-export const PROGRAMME_END_DATE = "2026-12-13";
+export const PROGRAMME_END_DATE = "2026-12-28";
 
 /** Full ISO timestamp of the Gala start (West Africa Time). */
-export const PROGRAMME_END_DATETIME = "2026-12-13T18:00:00+01:00";
+export const PROGRAMME_END_DATETIME = "2026-12-28T18:00:00+01:00";
 
 /** Date object for the Gala start (18:00 WAT). */
 export const PROGRAMME_END = new Date(PROGRAMME_END_DATETIME);
@@ -32,7 +32,7 @@ export const PROGRAMME_END = new Date(PROGRAMME_END_DATETIME);
  * Gala day begins 13 December 2026, 00:00 West Africa Time (UTC+1).
  * Do not hard-code this value in components.
  */
-export const GALA_COUNTDOWN_DATETIME = "2026-12-13T00:00:00+01:00";
+export const GALA_COUNTDOWN_DATETIME = "2026-12-28T00:00:00+01:00";
 export const GALA_COUNTDOWN_TARGET = new Date(GALA_COUNTDOWN_DATETIME);
 
 /** Human-readable label used across the site. */

@@ -392,7 +392,7 @@ export function buildTimeline(
     {
       id: "phase-6-blue-garnet-voting",
       phase: "Phase 6 · Gold–Blue Garnet Review",
-      dateRange: `16 September – 13 December ${ceremonyYear}`,
+      dateRange: `16 September – 28 December ${ceremonyYear}`,
       description:
         "Transparent public participation via the AGC framework combined with independent jury review (independent jury review) determines the final Gold–Blue Garnet honourees.",
       type: "voting",
@@ -475,7 +475,7 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
       id: "blue-garnet",
       title: "Blue Garnet Award",
       subtitle: "Highest Competitive Honour",
-      period: `16 September – 13 December ${ceremonyYear}`,
+      period: `16 September – 28 December ${ceremonyYear}`,
       showDate: `28 December ${ceremonyYear} (Gala)`,
       iconName: "Gem",
       features: [
