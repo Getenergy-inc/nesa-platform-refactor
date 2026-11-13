@@ -507,27 +507,8 @@ function MobileMenu() {
         </SheetHeader>
         <div className="flex-1 overflow-y-auto p-3">
           <div className="mb-3"><NavSearch className="!h-9 !w-full" /></div>
-          <div className="grid grid-cols-2 gap-2 mb-3">
+          <div className="grid grid-cols-1 gap-2 mb-3">
             <NominateButton className="w-full h-auto min-h-11 whitespace-normal text-center py-2" />
-            <Button
-              asChild
-              variant="outline"
-              className="w-full border-gold/60 text-gold hover:bg-gold/10"
-            >
-              <Link
-                to={secondary.href}
-                onClick={() =>
-                  trackNav("secondary_cta_click", {
-                    href: secondary.href,
-                    label: secondary.label,
-                    phase: CURRENT_PHASE.phase,
-                    device: "mobile",
-                  })
-                }
-              >
-                {secondary.label}
-              </Link>
-            </Button>
           </div>
 
           <div className="mb-3"><SchoolSupportChoice /></div>
@@ -723,7 +704,6 @@ export function SiteHeader() {
           <div className="flex items-center gap-1.5 shrink-0">
             <NavSearch className="hidden 2xl:inline-flex" />
             <NominateButton className="text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 h-9 sm:h-10 whitespace-nowrap" />
-            <SecondaryPhaseCTA />
             <AccountActions />
             <MobileMenu />
           </div>
