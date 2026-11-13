@@ -1,3 +1,9 @@
+## Keyboard navigation for both bars — 13 Nov 2026, 21:53 UTC
+- [x] Capture current contact-page header and audit opening, movement and Escape behaviour using keyboard input and existing accessible primitives.
+- [ ] Improve grouped desktop menus and utility Sign In using existing accessible menu primitives, preserving labels, destinations and styling.
+- [ ] Improve mobile visible focus and Sign In focus movement; retain the existing drawer focus trap and Escape behaviour.
+- [ ] Verify keyboard-only flows and run focused regression tests; no page-content, permission or data changes, nothing published.
+
 ## Navigation bars 1 and 2 — 13 Nov 2026, 21:44 UTC
 - [x] Read the supplied Draft Lean NESA-Africa Navigation Bar and inspect the live shared header, primary/utility menu configuration and sign-in menu.
 - [x] Owner granted “Exempt navigation only”; limited to bars 1 and 2 and their desktop/mobile menus, not wider security clearance or publication.
