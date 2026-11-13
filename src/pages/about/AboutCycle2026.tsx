@@ -18,12 +18,12 @@ import {
 import { AboutCanonicalContent } from "@/pages/about/AboutCanonicalContent";
 
 const STATS_2026 = [
-  { value: "9", label: "Icon Laureates", sub: "1 per pathway-classification group" },
-  { value: "27", label: "Grand Jury Finalists", sub: "3 per group across 9 panels" },
-  { value: "18", label: "Recognition Forms", sub: "22 category pages" },
-  { value: "4", label: "Recognition Tiers", sub: "1 flagship · 3 certificate" },
-  { value: "20", label: "Year Window", sub: "2006 → 2026 (Icon)" },
-  { value: "15", label: "Regions", sub: "8 Africa + 7 Global" },
+  { value: "4", label: "Recognition Tiers", sub: "22 awards · 90 subcategories" },
+  { value: "9", label: "Africa Education Icons", sub: "Up to nine recognised" },
+  { value: "9", label: "Icon NRC Members", sub: "Three per Icon category" },
+  { value: "9", label: "Independent Icon Judges", sub: "Icon tier only" },
+  { value: "0", label: "Public Voting", sub: "No public voting in 2026" },
+  { value: "13 Dec", label: "Online Programme", sub: "Sunday, 13 December 2026" },
 ];
 
 const PHASES_2026: TimelinePhase[] = [

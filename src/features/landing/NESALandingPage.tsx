@@ -81,12 +81,12 @@ export function NESALandingPage() {
         )}
         description={t(
           "seo.landing.description",
-          "Recognising Africa’s Education Enablers. Nominations open 9 November 2026–31 March 2027 across 4 tiers, 22 categories and 90 subcategories.",
+          "NESA-Africa identifies, documents and recognises the people, institutions and initiatives expanding educational opportunity across Africa. Four tiers, 22 main awards, 90 subcategories.",
         )}
         ogTitle={t("seo.landing.ogTitle", "NESA-Africa 2026 — A Continent in Recognition")}
         ogDescription={t(
           "seo.landing.ogDescription",
-          "The African Blue-Garnet Awards for Recognising Africa’s Education Enablers. Recognition → Visibility → Partnerships → Funding → Intervention → Legacy.",
+          "Evidence-led research. Independent Icon judging. No public voting in 2026.",
         )}
         keywords={t("seo.landing.keywords", "")}
       />
