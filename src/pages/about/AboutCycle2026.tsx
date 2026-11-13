@@ -23,7 +23,7 @@ const STATS_2026 = [
   { value: "9", label: "Icon NRC Members", sub: "Three per Icon category" },
   { value: "9", label: "Independent Icon Judges", sub: "Icon tier only" },
   { value: "0", label: "Public Voting", sub: "No public voting in 2026" },
-  { value: "13 Dec", label: "Online Programme", sub: "Sunday, 13 December 2026" },
+  { value: "28 Dec", label: "Online Programme", sub: "Monday, 28 December 2026" },
 ];
 
 const PHASES_2026: TimelinePhase[] = [

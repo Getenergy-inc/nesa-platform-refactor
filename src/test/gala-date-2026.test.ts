@@ -12,7 +12,7 @@ describe("rescheduled Online Recognition Programme", () => {
   });
   it("links the announcement to the online programme with the new date", () => {
     const announcement = ANNOUNCEMENTS.find((item) => item.id === "nominations-and-online-gala");
-    expect(announcement?.text).toContain("Online Recognition Programme: 13 December 2026. Learn More");
+    expect(announcement?.text).toContain("Online Recognition Programme: 28 December 2026. Learn More");
     expect(announcement?.href).toBe("/programme-2026");
   });
   it("moves the gala and its live coverage together", () => {
@@ -22,8 +22,10 @@ describe("rescheduled Online Recognition Programme", () => {
       expect(milestone?.dateLabel).toBe("Monday, 28 December 2026");
     }
   });
-  it("does not reschedule nomination or independent verification deadlines", () => {
+  it("keeps the approved nomination window unchanged", () => {
     expect(NOMINATION_WINDOW_LABEL).toBe("9 November 2026 – 31 March 2027");
-    expect(MASTER_TIMELINE_2026.find((item) => item.id === "gold-blue-garnet-verification")?.endsAt).toBe("2026-12-13T23:59:59Z");
+  });
+  it("moves the connected independent verification deadline to 28 December", () => {
+    expect(MASTER_TIMELINE_2026.find((item) => item.id === "gold-blue-garnet-verification")?.endsAt).toBe("2026-12-28T23:59:59Z");
   });
 });

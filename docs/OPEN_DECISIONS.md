@@ -6,7 +6,7 @@ All entries below are **TBC — needs management decision**. Website copy, certi
 
 | Decision | Conflict / missing evidence | Current handling |
 |---|---|---|
-| Gala date | Latest upload repeatedly states 13 December 2026; explicit 9 November reschedule approved 28 December 2026. | Preserve the explicit 28 December approval pending management reconciliation; do not silently revert. |
+| Gala date | Earlier uploads conflicted over the programme date. | RESOLVED 13 November 2026 at 21:31 UTC: use Monday 28 December 2026 everywhere and replace every December 13 variant with December 28. |
 | Certificate release window | Upload requires post-gala release from 14 December; earlier content brief approved continuous verified downloads 9 November–31 March. | No timing changes; require an explicit authoritative release decision independent of gala copy. |
 | Icon criteria and weights | Latest upload marks criteria/weights unapproved; recently approved public EDI section uses eight weighted criteria. | No criteria changes; confirm whether existing criteria have governance approval before Arena use. |
 | Confirmed social profiles | Latest upload permits NESA YouTube/LinkedIn and EduAid LinkedIn only; current approved follow registry has additional profiles. | No social changes in Phase 0; management to reconcile channel approval. |
@@ -22,7 +22,7 @@ All entries below are **TBC — needs management decision**. Website copy, certi
 ## Lean Website Pack brief (12 Nov 2026) — confirm before WP-2
 | Decision | Conflict | Interim handling |
 |---|---|---|
-| Gala date | Site shows Monday 28 December 2026 (user instruction 9 Nov); 12 Nov briefs say Sunday 13 December 2026. | Keep 28 December 2026 until management confirms in writing. |
+| Gala date | Earlier site copy and 12 Nov briefs used different dates. | RESOLVED 13 November 2026 at 21:31 UTC: Monday 28 December 2026 is the site-wide date. |
 | NRC size | Approved 36 (9 per tier); one brief says 9 across all tiers; /nrc/members enforces a 30-member cap. | TBC — needs management decision; no cap change. |
 | Regions | /regions shows 10 award zones; Support Fund uses 8 programme regions (mapping unapproved). | Keep both separate; no mapping published. |
 | Taxonomy mapping | Code has 17 categories / 138 subcategories; approved 4 tiers / 22 awards / 90 subcategories; Tier 2 has no code entries; Icon label 2005–2025 vs 2006–2026. | Presentation-only registry in WP-5; legacy keys unchanged. |
@@ -30,7 +30,7 @@ All entries below are **TBC — needs management decision**. Website copy, certi
 | Official URLs | Special Needs School Support Forms (NESA and EduAid), live-stream link, payment instructions. | TBC — needs management decision; shown as CONTENT REQUIRED. |
 
 ## Recommended decisions from Lean Website Pack brief v2 (12 Nov 2026) — pending management confirmation
-- Gala: Monday 28 December 2026; certificates from 29 December 2026 (supersedes 13 Dec option).
+- Gala: Monday 28 December 2026; certificates from 29 December 2026 (programme date reconfirmed by the owner on 13 November 2026 at 21:31 UTC).
 - NRC: CONFIRMED by user 12 Nov 2026 — 9 members per award tier, 36 total; /nrc/members cap = 36. Site copy still says 27; update in WP-2/WP-9 after Gate 0.
 - Icon judges: CONFIRMED by user 12 Nov 2026 — exactly 9 independent judges for the Africa Education Icon category only; judges are separate from NRC members, and no judge total is inferred for other categories. Reconcile affected copy after Gate 0.
 - Regions: award zones unchanged; Support Fund shows 8 regions without names/country lists until mapping approved.

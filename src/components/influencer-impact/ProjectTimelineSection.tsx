@@ -5,7 +5,7 @@ import { CalendarDays, Megaphone, ShieldCheck, Trophy, Sparkles, FileCheck } fro
  *
  * Dates are fixed to the "NESA-Africa 2026 — Complete Timeline Set":
  *   • Nominations: 6 September – 21 November 2026 (Influencer tier)
- *   • Rolling NRC verification: 16 September – 13 December 2026
+ *   • Rolling NRC verification: 16 September – 28 December 2026
  *   • Gala: Monday, 28 December 2026
  * There is no public voting in this tier — recognition is NRC-verified.
  */
@@ -29,7 +29,7 @@ const MILESTONES: TimelineMilestone[] = [
   },
   {
     id: "verification",
-    date: "16 September – 13 December 2026",
+    date: "16 September – 28 December 2026",
     phase: "Rolling NRC Verification",
     description:
       "The Nominee Research Corps verifies identity, category fit, duplicates and documented evidence of education impact, applying the EDX framework (25% Education Impact · 30% Development Contribution · 45% Excellence & Reach).",
@@ -45,7 +45,7 @@ const MILESTONES: TimelineMilestone[] = [
   },
   {
     id: "certificates",
-    date: "15 November – 13 December 2026",
+    date: "15 November – 28 December 2026",
     phase: "Certificate Approval & Publication",
     description:
       "Verified nominees are approved for Certificates of Recognition, published to the directory, and may request physical printed certificates ahead of the Gala.",

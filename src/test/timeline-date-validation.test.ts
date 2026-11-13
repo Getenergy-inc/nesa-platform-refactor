@@ -7,7 +7,7 @@
  *   2. Weekday prefixes ("Tuesday, 18 August 2026") are the real weekday.
  *   3. The canonical anchor dates from the source set are present, unchanged.
  *   4. Entries are chronological, uniquely identified and inside the programme
- *      window (1 July 2026 – 13 December 2027 legacy tail).
+ *      window (1 July 2026 – 28 December 2027 legacy tail).
  *   5. No retired date or retired terminology survives anywhere in src/.
  */
 import { describe, it, expect } from "vitest";
@@ -168,12 +168,13 @@ describe("Timeline anchors — Complete Timeline Set source values", () => {
     ["tier234-nominations", "2026-09-06", "2026-11-21"],
     ["icon-judges-onboarding", "2026-10-06", "2026-10-19"],
     ["nrc-icon-review", "2026-10-07", "2026-10-20"],
-    ["gold-blue-garnet-verification", "2026-09-23", "2026-12-13"],
+    ["gold-blue-garnet-verification", "2026-09-23", "2026-12-28"],
     ["judges-final-review", "2026-10-20", "2026-11-24"],
     ["final-verification-gala-production", "2026-11-25", "2026-11-29"],
     ["tv-show-1", "2026-11-22", undefined],
     ["tv-show-2", "2026-12-08", undefined],
     ["recognition-gala", "2026-12-28", undefined],
+    ["impact-legacy", "2026-12-22", "2027-12-28"],
   ];
 
   for (const [id, start, end] of CASES) {
@@ -222,6 +223,7 @@ const ALLOWLIST = new Set<string>([
 ]);
 
 const RETIRED: { pattern: RegExp; reason: string }[] = [
+  { pattern: /\b13\s+(?:December|Dec)\b|\bDecember\s+13\b|2026-12-13|2027-12-13/i, reason: "Retired December 13 date — use December 28" },
   { pattern: /\b1\s+August\s+2026\b/i, reason: "Retired nominations-open date — now 6 September 2026" },
   { pattern: /\b30\s+August\s+2026\b/i, reason: "Retired nominations-open date — now 6 September 2026" },
   { pattern: /(gala|ceremony)[^.\n]{0,60}\b22\s+October\s+2026\b/i, reason: "Retired Gala date — now 28 December 2026" },

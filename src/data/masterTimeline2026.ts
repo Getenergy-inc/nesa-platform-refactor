@@ -1,6 +1,6 @@
 // NESA-Africa & EduAid-Africa 2026 Master Timeline
 // Source: "NESA-Africa 2026 — CORRECTED Complete Timeline Set".
-// 8 July 2026 – 13 December 2027 (recognition cycle + legacy phase).
+// 8 July 2026 – 28 December 2027 (recognition cycle + legacy phase).
 //
 // Governance notes carried from the corrected source document:
 //  • Public nominations open 6 September 2026 (supersedes 30 August).
@@ -114,9 +114,9 @@ export const MASTER_TIMELINE_OPEN_ITEMS: { id: string; item: string; detail: str
   {
     id: "gbg-verification-past-showcase-2",
     item:
-      "Gold-Blue Garnet verification (closes 13 December) extends 5 days past TV Showcase 2 (8 December)",
+      "Gold-Blue Garnet verification (closes 28 December) extends 20 days past TV Showcase 2 (8 December)",
     detail:
-      "TV Showcase 2 on 8 December 2026 presents Gold-Blue Garnet recipients, but the independent rolling NRC verification deadline for that family remains 13 December 2026. Recipients verified between 9 and 13 December cannot appear in the broadcast. Flagged for the team — not silently resolved.",
+      "TV Showcase 2 on 8 December 2026 presents Gold-Blue Garnet recipients, but the independent rolling NRC verification deadline for that family remains 28 December 2026. Recipients verified between 9 and 28 December cannot appear in the broadcast. Flagged for the team — not silently resolved.",
   },
 ];
 
@@ -291,9 +291,9 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
   },
   {
     id: "gold-blue-garnet-verification",
-    dateLabel: `23 September – 13 December 2026`,
+    dateLabel: `23 September – 28 December 2026`,
     startsAt: "2026-09-23T00:00:00Z",
-    endsAt: "2026-12-13T23:59:59Z",
+    endsAt: "2026-12-28T23:59:59Z",
     milestone: "Gold-Blue Garnet NRC Verification (rolling)",
     activity:
       "Rolling Nominee Research Corps verification of Gold-Blue Garnet nominations against the EDI Matrix and evidence standards, capped at the Gala.",
@@ -609,9 +609,9 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
   },
   {
     id: "impact-legacy",
-    dateLabel: "22 December 2026 – 13 December 2027",
+    dateLabel: "22 December 2026 – 28 December 2027",
     startsAt: "2026-12-22T00:00:00Z",
-    endsAt: "2027-12-13T23:59:59Z",
+    endsAt: "2027-12-28T23:59:59Z",
     milestone: "Impact & Legacy Phase",
     activity:
       "EduAid-Africa, Rebuild My School Africa, Afri-EduTourism and Scholarships programmes run through the year.",

@@ -195,7 +195,7 @@ export default function Partners() {
                 Partner with <span className="text-gold">NESA-Africa 2026</span>
               </h1>
               <p className="text-lg md:text-xl text-primary font-medium mb-2">
-                Online Recognition Programme: Sunday, 13 December 2026 · Online only
+                Online Recognition Programme: Monday, 28 December 2026 · Online only
               </p>
               <p className="text-lg text-muted-foreground mb-8 max-w-3xl mx-auto">
                 Put your brand at the center of Africa's education story—celebrating champions and funding real impact through{" "}
