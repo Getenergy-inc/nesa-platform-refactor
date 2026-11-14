@@ -10,8 +10,15 @@ describe("2026–2027 navigation", () => {
     expect(MOBILE_SITE_NAV.some(g => g.href === "/nominees")).toBe(true);
   });
   it("keeps all utility nomination links on the authorised form", () => {
-    expect(UTILITY_NAV.map(g => g.href)).toEqual(["/login", NOMINATE_CTA.href]);
+    expect(UTILITY_NAV.map(g => g.href)).toEqual(["/login", NOMINATE_CTA.href, "/contact", "/nrc", "/judges"]);
     expect(UTILITY_NAV.find(g => g.href === NOMINATE_CTA.href)?.external).toBe(true);
+  });
+  it("sends merchandise enquiries to Contact without reopening the retired shop", () => {
+    expect(UTILITY_NAV.find(g => g.analyticsId === "util_merchandise")?.href).toBe("/contact");
+  });
+  it("keeps the top-bar research and judges links on their existing guarded routes", () => {
+    expect(UTILITY_NAV.find(g => g.analyticsId === "util_nrrc")?.href).toBe("/nrc");
+    expect(UTILITY_NAV.find(g => g.analyticsId === "util_judges")?.href).toBe("/judges");
   });
   it("preserves existing NRRC and judges routes without creating migrated routes", () => {
     expect(SIGN_IN_WORKSPACES.map(g => g.href)).toEqual([

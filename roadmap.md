@@ -1,3 +1,7 @@
+## First navigation bar additions — 14 Nov 2026
+- [x] Owner confirmed three separate links: Buy Merchandise, NRRC Portal and Judges Arena; merchandise goes to the existing Contact page, not a reopened shop.
+- [ ] Verify desktop top-bar and mobile Quick Links destinations, preserving styling and workspace guards; no publishing.
+
 ## Keyboard navigation for both bars — 13 Nov 2026, 21:53 UTC
 - [x] Capture current contact-page header and audit opening, movement and Escape behaviour using keyboard input and existing accessible primitives.
 - [x] Improve grouped desktop menus and utility Sign In using existing Radix menubar/dropdown primitives, preserving labels, destinations and gold focus styling; ordinary Contact remains a link.

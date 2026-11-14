@@ -99,10 +99,13 @@ export interface UtilityNavItem {
   external?: boolean;
 }
 
-/** Secondary links only; no tickets, voting, wallet, AGC or merchandise. */
+/** Owner-approved secondary links; merchandise enquiries only, no checkout or voting. */
 export const UTILITY_NAV: UtilityNavItem[] = [
   { label: "Sign In", href: "/login", analyticsId: "util_sign_in" },
   { label: NOMINATE_CTA.label, href: NOMINATE_CTA.href, external: true, analyticsId: "util_nominate" },
+  { label: "Buy Merchandise", href: "/contact", analyticsId: "util_merchandise" },
+  { label: "NRRC Portal", href: "/nrc", analyticsId: "util_nrrc" },
+  { label: "Judges Arena", href: "/judges", analyticsId: "util_judges" },
 ];
 
 export { NOMINATE_CTA, CURRENT_PHASE } from "./campaignPhase";
