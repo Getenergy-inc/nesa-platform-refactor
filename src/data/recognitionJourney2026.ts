@@ -111,7 +111,7 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     ],
     participants: ["Nominee Research Corps", "Governance Council", "NRC Leadership"],
     outcomes: ["Verification corps ready before nominations open"],
-    ctas: [{ label: "Visit the NRC Arena", to: "/nrc" }],
+    ctas: [{ label: "Visit the NRC Arena", to: "/nrrc" }],
   },
   {
     id: "public-nominations-open",
@@ -223,7 +223,7 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     description:
       "The Nominee Research Corps checks eligibility, evidence, citations and duplicate records before any nomination reaches a judge.",
     outcomes: ["Assessment-ready Icon pool in the Judges Arena"],
-    ctas: [{ label: "How Verification Works", to: "/nrc" }],
+    ctas: [{ label: "How Verification Works", to: "/nrrc" }],
   },
   {
     id: "gold-blue-garnet-verification",

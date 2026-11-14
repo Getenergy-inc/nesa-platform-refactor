@@ -294,7 +294,7 @@ function IntakeQueueContent() {
                           <TableCell className="text-right">
                             <div className="flex gap-1 justify-end">
                               <Button size="sm" variant="ghost" className="h-7 px-2 text-white/50 hover:text-white" asChild>
-                                <Link to={`/nrc/dashboard/intake/${r.id}`}>
+                                <Link to={`/nrrc/dashboard/intake/${r.id}`}>
                                   <Eye className="h-3 w-3" />
                                 </Link>
                               </Button>

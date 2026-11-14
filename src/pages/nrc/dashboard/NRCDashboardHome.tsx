@@ -108,12 +108,12 @@ function DashboardContent() {
           </div>
           <div className="flex gap-2">
             <Button asChild size="sm" variant="outline">
-              <Link to="/nrc/dashboard/reports">
+              <Link to="/nrrc/dashboard/reports">
                 <BarChart3 className="mr-2 h-4 w-4" /> Reports
               </Link>
             </Button>
             <Button asChild size="sm">
-              <Link to="/nrc/dashboard/nominees">
+              <Link to="/nrrc/dashboard/nominees">
                 Review Nominees <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>

@@ -30,33 +30,33 @@ const JUDGE_ROUTES = [
 ];
 
 const NRC_ROUTES = [
-  "/nrc",
-  "/nrc/dashboard",
-  "/nrc/dashboard/intake",
-  "/nrc/dashboard/nominees",
-  "/nrc/dashboard/my-reviews",
-  "/nrc/dashboard/queue",
-  "/nrc/dashboard/flagged",
-  "/nrc/dashboard/merge",
-  "/nrc/dashboard/edi-analytics",
-  "/nrc/dashboard/guidelines",
-  "/nrc/cases",
-  "/nrc/teams",
-  "/nrc/automation",
-  "/nrc/duplicates",
-  "/nrc/evidence",
-  "/nrc/endorsements",
-  "/nrc/handover/judges",
-  "/nrc/handover/governance",
-  "/nrc/reports",
-  "/nrc/directory",
-  "/nrc/profile",
-  "/nrc/onboarding",
-  "/nrc/audit-log",
-  "/nrc/my-queue",
-  "/nrc/members",
-  "/nrc/settings",
-  "/nrc/arena",
+  "/nrrc",
+  "/nrrc/dashboard",
+  "/nrrc/dashboard/intake",
+  "/nrrc/dashboard/nominees",
+  "/nrrc/dashboard/my-reviews",
+  "/nrrc/dashboard/queue",
+  "/nrrc/dashboard/flagged",
+  "/nrrc/dashboard/merge",
+  "/nrrc/dashboard/edi-analytics",
+  "/nrrc/dashboard/guidelines",
+  "/nrrc/cases",
+  "/nrrc/teams",
+  "/nrrc/automation",
+  "/nrrc/duplicates",
+  "/nrrc/evidence",
+  "/nrrc/endorsements",
+  "/nrrc/handover/judges",
+  "/nrrc/handover/governance",
+  "/nrrc/reports",
+  "/nrrc/directory",
+  "/nrrc/profile",
+  "/nrrc/onboarding",
+  "/nrrc/audit-log",
+  "/nrrc/my-queue",
+  "/nrrc/members",
+  "/nrrc/settings",
+  "/nrrc/arena",
 ];
 
 function renderSeo(pathname: string, workspace: ArenaWorkspace) {
@@ -127,7 +127,7 @@ describe("ArenaSeo — arena branding metadata", () => {
   it("honours explicit title and description overrides", async () => {
     render(
       <HelmetProvider>
-        <MemoryRouter initialEntries={["/nrc/dashboard"]}>
+        <MemoryRouter initialEntries={["/nrrc/dashboard"]}>
           <ArenaSeo
             workspace="NRC Arena"
             title="Custom Page"

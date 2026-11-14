@@ -63,7 +63,7 @@ export default function NRCTeams() {
         {teams.map((t) => (
           <Link
             key={t.slug}
-            to={`/nrc/teams/${t.slug}`}
+            to={`/nrrc/teams/${t.slug}`}
             className="rounded-xl border border-white/10 bg-white/[0.04] p-4 hover:border-gold hover:bg-white/[0.07] transition-colors"
           >
             <div className="flex items-start justify-between gap-2">

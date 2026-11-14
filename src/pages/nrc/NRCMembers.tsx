@@ -206,7 +206,7 @@ function NRCMembersContent() {
 
           <div className="flex items-center gap-2">
             <Button asChild variant="outline">
-              <Link to="/nrc/applications">Review applications</Link>
+              <Link to="/nrrc/applications">Review applications</Link>
             </Button>
             <Dialog open={showInviteDialog} onOpenChange={setShowInviteDialog}>
             <DialogTrigger asChild>

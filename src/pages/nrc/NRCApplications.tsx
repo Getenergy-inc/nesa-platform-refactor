@@ -124,12 +124,12 @@ export default function NRCApplications() {
           <div>
             <h2 className="font-display text-2xl font-bold">NRC Applications</h2>
             <p className="text-muted-foreground">
-              Public applications from <Link to="/nrc/apply" className="underline">/nrc/apply</Link>.
+              Public applications from <Link to="/nrrc/apply" className="underline">/nrc/apply</Link>.
               Approving issues a real 14-day invitation and emails it to the applicant.
             </p>
           </div>
           <Button asChild variant="outline">
-            <Link to="/nrc/members">Members</Link>
+            <Link to="/nrrc/members">Members</Link>
           </Button>
         </div>
 

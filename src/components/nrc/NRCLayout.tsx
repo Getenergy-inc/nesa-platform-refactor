@@ -28,10 +28,10 @@ interface NRCLayoutProps {
 }
 
 const navItems = [
-  { href: "/nrc", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/nrc/my-queue", label: "My Queue", icon: ClipboardList },
-  { href: "/nrc/members", label: "Members", icon: Users },
-  { href: "/nrc/settings", label: "Settings", icon: Settings },
+  { href: "/nrrc", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/nrrc/my-queue", label: "My Queue", icon: ClipboardList },
+  { href: "/nrrc/members", label: "Members", icon: Users },
+  { href: "/nrrc/settings", label: "Settings", icon: Settings },
 ];
 
 export function NRCLayout({ children }: NRCLayoutProps) {
@@ -41,7 +41,7 @@ export function NRCLayout({ children }: NRCLayoutProps) {
 
   const isActive = (href: string) =>
     location.pathname === href ||
-    (href !== "/nrc" && location.pathname.startsWith(href));
+    (href !== "/nrrc" && location.pathname.startsWith(href));
 
   return (
     <div className="min-h-screen bg-arena-bg text-arena-text">
@@ -50,7 +50,7 @@ export function NRCLayout({ children }: NRCLayoutProps) {
         <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-arena-rail lg:block">
           <div className="sticky top-0 flex h-screen flex-col overflow-y-auto">
             <ArenaExitRailLink />
-            <ArenaBrand workspace="NRC Arena" to="/nrc" />
+            <ArenaBrand workspace="NRC Arena" to="/nrrc" />
             <nav aria-label="NRC portal" className="flex-1 space-y-1 px-3">
               {navItems.map((item) => (
                 <Link

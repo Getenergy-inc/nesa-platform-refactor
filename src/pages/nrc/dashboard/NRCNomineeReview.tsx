@@ -76,7 +76,7 @@ function ReviewContent() {
           <div className="text-center">
             <p className="text-muted-foreground">Nominee not found</p>
             <Button asChild variant="outline" className="mt-4">
-              <Link to="/nrc/dashboard/nominees"><ArrowLeft className="mr-2 h-4 w-4" /> Back</Link>
+              <Link to="/nrrc/dashboard/nominees"><ArrowLeft className="mr-2 h-4 w-4" /> Back</Link>
             </Button>
           </div>
         </div>
@@ -108,7 +108,7 @@ function ReviewContent() {
         {/* Back + Header */}
         <div className="flex items-center gap-3">
           <Button asChild variant="ghost" size="icon" className="h-8 w-8">
-            <Link to="/nrc/dashboard/nominees"><ArrowLeft className="h-4 w-4" /></Link>
+            <Link to="/nrrc/dashboard/nominees"><ArrowLeft className="h-4 w-4" /></Link>
           </Button>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">

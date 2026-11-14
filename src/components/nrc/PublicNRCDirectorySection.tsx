@@ -63,7 +63,7 @@ export function PublicNRCDirectorySection({ limit }: { limit?: number }) {
             {members.map((m) => (
               <SmartLink
                 key={m.id}
-                to={`/nrc/member/${m.slug}`}
+                to={`/nrrc/member/${m.slug}`}
                 className="group rounded-xl border border-white/10 bg-arena-panel p-5 transition-colors hover:border-gold/50"
               >
                 <div className="flex items-center gap-3">

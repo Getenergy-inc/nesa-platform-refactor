@@ -79,7 +79,7 @@ export default function NRCDirectory() {
               {g.teams.map((team) => (
                 <Link
                   key={team.slug}
-                  to={`/nrc/teams/${team.slug}`}
+                  to={`/nrrc/teams/${team.slug}`}
                   className="rounded-xl border border-white/10 bg-white/[0.04] p-4 hover:border-gold hover:bg-white/[0.07] transition-colors"
                 >
                   <p className="font-display font-semibold text-white leading-snug">{team.name}</p>

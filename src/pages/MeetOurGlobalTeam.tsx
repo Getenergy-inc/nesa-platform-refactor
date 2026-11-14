@@ -43,7 +43,7 @@ export default function MeetOurGlobalTeam() {
       title: "Nominee Research Corps (NRC)",
       blurb:
         "Verifying every nomination against evidence standards before it ever reaches a judge, across all four recognition tiers.",
-      href: "/nrc",
+      href: "/nrrc",
     },
     {
       icon: Gavel,

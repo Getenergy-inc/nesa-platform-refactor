@@ -9,7 +9,7 @@ import { getNrcTeam, NRC_TIER_META } from "@/config/nrc/arenaTeams";
 export default function NRCTeamDetail() {
   const { teamSlug = "" } = useParams();
   const team = getNrcTeam(teamSlug);
-  if (!team) return <Navigate to="/nrc/teams" replace />;
+  if (!team) return <Navigate to="/nrrc/teams" replace />;
   const meta = NRC_TIER_META[team.tier];
 
   return (
@@ -17,7 +17,7 @@ export default function NRCTeamDetail() {
       <Helmet><title>{team.name} · NRC Team · NESA-Africa</title></Helmet>
 
       <Button asChild variant="ghost" size="sm" className="text-white/60 hover:text-gold mb-4">
-        <Link to="/nrc/teams"><ArrowLeft className="mr-1.5 h-4 w-4" /> All teams</Link>
+        <Link to="/nrrc/teams"><ArrowLeft className="mr-1.5 h-4 w-4" /> All teams</Link>
       </Button>
 
       <header className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 mb-6">
@@ -51,7 +51,7 @@ export default function NRCTeamDetail() {
               and the team has been staffed.
             </p>
             <Button asChild variant="outline" size="sm" className="mt-3 border-gold/40 text-gold hover:bg-gold/10">
-              <Link to="/nrc/cases">Open team queue</Link>
+              <Link to="/nrrc/cases">Open team queue</Link>
             </Button>
           </Block>
         </div>

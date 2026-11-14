@@ -27,21 +27,21 @@ interface StatCard {
 }
 
 const PRIMARY: StatCard[] = [
-  { label: "New Cases", value: 0, icon: Inbox, href: "/nrc/cases?status=new" },
-  { label: "Cases Not Started", value: 0, icon: Clock3, href: "/nrc/cases?status=pending" },
-  { label: "Cases In Progress", value: 0, icon: FileSearch, href: "/nrc/cases?status=in_progress" },
-  { label: "Evidence Requests Pending", value: 0, icon: MessageSquareText, href: "/nrc/evidence" },
-  { label: "Secondary Reviews Required", value: 0, icon: Users, href: "/nrc/cases?role=secondary" },
-  { label: "Quality Checks Required", value: 0, icon: ShieldCheck, href: "/nrc/cases?stage=quality" },
-  { label: "Ready for Handover", value: 0, icon: ArrowRightLeft, tone: "ok", href: "/nrc/handover/judges" },
-  { label: "Overdue Cases", value: 0, icon: AlertTriangle, tone: "warn", href: "/nrc/cases?status=overdue" },
+  { label: "New Cases", value: 0, icon: Inbox, href: "/nrrc/cases?status=new" },
+  { label: "Cases Not Started", value: 0, icon: Clock3, href: "/nrrc/cases?status=pending" },
+  { label: "Cases In Progress", value: 0, icon: FileSearch, href: "/nrrc/cases?status=in_progress" },
+  { label: "Evidence Requests Pending", value: 0, icon: MessageSquareText, href: "/nrrc/evidence" },
+  { label: "Secondary Reviews Required", value: 0, icon: Users, href: "/nrrc/cases?role=secondary" },
+  { label: "Quality Checks Required", value: 0, icon: ShieldCheck, href: "/nrrc/cases?stage=quality" },
+  { label: "Ready for Handover", value: 0, icon: ArrowRightLeft, tone: "ok", href: "/nrrc/handover/judges" },
+  { label: "Overdue Cases", value: 0, icon: AlertTriangle, tone: "warn", href: "/nrrc/cases?status=overdue" },
 ];
 
 const SECONDARY: StatCard[] = [
-  { label: "Possible Duplicates", value: 0, icon: ShieldCheck, href: "/nrc/duplicates" },
+  { label: "Possible Duplicates", value: 0, icon: ShieldCheck, href: "/nrrc/duplicates" },
   { label: "Nominee Acceptance Pending", value: 0, icon: ClipboardCheck },
   { label: "Conflict Declarations", value: 0, icon: AlertTriangle },
-  { label: "Public Endorsements Pending", value: 0, icon: MessageSquareText, href: "/nrc/endorsements" },
+  { label: "Public Endorsements Pending", value: 0, icon: MessageSquareText, href: "/nrrc/endorsements" },
   { label: "Cases Returned by Governance", value: 0, icon: ArrowRightLeft },
   { label: "Clarifications from Judges", value: 0, icon: MessageSquareText },
   { label: "Completed Cases", value: 0, icon: ClipboardCheck, tone: "ok" },
@@ -100,7 +100,7 @@ export default function NRCDashboard() {
             </div>
           </div>
           <Button asChild variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
-            <Link to="/nrc/profile">View Profile</Link>
+            <Link to="/nrrc/profile">View Profile</Link>
           </Button>
         </div>
       </section>
@@ -113,10 +113,10 @@ export default function NRCDashboard() {
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
           <Button asChild size="sm" className="bg-gold text-charcoal hover:bg-gold/90">
-            <Link to="/nrc/onboarding">Continue Onboarding</Link>
+            <Link to="/nrrc/onboarding">Continue Onboarding</Link>
           </Button>
           <Button asChild size="sm" variant="ghost" className="text-white/70 hover:text-gold">
-            <Link to="/nrc/directory">View Directory</Link>
+            <Link to="/nrrc/directory">View Directory</Link>
           </Button>
         </div>
       </section>

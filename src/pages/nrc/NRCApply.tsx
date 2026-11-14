@@ -132,7 +132,7 @@ export default function NRCApply() {
               from us by email.
             </p>
             <Button asChild variant="outline" className="mt-6 border-white/20 text-white">
-              <Link to="/nrc">Back to the NRC Arena</Link>
+              <Link to="/nrrc">Back to the NRC Arena</Link>
             </Button>
           </div>
         ) : (

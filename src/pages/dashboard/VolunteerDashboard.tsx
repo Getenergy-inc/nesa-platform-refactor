@@ -18,13 +18,13 @@ import {
 // each module surfaces its live data and/or links to the working screen.
 const MODULES = [
   { key: "overview", label: "My Volunteer Overview", icon: LayoutDashboard },
-  { key: "tasks", label: "NRC Research Tasks", icon: ClipboardList, href: "/nrc/dashboard/queue" },
-  { key: "submit", label: "Submit Nominee Research", icon: FileSearch, href: "/nrc/dashboard/intake" },
-  { key: "evidence", label: "Evidence Upload", icon: Upload, href: "/nrc/dashboard/intake" },
-  { key: "duplicates", label: "Duplicate Flags", icon: Copy, href: "/nrc/dashboard/duplicates" },
-  { key: "feedback", label: "Reviewer Feedback", icon: MessageSquare, href: "/nrc/dashboard/my-reviews" },
-  { key: "reports", label: "My NRC Reports", icon: FileText, href: "/nrc/dashboard/reports" },
-  { key: "training", label: "Training & Guidelines", icon: GraduationCap, href: "/nrc/dashboard/guidelines" },
+  { key: "tasks", label: "NRC Research Tasks", icon: ClipboardList, href: "/nrrc/dashboard/queue" },
+  { key: "submit", label: "Submit Nominee Research", icon: FileSearch, href: "/nrrc/dashboard/intake" },
+  { key: "evidence", label: "Evidence Upload", icon: Upload, href: "/nrrc/dashboard/intake" },
+  { key: "duplicates", label: "Duplicate Flags", icon: Copy, href: "/nrrc/dashboard/duplicates" },
+  { key: "feedback", label: "Reviewer Feedback", icon: MessageSquare, href: "/nrrc/dashboard/my-reviews" },
+  { key: "reports", label: "My NRC Reports", icon: FileText, href: "/nrrc/dashboard/reports" },
+  { key: "training", label: "Training & Guidelines", icon: GraduationCap, href: "/nrrc/dashboard/guidelines" },
 ] as const;
 
 function VolunteerDashboardContent() {

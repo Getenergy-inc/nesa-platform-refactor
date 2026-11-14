@@ -64,8 +64,8 @@ export default function NRCOnboarding() {
           <AlertTitle>No onboarding record yet</AlertTitle>
           <AlertDescription>
             An onboarding checklist is created when you redeem an NRC invitation. If you have an
-            invitation, <Link to="/nrc/redeem" className="text-gold underline">redeem it here</Link>.
-            Otherwise you can <Link to="/nrc/apply" className="text-gold underline">apply to join the NRC</Link>.
+            invitation, <Link to="/nrrc/redeem" className="text-gold underline">redeem it here</Link>.
+            Otherwise you can <Link to="/nrrc/apply" className="text-gold underline">apply to join the NRC</Link>.
           </AlertDescription>
         </Alert>
       ) : (

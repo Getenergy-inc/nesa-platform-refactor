@@ -420,7 +420,7 @@ export default function About() {
           research, but final verification decisions remain subject to accountable human review.
         </p>
         <Link
-          to="/nrc"
+          to="/nrrc"
           className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-gold hover:underline"
         >
           <Search className="h-4 w-4" aria-hidden="true" /> Learn About the NRRC

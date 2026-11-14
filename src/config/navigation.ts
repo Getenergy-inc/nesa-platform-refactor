@@ -365,11 +365,11 @@ export const USER_DASHBOARD_NAV: NavItem[] = [
 // ============================================================================
 
 export const NRC_DASHBOARD_NAV: NavItem[] = [
-  { label: "Review Queue", href: "/nrc", icon: FileCheck },
-  { label: "Assigned Reviews", href: "/nrc/my-queue", icon: Target },
-  { label: "Evidence Validation", href: "/nrc/evidence", icon: Shield },
-  { label: "Reports", href: "/nrc/reports", icon: BookOpen },
-  { label: "Audit Trail", href: "/nrc/audit-log", icon: Shield },
+  { label: "Review Queue", href: "/nrrc", icon: FileCheck },
+  { label: "Assigned Reviews", href: "/nrrc/my-queue", icon: Target },
+  { label: "Evidence Validation", href: "/nrrc/evidence", icon: Shield },
+  { label: "Reports", href: "/nrrc/reports", icon: BookOpen },
+  { label: "Audit Trail", href: "/nrrc/audit-log", icon: Shield },
 ];
 
 export const JURY_DASHBOARD_NAV: NavItem[] = [
@@ -499,11 +499,11 @@ export const PAGE_REGISTRY: PageDefinition[] = [
   { path: "/dashboard/settings", title: "Settings", description: "Account settings", component: "Settings", category: "dashboard", requiredRoles: ["user"] },
   
   // ==================== NRC DASHBOARD ====================
-  { path: "/nrc", title: "NRC Dashboard", description: "Review nominations", component: "NRCDashboard", category: "dashboard", requiredRoles: ["nrc", "admin"] },
-  { path: "/nrc/assigned", title: "Assigned Reviews", description: "Your assignments", component: "NRCAssigned", category: "dashboard", requiredRoles: ["nrc", "admin"] },
-  { path: "/nrc/evidence", title: "Evidence Validation", description: "Verify evidence", component: "NRCEvidence", category: "dashboard", requiredRoles: ["nrc", "admin"] },
-  { path: "/nrc/logs", title: "Approval Logs", description: "Decision history", component: "NRCLogs", category: "dashboard", requiredRoles: ["nrc", "admin"] },
-  { path: "/nrc/audit", title: "Audit Trail", description: "System audit logs", component: "NRCAudit", category: "dashboard", requiredRoles: ["nrc", "admin"] },
+  { path: "/nrrc", title: "NRC Dashboard", description: "Review nominations", component: "NRCDashboard", category: "dashboard", requiredRoles: ["nrc", "admin"] },
+  { path: "/nrrc/assigned", title: "Assigned Reviews", description: "Your assignments", component: "NRCAssigned", category: "dashboard", requiredRoles: ["nrc", "admin"] },
+  { path: "/nrrc/evidence", title: "Evidence Validation", description: "Verify evidence", component: "NRCEvidence", category: "dashboard", requiredRoles: ["nrc", "admin"] },
+  { path: "/nrrc/logs", title: "Approval Logs", description: "Decision history", component: "NRCLogs", category: "dashboard", requiredRoles: ["nrc", "admin"] },
+  { path: "/nrrc/audit", title: "Audit Trail", description: "System audit logs", component: "NRCAudit", category: "dashboard", requiredRoles: ["nrc", "admin"] },
   
   // ==================== JURY DASHBOARD ====================
   { path: "/jury", title: "Jury Dashboard", description: "Score finalists", component: "JuryDashboard", category: "dashboard", requiredRoles: ["jury", "admin"], stageGated: "jury_scoring" },

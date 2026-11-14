@@ -73,7 +73,7 @@ function IntakeReviewContent() {
         <div className="flex flex-col items-center justify-center py-20">
           <p className="text-white/50">Nomination record not found.</p>
           <Button asChild variant="ghost" className="mt-4 text-gold">
-            <Link to="/nrc/dashboard/intake"><ArrowLeft className="mr-2 h-4 w-4" />Back to Queue</Link>
+            <Link to="/nrrc/dashboard/intake"><ArrowLeft className="mr-2 h-4 w-4" />Back to Queue</Link>
           </Button>
         </div>
       </NRCDashboardLayout>
@@ -97,7 +97,7 @@ function IntakeReviewContent() {
           {/* Back + Header */}
           <div className="flex items-center gap-3">
             <Button size="sm" variant="ghost" asChild className="text-white/50">
-              <Link to="/nrc/dashboard/intake"><ArrowLeft className="h-4 w-4" /></Link>
+              <Link to="/nrrc/dashboard/intake"><ArrowLeft className="h-4 w-4" /></Link>
             </Button>
             <div className="flex-1">
               <h1 className="text-xl font-bold text-white">{record.nomineeName}</h1>

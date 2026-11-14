@@ -405,12 +405,12 @@ function NRCActions({ row }: { row: PipelineRow }) {
   return (
     <div className="flex justify-end gap-2">
       <Button asChild size="sm" variant="ghost">
-        <Link to={`/nrc/cases/${row.nominee_id}`}>
+        <Link to={`/nrrc/cases/${row.nominee_id}`}>
           <FileSearch className="mr-1.5 h-3.5 w-3.5" /> Dossier
         </Link>
       </Button>
       <Button asChild size="sm" variant={canPush ? "default" : "outline"} disabled={!canPush}>
-        <Link to={`/nrc/cases/${row.nominee_id}?action=push`}>
+        <Link to={`/nrrc/cases/${row.nominee_id}?action=push`}>
           <Send className="mr-1.5 h-3.5 w-3.5" /> Push to pathway
         </Link>
       </Button>

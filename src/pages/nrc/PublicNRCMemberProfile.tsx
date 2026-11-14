@@ -41,7 +41,7 @@ export default function PublicNRCMemberProfile() {
             This profile may be private, or the member has not completed public onboarding.
           </p>
           <Button asChild className="mt-6 bg-gold text-charcoal hover:bg-gold/90">
-            <SmartLink to="/nrc">Back to the NRC Arena</SmartLink>
+            <SmartLink to="/nrrc">Back to the NRC Arena</SmartLink>
           </Button>
         </div>
       </div>
@@ -63,7 +63,7 @@ export default function PublicNRCMemberProfile() {
 
       <div className="mx-auto max-w-4xl px-4 py-12">
         <SmartLink
-          to="/nrc"
+          to="/nrrc"
           className="inline-flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-gold"
         >
           <ArrowLeft className="h-4 w-4" aria-hidden /> Back to the NRC Arena

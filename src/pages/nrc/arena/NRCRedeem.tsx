@@ -93,7 +93,7 @@ export default function NRCRedeem() {
       toast.message(
         "Account created. Confirm your email, then sign in and re-open this invitation link to finish."
       );
-      return nav(`/nrc/sign-in?next=${encodeURIComponent(`/nrc/redeem?token=${token}`)}`, {
+      return nav(`/nrrc/sign-in?next=${encodeURIComponent(`/nrrc/redeem?token=${token}`)}`, {
         replace: true,
       });
     }
@@ -103,7 +103,7 @@ export default function NRCRedeem() {
 
     setBusy(false);
     toast.success("Invitation redeemed. Complete your appointment onboarding to be activated.");
-    nav("/nrc/onboarding", { replace: true });
+    nav("/nrrc/onboarding", { replace: true });
   };
 
   return (
@@ -141,7 +141,7 @@ export default function NRCRedeem() {
                 <p className="text-xs text-white/70">
                   NRC registration is invitation-only. Paste the single-use token from your
                   invitation email. Not invited yet?{" "}
-                  <Link to="/nrc/apply" className="text-gold underline">
+                  <Link to="/nrrc/apply" className="text-gold underline">
                     Apply to join
                   </Link>
                   .

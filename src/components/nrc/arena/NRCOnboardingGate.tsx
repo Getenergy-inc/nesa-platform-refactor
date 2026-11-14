@@ -48,7 +48,7 @@ export function NRCOnboardingGate({ children }: { children: ReactNode }) {
             Your review queue unlocks once every NRC compliance step is complete.
           </p>
           <Button asChild className="mt-4 bg-gold text-charcoal hover:bg-gold/90">
-            <Link to="/nrc/onboarding">Go to onboarding</Link>
+            <Link to="/nrrc/onboarding">Go to onboarding</Link>
           </Button>
         </div>
       </div>

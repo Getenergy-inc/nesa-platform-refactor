@@ -25,7 +25,7 @@ export default function NRCArenaIndex() {
   const { data: publicStats, isLoading: statsLoading } = useArenaPublicStats();
 
   if (!loading && user && (roles ?? []).some((r) => r === "nrc" || r === "admin")) {
-    return <Navigate to="/nrc/dashboard" replace />;
+    return <Navigate to="/nrrc/dashboard" replace />;
   }
 
   return (
@@ -60,15 +60,15 @@ export default function NRCArenaIndex() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
-              <Link to="/nrc/sign-in">
+              <Link to="/nrrc/sign-in">
                 NRC Sign In <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="border-gold/40 text-gold hover:bg-gold/10">
-              <Link to="/nrc/apply">Apply to Join the NRC</Link>
+              <Link to="/nrrc/apply">Apply to Join the NRC</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="border-gold/40 text-gold hover:bg-gold/10">
-              <Link to="/nrc/directory">View NRC Directory</Link>
+              <Link to="/nrrc/directory">View NRC Directory</Link>
             </Button>
             <Button asChild variant="ghost" size="lg" className="text-white/80 hover:text-gold">
               <Link to="/judgeapply/nrc">About the NRC</Link>
@@ -135,7 +135,7 @@ export default function NRCArenaIndex() {
             </p>
           </div>
           <div className="grid gap-3">
-            <Link to="/nrc/sign-in" className="rounded-lg border border-gold/30 bg-arena-panel p-4 hover:border-gold">
+            <Link to="/nrrc/sign-in" className="rounded-lg border border-gold/30 bg-arena-panel p-4 hover:border-gold">
               <p className="text-gold font-semibold">NRC Arena →</p>
               <p className="text-sm text-white/60">Verification · Evidence · Dossier · Handover</p>
             </Link>

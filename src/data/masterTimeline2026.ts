@@ -145,7 +145,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
       "Onboard and train Nominee Research Corps members across all four tiers, including Icon-relevant verification training.",
     outcome: "Verification corps ready before nominations open",
     track: "verification",
-    href: "/nrc",
+    href: "/nrrc",
   },
   {
     id: "weekly-news",
@@ -299,7 +299,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
       "Rolling Nominee Research Corps verification of Gold-Blue Garnet nominations against the EDI Matrix and evidence standards, capped at the Gala.",
     outcome: "NRC-verified Certificates of Recognition",
     track: "verification",
-    href: "/nrc",
+    href: "/nrrc",
   },
   {
     id: "webinar-3",
@@ -371,7 +371,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
       "The Nominee Research Corps verifies every Icon nomination and pushes the verified dossiers into the Judges Arena.",
     outcome: "Assessment-ready Icon pool in the Arena",
     track: "verification",
-    href: "/nrc",
+    href: "/nrrc",
   },
   {
     id: "special-needs-nominations-open",

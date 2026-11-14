@@ -397,7 +397,7 @@ const NRC: PortalArea = {
         },
       ],
       cta: [
-        { label: "Go to NRC Sign-In", to: "/nrc", variant: "primary" },
+        { label: "Go to NRC Sign-In", to: "/nrrc", variant: "primary" },
       ],
     },
   ],

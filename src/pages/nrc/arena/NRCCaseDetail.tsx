@@ -18,7 +18,7 @@ export default function NRCCaseDetail() {
       title={`Case ${caseId ?? "—"}`}
       eyebrow="Verification Workspace"
       status="live"
-      breadcrumb={[{ label: "Cases", href: "/nrc/cases" }, { label: caseId ?? "Case" }]}
+      breadcrumb={[{ label: "Cases", href: "/nrrc/cases" }, { label: caseId ?? "Case" }]}
       description="Full nominee verification workspace with evidence room, quality checks and traced handover."
       actions={
         <>

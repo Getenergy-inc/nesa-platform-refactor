@@ -38,20 +38,20 @@ interface NavItem {
 }
 
 const NAV: NavItem[] = [
-  { href: "/nrc/dashboard", label: "Overview", icon: LayoutDashboard, group: "operations" },
-  { href: "/nrc/cases", label: "My Assignments", icon: FolderKanban, group: "operations" },
-  { href: "/nrc/teams", label: "Team Queue", icon: UsersRound, group: "operations" },
-  { href: "/nrc/automation", label: "Automation Engine", icon: Cpu, group: "operations" },
-  { href: "/nrc/duplicates", label: "Duplicate Review", icon: ShieldAlert, group: "review" },
-  { href: "/nrc/evidence", label: "Evidence Room", icon: FileSearch, group: "review" },
-  { href: "/nrc/endorsements", label: "Public Endorsements", icon: MessageSquareText, group: "review" },
-  { href: "/nrc/handover/judges", label: "Handover · Judges", icon: ArrowRightLeft, group: "review" },
-  { href: "/nrc/handover/governance", label: "Handover · Governance", icon: ArrowRightLeft, group: "review" },
-  { href: "/nrc/reports", label: "Reports", icon: BarChart3, group: "operations" },
-  { href: "/nrc/directory", label: "NRC Directory", icon: Users, group: "you" },
-  { href: "/nrc/profile", label: "My Profile", icon: UserCircle2, group: "you" },
-  { href: "/nrc/onboarding", label: "Training & Onboarding", icon: BookOpen, group: "you" },
-  { href: "/nrc/audit-log", label: "Audit History", icon: History, group: "you" },
+  { href: "/nrrc/dashboard", label: "Overview", icon: LayoutDashboard, group: "operations" },
+  { href: "/nrrc/cases", label: "My Assignments", icon: FolderKanban, group: "operations" },
+  { href: "/nrrc/teams", label: "Team Queue", icon: UsersRound, group: "operations" },
+  { href: "/nrrc/automation", label: "Automation Engine", icon: Cpu, group: "operations" },
+  { href: "/nrrc/duplicates", label: "Duplicate Review", icon: ShieldAlert, group: "review" },
+  { href: "/nrrc/evidence", label: "Evidence Room", icon: FileSearch, group: "review" },
+  { href: "/nrrc/endorsements", label: "Public Endorsements", icon: MessageSquareText, group: "review" },
+  { href: "/nrrc/handover/judges", label: "Handover · Judges", icon: ArrowRightLeft, group: "review" },
+  { href: "/nrrc/handover/governance", label: "Handover · Governance", icon: ArrowRightLeft, group: "review" },
+  { href: "/nrrc/reports", label: "Reports", icon: BarChart3, group: "operations" },
+  { href: "/nrrc/directory", label: "NRC Directory", icon: Users, group: "you" },
+  { href: "/nrrc/profile", label: "My Profile", icon: UserCircle2, group: "you" },
+  { href: "/nrrc/onboarding", label: "Training & Onboarding", icon: BookOpen, group: "you" },
+  { href: "/nrrc/audit-log", label: "Audit History", icon: History, group: "you" },
 ];
 
 const GROUP_LABEL: Record<NavItem["group"], string> = {
@@ -78,7 +78,7 @@ function SideNav({ onNavigate }: { onNavigate?: () => void }) {
             {g.items.map((item) => {
               const active =
                 pathname === item.href ||
-                (item.href !== "/nrc/dashboard" && pathname.startsWith(item.href));
+                (item.href !== "/nrrc/dashboard" && pathname.startsWith(item.href));
               return (
                 <li key={item.href}>
                   <NavLink
@@ -115,7 +115,7 @@ export function NRCArenaLayout({ children }: { children: ReactNode }) {
         <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-arena-rail lg:block">
           <div className="sticky top-0 flex h-screen flex-col overflow-y-auto">
             <ArenaExitRailLink />
-            <ArenaBrand workspace="NRC Arena" to="/nrc" />
+            <ArenaBrand workspace="NRC Arena" to="/nrrc" />
             {user && (
               <div className="mx-3 mb-4 rounded-lg border border-white/10 bg-white/5 p-3">
                 <p className="text-[10px] uppercase tracking-wider text-gold/70">Signed in</p>
@@ -154,7 +154,7 @@ export function NRCArenaLayout({ children }: { children: ReactNode }) {
                 </SheetTrigger>
                 <SheetContent side="left" className="w-72 overflow-y-auto border-r border-white/10 bg-arena-rail p-0">
                   <ArenaExitRailLink />
-                  <ArenaBrand workspace="NRC Arena" to="/nrc" />
+                  <ArenaBrand workspace="NRC Arena" to="/nrrc" />
                   <div className="px-1 pb-6">
                     <SideNav />
                   </div>
