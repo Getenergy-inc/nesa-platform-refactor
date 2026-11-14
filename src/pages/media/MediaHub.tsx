@@ -38,8 +38,8 @@ const mediaCategories = [
   },
   {
     title: "Online Recognition Programme",
-    description: "Live 6-hour ceremony announcing all winners.",
-    href: "/media/gala",
+    description: "Online programme recognising up to nine Africa Education Icons with approximately 20–30 invited live participants.",
+    href: "/programme/2026",
     icon: Trophy,
     badge: "13 Dec 2026",
     badgeColor: "bg-primary",
@@ -77,11 +77,10 @@ export default function MediaHub() {
                 </span>
               </div>
               <h1 className="mb-6 font-display text-4xl font-bold text-white md:text-5xl">
-                Media <span className="text-primary">Hub</span>
+                Education Impact <span className="text-primary">in View</span>
               </h1>
               <p className="mb-8 text-lg text-white/70">
-                Your gateway to NESA-Africa's rich media content — from live TV broadcasts
-                to educational webinars and the annual Online Recognition Programme.
+                NESA-Africa Media documents education ideas, contributions and learning through responsible, evidence-based storytelling. Media participation does not influence recognition.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button asChild size="lg" className="bg-primary text-primary-foreground">
@@ -91,7 +90,7 @@ export default function MediaHub() {
                   </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                  <Link to="/media/gala">View Gala</Link>
+                  <Link to="/programme/2026">Watch Published Programmes</Link>
                 </Button>
               </div>
             </div>

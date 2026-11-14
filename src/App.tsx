@@ -245,7 +245,6 @@ import JudgesDirectory from "./pages/judges/JudgesDirectory";
 import JudgeProfile from "./pages/judges/JudgeProfile";
 import NomineePipeline from "./pages/judges/NomineePipeline";
 import PathwayWorkspace from "./pages/judges/PathwayWorkspace";
-import JudgesSignUp from "./pages/judges/JudgesSignUp";
 import JudgesForgotPassword from "./pages/judges/JudgesForgotPassword";
 import JudgesOnboarding from "./pages/judges/JudgesOnboarding";
 import IconPathwayIndex from "./pages/judges/IconPathwayIndex";
@@ -301,10 +300,6 @@ import {
   JudgeIconLifetime,
 } from "./pages/judge";
 import JudgeOnboarding from "./pages/judge/JudgeOnboarding";
-import JudgeApplyPortalLayout from "./pages/judgeapply/PortalLayout";
-import JudgeApplyPortalHome from "./pages/judgeapply/PortalHome";
-import JudgeApplyAreaLanding from "./pages/judgeapply/AreaLanding";
-import JudgeApplySupportingPage from "./pages/judgeapply/SupportingPage";
 import MyCertificates from "./pages/MyCertificates";
 import CertificateGuide from "./pages/CertificateGuide";
 
@@ -392,7 +387,6 @@ import PublicNRCMemberProfile from "./pages/nrc/PublicNRCMemberProfile";
 import NRCArenaIndex from "./pages/nrc/arena/NRCArenaIndex";
 import NRCSignIn from "./pages/nrc/arena/NRCSignIn";
 import NRCRedeem from "./pages/nrc/arena/NRCRedeem";
-import NRCApply from "./pages/nrc/NRCApply";
 import NRCApplications from "./pages/nrc/NRCApplications";
 import { NRCOnboardingGate } from "@/components/nrc/arena/NRCOnboardingGate";
 import NRCOnboarding from "./pages/nrc/arena/NRCOnboarding";

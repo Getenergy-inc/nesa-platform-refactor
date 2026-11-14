@@ -27,11 +27,11 @@ export const chaptersApi = {
 
 // 14. NRC research corps
 export const nrcApi = {
-  tasks: list<unknown>("/nrrc/tasks"),
-  createTask: create<unknown>("/nrrc/tasks"),
-  updateTask: patch<unknown>("/nrrc/tasks"),
-  submitNominee: create<unknown>("/nrrc/nominees"),
-  markDuplicate: (id: string) => http.patch<unknown>(`/nrrc/nominees/${id}/duplicate`),
+  tasks: list<unknown>("/nrc/tasks"),
+  createTask: create<unknown>("/nrc/tasks"),
+  updateTask: patch<unknown>("/nrc/tasks"),
+  submitNominee: create<unknown>("/nrc/nominees"),
+  markDuplicate: (id: string) => http.patch<unknown>(`/nrc/nominees/${id}/duplicate`),
 };
 
 // 15. Partners & sponsors
