@@ -2,18 +2,11 @@
 // Layers: SkipLink · AnnouncementBar · Brand · 6-group nav · Search · Nominate · Phase CTA · Language · Sign In.
 // Shared data source: src/config/siteNavigation.ts (desktop + mobile drawer).
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, LogOut, LogIn, UserCircle2 } from "lucide-react";
+import { Menu, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
+import { Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem } from "@/components/ui/menubar";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import {
   Accordion,
@@ -24,7 +17,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { LanguageSwitcher } from "@/components/i18n";
-import { SITE_NAV, MOBILE_SITE_NAV, SIGN_IN_WORKSPACES, UTILITY_NAV, PRIMARY_NAV_VISIBLE_XL, type NavItem, type NavChild, type NavSection } from "@/config/siteNavigation";
+import { SITE_NAV, MOBILE_SITE_NAV, SIGN_IN_WORKSPACES, UTILITY_NAV, type NavItem, type NavChild, type NavSection } from "@/config/siteNavigation";
 import { CURRENT_PHASE, NOMINATE_CTA } from "@/config/campaignPhase";
 import { trackNav } from "@/lib/analytics";
 import { AnnouncementBar } from "@/components/navigation/AnnouncementBar";
@@ -84,7 +77,7 @@ function DropdownSimple({ item }: { item: NavItem }) {
           const active = isActive(location.pathname, c.href);
           return (
             <li key={c.href}>
-              <NavigationMenuLink asChild>
+              <MenubarItem asChild>
                 <Link
                   to={c.href}
                   aria-current={active ? "page" : undefined}
@@ -105,7 +98,7 @@ function DropdownSimple({ item }: { item: NavItem }) {
                 >
                   {c.label}
                 </Link>
-              </NavigationMenuLink>
+              </MenubarItem>
             </li>
           );
         })}
@@ -113,7 +106,7 @@ function DropdownSimple({ item }: { item: NavItem }) {
       {item.panelFooter && (
         <div className="px-3 pb-3 pt-2 border-t border-gold/15">
           <p className="text-[11px] text-white/60">{item.panelFooter.note}</p>
-          <NavigationMenuLink asChild>
+          <MenubarItem asChild>
             <Link
               to={item.panelFooter.ctaHref}
               onClick={() =>
@@ -132,7 +125,7 @@ function DropdownSimple({ item }: { item: NavItem }) {
             >
               {item.panelFooter.ctaLabel}
             </Link>
-          </NavigationMenuLink>
+          </MenubarItem>
         </div>
       )}
     </div>
@@ -175,7 +168,7 @@ function DropdownSectioned({ item }: { item: NavItem }) {
                 const active = isActive(location.pathname, c.href);
                 return (
                   <li key={c.href}>
-                    <NavigationMenuLink asChild>
+                    <MenubarItem asChild>
                       <Link
                         to={c.href}
                         aria-current={active ? "page" : undefined}
@@ -196,7 +189,7 @@ function DropdownSectioned({ item }: { item: NavItem }) {
                       >
                         {c.label}
                       </Link>
-                    </NavigationMenuLink>
+                    </MenubarItem>
                   </li>
                 );
               })}
@@ -210,99 +203,42 @@ function DropdownSectioned({ item }: { item: NavItem }) {
 
 function DesktopNav() {
   const location = useLocation();
+  const [value, setValue] = useState("");
 
-  const triggerClsFor = (active: boolean) =>
-    cn(
-      "px-2 2xl:px-2.5 py-2 text-[13px] 2xl:text-sm font-medium rounded-md transition-colors whitespace-nowrap",
-      FOCUS_RING,
-      active ? "text-gold bg-gold/10" : "text-white/85 hover:text-gold hover:bg-gold/5",
-    );
+  useEffect(() => { setValue(""); }, [location.pathname, location.hash]);
 
-  const renderItem = (item: NavItem, extraCls?: string) => {
-    const active = isActive(location.pathname, item.href);
-    const triggerCls = triggerClsFor(active);
-    const hasPanel = !!(item.children || item.sections || item.megaMenu);
-
-    if (!hasPanel) {
-      return (
-        <NavigationMenuItem key={item.href} className={extraCls}>
-          <Link
-            to={item.href}
-            data-preserve-nomination-route={item.href === "/nominate" ? "true" : undefined}
-            className={triggerCls}
-            aria-current={active ? "page" : undefined}
-            onClick={() =>
-              trackNav("nav_click", {
-                label: item.label,
-                href: item.href,
-                section: item.analyticsId,
-                device: "desktop",
-              })
-            }
-          >
-            {item.shortLabel ?? item.label}
-          </Link>
-        </NavigationMenuItem>
-      );
-    }
-
-    return (
-      <NavigationMenuItem key={item.href} className={extraCls}>
-        <NavigationMenuTrigger
-          className={cn(
-            triggerCls,
-            "bg-transparent data-[state=open]:bg-gold/10 data-[state=open]:text-gold",
-          )}
-          onClick={() =>
-            trackNav("dropdown_open", {
-              label: item.label,
-              section: item.analyticsId,
-              device: "desktop",
-            })
-          }
-        >
-          {item.shortLabel ?? item.label}
-        </NavigationMenuTrigger>
-        <NavigationMenuContent>
-          {item.megaMenu === "education-enablers" ? (
-            <EducationEnablersMegaMenu />
-          ) : item.sections ? (
-            <DropdownSectioned item={item} />
-          ) : (
-            <DropdownSimple item={item} />
-          )}
-        </NavigationMenuContent>
-      </NavigationMenuItem>
-    );
-  };
-
-  const inline = SITE_NAV.slice(0, PRIMARY_NAV_VISIBLE_XL);
-  const overflow = SITE_NAV.slice(PRIMARY_NAV_VISIBLE_XL);
-
-  // "More" folds the overflow groups into one sectioned panel below 2xl, so
-  // ten top-level groups never wrap or force horizontal scrolling.
-  const moreItem: NavItem = {
-    label: "More",
-    href: "#more",
-    analyticsId: "nav_more",
-    sections: overflow.map((g) => ({
-      title: g.label,
-      items: [
-        { label: `${g.label} overview`, href: g.href },
-        ...(g.children ?? []),
-        ...(g.sections ?? []).flatMap((s) => s.items),
-      ].slice(0, 8),
-    })),
-  };
+  const triggerCls = (active: boolean) => cn(
+    "px-2 2xl:px-2.5 py-2 text-[13px] 2xl:text-sm font-medium rounded-md transition-colors whitespace-nowrap",
+    FOCUS_RING,
+    active ? "text-gold bg-gold/10" : "text-white/85 hover:text-gold hover:bg-gold/5",
+  );
 
   return (
-    <NavigationMenu className="hidden xl:flex flex-1 min-w-0 justify-center" aria-label="Primary">
-      <NavigationMenuList className="gap-0 flex-nowrap">
-        {inline.map((item) => renderItem(item))}
-        {overflow.map((item) => renderItem(item, "hidden 2xl:list-item"))}
-        {overflow.length > 0 && renderItem(moreItem, "2xl:hidden")}
-      </NavigationMenuList>
-    </NavigationMenu>
+    <nav className="hidden xl:flex flex-1 min-w-0 justify-center" aria-label="Primary">
+      <Menubar value={value} onValueChange={setValue} loop
+        className="h-auto border-0 bg-transparent p-0 space-x-0">
+        {SITE_NAV.filter(item => item.children || item.sections || item.megaMenu).map(item => (
+          <MenubarMenu key={item.href} value={item.href}>
+            <MenubarTrigger className={cn(triggerCls(isActive(location.pathname, item.href)),
+              "bg-transparent data-[state=open]:bg-gold/10 data-[state=open]:text-gold")}
+              onClick={() => trackNav("dropdown_open", { label: item.label, section: item.analyticsId, device: "desktop" })}>
+              {item.shortLabel ?? item.label}
+              <ChevronDown className="ml-1 h-3 w-3" aria-hidden />
+            </MenubarTrigger>
+            <MenubarContent alignOffset={0} sideOffset={6} className="min-w-0 p-0 border-gold/20 bg-charcoal text-foreground">
+              {item.megaMenu === "education-enablers" ? <EducationEnablersMegaMenu />
+                : item.sections ? <DropdownSectioned item={item} /> : <DropdownSimple item={item} />}
+            </MenubarContent>
+          </MenubarMenu>
+        ))}
+      </Menubar>
+      {SITE_NAV.filter(item => !item.children && !item.sections && !item.megaMenu).map(item => (
+        <Link key={item.href} to={item.href} className={triggerCls(isActive(location.pathname, item.href))}
+          aria-current={isActive(location.pathname, item.href) ? "page" : undefined}>
+          {item.label}
+        </Link>
+      ))}
+    </nav>
   );
 }
 
@@ -382,6 +318,7 @@ function AccountActions() {
 function MobileMenu() {
   const [open, setOpen] = useState(false);
   const [signInOpen, setSignInOpen] = useState("");
+  const signInTriggerRef = useRef<HTMLButtonElement>(null);
   const { user, signOut } = useAuth();
   const location = useLocation();
 
@@ -389,7 +326,8 @@ function MobileMenu() {
   useEffect(() => {
     if (signInOpen !== "sign-in") return;
     const timer = window.setTimeout(() => {
-      document.getElementById("mobile-sign-in")?.scrollIntoView({ block: "start", behavior: "auto" });
+      signInTriggerRef.current?.focus();
+      signInTriggerRef.current?.scrollIntoView({ block: "start", behavior: "auto" });
     }, 250);
     return () => window.clearTimeout(timer);
   }, [signInOpen]);
@@ -404,7 +342,7 @@ function MobileMenu() {
   }, []);
 
   const close = () => setOpen(false);
-  const linkCls = "block px-3 py-2 rounded text-sm text-white/85 hover:text-gold hover:bg-gold/10";
+  const linkCls = cn("block px-3 py-2 rounded text-sm text-white/85 hover:text-gold hover:bg-gold/10", FOCUS_RING);
 
   const renderChildren = (item: NavItem) => {
     if (item.sections) {
@@ -538,7 +476,7 @@ function MobileMenu() {
                         data-preserve-nomination-route={item.href === "/nominate" ? "true" : undefined}
                         onClick={close}
                         aria-current={isActive(location.pathname, item.href) ? "page" : undefined}
-                        className="block px-3 py-3 text-sm text-white hover:text-gold rounded-md"
+                        className={cn("block px-3 py-3 text-sm text-white hover:text-gold rounded-md", FOCUS_RING)}
                       >
                         {item.label}
                       </Link>
@@ -547,7 +485,7 @@ function MobileMenu() {
                 }
                 return (
                   <AccordionItem key={item.href} value={item.href} className="border-gold/15">
-                    <AccordionTrigger className="text-white hover:text-gold px-3 text-sm rounded-md">
+                    <AccordionTrigger className={cn("text-white hover:text-gold px-3 text-sm rounded-md", FOCUS_RING)}>
                       {item.label}
                     </AccordionTrigger>
                     <AccordionContent className="pb-1">
@@ -589,7 +527,7 @@ function MobileMenu() {
           <nav aria-label="Mobile quick links" className="mt-4 border-t border-gold/20 pt-3">
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="quick-links" className="border-gold/15">
-                <AccordionTrigger className="text-white hover:text-gold px-3 text-sm rounded-md">
+                <AccordionTrigger className={cn("text-white hover:text-gold px-3 text-sm rounded-md", FOCUS_RING)}>
                   Quick Links
                 </AccordionTrigger>
                 <AccordionContent className="pb-1">
@@ -639,7 +577,7 @@ function MobileMenu() {
                 <div className="px-3 py-2"><LanguageSwitcher /></div>
                 <Accordion type="single" collapsible value={signInOpen} onValueChange={setSignInOpen} id="mobile-sign-in" className="w-full">
                   <AccordionItem value="sign-in" className="border-gold/15">
-                    <AccordionTrigger className="text-white hover:text-gold px-3 text-sm rounded-md">Sign In</AccordionTrigger>
+                    <AccordionTrigger ref={signInTriggerRef} className={cn("text-white hover:text-gold px-3 text-sm rounded-md", FOCUS_RING)}>Sign In</AccordionTrigger>
                     <AccordionContent>
                       <p className="px-3 py-2 text-xs text-gold">Select Your Workspace</p>
                       {SIGN_IN_WORKSPACES.map(({ label, href, description }) => (
@@ -683,6 +621,10 @@ function UtilityNavBar() {
       >
         {UTILITY_NAV.map((item) => {
           const active = isActive(location.pathname, item.href);
+          if (item.href === "/login") {
+            return <AccountMenu key={item.href} label="Sign In" menuLabel="Utility sign in menu"
+              className="h-auto font-mono text-[11px] tracking-wide px-1 py-0 text-white/60" />;
+          }
           return (
             <a
               key={item.href}
