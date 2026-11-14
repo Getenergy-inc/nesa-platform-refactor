@@ -4,7 +4,6 @@ import { ChevronDown } from "lucide-react";
 import nesaStamp from "@/assets/nesa-stamp.jpeg";
 import { trackNav } from "@/lib/analytics";
 import { FollowLinks } from "@/components/nesa/FollowLinks";
-import { SCHOOL_SUPPORT_ACTIONS } from "@/config/schoolSupport";
 
 interface FooterLink {
   label: string;

@@ -1,43 +1,36 @@
 import { describe, it, expect } from "vitest";
 import { SITE_NAV, MOBILE_SITE_NAV, SIGN_IN_WORKSPACES, UTILITY_NAV } from "@/config/siteNavigation";
-import { NOMINATE_CTA } from "@/config/campaignPhase";
 import { PROGRAMME_END_DATE, PROGRAMME_END_LONG_LABEL } from "@/config/programme";
 
 describe("2026–2027 navigation", () => {
-  it("preserves nominee access under recognition on desktop and directly on mobile", () => {
-    expect(SITE_NAV.some(g => g.href === "/nominees")).toBe(false);
-    expect(SITE_NAV.find(g => g.href === "/categories")?.children?.some(c => c.href === "/nominees")).toBe(true);
-    expect(MOBILE_SITE_NAV.some(g => g.href === "/nominees")).toBe(true);
+  it("shows the seven approved main labels and direct nominee access", () => {
+    expect(SITE_NAV.map(g => g.label)).toEqual(["About", "Recognition", "Nominees", "Impact", "Media", "Get Involved", "Contact"]);
+    expect(MOBILE_SITE_NAV.map(g => g.label)).toEqual(SITE_NAV.map(g => g.label));
+    expect(SITE_NAV.find(g => g.label === "Recognition")?.children?.some(c => c.href === "/nominees")).toBe(true);
   });
-  it("keeps all utility nomination links on the authorised form", () => {
-    expect(UTILITY_NAV.map(g => g.href)).toEqual(["/login", "/register", NOMINATE_CTA.href, "/contact", "/nrc", "/judges"]);
-    expect(UTILITY_NAV.find(g => g.href === NOMINATE_CTA.href)?.external).toBe(true);
+  it("uses the nine approved utility destinations", () => {
+    expect(UTILITY_NAV.map(g => g.label)).toEqual([
+      "How Recognition Works", "EduAid-Africa", "Support a Special-Needs School",
+      "Become a Sponsor", "Partner With Us", "Join a Webinar", "Listen to the Podcast",
+      "Watch NESA-Africa TV", "Volunteer",
+    ]);
+    expect(UTILITY_NAV.find(g => g.label === "How Recognition Works")?.href).toBe("/about/how-recognition-works");
   });
-  it("sends merchandise enquiries to Contact without reopening the retired shop", () => {
-    expect(UTILITY_NAV.find(g => g.analyticsId === "util_merchandise")?.href).toBe("/contact");
-  });
-  it("links general signup to the existing registration page, not specialist recruitment", () => {
-    expect(UTILITY_NAV.find(g => g.analyticsId === "util_sign_up")?.href).toBe("/register");
-  });
-  it("keeps the top-bar research and judges links on their existing guarded routes", () => {
-    expect(UTILITY_NAV.find(g => g.analyticsId === "util_nrrc")?.href).toBe("/nrc");
-    expect(UTILITY_NAV.find(g => g.analyticsId === "util_judges")?.href).toBe("/judges");
-  });
-  it("preserves existing NRRC and judges routes without creating migrated routes", () => {
+  it("uses NRRC presentation routes without changing workspace access", () => {
     expect(SIGN_IN_WORKSPACES.map(g => g.href)).toEqual([
-      "/nominee-portal", "/nrc", "/judges", "/login?next=%2Fdashboard%2Fvolunteer",
+      "/nominee-portal", "/nrrc", "/judges", "/login?next=%2Fdashboard%2Fvolunteer",
       "/login?next=%2Folc%2Fdashboard", "/login?next=%2Fadmin",
     ]);
   });
-  it("has no voting, AGC, ticket or table links anywhere", () => {
+  it("has no voting, AGC, ticket, table or specialist-recruitment links", () => {
     const all = [...SITE_NAV.flatMap((g) => [g, ...(g.children ?? [])]), ...UTILITY_NAV, ...SIGN_IN_WORKSPACES];
-    for (const i of all) expect(i.href).not.toMatch(/vote|agc|ticket|table|wallet/i);
+    for (const i of all) expect(i.href).not.toMatch(/vote|agc|ticket|table|wallet|judgeapply|nrc\/apply/i);
   });
 });
 
 describe("online programme date", () => {
-  it("is Monday 28 December 2026", () => {
-    expect(PROGRAMME_END_DATE).toBe("2026-12-28");
-    expect(PROGRAMME_END_LONG_LABEL).toBe("Monday, 28 December 2026 · Online");
+  it("is Sunday 13 December 2026", () => {
+    expect(PROGRAMME_END_DATE).toBe("2026-12-13");
+    expect(PROGRAMME_END_LONG_LABEL).toBe("Sunday 13 December 2026 · Online");
   });
 });
