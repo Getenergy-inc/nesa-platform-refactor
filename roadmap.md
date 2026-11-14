@@ -1,8 +1,8 @@
 ## Keyboard navigation for both bars — 13 Nov 2026, 21:53 UTC
 - [x] Capture current contact-page header and audit opening, movement and Escape behaviour using keyboard input and existing accessible primitives.
-- [ ] Improve grouped desktop menus and utility Sign In using existing accessible menu primitives, preserving labels, destinations and styling.
-- [ ] Improve mobile visible focus and Sign In focus movement; retain the existing drawer focus trap and Escape behaviour.
-- [ ] Verify keyboard-only flows and run focused regression tests; no page-content, permission or data changes, nothing published.
+- [x] Improve grouped desktop menus and utility Sign In using existing Radix menubar/dropdown primitives, preserving labels, destinations and gold focus styling; ordinary Contact remains a link.
+- [x] Improve mobile visible focus and Sign In focus movement; retain the existing drawer focus trap and Escape behaviour.
+- [x] Verified all five desktop groups for Arrow Down entry, movement, Home/End, Escape/focus return; cross-group Arrow Right/entry and Tab exit; both Sign In controls; mobile opening, accordion Tab movement, Sign In focus, focus trapping and Escape/focus return at 915px/390px. Five navigation unit tests passed and latest preview build OK. Added retained E2E tests; JS runner cannot launch its missing browser version, so equivalent Python Playwright checks passed instead. No page-content, permission or data changes; nothing published.
 
 ## Navigation bars 1 and 2 — 13 Nov 2026, 21:44 UTC
 - [x] Read the supplied Draft Lean NESA-Africa Navigation Bar and inspect the live shared header, primary/utility menu configuration and sign-in menu.
