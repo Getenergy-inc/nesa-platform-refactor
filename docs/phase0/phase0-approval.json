@@ -9,9 +9,16 @@
     "signedAtUtc": null
   },
   "writtenPhase0Approval": {
-    "approver": null,
-    "exactMessage": null,
-    "evidenceReference": null,
-    "approvedAtUtc": null
+    "approver": "Babashola Santos Aderibigbe, SCEF/NESA-Africa",
+    "exactMessage": "Phase 0 approved",
+    "evidenceReference": "docs/phase0/owner-approval-2026-11-14.md",
+    "approvedAtUtc": "2026-11-14T06:07:00Z"
+  },
+  "ownerConfirmedIndependentSignOff": {
+    "confirmed": true,
+    "confirmedBy": "Babashola Santos Aderibigbe, SCEF/NESA-Africa",
+    "evidenceReference": "docs/phase0/owner-approval-2026-11-14.md",
+    "confirmedAtUtc": "2026-11-14T06:07:00Z",
+    "limitation": "Reviewer name, original evidence reference and signing timestamp were not supplied."
   }
 }
