@@ -1076,6 +1076,21 @@ export function getFAQsForPath(pathname: string): PageFAQ {
 // =============================================================
 export const FULL_FAQ_GROUPS: FAQGroup[] = [
   {
+    title: "Approved 2026 answers",
+    description: "Nomination, review and recognition integrity.",
+    faqs: [
+      { q: "Is nomination free?", a: "Yes. NESA-Africa does not charge a nomination fee." },
+      { q: "Does nomination guarantee recognition?", a: "No. Nomination begins a review process." },
+      { q: "Is there public voting in 2026?", a: "No. There is no public or AGC voting in the NESA-Africa 2026 awards." },
+      { q: "Who conducts nominee research?", a: "The Nominee Research and Review Corps conducts contact verification, consent, interviews, evidence research, profile preparation and preliminary review." },
+      { q: "Who makes the Icon decisions?", a: "Nine independent judges assess eligible Africa Education Icon dossiers." },
+      { q: "Can sponsors influence recognition?", a: "No. Sponsorship, donations and partnerships carry zero judging weight." },
+      { q: "Is the 2026 programme a physical gala?", a: "No public physical gala is currently authorised. The programme is scheduled to take place online on 13 December 2026." },
+      { q: "Is special-needs-school voting part of the awards?", a: "No. Any authorised 2027 regional school selection belongs to the EduAid-Africa intervention programme and is separate from NESA-Africa recognition." },
+      { q: "Does donating create votes?", a: "No. Donations must not purchase votes or influence school eligibility or NESA-Africa recognition." },
+    ],
+  },
+  {
     title: "A. General NESA-Africa",
     description:
       'New Education Standard Award Africa (NESA-Africa) and the motto "The African Blue-Garnet Awards for Recognising Africa’s Education Enablers".',

@@ -57,7 +57,7 @@ const INTEGRITY = [
   },
   {
     title: "Listing is not an award",
-    body: "Appearing in the directory records a nomination. Recognition is only conferred at the Gold-Blue Garnet Awards Gala, 13 December 2026.",
+    body: "Publication of a profile does not guarantee eligibility, shortlisting, judging, selection or recognition. Information may be corrected as verification continues.",
   },
 ];
 
@@ -197,15 +197,13 @@ export default function NomineesHubPage() {
               </div>
 
               <h1 id="dir-heading" className="ed-dir-title">
-                Africa Education
+                Nominee Profiles
                 <br />
-                <span className="ed-accent">Impact Directory</span>
+                <span className="ed-accent">and Review Status</span>
               </h1>
 
               <p className="ed-dir-sub">
-                Every nominee, in one verified register. Search people, organisations and
-                institutions across {stats.tiers} recognition tiers, {stats.categories} categories
-                and {stats.subcategories} subcategories.
+                This directory publishes authorised information only at the appropriate review stage and subject to consent, evidence and publication controls.
               </p>
 
               <form
@@ -228,7 +226,7 @@ export default function NomineesHubPage() {
               </form>
 
               <div className="ed-dir-counters">
-                <Counter num={isLoading ? "—" : total.toLocaleString()} label="Nominee Profiles" />
+                <Counter num="Controlled" label="Publication Status" />
                 <Counter num={stats.tiers} label="Recognition Tiers" />
                 <Counter num={stats.categories} label="Categories" />
                 <Counter num={stats.subcategories} label="Subcategories" />
@@ -407,8 +405,7 @@ export default function NomineesHubPage() {
                   Someone You Know Belongs in This Register
                 </h2>
                 <p className="ed-section-sub">
-                  Nominations open 6 September 2026. Submission is free, and you can create your
-                  account at the moment you submit.
+                  Nominations are open 9 November 2026 – 31 March 2027. Submission is free and begins a review process; it does not guarantee recognition.
                 </p>
               </div>
 
@@ -423,8 +420,8 @@ export default function NomineesHubPage() {
                 <Link to="/awards" className="ed-btn-ghost">
                   See the Recognition Framework →
                 </Link>
-                <Link to="/get-involved" className="ed-btn-ghost">
-                  Volunteer or Partner →
+                <Link to="/contact" className="ed-btn-ghost">
+                  Request a Correction →
                 </Link>
               </div>
             </div>

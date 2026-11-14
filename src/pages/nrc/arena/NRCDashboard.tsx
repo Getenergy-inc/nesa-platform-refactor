@@ -27,24 +27,24 @@ interface StatCard {
 }
 
 const PRIMARY: StatCard[] = [
-  { label: "New Cases", value: 0, icon: Inbox, href: "/nrrc/cases?status=new" },
-  { label: "Cases Not Started", value: 0, icon: Clock3, href: "/nrrc/cases?status=pending" },
-  { label: "Cases In Progress", value: 0, icon: FileSearch, href: "/nrrc/cases?status=in_progress" },
-  { label: "Evidence Requests Pending", value: 0, icon: MessageSquareText, href: "/nrrc/evidence" },
-  { label: "Secondary Reviews Required", value: 0, icon: Users, href: "/nrrc/cases?role=secondary" },
-  { label: "Quality Checks Required", value: 0, icon: ShieldCheck, href: "/nrrc/cases?stage=quality" },
-  { label: "Ready for Handover", value: 0, icon: ArrowRightLeft, tone: "ok", href: "/nrrc/handover/judges" },
-  { label: "Overdue Cases", value: 0, icon: AlertTriangle, tone: "warn", href: "/nrrc/cases?status=overdue" },
+  { label: "Assigned cases", value: 0, icon: Inbox, href: "/nrrc/cases?status=new" },
+  { label: "Contact research pending", value: 0, icon: Clock3, href: "/nrrc/cases?status=pending" },
+  { label: "Interviews pending", value: 0, icon: FileSearch, href: "/nrrc/cases?status=in_progress" },
+  { label: "Evidence review pending", value: 0, icon: MessageSquareText, href: "/nrrc/evidence" },
+  { label: "Acceptance pending", value: 0, icon: Users, href: "/nrrc/cases?role=secondary" },
+  { label: "Quality-assurance returns", value: 0, icon: ShieldCheck, href: "/nrrc/cases?stage=quality" },
+  { label: "Dossiers ready for handover", value: 0, icon: ArrowRightLeft, tone: "ok", href: "/nrrc/handover/judges" },
+  { label: "Delivery failures", value: 0, icon: AlertTriangle, tone: "warn", href: "/nrrc/cases?status=overdue" },
 ];
 
 const SECONDARY: StatCard[] = [
   { label: "Possible Duplicates", value: 0, icon: ShieldCheck, href: "/nrrc/duplicates" },
-  { label: "Nominee Acceptance Pending", value: 0, icon: ClipboardCheck },
+  { label: "Consent pending", value: 0, icon: ClipboardCheck },
   { label: "Conflict Declarations", value: 0, icon: AlertTriangle },
-  { label: "Public Endorsements Pending", value: 0, icon: MessageSquareText, href: "/nrrc/endorsements" },
+  { label: "Letters awaiting dispatch", value: 0, icon: MessageSquareText, href: "/nrrc/endorsements" },
   { label: "Cases Returned by Governance", value: 0, icon: ArrowRightLeft },
   { label: "Clarifications from Judges", value: 0, icon: MessageSquareText },
-  { label: "Completed Cases", value: 0, icon: ClipboardCheck, tone: "ok" },
+  { label: "Profiles in preparation", value: 0, icon: ClipboardCheck, tone: "ok" },
 ];
 
 function Card({ card }: { card: StatCard }) {
@@ -79,7 +79,7 @@ export default function NRCDashboard() {
   return (
     <NRCArenaLayout>
       <Helmet>
-        <title>NRRC Dashboard · NESA-Africa 2026</title>
+        <title>My NRRC Workspace · NESA-Africa 2026</title>
       </Helmet>
 
       {/* Identity block */}
@@ -91,7 +91,7 @@ export default function NRCDashboard() {
             </span>
           </div>
           <div className="min-w-0 flex-1">
-            <p className="text-xs uppercase tracking-wider text-gold/80">NESA-Africa 2026 · NRRC Member</p>
+            <p className="text-xs uppercase tracking-wider text-gold/80">NESA-Africa 2026 · My NRRC Workspace</p>
             <h1 className="font-display text-2xl font-bold mt-0.5">Welcome, {displayName}</h1>
             <div className="mt-2 flex flex-wrap gap-2 text-xs">
               <Badge variant="outline" className="border-white/20 text-white/80">Reference pending</Badge>
@@ -109,7 +109,7 @@ export default function NRCDashboard() {
       <section className="mb-6 rounded-xl border border-white/10 bg-arena-panel p-5">
         <p className="text-xs uppercase tracking-wider text-gold/80">Next required action</p>
         <p className="mt-1 text-white/85">
-          Complete NRRC onboarding to unlock case assignments.
+          Complete NRRC onboarding to unlock case assignments. View My Assignments and report any conflict before starting a case.
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
           <Button asChild size="sm" className="bg-gold text-charcoal hover:bg-gold/90">

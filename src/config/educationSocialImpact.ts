@@ -27,17 +27,17 @@ import { AFRICA_REGIONS, type AfricaRegionDefinition } from "@/config/regions/af
 
 export const IMPACT_BRAND = {
   /** Full institutional name — used as page H1 and dropdown heading. */
-  name: "NESA-Africa Education Social Impact",
+  name: "From Recognition to Education Action",
   /** Short navigation label. */
   navLabel: "Education Impact",
   positioning:
-    "Turning education recognition into measurable community impact across Africa.",
+    "NESA-Africa documents education contributions. EduAid-Africa helps convert verified needs, partnerships and public support into responsible education interventions.",
   supportingLine:
     "NESA-Africa connects education recognition with practical social impact by supporting verified interventions that improve schools, learning environments, inclusion, access and educational opportunity across Africa.",
   fundingLine: "Funded and supported by Friends of EduAid-Africa.",
-  overviewHeadline: "Recognition That Creates Real Education Impact.",
+  overviewHeadline: "Special-needs education support · School renovation · Accessible learning · Teacher development · Digital learning · Libraries · Skills development · Regional interventions · Education-impact storytelling.",
   overviewMessage:
-    "Friends of EduAid-Africa fund the impact. NESA-Africa documents, connects and showcases the impact.",
+    "Participation in an EduAid-Africa service does not guarantee NESA-Africa nomination or recognition.",
   /** How EduAid-Africa must be described everywhere in this section. */
   eduaidPositioning:
     "EduAid-Africa is part of the Santos Creations Educational Foundation education-support ecosystem and provides the programme infrastructure through which eligible education-support initiatives may be developed and implemented.",
@@ -116,7 +116,7 @@ export const IMPACT_NAV_ITEMS: { label: string; href: string }[] = [
   { label: "Afri-EduTourism 2027", href: "/afri-edutourism" },
   { label: "EduAid-Africa Journal", href: "/journal" },
   { label: "Impact Stories & Media", href: "/impact/stories" },
-  { label: `Gala 2026 · ${PROGRAMME_END_LABEL}`, href: "/gala" },
+  { label: `Online Recognition Programme · ${PROGRAMME_END_LABEL}`, href: "/programme/2026" },
 ];
 
 /** Rendered at the bottom of the dropdown. Never place payment details here. */
@@ -129,9 +129,9 @@ export const IMPACT_NAV_FOOTER = {
 
 /** Gala label always derives from the authoritative programme config. */
 export const IMPACT_GALA = {
-  label: `Gala 2026 · ${PROGRAMME_END_LABEL}`,
+  label: `Online Recognition Programme · ${PROGRAMME_END_LABEL}`,
   longLabel: PROGRAMME_END_LONG_LABEL,
-  href: "/gala",
+  href: "/programme/2026",
 } as const;
 
 /* -------------------------------------------------------------------------- */
@@ -208,9 +208,9 @@ export const IMPACT_REGIONS: AfricaRegionDefinition[] = AFRICA_REGIONS;
 
 export const IMPACT_CTAS = {
   explore: "Explore Education Impact",
-  rebuild: "Rebuild a School",
+  rebuild: "Explore EduAid-Africa",
   specialNeeds: "Support a Special-Needs School",
-  regional: "Explore Regional Impact",
+  regional: "Become a Partner",
   reports: "Read Impact Reports",
   stories: "Read Impact Stories",
   friend: "Become a Friend of EduAid-Africa",

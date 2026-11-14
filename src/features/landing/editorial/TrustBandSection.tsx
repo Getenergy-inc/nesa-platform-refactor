@@ -34,7 +34,7 @@ export function TrustBandSection() {
           ))}
         </div>
         <p className="ed-disclaimer">
-          Recognition Cannot Be Bought. Nomination is free. Sponsorship, donations, partnerships, endorsements, publicity and media participation do not influence eligibility, scoring, judging or recognition decisions. <Link to="/governance">Read our integrity policy →</Link>
+          Recognition Cannot Be Bought. Nomination is free. Sponsorship, donations, partnerships, endorsements, publicity, webinars, podcasts and media participation carry zero weight in eligibility, judging or recognition decisions. <Link to="/about/governance">Read Governance and Integrity →</Link>
         </p>
       </div>
     </section>

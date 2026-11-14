@@ -51,13 +51,13 @@ const contactInfo = [
 
 const departments = [
   { name: "General Inquiries", email: "info@nesa.africa" },
-  { name: "Nominations & Nominees", email: "nominees@nesa.africa" },
+  { name: "Nomination assistance · Nominee acceptance · Consent or correction · Evidence submission", email: "nominees@nesa.africa" },
   { name: "Partners & Sponsors", email: "partners@nesa.africa" },
   { name: "Media & Press", email: "press@nesa.africa" },
   { name: "Volunteer & Engagement", email: "engagement@nesa.africa" },
   { name: "Chapters Support", email: "chapters@nesa.africa" },
-  { name: "Gala & Events", email: "events@nesa.africa" },
-  { name: "Judges & Jury", email: "judges@nesa.africa" },
+  { name: "Online Programme & Media", email: "events@nesa.africa" },
+  { name: "NRRC support · Judges Arena support", email: "judges@nesa.africa" },
   { name: "Ambassadors", email: "ambassadors@nesa.africa" },
 ];
 
@@ -119,8 +119,7 @@ export default function Contact() {
               Contact <span className="text-nesa-gold">NESA-Africa</span>
             </h1>
             <p className="text-xl text-muted-foreground">
-              Have questions about nominations, partnerships, or want to get involved? 
-              We're here to help.
+              Select the subject that best matches your enquiry so it can be routed appropriately. Do not send passports, bank details, confidential evidence or other sensitive documents through the general contact form.
             </p>
           </div>
         </div>
@@ -159,7 +158,7 @@ export default function Contact() {
                   <TabsList className="grid w-full grid-cols-2">
                     <TabsTrigger value="general">
                       <MessageSquare className="mr-2 h-4 w-4" />
-                      General Inquiry
+                      General Enquiry
                     </TabsTrigger>
                     <TabsTrigger value="presenter">
                       <Mic className="mr-2 h-4 w-4" />
@@ -225,7 +224,7 @@ export default function Contact() {
                         <Label htmlFor="message">Message</Label>
                         <Textarea
                           id="message"
-                          placeholder="Your message..."
+                          placeholder="Your message... Do not include passports, bank details, confidential evidence or other sensitive documents."
                           rows={5}
                           value={formData.message}
                           onChange={(e) => setFormData({ ...formData, message: e.target.value })}

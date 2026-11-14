@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 
 const volunteerRoles = [
   {
-    title: "Nomination Reviewer",
+    title: "NRRC research and nominee contact",
     type: "Remote",
     commitment: "5-10 hrs/week",
     description: "Review and verify nomination submissions for completeness and eligibility",
@@ -34,10 +34,10 @@ const volunteerRoles = [
     skills: ["Social media savvy", "Content creation", "Community engagement"]
   },
   {
-    title: "Event Volunteer",
+    title: "Webinars and podcasts",
     type: "On-site",
     commitment: "Event-based",
-    description: "Support local and regional NESA events, ceremonies, and workshops",
+    description: "Support education webinars, podcasts, interviews and responsible storytelling",
     icon: Calendar,
     skills: ["Event coordination", "Customer service", "Flexibility"]
   },
@@ -73,8 +73,8 @@ const volunteerBenefits = [
     description: "Receive official NESA-Africa volunteer certification"
   },
   {
-    title: "Exclusive Access",
-    description: "VIP access to NESA events and ceremonies"
+    title: "Written Terms",
+    description: "Selected applicants receive written terms before access or assignments are issued"
   },
   {
     title: "Networking",
@@ -112,11 +112,10 @@ export default function Volunteer() {
               Join Our Movement
             </Badge>
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Volunteer with <span className="text-nesa-gold">NESA-Africa</span>
+              Volunteer With <span className="text-nesa-gold">NESA-Africa and EduAid-Africa</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
-              Be part of Africa's largest education recognition movement. 
-              Your time and talent can help celebrate the educators transforming our continent.
+              Contribute your skills to education research, technology, media, community engagement and education-support services. Submitting an application does not constitute appointment or onboarding. Selected applicants receive written terms before access or assignments are issued.
             </p>
             <Button size="lg" className="bg-nesa-gold hover:bg-nesa-gold/90 text-black">
               <Heart className="w-5 h-5 mr-2" />
@@ -245,16 +244,16 @@ export default function Volunteer() {
           <Heart className="w-12 h-12 text-nesa-gold mx-auto mb-4" />
           <h2 className="text-3xl font-bold mb-4">Ready to Make a Difference?</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-            Join thousands of volunteers across Africa working to recognize and celebrate education enablers.
+            Explore volunteer roles in technology, data quality, website QA, social media, design, documentaries, communications, translation, chapters, fundraising, school research, partnerships, accessibility, safeguarding and administration.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-nesa-gold hover:bg-nesa-gold/90 text-black">
-              Start Your Application
+              Apply to Volunteer
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
             <Link to="/contact">
               <Button size="lg" variant="outline">
-                Contact Volunteer Team
+                Explore Volunteer Roles
               </Button>
             </Link>
           </div>

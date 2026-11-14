@@ -29,14 +29,14 @@ export const PROGRAMME_END = new Date(PROGRAMME_END_DATETIME);
 
 /**
  * CANONICAL COUNTDOWN TARGET — every Gala countdown on the site must use this.
- * Gala day begins 28 December 2026, 00:00 West Africa Time (UTC+1).
+ * Programme day begins 13 December 2026, 00:00 West Africa Time (UTC+1).
  * Do not hard-code this value in components.
  */
 export const GALA_COUNTDOWN_DATETIME = "2026-12-13T00:00:00+01:00";
 export const GALA_COUNTDOWN_TARGET = new Date(GALA_COUNTDOWN_DATETIME);
 
 /** Human-readable label used across the site. */
-export const PROGRAMME_END_LABEL = "13 December 2026";
+export const PROGRAMME_END_LABEL = "Sunday 13 December 2026";
 
 /** Long label including the approved attendance mode. */
 export const PROGRAMME_END_LONG_LABEL = "Sunday 13 December 2026 · Online";

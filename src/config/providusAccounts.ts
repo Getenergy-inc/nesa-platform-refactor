@@ -99,15 +99,13 @@ export const PROVIDUS_ACCOUNT_GROUPS: ProvidusAccountGroup[] = [
       { label: "Send a Child to School", to: "/donate" },
       { label: "Adopt a School", to: "/donate" },
       { label: "Sponsor Teacher Training", to: "/programs" },
-      { label: "Support a Special-Needs School", to: "/support-a-special-needs-school" },
-      { label: "Join an Afri-EduTourism Mission", to: "/afri-edutourism" },
     ],
     primaryCta: { label: "Support EduAid-Africa", to: "/programs" },
   },
   {
     id: "nesa",
     shortName: "NESA-Africa",
-    legalName: "New Education Standards Award",
+    legalName: "New Education Standards Award (NESA-Africa)",
     description:
       "NESA-Africa sponsorship, the Online Recognition Programme, NESA-Africa TV, media, CSR education contributions and education recognition campaigns.",
     accounts: [

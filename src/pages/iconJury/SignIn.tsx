@@ -110,7 +110,7 @@ export default function IconJurySignIn() {
             <Gavel className="h-8 w-8 text-gold" />
             <div className="text-center">
               <p className="text-[11px] uppercase tracking-widest text-gold/80">Africa Education Icon</p>
-              <h1 className="text-lg font-semibold">Judges Portal</h1>
+              <h1 className="text-lg font-semibold">Judges Arena</h1>
             </div>
           </div>
 
@@ -119,11 +119,11 @@ export default function IconJurySignIn() {
               <>
                 <h2 className="text-xl font-semibold mb-1">Secure jury sign-in</h2>
                 <p className="text-sm text-white/60 mb-6">
-                  Independent review of Africa Education Icon nominees. Invitation-only access.
+                  Secure access for formally appointed Africa Education Icon judges. Access is role-limited and confidential. Judge assessments, conflict records and nominee evidence must not be shared outside the authorised process.
                 </p>
                 <form onSubmit={signIn} className="space-y-4">
                   <div>
-                    <Label className="text-white/80">Email</Label>
+                    <Label className="text-white/80">Approved email</Label>
                     <Input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
                   </div>
                   <div>
@@ -131,7 +131,7 @@ export default function IconJurySignIn() {
                     <Input type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
                   </div>
                   <Button type="submit" disabled={busy} className="w-full bg-gold hover:bg-gold/90 text-black">
-                    {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : "Continue"}
+                    {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : "Sign In"}
                   </Button>
                 </form>
               </>
@@ -172,7 +172,7 @@ export default function IconJurySignIn() {
             </p>
           </div>
           <p className="text-center text-xs text-white/40 mt-6">
-            Not a judge? <Link to="/" className="text-gold hover:underline">Return to nesa.africa</Link>
+            Need help? <Link to="/contact" className="text-gold hover:underline">Contact Judging Support</Link>
           </p>
         </div>
       </div>

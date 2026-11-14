@@ -82,8 +82,7 @@ export default function AfriEduTourismPage() {
                 Learning Through Africa's Stories, Heritage, and Educational Ecosystems
               </p>
               <p className="text-ivory/75 max-w-2xl mx-auto leading-relaxed">
-                Afri-EduTourism connects educational discovery, cultural heritage, institutional visits, research
-                exchanges, educational conferences, school partnerships, and continental learning experiences.
+                Responsible education travel connecting learning, professional volunteering, cultural exchange and verified school interventions across Africa.
               </p>
             </motion.div>
           </div>
@@ -176,12 +175,12 @@ export default function AfriEduTourismPage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button asChild size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-semibold">
                 <Link to="/contact">
-                  Partner with Us <ArrowRight className="ml-2 h-4 w-4" />
+                  Become an Institutional Partner <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
                 <Link to="/regions">
-                  Browse All Regions <ArrowRight className="ml-2 h-4 w-4" />
+                  Explore Missions <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </div>

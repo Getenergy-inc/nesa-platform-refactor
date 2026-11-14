@@ -141,9 +141,9 @@ export default function Login() {
         >
           <Card className="border-white/10 bg-charcoal-light shadow-2xl">
             <CardHeader className="space-y-2 text-center pb-4">
-              <CardTitle className="font-display text-2xl text-white">{t("auth.login.title")}</CardTitle>
+              <CardTitle className="font-display text-2xl text-white">Sign In to Your Authorised Workspace</CardTitle>
               <CardDescription className="text-white/60">
-                {t("auth.login.subtitle")}
+                Select the role for which you have approved access: Nominee Portal · NRRC Portal · Judges Arena · Volunteer Dashboard · Chapter Workspace · Administrator Sign In. NRRC, judge and administrator access is invitation-only. Users must not self-assign restricted roles.
               </CardDescription>
             </CardHeader>
 
@@ -237,9 +237,9 @@ export default function Login() {
 
             <CardFooter className="flex flex-col gap-3 pt-0">
               <p className="text-center text-sm text-white/50">
-                {t("auth.login.noAccount")}{" "}
-                <Link to="/register" className="font-medium text-gold hover:underline">
-                  {t("auth.login.createOne")}
+                Donor, school or supporter?{" "}
+                <Link to="/login?next=%2Fdashboard" className="font-medium text-gold hover:underline">
+                  Sign in to My EduAid-Africa Account.
                 </Link>
               </p>
             </CardFooter>

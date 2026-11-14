@@ -26,10 +26,10 @@ const WORKFLOW = [
   { icon: Users,        label: "Verified Nominee Pool" },
   { icon: Scale,        label: "Specialist Panel Screening" },
   { icon: Award,        label: "Three Finalists per Group" },
-  { icon: Vote,         label: "27-Judge Grand Jury Vote" },
+  { icon: Vote,         label: "Decision Ballot" },
   { icon: Gavel,        label: "Governance Review" },
   { icon: Sparkles,     label: "Nine Laureates" },
-  { icon: Award,        label: "Hall of Fame & Gala" },
+  { icon: Award,        label: "Moderated Outcome" },
 ];
 
 export default function JudgesArenaLanding() {
@@ -71,7 +71,7 @@ export default function JudgesArenaLanding() {
         <title>2026 Africa Education Icon Judges Arena | NESA-Africa</title>
         <meta
           name="description"
-          content="Learn how 27 independent judges review NRRC-verified nominees across three pathways and nine finalist groups to select the nine Africa Education Icon Laureates for 2006–2026."
+          content="Nine independent judges assess eligible Africa Education Icon dossiers after NRRC research, review and quality assurance."
         />
         <link rel="canonical" href="https://nesa.africa/judges" />
         <meta property="og:title" content="2026 Africa Education Icon Judges Arena | NESA-Africa" />
@@ -95,23 +95,22 @@ export default function JudgesArenaLanding() {
           </div>
           <div className="mt-4"><ArenaExitButton /></div>
           <h1 className="mt-6 font-serif text-4xl sm:text-5xl lg:text-6xl leading-tight max-w-4xl">
-            2026 <span className="text-gold">Africa Education Icon</span> Judges Arena
+            Independent <span className="text-gold">Africa Education Icon</span> Judges
           </h1>
           <p className="mt-6 text-lg sm:text-xl text-white/75 max-w-3xl leading-relaxed">
-            A secure, independent jury platform for reviewing verified lifetime education
-            impact and selecting the nine Africa Education Icon Laureates for 2006–2026.
+            Nine independent judges assess eligible Africa Education Icon dossiers after NRRC research, review and quality assurance. Three judges per Icon category; no public voting; conflict screening and governance oversight.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Button asChild size="lg" className="bg-gold text-arena-bg hover:bg-gold/90">
-              <SmartLink to="/judges/sign-in">Judge Sign In <ArrowRight className="ml-2 h-4 w-4" /></SmartLink>
+              <SmartLink to="/judges/sign-in">View Judging Standards <ArrowRight className="ml-2 h-4 w-4" /></SmartLink>
             </Button>
             <Button asChild size="lg" variant="outline"
               className="border-white/25 bg-white/5 text-white hover:bg-white/10">
-              <a href="#workflow">Learn About the Judging Process</a>
+              <a href="#workflow">How Icon Judging Works</a>
             </Button>
             <Button asChild size="lg" variant="ghost" className="text-white/80 hover:text-gold">
-              <SmartLink to="/judges/directory">Meet the Judges</SmartLink>
+              <SmartLink to="/judges/directory">Meet Confirmed Judges</SmartLink>
             </Button>
           </div>
 
@@ -182,12 +181,12 @@ export default function JudgesArenaLanding() {
               body: "The Nominee Research and Review Corps completes identity, duplicate, eligibility, evidence and pathway verification. Only NRRC-Verified nominees ever reach the judges.",
             },
             {
-              title: "Nine-Panel Jury Matrix",
-              body: "9 independent judges are divided into nine specialist panels of three. Each panel screens only its assigned pathway and classification, then all 9 independent judges vote in the grand jury round.",
+              title: "Independent judging structure",
+              body: "Nine judges · Three Icon categories · Three judges per category · Independent assessment · Governance oversight.",
             },
             {
-              title: "Screening to Final Vote Timeline",
-              body: "Specialist screening runs from the second week of September through 30 September 2026. Grand jury ranked-choice voting opens 1 October and closes 7 October 2026.",
+              title: "Publication conditions",
+              body: "Written acceptance, identity confirmation, confidentiality agreement, conflict declaration, category assignment, calibration and secure-access testing are required before publication.",
             },
             {
               title: "Independence & Conflict Safeguards",
@@ -227,15 +226,14 @@ export default function JudgesArenaLanding() {
       <section className="max-w-7xl mx-auto px-6 pb-24">
         <div className="rounded-2xl border border-gold/30 bg-gradient-to-br from-arena-panel to-arena-bg p-10 lg:p-14 text-center">
           <h2 className="font-serif text-3xl sm:text-4xl">
-            Three pathways · nine finalist groups · nine laureates — decided by an independent, firewalled jury matrix.
+            Judging preparation is in progress.
           </h2>
           <p className="mt-4 text-white/70 max-w-2xl mx-auto">
-            One independent, evidence-based and auditable jury process for Africa's
-            highest lifetime education recognition.
+            The Judges Arena will be activated only after appointments, conflict declarations, calibration and secure-access testing are complete.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Button asChild size="lg" className="bg-gold text-arena-bg hover:bg-gold/90">
-              <SmartLink to="/judges/sign-in">Judge Sign In</SmartLink>
+              <SmartLink to="/judges/sign-in">View Judging Standards</SmartLink>
             </Button>
             <Button asChild size="lg" variant="outline"
               className="border-white/25 bg-white/5 text-white hover:bg-white/10">

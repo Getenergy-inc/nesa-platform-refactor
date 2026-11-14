@@ -18,19 +18,19 @@ const firewalls = [
   {
     icon: Ban,
     title: "Sponsor Isolation",
-    description: "Sponsors never access nominations, voting, or jury processes.",
+    description: "Sponsors, donors, partners and media participants receive no nomination, scoring, judging or recognition advantage.",
     details: ["No branding on certificates", "No influence on category selection", "No access to nominee data"],
   },
   {
     icon: Lock,
     title: "Stage Locking",
-    description: "Each stage is locked/unlocked via config — no manual override possible.",
+    description: "Every significant status change records the responsible user, date and time, previous status, new status, supporting evidence and reason.",
     details: ["Nominations stage-gated", "Voting windows enforced", "Results sealed until ceremony"],
   },
   {
     icon: Eye,
     title: "Full Audit Trail",
-    description: "Every action is logged with timestamp, user, and IP address.",
+    description: "All relevant reviewers and judges must disclose actual, potential or perceived conflicts and recuse themselves from affected cases.",
     details: ["NRRC review logs", "Vote timestamps", "Certificate issuance records"],
   },
   {
@@ -42,11 +42,11 @@ const firewalls = [
 ];
 
 const roles = [
-  { name: "Public", access: "View categories, nominees, vote (when open)", level: "Open" },
-  { name: "User", access: "Submit nominations, track certificates, wallet", level: "Authenticated" },
-  { name: "NRRC", access: "Review nominations, validate evidence", level: "Verified" },
-  { name: "Jury", access: "Score finalists, access sealed results", level: "Appointed" },
-  { name: "Chapter", access: "Manage local events, regional nominations", level: "Regional" },
+  { name: "Public", access: "View approved categories, profiles and programme information", level: "Open" },
+  { name: "Programme team", access: "Programme administration, approved communications and delivery", level: "Authorised" },
+  { name: "Nominee Research and Review Corps", access: "Contact verification, consent, interviews, evidence review, preliminary eligibility review, profiles and dossiers", level: "Appointed" },
+  { name: "Independent Icon judges", access: "Assess eligible Africa Education Icon dossiers", level: "Appointed" },
+  { name: "SCEF governance", access: "Organisational oversight, policy control and process assurance", level: "Governance" },
   { name: "Admin", access: "Stage control, CMS, audit logs, compliance", level: "Staff" },
 ];
 
@@ -54,7 +54,7 @@ export default function Governance() {
   return (
     <>
       <AboutSeo
-        title="Governance & Firewalls | NESA-Africa Integrity Framework"
+        title="Governance, Integrity and Independence | NESA-Africa Integrity Framework"
         description="NESA-Africa's governance framework ensures sponsor independence, judging integrity, and full accountability through multiple firewalls across every recognition tier."
         path="/about/governance"
         breadcrumbs={[
@@ -76,11 +76,10 @@ export default function Governance() {
                 </span>
               </div>
               <h1 className="mb-6 font-display text-4xl font-bold text-white md:text-5xl">
-                Governance & Firewalls
+                Governance, Integrity and Independence
               </h1>
               <p className="text-lg text-white/70">
-                NESA-Africa is a governance-grade platform. Our multi-layered firewall system ensures
-                sponsor independence, voting integrity, and full operational accountability.
+                NESA-Africa operates through defined responsibilities, documented criteria, conflict controls and separation between research, judging, partnerships and programme production.
               </p>
             </div>
           </div>
@@ -160,7 +159,7 @@ export default function Governance() {
                 { label: "Privacy Policy", href: "/policies/privacy" },
                 { label: "Terms of Service", href: "/policies/terms" },
                 { label: "Conflict of Interest Policy", href: "/policies/coi" },
-                { label: "Voting Integrity Policy", href: "/policies/voting-integrity" },
+                { label: "Report a Concern", href: "/contact" },
               ].map((doc) => (
                 <Link
                   key={doc.href}

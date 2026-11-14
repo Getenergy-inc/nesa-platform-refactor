@@ -39,17 +39,17 @@ const PHASES_2026: TimelinePhase[] = [
   },
   {
     phaseName: "Nominations Open",
-    window: "6 Sep – 21 Nov 2026",
+    window: "9 Nov 2026 – 31 Mar 2027",
     status: "upcoming",
     spotlight: true,
     events: [
-      { date: "6 Sep", title: "Public Nominations Open — all four tiers" },
+      { date: "9 Nov", title: "Public Nominations Open — all four tiers" },
       { date: "6 Sep – 6 Oct", title: "Africa Education Icon window", detail: "Independent, shorter closing date" },
     ],
   },
   {
     phaseName: "NRRC Verification",
-    window: "6 Sep – 21 Nov 2026",
+    window: "9 Nov 2026 – 31 Mar 2027",
     status: "upcoming",
     events: [
       { date: "By 10 Sep", title: "Icon NRRC verification complete" },
@@ -74,12 +74,12 @@ const PHASES_2026: TimelinePhase[] = [
     ],
   },
   {
-    phaseName: "Recognition Gala",
-    window: "13 December 2026 · Lagos",
+    phaseName: "Online Recognition Programme",
+    window: "Sunday 13 December 2026 · Online",
     status: "upcoming",
     spotlight: true,
     events: [
-      { date: "13 Dec", title: "NESA-Africa 2026 Recognition Gala", detail: "9 Icon Laureates announced; Certificates presented" },
+      { date: "13 Dec", title: "NESA-Africa 2026 Online Recognition Programme", detail: "Approximately 20–30 invited live participants; up to nine Africa Education Icons" },
     ],
   },
   {
@@ -97,7 +97,7 @@ export default function AboutCycle2026() {
     <>
       <AboutSeo
         title="About NESA-Africa 2026 · Inaugural Public Award Cycle"
-        description="NESA-Africa 2026 — the inaugural public award cycle: 18 recognition forms across 4 tiers and 15 regions (8 Africa + 7 Global), culminating in the 13 December 2026 Recognition Gala in Lagos."
+        description="NESA-Africa 2026 is a focused evidence-led recognition and documentation programme culminating in an online programme on 13 December 2026."
         path="/about/nesa-africa-2026"
         breadcrumbs={[
           { name: "Home", path: "/" },
@@ -105,8 +105,8 @@ export default function AboutCycle2026() {
           { name: "NESA-Africa 2026", path: "/about/nesa-africa-2026" },
         ]}
         faqs={[
-          { question: "When do NESA-Africa 2026 nominations open?", answer: "Public nominations open 6 September 2026 across all four tiers. The Africa Education Icon Award nomination window runs 6 September – 6 October 2026." },
-          { question: "When is the NESA-Africa 2026 Recognition Gala?", answer: "The Recognition Gala takes place on 13 December 2026 in Lagos, Nigeria, where the 9 Icon Laureates are announced and all Certificates of Recognition are formally presented." },
+          { question: "When do NESA-Africa 2026 nominations open?", answer: "Public nominations are open 9 November 2026 – 31 March 2027." },
+          { question: "When is the NESA-Africa 2026 Online Recognition Programme?", answer: "The online programme takes place on Sunday, 13 December 2026 with approximately 20–30 invited live participants and up to nine Africa Education Icons." },
           { question: "Is there any public voting in the 2026 cycle?", answer: "No. There is no public voting mechanism at any stage of the 2026 cycle. Recognition is determined exclusively through Nominee Research and Review Corps verification, the EDI Matrix, and — for the Icon Award only — independent judging and Governance ratification." },
         ]}
       />
@@ -114,8 +114,8 @@ export default function AboutCycle2026() {
       <AboutSealHero
         eyebrow="Inaugural Public Cycle"
         title={<>About <span className="text-gold">NESA-Africa 2026</span></>}
-        positioning="The platform's first public award cycle since incorporation — 18 recognition forms across four tiers, verified end-to-end, culminating in the Recognition Gala in Lagos on 13 December 2026."
-        cyclePhase="Cycle Status · Pre-Nomination · Nominations open 6 September 2026"
+        positioning="NESA-Africa 2026 is a focused evidence-led recognition and documentation programme culminating in an online programme on 13 December 2026."
+        cyclePhase="Four recognition tiers · 22 main awards · 90 subcategories · Nine Icon NRRC members · Nine independent Icon judges · No public or AGC voting"
         primaryCta={{ label: "Submit a Nomination", href: "/nominate", icon: "nominate" }}
         secondaryCta={{ label: "Non-Influence Declaration", href: "#non-influence-protocol" }}
       />
@@ -124,7 +124,7 @@ export default function AboutCycle2026() {
 
       <AboutRecognitionTiers
         tiers={CANONICAL_TIERS}
-        footerCta={{ label: "See all 18 recognition forms", href: "/nominate" }}
+        footerCta={{ label: "Explore the Four Tiers", href: "/recognition" }}
       />
 
       <AboutProcessPipeline
@@ -133,8 +133,8 @@ export default function AboutCycle2026() {
       />
 
       <AboutCycleTimeline
-        title="The Road to the 13 December 2026 Gala"
-        subtitle="Phase-based awards-season roadmap with confirmed dates from the 2026 cycle calendar."
+        title="NESA-Africa 2026 Timeline"
+        subtitle="The timeline may change where necessary to protect integrity, safeguarding, security or technical readiness."
         phases={PHASES_2026}
         footerCta={{ label: "View full cycle calendar", href: "/events/calendar" }}
       />
@@ -145,9 +145,9 @@ export default function AboutCycle2026() {
 
       <AboutContactBlock
         headline="Engage with the 2026 Cycle"
-        intro="Nominate a changemaker, apply as a judge or NRRC member, become a chapter volunteer, or attend the 13 December 2026 Gala."
+        intro="The central 2026 focus is the recognition of up to nine Africa Education Icons across three Icon categories and three participation pathways. Other tiers follow their approved research, evidence and governance processes; their certificates are not automatically competitive awards."
         primaryCta={{ label: "Submit a Nomination", href: "/nominate" }}
-        secondaryCta={{ label: "Contact the Cycle Desk", href: "mailto:info@nesa.africa" }}
+        secondaryCta={{ label: "Receive Programme Updates", href: "/contact" }}
       />
     </>
   );
