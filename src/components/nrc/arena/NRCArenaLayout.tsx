@@ -48,7 +48,7 @@ const NAV: NavItem[] = [
   { href: "/nrrc/handover/judges", label: "Handover · Judges", icon: ArrowRightLeft, group: "review" },
   { href: "/nrrc/handover/governance", label: "Handover · Governance", icon: ArrowRightLeft, group: "review" },
   { href: "/nrrc/reports", label: "Reports", icon: BarChart3, group: "operations" },
-  { href: "/nrrc/directory", label: "NRC Directory", icon: Users, group: "you" },
+  { href: "/nrrc/directory", label: "NRRC Directory", icon: Users, group: "you" },
   { href: "/nrrc/profile", label: "My Profile", icon: UserCircle2, group: "you" },
   { href: "/nrrc/onboarding", label: "Training & Onboarding", icon: BookOpen, group: "you" },
   { href: "/nrrc/audit-log", label: "Audit History", icon: History, group: "you" },
@@ -68,7 +68,7 @@ function SideNav({ onNavigate }: { onNavigate?: () => void }) {
   }));
 
   return (
-    <nav aria-label="NRC Arena" className="space-y-6 text-sm">
+    <nav aria-label="NRRC Arena" className="space-y-6 text-sm">
       {groups.map((g) => (
         <div key={g.key}>
           <p className="px-3 pb-2 text-[11px] uppercase tracking-wider text-white/40">
@@ -109,18 +109,18 @@ export function NRCArenaLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen bg-arena-bg text-arena-text">
-      <ArenaSeo workspace="NRC Arena" />
+      <ArenaSeo workspace="NRRC Arena" />
       <div className="flex min-h-screen w-full">
         {/* Brand rail */}
         <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-arena-rail lg:block">
           <div className="sticky top-0 flex h-screen flex-col overflow-y-auto">
             <ArenaExitRailLink />
-            <ArenaBrand workspace="NRC Arena" to="/nrrc" />
+            <ArenaBrand workspace="NRRC Arena" to="/nrrc" />
             {user && (
               <div className="mx-3 mb-4 rounded-lg border border-white/10 bg-white/5 p-3">
                 <p className="text-[10px] uppercase tracking-wider text-gold/70">Signed in</p>
                 <p className="truncate text-sm font-medium">{user.email}</p>
-                <p className="mt-0.5 text-[11px] text-arena-muted">NRC Member · MFA required</p>
+                <p className="mt-0.5 text-[11px] text-arena-muted">NRRC Member · MFA required</p>
               </div>
             )}
             <div className="flex-1 px-1">
@@ -129,7 +129,7 @@ export function NRCArenaLayout({ children }: { children: ReactNode }) {
                 to="/support"
                 className="mt-6 flex items-center gap-2 px-3 py-2 text-xs text-white/50 hover:text-gold"
               >
-                <LifeBuoy className="h-3.5 w-3.5" /> NRC Support
+                <LifeBuoy className="h-3.5 w-3.5" /> NRRC Support
               </Link>
             </div>
             <ArenaRailBadge lines={["2026 NESA-AFRICA", "NOMINEE RESEARCH", "CORPS ARENA"]} />
@@ -138,7 +138,7 @@ export function NRCArenaLayout({ children }: { children: ReactNode }) {
 
         <div className="flex min-w-0 flex-1 flex-col">
           <ArenaTopBar
-            title="NESA-Africa NRC Arena"
+            title="NESA-Africa NRRC Arena"
             subtitle="Verification · Research · Evidence · Handover"
             leading={
               <Sheet>
@@ -147,14 +147,14 @@ export function NRCArenaLayout({ children }: { children: ReactNode }) {
                     variant="ghost"
                     size="icon"
                     className="lg:hidden text-white hover:bg-white/10"
-                    aria-label="Open NRC navigation"
+                    aria-label="Open NRRC navigation"
                   >
                     <Menu className="h-5 w-5" />
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="left" className="w-72 overflow-y-auto border-r border-white/10 bg-arena-rail p-0">
                   <ArenaExitRailLink />
-                  <ArenaBrand workspace="NRC Arena" to="/nrrc" />
+                  <ArenaBrand workspace="NRRC Arena" to="/nrrc" />
                   <div className="px-1 pb-6">
                     <SideNav />
                   </div>
@@ -164,8 +164,8 @@ export function NRCArenaLayout({ children }: { children: ReactNode }) {
             statusLabel="Verification Live"
             statusDetail="2026 Cycle"
             statusTone="live"
-            identityName={user?.email ?? "NRC Member"}
-            identityRole="NRC Member"
+            identityName={user?.email ?? "NRRC Member"}
+            identityRole="NRRC Member"
             notifications={3}
             actions={
               <div className="hidden lg:flex items-center gap-2">
@@ -181,7 +181,7 @@ export function NRCArenaLayout({ children }: { children: ReactNode }) {
           />
 
           <main className="min-w-0 flex-1 px-4 py-6 pb-16 sm:px-6">{children}</main>
-          <ArenaFooter workspace="NRC Arena" />
+          <ArenaFooter workspace="NRRC Arena" />
         </div>
       </div>
     </div>

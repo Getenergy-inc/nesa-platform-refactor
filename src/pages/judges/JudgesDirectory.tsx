@@ -62,7 +62,7 @@ const INTEGRITY_PILLARS = [
   { icon: ShieldAlert, title: "Conflict Screening", desc: "Mandatory disclosure and recusal protocols." },
   { icon: ClipboardCheck, title: "Evaluation Rubrics", desc: "Published EDI scoring matrices per tier." },
   { icon: Scale, title: "Independent Scoring", desc: "Firewalled from sponsors and operators." },
-  { icon: FileSearch, title: "Verification Review", desc: "Evidence cross-checked by the NRC." },
+  { icon: FileSearch, title: "Verification Review", desc: "Evidence cross-checked by the NRRC." },
   { icon: Lock, title: "Governance Oversight", desc: "Final validation by the SCEF board." },
 ];
 

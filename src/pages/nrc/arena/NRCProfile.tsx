@@ -14,12 +14,12 @@ const ACTIVITY = [
 export default function NRCProfile() {
   const { nrcReference } = useParams();
   const { user } = useAuth();
-  const ref = nrcReference ?? "NRC-2026-PENDING";
-  const display = user?.email?.split("@")[0] ?? "NRC Member";
+  const ref = nrcReference ?? "NRRC-2026-PENDING";
+  const display = user?.email?.split("@")[0] ?? "NRRC Member";
 
   return (
     <NRCArenaLayout>
-      <Helmet><title>NRC Profile · {ref} · NESA-Africa</title></Helmet>
+      <Helmet><title>NRRC Profile · {ref} · NESA-Africa</title></Helmet>
 
       <header className="mb-6 flex flex-wrap items-start gap-4">
         <div className="h-24 w-24 rounded-xl bg-gold/15 border border-gold/40 flex items-center justify-center">
@@ -28,7 +28,7 @@ export default function NRCProfile() {
           </span>
         </div>
         <div className="min-w-0 flex-1">
-          <p className="text-xs uppercase tracking-wider text-gold/80">NRC Reference · {ref}</p>
+          <p className="text-xs uppercase tracking-wider text-gold/80">NRRC Reference · {ref}</p>
           <h1 className="font-display text-2xl font-bold mt-0.5">{display}</h1>
           <p className="text-white/60 text-sm">Professional title · Organisation · Country</p>
           <div className="mt-2 flex flex-wrap gap-2 text-xs">
@@ -49,7 +49,7 @@ export default function NRCProfile() {
               the profile is completed.
             </p>
           </Block>
-          <Block title="NRC Assignment">
+          <Block title="NRRC Assignment">
             <p className="text-sm text-white/70">
               Recognition tier, main category, subcategories, team role, team members and
               service period appear here once appointed.

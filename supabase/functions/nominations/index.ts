@@ -19,7 +19,7 @@ interface NominationPayload {
   subcategory_id: string;
   justification: string;
   evidence_urls?: string[];
-  source?: "START_MEMBER" | "NRC" | "PUBLIC";
+  source?: "START_MEMBER" | "NRRC" | "PUBLIC";
 }
 
 serve(async (req: Request): Promise<Response> => {

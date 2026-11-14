@@ -65,7 +65,7 @@ export function InfluencerOutreachProspectsSection() {
         <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
           <StatCard icon={<Users className="h-4 w-4" />} value={total} label="Prospects" />
           <StatCard icon={<Globe2 className="h-4 w-4" />} value={countries} label="Regions" />
-          <StatCard icon={<ShieldCheck className="h-4 w-4" />} value={"NRC"} label="Verified by" />
+          <StatCard icon={<ShieldCheck className="h-4 w-4" />} value={"NRRC"} label="Verified by" />
           <StatCard icon={<Users className="h-4 w-4" />} value={filtered.length} label="Showing" />
         </div>
 

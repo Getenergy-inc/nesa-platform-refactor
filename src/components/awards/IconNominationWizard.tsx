@@ -104,7 +104,7 @@ const DECLARATIONS = [
   "The information provided is accurate to the best of my knowledge.",
   "This nomination is made voluntarily, without payment or incentive.",
   "I have not submitted false or misleading evidence.",
-  "I understand this submission may be reviewed by the Nominee Research Corps (NRC).",
+  "I understand this submission may be reviewed by the Nominee Research and Review Corps (NRRC).",
   "I understand recognition is based on verified impact, not popularity.",
 ] as const;
 
@@ -862,9 +862,9 @@ export function IconNominationWizard({
         <ol className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 text-xs text-foreground/75">
           {[
             "Nomination logged",
-            "NRC identity & duplicate verification (5–10 business days)",
+            "NRRC identity & duplicate verification (5–10 business days)",
             "Nominee acceptance",
-            "NRC dossier preparation & EDI Matrix assessment",
+            "NRRC dossier preparation & EDI Matrix assessment",
             "Judges Arena (27 Independent Judges, 9 Specialist Panels)",
             "Grand Jury voting",
             "Governance ratification",

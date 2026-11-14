@@ -88,7 +88,7 @@ const TIER_PRESENTATION: Record<TierSlug, TierPresentation> = {
       "Public figures whose verified campaigns, platforms, or programmes have advanced education. No judges, no voting, no ranking.",
     badges: [
       "Certificate of Recognition",
-      "NRC-Verified",
+      "NRRC-Verified",
       "Multiple Recipients Possible",
     ],
     cta: "Nominate an Influencer Enabler",
@@ -103,7 +103,7 @@ const TIER_PRESENTATION: Record<TierSlug, TierPresentation> = {
     badges: [
       "Certificate of Recognition",
       "7 Categories",
-      "NRC-Verified",
+      "NRRC-Verified",
     ],
     cta: "Explore Platinum Categories",
     ctaHref: "#directory",
@@ -117,7 +117,7 @@ const TIER_PRESENTATION: Record<TierSlug, TierPresentation> = {
     badges: [
       "Certificate of Recognition",
       "9 Categories",
-      "NRC-Verified",
+      "NRRC-Verified",
     ],
     cta: "Explore Gold-Blue Garnet Categories",
     ctaHref: "#directory",
@@ -276,7 +276,7 @@ function DirectoryCard({
               : "border-emerald-500/50 text-emerald-300",
           ].join(" ")}
         >
-          {form.judged ? "Judged" : "NRC-Verified"}
+          {form.judged ? "Judged" : "NRRC-Verified"}
         </Badge>
       </div>
       <h4 className="font-playfair text-base leading-snug text-foreground group-hover:text-gold">
@@ -444,7 +444,7 @@ function ProcessDiagram() {
   const iconSteps = [
     "Nomination",
     "Acceptance",
-    "NRC (EDI Matrix)",
+    "NRRC (EDI Matrix)",
     "Judges Arena (ICON_SCORING_CRITERIA)",
     "Grand Jury",
     "Governance Ratification",
@@ -453,7 +453,7 @@ function ProcessDiagram() {
   const certSteps = [
     "Nomination",
     "Acceptance",
-    "NRC (EDI Matrix)",
+    "NRRC (EDI Matrix)",
     "Governance Approval",
     "Certificate of Recognition",
   ];
@@ -468,9 +468,9 @@ function ProcessDiagram() {
           How Recognition Works
         </h2>
         <p className="mt-2 max-w-3xl text-sm text-foreground/70">
-          NRC verifies all four tiers using the EDI Matrix. Only the Africa
+          NRRC verifies all four tiers using the EDI Matrix. Only the Africa
           Education Icon Award proceeds to the Judges Arena, where judges apply
-          a separate lifetime-achievement scoring framework after NRC
+          a separate lifetime-achievement scoring framework after NRRC
           verification is complete.
         </p>
 
@@ -502,7 +502,7 @@ function ProcessDiagram() {
             <div className="mb-4 flex items-center gap-2">
               <BadgeCheck className="h-5 w-5 text-emerald-300" />
               <h3 className="font-playfair text-lg text-emerald-200">
-                Certificate Tiers (NRC-Verified)
+                Certificate Tiers (NRRC-Verified)
               </h3>
             </div>
             <p className="mb-3 text-xs uppercase tracking-wide text-emerald-300/80">
@@ -581,19 +581,19 @@ function ExistingNomineesBand() {
 const FAQS = [
   {
     q: "What counts as evidence of impact?",
-    a: "Anything that independently corroborates what the nominee has done: audited reports, press coverage, official policy documents, programme evaluations, beneficiary testimonials, photographs, video, or verifiable statistics. Self-reported claims without corroboration are not sufficient — the Nominee Research Corps assesses evidence against the category's EDI Matrix.",
+    a: "Anything that independently corroborates what the nominee has done: audited reports, press coverage, official policy documents, programme evaluations, beneficiary testimonials, photographs, video, or verifiable statistics. Self-reported claims without corroboration are not sufficient — the Nominee Research and Review Corps assesses evidence against the category's EDI Matrix.",
   },
   {
     q: "Can I nominate myself?",
-    a: "Individuals may not self-nominate for the Africa Education Icon Award. For all other tiers, organisations may submit their own institution or programme, but a third-party reference is expected during NRC verification.",
+    a: "Individuals may not self-nominate for the Africa Education Icon Award. For all other tiers, organisations may submit their own institution or programme, but a third-party reference is expected during NRRC verification.",
   },
   {
     q: "What happens after I submit?",
-    a: "You'll receive an acknowledgement immediately. Your nomination then moves through duplicate review, NRC evidence verification, EDI Matrix scoring, and — for the Africa Education Icon Award only — independent judging and Grand Jury deliberation, before Governance ratification.",
+    a: "You'll receive an acknowledgement immediately. Your nomination then moves through duplicate review, NRRC evidence verification, EDI Matrix scoring, and — for the Africa Education Icon Award only — independent judging and Grand Jury deliberation, before Governance ratification.",
   },
   {
     q: "Does sponsoring or donating affect my nominee's chances?",
-    a: "No. Sponsorship, partnership, donations, ticket purchases, endorsements, and visibility opportunities do not influence NRC verification, judging, or Governance decisions. Recognition is evidence-based only.",
+    a: "No. Sponsorship, partnership, donations, ticket purchases, endorsements, and visibility opportunities do not influence NRRC verification, judging, or Governance decisions. Recognition is evidence-based only.",
   },
   {
     q: "Can the same nominee win more than once?",
@@ -713,7 +713,7 @@ export default function NominateHub2026() {
             </p>
             <p className="mt-1 text-sm text-foreground/75">
               Submit the nominee&apos;s details and contribution story — the
-              Nominee Research Corps determines the correct recognition
+              Nominee Research and Review Corps determines the correct recognition
               pathway before review. You do not need to pick a category.
             </p>
             <div className="mt-3 flex flex-wrap gap-3 text-xs">

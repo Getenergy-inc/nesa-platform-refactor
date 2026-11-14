@@ -22,17 +22,17 @@ export function NRCStatusBadge({ status, className, size = "sm" }: Props) {
 
   const config = {
     "auto-verified": {
-      label: "NRC Auto-Verified",
+      label: "NRRC Auto-Verified",
       Icon: ShieldCheck,
       classes: "border-slate-300/60 bg-slate-200/10 text-slate-200",
     },
     "fully-approved": {
-      label: "NRC Fully Approved",
+      label: "NRRC Fully Approved",
       Icon: BadgeCheck,
       classes: "border-gold/60 bg-gold/15 text-gold",
     },
     "in-review": {
-      label: "NRC In Review",
+      label: "NRRC In Review",
       Icon: Clock,
       classes: "border-white/20 bg-white/5 text-white/70",
     },
@@ -50,7 +50,7 @@ export function NRCStatusBadge({ status, className, size = "sm" }: Props) {
         config.classes,
         className,
       )}
-      title={`${config.label} — verified by NESA-Africa NRC governance`}
+      title={`${config.label} — verified by NESA-Africa NRRC governance`}
     >
       <Icon className={iconSize} aria-hidden />
       {config.label}

@@ -18,12 +18,12 @@ import {
 // each module surfaces its live data and/or links to the working screen.
 const MODULES = [
   { key: "overview", label: "My Volunteer Overview", icon: LayoutDashboard },
-  { key: "tasks", label: "NRC Research Tasks", icon: ClipboardList, href: "/nrrc/dashboard/queue" },
+  { key: "tasks", label: "NRRC Research Tasks", icon: ClipboardList, href: "/nrrc/dashboard/queue" },
   { key: "submit", label: "Submit Nominee Research", icon: FileSearch, href: "/nrrc/dashboard/intake" },
   { key: "evidence", label: "Evidence Upload", icon: Upload, href: "/nrrc/dashboard/intake" },
   { key: "duplicates", label: "Duplicate Flags", icon: Copy, href: "/nrrc/dashboard/duplicates" },
   { key: "feedback", label: "Reviewer Feedback", icon: MessageSquare, href: "/nrrc/dashboard/my-reviews" },
-  { key: "reports", label: "My NRC Reports", icon: FileText, href: "/nrrc/dashboard/reports" },
+  { key: "reports", label: "My NRRC Reports", icon: FileText, href: "/nrrc/dashboard/reports" },
   { key: "training", label: "Training & Guidelines", icon: GraduationCap, href: "/nrrc/dashboard/guidelines" },
 ] as const;
 
@@ -46,7 +46,7 @@ function VolunteerDashboardContent() {
           <p className="text-gold/80 text-sm uppercase tracking-wide">NESA-Africa · Volunteer</p>
           <h1 className="text-3xl md:text-4xl font-playfair text-gold mt-2">Volunteer Dashboard</h1>
           <p className="text-white/70 mt-2">
-            Your volunteer overview and Nominee Research Corps (NRC) modules in one place.
+            Your volunteer overview and Nominee Research and Review Corps (NRRC) modules in one place.
           </p>
           <div className="mt-4">
             <NesaTvLink size="sm" />
@@ -70,7 +70,7 @@ function VolunteerDashboardContent() {
             </div>
             <p className="text-white/50 text-sm mt-6">
               Signed in as {user?.email}. Use the tabs above to pick up research tasks, submit
-              nominee evidence, flag duplicates, and view your NRC reports.
+              nominee evidence, flag duplicates, and view your NRRC reports.
             </p>
           </TabsContent>
 

@@ -255,7 +255,7 @@ export interface TimelineStep {
 
 const DEFAULT_TIMELINE: TimelineStep[] = [
   { label: "Nomination", description: "Public and institutional nominations open via the NESA-Africa portal." },
-  { label: "Verification", description: "NRC automated review screens evidence, eligibility, and duplicates." },
+  { label: "Verification", description: "NRRC automated review screens evidence, eligibility, and duplicates." },
   { label: "Review", description: "Independent jury panels apply the EDX Matrix rubric." },
   { label: "Assessment", description: "Independent jury assessment for eligible Blue Garnet tracks." },
   { label: "Recognition", description: "Certificates, gala honours, and legacy programme assignment." },
@@ -440,7 +440,7 @@ export function SponsorThisCategoryBlock({
               <p className="text-white/75 text-xs md:text-sm leading-relaxed">
                 Sponsors <span className="text-gold font-semibold">cannot influence</span>{" "}
                 nominees, voting, judges, finalists, or winners. Recognition outcomes
-                are governed independently through the NRC engine, EDX scoring, jury
+                are governed independently through the NRRC engine, EDX scoring, jury
                 panels, and audited governance ratification.
               </p>
             </div>

@@ -49,7 +49,7 @@ const ENABLER_TYPES = [
 const INTEGRITY = [
   {
     title: "No public voting",
-    body: "Recognition is never bought or crowd-sourced. Every profile in this directory is reviewed by the NRC and governance board.",
+    body: "Recognition is never bought or crowd-sourced. Every profile in this directory is reviewed by the NRRC and governance board.",
   },
   {
     title: "Evidence-led verification",
@@ -57,7 +57,7 @@ const INTEGRITY = [
   },
   {
     title: "Listing is not an award",
-    body: "Appearing in the directory records a nomination. Recognition is only conferred at the Gold-Blue Garnet Awards Gala, 28 December 2026.",
+    body: "Appearing in the directory records a nomination. Recognition is only conferred at the Gold-Blue Garnet Awards Gala, 13 December 2026.",
   },
 ];
 
@@ -291,7 +291,7 @@ export default function NomineesHubPage() {
                   Education Enablers in the Register
                 </h2>
                 <p className="ed-section-sub">
-                  NRC-verified profiles appear first. A listing records a nomination — it is not an
+                  NRRC-verified profiles appear first. A listing records a nomination — it is not an
                   award.
                 </p>
               </div>
@@ -467,7 +467,7 @@ function NomineeTile({ nominee }: { nominee: EnrichedDatabaseNominee }) {
           {[nominee.country, nominee.categoryName].filter(Boolean).join(" · ")}
         </div>
         <span className="ed-nom-tag">
-          {nominee.nrcVerified ? "NRC Verified" : "Nomination Recorded"}
+          {nominee.nrcVerified ? "NRRC Verified" : "Nomination Recorded"}
         </span>
       </div>
     </Link>

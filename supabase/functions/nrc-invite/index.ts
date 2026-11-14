@@ -33,15 +33,15 @@ function buildHtml(redeemUrl: string, expiresAt: string, name?: string | null) {
     <div style="text-align:center;margin-bottom:24px;">
       <div style="display:inline-block;padding:6px 14px;border-radius:999px;background:#f5c518;color:#111;font-weight:700;letter-spacing:1px;font-size:11px;">NESA-AFRICA 2026</div>
     </div>
-    <h1 style="font-size:22px;margin:0 0 8px 0;">Invitation to join the Nominee Research Corps</h1>
+    <h1 style="font-size:22px;margin:0 0 8px 0;">Invitation to join the Nominee Research and Review Corps</h1>
     <p style="font-size:15px;line-height:1.55;color:#333;margin:0 0 16px 0;">${greeting}</p>
     <p style="font-size:15px;line-height:1.55;color:#333;margin:0 0 16px 0;">
-      You have been invited to join the NESA-Africa Nominee Research Corps (NRC) — the independent
+      You have been invited to join the NESA-Africa Nominee Research and Review Corps (NRRC) — the independent
       body responsible for verifying nominee evidence ahead of judging. Use the secure link below to
       create your account and begin appointment onboarding.
     </p>
     <div style="text-align:center;margin:28px 0;">
-      <a href="${redeemUrl}" style="display:inline-block;background:#111;color:#f5c518;text-decoration:none;font-weight:700;padding:14px 26px;border-radius:8px;">Accept NRC invitation</a>
+      <a href="${redeemUrl}" style="display:inline-block;background:#111;color:#f5c518;text-decoration:none;font-weight:700;padding:14px 26px;border-radius:8px;">Accept NRRC invitation</a>
     </div>
     <p style="font-size:13px;color:#555;margin:0 0 8px 0;">Or copy this single-use link into your browser. It expires on ${expiry}:</p>
     <p style="font-size:12px;color:#333;word-break:break-all;background:#f6f7f9;padding:10px;border-radius:6px;">${redeemUrl}</p>
@@ -80,7 +80,7 @@ Deno.serve(async (req: Request) => {
     admin.rpc("has_role", { _user_id: userId, _role: "admin" }),
     admin.rpc("has_role", { _user_id: userId, _role: "nrc" }),
   ]);
-  if (!isAdmin && !isNrc) return json(403, { error: "NRC leadership access required" });
+  if (!isAdmin && !isNrc) return json(403, { error: "NRRC leadership access required" });
 
   let body: { email?: string; applicationId?: string; invitationId?: string; notes?: string };
   try {
@@ -138,7 +138,7 @@ Deno.serve(async (req: Request) => {
       .from("nrc_members")
       .select("*", { count: "exact", head: true })
       .in("status", ["pending", "active"]);
-    if ((count ?? 0) >= 30) return json(400, { error: "NRC member limit (30) reached" });
+    if ((count ?? 0) >= 30) return json(400, { error: "NRRC member limit (30) reached" });
 
     const newToken = crypto.randomUUID().replace(/-/g, "");
     const exp = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString();
@@ -175,7 +175,7 @@ Deno.serve(async (req: Request) => {
     body: JSON.stringify({
       from: RESEND_FROM,
       to: [email],
-      subject: "Your NESA-Africa NRC invitation",
+      subject: "Your NESA-Africa NRRC invitation",
       html: buildHtml(redeemUrl, expiresAt ?? new Date().toISOString(), fullName),
     }),
   });

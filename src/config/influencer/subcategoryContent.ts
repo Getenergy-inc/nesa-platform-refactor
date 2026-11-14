@@ -52,7 +52,7 @@ const COMMON_QUICK_INFO_TAIL = [
   { label: "Geographic coverage", value: "Africa and African Diaspora" },
   {
     label: "Decision method",
-    value: "NRC impact verification and governance approval",
+    value: "NRRC impact verification and governance approval",
   },
   { label: "Independent jury review", value: "None" },
   { label: "Nominations close", value: "21 November 2026" },
@@ -232,7 +232,7 @@ export const INFLUENCER_SUBCATEGORIES: Record<
       "Identity and duplicate check",
       "Nominee acceptance",
       "Profile and evidence completion",
-      "NRC impact verification",
+      "NRRC impact verification",
       "Governance approval",
       "Verified profile and recognition",
     ],
@@ -443,7 +443,7 @@ export const INFLUENCER_SUBCATEGORIES: Record<
       "Duplicate review",
       "Nominee acceptance",
       "Education-impact evidence",
-      "NRC verification",
+      "NRRC verification",
       "Governance approval",
       "Verified profile and recognition",
     ],
@@ -468,7 +468,7 @@ export const INFLUENCER_SUBCATEGORIES: Record<
       },
       {
         q: "Is there public voting?",
-        a: "No. The 2026 recognition uses NRC verification and governance approval.",
+        a: "No. The 2026 recognition uses NRRC verification and governance approval.",
       },
     ],
     finalCta: {
@@ -651,7 +651,7 @@ export const INFLUENCER_SUBCATEGORIES: Record<
       "Duplicate review",
       "Nominee acceptance",
       "Education-impact evidence completion",
-      "NRC impact verification",
+      "NRRC impact verification",
       "Governance approval",
       "Verified profile and recognition",
     ],
@@ -676,7 +676,7 @@ export const INFLUENCER_SUBCATEGORIES: Record<
       },
       {
         q: "Is public voting used?",
-        a: "No. The 2026 process uses NRC verification and governance approval.",
+        a: "No. The 2026 process uses NRRC verification and governance approval.",
       },
     ],
     finalCta: {

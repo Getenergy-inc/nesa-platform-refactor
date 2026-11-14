@@ -41,7 +41,7 @@ const mediaCategories = [
     description: "Live 6-hour ceremony announcing all winners.",
     href: "/media/gala",
     icon: Trophy,
-    badge: "28 Dec 2026",
+    badge: "13 Dec 2026",
     badgeColor: "bg-primary",
   },
 ];

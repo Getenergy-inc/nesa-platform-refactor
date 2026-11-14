@@ -19,7 +19,7 @@ import {
 
 
 const GLOSSARY = [
-  { term: "NRC — Nominee Research Corps", body: "The independent volunteer research body that verifies every nomination's evidence before assessment." },
+  { term: "NRRC — Nominee Research and Review Corps", body: "The independent volunteer research body that verifies every nomination's evidence before assessment." },
   { term: "EDI Matrix — Education Development Index", body: "The published scoring matrix reviewers use to assess verified nominations, category by category." },
   { term: "Judges Arena", body: "The closed internal environment where independent judges score the Africa Education Icon Award. No public voting is used." },
   { term: "Governance ratification", body: "The final board step that confirms a recognition before it is announced." },
@@ -31,7 +31,7 @@ export default function TrustIntegrityPage() {
       <LocalizedSEO
         pathname="/trust"
         title={`Trust & Integrity | ${BRAND.platform} 2026`}
-        description="Independent governance, NRC verification, evidence requirements, conflict-of-interest controls and sponsor independence at NESA-Africa."
+        description="Independent governance, NRRC verification, evidence requirements, conflict-of-interest controls and sponsor independence at NESA-Africa."
       />
 
       <header className="border-b border-gold/15 py-14 md:py-20">

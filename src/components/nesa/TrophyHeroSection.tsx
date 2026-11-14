@@ -163,7 +163,7 @@ export function TrophyHeroSection() {
               transition={{ duration: 0.5, delay: 0.75 }}
               className="text-gold/70 text-xs tracking-wide mb-10 max-w-xl mx-auto lg:mx-0"
             >
-              Independent NRC verification · EDI Matrix evaluation · Icon judging · Governance
+              Independent NRRC verification · EDI Matrix evaluation · Icon judging · Governance
               approval. Sponsorship, donations, and endorsements do not influence recognition.
             </motion.p>
 

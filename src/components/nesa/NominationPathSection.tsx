@@ -33,7 +33,7 @@ export function NominationPathSection() {
       description: "Open competition with public nominations, independent verification and expert judging.",
       bullets: [
         "Nominate verified changemakers",
-        "Independent NRC verification of every nomination",
+        "Independent NRRC verification of every nomination",
         "Explore Recognition during official independent jury review windows",
         "Winners protected by integrity controls"
       ],

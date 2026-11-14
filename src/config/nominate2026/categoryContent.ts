@@ -99,9 +99,9 @@ const NIGERIA_ZONES = [
 
 export const GOVERNANCE_COPY: Record<GovernanceKey, string> = {
   influencer:
-    "Not a competition. No judges, no public voting. Recognition is based entirely on Nominee Research Corps verification and category EDI Matrix assessment — never on follower count or fame.",
+    "Not a competition. No judges, no public voting. Recognition is based entirely on Nominee Research and Review Corps verification and category EDI Matrix assessment — never on follower count or fame.",
   platinum:
-    "Institutional recognition. No judges, no voting, no competition. Multiple organisations may be recognised in the same category after Nominee Research Corps verification and Governance approval.",
+    "Institutional recognition. No judges, no voting, no competition. Multiple organisations may be recognised in the same category after Nominee Research and Review Corps verification and Governance approval.",
   "gold-blue-garnet":
     "Entirely evidence-based. No judges, no voting, no ranking. Multiple organisations may be recognised per category, region, or sector.",
 };
@@ -481,7 +481,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     },
     about: p([
       "The Influencer Education Impact Recognition honours the individuals whose platforms, talents and public visibility have measurably enabled learning outcomes — not the ones with the largest audience.",
-      "Every nomination is independently reviewed by the Nominee Research Corps against the category Education Development Index. Recognition depends on verified education contribution — never on follower count, fame or media presence.",
+      "Every nomination is independently reviewed by the Nominee Research and Review Corps against the category Education Development Index. Recognition depends on verified education contribution — never on follower count, fame or media presence.",
     ]),
     governance: "influencer",
     classification: "africa",
@@ -512,7 +512,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     ediWeightingNote:
       "Influencer nominations are weighted toward verified reach, inclusion and evidence quality — public metrics alone are never sufficient.",
     footerIntegrity:
-      "Recognition in this category is based on verified education contribution, not popularity or public vote — verified by the Nominee Research Corps and approved by Governance.",
+      "Recognition in this category is based on verified education contribution, not popularity or public vote — verified by the Nominee Research and Review Corps and approved by Governance.",
   },
 
   // ═════════════════════════════════════════════════════════════════════════
@@ -530,7 +530,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     },
     about: p([
       "Libraries remain the quiet backbone of African tertiary education. This Platinum category recognises those whose collections, digital services, staff development and inclusive access have transformed how students learn and researchers work.",
-      "Every nomination is verified by the Nominee Research Corps against the Library Excellence EDI Matrix. Multiple institutions may be recognised in the same category — this is not a competition.",
+      "Every nomination is verified by the Nominee Research and Review Corps against the Library Excellence EDI Matrix. Multiple institutions may be recognised in the same category — this is not a competition.",
     ]),
     governance: "platinum",
     classification: "africa",
@@ -544,7 +544,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
       "Weighted toward collection depth, digital transformation, inclusive access and staff-development pipelines.",
     nomineeFieldOverrides: { leadershipLabel: "Head Librarian / Head of Library Services" },
     footerIntegrity:
-      "Recognition of libraries is based on verified service to scholarship — verified by the Nominee Research Corps and approved by Governance.",
+      "Recognition of libraries is based on verified service to scholarship — verified by the Nominee Research and Review Corps and approved by Governance.",
   },
 
   "research-development": {
@@ -559,7 +559,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     },
     about: p([
       "Great education systems are built on great evidence. This Platinum category honours the research bodies whose rigour has shaped policy, curriculum and practice across the continent.",
-      "The Nominee Research Corps independently verifies every submission against the Research & Development EDI Matrix. Multiple institutions may be recognised.",
+      "The Nominee Research and Review Corps independently verifies every submission against the Research & Development EDI Matrix. Multiple institutions may be recognised.",
     ]),
     governance: "platinum",
     classification: "africa",
@@ -573,7 +573,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
       "Weighted toward evidence quality, policy uptake and cross-border collaboration.",
     nomineeFieldOverrides: { leadershipLabel: "Director of Research / Principal Investigator" },
     footerIntegrity:
-      "Recognition of research bodies is based on verified evidence contribution — verified by the Nominee Research Corps and approved by Governance.",
+      "Recognition of research bodies is based on verified evidence contribution — verified by the Nominee Research and Review Corps and approved by Governance.",
   },
 
   "christian-education-impact": {
@@ -588,7 +588,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     },
     about: p([
       "From the earliest missionary schools to the modern faith-founded university, Christian institutions have shaped the African education landscape. This category honours those whose contribution is verified and continues today.",
-      "Every nomination is independently reviewed by the Nominee Research Corps against the Christian Education Impact EDI Matrix.",
+      "Every nomination is independently reviewed by the Nominee Research and Review Corps against the Christian Education Impact EDI Matrix.",
     ]),
     governance: "platinum",
     classification: "africa",
@@ -601,7 +601,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     ediWeightingNote:
       "Weighted toward verified access, inclusion and sustained community reach.",
     footerIntegrity:
-      "Recognition of Christian education enablers is based on verified educational impact — verified by the Nominee Research Corps and approved by Governance.",
+      "Recognition of Christian education enablers is based on verified educational impact — verified by the Nominee Research and Review Corps and approved by Governance.",
   },
 
   "islamic-education-impact": {
@@ -616,7 +616,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     },
     about: p([
       "This category honours the full breadth of Islamic education enablers — from established Islamic universities to grassroots Almajiri integration programmes — whose verified work supports learning access and quality.",
-      "Every nomination is independently reviewed by the Nominee Research Corps against the Islamic Education Impact EDI Matrix.",
+      "Every nomination is independently reviewed by the Nominee Research and Review Corps against the Islamic Education Impact EDI Matrix.",
     ]),
     governance: "platinum",
     classification: "africa",
@@ -629,7 +629,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     ediWeightingNote:
       "Weighted toward inclusion, gender equity, out-of-school recovery and community reach.",
     footerIntegrity:
-      "Recognition of Islamic education enablers is based on verified educational impact — verified by the Nominee Research Corps and approved by Governance.",
+      "Recognition of Islamic education enablers is based on verified educational impact — verified by the Nominee Research and Review Corps and approved by Governance.",
   },
 
   "political-leadership": {
@@ -644,7 +644,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     },
     about: p([
       "Systemic education change is impossible without political will. This category honours public officials whose in-office decisions and delivery have verifiably expanded access, equity and quality.",
-      "Every nomination is reviewed by the Nominee Research Corps against the Political Leadership EDI Matrix. Recognition is based on verified reform outcomes — not political affiliation.",
+      "Every nomination is reviewed by the Nominee Research and Review Corps against the Political Leadership EDI Matrix. Recognition is based on verified reform outcomes — not political affiliation.",
     ]),
     governance: "platinum",
     classification: "africa",
@@ -658,7 +658,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
       "Weighted toward verified reform outcomes, budget delivery and system-level impact — never political affiliation.",
     nomineeFieldOverrides: { leadershipLabel: "Office / Title", orgNameLabel: "Jurisdiction" },
     footerIntegrity:
-      "Recognition of political leaders is based on verified education reform outcomes — verified by the Nominee Research Corps and approved by Governance.",
+      "Recognition of political leaders is based on verified education reform outcomes — verified by the Nominee Research and Review Corps and approved by Governance.",
   },
 
   "international-partnership": {
@@ -673,7 +673,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     },
     about: p([
       "Cross-border partnership is a decisive engine of African education. This category recognises the international partners whose sustained investment is verifiable in African classrooms and campuses.",
-      "Every nomination is reviewed by the Nominee Research Corps against the International Partnership EDI Matrix.",
+      "Every nomination is reviewed by the Nominee Research and Review Corps against the International Partnership EDI Matrix.",
     ]),
     governance: "platinum",
     classification: "africa",
@@ -686,7 +686,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     ediWeightingNote:
       "Weighted toward sustained multi-year commitment, African-led design and verified outcomes on the ground.",
     footerIntegrity:
-      "Recognition of international partners is based on verified impact on African education — verified by the Nominee Research Corps and approved by Governance.",
+      "Recognition of international partners is based on verified impact on African education — verified by the Nominee Research and Review Corps and approved by Governance.",
   },
 
   "diaspora-education-impact": {
@@ -701,7 +701,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     },
     about: p([
       "The African diaspora is a living education infrastructure — sending remittances, scholarships, skills and networks back into the continent's classrooms. This category honours the diaspora institutions doing that work at scale.",
-      "Every nomination is reviewed by the Nominee Research Corps against the Diaspora Education Impact EDI Matrix.",
+      "Every nomination is reviewed by the Nominee Research and Review Corps against the Diaspora Education Impact EDI Matrix.",
     ]),
     governance: "platinum",
     classification: "africa",
@@ -714,7 +714,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     ediWeightingNote:
       "Weighted toward sustained cross-border contribution, verified beneficiaries and African-led co-design.",
     footerIntegrity:
-      "Recognition of diaspora education enablers is based on verified educational impact — verified by the Nominee Research Corps and approved by Governance.",
+      "Recognition of diaspora education enablers is based on verified educational impact — verified by the Nominee Research and Review Corps and approved by Governance.",
   },
 
   // ═════════════════════════════════════════════════════════════════════════
@@ -732,7 +732,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     },
     about: p([
       "This category honours companies whose corporate social responsibility for education is verifiable, sustained and regionally grounded — not one-off campaigns.",
-      "Every nomination is reviewed by the Nominee Research Corps against the CSR-Africa EDI Matrix. Multiple organisations may be recognised per region and per sector.",
+      "Every nomination is reviewed by the Nominee Research and Review Corps against the CSR-Africa EDI Matrix. Multiple organisations may be recognised per region and per sector.",
     ]),
     governance: "gold-blue-garnet",
     classification: "africa",
@@ -750,7 +750,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     ediWeightingNote:
       "Weighted toward multi-year CSR commitment, verified beneficiaries and regional depth.",
     footerIntegrity:
-      "Recognition of CSR Enablers is based on verified educational impact — not brand marketing — verified by the Nominee Research Corps and approved by Governance.",
+      "Recognition of CSR Enablers is based on verified educational impact — not brand marketing — verified by the Nominee Research and Review Corps and approved by Governance.",
   },
 
   "nigeria-csr": {
@@ -765,7 +765,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     },
     about: p([
       "This category honours Nigerian and Nigeria-operating companies whose CSR for education is verifiable, sustained and zonally grounded.",
-      "Every nomination is reviewed by the Nominee Research Corps against the CSR-Nigeria EDI Matrix.",
+      "Every nomination is reviewed by the Nominee Research and Review Corps against the CSR-Nigeria EDI Matrix.",
     ]),
     governance: "gold-blue-garnet",
     classification: "nigeria",
@@ -783,7 +783,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     ediWeightingNote:
       "Weighted toward multi-year CSR commitment, verified beneficiaries and zonal depth.",
     footerIntegrity:
-      "Recognition of Nigeria CSR Enablers is based on verified educational impact — verified by the Nominee Research Corps and approved by Governance.",
+      "Recognition of Nigeria CSR Enablers is based on verified educational impact — verified by the Nominee Research and Review Corps and approved by Governance.",
   },
 
   "africa-edutech": {
@@ -798,7 +798,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     },
     about: p([
       "This category honours EdTech organisations whose deployed products — not pitch decks — have verifiably reached African learners at scale.",
-      "Every nomination is reviewed by the Nominee Research Corps against the EduTech EDI Matrix.",
+      "Every nomination is reviewed by the Nominee Research and Review Corps against the EduTech EDI Matrix.",
     ]),
     governance: "gold-blue-garnet",
     classification: "africa",
@@ -811,7 +811,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     ediWeightingNote:
       "Weighted toward verified active learners, offline resilience and inclusion.",
     footerIntegrity:
-      "Recognition of EduTech Enablers is based on verified reach and outcomes — verified by the Nominee Research Corps and approved by Governance.",
+      "Recognition of EduTech Enablers is based on verified reach and outcomes — verified by the Nominee Research and Review Corps and approved by Governance.",
   },
 
   "nigeria-media": {
@@ -826,7 +826,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     },
     about: p([
       "This category honours the media houses whose reporting, programming and campaigns have measurably advanced public understanding of and investment in Nigerian education.",
-      "Every nomination is reviewed by the Nominee Research Corps against the Media EDI Matrix.",
+      "Every nomination is reviewed by the Nominee Research and Review Corps against the Media EDI Matrix.",
     ]),
     governance: "gold-blue-garnet",
     classification: "nigeria",
@@ -839,7 +839,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     ediWeightingNote:
       "Weighted toward sustained editorial commitment, reach and demonstrated public-education outcomes.",
     footerIntegrity:
-      "Recognition of media enablers is based on verified educational impact — verified by the Nominee Research Corps and approved by Governance.",
+      "Recognition of media enablers is based on verified educational impact — verified by the Nominee Research and Review Corps and approved by Governance.",
   },
 
   "nigeria-ngo": {
@@ -854,7 +854,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     },
     about: p([
       "This category honours the Nigerian NGOs whose programmes are verifiable at the classroom and community level — not just at donor-report level.",
-      "Every nomination is reviewed by the Nominee Research Corps against the NGO-Nigeria EDI Matrix.",
+      "Every nomination is reviewed by the Nominee Research and Review Corps against the NGO-Nigeria EDI Matrix.",
     ]),
     governance: "gold-blue-garnet",
     classification: "nigeria",
@@ -867,7 +867,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     ediWeightingNote:
       "Weighted toward verified beneficiaries, inclusion and multi-year continuity.",
     footerIntegrity:
-      "Recognition of NGO Enablers is based on verified educational impact — verified by the Nominee Research Corps and approved by Governance.",
+      "Recognition of NGO Enablers is based on verified educational impact — verified by the Nominee Research and Review Corps and approved by Governance.",
   },
 
   "africa-regional-ngo": {
@@ -882,7 +882,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     },
     about: p([
       "This category honours NGOs whose regional education programmes are verifiable, sustained and beneficiary-focused.",
-      "Every nomination is reviewed by the Nominee Research Corps against the NGO-Africa EDI Matrix.",
+      "Every nomination is reviewed by the Nominee Research and Review Corps against the NGO-Africa EDI Matrix.",
     ]),
     governance: "gold-blue-garnet",
     classification: "africa",
@@ -900,7 +900,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     ediWeightingNote:
       "Weighted toward verified beneficiaries, inclusion and cross-border continuity.",
     footerIntegrity:
-      "Recognition of regional NGO Enablers is based on verified educational impact — verified by the Nominee Research Corps and approved by Governance.",
+      "Recognition of regional NGO Enablers is based on verified educational impact — verified by the Nominee Research and Review Corps and approved by Governance.",
   },
 
   "africa-stem": {
@@ -915,7 +915,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     },
     about: p([
       "This category honours the STEM programmes whose classroom, laboratory and community delivery is verifiable — especially those closing gender and inclusion gaps.",
-      "Every nomination is reviewed by the Nominee Research Corps against the STEM EDI Matrix.",
+      "Every nomination is reviewed by the Nominee Research and Review Corps against the STEM EDI Matrix.",
     ]),
     governance: "gold-blue-garnet",
     classification: "africa",
@@ -928,7 +928,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     ediWeightingNote:
       "Weighted toward verified learners reached, gender equity and inclusion.",
     footerIntegrity:
-      "Recognition of STEM Enablers is based on verified educational impact — verified by the Nominee Research Corps and approved by Governance.",
+      "Recognition of STEM Enablers is based on verified educational impact — verified by the Nominee Research and Review Corps and approved by Governance.",
   },
 
   "nigeria-creative-arts": {
@@ -943,7 +943,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     },
     about: p([
       "This category honours the creative-arts programmes whose training pipelines are verifiable at the learner and community level — from grassroots music schools to national creative academies.",
-      "Every nomination is reviewed by the Nominee Research Corps against the Creative Arts EDI Matrix.",
+      "Every nomination is reviewed by the Nominee Research and Review Corps against the Creative Arts EDI Matrix.",
     ]),
     governance: "gold-blue-garnet",
     classification: "nigeria",
@@ -956,7 +956,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     ediWeightingNote:
       "Weighted toward verified learner outcomes, inclusion and sustained delivery.",
     footerIntegrity:
-      "Recognition of Creative Arts Enablers is based on verified educational impact — verified by the Nominee Research Corps and approved by Governance.",
+      "Recognition of Creative Arts Enablers is based on verified educational impact — verified by the Nominee Research and Review Corps and approved by Governance.",
   },
 
   "nigeria-education-friendly-states": {
@@ -971,7 +971,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     },
     about: p([
       "This category recognises Nigerian states whose education budgeting, delivery and reform decisions are verifiable at the school and learner level.",
-      "Every nomination is reviewed by the Nominee Research Corps against the Education-Friendly States EDI Matrix. This is not a ranking — multiple states may be recognised per zone.",
+      "Every nomination is reviewed by the Nominee Research and Review Corps against the Education-Friendly States EDI Matrix. This is not a ranking — multiple states may be recognised per zone.",
     ]),
     governance: "gold-blue-garnet",
     classification: "state-capacity",
@@ -987,7 +987,7 @@ const CATEGORY_CONTENT: Record<string, CategoryContent> = {
       "Weighted toward verified budget delivery, access outcomes and inclusion — never political affiliation.",
     nomineeFieldOverrides: { orgNameLabel: "State" },
     footerIntegrity:
-      "Recognition of Education-Friendly States is based on verified education-sector outcomes — verified by the Nominee Research Corps and approved by Governance.",
+      "Recognition of Education-Friendly States is based on verified education-sector outcomes — verified by the Nominee Research and Review Corps and approved by Governance.",
   },
 };
 

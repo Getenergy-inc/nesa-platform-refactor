@@ -12,7 +12,7 @@ const REPORTS = [
 export default function NRCReportsPage() {
   return (
     <NRCArenaPage
-      title="NRC Operational Reports"
+      title="NRRC Operational Reports"
       description="Backlog, turnaround, duplicate, evidence-gap, regional-distribution and reviewer-workload reports."
       status="live"
     >

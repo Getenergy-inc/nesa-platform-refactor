@@ -392,7 +392,7 @@ export function buildTimeline(
     {
       id: "phase-6-blue-garnet-voting",
       phase: "Phase 6 · Gold–Blue Garnet Review",
-      dateRange: `16 September – 28 December ${ceremonyYear}`,
+      dateRange: `16 September – 13 December ${ceremonyYear}`,
       description:
         "Transparent public participation via the AGC framework combined with independent jury review (independent jury review) determines the final Gold–Blue Garnet honourees.",
       type: "voting",
@@ -401,9 +401,9 @@ export function buildTimeline(
     {
       id: "phase-7-gala",
       phase: "Phase 7 · Gold–Blue Garnet Awards Gala",
-      dateRange: `28 December ${ceremonyYear}`,
+      dateRange: `13 December ${ceremonyYear}`,
       description:
-        "Africa's flagship education recognition ceremony on 28 December 2026 celebrating the continent's leading Education Enablers across 15 regions (8 Africa + 7 Global).",
+        "Africa's flagship education recognition ceremony on 13 December 2026 celebrating the continent's leading Education Enablers across 15 regions (8 Africa + 7 Global).",
       type: "gala",
     },
     {
@@ -432,7 +432,7 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
       iconName: "Medal",
       features: [
         "Non-competitive entry layer",
-        "Verification by NESA Nominee Research Corps (NRC)",
+        "Verification by NESA Nominee Research and Review Corps (NRRC)",
         "Governance & safeguarding checks",
         "Certificate validity: 1 year",
         "Global QR-code authentication",
@@ -475,8 +475,8 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
       id: "blue-garnet",
       title: "Blue Garnet Award",
       subtitle: "Highest Competitive Honour",
-      period: `16 September – 28 December ${ceremonyYear}`,
-      showDate: `28 December ${ceremonyYear} (Gala)`,
+      period: `16 September – 13 December ${ceremonyYear}`,
+      showDate: `13 December ${ceremonyYear} (Gala)`,
       iconName: "Gem",
       features: [
         "From 135 Gold Certificate winners",

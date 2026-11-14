@@ -41,7 +41,7 @@ const tierBadgeStyles: Record<string, { label: string; className: string; icon: 
 
 // Governance hints per track
 const governanceHints: Record<string, string> = {
-  competitive: "2026 recognition requires NRC evidence review and governance approval; public voting is not used.",
+  competitive: "2026 recognition requires NRRC evidence review and governance approval; public voting is not used.",
   institutional: "Institutional recognition evaluated under governance and leadership criteria.",
   "special-recognition": "Cultural & influence impact recognition (2026 edition).",
   lifetime: "Continental lifetime honour.",

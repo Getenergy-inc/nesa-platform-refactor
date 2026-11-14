@@ -20,9 +20,9 @@ import heroImg from "@/assets/judges-arena/jury-chamber-hero.jpg";
 const WORKFLOW = [
   { icon: Users,        label: "Public Nomination" },
   { icon: FileSearch,   label: "Automated Screening" },
-  { icon: ShieldCheck,  label: "NRC Initial Review" },
+  { icon: ShieldCheck,  label: "NRRC Initial Review" },
   { icon: CheckCircle2, label: "Nominee Acceptance" },
-  { icon: ShieldCheck,  label: "NRC Full Verification" },
+  { icon: ShieldCheck,  label: "NRRC Full Verification" },
   { icon: Users,        label: "Verified Nominee Pool" },
   { icon: Scale,        label: "Specialist Panel Screening" },
   { icon: Award,        label: "Three Finalists per Group" },
@@ -48,7 +48,7 @@ export default function JudgesArenaLanding() {
     {
       icon: Users,
       value: arenaCount(publicStats?.publicNrcMembers, statsLoading),
-      label: "NRC researchers listed",
+      label: "NRRC researchers listed",
       detail: "Verification corps, opt-in profiles",
     },
     {
@@ -71,7 +71,7 @@ export default function JudgesArenaLanding() {
         <title>2026 Africa Education Icon Judges Arena | NESA-Africa</title>
         <meta
           name="description"
-          content="Learn how 27 independent judges review NRC-verified nominees across three pathways and nine finalist groups to select the nine Africa Education Icon Laureates for 2006–2026."
+          content="Learn how 27 independent judges review NRRC-verified nominees across three pathways and nine finalist groups to select the nine Africa Education Icon Laureates for 2006–2026."
         />
         <link rel="canonical" href="https://nesa.africa/judges" />
         <meta property="og:title" content="2026 Africa Education Icon Judges Arena | NESA-Africa" />
@@ -178,8 +178,8 @@ export default function JudgesArenaLanding() {
               body: "Three lifetime-impact pathways — Literary & New Curriculum Advocate, Africa Technical Educator, Africa Education Philanthropy — each with three classifications: African in Africa, African in the Diaspora, and Friend of Africa. Nine laureates in total.",
             },
             {
-              title: "NRC Verification Before Judging",
-              body: "The Nominee Research Corps completes identity, duplicate, eligibility, evidence and pathway verification. Only NRC-Verified nominees ever reach the judges.",
+              title: "NRRC Verification Before Judging",
+              body: "The Nominee Research and Review Corps completes identity, duplicate, eligibility, evidence and pathway verification. Only NRRC-Verified nominees ever reach the judges.",
             },
             {
               title: "Nine-Panel Jury Matrix",

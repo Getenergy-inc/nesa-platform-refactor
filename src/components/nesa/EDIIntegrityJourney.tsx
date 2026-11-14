@@ -48,7 +48,7 @@ const JOURNEY_STEPS = [
     step: 2,
     title: "Acceptance",
     subtitle: "For Nominees",
-    description: "NRC screening, acceptance journey, and dashboard tracking.",
+    description: "NRRC screening, acceptance journey, and dashboard tracking.",
     icon: CheckCircle,
     image: ediAcceptanceImg,
     href: "/guidelines/nominees",

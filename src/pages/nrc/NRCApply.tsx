@@ -103,20 +103,20 @@ export default function NRCApply() {
   return (
     <div className="min-h-screen bg-charcoal text-white px-4 py-12">
       <Helmet>
-        <title>Apply to the NRC — NESA-Africa 2026</title>
+        <title>Apply to the NRRC — NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Apply to join the NESA-Africa Nominee Research Corps: verify nominee evidence and uphold recognition integrity."
+          content="Apply to join the NESA-Africa Nominee Research and Review Corps: verify nominee evidence and uphold recognition integrity."
         />
       </Helmet>
 
       <div className="mx-auto w-full max-w-2xl">
         <header className="mb-8 text-center">
           <Search className="mx-auto mb-3 h-9 w-9 text-gold" aria-hidden />
-          <h1 className="font-display text-3xl font-bold">Join the Nominee Research Corps</h1>
+          <h1 className="font-display text-3xl font-bold">Join the Nominee Research and Review Corps</h1>
           <p className="mt-2 text-sm text-white/65">
-            The NRC independently verifies nominee evidence before judging. Applications are reviewed
-            by NRC leadership; approved applicants receive an emailed invitation to create their
+            The NRRC independently verifies nominee evidence before judging. Applications are reviewed
+            by NRRC leadership; approved applicants receive an emailed invitation to create their
             account.
           </p>
         </header>
@@ -126,13 +126,13 @@ export default function NRCApply() {
             <CheckCircle2 className="mx-auto mb-3 h-10 w-10 text-emerald-400" aria-hidden />
             <h2 className="font-display text-xl font-bold">Application received</h2>
             <p className="mt-2 text-sm text-white/70">
-              Your application is now in the NRC leadership review queue. If it is approved you will
+              Your application is now in the NRRC leadership review queue. If it is approved you will
               receive an invitation email at <strong>{form.email}</strong> with a secure link to
-              create your NRC account. We do not publish a decision timeline — you will only hear
+              create your NRRC account. We do not publish a decision timeline — you will only hear
               from us by email.
             </p>
             <Button asChild variant="outline" className="mt-6 border-white/20 text-white">
-              <Link to="/nrrc">Back to the NRC Arena</Link>
+              <Link to="/nrrc">Back to the NRRC Arena</Link>
             </Button>
           </div>
         ) : (
@@ -205,7 +205,7 @@ export default function NRCApply() {
             </fieldset>
 
             <div>
-              <Label htmlFor="motivation">Why do you want to serve on the NRC?</Label>
+              <Label htmlFor="motivation">Why do you want to serve on the NRRC?</Label>
               <Textarea
                 id="motivation" required minLength={80} rows={5}
                 value={form.motivation} onChange={set("motivation")}
@@ -217,7 +217,7 @@ export default function NRCApply() {
             <div className="flex items-start gap-3 rounded-lg border border-gold/25 bg-gold/5 p-3">
               <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden />
               <p className="text-xs text-white/70">
-                NRC service is unpaid and governed by a confidentiality agreement, a code of conduct
+                NRRC service is unpaid and governed by a confidentiality agreement, a code of conduct
                 and a conflict-of-interest declaration completed during onboarding.
               </p>
             </div>

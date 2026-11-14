@@ -73,7 +73,7 @@ function NRCMembersContent() {
 
     // Check member cap
     if ((stats?.total_members || 0) >= 30) {
-      toast.error("NRC member limit (30) reached");
+      toast.error("NRRC member limit (30) reached");
       return;
     }
 
@@ -127,7 +127,7 @@ function NRCMembersContent() {
         );
         if (roleError) {
           throw new Error(
-            `Member marked active but the NRC role could not be granted: ${roleError.message}`
+            `Member marked active but the NRRC role could not be granted: ${roleError.message}`
           );
         }
       }
@@ -140,7 +140,7 @@ function NRCMembersContent() {
           .eq("role", "nrc");
         if (roleError) {
           throw new Error(
-            `Member status changed but the NRC role could not be revoked: ${roleError.message}`
+            `Member status changed but the NRRC role could not be revoked: ${roleError.message}`
           );
         }
       }
@@ -198,7 +198,7 @@ function NRCMembersContent() {
         {/* Header */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="font-display text-2xl font-bold">Hybrid NRC Members</h2>
+            <h2 className="font-display text-2xl font-bold">Hybrid NRRC Members</h2>
             <p className="text-muted-foreground">
               Manage the 27-member Nomination Review Committee (Hybrid Model: core + volunteer support)
             </p>
@@ -217,9 +217,9 @@ function NRCMembersContent() {
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>Invite NRC Member</DialogTitle>
+                <DialogTitle>Invite NRRC Member</DialogTitle>
                 <DialogDescription>
-                  Send an invitation to join the Nominee Research Corps.
+                  Send an invitation to join the Nominee Research and Review Corps.
                   Members can review and approve nominations.
                 </DialogDescription>
               </DialogHeader>
@@ -298,7 +298,7 @@ function NRCMembersContent() {
         {membersError ? (
           <Alert variant="destructive">
             <AlertTriangle className="h-4 w-4" />
-            <AlertTitle>Could not load NRC members</AlertTitle>
+            <AlertTitle>Could not load NRRC members</AlertTitle>
             <AlertDescription className="space-y-3">
               <p>{(membersError as Error).message}</p>
               <Button variant="outline" size="sm" onClick={() => refetchMembers()}>
@@ -407,7 +407,7 @@ function NRCMembersContent() {
                 No Members Yet
               </h3>
               <p className="mb-4 text-muted-foreground">
-                Start building your NRC team by inviting members
+                Start building your NRRC team by inviting members
               </p>
               <Button onClick={() => setShowInviteDialog(true)}>
                 <UserPlus className="mr-2 h-4 w-4" />

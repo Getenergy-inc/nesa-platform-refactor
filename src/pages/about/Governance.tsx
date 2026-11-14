@@ -31,12 +31,12 @@ const firewalls = [
     icon: Eye,
     title: "Full Audit Trail",
     description: "Every action is logged with timestamp, user, and IP address.",
-    details: ["NRC review logs", "Vote timestamps", "Certificate issuance records"],
+    details: ["NRRC review logs", "Vote timestamps", "Certificate issuance records"],
   },
   {
     icon: Scale,
     title: "Conflict of Interest",
-    description: "Mandatory COI disclosure for NRC, Jury, and Chapter leads.",
+    description: "Mandatory COI disclosure for NRRC, Jury, and Chapter leads.",
     details: ["Recusal requirements", "Third-party verification", "Public COI register"],
   },
 ];
@@ -44,7 +44,7 @@ const firewalls = [
 const roles = [
   { name: "Public", access: "View categories, nominees, vote (when open)", level: "Open" },
   { name: "User", access: "Submit nominations, track certificates, wallet", level: "Authenticated" },
-  { name: "NRC", access: "Review nominations, validate evidence", level: "Verified" },
+  { name: "NRRC", access: "Review nominations, validate evidence", level: "Verified" },
   { name: "Jury", access: "Score finalists, access sealed results", level: "Appointed" },
   { name: "Chapter", access: "Manage local events, regional nominations", level: "Regional" },
   { name: "Admin", access: "Stage control, CMS, audit logs, compliance", level: "Staff" },

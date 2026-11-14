@@ -5,7 +5,7 @@ export function VolunteerBandSection() {
   const stats = useGlobalTeamStats();
 
   const items = [
-    { num: stats.people, label: "Volunteers, Judges & NRC" },
+    { num: stats.people, label: "Volunteers, Judges & NRRC" },
     { num: stats.countries, label: "Countries" },
     { num: stats.activeChapters, label: "Active Chapters" },
   ];

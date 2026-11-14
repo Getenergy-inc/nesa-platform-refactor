@@ -29,9 +29,9 @@ export const TIERS: TierDefinition[] = [
     shortName: "Africa Education Icon",
     summary:
       "Continental lifetime recognition (2006–2026) for Education Enablers whose legacy has transformed learning across Africa and the Diaspora.",
-    decisionMethod2026: "NRC Verification → Icon Jury Assessment → Governance Ratification",
+    decisionMethod2026: "NRRC Verification → Icon Jury Assessment → Governance Ratification",
     reviewRoute: [
-      "NRC Verification",
+      "NRRC Verification",
       "Icon Judge Assignment",
       "Independent Assessment",
       "Moderation",
@@ -49,8 +49,8 @@ export const TIERS: TierDefinition[] = [
     shortName: "Influencer Impact",
     summary:
       "Recognition for public figures whose platforms have measurably advanced education outcomes across Africa and the Diaspora.",
-    decisionMethod2026: "NRC Impact Verification → Governance Approval",
-    reviewRoute: ["NRC Impact Verification", "Governance Approval"],
+    decisionMethod2026: "NRRC Impact Verification → Governance Approval",
+    reviewRoute: ["NRRC Impact Verification", "Governance Approval"],
     eligibleNomineeTypes: ["Individual (Public Figure)"],
     totalCategories: 1,
     totalSubcategories: 3,
@@ -63,8 +63,8 @@ export const TIERS: TierDefinition[] = [
     shortName: "Platinum",
     summary:
       "Institutional leadership recognition for organisations, governments and international partners advancing Education for All Across Africa.",
-    decisionMethod2026: "Institutional Due Diligence → NRC Verification → Governance Approval",
-    reviewRoute: ["Institutional Due Diligence", "NRC Verification", "Governance Approval"],
+    decisionMethod2026: "Institutional Due Diligence → NRRC Verification → Governance Approval",
+    reviewRoute: ["Institutional Due Diligence", "NRRC Verification", "Governance Approval"],
     eligibleNomineeTypes: [
       "Tertiary Institution Library",
       "Research Institution",
@@ -84,8 +84,8 @@ export const TIERS: TierDefinition[] = [
     shortName: "Gold-Blue Garnet",
     summary:
       "2026 Recognition and Qualification Edition for CSR, EdTech, NGOs, media, STEM, creative arts and state policy leadership in education. No public voting.",
-    decisionMethod2026: "NRC Verification → Governance Approval",
-    reviewRoute: ["NRC Verification", "Governance Approval"],
+    decisionMethod2026: "NRRC Verification → Governance Approval",
+    reviewRoute: ["NRRC Verification", "Governance Approval"],
     eligibleNomineeTypes: [
       "Corporate Organisation",
       "Corporate Foundation",

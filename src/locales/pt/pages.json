@@ -236,7 +236,7 @@
       "description": "Quatro plataformas de reconhecimento distintas, cada uma com critérios e processos de seleção únicos.",
       "platinum": {
         "title": "Certificado Platinum",
-        "description": "Reconhecimento básico por contribuição à Educação Para Todos. Não competitivo, verificado pelo NRC, válido por 1 ano."
+        "description": "Reconhecimento básico por contribuição à Educação Para Todos. Não competitivo, verificado pelo NRRC, válido por 1 ano."
       },
       "icon": {
         "title": "Ícone da Educação Africana",
@@ -606,7 +606,7 @@
       "acceptance": {
         "title": "Aceitação",
         "subtitle": "Para Nomeados",
-        "description": "Processo de triagem NRC, jornada de aceitação e acompanhamento de status.",
+        "description": "Processo de triagem NRRC, jornada de aceitação e acompanhamento de status.",
         "badge": "Passo 2"
       },
       "judges": {

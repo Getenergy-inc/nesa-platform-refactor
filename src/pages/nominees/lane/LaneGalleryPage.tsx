@@ -91,7 +91,7 @@ export function LaneNomineeCard({
           )}
           {nominee.nrc_verified && (
             <Badge className="border-0 bg-gold/15 text-gold text-[10px]">
-              <ShieldCheck className="mr-1 h-3 w-3" /> NRC verified
+              <ShieldCheck className="mr-1 h-3 w-3" /> NRRC verified
             </Badge>
           )}
         </div>

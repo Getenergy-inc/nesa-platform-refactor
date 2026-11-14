@@ -44,7 +44,7 @@ export default function AdminResearchStaging() {
         const { error } = await supabase.from("import_review_queue").insert(pending.slice(offset, offset + 100).map((row) => ({
           batch_id: BATCH_ID, source_file: row.source_file, row_number: row.source_row,
           raw_row: JSON.parse(JSON.stringify(row)), suggested_name: row.name, suggested_region: row.source_region,
-          reason: "Identifiable research candidate: NRC evidence and legacy-taxonomy mapping required; do not publish.",
+          reason: "Identifiable research candidate: NRRC evidence and legacy-taxonomy mapping required; do not publish.",
           status: "pending", created_by: user.id,
         })));
         if (error) throw error;
@@ -56,7 +56,7 @@ export default function AdminResearchStaging() {
   const filtered = rows.filter((row) => `${row.name} ${row.category_slug} ${row.pathway_slug} ${row.source_region}`.toLowerCase().includes(query.toLowerCase()));
   return <DashboardLayout title="Research review staging"><div className="space-y-6">
     <h1 className="font-serif text-3xl">Attached award research</h1>
-    <p className="text-muted-foreground">{rows.length} private candidates · NRC review pending · No publication or verification changes</p>
+    <p className="text-muted-foreground">{rows.length} private candidates · NRRC review pending · No publication or verification changes</p>
     {error && <p role="alert" className="text-destructive">{error}</p>}
     <div className="flex flex-wrap items-center gap-4">
       <Input type="file" accept=".json" aria-label="Upload private research manifest" disabled={busy} onChange={async (event) => {
@@ -64,7 +64,7 @@ export default function AdminResearchStaging() {
         try { const parsed = researchManifestSchema.parse(JSON.parse(await file.text())); setManifest(dedupeResearchCandidates(parsed)); setError(""); }
         catch { setError("Invalid manifest. Every candidate must include source provenance and private, unverified review status."); setManifest([]); }
       }} className="max-w-md" />
-      <Button disabled={!manifest.length || busy} onClick={stage}>{busy ? "Staging…" : `Stage ${manifest.length} candidates for NRC review`}</Button>
+      <Button disabled={!manifest.length || busy} onClick={stage}>{busy ? "Staging…" : `Stage ${manifest.length} candidates for NRRC review`}</Button>
     </div>
     <Input aria-label="Search research candidates" placeholder="Search name, category, pathway or region" value={query} onChange={(event) => setQuery(event.target.value)} />
     <p className="text-sm text-muted-foreground">{filtered.length} matching candidates</p>

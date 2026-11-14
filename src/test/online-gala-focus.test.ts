@@ -20,9 +20,9 @@ describe("approved online gala scope", () => {
   it("remains online only", () => expect(ONLINE_GALA.onlineOnly).toBe(true));
   it("does not sell tickets", () => expect(ONLINE_GALA.ticketSales).toBe(false));
   it("does not enable public voting", () => expect(ONLINE_GALA.publicVoting).toBe(false));
-  it("retains the 28 December gala date", () => {
-    expect(PROGRAMME_END_DATE).toBe("2026-12-28");
-    expect(MASTER_TIMELINE_2026.find((entry) => entry.id === "recognition-gala")?.startsAt).toBe("2026-12-28T00:00:00Z");
+  it("retains the 13 December gala date", () => {
+    expect(PROGRAMME_END_DATE).toBe("2026-12-13");
+    expect(MASTER_TIMELINE_2026.find((entry) => entry.id === "recognition-gala")?.startsAt).toBe("2026-12-13T00:00:00Z");
   });
   it("keeps continuing recognition open until 31 March 2027", () => {
     expect(ONLINE_GALA.continuingRecognitionEndsOn).toBe("2027-03-31");

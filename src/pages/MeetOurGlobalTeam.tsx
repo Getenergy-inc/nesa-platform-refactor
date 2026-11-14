@@ -32,7 +32,7 @@ export default function MeetOurGlobalTeam() {
   const stats = useGlobalTeamStats();
 
   const counters = [
-    { icon: Users, value: stats.people, label: "Volunteers, Judges & NRC Members" },
+    { icon: Users, value: stats.people, label: "Volunteers, Judges & NRRC Members" },
     { icon: Globe2, value: stats.countries, label: "Countries" },
     { icon: MapPin, value: stats.activeChapters, label: "Active Local Chapters" },
   ];
@@ -40,7 +40,7 @@ export default function MeetOurGlobalTeam() {
   const groups = [
     {
       icon: ShieldCheck,
-      title: "Nominee Research Corps (NRC)",
+      title: "Nominee Research and Review Corps (NRRC)",
       blurb:
         "Verifying every nomination against evidence standards before it ever reaches a judge, across all four recognition tiers.",
       href: "/nrrc",
@@ -50,7 +50,7 @@ export default function MeetOurGlobalTeam() {
       title: "Judges Arena",
       blurb: `${
         stats.judges !== null && stats.judges > 0 ? stats.judges : "Independent"
-      } independent judges reviewing NRC-verified nominees and selecting the nine Africa Education Icon laureates.`,
+      } independent judges reviewing NRRC-verified nominees and selecting the nine Africa Education Icon laureates.`,
       href: "/judges",
     },
     {
@@ -114,7 +114,7 @@ export default function MeetOurGlobalTeam() {
           </div>
           <p className="text-center text-white/60 text-sm mt-6 max-w-2xl mx-auto">
             Real people, real hours, real impact — building toward the NESA-Africa 2026
-            Recognition Gala on 28 December in Lagos.
+            Recognition Gala on 13 December in Lagos.
           </p>
         </div>
       </section>

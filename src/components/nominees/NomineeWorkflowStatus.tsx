@@ -12,7 +12,7 @@ const STEP_ICONS = [
   { icon: Clock, label: "Submitted" },
   { icon: FileSearch, label: "Screening" },
   { icon: Shield, label: "Verification" },
-  { icon: Users, label: "NRC Review" },
+  { icon: Users, label: "NRRC Review" },
   { icon: CheckCircle, label: "Cleared" },
 ];
 

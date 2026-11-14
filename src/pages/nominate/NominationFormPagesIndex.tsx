@@ -45,7 +45,7 @@ export default function NominationFormPagesIndex() {
         <title>All 18 Nomination Forms · NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Open any of the 18 NESA-Africa 2026 nomination forms — one tailored form per award category, free to submit, verified by the Nominee Research Corps (NRC)."
+          content="Open any of the 18 NESA-Africa 2026 nomination forms — one tailored form per award category, free to submit, verified by the Nominee Research and Review Corps (NRRC)."
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/nominate/pages" />
       </Helmet>
@@ -70,7 +70,7 @@ export default function NominationFormPagesIndex() {
               </span>
               <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1">
                 <ShieldCheck className="h-3.5 w-3.5 text-gold" aria-hidden />
-                Every claim NRC-verified
+                Every claim NRRC-verified
               </span>
             </div>
           </header>

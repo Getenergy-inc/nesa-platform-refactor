@@ -5,27 +5,27 @@ import { MASTER_TIMELINE_2026 } from "@/data/masterTimeline2026";
 import { NOMINATION_WINDOW_LABEL } from "@/config/nominationWindows2026";
 
 describe("rescheduled Online Recognition Programme", () => {
-  it("takes place on Monday 28 December 2026", () => {
-    expect(PROGRAMME_END_DATE).toBe("2026-12-28");
-    expect(PROGRAMME_END_LABEL).toBe("28 December 2026");
-    expect(PROGRAMME_END_LONG_LABEL).toBe("Monday, 28 December 2026 · Online");
+  it("takes place on Sunday 13 December 2026", () => {
+    expect(PROGRAMME_END_DATE).toBe("2026-12-13");
+    expect(PROGRAMME_END_LABEL).toBe("13 December 2026");
+    expect(PROGRAMME_END_LONG_LABEL).toBe("Sunday 13 December 2026 · Online");
   });
   it("links the announcement to the online programme with the new date", () => {
     const announcement = ANNOUNCEMENTS.find((item) => item.id === "nominations-and-online-gala");
-    expect(announcement?.text).toContain("Online Recognition Programme: 28 December 2026. Learn More");
+    expect(announcement?.text).toContain("Online Recognition Programme: 13 December 2026. Learn More");
     expect(announcement?.href).toBe("/programme-2026");
   });
   it("moves the gala and its live coverage together", () => {
     for (const id of ["recognition-gala", "tv-show-3"]) {
       const milestone = MASTER_TIMELINE_2026.find((item) => item.id === id);
-      expect(milestone?.startsAt).toBe("2026-12-28T00:00:00Z");
-      expect(milestone?.dateLabel).toBe("Monday, 28 December 2026");
+      expect(milestone?.startsAt).toBe("2026-12-13T00:00:00Z");
+      expect(milestone?.dateLabel).toBe("Sunday 13 December 2026");
     }
   });
   it("keeps the approved nomination window unchanged", () => {
     expect(NOMINATION_WINDOW_LABEL).toBe("9 November 2026 – 31 March 2027");
   });
-  it("moves the connected independent verification deadline to 28 December", () => {
-    expect(MASTER_TIMELINE_2026.find((item) => item.id === "gold-blue-garnet-verification")?.endsAt).toBe("2026-12-28T23:59:59Z");
+  it("moves the connected independent verification deadline to 13 December", () => {
+    expect(MASTER_TIMELINE_2026.find((item) => item.id === "gold-blue-garnet-verification")?.endsAt).toBe("2026-12-13T23:59:59Z");
   });
 });

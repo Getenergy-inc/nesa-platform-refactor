@@ -45,7 +45,7 @@ async function translate(apiKey: string, lang: string, texts: string[]): Promise
             `Translate each item's "text" from English into ${LANGS[lang]}. ` +
             `Keep the meaning exact — never add, remove or soften facts, dates or figures. ` +
             `Keep URLs, paths (like /support), brand names (NESA-Africa, SCEF, AGC, Afri-Gold Coin, ` +
-            `Blue-Garnet, Nominee Research Corps, EduAid Africa, Rebuild My School Africa) unchanged. ` +
+            `Blue-Garnet, Nominee Research and Review Corps, EduAid Africa, Rebuild My School Africa) unchanged. ` +
             `Return ONLY a JSON array of objects: [{"i": number, "text": "translation"}].`,
         },
         { role: "user", content: JSON.stringify(payload) },

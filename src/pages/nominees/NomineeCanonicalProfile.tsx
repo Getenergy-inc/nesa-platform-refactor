@@ -71,7 +71,7 @@ export default function NomineeCanonicalProfile() {
           <>
             <p className="mt-3 text-white/60">
               The nominee record you are looking for is still in verification with the
-              Nominee Research Corps, or the link has changed.
+              Nominee Research and Review Corps, or the link has changed.
             </p>
             <Button asChild className="mt-6">
               <Link to="/nominees">Explore existing nominees</Link>
@@ -163,7 +163,7 @@ export default function NomineeCanonicalProfile() {
                 )}
                 {verified && (
                   <Badge variant="outline" className="border-emerald-400/40 text-emerald-300">
-                    <ShieldCheck className="mr-1 h-3 w-3" /> NRC verified
+                    <ShieldCheck className="mr-1 h-3 w-3" /> NRRC verified
                   </Badge>
                 )}
               </div>

@@ -138,7 +138,7 @@ export const TIMELINE_STAGES = [
   "Automated Screening and Duplicate Detection",
   "Nominee Invitation and Acceptance",
   "Profile Completion",
-  "NRC Evidence Verification",
+  "NRRC Evidence Verification",
   "Jury or Governance Review",
   "Recognition Approval",
   "Public Profile Publication",
@@ -147,7 +147,7 @@ export const TIMELINE_STAGES = [
 ];
 
 export const GALA_NOTE =
-  "The NESA-Africa 2026 Gala and Awards Ceremony is scheduled for 28 December 2026 in Lagos, Nigeria. Attendance is optional and does not affect recognition.";
+  "The NESA-Africa 2026 Gala and Awards Ceremony is scheduled for 13 December 2026 in Lagos, Nigeria. Attendance is optional and does not affect recognition.";
 
 export const RECOGNITION_PACKAGE: Record<AwardTier, string[]> = {
   "blue-garnet": [
@@ -170,7 +170,7 @@ export const RECOGNITION_PACKAGE: Record<AwardTier, string[]> = {
 
 export const TRUST_LINKS: CTA[] = [
   { label: "Independent Governance", href: "/governance" },
-  { label: "NRC Verification", href: "/judgeapply/nrc" },
+  { label: "NRRC Verification", href: "/judgeapply/nrc" },
   { label: "Public Reporting", href: "/impact" },
   { label: "Policies", href: "/policies" },
   { label: "Full FAQ", href: "/faqs" },
@@ -431,7 +431,7 @@ const pages: Record<string, DetailedAwardCategoryPage> = {
     faqs: [
       { q: "Are unregistered CBOs eligible?", a: "Community-based organisations may be nominated, but proof of activity, governance, and accountability is required." },
       { q: "Does short-term project work qualify?", a: "Sustained programmes are prioritised; one-off activities are unlikely to reach the threshold." },
-      { q: "How is impact verified?", a: "By the Nominee Research Corps using programme documents, partner confirmation, and independent sources." },
+      { q: "How is impact verified?", a: "By the Nominee Research and Review Corps using programme documents, partner confirmation, and independent sources." },
       { q: "Is this competitive?", a: "No — Blue Garnet 2026 is a Recognition Edition." },
     ],
     seo: { title: "NGOs for Education — Nigeria | NESA-Africa 2026", description: "Recognising Nigerian NGOs driving measurable education impact.", canonical: "https://nesa.africa/category/ngo-education-nigeria" },

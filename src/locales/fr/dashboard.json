@@ -50,7 +50,7 @@
     "of": "sur"
   },
   "nrc": {
-    "title": "Tableau de Bord NRC",
+    "title": "Tableau de Bord NRRC",
     "queue": "File d'Attente",
     "pending": "En Attente",
     "underReview": "En Révision",

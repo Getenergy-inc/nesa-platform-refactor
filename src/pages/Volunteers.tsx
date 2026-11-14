@@ -29,7 +29,7 @@ const fadeUp = {
 const ROLE_LABELS: Record<string, string> = {
   volunteer: "Volunteer",
   judge: "Judge",
-  nrc: "NRC Member",
+  nrc: "NRRC Member",
   leadership: "Team Leadership",
   other: "Other",
 };
@@ -225,15 +225,15 @@ export default function Volunteers() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
           <CounterCard label="Volunteers" value={formatStat(team_stats.volunteers)} icon={Users} />
           <CounterCard label="Judges" value={formatStat(team_stats.judges)} icon={ShieldCheck} />
-          <CounterCard label="NRC Members" value={formatStat(team_stats.nrcMembers)} icon={BadgeCheck} />
+          <CounterCard label="NRRC Members" value={formatStat(team_stats.nrcMembers)} icon={BadgeCheck} />
           <CounterCard label="Countries" value={formatStat(team_stats.countries)} icon={Globe2} />
           <CounterCard label="Active Chapters" value={formatStat(team_stats.activeChapters)} icon={MapPin} />
           <CounterCard label="Tasks Done" value={stats.tasks} icon={Sparkles} />
         </div>
         <p className="mt-3 text-center text-[11px] text-white/40">
-          Live counts from the verified volunteer, judge, NRC and chapter records. Volunteer, judge
-          and NRC roles can coexist under one person record, so someone holding several roles is
-          counted once and shown on a single card carrying all of their role badges. NRC members are
+          Live counts from the verified volunteer, judge, NRRC and chapter records. Volunteer, judge
+          and NRRC roles can coexist under one person record, so someone holding several roles is
+          counted once and shown on a single card carrying all of their role badges. NRRC members are
           counted and badged, but not listed individually by name.
         </p>
 

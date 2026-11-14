@@ -197,7 +197,7 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
           </span>
           <span className="text-white/40 hidden sm:inline">·</span>
           <span className="text-white/60 hidden sm:inline">
-            2026 Decision: NRC impact verification and governance approval
+            2026 Decision: NRRC impact verification and governance approval
           </span>
         </div>
       </div>
@@ -235,7 +235,7 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
           label: "Meet the Education Impact Influencers",
           href: "#existing-nominees",
         }}
-        trustLine="NRC impact verification · Governance approval · No public voting in 2026"
+        trustLine="NRRC impact verification · Governance approval · No public voting in 2026"
       />
 
       <div className="container mx-auto px-4 py-10 max-w-5xl">
@@ -425,7 +425,7 @@ export default function InfluencerSubcategoryPage({ slugOverride }: Props) {
               <div className="grid gap-2 sm:grid-cols-2 pt-1">
                 <p>
                   <span className="text-gold font-semibold">Review method:</span>{" "}
-                  NRC impact verification and governance approval
+                  NRRC impact verification and governance approval
                 </p>
                 <p>
                   <span className="text-gold font-semibold">Independent jury review:</span>{" "}

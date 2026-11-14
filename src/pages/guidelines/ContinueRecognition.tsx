@@ -78,7 +78,7 @@ const PATHWAYS = [
     badgeClass: "border-gold/40 text-gold bg-gold/10",
     points: [
       "Updated evidence strengthens the record",
-      "Category relevance reviewed by NRC",
+      "Category relevance reviewed by NRRC",
       "Recognition threshold checked",
       "Certificate subcategory applies",
     ],
@@ -175,7 +175,7 @@ const FAQ = [
   },
   {
     q: "What happens after submission?",
-    a: "Your update enters a review queue. The NRC validates accuracy, category fit, and evidence quality before merging it into the nominee record.",
+    a: "Your update enters a review queue. The NRRC validates accuracy, category fit, and evidence quality before merging it into the nominee record.",
   },
   {
     q: "Can a nominee be updated more than once?",

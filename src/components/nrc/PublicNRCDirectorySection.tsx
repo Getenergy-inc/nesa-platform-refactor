@@ -19,8 +19,8 @@ export function PublicNRCDirectorySection({ limit }: { limit?: number }) {
       <div className="mx-auto max-w-6xl px-4 py-16">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-gold/80">Nominee Research Corps</p>
-            <h2 className="mt-2 font-display text-3xl font-bold text-gold">Meet the NRC</h2>
+            <p className="text-xs uppercase tracking-[0.2em] text-gold/80">Nominee Research and Review Corps</p>
+            <h2 className="mt-2 font-display text-3xl font-bold text-gold">Meet the NRRC</h2>
             <p className="mt-2 max-w-2xl text-white/70">
               Verification is carried out by named, accountable researchers. Members appear here
               only after onboarding is complete and they have opted into public listing.
@@ -28,7 +28,7 @@ export function PublicNRCDirectorySection({ limit }: { limit?: number }) {
           </div>
           <Button asChild variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
             <SmartLink to="/judgeapply/nrc">
-              Join the NRC <ArrowRight className="ml-2 h-4 w-4" />
+              Join the NRRC <ArrowRight className="ml-2 h-4 w-4" />
             </SmartLink>
           </Button>
         </div>
@@ -43,7 +43,7 @@ export function PublicNRCDirectorySection({ limit }: { limit?: number }) {
           <div className="mt-8 rounded-xl border border-dashed border-gold/25 bg-white/[0.03] p-8 text-center">
             <Users2 className="mx-auto h-8 w-8 text-gold/70" aria-hidden />
             <p className="mt-3 font-display text-lg font-semibold text-white">
-              NRC members will be introduced here as onboarding completes
+              NRRC members will be introduced here as onboarding completes
             </p>
             <p className="mx-auto mt-2 max-w-xl text-sm text-white/60">
               We do not publish placeholder profiles. Each researcher is listed only once their
@@ -51,7 +51,7 @@ export function PublicNRCDirectorySection({ limit }: { limit?: number }) {
             </p>
             <div className="mt-5 flex flex-wrap justify-center gap-3">
               <Button asChild className="bg-gold text-charcoal hover:bg-gold/90">
-                <SmartLink to="/judgeapply/nrc">Apply to join the NRC</SmartLink>
+                <SmartLink to="/judgeapply/nrc">Apply to join the NRRC</SmartLink>
               </Button>
               <Button asChild variant="ghost" className="text-white/80 hover:text-gold">
                 <SmartLink to="/judgeapply/about/integrity">How verification works</SmartLink>
@@ -82,7 +82,7 @@ export function PublicNRCDirectorySection({ limit }: { limit?: number }) {
                 </div>
                 {m.bio && <p className="mt-3 line-clamp-3 text-sm text-white/65">{m.bio}</p>}
                 <p className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-gold/80">
-                  <ShieldCheck className="h-3.5 w-3.5" aria-hidden /> Verified NRC member
+                  <ShieldCheck className="h-3.5 w-3.5" aria-hidden /> Verified NRRC member
                 </p>
               </SmartLink>
             ))}

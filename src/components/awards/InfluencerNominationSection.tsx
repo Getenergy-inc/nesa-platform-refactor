@@ -25,7 +25,7 @@ export function InfluencerNominationSection() {
           <p className="text-foreground/75 text-sm sm:text-base max-w-3xl leading-relaxed">
             Use the native intake form below to submit your nomination. Select the most
             appropriate <span className="text-gold">Primary Medium of Influence</span>. Every
-            submission is independently reviewed by the Nominee Research Corps (NRC) before
+            submission is independently reviewed by the Nominee Research and Review Corps (NRRC) before
             progressing to verification, public recognition, certificate approval and
             publication.
           </p>

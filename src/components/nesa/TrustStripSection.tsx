@@ -22,7 +22,7 @@ export function TrustStripSection() {
             </h2>
           </div>
           <p className="text-white/85 text-sm md:text-base leading-relaxed flex-1">
-            Independent NRC verification · EDI Matrix evaluation · Icon judging · Governance
+            Independent NRRC verification · EDI Matrix evaluation · Icon judging · Governance
             approval. Sponsorship, donations, and endorsements do not influence recognition.
           </p>
 

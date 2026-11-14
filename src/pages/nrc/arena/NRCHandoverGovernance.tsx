@@ -10,8 +10,8 @@ export default function NRCHandoverGovernance() {
     >
       <div className="rounded-xl border border-white/10 bg-white/[0.04] p-6">
         <div className="flex flex-wrap items-center gap-3 text-sm text-white/80">
-          NRC verification
-          <ArrowRight className="h-4 w-4 text-white/40" /> NRC recommendation
+          NRRC verification
+          <ArrowRight className="h-4 w-4 text-white/40" /> NRRC recommendation
           <ArrowRight className="h-4 w-4 text-white/40" /> Governance approval
           <ArrowRight className="h-4 w-4 text-white/40" /> Verified public profile
           <ArrowRight className="h-4 w-4 text-white/40" /> Certificate

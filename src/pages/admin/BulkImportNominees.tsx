@@ -125,7 +125,7 @@ export default function BulkImportNominees() {
           <p className="text-sm text-muted-foreground">
             Upload a CSV or XLSX register. Rows are matched to categories and subcategories
             server-side, imported as <strong>draft</strong> records, and never publicly visible
-            until they pass the NRC review workflow.
+            until they pass the NRRC review workflow.
           </p>
         </header>
 

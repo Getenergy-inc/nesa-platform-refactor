@@ -276,7 +276,7 @@ export default function EDIAnalyticsDashboard() {
   return (
     <ProtectedRoute requiredRoles={['admin', 'nrc']}>
       <Helmet>
-        <title>EDI Analytics — NESA Africa NRC</title>
+        <title>EDI Analytics — NESA Africa NRRC</title>
       </Helmet>
       <NRCDashboardLayout>
         <div className="p-4 md:p-6">

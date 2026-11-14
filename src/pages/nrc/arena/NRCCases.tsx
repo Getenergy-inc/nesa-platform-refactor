@@ -63,7 +63,7 @@ export default function NRCCases() {
       </div>
 
       <p className="mt-3 text-[11px] text-white/40">
-        Sample data shown. Live case routing arrives with Phase 3 (NRC schema) and Phase 4 (automation engine).
+        Sample data shown. Live case routing arrives with Phase 3 (NRRC schema) and Phase 4 (automation engine).
       </p>
     </NRCArenaPage>
   );

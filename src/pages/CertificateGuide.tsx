@@ -147,7 +147,7 @@ export default function CertificateGuide() {
               Every NESA-Africa certificate carries a QR verification code, a unique
               verification ID, and a SHA256 integrity hash. Sponsorship, donation, ticket,
               merchandise, partnership, or any GFAwzip Wallet payment does not influence
-              certificate issuance — recognition follows strict Automated NRC verification,
+              certificate issuance — recognition follows strict Automated NRRC verification,
               EDI Matrix scoring, and Gold-Blue Garnet Awards governance.
             </div>
           </div>

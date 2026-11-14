@@ -715,7 +715,7 @@ function UserMenu() {
               to="/nrrc"
               className="cursor-pointer text-white hover:text-gold hover:bg-gold/10"
             >
-              NRC Dashboard
+              NRRC Dashboard
             </Link>
           </DropdownMenuItem>
         )}

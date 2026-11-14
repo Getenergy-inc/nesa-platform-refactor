@@ -64,7 +64,7 @@ function NomineeTableContent() {
   return (
     <NRCDashboardLayout>
       <Helmet>
-        <title>All Nominees | NRC Dashboard</title>
+        <title>All Nominees | NRRC Dashboard</title>
       </Helmet>
 
       <div className="space-y-4">

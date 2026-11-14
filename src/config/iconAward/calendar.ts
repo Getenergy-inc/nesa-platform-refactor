@@ -37,7 +37,7 @@ export function getCurrentIconPhase(now: Date = new Date()): IconPhaseInfo {
   if (now < c.screeningOpen) {
     return {
       phase: "pre_screening",
-      label: "NRC Verification",
+      label: "NRRC Verification",
       currentStart: null,
       nextStart: c.screeningOpen,
       nextLabel: "Specialist Panel Screening opens",
@@ -80,7 +80,7 @@ export function getCurrentIconPhase(now: Date = new Date()): IconPhaseInfo {
 }
 
 export const ICON_PHASE_TIMELINE: Array<{ key: IconPhase; label: string; date: Date }> = [
-  { key: "pre_screening",      label: "NRC Verification",             date: ICON_CALENDAR.screeningOpen },
+  { key: "pre_screening",      label: "NRRC Verification",             date: ICON_CALENDAR.screeningOpen },
   { key: "screening",          label: "Specialist Panel Screening",   date: ICON_CALENDAR.screeningClose },
   { key: "grand_jury",         label: "Grand Jury Deliberation",            date: ICON_CALENDAR.grandJuryClose },
   { key: "governance_review",  label: "Governance Review",            date: ICON_CALENDAR.governanceClose },

@@ -50,7 +50,7 @@ const STEPS = [
   {
     step: 3,
     title: "Provide Nominee Information",
-    description: "Enter the nominee's full name, title, organization, and contact information. Ensure accuracy for NRC verification.",
+    description: "Enter the nominee's full name, title, organization, and contact information. Ensure accuracy for NRRC verification.",
     icon: FileText,
     tips: ["Use official names as they appear in documents", "Provide working email and phone for acceptance letter"],
   },
@@ -127,11 +127,11 @@ const FAQS = [
   },
   {
     question: "What happens after I submit a nomination?",
-    answer: "The NRC (Nominee Research Corps) reviews all nominations within 72 hours. The nominee receives an acceptance letter and you receive status updates via email.",
+    answer: "The NRRC (Nominee Research and Review Corps) reviews all nominations within 72 hours. The nominee receives an acceptance letter and you receive status updates via email.",
   },
   {
     question: "Can I edit my nomination after submitting?",
-    answer: "No. Once submitted, nominations cannot be edited. However, the NRC may request additional information during the verification process.",
+    answer: "No. Once submitted, nominations cannot be edited. However, the NRRC may request additional information during the verification process.",
   },
   {
     question: "Do I earn any rewards for nominating?",
@@ -143,7 +143,7 @@ const FAQS = [
   },
   {
     question: "How do I know if my nominee was selected?",
-    answer: "You'll receive email notifications at each stage: NRC clearance, competitive shortlisting (if applicable), and final results announcement.",
+    answer: "You'll receive email notifications at each stage: NRRC clearance, competitive shortlisting (if applicable), and final results announcement.",
   },
   {
     question: "What evidence is most valuable?",

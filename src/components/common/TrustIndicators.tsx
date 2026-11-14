@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 const DEFAULT_ITEMS = [
   { label: "4 Recognition Tiers", detail: "Icon · Blue Garnet · Platinum · Influencer" },
-  { label: "NRC-Verified Profiles", detail: "Independent verification of every recognised nominee" },
+  { label: "NRRC-Verified Profiles", detail: "Independent verification of every recognised nominee" },
   { label: "15 Regions", detail: "8 Africa + 7 Global — continental reach with regional accountability" },
   { label: "African Diaspora & Friends of Africa", detail: "One continent, one diaspora community, one mission" },
   { label: "Sponsor Independence", detail: "Sponsors fund the platform. They do not influence selection." },

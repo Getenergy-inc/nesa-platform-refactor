@@ -207,7 +207,7 @@ export default function Podcast() {
                 The podcast is a public awareness and education programme. It carries no
                 judging, scoring or voting function, and no episode names Africa Education
                 Icon nominees or discusses deliberations. Recognition outcomes are decided
-                only through the NRC verification and Judges Arena processes.
+                only through the NRRC verification and Judges Arena processes.
               </p>
             </div>
           </div>

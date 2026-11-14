@@ -192,7 +192,7 @@ export const MAIN_NAV: NavItem[] = [
       { label: "Webinars", href: "/media/webinars", description: "Continental webinar series", icon: Mic },
       { label: "Gallery", href: "/gallery", description: "Photo archives across NESA seasons", icon: Play },
       { label: "Press Releases", href: "/press", description: "Official announcements", icon: FileCheck },
-      { label: "Awards Gala — 28 Dec 2026", href: "/media/gala", description: "The Blue-Garnet Gala Night", icon: Calendar, badge: "2026" },
+      { label: "Awards Gala — 13 Dec 2026", href: "/media/gala", description: "The Blue-Garnet Gala Night", icon: Calendar, badge: "2026" },
       { label: "Buy Gala Ticket", href: "/tickets", description: "Secure your seat", icon: Ticket },
       { label: "Buy Award Merchandise", href: "/shop", description: "Official NESA-Africa store", icon: ShoppingBag },
     ],
@@ -499,7 +499,7 @@ export const PAGE_REGISTRY: PageDefinition[] = [
   { path: "/dashboard/settings", title: "Settings", description: "Account settings", component: "Settings", category: "dashboard", requiredRoles: ["user"] },
   
   // ==================== NRC DASHBOARD ====================
-  { path: "/nrrc", title: "NRC Dashboard", description: "Review nominations", component: "NRCDashboard", category: "dashboard", requiredRoles: ["nrc", "admin"] },
+  { path: "/nrrc", title: "NRRC Dashboard", description: "Review nominations", component: "NRCDashboard", category: "dashboard", requiredRoles: ["nrc", "admin"] },
   { path: "/nrrc/assigned", title: "Assigned Reviews", description: "Your assignments", component: "NRCAssigned", category: "dashboard", requiredRoles: ["nrc", "admin"] },
   { path: "/nrrc/evidence", title: "Evidence Validation", description: "Verify evidence", component: "NRCEvidence", category: "dashboard", requiredRoles: ["nrc", "admin"] },
   { path: "/nrrc/logs", title: "Approval Logs", description: "Decision history", component: "NRCLogs", category: "dashboard", requiredRoles: ["nrc", "admin"] },

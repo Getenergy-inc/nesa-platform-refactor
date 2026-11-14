@@ -7,10 +7,10 @@ export default function PortalLayout() {
   return (
     <div className="min-h-screen bg-charcoal text-white flex flex-col">
       <Helmet>
-        <title>Judges & NRC Portal | NESA-Africa 2026</title>
+        <title>Judges & NRRC Portal | NESA-Africa 2026</title>
         <meta
           name="description"
-          content="NESA-Africa 2026 Judges and Nominee Research Corps (NRC) portal. Learn how the process works, recommend a judge, or apply to join the NRC."
+          content="NESA-Africa 2026 Judges and Nominee Research and Review Corps (NRRC) portal. Learn how the process works, recommend a judge, or apply to join the NRRC."
         />
       </Helmet>
       <PortalHeader />
@@ -19,7 +19,7 @@ export default function PortalLayout() {
       </main>
       <footer className="border-t border-gold/15 bg-charcoal-light">
         <div className="container py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/60">
-          <div>© 2026 NESA-Africa. Judges & NRC Portal.</div>
+          <div>© 2026 NESA-Africa. Judges & NRRC Portal.</div>
           <div className="flex gap-4">
             <Link to="/judgeapply/about/integrity" className="hover:text-gold">
               Integrity

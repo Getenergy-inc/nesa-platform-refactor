@@ -85,7 +85,7 @@ const PATHWAYS = [
     icon: Medal,
     title: "Platinum Recognition",
     subtitle: "Institutional Leadership",
-    stats: ["7 Categories", "27 Subcategories", "NRC Verified"],
+    stats: ["7 Categories", "27 Subcategories", "NRRC Verified"],
     description: "Recognising institutional contribution and governance-grade impact.",
     href: "/awards/platinum-certificate-categories",
     cta: "Explore Platinum",

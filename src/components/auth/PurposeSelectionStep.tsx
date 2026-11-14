@@ -76,8 +76,8 @@ const purposeOptions: Omit<PurposeOption, "selected">[] = [
   {
     id: "nrc",
     icon: <Search className="h-5 w-5" />,
-    title: "Apply as NRC Volunteer",
-    description: "Apply to the Nominee Research Corps — you will be taken to the application form",
+    title: "Apply as NRRC Volunteer",
+    description: "Apply to the Nominee Research and Review Corps — you will be taken to the application form",
   },
   {
     id: "gala",

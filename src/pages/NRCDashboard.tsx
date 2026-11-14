@@ -231,7 +231,7 @@ function NRCDashboardContent() {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <div className="animate-pulse text-muted-foreground">Loading NRC Dashboard...</div>
+        <div className="animate-pulse text-muted-foreground">Loading NRRC Dashboard...</div>
       </div>
     );
   }
@@ -249,9 +249,9 @@ function NRCDashboardContent() {
               <Award className="h-5 w-5 text-primary" />
             </Link>
             <div>
-              <h1 className="font-display text-lg font-bold">NRC Dashboard</h1>
+              <h1 className="font-display text-lg font-bold">NRRC Dashboard</h1>
               <p className="text-xs text-muted-foreground">
-                Nominee Research Corps • {currentEdition.name}
+                Nominee Research and Review Corps • {currentEdition.name}
               </p>
             </div>
           </div>

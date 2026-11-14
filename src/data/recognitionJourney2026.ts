@@ -89,8 +89,8 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
   {
     id: "nrc-member-onboarding",
     number: 2,
-    name: "NRC Member Onboarding",
-    shortName: "NRC Onboarding",
+    name: "NRRC Member Onboarding",
+    shortName: "NRRC Onboarding",
     dateRange: "1 – 28 August 2026",
     startsAt: "2026-08-01T00:00:00Z",
     endsAt: "2026-08-28T23:59:59Z",
@@ -99,7 +99,7 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     iconName: "Users",
     accent: "slate",
     purpose:
-      "Onboard and train the Nominee Research Corps (NRC) responsible for verifying every nomination across all four recognition tiers.",
+      "Onboard and train the Nominee Research and Review Corps (NRRC) responsible for verifying every nomination across all four recognition tiers.",
     description:
       "Members complete governance orientation, conflict-of-interest declarations, EDI Matrix training, evidence standards and Icon-relevant verification training before nominations open.",
     activities: [
@@ -109,9 +109,9 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
       "Evidence & sourcing standards",
       "Digital platform training",
     ],
-    participants: ["Nominee Research Corps", "Governance Council", "NRC Leadership"],
+    participants: ["Nominee Research and Review Corps", "Governance Council", "NRRC Leadership"],
     outcomes: ["Verification corps ready before nominations open"],
-    ctas: [{ label: "Visit the NRC Arena", to: "/nrrc" }],
+    ctas: [{ label: "Visit the NRRC Arena", to: "/nrrc" }],
   },
   {
     id: "public-nominations-open",
@@ -129,7 +129,7 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
       "Open nominations simultaneously for Africa Education Icon, Gold-Blue Garnet, Platinum Recognition and Influencer Education Impact.",
     description:
       "Two distinct windows apply: Africa Education Icon closes early on 6 October 2026 so judges can complete their review, while Gold-Blue Garnet, Platinum Recognition and Influencer Education Impact stay open to 21 November 2026 — giving nominees time to request physical printed certificates before the Gala.",
-    selection: "NRC verification · Independent judging for Icon only",
+    selection: "NRRC verification · Independent judging for Icon only",
     outcomes: ["Steady flow of nominations across all four tiers"],
     ctas: [{ label: "Nominate an Enabler", to: "/nominate" }],
   },
@@ -174,10 +174,10 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     iconName: "Gem",
     accent: "blue",
     purpose:
-      "Receive nominations for Gold-Blue Garnet, Platinum Recognition and Influencer Education Impact — all NRC-verified Certificates of Recognition.",
+      "Receive nominations for Gold-Blue Garnet, Platinum Recognition and Influencer Education Impact — all NRRC-verified Certificates of Recognition.",
     description:
       "The extended window closes on 21 November 2026 so verified Enablers have time to request physical printed certificates ahead of the Recognition Gala. These tiers are recognition-based, not competitive contests.",
-    selection: "NRC verification against the EDI Matrix · No public vote",
+    selection: "NRRC verification against the EDI Matrix · No public vote",
     outcomes: ["Verified Certificates of Recognition across three tiers"],
     ctas: [{ label: "Choose Your Category", to: "/nominate" }],
   },
@@ -209,8 +209,8 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
   {
     id: "nrc-icon-review",
     number: 7,
-    name: "NRC Review of All Icon Nominees",
-    shortName: "NRC Icon Review",
+    name: "NRRC Review of All Icon Nominees",
+    shortName: "NRRC Icon Review",
     dateRange: "7 – 20 October 2026",
     startsAt: "2026-10-07T00:00:00Z",
     endsAt: "2026-10-20T23:59:59Z",
@@ -221,18 +221,18 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     purpose:
       "Verify every Icon nomination and push assessment-ready dossiers into the Judges Arena.",
     description:
-      "The Nominee Research Corps checks eligibility, evidence, citations and duplicate records before any nomination reaches a judge.",
+      "The Nominee Research and Review Corps checks eligibility, evidence, citations and duplicate records before any nomination reaches a judge.",
     outcomes: ["Assessment-ready Icon pool in the Judges Arena"],
     ctas: [{ label: "How Verification Works", to: "/nrrc" }],
   },
   {
     id: "gold-blue-garnet-verification",
     number: 8,
-    name: "Gold-Blue Garnet NRC Verification (rolling)",
+    name: "Gold-Blue Garnet NRRC Verification (rolling)",
     shortName: "Gold-Blue Garnet Verification",
-    dateRange: "23 September – 28 December 2026",
+    dateRange: "23 September – 13 December 2026",
     startsAt: "2026-09-23T00:00:00Z",
-    endsAt: "2026-12-28T23:59:59Z",
+    endsAt: "2026-12-13T23:59:59Z",
     status: "upcoming",
     tier: "Tier 2",
     iconName: "ShieldCheck",
@@ -241,8 +241,8 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
       "Verify Gold-Blue Garnet nominations on a rolling basis against the EDI Matrix and evidence standards.",
     description:
       "Verification runs continuously from 23 September through Gala day so Certificates of Recognition can be issued as nominations clear review — covering Gold-Blue Garnet, Platinum Recognition and Influencer Education Impact nominations as they arrive.",
-    selection: "NRC verification only · No public vote",
-    outcomes: ["NRC-verified Certificates of Recognition"],
+    selection: "NRRC verification only · No public vote",
+    outcomes: ["NRRC-verified Certificates of Recognition"],
     ctas: [{ label: "Explore Gold-Blue Garnet", to: "/awards/gold-blue-garnet" }],
   },
   {
@@ -297,7 +297,7 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     iconName: "Tv",
     accent: "yellow",
     purpose:
-      "Present Africa Education Icon recipients and every NRC-verified Enabler to a continental television audience ahead of the Gala.",
+      "Present Africa Education Icon recipients and every NRRC-verified Enabler to a continental television audience ahead of the Gala.",
     description:
       "TV Showcase 1 (22 November) presents Platinum Recognition and Influencer Education Impact Certificates of Recognition. TV Showcase 2 (8 December) presents the Africa Education Icon recipients alongside verified Gold-Blue Garnet Enablers.",
     outcomes: ["Continental broadcast moments", "Gala momentum"],
@@ -309,8 +309,8 @@ export const RECOGNITION_JOURNEY_2026: JourneyPhase[] = [
     name: "NESA-Africa 2026 Online Awards Gala",
     shortName: "Online Awards Gala",
     dateRange: `${PROGRAMME_END_LABEL} · Online only`,
-    startsAt: "2026-12-28T00:00:00Z",
-    endsAt: "2026-12-28T23:59:59Z",
+    startsAt: "2026-12-13T00:00:00Z",
+    endsAt: "2026-12-13T23:59:59Z",
     status: "upcoming",
     tier: "Cross-Tier",
     iconName: "Trophy",

@@ -44,7 +44,7 @@ export const INTAKE_STATUS_CONFIG: Record<IntakeStatus, IntakeStatusConfig> = {
   duplicate_check: { label: "Duplicate Check", color: "bg-amber-500/20 text-amber-400", icon: "🔍", step: 2, description: "Checking for existing records and duplicates." },
   under_screening: { label: "Under Screening", color: "bg-orange-500/20 text-orange-400", icon: "📋", step: 3, description: "Automated eligibility screening in progress." },
   documentation_incomplete: { label: "Documentation Incomplete", color: "bg-red-500/20 text-red-300", icon: "⚠️", step: 3, description: "Missing required evidence or documentation." },
-  under_nrc_review: { label: "Under NRC Review", color: "bg-purple-500/20 text-purple-400", icon: "🏛", step: 4, description: "Assigned to NRC reviewer for expert evaluation." },
+  under_nrc_review: { label: "Under NRRC Review", color: "bg-purple-500/20 text-purple-400", icon: "🏛", step: 4, description: "Assigned to NRRC reviewer for expert evaluation." },
   cleared: { label: "Cleared", color: "bg-emerald-500/20 text-emerald-400", icon: "✅", step: 5, description: "Nomination cleared and nominee approved." },
   returned_for_clarification: { label: "Returned for Clarification", color: "bg-orange-500/20 text-orange-400", icon: "↩️", step: 3, description: "Additional information required from nominator." },
   declined: { label: "Declined", color: "bg-red-500/20 text-red-400", icon: "❌", step: 0, description: "Nomination did not meet eligibility requirements." },
@@ -57,7 +57,7 @@ export const NOMINATION_TYPE_CONFIG: Record<NominationType, { label: string; col
   re_nominated: { label: "Re-Nominated", color: "bg-purple-500/20 text-purple-400", description: "Existing nominee submitted for a new review cycle." },
   duplicate_submission: { label: "Duplicate Submission", color: "bg-amber-500/20 text-amber-400", description: "Duplicate of an existing nomination." },
   incomplete_submission: { label: "Incomplete", color: "bg-red-500/20 text-red-300", description: "Nomination missing required fields or evidence." },
-  pending_nrc_review: { label: "Pending NRC Review", color: "bg-purple-500/20 text-purple-400", description: "Awaiting NRC expert assessment." },
+  pending_nrc_review: { label: "Pending NRRC Review", color: "bg-purple-500/20 text-purple-400", description: "Awaiting NRRC expert assessment." },
 };
 
 // ═══════════════════════════════════════════════════════════════════
@@ -227,7 +227,7 @@ export function classifyNomination(input: {
 
   // Auto-route based on completeness
   if (intakeStatus === "under_screening" && flags.length === 0 && input.evidenceCount >= 1 && input.justification.length >= 100) {
-    autoDecisions.push("Documentation complete — advancing to NRC review queue");
+    autoDecisions.push("Documentation complete — advancing to NRRC review queue");
     intakeStatus = "under_nrc_review";
   }
 

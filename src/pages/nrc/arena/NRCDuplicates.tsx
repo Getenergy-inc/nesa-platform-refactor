@@ -4,7 +4,7 @@ export default function NRCDuplicates() {
   return (
     <NRCArenaPage
       title="Duplicate & Identity Resolution"
-      description="Automated candidate matches (name, organisation, contact, socials) surface here for NRC confirmation. Automation never merges records — only NRC members do."
+      description="Automated candidate matches (name, organisation, contact, socials) surface here for NRRC confirmation. Automation never merges records — only NRRC members do."
       status="live"
     >
       <div className="grid gap-3 sm:grid-cols-2">

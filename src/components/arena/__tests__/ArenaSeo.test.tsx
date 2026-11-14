@@ -80,7 +80,7 @@ describe("ArenaSeo — arena branding metadata", () => {
 
   const cases: Array<[string, ArenaWorkspace]> = [
     ...JUDGE_ROUTES.map((r) => [r, "Judges Arena"] as [string, ArenaWorkspace]),
-    ...NRC_ROUTES.map((r) => [r, "NRC Arena"] as [string, ArenaWorkspace]),
+    ...NRC_ROUTES.map((r) => [r, "NRRC Arena"] as [string, ArenaWorkspace]),
   ];
 
   it.each(cases)("%s carries branded title + OG tokens", async (pathname, workspace) => {
@@ -129,7 +129,7 @@ describe("ArenaSeo — arena branding metadata", () => {
       <HelmetProvider>
         <MemoryRouter initialEntries={["/nrrc/dashboard"]}>
           <ArenaSeo
-            workspace="NRC Arena"
+            workspace="NRRC Arena"
             title="Custom Page"
             description="Custom arena description."
           />
@@ -138,11 +138,11 @@ describe("ArenaSeo — arena branding metadata", () => {
     );
 
     await waitFor(() => {
-      expect(document.title).toBe("Custom Page · NRC Arena · NESA-Africa 2026");
+      expect(document.title).toBe("Custom Page · NRRC Arena · NESA-Africa 2026");
     });
     expect(meta('meta[name="description"]')).toBe("Custom arena description.");
     expect(meta('meta[property="og:title"]')).toBe(
-      "Custom Page · NRC Arena · NESA-Africa 2026",
+      "Custom Page · NRRC Arena · NESA-Africa 2026",
     );
   });
 

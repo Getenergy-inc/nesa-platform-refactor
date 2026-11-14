@@ -23,7 +23,7 @@ export interface TierCategoryCardsProps {
 
 export function TierCategoryCards({
   tier,
-  eyebrow = "18-Category Registry",
+  eyebrow = "22-main-award Registry",
   heading,
   sub,
 }: TierCategoryCardsProps) {

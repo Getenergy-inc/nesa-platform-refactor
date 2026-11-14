@@ -48,7 +48,7 @@ const WORKFLOW_STAGES: { status: IntakeStatus; label: string; color: string }[] 
   { status: "submitted", label: "Submitted", color: "bg-blue-500" },
   { status: "duplicate_check", label: "Duplicate Check", color: "bg-amber-500" },
   { status: "under_screening", label: "Screening", color: "bg-orange-500" },
-  { status: "under_nrc_review", label: "NRC Review", color: "bg-purple-500" },
+  { status: "under_nrc_review", label: "NRRC Review", color: "bg-purple-500" },
   { status: "cleared", label: "Cleared", color: "bg-emerald-500" },
 ];
 
@@ -91,7 +91,7 @@ function IntakeReviewContent() {
 
   return (
     <>
-      <Helmet><title>Review: {record.nomineeName} — NRC</title></Helmet>
+      <Helmet><title>Review: {record.nomineeName} — NRRC</title></Helmet>
       <NRCDashboardLayout>
         <div className="space-y-6">
           {/* Back + Header */}
@@ -112,7 +112,7 @@ function IntakeReviewContent() {
             <CardHeader className="pb-3">
               <CardTitle className="text-sm text-white/70 flex items-center gap-2">
                 <Shield className="h-4 w-4 text-gold" />
-                NRC Processing Pipeline
+                NRRC Processing Pipeline
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -259,7 +259,7 @@ function IntakeReviewContent() {
                 <CardHeader>
                   <CardTitle className="text-sm text-white/70 flex items-center gap-2">
                     <FileCheck className="h-4 w-4 text-gold" />
-                    NRC Verification Checklist
+                    NRRC Verification Checklist
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -313,7 +313,7 @@ function IntakeReviewContent() {
                   <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white gap-2" size="sm"
                     onClick={() => handleAdvanceStatus("under_nrc_review")}>
                     <Shield className="h-4 w-4" />
-                    Assign to NRC Review
+                    Assign to NRRC Review
                   </Button>
                   <Button variant="outline" className="w-full border-orange-500/30 text-orange-400 hover:bg-orange-500/10 gap-2" size="sm"
                     onClick={() => handleAdvanceStatus("returned_for_clarification")}>

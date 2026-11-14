@@ -38,7 +38,7 @@ export function OfficialNominationForm({ awardName, subcategory, heading, onSite
         </h2>
         <p className="mt-2 max-w-3xl text-sm text-foreground/75">
           Complete the official NESA-Africa 2026 nomination form below. Nomination is free and every
-          submission is checked by the Nomination Review Committee (NRC).
+          submission is checked by the Nomination Review Committee (NRRC).
         </p>
       </div>
 

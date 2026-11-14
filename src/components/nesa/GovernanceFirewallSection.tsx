@@ -80,7 +80,7 @@ export function GovernanceFirewallSection() {
               ))}
             </ul>
             <p className="text-white/55 text-xs leading-relaxed">
-              Outcomes are governed by the NRC review engine, EDI scoring matrix,
+              Outcomes are governed by the NRRC review engine, EDI scoring matrix,
               independent jury panels, and audited governance ratification — every decision
               logged and verifiable.
             </p>

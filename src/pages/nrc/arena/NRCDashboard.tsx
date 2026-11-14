@@ -74,12 +74,12 @@ function Card({ card }: { card: StatCard }) {
 
 export default function NRCDashboard() {
   const { user } = useAuth();
-  const displayName = user?.email?.split("@")[0] ?? "NRC Member";
+  const displayName = user?.email?.split("@")[0] ?? "NRRC Member";
 
   return (
     <NRCArenaLayout>
       <Helmet>
-        <title>NRC Dashboard · NESA-Africa 2026</title>
+        <title>NRRC Dashboard · NESA-Africa 2026</title>
       </Helmet>
 
       {/* Identity block */}
@@ -91,7 +91,7 @@ export default function NRCDashboard() {
             </span>
           </div>
           <div className="min-w-0 flex-1">
-            <p className="text-xs uppercase tracking-wider text-gold/80">NESA-Africa 2026 · NRC Member</p>
+            <p className="text-xs uppercase tracking-wider text-gold/80">NESA-Africa 2026 · NRRC Member</p>
             <h1 className="font-display text-2xl font-bold mt-0.5">Welcome, {displayName}</h1>
             <div className="mt-2 flex flex-wrap gap-2 text-xs">
               <Badge variant="outline" className="border-white/20 text-white/80">Reference pending</Badge>
@@ -109,7 +109,7 @@ export default function NRCDashboard() {
       <section className="mb-6 rounded-xl border border-white/10 bg-arena-panel p-5">
         <p className="text-xs uppercase tracking-wider text-gold/80">Next required action</p>
         <p className="mt-1 text-white/85">
-          Complete NRC onboarding to unlock case assignments.
+          Complete NRRC onboarding to unlock case assignments.
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
           <Button asChild size="sm" className="bg-gold text-charcoal hover:bg-gold/90">

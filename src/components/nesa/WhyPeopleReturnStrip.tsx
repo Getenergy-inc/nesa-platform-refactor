@@ -5,7 +5,7 @@ const reasons = [
   {
     icon: ShieldCheck,
     title: "Verified Nominations",
-    description: "Every nominee passes independent NRC screening.",
+    description: "Every nominee passes independent NRRC screening.",
   },
   {
     icon: CalendarCheck,

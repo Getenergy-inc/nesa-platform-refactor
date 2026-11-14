@@ -114,7 +114,7 @@ export function ExitIntentPopup() {
 
                 <p className="text-white/70 mb-6 max-w-sm mx-auto">
                   Someone in your world is already an enabler of Education for All — a teacher, a founder, a mentor no one's recognised yet. Put their name forward. It takes minutes, it's free, and every submission goes through{" "}
-                  <span className="text-gold font-semibold">independent NRC verification</span>.
+                  <span className="text-gold font-semibold">independent NRRC verification</span>.
                 </p>
 
                 {/* Value props */}

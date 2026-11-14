@@ -184,7 +184,7 @@ export interface NominationWithWorkflow {
   nominee_photo_url: string | null;
   justification: string | null;
   evidence_urls: string[] | null;
-  source: "START_MEMBER" | "NRC" | "PUBLIC";
+  source: "START_MEMBER" | "NRRC" | "PUBLIC";
   status: string;
   workflow_status: NRCWorkflowStatus;
   rubric_version: string;

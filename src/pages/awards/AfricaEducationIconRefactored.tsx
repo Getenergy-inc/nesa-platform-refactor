@@ -67,11 +67,11 @@ const CLASSIFICATION_CARDS = [
 const TIMELINE = [
   { date: "1 Aug 2026", label: "Public Nominations Open" },
   { date: "6 Oct 2026", label: "Nominations Close" },
-  { date: "1–13 Sept 2026", label: "NRC Verification & Dossiers" },
+  { date: "1–13 Sept 2026", label: "NRRC Verification & Dossiers" },
   { date: "14–30 Sept 2026", label: "Judges Arena — Panel Screening" },
   { date: "1–7 Oct 2026", label: "Grand Jury Ranked-Choice Voting" },
   { date: "8–15 Oct 2026", label: "Governance Ratification" },
-  { date: "28 Dec 2026", label: "Recognition Gala · Lagos, Nigeria" },
+  { date: "13 Dec 2026", label: "Recognition Gala · Lagos, Nigeria" },
 ];
 
 const FAQ = [
@@ -277,7 +277,7 @@ export default function AfricaEducationIcon() {
                 <div className="p-4">
                   <div className="flex items-center gap-2 mb-1">
                     <Badge variant="outline" className="border-gold/40 text-gold text-[10px]">
-                      NRC Verified
+                      NRRC Verified
                     </Badge>
                     <span className="text-[10px] text-white/50">{n.country}</span>
                   </div>
@@ -392,10 +392,10 @@ export default function AfricaEducationIcon() {
             </div>
             <div>
               <h2 className="font-display text-2xl md:text-3xl font-bold text-white">
-                Nominee Research Corps (NRC) Verification
+                Nominee Research and Review Corps (NRRC) Verification
               </h2>
               <p className="text-white/75 mt-3">
-                Every nomination is independently verified by the Nominee Research Corps. The NRC checks
+                Every nomination is independently verified by the Nominee Research and Review Corps. The NRRC checks
                 identity, duplicates, evidence integrity, and continental relevance before a nominee
                 enters the Judges Arena. This layer is what makes the Africa Education Icon Award a
                 recognition of verified lifetime impact — not visibility.
@@ -548,7 +548,7 @@ export default function AfricaEducationIcon() {
           <p className="text-xs md:text-sm text-white/60 leading-relaxed">
             The Africa Education Icon Award is the only competitive recognition tier under the New
             Education Standard Award Africa (NESA-Africa). Every nominee is independently verified by
-            the Nominee Research Corps, assessed using the Education Development Index Matrix,
+            the Nominee Research and Review Corps, assessed using the Education Development Index Matrix,
             reviewed by independent judges, and approved through a transparent governance process.
             Recognition is based on verified educational impact — not popularity.
           </p>

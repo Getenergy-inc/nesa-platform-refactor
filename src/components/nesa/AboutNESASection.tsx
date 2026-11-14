@@ -91,7 +91,7 @@ const PANELS: Panel[] = [
     preview: "From public nominations to verification, voting, gala recognition, and post-award impact.",
     render: () => (
       <p>
-        Public nominations → NRC verification → jury onboarding → Gold
+        Public nominations → NRRC verification → jury onboarding → Gold
         Certificate independent jury review → Blue Garnet final voting → Awards Gala →
         post-award impact.
       </p>
@@ -231,7 +231,7 @@ const PANELS: Panel[] = [
     preview: "How nominations, verification, jury review, and gala recognition work together.",
     render: () => (
       <p>
-        Public nominations identify changemakers. NRC verification and jury
+        Public nominations identify changemakers. NRRC verification and jury
         review strengthen credibility. Independent verification drives credibility.
         The gala celebrates recognised impact. Post-award programs connect
         recognition to measurable education support.

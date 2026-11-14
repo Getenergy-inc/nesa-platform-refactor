@@ -45,7 +45,7 @@ function NRCPortalContent() {
         <div>
           <h2 className="font-display text-2xl font-bold">Welcome back!</h2>
           <p className="text-muted-foreground">
-            Here's your NRC dashboard overview
+            Here's your NRRC dashboard overview
           </p>
         </div>
 
@@ -94,7 +94,7 @@ function NRCPortalContent() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">
-                NRC Members
+                NRRC Members
               </CardTitle>
               <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
@@ -202,7 +202,7 @@ function NRCPortalContent() {
           {/* Team Overview */}
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle className="text-base">NRC Team</CardTitle>
+              <CardTitle className="text-base">NRRC Team</CardTitle>
               <Button variant="ghost" size="sm" asChild>
                 <Link to="/nrrc/members">
                   Manage

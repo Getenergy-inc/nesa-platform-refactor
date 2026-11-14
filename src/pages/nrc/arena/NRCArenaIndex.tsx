@@ -31,10 +31,10 @@ export default function NRCArenaIndex() {
   return (
     <div className="min-h-screen bg-arena-bg text-arena-text">
       <Helmet>
-        <title>NRC Arena · NESA-Africa 2026</title>
+        <title>NRRC Arena · NESA-Africa 2026</title>
         <meta
           name="description"
-          content="The NESA-Africa Nominee Research Corps (NRC) Arena — verification, evidence and dossier preparation for the 2026 recognition cycle."
+          content="The NESA-Africa Nominee Research and Review Corps (NRRC) Arena — verification, evidence and dossier preparation for the 2026 recognition cycle."
         />
       </Helmet>
 
@@ -48,30 +48,30 @@ export default function NRCArenaIndex() {
             </p>
           </div>
           <h1 className="mt-4 font-display text-4xl sm:text-5xl font-bold">
-            NRC Arena
+            NRRC Arena
           </h1>
           <p className="mt-2 text-lg text-white/70">
             Verification · Research · Evidence · Dossier · Handover
           </p>
           <p className="mt-6 max-w-2xl text-white/70">
-            The Nominee Research Corps is the independent verification backbone of the
-            NESA-Africa 2026 recognition cycle. NRC members verify identity and eligibility,
+            The Nominee Research and Review Corps is the independent verification backbone of the
+            NESA-Africa 2026 recognition cycle. NRRC members verify identity and eligibility,
             build evidence-backed dossiers, and hand cases to the Judges Arena or Governance.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
               <Link to="/nrrc/sign-in">
-                NRC Sign In <ArrowRight className="ml-2 h-4 w-4" />
+                NRRC Sign In <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="border-gold/40 text-gold hover:bg-gold/10">
-              <Link to="/nrrc/apply">Apply to Join the NRC</Link>
+              <Link to="/nrrc/apply">Apply to Join the NRRC</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="border-gold/40 text-gold hover:bg-gold/10">
-              <Link to="/nrrc/directory">View NRC Directory</Link>
+              <Link to="/nrrc/directory">View NRRC Directory</Link>
             </Button>
             <Button asChild variant="ghost" size="lg" className="text-white/80 hover:text-gold">
-              <Link to="/judgeapply/nrc">About the NRC</Link>
+              <Link to="/judgeapply/nrc">About the NRRC</Link>
             </Button>
           </div>
         </div>
@@ -84,7 +84,7 @@ export default function NRCArenaIndex() {
               {
                 icon: Users,
                 value: arenaCount(publicStats?.publicNrcMembers, statsLoading),
-                label: "NRC researchers listed",
+                label: "NRRC researchers listed",
                 detail: "Published only after onboarding & consent",
               },
               {
@@ -129,14 +129,14 @@ export default function NRCArenaIndex() {
           <div>
             <h2 className="font-display text-2xl font-bold text-gold">Two separate arenas · one identity</h2>
             <p className="mt-3 text-white/70">
-              The NRC Arena and Judges Arena share NESA-Africa authentication and visual
-              identity but operate as fully separated systems. NRC handles verification;
+              The NRRC Arena and Judges Arena share NESA-Africa authentication and visual
+              identity but operate as fully separated systems. NRRC handles verification;
               Judges handle independent scoring and final voting.
             </p>
           </div>
           <div className="grid gap-3">
             <Link to="/nrrc/sign-in" className="rounded-lg border border-gold/30 bg-arena-panel p-4 hover:border-gold">
-              <p className="text-gold font-semibold">NRC Arena →</p>
+              <p className="text-gold font-semibold">NRRC Arena →</p>
               <p className="text-sm text-white/60">Verification · Evidence · Dossier · Handover</p>
             </Link>
             <Link to="/judges" className="rounded-lg border border-white/15 bg-arena-panel p-4 hover:border-gold">

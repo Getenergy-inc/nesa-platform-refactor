@@ -210,7 +210,7 @@ export default function CatalogueIndexPage() {
         <title>Recognition Catalogue · Africa's Education Impact Directory</title>
         <meta
           name="description"
-          content="Browse every NESA-Africa nominee organised by award tier, category, subcategory, region, country, classification, nomination year and NRC verification status."
+          content="Browse every NESA-Africa nominee organised by award tier, category, subcategory, region, country, classification, nomination year and NRRC verification status."
         />
         <link rel="canonical" href={CANONICAL} />
         <meta property="og:title" content="Recognition Catalogue · NESA-Africa 2026" />
@@ -565,7 +565,7 @@ export default function CatalogueIndexPage() {
                                   : "border-foreground/25 text-foreground/60"
                               }`}
                             >
-                              <BadgeCheck className="mr-1 h-3 w-3" /> NRC {status}
+                              <BadgeCheck className="mr-1 h-3 w-3" /> NRRC {status}
                             </Badge>
                           </div>
 

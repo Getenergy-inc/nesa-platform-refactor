@@ -58,7 +58,7 @@ const SIDEBAR_SECTIONS = [
     items: [
       { href: "/nrrc/dashboard/edi-analytics", label: "EDI Analytics", icon: TrendingUp },
       { href: "/guidelines/edi-matrix", label: "EDI Matrix", icon: Shield },
-      { href: "/nrrc/dashboard/guidelines", label: "NRC Guidelines", icon: BookOpen },
+      { href: "/nrrc/dashboard/guidelines", label: "NRRC Guidelines", icon: BookOpen },
     ],
   },
   {
@@ -100,7 +100,7 @@ export function NRCDashboardLayout({ children }: NRCDashboardLayoutProps) {
         </div>
       ) : (
         <div className="border-b border-white/10">
-          <ArenaBrand workspace="NRC Arena" to="/nrrc/dashboard" compact />
+          <ArenaBrand workspace="NRRC Arena" to="/nrrc/dashboard" compact />
         </div>
       )}
 
@@ -157,15 +157,15 @@ export function NRCDashboardLayout({ children }: NRCDashboardLayoutProps) {
 
   return (
     <div className="min-h-screen bg-arena-bg text-arena-text">
-      <ArenaSeo workspace="NRC Arena" />
+      <ArenaSeo workspace="NRRC Arena" />
       <ArenaTopBar
-        title="NESA-Africa NRC Arena"
+        title="NESA-Africa NRRC Arena"
         subtitle="Internal Review System · NESA Africa 2026"
         statusLabel="Verification Live"
         statusDetail="2026 Cycle"
         statusTone="live"
         identityName={user?.email ?? "Reviewer"}
-        identityRole="NRC Reviewer"
+        identityRole="NRRC Reviewer"
         notifications={3}
         leading={
           <div className="flex items-center gap-1">
@@ -233,7 +233,7 @@ export function NRCDashboardLayout({ children }: NRCDashboardLayoutProps) {
         {/* Main Content */}
         <div className="flex min-w-0 flex-1 flex-col">
           <main className="min-w-0 flex-1 p-4 md:p-6 lg:p-8">{children}</main>
-          <ArenaFooter workspace="NRC Arena" />
+          <ArenaFooter workspace="NRRC Arena" />
         </div>
       </div>
     </div>

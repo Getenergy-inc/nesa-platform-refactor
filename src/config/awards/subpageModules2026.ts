@@ -26,10 +26,10 @@ export interface SubpageModules {
 
 const COMMON_TERMS: string[] = [
   "Nomination is free. No payment, sponsorship, donation, Gala ticket, merchandise purchase, GFAwzip Wallet transaction or AGC Participation Credit balance influences verification, assessment or recognition.",
-  "Every claim submitted must be independently verifiable. The Nominee Research Corps (NRC) may request original documents, referee contacts or third-party confirmation before a nomination proceeds.",
+  "Every claim submitted must be independently verifiable. The Nominee Research and Review Corps (NRRC) may request original documents, referee contacts or third-party confirmation before a nomination proceeds.",
   "Nominations containing falsified, plagiarised or unverifiable evidence are disqualified, and the submitting account may be suspended.",
   "Nominees must consent to publication of their verified profile, category, region and recognition status on NESA.Africa.",
-  "Reviewers, NRC members and Governance Board members must declare and recuse themselves from any conflict of interest before assessing a nomination.",
+  "Reviewers, NRRC members and Governance Board members must declare and recuse themselves from any conflict of interest before assessing a nomination.",
   "NESA-Africa reserves the right to reclassify a nomination into the correct category, subcategory or region where the submitted placement is incorrect.",
   "Recognition decisions of the Governance Board are final. An evidence-correction window is offered before any nomination is closed as unverified.",
   "Personal data is processed solely for verification, recognition and Gala administration, in line with the NESA-Africa privacy policy.",
@@ -37,7 +37,7 @@ const COMMON_TERMS: string[] = [
 
 const ICON_TERMS: string[] = [
   "The Africa Education Icon recognition covers the 2006–2026 period and requires at least twenty years of documented education contribution.",
-  "Icon recognition is decided exclusively by the Icon Jury following NRC verification. There is no public vote and no public shortlist ballot.",
+  "Icon recognition is decided exclusively by the Icon Jury following NRRC verification. There is no public vote and no public shortlist ballot.",
   "Posthumous nominations are accepted where an authorised representative provides the evidence and consents on the nominee's behalf.",
 ];
 
@@ -64,7 +64,7 @@ const GBG_TERMS: string[] = [
 const COMMON_BENEFITS: SubpageBenefit[] = [
   {
     title: "Verified public profile",
-    body: "A permanent NESA.Africa profile carrying the NRC verification mark, searchable in Africa's Education Impact Directory.",
+    body: "A permanent NESA.Africa profile carrying the NRRC verification mark, searchable in Africa's Education Impact Directory.",
   },
   {
     title: "Digital certificate & seal",
@@ -121,7 +121,7 @@ const ICON_TIMELINE: SubpageTimelineEntry[] = [
   { date: "1 – 31 July 2026", title: "Pre-launch activation", description: "Tier briefings, media mobilisation and chapter readiness.", status: "upcoming" },
   { date: "6 September 2026", title: "Nominations open", description: "Public nominations open for the Africa Education Icon tier.", status: "upcoming" },
   { date: "6 October 2026", title: "Nominations close", description: "Icon nominations close at 23:59 WAT.", status: "upcoming" },
-  { date: "7 October – 10 November 2026", title: "Verification & Assessment", description: "NRC verification and Icon Jury independent assessment.", status: "upcoming" },
+  { date: "7 October – 10 November 2026", title: "Verification & Assessment", description: "NRRC verification and Icon Jury independent assessment.", status: "upcoming" },
   { date: "24 November 2026", title: "Icon confirmation", description: "Up to nine verified Africa Education Icons of the Decade may be confirmed following authorised recognition decisions.", status: "upcoming" },
   { date: PROGRAMME_END_LABEL, title: "Online Awards Gala", description: ONLINE_GALA.copy.summary, status: "upcoming" },
 ];
@@ -129,7 +129,7 @@ const ICON_TIMELINE: SubpageTimelineEntry[] = [
 const STANDARD_TIMELINE: SubpageTimelineEntry[] = [
   { date: "1 – 31 July 2026", title: "Pre-launch activation", description: "Category briefings, evidence guidance and partner mobilisation.", status: "upcoming" },
   { date: "6 September 2026", title: "Nominations open", description: "Public nominations open across all four recognition tiers.", status: "upcoming" },
-  { date: "6 September – 21 November 2026", title: "Rolling NRC verification", description: "Evidence checks begin as soon as a nomination is complete.", status: "upcoming" },
+  { date: "6 September – 21 November 2026", title: "Rolling NRRC verification", description: "Evidence checks begin as soon as a nomination is complete.", status: "upcoming" },
   { date: "22 November – 10 December 2026", title: "Final curation", description: "Final profile verification and certification production.", status: "upcoming" },
   { date: PROGRAMME_END_LABEL, title: "Online Awards Gala", description: ONLINE_GALA.copy.continuation, status: "upcoming" },
 ];
@@ -140,7 +140,7 @@ const ICON_COUNTDOWN: SubpageCountdown = {
   heading: "Time left to nominate an Africa Education Icon",
   targetIso: "2026-10-06T23:59:00+01:00",
   label: "Icon nominations close · 6 October 2026, 23:59 WAT",
-  note: "Nominations submitted with complete evidence enter NRC verification immediately.",
+  note: "Nominations submitted with complete evidence enter NRRC verification immediately.",
 };
 
 const STANDARD_COUNTDOWN: SubpageCountdown = {

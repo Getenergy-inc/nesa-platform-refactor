@@ -176,7 +176,7 @@ export default function Partners() {
         <title>Partner with NESA-Africa 2026 | Sponsorship, Media &amp; Impact Opportunities</title>
         <meta
           name="description"
-          content="Partner with NESA-Africa 2026 and the Online Recognition Programme on 28 December 2026. Sponsorship enquiries are handled through SCEF's approved Google Form."
+          content="Partner with NESA-Africa 2026 and the Online Recognition Programme on 13 December 2026. Sponsorship enquiries are handled through SCEF's approved Google Form."
         />
       </Helmet>
 
@@ -195,7 +195,7 @@ export default function Partners() {
                 Partner with <span className="text-gold">NESA-Africa 2026</span>
               </h1>
               <p className="text-lg md:text-xl text-primary font-medium mb-2">
-                Online Recognition Programme: Monday, 28 December 2026 · Online only
+                Online Recognition Programme: Sunday 13 December 2026 · Online only
               </p>
               <p className="text-lg text-muted-foreground mb-8 max-w-3xl mx-auto">
                 Put your brand at the center of Africa's education story—celebrating champions and funding real impact through{" "}

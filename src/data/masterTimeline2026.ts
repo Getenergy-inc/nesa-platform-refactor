@@ -72,28 +72,28 @@ export const MASTER_TIMELINE_NOMINATION_WINDOWS = [
     tier: "Africa Education Icon",
     window: ICON_WINDOW_LABEL,
     verification:
-      "NRC reviews all Icon nominees 7 – 20 October, then pushes verified dossiers to the Judges Arena.",
+      "NRRC reviews all Icon nominees 7 – 20 October, then pushes verified dossiers to the Judges Arena.",
     href: "/nominate?tier=icon",
   },
   {
     id: "gold-blue-garnet",
     tier: "Gold-Blue Garnet",
     window: CERTIFICATE_WINDOW_LABEL,
-    verification: `Rolling NRC verification, 23 September – ${PROGRAMME_END_LABEL}.`,
+    verification: `Rolling NRRC verification, 23 September – ${PROGRAMME_END_LABEL}.`,
     href: "/nominate?tier=gold-blue-garnet",
   },
   {
     id: "platinum",
     tier: "Platinum Recognition",
     window: CERTIFICATE_WINDOW_LABEL,
-    verification: "NRC verification only — no dated verification window confirmed.",
+    verification: "NRRC verification only — no dated verification window confirmed.",
     href: "/nominate?tier=platinum",
   },
   {
     id: "influencer",
     tier: "Influencer Education Impact",
     window: CERTIFICATE_WINDOW_LABEL,
-    verification: "NRC verification only — no dated verification window confirmed.",
+    verification: "NRRC verification only — no dated verification window confirmed.",
     href: "/nominate?tier=influencer",
   },
 ] as const;
@@ -114,9 +114,9 @@ export const MASTER_TIMELINE_OPEN_ITEMS: { id: string; item: string; detail: str
   {
     id: "gbg-verification-past-showcase-2",
     item:
-      "Gold-Blue Garnet verification (closes 28 December) extends 20 days past TV Showcase 2 (8 December)",
+      "Gold-Blue Garnet verification (closes 13 December) extends 20 days past TV Showcase 2 (8 December)",
     detail:
-      "TV Showcase 2 on 8 December 2026 presents Gold-Blue Garnet recipients, but the independent rolling NRC verification deadline for that family remains 28 December 2026. Recipients verified between 9 and 28 December cannot appear in the broadcast. Flagged for the team — not silently resolved.",
+      "TV Showcase 2 on 8 December 2026 presents Gold-Blue Garnet recipients, but the independent rolling NRRC verification deadline for that family remains 13 December 2026. Recipients verified between 9 and 13 December cannot appear in the broadcast. Flagged for the team — not silently resolved.",
   },
 ];
 
@@ -140,9 +140,9 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     dateLabel: "8 August – 4 September 2026",
     startsAt: "2026-08-08T00:00:00Z",
     endsAt: "2026-09-04T23:59:59Z",
-    milestone: "NRC Member Onboarding",
+    milestone: "NRRC Member Onboarding",
     activity:
-      "Onboard and train Nominee Research Corps members across all four tiers, including Icon-relevant verification training.",
+      "Onboard and train Nominee Research and Review Corps members across all four tiers, including Icon-relevant verification training.",
     outcome: "Verification corps ready before nominations open",
     track: "verification",
     href: "/nrrc",
@@ -231,7 +231,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
       "Gold-Blue Garnet, Platinum & Influencer Education Impact Nominations",
     activity:
       "Extended nomination window so nominees have time to request physical printed certificates ahead of the Gala.",
-    outcome: "NRC-verified Certificates of Recognition pipeline",
+    outcome: "NRRC-verified Certificates of Recognition pipeline",
     track: "nominations",
     href: "/nominate",
     highlight: true,
@@ -291,13 +291,13 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
   },
   {
     id: "gold-blue-garnet-verification",
-    dateLabel: `23 September – 28 December 2026`,
+    dateLabel: `23 September – 13 December 2026`,
     startsAt: "2026-09-23T00:00:00Z",
-    endsAt: "2026-12-28T23:59:59Z",
-    milestone: "Gold-Blue Garnet NRC Verification (rolling)",
+    endsAt: "2026-12-13T23:59:59Z",
+    milestone: "Gold-Blue Garnet NRRC Verification (rolling)",
     activity:
-      "Rolling Nominee Research Corps verification of Gold-Blue Garnet nominations against the EDI Matrix and evidence standards, capped at the Gala.",
-    outcome: "NRC-verified Certificates of Recognition",
+      "Rolling Nominee Research and Review Corps verification of Gold-Blue Garnet nominations against the EDI Matrix and evidence standards, capped at the Gala.",
+    outcome: "NRRC-verified Certificates of Recognition",
     track: "verification",
     href: "/nrrc",
   },
@@ -331,8 +331,8 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     dateLabel: `Tuesday, ${ICON_WINDOW_CLOSE_LABEL}`,
     startsAt: "2026-10-06T00:00:00Z",
     milestone: "Africa Education Icon Nominations Close",
-    activity: "Close Icon nominations and hand the pool to the NRC.",
-    outcome: "Begin NRC review of all Icon nominees",
+    activity: "Close Icon nominations and hand the pool to the NRRC.",
+    outcome: "Begin NRRC review of all Icon nominees",
     track: "nominations",
   },
   {
@@ -366,9 +366,9 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     dateLabel: "7 – 20 October 2026",
     startsAt: "2026-10-07T00:00:00Z",
     endsAt: "2026-10-20T23:59:59Z",
-    milestone: "NRC Review of All Icon Nominees → Judges Arena",
+    milestone: "NRRC Review of All Icon Nominees → Judges Arena",
     activity:
-      "The Nominee Research Corps verifies every Icon nomination and pushes the verified dossiers into the Judges Arena.",
+      "The Nominee Research and Review Corps verifies every Icon nomination and pushes the verified dossiers into the Judges Arena.",
     outcome: "Assessment-ready Icon pool in the Arena",
     track: "verification",
     href: "/nrrc",
@@ -550,7 +550,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     milestone:
       "Gold-Blue Garnet, Platinum & Influencer Education Impact Nominations Close",
     activity:
-      "Final submissions accepted; remaining nominations move into rolling NRC verification.",
+      "Final submissions accepted; remaining nominations move into rolling NRRC verification.",
     outcome: "Nomination stage closed for the 2026 cycle",
     track: "nominations",
     highlight: true,
@@ -566,8 +566,8 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     track: "showcase",
     href: "/media",
     details: [
-      "Platinum Recognition — NRC verification → Governance Approval. No judges, no public vote.",
-      "Influencer Education Impact — NRC verification → Governance Approval. No judges, no public vote.",
+      "Platinum Recognition — NRRC verification → Governance Approval. No judges, no public vote.",
+      "Influencer Education Impact — NRRC verification → Governance Approval. No judges, no public vote.",
     ],
   },
   {
@@ -576,19 +576,19 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
     startsAt: "2026-12-08T00:00:00Z",
     milestone: "TV Showcase 2 — Icon + Gold-Blue Garnet",
     activity:
-      "Africa Education Icon recipients presented alongside NRC-verified Gold-Blue Garnet Enablers ahead of the Gala.",
+      "Africa Education Icon recipients presented alongside NRRC-verified Gold-Blue Garnet Enablers ahead of the Gala.",
     outcome: "Build Gala momentum",
     track: "showcase",
     href: "/media",
     details: [
-      "Africa Education Icon — NRC verification → Judges Arena → Grand Jury ranked-choice voting, locked 24 November 2026.",
-      "Gold-Blue Garnet — NRC verification only. No judges, no public vote.",
+      "Africa Education Icon — NRRC verification → Judges Arena → Grand Jury ranked-choice voting, locked 24 November 2026.",
+      "Gold-Blue Garnet — NRRC verification only. No judges, no public vote.",
     ],
   },
   {
     id: "tv-show-3",
     dateLabel: `Monday, ${PROGRAMME_END_LABEL}`,
-    startsAt: "2026-12-28T00:00:00Z",
+    startsAt: "2026-12-13T00:00:00Z",
     milestone: "TV Showcase 3 — Gala Live Coverage",
     activity: "Live broadcast of the Online Recognition Programme, principally recognising up to nine verified Africa Education Icons of the Decade.",
     outcome: "Continental live coverage",
@@ -598,7 +598,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
   {
     id: "recognition-gala",
     dateLabel: `Monday, ${PROGRAMME_END_LABEL}`,
-    startsAt: "2026-12-28T00:00:00Z",
+    startsAt: "2026-12-13T00:00:00Z",
     milestone: "NESA-Africa 2026 Online Recognition Programme",
     activity:
       "Principally recognise up to nine verified Africa Education Icons of the Decade through approved documentary profiles, interviews and digital presentations. Online only; approximately 20–30 approved participants may join the live production.",
@@ -609,7 +609,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
   },
   {
     id: "impact-legacy",
-    dateLabel: "22 December 2026 – 28 December 2027",
+    dateLabel: "22 December 2026 – 13 December 2027",
     startsAt: "2026-12-22T00:00:00Z",
     endsAt: "2027-12-28T23:59:59Z",
     milestone: "Impact & Legacy Phase",
@@ -624,7 +624,7 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
 export const MASTER_TIMELINE_TRACK_LABELS: Record<MasterTimelineTrack, string> = {
   activation: "Public Activation",
   nominations: "Nominations",
-  verification: "NRC Verification",
+  verification: "NRRC Verification",
   webinar: "EduAid-Africa Webinar",
   podcast: "Education Enablers Podcast",
   judging: "Icon Judging",

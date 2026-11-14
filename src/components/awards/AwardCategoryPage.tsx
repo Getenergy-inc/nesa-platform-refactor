@@ -49,7 +49,7 @@ const NOMINATION_FLOW: Array<{ title: string; description: string }> = [
     description: "Complete the guided form with the nominee's profile, impact summary and evidence.",
   },
   {
-    title: "NRC eligibility check",
+    title: "NRRC eligibility check",
     description: "The Nominations Review Committee verifies eligibility, evidence and duplicates.",
   },
   {

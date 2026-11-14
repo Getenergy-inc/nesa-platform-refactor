@@ -14,7 +14,7 @@ const NOTICES: Record<TierNoticeKind, { title: string; body: string }> = {
   },
   "jury-only": {
     title: "Jury-only recognition",
-    body: "NRC verification, independent jury assessment, and governance approval determine outcomes. No public voting, no sponsor influence.",
+    body: "NRRC verification, independent jury assessment, and governance approval determine outcomes. No public voting, no sponsor influence.",
   },
   "impact-based": {
     title: "Recognised for verified impact, not popularity",

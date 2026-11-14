@@ -33,7 +33,7 @@ function MyReviewsContent() {
   return (
     <NRCDashboardLayout>
       <Helmet>
-        <title>My Reviews | NRC Dashboard</title>
+        <title>My Reviews | NRRC Dashboard</title>
       </Helmet>
 
       <div className="space-y-4">

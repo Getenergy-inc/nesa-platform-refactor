@@ -95,7 +95,7 @@ export const ABOUT_TIERS: AboutTier[] = [
       },
     ],
     note:
-      "Tier 1 is the only pathway that proceeds from NRC verification into independent judging, Grand Jury review and Governance ratification.",
+      "Tier 1 is the only pathway that proceeds from NRRC verification into independent judging, Grand Jury review and Governance ratification.",
     href: "/awards/africa-education-icon",
   },
   {
@@ -129,22 +129,22 @@ export const ABOUT_PROCESS = {
   shared: [
     "Nomination",
     "Nominee Acceptance / Identity Confirmation",
-    "Nominee Research Corps (NRC)",
+    "Nominee Research and Review Corps (NRRC)",
     "Eligibility Review",
     "Duplicate & Identity Checks",
     "Evidence Collection & Validation",
     "Education Development Index (EDI) Assessment",
-    "Human NRC Review",
+    "Human NRRC Review",
   ],
   tier1: [
-    "NRC Verified",
+    "NRRC Verified",
     "Judges Arena",
     "Moderation",
     "Grand Jury",
     "Governance Ratification",
     "Africa Education Icon Laureates",
   ],
-  tiers234: ["NRC Verified", "Governance Review", "Certificate / Recognition Record"],
+  tiers234: ["NRRC Verified", "Governance Review", "Certificate / Recognition Record"],
 };
 
 export const ABOUT_NRC_QUESTIONS = [
@@ -169,7 +169,7 @@ export const ABOUT_EDI_CRITERIA = [
 
 export const ABOUT_FIREWALL_ITEMS = [
   "Nomination acceptance",
-  "NRC verification",
+  "NRRC verification",
   "EDI assessment",
   "Judge assignment or scores",
   "Finalist selection",
@@ -230,7 +230,7 @@ export const ABOUT_TAKE_PART = [
   },
   {
     title: "Join the Movement",
-    detail: "Volunteer, serve in the NRC, or contribute professional expertise",
+    detail: "Volunteer, serve in the NRRC, or contribute professional expertise",
     href: "/movement",
   },
 ];

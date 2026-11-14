@@ -178,7 +178,7 @@ export const RED_FLAG_SEVERITY_CONFIG: Record<RedFlagSeverity, { label: string; 
 
 export const TRIGGER_ACTION_LABELS: Record<RedFlag["triggerAction"], string> = {
   enhanced_review: "Triggers Enhanced Review",
-  immediate_escalation: "Immediate Escalation to NRC Lead",
+  immediate_escalation: "Immediate Escalation to NRRC Lead",
   auto_reject: "Automatic Rejection",
 };
 

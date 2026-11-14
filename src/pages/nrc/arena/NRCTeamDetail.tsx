@@ -14,7 +14,7 @@ export default function NRCTeamDetail() {
 
   return (
     <NRCArenaLayout>
-      <Helmet><title>{team.name} · NRC Team · NESA-Africa</title></Helmet>
+      <Helmet><title>{team.name} · NRRC Team · NESA-Africa</title></Helmet>
 
       <Button asChild variant="ghost" size="sm" className="text-white/60 hover:text-gold mb-4">
         <Link to="/nrrc/teams"><ArrowLeft className="mr-1.5 h-4 w-4" /> All teams</Link>

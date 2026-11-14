@@ -15,7 +15,7 @@ const assigned = [
 ];
 
 const announcements = [
-  { from: "NRC", title: "Cycle 2026 calibration window opens June 16", time: "2h ago" },
+  { from: "NRRC", title: "Cycle 2026 calibration window opens June 16", time: "2h ago" },
   { from: "Panel Lead", title: "EDI rubric clarification posted for STEM category", time: "Yesterday" },
   { from: "Secretariat", title: "Submit all Gold-track scores by June 28, 23:59 GMT", time: "2 days ago" },
 ];
@@ -57,7 +57,7 @@ export default function ArenaDashboard() {
           { label: "Overall Progress", value: "68%", note: "of assigned reviews", icon: TrendingUp, accent: "from-gold/30" },
           { label: "Pending Reviews", value: "12", note: "across 3 categories", icon: Clock, accent: "from-amber-500/20" },
           { label: "Completed", value: "26", note: "this cycle", icon: CheckCircle2, accent: "from-emerald-500/20" },
-          { label: "Flagged", value: "2", note: "need NRC follow-up", icon: AlertTriangle, accent: "from-rose-500/20" },
+          { label: "Flagged", value: "2", note: "need NRRC follow-up", icon: AlertTriangle, accent: "from-rose-500/20" },
         ].map((s) => (
           <Card key={s.label} className="bg-white/[0.03] border-gold/15 text-white overflow-hidden relative">
             <div className={`absolute inset-0 bg-gradient-to-br ${s.accent} to-transparent opacity-60 pointer-events-none`} />
@@ -130,7 +130,7 @@ export default function ArenaDashboard() {
       <Card className="bg-white/[0.03] border-gold/15 text-white">
         <CardHeader>
           <CardTitle className="text-white font-serif flex items-center gap-2">
-            <Megaphone className="h-4 w-4 text-gold" /> NRC Updates & Announcements
+            <Megaphone className="h-4 w-4 text-gold" /> NRRC Updates & Announcements
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">

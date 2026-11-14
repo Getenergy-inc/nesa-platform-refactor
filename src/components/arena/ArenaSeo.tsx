@@ -13,10 +13,10 @@ const SITE_URL = "https://nesaafrica.lovable.app";
 const ARENA_OG_IMAGE = `${SITE_URL}/og-image.png`;
 const SUITE = "NESA-Africa 2026";
 
-export type ArenaWorkspace = "NRC Arena" | "Judges Arena";
+export type ArenaWorkspace = "NRRC Arena" | "Judges Arena";
 
 const WORKSPACE_DESCRIPTION: Record<ArenaWorkspace, string> = {
-  "NRC Arena":
+  "NRRC Arena":
     "Secure Nomination Review Committee workspace for NESA-Africa 2026 — verification queues, evidence review and audited handovers.",
   "Judges Arena":
     "Secure judging workspace for NESA-Africa 2026 — private deliberation, EDI Matrix scoring and fully audited decisions.",
@@ -47,7 +47,7 @@ const ROUTE_TITLES: Array<[string, string]> = [
   ["/nrrc/dashboard/flagged", "Flagged Cases"],
   ["/nrrc/dashboard/merge", "Merge & Dedup Tool"],
   ["/nrrc/dashboard/edi-analytics", "EDI Analytics"],
-  ["/nrrc/dashboard/guidelines", "NRC Guidelines"],
+  ["/nrrc/dashboard/guidelines", "NRRC Guidelines"],
   ["/nrrc/dashboard", "Overview"],
   ["/nrrc/cases", "My Assignments"],
   ["/nrrc/teams", "Team Queue"],
@@ -58,7 +58,7 @@ const ROUTE_TITLES: Array<[string, string]> = [
   ["/nrrc/handover/judges", "Handover · Judges"],
   ["/nrrc/handover/governance", "Handover · Governance"],
   ["/nrrc/reports", "Reports"],
-  ["/nrrc/directory", "NRC Directory"],
+  ["/nrrc/directory", "NRRC Directory"],
   ["/nrrc/profile", "My Profile"],
   ["/nrrc/onboarding", "Training & Onboarding"],
   ["/nrrc/audit-log", "Audit History"],

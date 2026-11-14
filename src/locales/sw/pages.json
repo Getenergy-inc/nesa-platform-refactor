@@ -236,7 +236,7 @@
       "description": "Majukwaa manne tofauti ya utambuzi yenye vigezo vya kipekee.",
       "platinum": {
         "title": "Cheti cha Platinum",
-        "description": "Utambuzi wa msingi kwa mchango wa Elimu kwa Wote. Si ya ushindani, imethibitishwa na NRC."
+        "description": "Utambuzi wa msingi kwa mchango wa Elimu kwa Wote. Si ya ushindani, imethibitishwa na NRRC."
       },
       "icon": {
         "title": "Ikoni ya Elimu ya Afrika",
@@ -606,7 +606,7 @@
       "acceptance": {
         "title": "Kukubalika",
         "subtitle": "Kwa Walioteuliwa",
-        "description": "Mchakato wa uchunguzi wa NRC, safari ya kukubalika na ufuatiliaji wa hali.",
+        "description": "Mchakato wa uchunguzi wa NRRC, safari ya kukubalika na ufuatiliaji wa hali.",
         "badge": "Hatua ya 2"
       },
       "judges": {

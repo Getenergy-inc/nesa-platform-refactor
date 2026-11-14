@@ -101,7 +101,7 @@ function ReviewContent() {
   return (
     <NRCDashboardLayout>
       <Helmet>
-        <title>Review: {nominee.name} | NRC Dashboard</title>
+        <title>Review: {nominee.name} | NRRC Dashboard</title>
       </Helmet>
 
       <div className="space-y-4">
@@ -230,7 +230,7 @@ function ReviewContent() {
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-display flex items-center gap-2">
                   <Shield className="h-4 w-4 text-primary" />
-                  NRC Scoring Panel
+                  NRRC Scoring Panel
                 </CardTitle>
                 <p className="text-[11px] text-muted-foreground">Score each criterion 1–10</p>
               </CardHeader>

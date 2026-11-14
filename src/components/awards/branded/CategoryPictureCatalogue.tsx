@@ -175,7 +175,7 @@ export function CategoryPictureCatalogue({
             <p className="mt-2 max-w-3xl text-sm md:text-base text-muted-foreground">
               {total} nominee{total === 1 ? "" : "s"} across {data.subs.length}{" "}
               subcategor{data.subs.length === 1 ? "y" : "ies"} and {regionOptions.length}{" "}
-              region{regionOptions.length === 1 ? "" : "s"} — {verified} NRC-verified so far.
+              region{regionOptions.length === 1 ? "" : "s"} — {verified} NRRC-verified so far.
               Counts update live from the public nominee register.
             </p>
           </div>
@@ -304,7 +304,7 @@ export function CategoryPictureCatalogue({
                             {n.nrc_verified && (
                               <BadgeCheck
                                 className="h-3.5 w-3.5 shrink-0 text-gold"
-                                aria-label="NRC verified"
+                                aria-label="NRRC verified"
                               />
                             )}
                           </div>

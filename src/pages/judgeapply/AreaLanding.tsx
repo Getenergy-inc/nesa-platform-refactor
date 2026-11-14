@@ -18,7 +18,7 @@ export default function AreaLanding({ areaId: areaProp }: Props) {
   return (
     <>
       <Helmet>
-        <title>{`${area.label} | NESA-Africa Judges & NRC Portal`}</title>
+        <title>{`${area.label} | NESA-Africa Judges & NRRC Portal`}</title>
         <meta name="description" content={area.intro} />
       </Helmet>
 

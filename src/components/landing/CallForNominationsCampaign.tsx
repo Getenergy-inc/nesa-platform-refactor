@@ -32,7 +32,7 @@ const personas = [
 
 const journey = [
   { n: "1", title: "Nominate a Changemaker", desc: "Submit an education impact leader, organisation, or initiative in minutes.", icon: Trophy },
-  { n: "2", title: "Independent Verification", desc: "Every submission is reviewed by the NRC and scored against the EDI Matrix — no fees, no shortcuts.", icon: ShieldCheck },
+  { n: "2", title: "Independent Verification", desc: "Every submission is reviewed by the NRRC and scored against the EDI Matrix — no fees, no shortcuts.", icon: ShieldCheck },
   { n: "3", title: "Share the Movement", desc: "Invite your community, school network, organisation, or diaspora network to participate.", icon: Share2 },
   { n: "4", title: "Track Your Nomination", desc: "Follow verification status and celebrate when your nominee advances through the recognition pathway.", icon: Star },
 ];

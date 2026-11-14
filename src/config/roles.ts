@@ -3,7 +3,7 @@ export type AppRole = "user" | "nrc" | "jury" | "chapter" | "sponsor" | "admin";
 
 export const ROLE_LABELS: Record<AppRole, string> = {
   user: "User",
-  nrc: "NRC Member",
+  nrc: "NRRC Member",
   jury: "Jury Member",
   chapter: "Chapter Lead",
   sponsor: "Sponsor",

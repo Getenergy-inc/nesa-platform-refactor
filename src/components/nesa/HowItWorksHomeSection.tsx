@@ -22,7 +22,7 @@ const STEPS = [
   {
     icon: ShieldCheck,
     title: "Verify and Review",
-    body: "The NRC verifies identity, category fit, geography, evidence and integrity. Verified Icon profiles go to the Icon Jury. Other tiers proceed to governance approval.",
+    body: "The NRRC verifies identity, category fit, geography, evidence and integrity. Verified Icon profiles go to the Icon Jury. Other tiers proceed to governance approval.",
   },
   {
     icon: Award,

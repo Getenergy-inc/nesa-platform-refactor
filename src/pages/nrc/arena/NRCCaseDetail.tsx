@@ -8,7 +8,7 @@ const TABS = [
   "Overview", "Identity", "Eligibility", "Nominations", "Duplicate Review",
   "Evidence Room", "Education Impact", "Geographic Contribution",
   "Nominee Acceptance", "Risk & Integrity", "Public Endorsements",
-  "NRC Reviews", "Quality Approval", "Handover", "Activity History",
+  "NRRC Reviews", "Quality Approval", "Handover", "Activity History",
 ];
 
 export default function NRCCaseDetail() {
@@ -55,7 +55,7 @@ export default function NRCCaseDetail() {
           </dl>
         </Card>
         <Card className="p-4 bg-white/[0.04] border-white/10">
-          <h3 className="font-display font-semibold text-white mb-2">Human NRC Review</h3>
+          <h3 className="font-display font-semibold text-white mb-2">Human NRRC Review</h3>
           <ul className="space-y-1.5 text-sm text-white/70">
             <li>Identity: <span className="text-emerald-300">Confirmed</span></li>
             <li>Eligibility: <span className="text-amber-300">In progress</span></li>

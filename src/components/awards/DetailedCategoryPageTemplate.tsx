@@ -299,7 +299,7 @@ export default function DetailedCategoryPageTemplate({ page, theme = "corporate"
             <h2 className="font-serif text-2xl md:text-3xl mb-2">Meet Africa's Education Enablers</h2>
             <p className="text-muted-foreground max-w-3xl mb-6">
               Explore organisations, institutions, programmes, and leaders already identified under this
-              category. Entries are updated as NRC verification progresses. Grouping:{" "}
+              category. Entries are updated as NRRC verification progresses. Grouping:{" "}
               <span className="font-medium">{page.nomineeCatalogue.grouping.replace("_", " ")}</span>.
             </p>
             <BrandedNomineeDirectory

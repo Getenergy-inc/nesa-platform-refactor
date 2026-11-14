@@ -31,17 +31,17 @@ export default function PublicNRCMemberProfile() {
     return (
       <div className="min-h-screen bg-charcoal text-white">
         <Helmet>
-          <title>NRC profile not found · NESA-Africa</title>
+          <title>NRRC profile not found · NESA-Africa</title>
           <meta name="robots" content="noindex" />
         </Helmet>
         <div className="mx-auto max-w-3xl px-4 py-24 text-center">
           <Users2 className="mx-auto mb-4 h-12 w-12 text-gold/70" aria-hidden />
-          <h1 className="font-display text-3xl font-bold text-gold">NRC profile not found</h1>
+          <h1 className="font-display text-3xl font-bold text-gold">NRRC profile not found</h1>
           <p className="mt-2 text-white/70">
             This profile may be private, or the member has not completed public onboarding.
           </p>
           <Button asChild className="mt-6 bg-gold text-charcoal hover:bg-gold/90">
-            <SmartLink to="/nrrc">Back to the NRC Arena</SmartLink>
+            <SmartLink to="/nrrc">Back to the NRRC Arena</SmartLink>
           </Button>
         </div>
       </div>
@@ -51,12 +51,12 @@ export default function PublicNRCMemberProfile() {
   return (
     <div className="min-h-screen bg-charcoal text-white">
       <Helmet>
-        <title>{`${member.display_name} · NRC · NESA-Africa`}</title>
+        <title>{`${member.display_name} · NRRC · NESA-Africa`}</title>
         <meta
           name="description"
           content={
             member.bio?.slice(0, 155) ??
-            `${member.display_name} is a member of the NESA-Africa Nominee Research Corps.`
+            `${member.display_name} is a member of the NESA-Africa Nominee Research and Review Corps.`
           }
         />
       </Helmet>
@@ -66,7 +66,7 @@ export default function PublicNRCMemberProfile() {
           to="/nrrc"
           className="inline-flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-gold"
         >
-          <ArrowLeft className="h-4 w-4" aria-hidden /> Back to the NRC Arena
+          <ArrowLeft className="h-4 w-4" aria-hidden /> Back to the NRRC Arena
         </SmartLink>
 
         <header className="mt-6 flex flex-col gap-5 rounded-2xl border border-white/10 bg-white/5 p-6 sm:flex-row sm:items-center">
@@ -79,7 +79,7 @@ export default function PublicNRCMemberProfile() {
           <div className="min-w-0">
             <h1 className="font-display text-3xl font-bold text-gold">{member.display_name}</h1>
             <p className="mt-1 inline-flex items-center gap-1.5 text-sm text-white/70">
-              <ShieldCheck className="h-4 w-4 text-gold" aria-hidden /> Nominee Research Corps · 2026 cycle
+              <ShieldCheck className="h-4 w-4 text-gold" aria-hidden /> Nominee Research and Review Corps · 2026 cycle
             </p>
             {member.country && (
               <p className="mt-1 inline-flex items-center gap-1.5 text-sm text-white/60">
@@ -110,7 +110,7 @@ export default function PublicNRCMemberProfile() {
         )}
 
         <section className="mt-8 rounded-xl border border-white/10 bg-white/[0.03] p-5 text-sm text-white/60">
-          NRC members verify identity, eligibility and evidence. Individual case work, reviewer
+          NRRC members verify identity, eligibility and evidence. Individual case work, reviewer
           notes and verification outcomes remain confidential and are never published on profiles.
         </section>
       </div>

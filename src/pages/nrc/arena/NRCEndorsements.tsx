@@ -1,7 +1,7 @@
 import { NRCArenaPage } from "@/components/nrc/arena/NRCArenaPage";
 import { Badge } from "@/components/ui/badge";
 
-const STATUSES = ["Received", "Duplicate", "Under NRC Review", "Evidence Requested", "Accepted as Supporting Information", "Rejected", "Escalated", "Published", "Archived"];
+const STATUSES = ["Received", "Duplicate", "Under NRRC Review", "Evidence Requested", "Accepted as Supporting Information", "Rejected", "Escalated", "Published", "Archived"];
 
 export default function NRCEndorsements() {
   return (

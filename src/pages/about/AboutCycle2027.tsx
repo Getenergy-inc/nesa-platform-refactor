@@ -28,7 +28,7 @@ const STATS_2027 = [
 const PHASES_2027: TimelinePhase[] = [
   { phaseName: "Pre-Nomination", window: "Dates to be confirmed", status: "unconfirmed", events: [] },
   { phaseName: "Nominations Open", window: "Dates to be confirmed", status: "unconfirmed", events: [] },
-  { phaseName: "NRC Verification", window: "Dates to be confirmed", status: "unconfirmed", events: [] },
+  { phaseName: "NRRC Verification", window: "Dates to be confirmed", status: "unconfirmed", events: [] },
   { phaseName: "Judges & Grand Jury", window: "Icon Award only · dates to be confirmed", status: "unconfirmed", events: [] },
   { phaseName: "Finalists Revealed", window: "Two TV shows · dates to be confirmed", status: "unconfirmed", events: [] },
   {
@@ -89,7 +89,7 @@ export default function AboutCycle2027() {
 
       <AboutContactBlock
         headline="Stay With the 2027 Cycle"
-        intro="Register interest to be the first to know when 2027 nominations open. Judge and NRC applications reopen after the 2026 gala."
+        intro="Register interest to be the first to know when 2027 nominations open. Judge and NRRC applications reopen after the 2026 gala."
         primaryCta={{ label: "Notify Me When 2027 Opens", href: "/contact?topic=2027" }}
         secondaryCta={{ label: "Contact the Cycle Desk", href: "mailto:info@nesa.africa" }}
       />

@@ -242,7 +242,7 @@ export default function MyCertificates() {
                 <AccordionTrigger>Why is my download locked?</AccordionTrigger>
                 <AccordionContent>
                   Platinum certificates unlock automatically once your nominee profile reaches 200 endorsements
-                  and NRC verification is complete. You will receive an email the moment your certificate
+                  and NRRC verification is complete. You will receive an email the moment your certificate
                   unlocks.
                 </AccordionContent>
               </AccordionItem>

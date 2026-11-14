@@ -118,11 +118,11 @@ export default function NRCApplications() {
 
   return (
     <NRCLayout>
-      <Helmet><title>NRC Applications · NESA-Africa 2026</title></Helmet>
+      <Helmet><title>NRRC Applications · NESA-Africa 2026</title></Helmet>
       <div className="space-y-6">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="font-display text-2xl font-bold">NRC Applications</h2>
+            <h2 className="font-display text-2xl font-bold">NRRC Applications</h2>
             <p className="text-muted-foreground">
               Public applications from <Link to="/nrrc/apply" className="underline">/nrc/apply</Link>.
               Approving issues a real 14-day invitation and emails it to the applicant.

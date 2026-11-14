@@ -11,7 +11,7 @@ const METRICS = [
   { label: "Risk Flags Generated", value: 0 },
   { label: "Automatically Routed", value: 0 },
   { label: "Assignment Failures", value: 0 },
-  { label: "Ready for Human NRC Review", value: 0 },
+  { label: "Ready for Human NRRC Review", value: 0 },
 ];
 
 const NAV = [
@@ -24,9 +24,9 @@ const NAV = [
 export default function NRCAutomation() {
   return (
     <NRCArenaPage
-      title="NRC Automated Intake & Pre-Verification Engine"
+      title="NRRC Automated Intake & Pre-Verification Engine"
       eyebrow="Phase One · Automation"
-      description="Phase One receives, screens, deduplicates, classifies, discovers evidence, flags risk, and routes every nomination to the correct NRC team before human review begins."
+      description="Phase One receives, screens, deduplicates, classifies, discovers evidence, flags risk, and routes every nomination to the correct NRRC team before human review begins."
       status="live"
     >
       <div className="mb-6 flex flex-wrap gap-1.5 text-xs">

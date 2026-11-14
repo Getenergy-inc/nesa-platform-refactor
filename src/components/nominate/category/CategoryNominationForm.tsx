@@ -510,7 +510,7 @@ export default function CategoryNominationForm({ content }: Props) {
             className="mt-0.5"
           />
           <span className="text-xs text-foreground/80">
-            I consent to being contacted by the Nominee Research Corps for evidence verification
+            I consent to being contacted by the Nominee Research and Review Corps for evidence verification
             and clarification questions relating to this nomination.
           </span>
         </label>
@@ -549,8 +549,8 @@ export default function CategoryNominationForm({ content }: Props) {
         </div>
         <ol className="ml-4 list-decimal space-y-1">
           <li>Submission captured &amp; nominee notified.</li>
-          <li>NRC Phase One (automated screening + duplicate detection).</li>
-          <li>NRC Phase Two (human evidence verification against the category EDI Matrix).</li>
+          <li>NRRC Phase One (automated screening + duplicate detection).</li>
+          <li>NRRC Phase Two (human evidence verification against the category EDI Matrix).</li>
           <li>Nominee acceptance &amp; correction window.</li>
           <li>Governance approval.</li>
           <li>

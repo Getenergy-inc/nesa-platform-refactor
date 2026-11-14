@@ -83,7 +83,7 @@ function FlaggedContent() {
   return (
     <NRCDashboardLayout>
       <Helmet>
-        <title>Flagged Cases | NRC Dashboard</title>
+        <title>Flagged Cases | NRRC Dashboard</title>
       </Helmet>
 
       <div className="space-y-4">

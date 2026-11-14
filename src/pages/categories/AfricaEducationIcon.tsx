@@ -44,7 +44,7 @@ const PATHWAY_ICONS: Record<IconSubcategorySlug, typeof ScrollText> = {
 
 const SELECTION_STEPS = [
   { n: 1, title: "Nomination", body: "Public, peer, and institutional nominations open across all three subcategories." },
-  { n: 2, title: "Verification", body: "Nominee Research Corps (NRC) verifies records, evidence, and longevity of impact." },
+  { n: 2, title: "Verification", body: "Nominee Research and Review Corps (NRRC) verifies records, evidence, and longevity of impact." },
   { n: 3, title: "Classification", body: "Each verified nominee is sorted into one of three classifications." },
   { n: 4, title: "Jury Review", body: "Independent continental jury evaluates lifetime contribution against rubric." },
   { n: 5, title: "Shortlist", body: "Final shortlist published for public transparency — no public voting on Icon." },
@@ -266,7 +266,7 @@ export default function AfricaEducationIconPage() {
 
             <div className="mt-8 flex flex-wrap items-center gap-2 text-xs text-white/60">
               {[
-                "NRC-verified evidence",
+                "NRRC-verified evidence",
                 "Continental jury",
                 "Conflict-of-interest firewall",
                 "Audit-logged decisions",

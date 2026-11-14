@@ -71,7 +71,7 @@ const ICON: AwardPageContent = {
     ],
     primaryCta: { label: "Nominate an Education Icon", href: "/nominate?category=africa-education-icon-award" },
     secondaryCta: { label: "Meet the Africa Education Icons", href: "/nominees/africa-education-icon-award" },
-    trustLine: "Jury-led · No public voting · Independent NRC verification · Continental Hall of Fame induction",
+    trustLine: "Jury-led · No public voting · Independent NRRC verification · Continental Hall of Fame induction",
   },
   recognises:
     "Education transforms lives, but Education Enablers create the conditions that make transformation possible. The Africa Education Icon Award honours philanthropists, curriculum reformers, literary advocates, technical education pioneers, institution builders and long-serving reformers whose lifetime contribution has built schools, funded scholarships, shaped policy, advanced literacy, strengthened STEM and TVET, and inspired generations of learners across Africa and the African Diaspora. Every laureate becomes part of a permanent public record — their journey, contributions, institutions, publications and continuing legacy preserved as part of Africa's educational history.",
@@ -172,7 +172,7 @@ const GOLD_BLUE_GARNET: AwardPageContent = {
     ],
     primaryCta: { label: "Submit a Nomination", href: "/nominate?tier=gold-blue-garnet" },
     secondaryCta: { label: "Meet Africa's Education Enablers", href: "/nominees?tier=blue-garnet" },
-    trustLine: "No public voting · No competitive ranking · Independent NRC verification · Africa Education Impact Directory listing",
+    trustLine: "No public voting · No competitive ranking · Independent NRRC verification · Africa Education Impact Directory listing",
   },
   recognises:
     "The Blue Garnet Award 2026 is a Continental Recognition Edition. There is no public voting, no competitive ranking and no elimination rounds. Successful nominees receive official recognition as verified Education Enablers — a Certificate of Recognition, Letter of Appreciation, verified public profile and Africa Education Impact Directory listing — and become the qualifying pool for the fully competitive Blue Garnet Award 2027. The 2026 edition builds Africa's most credible database of verified Education Enablers across CSR, EdTech, NGOs, STEM, media, creative industries, state governments, foundations, professional associations, community initiatives and social enterprises.",
@@ -198,7 +198,7 @@ const GOLD_BLUE_GARNET: AwardPageContent = {
       "Documented partnerships, publications, photos, videos and impact statistics",
     ],
     region: "Open to organisations operating across Africa Regional and Nigeria-specific categories.",
-    pathway: "Public nomination → automated screening → nominee acceptance → profile development → NRC verification → governance review → Recognition Certificate + Directory listing. Recognised nominees qualify for competitive Blue Garnet Award 2027.",
+    pathway: "Public nomination → automated screening → nominee acceptance → profile development → NRRC verification → governance review → Recognition Certificate + Directory listing. Recognised nominees qualify for competitive Blue Garnet Award 2027.",
   },
   hallFilter: {
     categoryIncludes: ["csr", "ngo", "edutech", "edtech", "stem", "media", "creative", "policy", "state"],
@@ -338,7 +338,7 @@ const PLATINUM: AwardPageContent = {
     ],
     primaryCta: { label: "Nominate an Institution", href: "/nominate?tier=platinum" },
     secondaryCta: { label: "Meet Africa's Education Enablers", href: "/nominees?tier=platinum" },
-    trustLine: "Jury-only recognition · Independent NRC verification · Governance-ratified · No public voting · No political or sponsor influence",
+    trustLine: "Jury-only recognition · Independent NRRC verification · Governance-ratified · No public voting · No political or sponsor influence",
   },
   recognises:
     "Strong education systems are built by strong institutions. Universities prepare future leaders. Libraries preserve knowledge. Research institutions develop evidence for better policy. Faith-based organisations establish schools and expand access. Governments create policies and invest in learning. International partners strengthen education through collaboration. Diaspora organisations connect Africa with global expertise and investment. The Platinum Award honours these seven institutional pathways because they build the foundations upon which quality education depends — recognised on evidence, integrity and contribution, not organisational size, political influence or public visibility.",
@@ -364,7 +364,7 @@ const PLATINUM: AwardPageContent = {
       "Documented partnerships, research outputs, publications and impact statistics",
     ],
     region: "Seven institutional pathways spanning national, regional, continental and international scope.",
-    pathway: "Nomination → automated screening → nominee acceptance → institutional profile development → NRC verification → independent jury assessment → governance approval → Platinum Certificate + Directory listing.",
+    pathway: "Nomination → automated screening → nominee acceptance → institutional profile development → NRRC verification → independent jury assessment → governance approval → Platinum Certificate + Directory listing.",
   },
   hallFilter: {
     categoryIncludes: ["library", "research", "christian", "islamic", "political", "international", "diaspora", "platinum"],
@@ -482,7 +482,7 @@ const INFLUENCER: AwardPageContent = {
     ],
     primaryCta: { label: "Nominate an Education Impact Influencer", href: "/nominate?tier=influencer-2026" },
     secondaryCta: { label: "Meet the Education Impact Influencers", href: "/nominees?tier=influencer" },
-    trustLine: "2026 Recognition & Verification Edition · NRC-verified · Directory listing · No competitive ranking · Foundation year for 2027 competitive launch",
+    trustLine: "2026 Recognition & Verification Edition · NRRC-verified · Directory listing · No competitive ranking · Foundation year for 2027 competitive launch",
   },
   recognises:
     "Public figures shape culture, values and public conversation. When they use that influence to advance education, the impact reaches millions of young Africans. The Influencer Education Impact Award honours three verification pathways — Social Media Creators, Sports Icons and Music Icons — celebrating individuals whose platforms produce documented education outcomes rather than one-off endorsements.",
@@ -504,7 +504,7 @@ const INFLUENCER: AwardPageContent = {
       "Beneficiary testimony, programme reports or measurable reach data",
     ],
     region: "Open to Africans in Africa and Africans in the Diaspora.",
-    pathway: "Nomination → automated screening → nominee acceptance → profile development → NRC verification → governance approval → Directory listing as a verified 2026 Education Enabler (foundation year for 2027 competitive launch).",
+    pathway: "Nomination → automated screening → nominee acceptance → profile development → NRRC verification → governance approval → Directory listing as a verified 2026 Education Enabler (foundation year for 2027 competitive launch).",
   },
   hallFilter: {
     categoryIncludes: ["influencer", "social media", "sport", "footballer", "music", "musician"],

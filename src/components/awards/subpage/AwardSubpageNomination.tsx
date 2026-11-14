@@ -104,7 +104,7 @@ export function AwardSubpageNomination({ config }: { config: AwardNominationConf
           {[
             "Free to submit — no fee at any stage",
             "No account needed to start; created at submission",
-            "Every claim verified by the Nominee Research Corps (NRC)",
+            "Every claim verified by the Nominee Research and Review Corps (NRRC)",
             "No public voting, sponsorship or popularity influence",
           ].map((t) => (
             <li key={t} className="flex items-start gap-2 text-sm text-white/70">

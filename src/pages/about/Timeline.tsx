@@ -201,8 +201,8 @@ export default function Timeline() {
     },
     {
       step: "02",
-      title: "NRC Verification",
-      body: "The Nominee Research Corps verifies eligibility, identity and supporting evidence for every nomination before it proceeds.",
+      title: "NRRC Verification",
+      body: "The Nominee Research and Review Corps verifies eligibility, identity and supporting evidence for every nomination before it proceeds.",
       statusLabel: nrcActive ? "In progress" : "Begins once nominations open",
       tone: nrcActive ? "gold" : "stone",
       metric: nrcActive ? formatCount(status.nrcVerified) : undefined,
@@ -211,7 +211,7 @@ export default function Timeline() {
     {
       step: "03",
       title: "Judges Arena",
-      body: "27 volunteer judges across 9 pathways review NRC-verified nominees, select finalists, and cast the final ranked-choice ballot.",
+      body: "27 volunteer judges across 9 pathways review NRRC-verified nominees, select finalists, and cast the final ranked-choice ballot.",
       statusLabel: judgesActive ? "In progress" : "Not yet active",
       tone: judgesActive ? "gold" : "stone",
       metric: judgesActive ? formatCount(status.judgeAssignments) : undefined,

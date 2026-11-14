@@ -74,7 +74,7 @@ export function CategorySubcategoriesPanel({ formSlug, categoryTitle }: Props) {
           </h2>
           <p className="text-foreground/75 text-sm sm:text-base max-w-3xl">
             Expand any subcategory below to nominate directly{isGBG ? "." : "."}
-            {" "}All submissions are reviewed by the NRC before reaching the jury.
+            {" "}All submissions are reviewed by the NRRC before reaching the jury.
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
             <Badge variant="outline" className="border-gold/40 text-gold">
@@ -208,7 +208,7 @@ function SubcategoryAccordion({
               <div className="space-y-4 pt-2 pb-3">
                 <p className="text-sm text-foreground/75 leading-relaxed">
                   Submit a Nomination that exemplifies excellence in{" "}
-                  <span className="text-gold">{sub.name}</span>. NRC reviewers
+                  <span className="text-gold">{sub.name}</span>. NRRC reviewers
                   verify every submission before it reaches the independent jury.
                 </p>
 

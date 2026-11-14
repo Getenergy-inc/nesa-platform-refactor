@@ -20,25 +20,25 @@ const ROWS: Row[] = [
   {
     tier: "Africa Education Icon Award",
     structure: "3 subcategories · 9 laureate positions",
-    review: "NRC, Icon Jury and governance",
+    review: "NRRC, Icon Jury and governance",
     href: "/awards/africa-education-icon",
   },
   {
     tier: "Influencer Education Impact",
     structure: "3 subcategories",
-    review: "NRC and governance",
+    review: "NRRC and governance",
     href: "/awards/influencers-education-impact",
   },
   {
     tier: "Platinum Recognition",
     structure: "7 categories · 27 subcategories",
-    review: "Due diligence, NRC and governance",
+    review: "Due diligence, NRRC and governance",
     href: "/awards/platinum-recognition",
   },
   {
     tier: "Gold-Blue Garnet Recognition",
     structure: "9 categories · 63 subcategories",
-    review: "NRC and governance",
+    review: "NRRC and governance",
     href: "/awards/gold-blue-garnet",
   },
 ];

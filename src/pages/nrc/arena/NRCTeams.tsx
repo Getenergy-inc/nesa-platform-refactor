@@ -25,10 +25,10 @@ export default function NRCTeams() {
 
   return (
     <NRCArenaLayout>
-      <Helmet><title>NRC Teams · NESA-Africa 2026</title></Helmet>
+      <Helmet><title>NRRC Teams · NESA-Africa 2026</title></Helmet>
       <header className="mb-5">
         <p className="text-xs uppercase tracking-wider text-gold/80">Operational teams</p>
-        <h1 className="font-display text-2xl font-bold">NRC Teams</h1>
+        <h1 className="font-display text-2xl font-bold">NRRC Teams</h1>
         <p className="text-white/60 text-sm mt-1">
           {NRC_TOTALS.teams} teams · {NRC_TOTALS.slots} approved member slots across 4 recognition tiers.
         </p>

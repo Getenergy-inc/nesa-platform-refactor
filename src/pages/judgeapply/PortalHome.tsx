@@ -7,7 +7,7 @@ export default function PortalHome() {
   return (
     <>
       <Helmet>
-        <title>Judges & NRC Portal | NESA-Africa 2026</title>
+        <title>Judges & NRRC Portal | NESA-Africa 2026</title>
       </Helmet>
 
       {/* Hero */}
@@ -19,11 +19,11 @@ export default function PortalHome() {
             Verification · Evidence · Integrity · Impact
           </div>
           <h1 className="mt-5 font-display text-4xl md:text-6xl font-bold leading-tight">
-            NESA-Africa <span className="text-gold">Judges & NRC Portal</span>
+            NESA-Africa <span className="text-gold">Judges & NRRC Portal</span>
           </h1>
           <p className="mt-5 max-w-2xl text-white/75 text-base md:text-lg">
             One portal for the two engines that safeguard the integrity of the 2026 recognition
-            cycle — the Nominee Research Corps and the Judges Panels. Choose your destination
+            cycle — the Nominee Research and Review Corps and the Judges Panels. Choose your destination
             below.
           </p>
         </div>
@@ -65,7 +65,7 @@ export default function PortalHome() {
 
         <div className="mt-14 rounded-2xl border border-gold/15 bg-charcoal-light p-6 text-sm text-white/70">
           <strong className="text-white">Note:</strong> This portal provides public navigation
-          only. It does not grant NRC, judge, governance or administrator permissions.
+          only. It does not grant NRRC, judge, governance or administrator permissions.
           Dashboards remain behind authenticated, role-based routes.
         </div>
       </section>

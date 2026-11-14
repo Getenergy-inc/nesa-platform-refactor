@@ -59,7 +59,7 @@ export function NomineeSupportPanel({ nomineeId, nomineeName, shareUrl }: Props)
         author_organization: form.author_organization.trim() || undefined,
         message: form.message.trim(),
       });
-      toast.success("Thank you — your message goes to NRC review before publication.");
+      toast.success("Thank you — your message goes to NRRC review before publication.");
       setForm({ author_name: "", author_email: "", author_organization: "", message: "" });
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Could not send your message.");
