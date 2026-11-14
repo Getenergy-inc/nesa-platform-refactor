@@ -35,7 +35,7 @@ const SIGNED_IN = [
   { label: "Account Settings", href: "/dashboard/settings", icon: Settings },
 ] as const;
 
-export function AccountMenu({ className }: { className?: string }) {
+export function AccountMenu({ className, label, menuLabel }: { className?: string; label?: string; menuLabel?: string }) {
   const { user, signOut } = useAuth();
 
   const triggerCls = cn(
@@ -53,10 +53,10 @@ export function AccountMenu({ className }: { className?: string }) {
             variant="ghost"
             type="button"
             className={triggerCls}
-            aria-label="Sign in menu"
+            aria-label={menuLabel ?? "Sign in menu"}
             onClick={() => trackNav("account_menu_open", { device: "desktop", state: "signed_out" })}
           >
-            <UserCircle2 className="h-4 w-4" aria-hidden /> Sign In
+            {!label && <UserCircle2 className="h-4 w-4" aria-hidden />} {label ?? "Sign In"}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-56 bg-charcoal border-gold/20 text-white/90">
@@ -84,11 +84,11 @@ export function AccountMenu({ className }: { className?: string }) {
           variant="ghost"
           type="button"
           className={triggerCls}
-          aria-label="Account menu"
+          aria-label={menuLabel ?? "Account menu"}
           onClick={() => trackNav("account_menu_open", { device: "desktop", state: "signed_in" })}
         >
-          <UserCircle2 className="h-4 w-4" aria-hidden />
-          <span className="max-w-[8rem] truncate">My Account</span>
+          {!label && <UserCircle2 className="h-4 w-4" aria-hidden />}
+          <span className="max-w-[8rem] truncate">{label ?? "My Account"}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-60 bg-charcoal border-gold/20 text-white/90">
