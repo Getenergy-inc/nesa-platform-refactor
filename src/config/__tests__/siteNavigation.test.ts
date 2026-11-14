@@ -10,11 +10,14 @@ describe("2026–2027 navigation", () => {
     expect(MOBILE_SITE_NAV.some(g => g.href === "/nominees")).toBe(true);
   });
   it("keeps all utility nomination links on the authorised form", () => {
-    expect(UTILITY_NAV.map(g => g.href)).toEqual(["/login", NOMINATE_CTA.href, "/contact", "/nrc", "/judges"]);
+    expect(UTILITY_NAV.map(g => g.href)).toEqual(["/login", "/register", NOMINATE_CTA.href, "/contact", "/nrc", "/judges"]);
     expect(UTILITY_NAV.find(g => g.href === NOMINATE_CTA.href)?.external).toBe(true);
   });
   it("sends merchandise enquiries to Contact without reopening the retired shop", () => {
     expect(UTILITY_NAV.find(g => g.analyticsId === "util_merchandise")?.href).toBe("/contact");
+  });
+  it("links general signup to the existing registration page, not specialist recruitment", () => {
+    expect(UTILITY_NAV.find(g => g.analyticsId === "util_sign_up")?.href).toBe("/register");
   });
   it("keeps the top-bar research and judges links on their existing guarded routes", () => {
     expect(UTILITY_NAV.find(g => g.analyticsId === "util_nrrc")?.href).toBe("/nrc");

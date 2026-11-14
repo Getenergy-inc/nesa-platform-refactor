@@ -102,6 +102,7 @@ export interface UtilityNavItem {
 /** Owner-approved secondary links; merchandise enquiries only, no checkout or voting. */
 export const UTILITY_NAV: UtilityNavItem[] = [
   { label: "Sign In", href: "/login", analyticsId: "util_sign_in" },
+  { label: "Sign Up", href: "/register", analyticsId: "util_sign_up" },
   { label: NOMINATE_CTA.label, href: NOMINATE_CTA.href, external: true, analyticsId: "util_nominate" },
   { label: "Buy Merchandise", href: "/contact", analyticsId: "util_merchandise" },
   { label: "NRRC Portal", href: "/nrc", analyticsId: "util_nrrc" },
