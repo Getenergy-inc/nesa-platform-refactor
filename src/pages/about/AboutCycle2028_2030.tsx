@@ -41,7 +41,7 @@ const EVOLUTION: EvolutionYear[] = [
     status: "locked",
     points: [
       "All four tiers verification-only.",
-      "NRC + EDI Matrix + Judges (Icon only) + Governance ratification.",
+      "NRRC + EDI Matrix + Judges (Icon only) + Governance ratification.",
       "Zero public voting; zero monetary influence.",
     ],
   },
@@ -52,7 +52,7 @@ const EVOLUTION: EvolutionYear[] = [
     status: "transition",
     points: [
       "Gold-Blue Garnet Regional Certificates only.",
-      "Capped, non-monetary public input as one signal alongside NRC & EDI.",
+      "Capped, non-monetary public input as one signal alongside NRRC & EDI.",
       "Per-person and per-session caps enforced at platform level.",
       "Governance retains final ratification authority.",
     ],

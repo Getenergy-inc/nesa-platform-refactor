@@ -39,7 +39,7 @@ export default function GalaConsolidated() {
 
       <section id="overview" className="border-b border-gold/15 bg-charcoal py-16 text-white md:py-24">
         <div className="container mx-auto max-w-5xl px-4 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">28 December 2026 · Online only</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">Sunday, 13 December 2026 · Online only</p>
           <h1 className="mt-4 font-display text-4xl font-bold md:text-6xl">NESA-Africa 2026 <span className="text-gold">Online Recognition Programme</span></h1>
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-white/75">
             {t("onlineGala.summary")}

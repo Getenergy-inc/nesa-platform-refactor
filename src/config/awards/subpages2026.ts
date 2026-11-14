@@ -49,14 +49,14 @@ const INTEGRITY_2026 =
 
 const DEFAULT_STEPS: SubpageStep[] = [
   { title: "Nominate", description: "Submit the nominee with verifiable evidence of impact." },
-  { title: "NRC verification", description: "The Nominee Research Corps (NRC) validates documents and citations." },
+  { title: "NRRC verification", description: "The Nominee Research and Review Corps (NRRC) validates documents and citations." },
   { title: "Independent assessment", description: "Assigned reviewers score against the published EDI matrix." },
   { title: "Governance approval", description: "The Governance Board ratifies verified Education Enablers." },
   { title: "Recognition", description: "Enablers are announced and honoured at the 2026 Recognition Edition." },
 ];
 
 const DEFAULT_FAQS: SubpageFaq[] = [
-  { q: "Is public voting used?", a: "No. Recognition is verified by the NRC, independent reviewers and the Governance Board." },
+  { q: "Is public voting used?", a: "No. Recognition is verified by the NRRC, independent reviewers and the Governance Board." },
   { q: "Who can submit a nomination?", a: "Any verified NESA.Africa account holder — institutions, peers, alumni networks, chapters, or the nominee themselves." },
   { q: "What evidence is required?", a: "Independently verifiable citations, letters of endorsement, programme reports and impact records." },
   { q: "Is there a nomination fee?", a: "No. Nomination is free. Verified Enablers may opt into a paid profile upgrade." },
@@ -183,7 +183,7 @@ function fromCategory(cat: CategoryDefinition): AwardSubpageContent {
     },
     notice: {
       kind: TIER_NOTICE_KIND[cat.tier],
-      body: "Recognition is determined by NRC verification, independent assessment and governance ratification.",
+      body: "Recognition is determined by NRRC verification, independent assessment and governance ratification.",
     },
 
     recognises: {
@@ -247,7 +247,7 @@ function fromCategory(cat: CategoryDefinition): AwardSubpageContent {
     },
     finalCta: {
       heading: `Recognise an Enabler of ${cat.shortName}`,
-      body: "Submit a fully evidenced nomination. NRC review begins as soon as evidence is complete.",
+      body: "Submit a fully evidenced nomination. NRRC review begins as soon as evidence is complete.",
       primary: { label: "Nominate now", href: nominateHref },
       secondary: { label: "See existing nominees", href: directoryHref },
     },
@@ -286,7 +286,7 @@ function fromSubcategory(
     },
     notice: {
       kind: TIER_NOTICE_KIND[parent.tier],
-      body: "Recognition is determined by NRC verification, independent assessment and governance ratification.",
+      body: "Recognition is determined by NRRC verification, independent assessment and governance ratification.",
     },
 
     recognises: {
@@ -340,7 +340,7 @@ function fromSubcategory(
     },
     finalCta: {
       heading: `Recognise an Enabler — ${sub.name}`,
-      body: "Submit a fully evidenced nomination. NRC review begins as soon as evidence is complete.",
+      body: "Submit a fully evidenced nomination. NRRC review begins as soon as evidence is complete.",
       primary: { label: "Nominate now", href: nominateHref },
       secondary: { label: "See existing nominees", href: directoryHref },
     },

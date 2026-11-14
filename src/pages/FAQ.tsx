@@ -38,7 +38,7 @@ export default function FAQPage() {
         <title>FAQ & Participation Guide | NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Full continental participation guide for NESA-Africa 2026 — nominations, GFAwzip Wallet payments, Blue Garnet Awards Gala, regions, EduAid Africa and partnerships."
+          content="Approved answers about free nomination, review, NRRC research, independent Icon judging, sponsorship independence and the online programme."
         />
         <link rel="canonical" href="/faq" />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
@@ -63,9 +63,7 @@ export default function FAQPage() {
                 NESA-Africa 2026 — Frequently Asked Questions
               </h1>
               <p className="text-white/70 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-                Everything you need to know about nominations, payments, the Blue Garnet Awards
-                Gala, regional participation, and post-award education impact through EduAid Africa
-                and Rebuild My School Africa.
+                Approved answers about nomination, recognition, NRRC research, independent judging and the Online Recognition Programme.
               </p>
             </motion.div>
 
@@ -151,8 +149,7 @@ export default function FAQPage() {
               Still have questions?
             </h3>
             <p className="text-white/70 text-sm sm:text-base mb-6">
-              Our team responds within 2 business days. You can also explore the 2026 journey or
-              jump straight into nominations and voting.
+              You can explore the 2026 recognition process or submit a nomination for review.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Button

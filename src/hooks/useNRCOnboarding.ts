@@ -9,7 +9,7 @@ export const NRC_ONBOARDING_STEPS = [
   { key: "profile_completed", label: "Professional Profile", self: true },
   { key: "identity_verified", label: "Identity Verification", self: true },
   { key: "appointment_accepted", label: "Appointment Acceptance", self: true },
-  { key: "mou_signed", label: "NRC MOU", self: true },
+  { key: "mou_signed", label: "NRRC MOU", self: true },
   { key: "confidentiality_signed", label: "Confidentiality Agreement", self: true },
   { key: "code_of_conduct", label: "Code of Conduct", self: true },
   { key: "conflict_declared", label: "Conflict Declaration", self: true },
@@ -17,7 +17,7 @@ export const NRC_ONBOARDING_STEPS = [
   { key: "evidence_training", label: "Evidence Verification Training", self: true },
   { key: "category_training", label: "Category or Pathway Training", self: true },
   { key: "assessment_passed", label: "Assessment", self: true },
-  { key: "activated", label: "Activation (NRC leadership)", self: false },
+  { key: "activated", label: "Activation (NRRC leadership)", self: false },
 ] as const;
 
 export type NRCOnboardingStepKey = (typeof NRC_ONBOARDING_STEPS)[number]["key"];

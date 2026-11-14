@@ -38,7 +38,7 @@ export const TIERS_META: TierMeta[] = [
     verificationRoute: [
       "Nomination",
       "Nominee Acceptance",
-      "NRC Verification",
+      "NRRC Verification",
       "Category EDI Matrix",
       "27 Independent Judges",
       "Grand Jury",
@@ -59,7 +59,7 @@ export const TIERS_META: TierMeta[] = [
     verificationRoute: [
       "Nomination",
       "Nominee Acceptance",
-      "NRC Verification",
+      "NRRC Verification",
       "Category EDI Matrix",
       "Governance Approval",
       "Certificate of Recognition",
@@ -78,13 +78,13 @@ export const TIERS_META: TierMeta[] = [
     verificationRoute: [
       "Nomination",
       "Nominee Acceptance",
-      "NRC Verification",
+      "NRRC Verification",
       "Category EDI Matrix",
       "Governance Approval",
       "Certificate of Recognition",
     ],
     formsCount: 7,
-    hubBadge: "7 categories • NRC-verified",
+    hubBadge: "7 categories • NRRC-verified",
     cta: "Explore Platinum Categories",
   },
   {
@@ -97,7 +97,7 @@ export const TIERS_META: TierMeta[] = [
     verificationRoute: [
       "Nomination",
       "Nominee Acceptance",
-      "NRC Verification",
+      "NRRC Verification",
       "Category EDI Matrix",
       "Governance Approval",
       "Regional Certificate of Recognition",

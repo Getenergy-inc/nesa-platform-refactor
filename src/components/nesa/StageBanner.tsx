@@ -123,7 +123,7 @@ export function StageBanner({ variant = "full" }: StageBannerProps) {
 export function PhaseTimeline() {
   const phases = [
     { id: "nominations", label: "Nominations", status: "active" },
-    { id: "nrc-review", label: "NRC Review", status: "upcoming" },
+    { id: "nrc-review", label: "NRRC Review", status: "upcoming" },
     { id: "voting", label: "Independent jury review", status: "upcoming" },
     { id: "jury", label: "Jury Scoring", status: "upcoming" },
     { id: "ceremony", label: "Ceremony", status: "upcoming" },

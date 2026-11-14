@@ -34,6 +34,12 @@ const SlugRedirect = ({ to }: { to: (slug: string) => string }) => {
  *  Resolves legacy short slugs (west, east, north, south, central, horn, sahel,
  *  indian-ocean, african-diaspora) to their canonical slug via a 301-style
  *  Navigate; canonical slugs render the RegionNomineesHubPage directly. */
+const LegacyNrrcRedirect = () => {
+  const location = useLocation();
+  const suffix = location.pathname.slice("/nrrc".length);
+  return <Navigate to={`/nrrc${suffix}${location.search}${location.hash}`} replace />;
+};
+
 const RegionSlugGate = () => {
   const { region = "" } = useParams();
   const search = typeof window !== "undefined" ? window.location.search : "";
@@ -239,7 +245,6 @@ import JudgesDirectory from "./pages/judges/JudgesDirectory";
 import JudgeProfile from "./pages/judges/JudgeProfile";
 import NomineePipeline from "./pages/judges/NomineePipeline";
 import PathwayWorkspace from "./pages/judges/PathwayWorkspace";
-import JudgesSignUp from "./pages/judges/JudgesSignUp";
 import JudgesForgotPassword from "./pages/judges/JudgesForgotPassword";
 import JudgesOnboarding from "./pages/judges/JudgesOnboarding";
 import IconPathwayIndex from "./pages/judges/IconPathwayIndex";
@@ -295,10 +300,6 @@ import {
   JudgeIconLifetime,
 } from "./pages/judge";
 import JudgeOnboarding from "./pages/judge/JudgeOnboarding";
-import JudgeApplyPortalLayout from "./pages/judgeapply/PortalLayout";
-import JudgeApplyPortalHome from "./pages/judgeapply/PortalHome";
-import JudgeApplyAreaLanding from "./pages/judgeapply/AreaLanding";
-import JudgeApplySupportingPage from "./pages/judgeapply/SupportingPage";
 import MyCertificates from "./pages/MyCertificates";
 import CertificateGuide from "./pages/CertificateGuide";
 
@@ -386,7 +387,6 @@ import PublicNRCMemberProfile from "./pages/nrc/PublicNRCMemberProfile";
 import NRCArenaIndex from "./pages/nrc/arena/NRCArenaIndex";
 import NRCSignIn from "./pages/nrc/arena/NRCSignIn";
 import NRCRedeem from "./pages/nrc/arena/NRCRedeem";
-import NRCApply from "./pages/nrc/NRCApply";
 import NRCApplications from "./pages/nrc/NRCApplications";
 import { NRCOnboardingGate } from "@/components/nrc/arena/NRCOnboardingGate";
 import NRCOnboarding from "./pages/nrc/arena/NRCOnboarding";
@@ -572,9 +572,9 @@ const App = () => (
                   />
 
                   {/* Retired AGC/voting-credit surfaces → GFAwzip Wallet */}
-                  <Route path="/earn-agc" element={<Navigate to="/" replace />} />
-                  <Route path="/agc-rewards" element={<Navigate to="/" replace />} />
-                  <Route path="/earn-voting-coins" element={<Navigate to="/" replace />} />
+                  <Route path="/earn-agc" element={<Navigate to="/about/how-recognition-works" replace />} />
+                  <Route path="/agc-rewards" element={<Navigate to="/about/how-recognition-works" replace />} />
+                  <Route path="/earn-voting-coins" element={<Navigate to="/about/how-recognition-works" replace />} />
 
                   {/* === 301 LEGACY REDIRECTS === */}
                   {/* Auth legacy */}
@@ -605,9 +605,9 @@ const App = () => (
                   {/* Master-register canonical aliases → existing implementations
                       (Stage B: make the register's short/canonical paths resolve). */}
                   <Route path="/awards/influencer" element={<Navigate to="/awards/influencer-education-impact" replace />} />
-                  <Route path="/judges/apply" element={<Navigate to="/judgeapply" replace />} />
-                  <Route path="/gala/tickets" element={<Navigate to="/programme-2026" replace />} />
-                  <Route path="/gala/attendance" element={<Navigate to="/programme-2026" replace />} />
+                  <Route path="/judges/apply" element={<Navigate to="/judges" replace />} />
+                  <Route path="/gala/tickets" element={<Navigate to="/programme/2026" replace />} />
+                  <Route path="/gala/attendance" element={<Navigate to="/programme/2026" replace />} />
                   <Route path="/prenominate" element={<Navigate to="/nominate" replace />} />
                   <Route path="/verify" element={<Navigate to="/certificates/verify" replace />} />
                   <Route path="/membership" element={<Navigate to="/get-involved" replace />} />
@@ -655,6 +655,7 @@ const App = () => (
                   {/* About sub-pages -> consolidated About with hash anchors */}
                   <Route path="/about/vision-mission" element={<Navigate to="/about#vision" replace />} />
                   <Route path="/about/how-it-works" element={<Navigate to="/about#how-it-works" replace />} />
+                  <Route path="/about/how-recognition-works" element={<Navigate to="/about#how-it-works" replace />} />
                   <Route path="/about/judges" element={<Navigate to="/judges" replace />} />
                   <Route path="/about/integrity" element={<Navigate to="/governance" replace />} />
                   <Route path="/about/verification" element={<Navigate to="/governance#verification" replace />} />
@@ -700,7 +701,7 @@ const App = () => (
                   <Route path="/education-enabler-features" element={<Navigate to="/media#features" replace />} />
                   <Route path="/interviews" element={<Navigate to="/media#interviews" replace />} />
                   <Route path="/press-room" element={<Navigate to="/media#press" replace />} />
-                  <Route path="/gala/tables" element={<Navigate to="/programme-2026" replace />} />
+                  <Route path="/gala/tables" element={<Navigate to="/programme/2026" replace />} />
                   <Route path="/events/calendar" element={<Navigate to="/media#events" replace />} />
                   <Route path="/events/afri-edutourism" element={<Navigate to="/afri-edutourism" replace />} />
 
@@ -720,13 +721,13 @@ const App = () => (
                   <Route path="/contact/partnerships" element={<Navigate to="/contact" replace />} />
 
                   {/* Canonical consolidation aliases per 2026 IA refactor */}
-                  <Route path="/recognition" element={<Navigate to="/awards" replace />} />
+                  <Route path="/recognition" element={<WithLayout><RecognitionHubPage /></WithLayout>} />
                   <Route path="/companies" element={<Navigate to="/education-enablers" replace />} />
                   <Route path="/organisations" element={<Navigate to="/education-enablers" replace />} />
                   <Route path="/organizations" element={<Navigate to="/education-enablers" replace />} />
                   <Route path="/enabler-database" element={<Navigate to="/education-enablers" replace />} />
-                  <Route path="/gala" element={<Navigate to="/programme-2026" replace />} />
-                  <Route path="/gala/tickets" element={<Navigate to="/programme-2026" replace />} />
+                  <Route path="/gala" element={<Navigate to="/programme/2026" replace />} />
+                  <Route path="/gala/tickets" element={<Navigate to="/programme/2026" replace />} />
                   <Route path="/partner" element={<Navigate to="/get-involved/partner" replace />} />
                   <Route path="/sponsor" element={<Navigate to="/sponsors" replace />} />
 
@@ -813,6 +814,7 @@ const App = () => (
                       </WithLayout>
                     }
                   />
+                  <Route path="/support-a-special-needs-school/2027" element={<WithLayout><SpecialNeedsSchools /></WithLayout>} />
                   <Route
                     path="/support-a-special-needs-school/participate"
                     element={
@@ -1225,6 +1227,7 @@ const App = () => (
                   <Route path="/recognition/platinum" element={<WithLayout><PlatinumAward /></WithLayout>} />
                   <Route path="/recognition/africa-education-icon" element={<WithLayout><IconAward /></WithLayout>} />
                   <Route path="/recognition/influencer-education-impact" element={<InfluencerImpact2026 />} />
+                  <Route path="/recognition/influencers" element={<InfluencerImpact2026 />} />
                   {/* 3-segment subcategory routes remain */}
                   <Route path="/recognition/gold-blue-garnet/:categorySlug/:subcategorySlug" element={<WithLayout><TierCategorySubcategoryPage /></WithLayout>} />
                   <Route path="/recognition/research/:categorySlug/:pathwaySlug" element={<WithLayout><ResearchPathwayPage /></WithLayout>} />
@@ -1253,7 +1256,8 @@ const App = () => (
 
                   {/* Core spec URLs — render existing content at canonical paths */}
                   <Route path="/programme-2026" element={<WithLayout><GalaConsolidated /></WithLayout>} />
-                  <Route path="/gala" element={<Navigate to="/programme-2026" replace />} />
+                  <Route path="/programme/2026" element={<WithLayout><GalaConsolidated /></WithLayout>} />
+                  <Route path="/gala" element={<Navigate to="/programme/2026" replace />} />
                   <Route path="/support" element={<WithLayout><SupportConsolidated /></WithLayout>} />
                   <Route path="/participate" element={<WithLayout><ParticipatePage /></WithLayout>} />
                   <Route path="/trust" element={<WithLayout><TrustIntegrityPage /></WithLayout>} />
@@ -1596,9 +1600,9 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route path="/media/gala" element={<Navigate to="/programme-2026" replace />} />
-                  <Route path="/tickets" element={<Navigate to="/programme-2026" replace />} />
-                  <Route path="/buy-your-ticket" element={<Navigate to="/programme-2026" replace />} />
+                  <Route path="/media/gala" element={<Navigate to="/programme/2026" replace />} />
+                  <Route path="/tickets" element={<Navigate to="/programme/2026" replace />} />
+                  <Route path="/buy-your-ticket" element={<Navigate to="/programme/2026" replace />} />
 
                   {/* Public commerce is retired in 2026; admin records are preserved. */}
                   <Route path="/shop" element={<Navigate to="/" replace />} />
@@ -1619,6 +1623,7 @@ const App = () => (
 
                   {/* Auth - standalone layout (dark branded) */}
                   <Route path="/login" element={<Login />} />
+                  <Route path="/sign-in" element={<Login />} />
                   <Route path="/register" element={<Register />} />
                   <Route path="/forgot-password" element={<ForgotPassword />} />
                   <Route path="/reset-password" element={<ResetPassword />} />
@@ -1978,128 +1983,134 @@ const App = () => (
                     }
                   />
 
+                  {/* Legacy /nrc/* links permanently redirect to the same guarded NRRC pages. */}
+                  <Route path="/nrc" element={<LegacyNrrcRedirect />} />
+                  <Route path="/nrc/*" element={<LegacyNrrcRedirect />} />
+
                   {/* NRC Arena — public landing + secure workspace shell. */}
-                  <Route path="/nrc" element={<NRCArenaIndex />} />
-                  <Route path="/nrc/member/:slug" element={<PublicNRCMemberProfile />} />
-                  <Route path="/nrc/sign-in" element={<NRCSignIn />} />
-                  <Route path="/nrc/apply" element={<NRCApply />} />
-                  <Route path="/nrc/redeem" element={<NRCRedeem />} />
-                  <Route path="/nrc/portal" element={<Navigate to="/nrc" replace />} />
+                  <Route path="/nrrc" element={<NRCArenaIndex />} />
+                  <Route path="/nrrc/member/:slug" element={<PublicNRCMemberProfile />} />
+                  <Route path="/nrrc/sign-in" element={<NRCSignIn />} />
+                  <Route path="/nrrc/apply" element={<Navigate to="/nrrc" replace />} />
+                  <Route path="/nrrc/redeem" element={<NRCRedeem />} />
+                  <Route path="/nrrc/portal" element={<NRCProtectedRoute><NRCArenaDashboard /></NRCProtectedRoute>} />
+                  <Route path="/nrrc/my-assignments" element={<NRCProtectedRoute><NRCOnboardingGate><NRCMyQueue /></NRCOnboardingGate></NRCProtectedRoute>} />
+                  <Route path="/nrrc/research-standards" element={<Navigate to="/nrrc" replace />} />
                   <Route
-                    path="/nrc/onboarding"
+                    path="/nrrc/onboarding"
                     element={<NRCProtectedRoute><NRCOnboarding /></NRCProtectedRoute>}
                   />
                   <Route
-                    path="/nrc/profile"
+                    path="/nrrc/profile"
                     element={<NRCProtectedRoute><NRCProfile /></NRCProtectedRoute>}
                   />
                   <Route
-                    path="/nrc/profile/:nrcReference"
+                    path="/nrrc/profile/:nrcReference"
                     element={<NRCProtectedRoute><NRCProfile /></NRCProtectedRoute>}
                   />
                   <Route
-                    path="/nrc/directory"
+                    path="/nrrc/directory"
                     element={<NRCProtectedRoute><NRCDirectory /></NRCProtectedRoute>}
                   />
                   <Route
-                    path="/nrc/teams"
+                    path="/nrrc/teams"
                     element={<NRCProtectedRoute><NRCTeams /></NRCProtectedRoute>}
                   />
                   <Route
-                    path="/nrc/teams/:teamSlug"
+                    path="/nrrc/teams/:teamSlug"
                     element={<NRCProtectedRoute><NRCTeamDetail /></NRCProtectedRoute>}
                   />
 
                   {/* NRC operational pages (legacy screens retained) — role-gated */}
                   <Route
-                    path="/nrc/my-queue"
+                    path="/nrrc/my-queue"
                     element={
                       <NRCProtectedRoute>
                         <NRCOnboardingGate><NRCMyQueue /></NRCOnboardingGate>
                       </NRCProtectedRoute>
                     }
                   />
-                  <Route path="/nrc/members" element={<NRCProtectedRoute><NRCMembersPage /></NRCProtectedRoute>} />
-                  <Route path="/nrc/applications" element={<NRCProtectedRoute><NRCApplications /></NRCProtectedRoute>} />
-                  <Route path="/nrc/settings" element={<NRCProtectedRoute><NRCSettings /></NRCProtectedRoute>} />
+                  <Route path="/nrrc/members" element={<NRCProtectedRoute><NRCMembersPage /></NRCProtectedRoute>} />
+                  <Route path="/nrrc/applications" element={<NRCProtectedRoute><NRCApplications /></NRCProtectedRoute>} />
+                  <Route path="/nrrc/settings" element={<NRCProtectedRoute><NRCSettings /></NRCProtectedRoute>} />
                   <Route
-                    path="/nrc/profile-revisions"
+                    path="/nrrc/profile-revisions"
                     element={<NRCProtectedRoute><NRCProfileRevisions /></NRCProtectedRoute>}
                   />
                   <Route
-                    path="/nrc/scoring"
+                    path="/nrrc/scoring"
                     element={<NRCProtectedRoute><NRCScoringDashboard /></NRCProtectedRoute>}
                   />
 
                   {/* NRC Dashboard — new arena dashboard */}
                   <Route
-                    path="/nrc/dashboard"
+                    path="/nrrc/dashboard"
                     element={<NRCProtectedRoute><NRCArenaDashboard /></NRCProtectedRoute>}
                   />
-                  <Route path="/nrc/cases" element={<NRCProtectedRoute><NRCCases /></NRCProtectedRoute>} />
-                  <Route path="/nrc/cases/:caseId" element={<NRCProtectedRoute><NRCCaseDetail /></NRCProtectedRoute>} />
-                  <Route path="/nrc/evidence" element={<NRCProtectedRoute><NRCEvidence /></NRCProtectedRoute>} />
-                  <Route path="/nrc/duplicates" element={<NRCProtectedRoute><NRCDuplicates /></NRCProtectedRoute>} />
-                  <Route path="/nrc/endorsements" element={<NRCProtectedRoute><NRCEndorsements /></NRCProtectedRoute>} />
-                  <Route path="/nrc/handover/judges" element={<NRCProtectedRoute><NRCHandoverJudges /></NRCProtectedRoute>} />
-                  <Route path="/nrc/handover/governance" element={<NRCProtectedRoute><NRCHandoverGovernance /></NRCProtectedRoute>} />
-                  <Route path="/nrc/reports" element={<NRCProtectedRoute><NRCReportsPage /></NRCProtectedRoute>} />
-                  <Route path="/nrc/audit-log" element={<NRCProtectedRoute><NRCAuditLog /></NRCProtectedRoute>} />
-                  <Route path="/nrc/automation" element={<NRCProtectedRoute><NRCAutomation /></NRCProtectedRoute>} />
+                  <Route path="/nrrc/cases" element={<NRCProtectedRoute><NRCCases /></NRCProtectedRoute>} />
+                  <Route path="/nrrc/cases/:caseId" element={<NRCProtectedRoute><NRCCaseDetail /></NRCProtectedRoute>} />
+                  <Route path="/nrrc/evidence" element={<NRCProtectedRoute><NRCEvidence /></NRCProtectedRoute>} />
+                  <Route path="/nrrc/duplicates" element={<NRCProtectedRoute><NRCDuplicates /></NRCProtectedRoute>} />
+                  <Route path="/nrrc/endorsements" element={<NRCProtectedRoute><NRCEndorsements /></NRCProtectedRoute>} />
+                  <Route path="/nrrc/handover/judges" element={<NRCProtectedRoute><NRCHandoverJudges /></NRCProtectedRoute>} />
+                  <Route path="/nrrc/handover/governance" element={<NRCProtectedRoute><NRCHandoverGovernance /></NRCProtectedRoute>} />
+                  <Route path="/nrrc/reports" element={<NRCProtectedRoute><NRCReportsPage /></NRCProtectedRoute>} />
+                  <Route path="/nrrc/audit-log" element={<NRCProtectedRoute><NRCAuditLog /></NRCProtectedRoute>} />
+                  <Route path="/nrrc/automation" element={<NRCProtectedRoute><NRCAutomation /></NRCProtectedRoute>} />
                   <Route
-                    path="/nrc/dashboard/nominees"
+                    path="/nrrc/dashboard/nominees"
                     element={<NRCProtectedRoute><NRCNomineeTable /></NRCProtectedRoute>}
                   />
                   <Route
-                    path="/nrc/dashboard/review/:id"
+                    path="/nrrc/dashboard/review/:id"
                     element={<NRCProtectedRoute><NRCNomineeReview /></NRCProtectedRoute>}
                   />
                   <Route
-                    path="/nrc/dashboard/reports"
+                    path="/nrrc/dashboard/reports"
                     element={<NRCProtectedRoute><NRCReports /></NRCProtectedRoute>}
                   />
                   <Route
-                    path="/nrc/dashboard/flagged"
+                    path="/nrrc/dashboard/flagged"
                     element={<NRCProtectedRoute><NRCFlaggedCases /></NRCProtectedRoute>}
                   />
                   <Route
-                    path="/nrc/dashboard/my-reviews"
+                    path="/nrrc/dashboard/my-reviews"
                     element={<NRCProtectedRoute><NRCMyReviews /></NRCProtectedRoute>}
                   />
                   <Route
-                    path="/nrc/dashboard/queue"
+                    path="/nrrc/dashboard/queue"
                     element={<NRCProtectedRoute><NRCNomineeTable /></NRCProtectedRoute>}
                   />
                   <Route
-                    path="/nrc/dashboard/intake"
+                    path="/nrrc/dashboard/intake"
                     element={<NRCProtectedRoute><NRCIntakeQueue /></NRCProtectedRoute>}
                   />
                   <Route
-                    path="/nrc/dashboard/intake/:id"
+                    path="/nrrc/dashboard/intake/:id"
                     element={<NRCProtectedRoute><NRCIntakeReview /></NRCProtectedRoute>}
                   />
                   <Route
-                    path="/nrc/dashboard/merge"
+                    path="/nrrc/dashboard/merge"
                     element={<NRCProtectedRoute><NRCMergeTool /></NRCProtectedRoute>}
                   />
                   <Route
-                    path="/nrc/dashboard/duplicates"
+                    path="/nrrc/dashboard/duplicates"
                     element={<NRCProtectedRoute><NRCMergeTool /></NRCProtectedRoute>}
                   />
                   <Route
-                    path="/nrc/dashboard/guidelines"
+                    path="/nrrc/dashboard/guidelines"
                     element={<NRCProtectedRoute><NRCSettings /></NRCProtectedRoute>}
                   />
                   <Route
-                    path="/nrc/dashboard/edi-analytics"
+                    path="/nrrc/dashboard/edi-analytics"
                     element={<NRCProtectedRoute><EDIAnalyticsDashboard /></NRCProtectedRoute>}
                   />
                   <Route
-                    path="/nrc/dashboard/profile"
+                    path="/nrrc/dashboard/profile"
                     element={<NRCProtectedRoute><NRCSettings /></NRCProtectedRoute>}
                   />
                   <Route
-                    path="/nrc/dashboard/settings"
+                    path="/nrrc/dashboard/settings"
                     element={<NRCProtectedRoute><NRCSettings /></NRCProtectedRoute>}
                   />
 
@@ -2204,14 +2215,7 @@ const App = () => (
                   <Route path="/install" element={<Install />} />
 
                   {/* Judge Application Flow (Public) */}
-                  <Route
-                    path="/judge/apply"
-                    element={
-                      <WithLayout>
-                        <JudgeApply />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/judge/apply" element={<Navigate to="/judges" replace />} />
                   <Route
                     path="/judge/status"
                     element={
@@ -2224,33 +2228,10 @@ const App = () => (
                   <Route path="/judge/verify" element={<JudgeVerify />} />
 
                   {/* /judgeapply — Judges & NRC Portal (dropdown hub with nested pages) */}
-                  <Route path="/judgeapply" element={<JudgeApplyPortalLayout />}>
-                    <Route index element={<JudgeApplyPortalHome />} />
-                    <Route path="about" element={<JudgeApplyAreaLanding areaId="about" />} />
-                    <Route path="about/:slug" element={<JudgeApplySupportingPage areaId="about" />} />
-                    <Route path="judges" element={<JudgeApplyAreaLanding areaId="judges" />} />
-                    <Route path="judges/:slug" element={<JudgeApplySupportingPage areaId="judges" />} />
-                    <Route path="nrc" element={<JudgeApplyAreaLanding areaId="nrc" />} />
-                    <Route path="nrc/:slug" element={<JudgeApplySupportingPage areaId="nrc" />} />
-                    <Route path="*" element={<Navigate to="/judgeapply" replace />} />
-                  </Route>
+                  <Route path="/judgeapply" element={<Navigate to="/judges" replace />} />
 
-                  <Route
-                    path="/judge-apply"
-                    element={
-                      <WithLayout>
-                        <JudgeApply />
-                      </WithLayout>
-                    }
-                  />
-                  <Route
-                    path="/judge-application-form"
-                    element={
-                      <WithLayout>
-                        <JudgeApply />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/judge-apply" element={<Navigate to="/judges" replace />} />
+                  <Route path="/judge-application-form" element={<Navigate to="/judges" replace />} />
                   <Route
                     path="/judge-status"
                     element={
@@ -2451,6 +2432,8 @@ const App = () => (
                   <Route path="/volunteer-chapters" element={<WithLayout><VolunteerChaptersHub /></WithLayout>} />
 
                   <Route path="/join-local-chapter" element={<WithLayout><JoinLocalChapter /></WithLayout>} />
+                  <Route path="/chapters/join" element={<WithLayout><JoinLocalChapter /></WithLayout>} />
+                  <Route path="/chapters/establish" element={<WithLayout><ChaptersConsolidated /></WithLayout>} />
                   <Route path="/volunteers/command-center" element={<VolunteerCommandCenter />} />
                   <Route
                     path="/ambassadors"
@@ -2610,7 +2593,7 @@ const App = () => (
                   <Route path="/judges" element={<JudgesArenaLanding />} />
                   <Route path="/judges/enter" element={<JudgesEntry />} />
                   <Route path="/judges/sign-in" element={<IconJurySignIn />} />
-                  <Route path="/judges/sign-up" element={<JudgesSignUp />} />
+                  <Route path="/judges/sign-up" element={<Navigate to="/judges" replace />} />
                   <Route path="/judges/forgot-password" element={<JudgesForgotPassword />} />
                   <Route path="/judges/onboarding" element={<JudgesOnboarding />} />
                   <Route path="/icon-jury/sign-in" element={<Navigate to="/judges/sign-in" replace />} />

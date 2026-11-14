@@ -162,7 +162,7 @@ export default function PathwayWorkspace() {
       <div className="container py-16 max-w-lg text-center">
         <ShieldAlert className="h-12 w-12 mx-auto text-destructive mb-4" />
         <h1 className="text-2xl font-bold mb-2">Access restricted</h1>
-        <p className="text-muted-foreground">The pathway workspace is reserved for seated judges and NRC members.</p>
+        <p className="text-muted-foreground">The pathway workspace is reserved for seated judges and NRRC members.</p>
       </div>
     );
   }
@@ -321,7 +321,7 @@ function DossiersPanel({ rows, selectedId, onSelect, selectedRow }: any) {
             </CardHeader>
             <CardContent className="space-y-4">
               {!selectedRow.dossier ? (
-                <p className="text-sm text-muted-foreground">No locked dossier yet — awaiting NRC handover.</p>
+                <p className="text-sm text-muted-foreground">No locked dossier yet — awaiting NRRC handover.</p>
               ) : (
                 <>
                   <DossierField label="Biography" value={selectedRow.dossier.biography} />
@@ -329,7 +329,7 @@ function DossiersPanel({ rows, selectedId, onSelect, selectedRow }: any) {
                   <DossierField label="Geographic Reach" value={selectedRow.dossier.geographic_reach} />
                   <DossierField label="Main Beneficiaries" value={selectedRow.dossier.main_beneficiaries} />
                   <DossierField label="Impact Summary" value={selectedRow.dossier.impact_summary} />
-                  <DossierField label="NRC Recommendation" value={selectedRow.dossier.nrc_recommendation} />
+                  <DossierField label="NRRC Recommendation" value={selectedRow.dossier.nrc_recommendation} />
                   <DossierField label="Source Quality Notes" value={selectedRow.dossier.source_quality_notes} />
                   <DossierField label="Known Limitations" value={selectedRow.dossier.known_limitations} />
                   {Array.isArray(selectedRow.dossier.evidence_library) && selectedRow.dossier.evidence_library.length > 0 && (
@@ -460,7 +460,7 @@ function ClarificationsPanel({ pathway, rows, requests, userId, isNRC, isJudge, 
     });
     setPosting(false);
     if (error) toast({ title: "Failed", description: error.message, variant: "destructive" });
-    else { toast({ title: "Clarification sent to NRC" }); setQuestion(""); setSection(""); onChange(); }
+    else { toast({ title: "Clarification sent to NRRC" }); setQuestion(""); setSection(""); onChange(); }
   };
 
   const respond = async (id: string) => {
@@ -495,10 +495,10 @@ function ClarificationsPanel({ pathway, rows, requests, userId, isNRC, isJudge, 
                 </SelectContent>
               </Select>
             </div>
-            <Textarea placeholder="Question for the NRC team…" value={question} onChange={(e) => setQuestion(e.target.value)} rows={3} />
+            <Textarea placeholder="Question for the NRRC team…" value={question} onChange={(e) => setQuestion(e.target.value)} rows={3} />
             <div className="flex justify-end">
               <Button onClick={submit} disabled={posting}>
-                {posting && <Loader2 className="h-4 w-4 animate-spin mr-2" />} Send to NRC
+                {posting && <Loader2 className="h-4 w-4 animate-spin mr-2" />} Send to NRRC
               </Button>
             </div>
           </CardContent>
@@ -531,7 +531,7 @@ function ClarificationsPanel({ pathway, rows, requests, userId, isNRC, isJudge, 
                     <p className="text-sm whitespace-pre-wrap">{c.question}</p>
                     {c.response_text && (
                       <div className="mt-2 border-l-2 border-primary pl-3">
-                        <div className="text-xs font-semibold text-muted-foreground mb-1">NRC response · {c.responded_at ? new Date(c.responded_at).toLocaleString() : ""}</div>
+                        <div className="text-xs font-semibold text-muted-foreground mb-1">NRRC response · {c.responded_at ? new Date(c.responded_at).toLocaleString() : ""}</div>
                         <p className="text-sm whitespace-pre-wrap">{c.response_text}</p>
                       </div>
                     )}

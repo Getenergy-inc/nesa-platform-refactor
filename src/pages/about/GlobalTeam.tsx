@@ -40,11 +40,11 @@ const GOVERNANCE: TeamGroup[] = [
   {
     icon: Users,
     eyebrow: "Verification",
-    title: "Nominee Research Corps (NRC)",
+    title: "Nominee Research and Review Corps (NRRC)",
     blurb:
       "Independent researchers who verify every submission — evidence checks, duplicate detection and Education Development Index scoring before any file reaches a judge.",
     href: "/judgeapply/nrc",
-    cta: "About the NRC",
+    cta: "About the NRRC",
   },
   {
     icon: Gavel,
@@ -131,7 +131,7 @@ export default function GlobalTeam() {
         <title>Meet Our Global Team | NESA-Africa 2026</title>
         <meta
           name="description"
-          content="The people behind NESA-Africa 2026 — the SCEF Board of Advisors, Nominee Research Corps, independent judges, volunteers, ambassadors and local chapters across Africa and the diaspora."
+          content="The people behind NESA-Africa 2026 — the SCEF Board of Advisors, Nominee Research and Review Corps, independent judges, volunteers, ambassadors and local chapters across Africa and the diaspora."
         />
         <link rel="canonical" href="https://nesa.africa/about/team" />
       </Helmet>

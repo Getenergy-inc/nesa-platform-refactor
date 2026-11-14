@@ -204,7 +204,7 @@ export const ICON_NOMINATION_TIMELINE = {
       key: "review",
       label: "Review & Verification",
       when: "20 September – 3 October 2026",
-      body: "The Nominee Research Corps verifies every Icon nomination — eligibility, identity and supporting evidence — before dossiers reach the Judges Arena.",
+      body: "The Nominee Research and Review Corps verifies every Icon nomination — eligibility, identity and supporting evidence — before dossiers reach the Judges Arena.",
     },
     {
       key: "selection",
@@ -486,7 +486,7 @@ export const SERVICE_OWNERS: ServiceOwner[] = [
 
 export const TRUST_PILLARS = [
   { title: "Independent governance", body: "A governance board separate from operations ratifies every recognition." },
-  { title: "NRC review", body: "The Nominee Research Corps independently verifies every submitted claim." },
+  { title: "NRRC review", body: "The Nominee Research and Review Corps independently verifies every submitted claim." },
   { title: "Evidence requirements", body: "Recognition requires independently verifiable citations and records." },
   { title: "Conflict-of-interest controls", body: "Reviewers and judges declare and are recused from conflicts." },
   { title: "Sponsor independence", body: "Sponsorship, donations, tickets and merchandise never influence outcomes." },

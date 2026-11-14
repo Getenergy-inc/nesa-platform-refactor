@@ -33,8 +33,8 @@ export default function MediaHubConsolidated() {
   return (
     <>
       <Helmet>
-        <title>Media & Events · NESA-Africa 2026</title>
-        <meta name="description" content="NESA-Africa TV, EduAid webinars, recognition shows, interviews, documentaries, podcasts, news, photo and video galleries, upcoming events and media accreditation." />
+        <title>Education Impact in View | NESA-Africa Media</title>
+        <meta name="description" content="NESA-Africa Media documents education ideas, contributions and learning through responsible, evidence-based storytelling. Media participation does not influence recognition." />
       </Helmet>
       <nav aria-label="Media sections" className="sticky top-14 sm:top-16 z-30 bg-charcoal/95 backdrop-blur border-b border-gold/20 overflow-x-auto">
         <ul className="flex gap-4 px-4 py-3 text-sm whitespace-nowrap">

@@ -3,7 +3,7 @@ import { NRCArenaPage } from "@/components/nrc/arena/NRCArenaPage";
 export default function NRCAuditLog() {
   return (
     <NRCArenaPage
-      title="NRC Activity & Integrity Log"
+      title="NRRC Activity & Integrity Log"
       description="Every case, review, evidence item, decision, reassignment and handover carries a permanent reference, user, timestamp and version."
       status="restricted"
     >

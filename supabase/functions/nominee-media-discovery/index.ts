@@ -138,7 +138,7 @@ Deno.serve(async (req) => {
 
   const { data: roles } = await admin.from("user_roles").select("role").eq("user_id", user.id);
   const allowed = (roles ?? []).some((r) => r.role === "admin" || r.role === "nrc");
-  if (!allowed) return json(403, { error: "Admin or NRC role required" });
+  if (!allowed) return json(403, { error: "Admin or NRRC role required" });
 
   let body: { action?: string; limit?: number };
   try {

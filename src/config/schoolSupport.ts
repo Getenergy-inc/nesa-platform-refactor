@@ -8,7 +8,7 @@ export const SCHOOL_SUPPORT_ROUTE = "/support-a-special-needs-school";
 export const SCHOOL_SUPPORT_PARTICIPATE_ROUTE = `${SCHOOL_SUPPORT_ROUTE}/participate`;
 
 /** CONTENT REQUIRED: supply the authorised NESA-Africa Google Form URL. */
-export const SNS_FORM_URL = "";
+export const SNS_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfSFHcQc9ehWdnPTfPRyzeMruCVOzVyjyI29uUSRR6E2g1JWw/viewform";
 
 /** Voting remains unavailable until technical and governance approval authorises this flag. */
 export const VOTING_OPEN = false;
@@ -40,13 +40,13 @@ export const SCHOOL_SUPPORT_PROGRAMME = {
   name: "Africa Special Needs Education Support Fund 2027",
   presenters: "Jointly presented by NESA-Africa and EduAid-Africa",
   serviceLine: "An education-support service of Santos Creations Educational Foundation, supported by Friends of EduAid-Africa and the Africa Education Enablers Network.",
-  headline: "Support One Special-Needs School in Each African Region",
-  introduction: "In 2027, the Africa Special Needs Education Support Fund will identify, verify and present eligible special-needs and inclusive schools across Africa.",
-  selection: "Following verification and approved public participation, one eligible school will be selected from each of the eight approved African programme regions—producing up to eight regional beneficiary schools in 2027.",
+  headline: "Support a Special-Needs School Across Africa",
+  introduction: "Help identify, verify and support specialist schools and inclusive mainstream schools serving learners with disabilities and additional support needs. This is a joint NESA-Africa and EduAid-Africa education-support programme under Santos Creations Educational Foundation, supported through Friends of EduAid-Africa and the Africa Education Enablers Network. It is not a NESA-Africa award tier.",
+  selection: "Eight operational regions: North Africa · West Africa · Central Africa · East Africa · Southern Africa · Sahel Region · Horn of Africa · Indian Ocean Islands. These are programme-operational regions, not an official African Union classification. The 2027 programme aims to identify one priority school in each region for verified intervention support. Fundraising target: US$150,000 per region · eight regions · US$1.2 million continental target. This is a fundraising target, not secured funding.",
   supportQualifier: "Subject to due diligence, available funds and written approval, each selected school may receive:",
   supportWarning: "Do not promise a fixed grant amount or intervention until funding, verification, project scope and approval are confirmed.",
   campaignLine: "Eight African Regions. Eight Supported Schools. One Inclusive Future.",
-  supportingLine: "Nominate. Verify. Vote. Fund. Volunteer. Transform.",
+  supportingLine: "Regional school selection is separate from NESA-Africa award recognition. Donations, sponsorship and regional participation do not affect NESA-Africa judging or recognition decisions.",
 } as const;
 
 export const SCHOOL_SUPPORT_POSSIBILITIES = [
@@ -205,14 +205,14 @@ export const SCHOOL_SUPPORT_DONATION_STATUSES = [
 ] as const;
 
 export const SCHOOL_SUPPORT_TIMETABLE = [
-  { period: "February–March 2027", activity: "Programme preparation, partner mobilisation, fundraising controls and regional coordination" },
+  { period: "February–March 2027", activity: "Governance, fundraising, financial controls, forms and regional rules" },
   { period: "April 2027", activity: "School nominations open" },
-  { period: "April–August 2027", activity: "Verification, safeguarding, needs assessment and regional classification" },
-  { period: "August 2027", activity: "Approved school profiles prepared and voting system tested" },
-  { period: "September 2027", activity: "Voting for verified schools" },
-  { period: "October 2027", activity: "Due diligence, regional selection and approved interventions begin" },
-  { period: "November 2027", activity: "Implementation monitoring, documentation and quality assurance" },
-  { period: "December 2027", activity: "Regional beneficiaries and verified impact presented through the approved NESA-Africa programme" },
+  { period: "April–August 2027", activity: "Verification, consent, needs assessment, safeguarding review and regional classification" },
+  { period: "August 2027", activity: "Regional shortlist and public-information review" },
+  { period: "September 2027", activity: "Authorised regional selection" },
+  { period: "October–November 2027", activity: "Controlled funding releases, intervention delivery and EduTourism activities" },
+  { period: "December 2027", activity: "Outcome presentation, partner recognition and preliminary reporting" },
+  { period: "2028 onward", activity: "Intervention completion, monitoring and public impact reporting where required" },
   { period: "2028 onward", activity: "Intervention completion, monitoring and public impact reporting where required" },
 ] as const;
 

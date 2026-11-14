@@ -101,11 +101,11 @@ export function FeaturedCategorySpotlight({ categorySlug, className }: Props) {
                   <div className="mb-2 flex flex-wrap items-center gap-2">
                     {n.nrc_verified ? (
                       <span className="inline-flex items-center gap-1 rounded-full border border-gold/40 bg-gold/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-gold">
-                        <BadgeCheck className="h-3 w-3" /> NRC verified
+                        <BadgeCheck className="h-3 w-3" /> NRRC verified
                       </span>
                     ) : (
                       <span className="inline-flex items-center gap-1 rounded-full border border-border bg-muted px-2 py-0.5 text-[10px] uppercase tracking-wide text-muted-foreground">
-                        <ShieldQuestion className="h-3 w-3" /> Not yet NRC verified
+                        <ShieldQuestion className="h-3 w-3" /> Not yet NRRC verified
                       </span>
                     )}
                     {typeof n.profile_completion_score === "number" && (

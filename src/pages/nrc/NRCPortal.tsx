@@ -45,7 +45,7 @@ function NRCPortalContent() {
         <div>
           <h2 className="font-display text-2xl font-bold">Welcome back!</h2>
           <p className="text-muted-foreground">
-            Here's your NRC dashboard overview
+            Here's your NRRC dashboard overview
           </p>
         </div>
 
@@ -65,7 +65,7 @@ function NRCPortalContent() {
                 </p>
               </div>
               <Button variant="outline" size="sm" asChild>
-                <Link to="/nrc/my-queue">
+                <Link to="/nrrc/my-queue">
                   View Queue
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -94,7 +94,7 @@ function NRCPortalContent() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">
-                NRC Members
+                NRRC Members
               </CardTitle>
               <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
@@ -151,7 +151,7 @@ function NRCPortalContent() {
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="text-base">My Assigned Queue</CardTitle>
               <Button variant="ghost" size="sm" asChild>
-                <Link to="/nrc/my-queue">
+                <Link to="/nrrc/my-queue">
                   View All
                   <ArrowRight className="ml-1 h-4 w-4" />
                 </Link>
@@ -202,9 +202,9 @@ function NRCPortalContent() {
           {/* Team Overview */}
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle className="text-base">NRC Team</CardTitle>
+              <CardTitle className="text-base">NRRC Team</CardTitle>
               <Button variant="ghost" size="sm" asChild>
-                <Link to="/nrc/members">
+                <Link to="/nrrc/members">
                   Manage
                   <ArrowRight className="ml-1 h-4 w-4" />
                 </Link>
@@ -237,7 +237,7 @@ function NRCPortalContent() {
 
                 {(stats?.total_members || 0) < 30 && (
                   <Button variant="outline" className="w-full" asChild>
-                    <Link to="/nrc/members">
+                    <Link to="/nrrc/members">
                       <UserPlus className="mr-2 h-4 w-4" />
                       Invite New Member
                     </Link>

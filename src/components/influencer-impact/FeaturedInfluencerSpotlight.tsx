@@ -107,7 +107,7 @@ function EmptySpotlight({ category }: { category: CategoryId }) {
       <p className="text-gold text-sm font-semibold mb-1">No Featured Enablers yet</p>
       <p className="text-white/65 text-xs max-w-md mx-auto">
         No {meta?.shortName ?? "Influencer"} nominee has been verified and featured for 2026 yet.
-        Nominations are open — featured spotlights are selected after NRC impact verification.
+        Nominations are open — featured spotlights are selected after NRRC impact verification.
       </p>
       <Button asChild size="sm" className="mt-4 bg-gold text-charcoal hover:bg-gold/90">
         <Link to={NOMINATE_URL(category)}>Submit a Nomination</Link>

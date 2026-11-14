@@ -44,7 +44,7 @@ const VACANCIES: Vacancy[] = [
     publicFacing: false,
     icon: ShieldCheck,
     summary:
-      "Owns NRC and jury governance policy, non-influence protocol, audit trail. Standard confidential hire — not a public recruitment moment.",
+      "Owns NRRC and jury governance policy, non-influence protocol, audit trail. Standard confidential hire — not a public recruitment moment.",
   },
   {
     id: "executive-operations-admin",
@@ -86,12 +86,12 @@ const VACANCIES: Vacancy[] = [
   {
     id: "data-engineer-nrc",
     code: "N-05",
-    title: "Data Engineer / NRC Systems Analyst",
+    title: "Data Engineer / NRRC Systems Analyst",
     org: "NESA-Africa",
     publicFacing: false,
     icon: ShieldCheck,
     summary:
-      "Runs the NRC dossier pipeline, duplicate detection, EDI scoring integrity. Confidentiality of NRC precludes public treatment.",
+      "Runs the NRRC dossier pipeline, duplicate detection, EDI scoring integrity. Confidentiality of NRRC precludes public treatment.",
   },
   {
     id: "bd-partnerships-lead",
@@ -160,12 +160,12 @@ const VACANCIES: Vacancy[] = [
   {
     id: "nrc-reviewer",
     code: "N-10",
-    title: "Nominee Research Corps Reviewer",
+    title: "Nominee Research and Review Corps Reviewer",
     org: "NESA-Africa",
     publicFacing: false,
     icon: ShieldCheck,
     summary:
-      "Verifies nominee evidence, runs dossier scoring inside the NRC firewall. Independence and confidentiality by design — no public treatment.",
+      "Verifies nominee evidence, runs dossier scoring inside the NRRC firewall. Independence and confidentiality by design — no public treatment.",
   },
   {
     id: "gala-events-lead",
@@ -226,7 +226,7 @@ const CALENDAR = [
   { window: "20 Aug – 12 Nov 2026", label: "Pre-Award Webinar Series", tie: "Presenter-search episode (N-08); Build-With-Us segment (N-03)." },
   { window: "28 Nov 2026", label: "TV Award Show — Recognition Ratification", tie: "Chapter Coordinator regional features (N-09) roll out ahead of broadcast." },
   { window: "6 Dec 2026", label: "TV Award Show — Icon Class Reveal", tie: "Content Producer (N-07) audition reveal published in campaign runway." },
-  { window: "28 Dec 2026", label: "NESA-Africa Recognition Gala, Lagos", tie: "Gala & Events Lead (N-11) \"Countdown to the Gala\" behind-the-scenes." },
+  { window: "13 Dec 2026", label: "NESA-Africa Recognition Gala, Lagos", tie: "Gala & Events Lead (N-11) \"Countdown to the Gala\" behind-the-scenes." },
 ];
 
 function VacancyCard({ v }: { v: Vacancy }) {
@@ -310,7 +310,7 @@ export default function Vacancies() {
             Eleven NESA-Africa roles and two EduAid-Africa roles. Where the role is public-facing
             by nature, the recruitment process itself runs as scheduled content on channels
             already established — the Webinar Series, NESA Africa TV, the TV Award Shows and
-            social. Governance, NRC, Data and BD hires remain standard confidential processes.
+            social. Governance, NRRC, Data and BD hires remain standard confidential processes.
           </p>
           <div className="mt-6 flex flex-wrap gap-3 text-xs">
             <span className="px-3 py-1 rounded-full border border-gold/30 text-gold/90">
@@ -404,7 +404,7 @@ export default function Vacancies() {
             <Users className="w-6 h-6 text-gold" /> Standard confidential hires
           </h2>
           <p className="text-ivory/60 text-sm mb-8 max-w-2xl">
-            Governance, NRC, Data, BD and back-office operations — no public content treatment.
+            Governance, NRRC, Data, BD and back-office operations — no public content treatment.
             Forcing one on would be manufactured rather than real.
           </p>
           <div className="grid md:grid-cols-2 gap-5">

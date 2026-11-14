@@ -32,7 +32,7 @@ export function FinalCTASection() {
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
             <Link to="/nominate" className="group" onClick={() => trackEvent("final_cta_click", { cta: "nominate", to: "/nominate", location: "final_cta" })}>
               <Button size="lg" className="bg-gold hover:bg-gold-dark text-charcoal font-bold rounded-full px-10 gap-2.5 shadow-xl shadow-gold/25 hover:shadow-gold/40 transition-all min-h-[56px] text-lg">
-                Submit a Nomination Now
+                Submit a Nomination
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
@@ -46,13 +46,13 @@ export function FinalCTASection() {
           <div className="flex flex-wrap justify-center gap-3 mb-10">
             {[
               { to: "/nominate", label: "Submit a Nomination", icon: Award, cta: "nominate" },
-              { to: "/buy-your-ticket", label: "Buy Gala Ticket", icon: Ticket, cta: "tickets" },
+              { to: "/programme/2026", label: "Watch the Online Programme", icon: Ticket, cta: "programme" },
               { to: "/judges-arena", label: "Judges Arena", icon: Scale, cta: "judges_arena" },
               { to: "/sponsor", label: "Sponsor the Timeline", icon: Handshake, cta: "sponsor" },
               { to: "/media/webinars", label: "Join Pre-Award Webinars", icon: Video, cta: "webinars" },
               { to: "/donate", label: "Donate", icon: Heart, cta: "donate" },
               { to: "/shop", label: "Buy Merchandise (Post-Award Impact)", icon: ShoppingBag, cta: "merchandise" },
-              { to: "/awards/gold-blue-garnet", label: "Explore Recognition", icon: Vote, cta: "vote" },
+              { to: "/about/how-recognition-works", label: "How Recognition Works", icon: Vote, cta: "recognition_process" },
             ].map((item) => (
               <Link
                 key={item.cta}

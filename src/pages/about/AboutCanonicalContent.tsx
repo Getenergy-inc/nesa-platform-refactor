@@ -12,10 +12,10 @@ const JOURNEY: [string, string][] = [
 ];
 
 const ARCHITECTURE: [string, string, string][] = [
-  ["Africa Education Icon Award (flagship)", "3 subcategories · 9 laureate positions", "NRC, Icon Jury, and Governance"],
-  ["Influencer Education Impact", "3 subcategories", "NRC and Governance"],
-  ["Platinum Certificates of Recognition", "7 categories · 27 subcategories", "Due diligence, NRC, and Governance"],
-  ["Gold-Blue Garnet Regional Certificates", "9 categories · 63 subcategories", "NRC and Governance"],
+  ["Africa Education Icon Award (flagship)", "3 subcategories · 9 laureate positions", "NRRC, Icon Jury, and Governance"],
+  ["Influencer Education Impact", "3 subcategories", "NRRC and Governance"],
+  ["Platinum Certificates of Recognition", "7 categories · 27 subcategories", "Due diligence, NRRC, and Governance"],
+  ["Gold-Blue Garnet Regional Certificates", "9 categories · 63 subcategories", "NRRC and Governance"],
 ];
 
 const REGIONS = [
@@ -98,8 +98,8 @@ export function AboutCanonicalContent() {
           <div className="grid grid-cols-3 gap-3 text-center">
             {[
               ["4", "Tiers"],
-              ["18", "Categories"],
-              ["96", "Subcategories"],
+              ["22", "Main Awards"],
+              ["90", "Subcategories"],
             ].map(([v, l]) => (
               <div key={l} className="rounded-xl border border-gold/20 bg-white/[0.03] py-5">
                 <p className="font-mono text-3xl md:text-4xl text-gold">{v}</p>
@@ -141,8 +141,7 @@ export function AboutCanonicalContent() {
             <li><strong>Africa Technical Educator Icon</strong></li>
           </ul>
           <p className="text-ivory/75 text-sm">
-            Nine Laureates per cycle, drawn from 27 Grand Jury finalists — three per
-            pathway-classification group.
+            Up to nine Africa Education Icons across three Icon categories and three participation pathways.
           </p>
         </div>
 
@@ -176,7 +175,7 @@ export function AboutCanonicalContent() {
         <div className="space-y-4">
           <H>How Recognition Works</H>
           <p>
-            Every nomination is verified by the <strong>Nominee Research Corps (NRC)</strong> —
+            Every nomination is verified by the <strong>Nominee Research and Review Corps (NRRC)</strong> —
             Data Entry, Automated Review, Human Review — using the{" "}
             <strong>Education Development Index (EDI) Matrix</strong>, a category-specific,
             weighted standard assessing access, quality, scale, inclusion, innovation,
@@ -184,9 +183,7 @@ export function AboutCanonicalContent() {
             outcomes.
           </p>
           <p>
-            Only the Africa Education Icon Award proceeds to independent judging — 27 volunteer
-            judges, nine specialist panels, culminating in Grand Jury deliberation and Governance
-            ratification. The three Certificate tiers move directly from NRC verification to
+            Only eligible Africa Education Icon dossiers proceed to nine independent judges, three per Icon category, followed by documented governance review. The three Certificate tiers move directly from NRRC verification to
             Governance approval — no judges, no public voting, no competitive ranking; multiple
             recipients possible per category.
           </p>
@@ -198,12 +195,7 @@ export function AboutCanonicalContent() {
             </strong>
           </p>
           <p className="text-ivory/75 text-sm italic">
-            Sponsorship, donations, ticket purchases, and gala attendance do not influence nominee
-            approval, judging, or Governance decisions at any tier — through 2026 and 2027. From
-            2028, our Gold-Blue Garnet tier alone introduces a capped, non-monetary public
-            engagement element, disclosed here in advance; the Africa Education Icon Award and
-            Platinum Certificates of Recognition remain fully verification-based, with no public
-            voting, indefinitely.
+            Sponsorship, donations, partnerships, endorsements, publicity and media participation carry zero weight in nomination, eligibility, judging or recognition decisions.
           </p>
         </div>
 
@@ -225,7 +217,7 @@ export function AboutCanonicalContent() {
           <p className="text-ivory/75 text-sm">
             All Board of Advisors members serve under SCEF's published Conflict of Interest Policy,
             with signed declarations on file. No individual may serve on more than one of: the
-            Nominee Research Corps, the Judges Arena, the Governance Committee, or EduAid-Africa's
+            Nominee Research and Review Corps, the Judges Arena, the Governance Committee, or EduAid-Africa's
             CSR Fund Management decision-makers.
           </p>
         </div>
@@ -277,11 +269,11 @@ export function AboutCanonicalContent() {
         <div className="grid md:grid-cols-2 gap-6">
           <div className="rounded-2xl border border-gold/25 bg-white/[0.03] p-6">
             <p className="text-xs uppercase tracking-[0.25em] text-ivory/55 mb-2">
-              2026 Inaugural Gala
+              2026 Online Recognition Programme
             </p>
-            <p className="font-mono text-2xl md:text-3xl text-gold">28 December 2026</p>
+            <p className="font-mono text-2xl md:text-3xl text-gold">13 December 2026</p>
             <p className="text-sm text-ivory/70 mt-2">
-              Lagos, Nigeria. Second cycle Gala follows in December 2027 (date to be confirmed).
+              Sunday, 13 December 2026 · Online. No public physical gala, ticket sale, corporate table or public venue is currently authorised.
             </p>
           </div>
           <div className="rounded-2xl border border-gold/25 bg-white/[0.03] p-6">

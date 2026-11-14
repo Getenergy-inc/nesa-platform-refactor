@@ -96,7 +96,7 @@ const ICON: CategoryDefinition = {
     "Integrity declaration",
   ],
   reviewRoute: [
-    "NRC Verification",
+    "NRRC Verification",
     "Icon Judge Assignment",
     "Independent Assessment",
     "Moderation",
@@ -158,7 +158,7 @@ const INFLUENCER: CategoryDefinition = {
     "Measurable education outcomes",
     "Financial disclosures for scholarships or resources mobilised",
   ],
-  reviewRoute: ["NRC Impact Verification", "Governance Approval"],
+  reviewRoute: ["NRRC Impact Verification", "Governance Approval"],
   openingDate: OPEN,
   closingDate: CLOSE,
   seo: {
@@ -185,7 +185,7 @@ const PLATINUM: CategoryDefinition[] = [
     subcategories: [],
     eligibility: [...COMMON_ELIGIBILITY, "Library must be attached to a recognised tertiary institution."],
     evidenceRequired: ["Institutional confirmation", "Collection and usage data", "Accessibility statement", "Research support evidence"],
-    reviewRoute: ["Institutional Due Diligence", "NRC Verification", "Governance Approval"],
+    reviewRoute: ["Institutional Due Diligence", "NRRC Verification", "Governance Approval"],
     openingDate: OPEN,
     closingDate: CLOSE,
     seo: {
@@ -206,7 +206,7 @@ const PLATINUM: CategoryDefinition[] = [
     subcategories: [],
     eligibility: [...COMMON_ELIGIBILITY, "Research must be peer-reviewed or officially adopted."],
     evidenceRequired: ["Publications", "Policy adoption evidence", "Citations", "Adopting institution letters"],
-    reviewRoute: ["Institutional Due Diligence", "NRC Verification", "Governance Approval"],
+    reviewRoute: ["Institutional Due Diligence", "NRRC Verification", "Governance Approval"],
     openingDate: OPEN,
     closingDate: CLOSE,
     seo: {
@@ -227,7 +227,7 @@ const PLATINUM: CategoryDefinition[] = [
     subcategories: [],
     eligibility: [...COMMON_ELIGIBILITY, "Nominee must be a registered faith-based organisation.", "Safeguarding standards must be in place."],
     evidenceRequired: ["Registration", "Programme reports", "Safeguarding policy", "Beneficiary evidence"],
-    reviewRoute: ["Institutional Due Diligence", "NRC Verification", "Governance Approval"],
+    reviewRoute: ["Institutional Due Diligence", "NRRC Verification", "Governance Approval"],
     openingDate: OPEN,
     closingDate: CLOSE,
     seo: {
@@ -248,7 +248,7 @@ const PLATINUM: CategoryDefinition[] = [
     subcategories: [],
     eligibility: [...COMMON_ELIGIBILITY, "Nominee must be a registered faith-based organisation.", "Safeguarding standards must be in place."],
     evidenceRequired: ["Registration", "Programme reports", "Safeguarding policy", "Beneficiary evidence"],
-    reviewRoute: ["Institutional Due Diligence", "NRC Verification", "Governance Approval"],
+    reviewRoute: ["Institutional Due Diligence", "NRRC Verification", "Governance Approval"],
     openingDate: OPEN,
     closingDate: CLOSE,
     seo: {
@@ -269,7 +269,7 @@ const PLATINUM: CategoryDefinition[] = [
     subcategories: [],
     eligibility: [...COMMON_ELIGIBILITY, "Nominee must have held official public office within the recognised period."],
     evidenceRequired: ["Official statistics", "Policy documents", "Budget records", "Independent verification"],
-    reviewRoute: ["Institutional Due Diligence", "NRC Verification", "Governance Approval"],
+    reviewRoute: ["Institutional Due Diligence", "NRRC Verification", "Governance Approval"],
     openingDate: OPEN,
     closingDate: CLOSE,
     seo: {
@@ -290,7 +290,7 @@ const PLATINUM: CategoryDefinition[] = [
     subcategories: [],
     eligibility: [...COMMON_ELIGIBILITY, "Partnership must be documented in signed agreements."],
     evidenceRequired: ["Signed agreements", "Funding disclosures", "Institutional support letters", "Official reports"],
-    reviewRoute: ["Institutional Due Diligence", "NRC Verification", "Governance Approval"],
+    reviewRoute: ["Institutional Due Diligence", "NRRC Verification", "Governance Approval"],
     openingDate: OPEN,
     closingDate: CLOSE,
     seo: {
@@ -311,7 +311,7 @@ const PLATINUM: CategoryDefinition[] = [
     subcategories: [],
     eligibility: [...COMMON_ELIGIBILITY, "Nominee must be based in the Diaspora and demonstrably support education in Africa."],
     evidenceRequired: ["Partner verification", "Funding disclosures", "Programme reports", "Beneficiary evidence"],
-    reviewRoute: ["Institutional Due Diligence", "NRC Verification", "Governance Approval"],
+    reviewRoute: ["Institutional Due Diligence", "NRRC Verification", "Governance Approval"],
     openingDate: OPEN,
     closingDate: CLOSE,
     seo: {
@@ -336,7 +336,7 @@ const GBG: CategoryDefinition[] = [
     subcategories: [],
     eligibility: [...COMMON_ELIGIBILITY, "Programme must operate in more than one African country."],
     evidenceRequired: ["Programme budget", "Independent evaluation", "Beneficiary records"],
-    reviewRoute: ["NRC Verification", "Governance Approval"],
+    reviewRoute: ["NRRC Verification", "Governance Approval"],
     openingDate: OPEN,
     closingDate: CLOSE,
     seo: {
@@ -357,7 +357,7 @@ const GBG: CategoryDefinition[] = [
     subcategories: [],
     eligibility: [...COMMON_ELIGIBILITY, "Programme must operate in Nigeria."],
     evidenceRequired: ["Programme budget", "Monitoring reports", "Beneficiary records"],
-    reviewRoute: ["NRC Verification", "Governance Approval"],
+    reviewRoute: ["NRRC Verification", "Governance Approval"],
     openingDate: OPEN,
     closingDate: CLOSE,
     seo: {
@@ -378,7 +378,7 @@ const GBG: CategoryDefinition[] = [
     subcategories: [],
     eligibility: [...COMMON_ELIGIBILITY, "Product must be live and serving verifiable users."],
     evidenceRequired: ["Product demo", "Active user data", "Learning outcomes", "Data protection statement"],
-    reviewRoute: ["NRC Verification", "Governance Approval"],
+    reviewRoute: ["NRRC Verification", "Governance Approval"],
     openingDate: OPEN,
     closingDate: CLOSE,
     seo: {
@@ -399,7 +399,7 @@ const GBG: CategoryDefinition[] = [
     subcategories: [],
     eligibility: [...COMMON_ELIGIBILITY, "Nominee must be a registered media organisation operating in Nigeria."],
     evidenceRequired: ["Publication links", "Reach analytics", "Public or policy impact evidence"],
-    reviewRoute: ["NRC Verification", "Governance Approval"],
+    reviewRoute: ["NRRC Verification", "Governance Approval"],
     openingDate: OPEN,
     closingDate: CLOSE,
     seo: {
@@ -420,7 +420,7 @@ const GBG: CategoryDefinition[] = [
     subcategories: [],
     eligibility: [...COMMON_ELIGIBILITY, "Nominee must be a registered Nigerian NGO."],
     evidenceRequired: ["Registration", "Annual report", "Safeguarding policy", "Beneficiary records"],
-    reviewRoute: ["NRC Verification", "Governance Approval"],
+    reviewRoute: ["NRRC Verification", "Governance Approval"],
     openingDate: OPEN,
     closingDate: CLOSE,
     seo: {
@@ -441,7 +441,7 @@ const GBG: CategoryDefinition[] = [
     subcategories: [],
     eligibility: [...COMMON_ELIGIBILITY, "Programme must operate in more than one African country."],
     evidenceRequired: ["Registration", "Audit", "Safeguarding policy", "Continental impact evidence"],
-    reviewRoute: ["NRC Verification", "Governance Approval"],
+    reviewRoute: ["NRRC Verification", "Governance Approval"],
     openingDate: OPEN,
     closingDate: CLOSE,
     seo: {
@@ -462,7 +462,7 @@ const GBG: CategoryDefinition[] = [
     subcategories: [],
     eligibility: [...COMMON_ELIGIBILITY, "Programme must have verifiable learner enrolment and outcomes."],
     evidenceRequired: ["Curriculum", "Learner outcomes", "Equipment and laboratory evidence", "Progression records"],
-    reviewRoute: ["NRC Verification", "Governance Approval"],
+    reviewRoute: ["NRRC Verification", "Governance Approval"],
     openingDate: OPEN,
     closingDate: CLOSE,
     seo: {
@@ -483,7 +483,7 @@ const GBG: CategoryDefinition[] = [
     subcategories: [],
     eligibility: [...COMMON_ELIGIBILITY, "Programme must have documented curriculum linkage."],
     evidenceRequired: ["Curriculum link", "Learner outcomes", "Performance or exhibition records"],
-    reviewRoute: ["NRC Verification", "Governance Approval"],
+    reviewRoute: ["NRRC Verification", "Governance Approval"],
     openingDate: OPEN,
     closingDate: CLOSE,
     seo: {
@@ -504,7 +504,7 @@ const GBG: CategoryDefinition[] = [
     subcategories: [],
     eligibility: [...COMMON_ELIGIBILITY, "Nominee must be a Nigerian state government."],
     evidenceRequired: ["Policy documents", "Budget records", "Enrolment and retention data", "Independent verification"],
-    reviewRoute: ["NRC Verification", "Governance Approval"],
+    reviewRoute: ["NRRC Verification", "Governance Approval"],
     openingDate: OPEN,
     closingDate: CLOSE,
     seo: {

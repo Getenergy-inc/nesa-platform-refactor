@@ -420,7 +420,7 @@ export default function About() {
           research, but final verification decisions remain subject to accountable human review.
         </p>
         <Link
-          to="/nrc"
+          to="/nrrc"
           className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-gold hover:underline"
         >
           <Search className="h-4 w-4" aria-hidden="true" /> Learn About the NRRC
@@ -651,7 +651,7 @@ export default function About() {
         id="nesa-africa-2026"
         eyebrow="Current Cycle"
         title="NESA-Africa 2026"
-        lede="The NESA-Africa 2026 Online Recognition Programme is scheduled for Monday, 28 December 2026."
+        lede="The NESA-Africa 2026 Online Recognition Programme is scheduled for Sunday 13 December 2026."
       >
         <p className="max-w-3xl text-sm leading-relaxed text-ivory/75 md:text-base">
           The programme will involve approximately 20–30 invited live participants and will principally recognise up to nine Africa Education Icons, supported by approved Certificates of Recognition, documentaries, interviews and education-impact media.

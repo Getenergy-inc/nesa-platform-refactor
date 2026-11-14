@@ -172,7 +172,7 @@ export default function ArenaReview() {
             <div className="pt-2 border-t border-gold/15">
               <Label className="text-white/85">Confidential notes</Label>
               <Textarea
-                placeholder="Evidence, rationale, follow-up questions… visible only to NRC/Admins."
+                placeholder="Evidence, rationale, follow-up questions… visible only to NRRC/Admins."
                 className="mt-1.5 bg-white/5 border-gold/20 text-white placeholder:text-white/40 min-h-[90px]"
               />
             </div>
@@ -212,7 +212,7 @@ export default function ArenaReview() {
                 <Save className="h-4 w-4 mr-1" /> Save draft
               </Button>
               <Button variant="ghost" className="text-white/70 hover:text-gold">
-                <MessageCircleQuestion className="h-4 w-4 mr-1" /> Ask NRC
+                <MessageCircleQuestion className="h-4 w-4 mr-1" /> Ask NRRC
               </Button>
               <Button variant="ghost" className="text-white/70 hover:text-rose-300">
                 <Flag className="h-4 w-4 mr-1" /> Flag

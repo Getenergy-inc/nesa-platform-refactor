@@ -114,7 +114,7 @@ export function useSubmitReview() {
       if (data?.quorum_result?.quorum_reached) {
         toast.success(`Quorum reached: Nomination ${data.quorum_result.decision}`);
       } else if (data?.quorum_result?.needs_lead) {
-        toast.info("Split decision - awaiting NRC Lead resolution");
+        toast.info("Split decision - awaiting NRRC Lead resolution");
       } else {
         toast.success("Review submitted successfully");
       }

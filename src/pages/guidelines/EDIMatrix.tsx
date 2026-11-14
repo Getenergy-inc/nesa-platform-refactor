@@ -62,7 +62,7 @@ const BLUE_GARNET_EDI = {
   subtitle: "10 categories · Independent jury assessment",
   description: "The pinnacle competitive track. Nominees progress through independent jury review and expert jury evaluation. Top 3 finalists in each subcategory compete for the Blue Garnet Award.",
   scoringBreakdown: [
-    { label: "NRC Evidence Verification", weight: 40, description: "Verified evidence review — no public voting in the 2026 cycle" },
+    { label: "NRRC Evidence Verification", weight: 40, description: "Verified evidence review — no public voting in the 2026 cycle" },
     { label: "Jury Assessment", weight: 60, description: "Independent expert panel scoring on 20-point scale" },
   ],
   judgingCriteria: [
@@ -81,8 +81,8 @@ const BLUE_GARNET_EDI = {
 
 const PLATINUM_EDI = {
   title: "Platinum — Institutional Leadership",
-  subtitle: "6 categories · NRC verification · No public voting",
-  description: "Recognition-only track for institutional and governance contributions. Evaluated by the Nomination Review Committee (NRC) against verified contribution thresholds.",
+  subtitle: "6 categories · NRRC verification · No public voting",
+  description: "Recognition-only track for institutional and governance contributions. Evaluated by the Nomination Review Committee (NRRC) against verified contribution thresholds.",
   thresholds: {
     core: { count: 7, renominations: 100 },
     standard: { count: 10, renominations: 200 },
@@ -759,7 +759,7 @@ export default function EDIMatrix() {
                   </CardHeader>
                   <CardContent className="space-y-4 text-white/70">
                     <p>
-                      After initial NRC screening and jury scoring, the Top 3 nominees in each competitive category
+                      After initial NRRC screening and jury scoring, the Top 3 nominees in each competitive category
                       undergo enhanced due diligence before the Blue Garnet Award is finalised:
                     </p>
                     <div className="grid md:grid-cols-3 gap-4">

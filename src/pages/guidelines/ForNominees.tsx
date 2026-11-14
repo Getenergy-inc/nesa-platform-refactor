@@ -52,8 +52,8 @@ const JOURNEY_STEPS = [
   },
   {
     step: 4,
-    title: "NRC Verification",
-    description: "The Nominee Research Corps verifies your credentials and evidence (72-hour SLA).",
+    title: "NRRC Verification",
+    description: "The Nominee Research and Review Corps verifies your credentials and evidence (72-hour SLA).",
     status: "pending",
     icon: Shield,
   },
@@ -157,7 +157,7 @@ const RESPONSIBILITIES = [
   },
   {
     title: "Responsive Communication",
-    description: "Respond to NRC queries within the specified timeframe. Failure to respond may result in nomination withdrawal.",
+    description: "Respond to NRRC queries within the specified timeframe. Failure to respond may result in nomination withdrawal.",
     icon: Mail,
   },
   {
@@ -172,7 +172,7 @@ export default function ForNominees() {
     <>
       <Helmet>
         <title>For Nominees - Acceptance Guidelines | NESA-Africa 2026</title>
-        <meta name="description" content="Understand your journey as a NESA-Africa nominee. Learn about NRC screening, acceptance process, and next steps for each award tier." />
+        <meta name="description" content="Understand your journey as a NESA-Africa nominee. Learn about NRRC screening, acceptance process, and next steps for each award tier." />
       </Helmet>
 
       <div className="min-h-screen bg-charcoal">
@@ -247,7 +247,7 @@ export default function ForNominees() {
             <section>
               <h2 className="font-display text-2xl font-bold text-white mb-6 flex items-center gap-2">
                 <Shield className="h-6 w-6 text-gold" />
-                NRC Screening Outcomes
+                NRRC Screening Outcomes
               </h2>
               <div className="grid md:grid-cols-3 gap-4">
                 {NRC_OUTCOMES.map((outcome, i) => (
@@ -327,7 +327,7 @@ export default function ForNominees() {
                     </div>
                     <div className="bg-white/5 rounded-lg p-4 text-center">
                       <p className="text-2xl font-bold text-emerald-400">CLEARED</p>
-                      <p className="text-xs text-white/60">NRC Status</p>
+                      <p className="text-xs text-white/60">NRRC Status</p>
                     </div>
                     <div className="bg-white/5 rounded-lg p-4 text-center">
                       <p className="text-2xl font-bold text-amber-400">53</p>

@@ -57,7 +57,7 @@ function NRCSettingsContent() {
       if (saveError) throw saveError;
       if (!data || data.length === 0) {
         throw new Error(
-          "No record was updated — your account may no longer have NRC edit permissions."
+          "No record was updated — your account may no longer have NRRC edit permissions."
         );
       }
 
@@ -87,7 +87,7 @@ function NRCSettingsContent() {
       <NRCLayout>
         <Alert variant="destructive">
           <AlertTriangle className="h-4 w-4" />
-          <AlertTitle>Could not load your NRC membership</AlertTitle>
+          <AlertTitle>Could not load your NRRC membership</AlertTitle>
           <AlertDescription className="space-y-3">
             <p>{(error as Error).message}</p>
             <Button variant="outline" size="sm" onClick={() => refetch()}>
@@ -105,11 +105,11 @@ function NRCSettingsContent() {
       <NRCLayout>
         <Alert>
           <AlertTriangle className="h-4 w-4" />
-          <AlertTitle>No active NRC member record</AlertTitle>
+          <AlertTitle>No active NRRC member record</AlertTitle>
           <AlertDescription>
-            You do not yet have an active Nominee Research Corps membership record,
+            You do not yet have an active Nominee Research and Review Corps membership record,
             so there are no queue or region preferences to configure. An
-            administrator must activate your membership from the NRC Members page
+            administrator must activate your membership from the NRRC Members page
             first.
           </AlertDescription>
         </Alert>
@@ -124,7 +124,7 @@ function NRCSettingsContent() {
         <div>
           <h2 className="font-display text-2xl font-bold">Settings</h2>
           <p className="text-muted-foreground">
-            Manage your NRC workspace preferences
+            Manage your NRRC workspace preferences
           </p>
         </div>
 

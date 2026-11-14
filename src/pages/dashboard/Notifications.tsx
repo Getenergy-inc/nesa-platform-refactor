@@ -29,7 +29,7 @@ const MOCK_NOTIFICATIONS: Notification[] = [
     id: "2",
     type: "nomination",
     title: "Nomination Received",
-    message: "Your nomination for the Education Innovation category has been received and is under NRC review.",
+    message: "Your nomination for the Education Innovation category has been received and is under NRRC review.",
     time: "1 day ago",
     read: false,
   },

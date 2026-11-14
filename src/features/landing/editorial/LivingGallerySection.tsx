@@ -164,7 +164,7 @@ export function LivingGallerySection() {
   const hasEnough = entries.length >= LIVING_GALLERY_MIN_RECORDS;
 
   const { gallery, tagline } = ICON_AWARD_SECTION;
-  const lede = gallery.lede.replace("{count}", String(total));
+  const lede = "Across Africa and beyond, educators, philanthropists, institutions, innovators, advocates, public leaders, artists, athletes and community organisations are helping learners overcome barriers and access better educational opportunities.";
   const invite = gallery.invite.replace("{date}", PROGRAMME_END_LABEL);
 
   return (
@@ -204,9 +204,7 @@ export function LivingGallerySection() {
           <>
             <p className="mb-8 text-center text-sm text-white/60">
               Verified Education Enabler profiles are published as nominations are reviewed
-              {entries.length > 0
-                ? ` (${entries.length} of ${LIVING_GALLERY_MIN_RECORDS} needed to open the gallery)`
-                : ""}
+              
               . In the meantime, explore how recognition works.
             </p>
             <PathwayFallback />

@@ -95,9 +95,9 @@ Deno.serve(async (req) => {
 
     const buf = new Uint8Array(await file.arrayBuffer());
     const wb = XLSX.read(buf, { type: "array" });
-    const sheet = wb.Sheets["NRC Evidence Matrix"];
+    const sheet = wb.Sheets["NRRC Evidence Matrix"];
     if (!sheet) {
-      return new Response(JSON.stringify({ error: "'NRC Evidence Matrix' sheet not found" }), {
+      return new Response(JSON.stringify({ error: "'NRRC Evidence Matrix' sheet not found" }), {
         status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
@@ -117,7 +117,7 @@ Deno.serve(async (req) => {
     const iconRows: Json[] = [];
 
     for (const r of rows) {
-      const nrc_no = num(r["NRC No."]);
+      const nrc_no = num(r["NRRC No."]);
       if (!nrc_no) continue;
       const name = clean(r["Nominee Name"]);
       if (!name) continue;
@@ -138,7 +138,7 @@ Deno.serve(async (req) => {
         nominee_type: clean(r["Type"]),
         country_base: clean(r["Country / Base in Existing Register"]),
         nesa_region: region,
-        nrc_classification_level: classLevel(clean(r["NRC Classification Level"])),
+        nrc_classification_level: classLevel(clean(r["NRRC Classification Level"])),
         nigeria_classification_group: clean(r["Nigeria Classification Group"]),
         award_category: category,
         award_subcategory: subcategory,
@@ -208,7 +208,7 @@ Deno.serve(async (req) => {
       if (category && /education icon|lifetime|icon of the decade/i.test(category)) {
         const country = clean(r["Country / Base in Existing Register"]) ?? "";
         let group: string = "needs_verification";
-        const lvl = clean(r["NRC Classification Level"])?.toLowerCase() ?? "";
+        const lvl = clean(r["NRRC Classification Level"])?.toLowerCase() ?? "";
         if (lvl.includes("diaspora")) group = "africans_in_diaspora";
         else if (lvl.includes("friend")) group = "friends_of_africa";
         else if (lvl.includes("africa")) group = "africans_in_africa";

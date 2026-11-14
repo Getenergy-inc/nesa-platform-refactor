@@ -48,7 +48,7 @@ const TIER_FRAME: Record<
     standard:
       "Icon recognition is not awarded for a good year. It is awarded for twenty years of documented, independently verifiable contribution that changed institutions, curricula or the life-chances of learners at continental scale.",
     route:
-      "Nomination → NRC verification → Icon Jury assessment → Governance Board ratification → Hall of Fame induction at the 28 December 2026 Gala.",
+      "Nomination → NRRC verification → Icon Jury assessment → Governance Board ratification → Hall of Fame induction at the 13 December 2026 Gala.",
   },
   "influencer-education-impact": {
     label: "Influencer Education Impact",
@@ -57,7 +57,7 @@ const TIER_FRAME: Record<
     standard:
       "Audience size is context, never a score. What is assessed is what the platform produced: funds mobilised, schools supported, learners reached and campaigns with independently confirmed outcomes.",
     route:
-      "Nomination → NRC verification of every outcome claimed → independent assessment against the published EDI matrix → Governance Board ratification.",
+      "Nomination → NRRC verification of every outcome claimed → independent assessment against the published EDI matrix → Governance Board ratification.",
   },
   platinum: {
     label: "Platinum Recognition",
@@ -66,7 +66,7 @@ const TIER_FRAME: Record<
     standard:
       "Platinum is jury-determined and institution-facing. Nominees must be registered, governed and accountable, with published reporting and evidence of sustained delivery — not a single flagship project.",
     route:
-      "Nomination → NRC verification → independent institutional assessment → Governance Board ratification. There is no public vote in this tier.",
+      "Nomination → NRRC verification → independent institutional assessment → Governance Board ratification. There is no public vote in this tier.",
   },
   "gold-blue-garnet": {
     label: "Gold-Blue Garnet Recognition",
@@ -75,7 +75,7 @@ const TIER_FRAME: Record<
     standard:
       "Gold-Blue Garnet rewards documented reach. Monitoring data, evaluations, audited reports and beneficiary records are the currency; every country claimed must be evidenced separately.",
     route:
-      "Nomination → NRC verification → independent assessment against the category EDI matrix → Governance Board ratification.",
+      "Nomination → NRRC verification → independent assessment against the category EDI matrix → Governance Board ratification.",
   },
 };
 
@@ -137,7 +137,7 @@ export function buildCategoryStory(cat: CategoryDefinition): AwardStory {
         body: cat.subcategories.length
           ? `${cat.shortName} is delivered through ${cat.subcategories.length} recognised ${
               cat.subcategories.length === 1 ? "pathway" : "subcategories and pathways"
-            }, each with its own evidence bar and its own scoring line in the EDI matrix. Choose the one that matches the nominee's work — the NRC will reclassify if a better fit exists.`
+            }, each with its own evidence bar and its own scoring line in the EDI matrix. Choose the one that matches the nominee's work — the NRRC will reclassify if a better fit exists.`
           : `${cat.shortName} is assessed as a single recognition pathway against the published EDI matrix.`,
       },
       { heading: "How recognition is reached", body: frame.route },
@@ -159,7 +159,7 @@ export function buildSubcategoryStory(
       { heading: `The ${frame.label} standard`, body: frame.standard },
       {
         heading: "Evidence that counts",
-        body: `${sub.evidenceSummary} Claims are checked line by line by the Nominee Research Corps (NRC) before any assessment begins.`,
+        body: `${sub.evidenceSummary} Claims are checked line by line by the Nominee Research and Review Corps (NRRC) before any assessment begins.`,
       },
       { heading: "How recognition is reached", body: frame.route },
     ],

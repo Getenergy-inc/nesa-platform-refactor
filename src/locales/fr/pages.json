@@ -153,7 +153,7 @@
       "items": {
         "platinum": {
           "title": "Platine",
-          "description": "Non compétitif. Vérification NRC + contrôles de gouvernance."
+          "description": "Non compétitif. Vérification NRRC + contrôles de gouvernance."
         },
         "gold": {
           "title": "Étape Or",
@@ -913,7 +913,7 @@
       "acceptance": {
         "title": "Acceptation",
         "subtitle": "Pour les Nominés",
-        "description": "Processus de filtrage NRC, parcours d'acceptation et suivi du statut.",
+        "description": "Processus de filtrage NRRC, parcours d'acceptation et suivi du statut.",
         "badge": "Étape 2"
       },
       "judges": {

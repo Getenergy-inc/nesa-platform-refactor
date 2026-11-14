@@ -93,7 +93,7 @@ export default function NRCProfileRevisions() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-10">
       <Helmet>
-        <title>Profile Revisions | NRC Arena</title>
+        <title>Profile Revisions | NRRC Arena</title>
         <meta name="robots" content="noindex,nofollow" />
       </Helmet>
 

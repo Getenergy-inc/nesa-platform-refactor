@@ -52,7 +52,7 @@ function buildUpdates(awardYear: number): UpdateItem[] {
       type: "media",
       icon: Tv,
       title: "Platinum Recognition Show",
-      description: `Premieres ${platinumShow?.date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) ?? `28 February ${ceremonyYear}`} — featuring NRC-verified champions.`,
+      description: `Premieres ${platinumShow?.date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) ?? `28 February ${ceremonyYear}`} — featuring NRRC-verified champions.`,
       date: platinumShow?.date.toISOString().split("T")[0] ?? `${ceremonyYear}-02-28`,
       href: "/media/shows",
       badge: "Upcoming",

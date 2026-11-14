@@ -95,7 +95,7 @@ export default function IconJuryDashboard() {
             <p className="text-white/60 text-sm mt-1 max-w-3xl">
               The Africa Education Icon Award is the highest lifetime recognition within NESA-Africa.
               Twenty-seven independent judges review more than 500 nominees across three pathways and
-              three classifications to recommend nine laureates. Final recognition is subject to NRC
+              three classifications to recommend nine laureates. Final recognition is subject to NRRC
               verification, jury deliberation, conflict-of-interest controls, and governance approval.
             </p>
           </div>

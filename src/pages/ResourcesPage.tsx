@@ -83,7 +83,7 @@ const GROUPS: ResourceGroup[] = [
       {
         label: "18 Award Categories",
         href: "/awards",
-        description: "The full 4-tier · 18-category · 96-subcategory map.",
+        description: "The full 4-tier · 22-main-award · 96-subcategory map.",
         icon: GraduationCap,
       },
       {

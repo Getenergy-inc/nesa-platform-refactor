@@ -21,7 +21,7 @@ export const ICON_CATEGORY: AwardCategoryConfig = {
     "Verifiable impact references",
   ],
   reviewMethod:
-    "Secretariat invitation → NRC verification → Icon jury review (with integrity check) → governance ratification.",
+    "Secretariat invitation → NRRC verification → Icon jury review (with integrity check) → governance ratification.",
   votingRole: "No public voting.",
   judgingRole: "Dedicated Icon jury + governance ratification.",
   relatedCategories: [],
@@ -33,7 +33,7 @@ export const ICON_CATEGORY: AwardCategoryConfig = {
     whoCanNominate: "By invitation only. Secretariat invites peer, institutional and public nominations.",
     evidence: "Biography with citations, 15+ years body of work, independent endorsements, verifiable impact references.",
     publicVoting: "No. The Icon Award is decided by jury and governance review, not public vote.",
-    review: "Secretariat invitation, NRC verification, Icon jury review with integrity check, then governance ratification.",
+    review: "Secretariat invitation, NRRC verification, Icon jury review with integrity check, then governance ratification.",
     announcement:
       "Icon laureates are revealed at the NESA-Africa 2026 Gala alongside a published honour roll covering 2006–2026.",
   }),

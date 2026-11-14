@@ -1,3 +1,10 @@
+## Owner-approved wording and link pass — 14 Nov 2026
+- [x] Record the owner's exact "Phase 0 approved" statement at 06:07 UTC and confirmation that independent security sign-off is complete; reviewer name, original evidence reference and signing time remain unsupplied, so the structured publishing guard still fails closed.
+- [ ] Apply the supplied announcement, header, page, footer, official-account, NRRC, programme-date and retired-feature wording to existing surfaces only; preserve design and data.
+- [ ] Repoint only authorised existing links and add the requested /nrc/* → /nrrc/* aliases without renaming database roles or changing access rules.
+- [ ] Reuse the existing dialog for the school-support pop-up only if no new design or additional behaviour work is needed; otherwise skip and report.
+- [ ] Run focused wording/link/date tests and browser checks; list every changed page/text, every repointed link, every "needs a page" mapping and every skipped requirement. Do not publish.
+
 ## First navigation bar additions — 14 Nov 2026
 - [x] Added owner-requested Sign Up beside Sign In using /register; clicked desktop and 915px mobile links and confirmed the existing account-type screen. Eight navigation tests passed; preview build OK. Registration settings, account creation and permissions unchanged/unverified; existing registration copy still mentions retired AGC/voting/gala features and needs a separately authorised wording update.
 - [x] Owner confirmed three separate links: Buy Merchandise, NRRC Portal and Judges Arena; merchandise goes to the existing Contact page, not a reopened shop.

@@ -63,7 +63,7 @@ serve(async (req: Request): Promise<Response> => {
 
     if (!hasNrcRole && !hasAdminRole) {
       return new Response(
-        JSON.stringify({ error: "NRC or Admin access required" }),
+        JSON.stringify({ error: "NRRC or Admin access required" }),
         { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
@@ -212,7 +212,7 @@ serve(async (req: Request): Promise<Response> => {
 
       if ((count || 0) >= 30) {
         return new Response(
-          JSON.stringify({ error: "NRC member limit (30) reached" }),
+          JSON.stringify({ error: "NRRC member limit (30) reached" }),
           { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
         );
       }
@@ -784,7 +784,7 @@ serve(async (req: Request): Promise<Response> => {
     );
 
   } catch (error: any) {
-    console.error("NRC API error:", error);
+    console.error("NRRC API error:", error);
     return new Response(
       JSON.stringify({ error: "Internal server error" }),
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }

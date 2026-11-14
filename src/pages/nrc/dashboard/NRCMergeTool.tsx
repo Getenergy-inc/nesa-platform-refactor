@@ -58,7 +58,7 @@ function MergeToolContent() {
 
   return (
     <>
-      <Helmet><title>Merge Tool — NRC Dashboard</title></Helmet>
+      <Helmet><title>Merge Tool — NRRC Dashboard</title></Helmet>
       <NRCDashboardLayout>
         <div className="space-y-6">
           <div>

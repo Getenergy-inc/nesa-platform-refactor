@@ -260,7 +260,7 @@ export default function EDXMatrixPage() {
                 {
                   step: "1",
                   title: "Evidence intake",
-                  body: "Nominees submit verifiable evidence: links, reports, beneficiary numbers, citations. The NRC engine deduplicates and screens.",
+                  body: "Nominees submit verifiable evidence: links, reports, beneficiary numbers, citations. The NRRC engine deduplicates and screens.",
                 },
                 {
                   step: "2",

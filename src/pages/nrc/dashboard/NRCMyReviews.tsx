@@ -33,7 +33,7 @@ function MyReviewsContent() {
   return (
     <NRCDashboardLayout>
       <Helmet>
-        <title>My Reviews | NRC Dashboard</title>
+        <title>My Reviews | NRRC Dashboard</title>
       </Helmet>
 
       <div className="space-y-4">
@@ -105,7 +105,7 @@ function MyReviewsContent() {
                     <NomineeWorkflowStatusBadge status={nominee.workflowStatus} compact />
                   </div>
                   <Button asChild variant="ghost" size="sm" className="shrink-0">
-                    <Link to={`/nrc/dashboard/review/${nominee.id}`}>
+                    <Link to={`/nrrc/dashboard/review/${nominee.id}`}>
                       Review <ArrowRight className="ml-1 h-3.5 w-3.5" />
                     </Link>
                   </Button>

@@ -106,7 +106,7 @@ export default function NominateCategoryShell({ fixedTier, fixedCategory }: Prop
               {tierMeta.name}
             </Badge>
             <Badge variant="secondary">
-              {judged ? "Judged tier" : "NRC-verified"}
+              {judged ? "Judged tier" : "NRRC-verified"}
             </Badge>
             <Badge variant="outline" className="border-gold/30 text-foreground/70">
               {judged ? "Competitive" : "Non-competitive"}
@@ -169,8 +169,8 @@ export default function NominateCategoryShell({ fixedTier, fixedCategory }: Prop
             <div className="space-y-3">
               <PillarCard
                 icon={<BadgeCheck className="h-5 w-5" />}
-                title="NRC-Verified"
-                body="Every nomination is independently reviewed by the Nominee Research Corps against category-specific EDI indicators."
+                title="NRRC-Verified"
+                body="Every nomination is independently reviewed by the Nominee Research and Review Corps against category-specific EDI indicators."
               />
               <PillarCard
                 icon={judged ? <Gavel className="h-5 w-5" /> : <Ban className="h-5 w-5" />}
@@ -233,7 +233,7 @@ export default function NominateCategoryShell({ fixedTier, fixedCategory }: Prop
                   ? REGION_SCOPE_LABEL[form.regionScope]
                   : "Africa, the Diaspora and Friends of Africa"
               }
-              note="Classification is confirmed by the Nominee Research Corps during verification."
+              note="Classification is confirmed by the Nominee Research and Review Corps during verification."
             />
             <FactCard
               icon={<Layers className="h-4 w-4" />}
@@ -251,7 +251,7 @@ export default function NominateCategoryShell({ fixedTier, fixedCategory }: Prop
           <SectionHeading
             index={3}
             title="Education Development Index Matrix"
-            subtitle="The category-specific indicators used by the Nominee Research Corps to assess every nomination in this category."
+            subtitle="The category-specific indicators used by the Nominee Research and Review Corps to assess every nomination in this category."
           />
           <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
             <div className="grid gap-3 sm:grid-cols-2">
@@ -324,7 +324,7 @@ export default function NominateCategoryShell({ fixedTier, fixedCategory }: Prop
                 ))}
               </ul>
               <p className="mt-4 rounded-md border border-gold/15 bg-black/30 p-3 text-xs text-foreground/70">
-                Cure window: where evidence is incomplete, the Nominee Research Corps issues a
+                Cure window: where evidence is incomplete, the Nominee Research and Review Corps issues a
                 request for clarification before any nomination is closed.
               </p>
             </div>
@@ -366,7 +366,7 @@ export default function NominateCategoryShell({ fixedTier, fixedCategory }: Prop
           <SectionHeading
             index={6}
             title="Existing nominees"
-            subtitle="Verified nominees in this category, once accepted by the Nominee Research Corps."
+            subtitle="Verified nominees in this category, once accepted by the Nominee Research and Review Corps."
           />
           <div className="rounded-2xl border border-gold/25 bg-[#15181f] p-10 text-center">
             <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full border border-gold/40 text-gold">
@@ -375,7 +375,7 @@ export default function NominateCategoryShell({ fixedTier, fixedCategory }: Prop
             <h3 className="font-playfair text-xl text-gold">No Verified Nominees Yet</h3>
             <p className="mx-auto mt-2 max-w-md text-sm text-foreground/70">
               This category is newly open for nominations. Once nominees are accepted and verified
-              by the Nominee Research Corps, their profiles will appear here.
+              by the Nominee Research and Review Corps, their profiles will appear here.
             </p>
             <div className="mt-5 flex flex-wrap justify-center gap-3">
               <Button asChild className="bg-gold text-charcoal hover:bg-gold/90">

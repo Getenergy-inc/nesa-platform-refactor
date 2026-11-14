@@ -78,7 +78,7 @@ function IntakeQueueContent() {
     { name: "Screening", value: stats.pendingScreening },
     { name: "Dup Check", value: stats.pendingDuplicateCheck },
     { name: "Doc Review", value: stats.pendingDocReview },
-    { name: "NRC Review", value: stats.pendingNRCReview },
+    { name: "NRRC Review", value: stats.pendingNRCReview },
     { name: "Cleared", value: stats.cleared },
     { name: "Declined", value: stats.declined },
   ].filter(d => d.value > 0);
@@ -87,7 +87,7 @@ function IntakeQueueContent() {
 
   return (
     <>
-      <Helmet><title>Intake Queue — NRC Dashboard</title></Helmet>
+      <Helmet><title>Intake Queue — NRRC Dashboard</title></Helmet>
       <NRCDashboardLayout>
         <div className="space-y-6">
           {/* Header */}
@@ -137,7 +137,7 @@ function IntakeQueueContent() {
                 {[
                   { label: "Pending Screening", value: stats.pendingScreening, total: stats.total, color: "bg-blue-500" },
                   { label: "Duplicate Check", value: stats.pendingDuplicateCheck, total: stats.total, color: "bg-amber-500" },
-                  { label: "Under NRC Review", value: stats.pendingNRCReview, total: stats.total, color: "bg-purple-500" },
+                  { label: "Under NRRC Review", value: stats.pendingNRCReview, total: stats.total, color: "bg-purple-500" },
                   { label: "Clearance Rate", value: clearanceRate, total: 100, color: "bg-emerald-500", suffix: "%" },
                 ].map(p => (
                   <div key={p.label} className="space-y-2">
@@ -294,7 +294,7 @@ function IntakeQueueContent() {
                           <TableCell className="text-right">
                             <div className="flex gap-1 justify-end">
                               <Button size="sm" variant="ghost" className="h-7 px-2 text-white/50 hover:text-white" asChild>
-                                <Link to={`/nrc/dashboard/intake/${r.id}`}>
+                                <Link to={`/nrrc/dashboard/intake/${r.id}`}>
                                   <Eye className="h-3 w-3" />
                                 </Link>
                               </Button>

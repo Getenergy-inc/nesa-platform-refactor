@@ -16,10 +16,10 @@ export interface AwardResearch {
   lenses?: string[];
 }
 export const RESEARCH_REGIONS = ["West Africa", "East Africa", "Central Africa", "Southern Africa", "North Africa", "Horn of Africa", "Sahel Africa", "Indian Ocean Islands", "African Diaspora", "Friends of Africa"];
-export const RESEARCH_EVIDENCE_NOTE = "Research evidence grades describe the source documentation, not NESA verification, eligibility approval, finalist status or recognition. Named research leads remain private until reviewed through the existing NRC workflow.";
+export const RESEARCH_EVIDENCE_NOTE = "Research evidence grades describe the source documentation, not NESA verification, eligibility approval, finalist status or recognition. Named research leads remain private until reviewed through the existing NRRC workflow.";
 const pathway = (slug: string, title: string, description: string, legacyPrefixes: string[] = []): ResearchPathway => ({
   slug, title, description, legacyPrefixes,
-  evidence: "Provide dated programme records, independently attributable delivery, partner confirmation and learner or institutional outcomes. Source claims and missing metrics require NRC review.",
+  evidence: "Provide dated programme records, independently attributable delivery, partner confirmation and learner or institutional outcomes. Source claims and missing metrics require NRRC review.",
 });
 export const AWARD_RESEARCH: AwardResearch[] = [
   {

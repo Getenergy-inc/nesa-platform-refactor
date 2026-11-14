@@ -143,7 +143,7 @@ export function NominationCampaignSection() {
                 Nominate. Verify. Celebrate Education Impact.
               </p>
               <p className="mt-1 text-sm text-ivory/70">
-                Every submission enters our NRC verification and EDI Matrix review — free to submit, and you can track its status anytime.
+                Every submission enters our NRRC verification and EDI Matrix review — free to submit, and you can track its status anytime.
               </p>
             </div>
           </motion.div>
@@ -253,7 +253,7 @@ export function NominationCampaignSection() {
             Community engagement. Education impact storytelling.
           </p>
           <p className="mt-4 font-display text-base sm:text-lg text-gold">
-            Nominate a changemaker today — your submission enters independent NRC verification.
+            Nominate a changemaker today — your submission enters independent NRRC verification.
           </p>
           <div className="mt-5 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">

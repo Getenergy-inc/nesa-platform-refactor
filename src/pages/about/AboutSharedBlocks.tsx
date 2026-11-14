@@ -393,7 +393,7 @@ export function AboutContactBlock({
             <Globe2 className="w-4 h-4 text-gold" /> 15 Regions · 8 Africa + 7 Global
           </div>
           <div className="flex items-center justify-center gap-2 rounded-lg border border-gold/20 bg-charcoal-light/25 p-3">
-            <Calendar className="w-4 h-4 text-gold" /> Gala · 28 Dec 2026 · Lagos
+            <Calendar className="w-4 h-4 text-gold" /> Gala · 13 Dec 2026 · Lagos
           </div>
         </div>
         <div className="flex flex-wrap justify-center gap-3 pt-2">
@@ -424,7 +424,7 @@ export const CANONICAL_TIERS: RecognitionTier[] = [
     name: "Africa Education Icon Award",
     positioning: "Competitive, judge-reviewed lifetime achievement recognition. Nine Laureates per cycle, drawn from 27 Grand Jury finalists across three lifetime pathways and three classifications. Rolling 20-year window; can be won only once in a lifetime.",
     forms: "1 (3 pathways × 3 classifications)",
-    governancePath: "NRC → EDI → Judges → Grand Jury → Governance",
+    governancePath: "NRRC → EDI → Judges → Grand Jury → Governance",
     flagship: true,
   },
   {
@@ -432,27 +432,27 @@ export const CANONICAL_TIERS: RecognitionTier[] = [
     name: "Influencer Education Impact",
     positioning: "Non-competitive recognition across sport, music, and social media.",
     forms: "1 (3 pathways)",
-    governancePath: "NRC → EDI → Governance",
+    governancePath: "NRRC → EDI → Governance",
   },
   {
     key: "platinum",
     name: "Platinum Certificates of Recognition",
     positioning: "Non-competitive recognition across seven institutional forms.",
     forms: "7",
-    governancePath: "NRC → EDI → Governance",
+    governancePath: "NRRC → EDI → Governance",
   },
   {
     key: "gold",
     name: "Gold-Blue Garnet Regional Certificates",
     positioning: "Non-competitive recognition across nine corporate, NGO, and regional forms.",
     forms: "9",
-    governancePath: "NRC → EDI → Governance (no voting until 2028)",
+    governancePath: "NRRC → EDI → Governance (no voting until 2028)",
   },
 ];
 
 export const CANONICAL_PIPELINE: PipelineStage[] = [
   { step: "Submission", title: "Public Nomination", detail: "Any tier · self-check gate · non-influence disclaimer" },
-  { step: "NRC", title: "Verification", detail: "Data Entry → Automated Review → Human Review" },
+  { step: "NRRC", title: "Verification", detail: "Data Entry → Automated Review → Human Review" },
   { step: "EDI Matrix", title: "Weighted Scoring", detail: "Category-specific standard across 10 dimensions" },
   { step: "Judges Arena", title: "Panel + Grand Jury", detail: "Icon Award only · 9 independent judges · 9 panels" },
   { step: "Finalists", title: "TV Show Reveals", detail: "Two online shows · Certificate + Icon finalists" },

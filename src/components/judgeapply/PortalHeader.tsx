@@ -30,7 +30,7 @@ export function PortalHeader() {
           <div className="leading-tight">
             <div className="font-display text-white text-sm tracking-wide">NESA-AFRICA</div>
             <div className="text-[11px] text-gold font-semibold uppercase tracking-wider">
-              Judges & NRC Portal
+              Judges & NRRC Portal
             </div>
           </div>
         </Link>

@@ -8,11 +8,10 @@ export function HelpRecogniseSection() {
     <section className="ed-section ed-section-ink" aria-labelledby="ed-help-recognise-heading">
       <div className="ed-wrap text-center">
         <h2 id="ed-help-recognise-heading" className="ed-section-title">
-          Help Recognise Africa&apos;s Education Enablers
+          Help Us Document Education Impact Responsibly
         </h2>
         <p className="ed-section-sub">
-          Know someone helping advance Education for All across Africa? Help their story be
-          discovered.
+          Know a person, institution or programme whose work deserves evidence-based consideration?
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link
@@ -25,13 +24,13 @@ export function HelpRecogniseSection() {
             Submit a Nomination
           </Link>
           <Link
-            to="/nominees"
+            to="/nominate#nominator-guidelines"
             className="ed-btn-ghost"
             onClick={() =>
-              trackEvent("hero_cta_click", { slot: "secondary", href: "/nominees", surface: "home-final" })
+                trackEvent("hero_cta_click", { slot: "secondary", href: "/nominate#nominator-guidelines", surface: "home-final" })
             }
           >
-            Meet Africa's Education Enablers →
+            Read the Nomination Guide →
           </Link>
         </div>
       </div>

@@ -144,7 +144,7 @@ export default function NomineeProfileEditor() {
         payload,
       });
       if (error) throw error;
-      toast.success("Submitted. NRC will review your changes before they go live.");
+      toast.success("Submitted. NRRC will review your changes before they go live.");
       await load();
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Could not submit changes.");
@@ -167,7 +167,7 @@ export default function NomineeProfileEditor() {
         <title>Nominee Portal | NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Claim your NESA-Africa nominee profile and submit updates for Nominee Research Corps review."
+          content="Claim your NESA-Africa nominee profile and submit updates for Nominee Research and Review Corps review."
         />
       </Helmet>
 
@@ -175,7 +175,7 @@ export default function NomineeProfileEditor() {
       <p className="mt-2 flex items-start gap-2 text-sm text-white/60">
         <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-gold/80" />
         You can propose changes to your public profile. Nothing is published until the
-        Nominee Research Corps approves it. Recognition status and verification data are
+        Nominee Research and Review Corps approves it. Recognition status and verification data are
         never editable here.
       </p>
 
@@ -205,7 +205,7 @@ export default function NomineeProfileEditor() {
         <>
           {revisions.some((r) => r.status === "pending") && (
             <div className="mt-6 rounded-lg border border-gold/30 bg-gold/10 p-4 text-sm text-gold">
-              You have changes awaiting NRC review.
+              You have changes awaiting NRRC review.
             </div>
           )}
 
@@ -305,7 +305,7 @@ export default function NomineeProfileEditor() {
 
                 <Button type="submit" disabled={busy}>
                   {busy && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                  Submit changes for NRC review
+                  Submit changes for NRRC review
                 </Button>
               </form>
             </CardContent>

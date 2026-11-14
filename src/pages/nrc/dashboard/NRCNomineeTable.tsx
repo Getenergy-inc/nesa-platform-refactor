@@ -64,7 +64,7 @@ function NomineeTableContent() {
   return (
     <NRCDashboardLayout>
       <Helmet>
-        <title>All Nominees | NRC Dashboard</title>
+        <title>All Nominees | NRRC Dashboard</title>
       </Helmet>
 
       <div className="space-y-4">
@@ -197,7 +197,7 @@ function NomineeTableContent() {
                       <TableCell className="text-right">
                         <div className="flex items-center justify-end gap-1">
                           <Button asChild variant="ghost" size="icon" className="h-7 w-7">
-                            <Link to={`/nrc/dashboard/review/${nominee.id}`} title="Review">
+                            <Link to={`/nrrc/dashboard/review/${nominee.id}`} title="Review">
                               <Eye className="h-3.5 w-3.5" />
                             </Link>
                           </Button>

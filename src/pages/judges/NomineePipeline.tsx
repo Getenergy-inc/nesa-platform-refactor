@@ -70,7 +70,7 @@ const JUDGE_STATUSES: PipelineStatus[] = [
 const STATUS_LABELS: Record<PipelineStatus, string> = {
   NOMINATION_RECEIVED: "Nomination Received",
   AUTOMATED_SCREENING: "Automated Screening",
-  NRC_REVIEW: "NRC Review",
+  NRC_REVIEW: "NRRC Review",
   DUPLICATE_REVIEW: "Duplicate Review",
   ELIGIBILITY_REVIEW: "Eligibility Review",
   AWAITING_ACCEPTANCE: "Awaiting Acceptance",
@@ -190,7 +190,7 @@ export default function NomineePipeline() {
         <ShieldAlert className="mx-auto h-10 w-10 text-amber-500" />
         <h1 className="mt-4 text-xl font-semibold">Restricted workspace</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          The Nominee Pipeline is only available to NRC members, judges, and administrators.
+          The Nominee Pipeline is only available to NRRC members, judges, and administrators.
         </p>
         <Button asChild className="mt-6" variant="outline">
           <Link to="/">Return home</Link>
@@ -202,17 +202,17 @@ export default function NomineePipeline() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-8">
       <Helmet>
-        <title>Nominee Pipeline · NESA-Africa 2026 Judges & NRC</title>
+        <title>Nominee Pipeline · NESA-Africa 2026 Judges & NRRC</title>
         <meta
           name="description"
-          content="Shared operational view of nominees moving through NRC verification and Judges review — role-scoped actions and confidentiality boundaries."
+          content="Shared operational view of nominees moving through NRRC verification and Judges review — role-scoped actions and confidentiality boundaries."
         />
       </Helmet>
 
       <header className="mb-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <p className="text-xs uppercase tracking-wider text-muted-foreground">Judges & NRC</p>
+            <p className="text-xs uppercase tracking-wider text-muted-foreground">Judges & NRRC</p>
             <h1 className="font-playfair text-3xl font-semibold">Nominee Pipeline</h1>
             <p className="mt-1 text-sm text-muted-foreground">
               One shared reference for every nominee — with role-scoped actions, dossiers, and evidence boundaries.
@@ -221,7 +221,7 @@ export default function NomineePipeline() {
           <div className="flex flex-wrap gap-2">
             {isNRC && (
               <Badge variant="outline" className="border-amber-500/40 text-amber-700">
-                NRC access
+                NRRC access
               </Badge>
             )}
             {isJudge && (
@@ -236,7 +236,7 @@ export default function NomineePipeline() {
       <section aria-label="Pipeline statistics" className="mb-6 grid grid-cols-2 gap-3 md:grid-cols-6">
         {[
           { label: "Total tracked", value: stats.total },
-          { label: "NRC active", value: stats.nrcActive },
+          { label: "NRRC active", value: stats.nrcActive },
           { label: "Ready for judges", value: stats.readyForJudges },
           { label: "Judge active", value: stats.judgeActive },
           { label: "Clarifications", value: stats.clarification },
@@ -253,14 +253,14 @@ export default function NomineePipeline() {
 
       <Tabs value={tab} onValueChange={(v) => { setTab(v as any); setStatusFilter("all"); }}>
         <TabsList>
-          {isNRC && <TabsTrigger value="nrc">NRC View</TabsTrigger>}
+          {isNRC && <TabsTrigger value="nrc">NRRC View</TabsTrigger>}
           {isJudge && <TabsTrigger value="judge">Judge View</TabsTrigger>}
         </TabsList>
 
         <Card className="mt-4">
           <CardHeader className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <CardTitle className="text-base">
-              {tab === "nrc" ? "NRC verification queue" : "Judge review queue"}
+              {tab === "nrc" ? "NRRC verification queue" : "Judge review queue"}
             </CardTitle>
             <div className="flex flex-col gap-2 md:flex-row">
               <Input
@@ -311,7 +311,7 @@ export default function NomineePipeline() {
       </Tabs>
 
       <p className="mt-6 text-xs text-muted-foreground">
-        Confidentiality: NRC never sees judge scores or deliberation content. Judges never see raw NRC notes or PII — only the sanitized dossier version pushed to their pathway.
+        Confidentiality: NRRC never sees judge scores or deliberation content. Judges never see raw NRRC notes or PII — only the sanitized dossier version pushed to their pathway.
       </p>
     </div>
   );
@@ -405,12 +405,12 @@ function NRCActions({ row }: { row: PipelineRow }) {
   return (
     <div className="flex justify-end gap-2">
       <Button asChild size="sm" variant="ghost">
-        <Link to={`/nrc/cases/${row.nominee_id}`}>
+        <Link to={`/nrrc/cases/${row.nominee_id}`}>
           <FileSearch className="mr-1.5 h-3.5 w-3.5" /> Dossier
         </Link>
       </Button>
       <Button asChild size="sm" variant={canPush ? "default" : "outline"} disabled={!canPush}>
-        <Link to={`/nrc/cases/${row.nominee_id}?action=push`}>
+        <Link to={`/nrrc/cases/${row.nominee_id}?action=push`}>
           <Send className="mr-1.5 h-3.5 w-3.5" /> Push to pathway
         </Link>
       </Button>

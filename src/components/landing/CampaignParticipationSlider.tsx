@@ -43,7 +43,7 @@ const slides: Slide[] = [
     kicker: "Step 2",
     title: "Who Can Be Nominated?",
     body:
-      "From classrooms to communities, education changemakers are everywhere. Nominate a Changemaker for 2026 now — every submission enters independent NRC verification.",
+      "From classrooms to communities, education changemakers are everywhere. Nominate a Changemaker for 2026 now — every submission enters independent NRRC verification.",
     bullets: [
       "A mentor or school founder",
       "An NGO leader or youth advocate",
@@ -58,7 +58,7 @@ const slides: Slide[] = [
     kicker: "Step 3",
     title: "How Recognition Works",
     body:
-      "Nominate. Verify. Recognise. Every nominee is reviewed by the NRC, scored on the EDI Matrix, and judged by an independent jury — no public voting, no pay-to-win.",
+      "Nominate. Verify. Recognise. Every nominee is reviewed by the NRRC, scored on the EDI Matrix, and judged by an independent jury — no public voting, no pay-to-win.",
     bullets: [
       "Submit a 2026 nominee",
       "Track verification and EDI scoring",

@@ -41,7 +41,7 @@ const threads = [
 const messages = [
   { from: "Judge A4", text: "Strong story. Retention metric is independently verified.", anon: false, time: "12:01" },
   { from: "Anonymous", text: "I'd like to see more on financial sustainability.", anon: true, time: "12:04" },
-  { from: "Judge B2", text: "Agree — let's request supplementary evidence via NRC.", anon: false, time: "12:08" },
+  { from: "Judge B2", text: "Agree — let's request supplementary evidence via NRRC.", anon: false, time: "12:08" },
 ];
 
 export default function ArenaDiscussion() {

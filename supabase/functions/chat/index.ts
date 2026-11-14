@@ -245,7 +245,7 @@ ABOUT NESA-AFRICA PROGRAMS:
    - Platinum Recognition: Non-competitive, impact-verified recognition
    - Gold Awards: 100% public voting
    - Blue Garnet Awards: Premium tier (60% internal judges + 40% public vote)
-   - Africa Icon Awards: Elite recognition by internal judges only (27 judges, 9 Icons selected)
+   - Africa Icon Awards: Elite recognition by internal judges only (nine independent Icon judges, 9 Icons selected)
 
 2. EDUAID AFRICA:
    - Education support initiative for scholarships, learning materials, teacher support

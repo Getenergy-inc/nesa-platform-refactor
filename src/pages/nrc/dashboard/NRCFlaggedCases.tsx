@@ -83,7 +83,7 @@ function FlaggedContent() {
   return (
     <NRCDashboardLayout>
       <Helmet>
-        <title>Flagged Cases | NRC Dashboard</title>
+        <title>Flagged Cases | NRRC Dashboard</title>
       </Helmet>
 
       <div className="space-y-4">
@@ -142,7 +142,7 @@ function FlaggedContent() {
                     <div className="flex items-center gap-1 shrink-0">
                       <span className="text-[10px] text-muted-foreground/50 mr-2">{flagCase.createdAt}</span>
                       <Button asChild variant="ghost" size="icon" className="h-7 w-7">
-                        <Link to={`/nrc/dashboard/review/${flagCase.nomineeId}`}>
+                        <Link to={`/nrrc/dashboard/review/${flagCase.nomineeId}`}>
                           <Eye className="h-3.5 w-3.5" />
                         </Link>
                       </Button>

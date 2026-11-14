@@ -3,17 +3,14 @@
 // a genuine database zero renders "0".
 
 import { Link } from "react-router-dom";
-import { useDirectoryStats } from "@/hooks/useLivingGallery";
-import { formatStat } from "@/hooks/useGlobalTeamStats";
+
 
 export function DirectoryStatsSection() {
-  const stats = useDirectoryStats();
-
-  const items: { label: string; value: number | null }[] = [
-    { label: "Education Enablers", value: stats.enablers },
-    { label: "Countries & Regions", value: stats.countriesAndRegions },
-    { label: "Recognition Categories", value: stats.categories },
-    { label: "Education Impact Stories", value: stats.impactStories },
+  const items = [
+    { label: "Four recognition tiers", value: "4" },
+    { label: "Main awards", value: "22" },
+    { label: "Subcategories", value: "90" },
+    { label: "Independent Icon judges", value: "9" },
   ];
 
   return (
@@ -25,8 +22,7 @@ export function DirectoryStatsSection() {
             Africa&apos;s Education Impact Directory
           </h2>
           <p className="ed-section-sub">
-            One searchable, verified record of the people and organisations advancing Education
-            for All across Africa and the Diaspora.
+            Four recognition tiers · 22 main awards · 90 subcategories · Nine Icon NRRC members · Nine independent Icon judges · Up to nine Africa Education Icons · Nomination is free · No public or AGC voting in 2026.
           </p>
         </div>
 
@@ -38,14 +34,14 @@ export function DirectoryStatsSection() {
 
         <dl
           className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4"
-          aria-busy={stats.loading || undefined}
+          aria-label="Programme facts"
         >
           {items.map((s) => (
             <div
               key={s.label}
               className="rounded-2xl border border-gold/20 bg-white/[0.03] px-4 py-6 text-center"
             >
-              <dd className="font-serif text-3xl text-gold sm:text-4xl">{formatStat(s.value)}</dd>
+              <dd className="font-serif text-3xl text-gold sm:text-4xl">{s.value}</dd>
               <dt className="mt-2 text-xs uppercase tracking-[0.14em] text-white/60">{s.label}</dt>
             </div>
           ))}

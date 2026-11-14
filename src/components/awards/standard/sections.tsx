@@ -713,7 +713,7 @@ export function SubcategoryPathways({
 
 const DEFAULT_STEPS = [
   { icon: FileCheck, title: "Nominate", body: "Submit a nomination through the official form." },
-  { icon: ShieldCheck, title: "Evidence Review", body: "NRC verifies records, references, and supporting evidence." },
+  { icon: ShieldCheck, title: "Evidence Review", body: "NRRC verifies records, references, and supporting evidence." },
   { icon: CheckCircle2, title: "Category Verification", body: "Nominee is classified, sorted, and confirmed against eligibility." },
   { icon: Eye, title: "Shortlist / Hall of Fame", body: "Verified nominees appear in the public Hall of Fame preview." },
   { icon: Gavel, title: "Jury & Public Participation", body: "Where applicable, jury reviews and public participation contribute to the outcome." },

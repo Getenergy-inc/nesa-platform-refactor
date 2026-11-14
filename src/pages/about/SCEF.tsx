@@ -46,7 +46,7 @@ export default function SCEF() {
     <>
       <AboutSeo
         title="SCEF Foundation | Santos Creations Educational Foundation"
-        description="Santos Creations Educational Foundation (SCEF) is the parent organisation driving education transformation across Africa through NESA-Africa, EduAid-Africa, and Rebuild My School Africa."
+        description="Santos Creations Educational Foundation—SCEF—is the organisational host of NESA-Africa and the wider EduAid-Africa education-support ecosystem."
         path="/about/scef"
         breadcrumbs={[
           { name: "Home", path: "/" },
@@ -70,8 +70,7 @@ export default function SCEF() {
                 Santos Creations Educational Foundation
               </h1>
               <p className="mb-8 text-lg text-white/70">
-                SCEF is a registered non-profit driving education transformation across Africa
-                through recognition, support, and infrastructure development programmes.
+                Santos Creations Educational Foundation—SCEF—is the organisational host of NESA-Africa and the wider EduAid-Africa education-support ecosystem. SCEF advances education access, inclusion, skills development, advocacy, digital learning, institutional partnerships and responsible education support.
               </p>
               <Button asChild className="bg-primary text-primary-foreground">
                 <a href="https://santoscreations.org" target="_blank" rel="noopener noreferrer">
@@ -90,9 +89,7 @@ export default function SCEF() {
               <GraduationCap className="mx-auto mb-6 h-12 w-12 text-primary" />
               <h2 className="mb-6 font-display text-3xl font-bold text-white">Our Mission</h2>
               <p className="text-lg leading-relaxed text-white/80">
-                To create, implement, and sustain innovative educational programmes that provide
-                access, improve quality, and celebrate excellence in education across Africa —
-                ensuring no child is left behind in the journey towards Education for All.
+                SCEF provides organisational oversight. NESA-Africa identifies and documents education enablers. EduAid-Africa mobilises education support and interventions. Media services communicate verified education stories. Local chapters support authorised outreach and education activity. Participation in an SCEF or EduAid-Africa programme does not guarantee NESA-Africa recognition. SCEF separates recognition decisions from sponsorship, donations, partnerships and commercial relationships.
               </p>
             </div>
           </div>

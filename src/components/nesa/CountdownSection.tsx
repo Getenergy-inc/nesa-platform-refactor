@@ -59,7 +59,7 @@ export function CountdownSection() {
           {GALA_LABEL}
         </h2>
         <p className="text-xs sm:text-sm text-white/60 mb-2">
-          28 December 2026 · Lagos, Nigeria
+          13 December 2026 · Lagos, Nigeria
         </p>
         <p className="text-xs sm:text-sm text-white/55 mb-6 max-w-xl mx-auto">
           A continental gathering celebrating verified Education Enablers from across Africa, the African Diaspora and Friends of Africa — bringing together recognised individuals, organisations, institutions, partners, media, development leaders and education advocates committed to advancing Education for All.

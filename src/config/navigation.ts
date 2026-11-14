@@ -192,7 +192,7 @@ export const MAIN_NAV: NavItem[] = [
       { label: "Webinars", href: "/media/webinars", description: "Continental webinar series", icon: Mic },
       { label: "Gallery", href: "/gallery", description: "Photo archives across NESA seasons", icon: Play },
       { label: "Press Releases", href: "/press", description: "Official announcements", icon: FileCheck },
-      { label: "Awards Gala — 28 Dec 2026", href: "/media/gala", description: "The Blue-Garnet Gala Night", icon: Calendar, badge: "2026" },
+      { label: "Awards Gala — 13 Dec 2026", href: "/media/gala", description: "The Blue-Garnet Gala Night", icon: Calendar, badge: "2026" },
       { label: "Buy Gala Ticket", href: "/tickets", description: "Secure your seat", icon: Ticket },
       { label: "Buy Award Merchandise", href: "/shop", description: "Official NESA-Africa store", icon: ShoppingBag },
     ],
@@ -365,11 +365,11 @@ export const USER_DASHBOARD_NAV: NavItem[] = [
 // ============================================================================
 
 export const NRC_DASHBOARD_NAV: NavItem[] = [
-  { label: "Review Queue", href: "/nrc", icon: FileCheck },
-  { label: "Assigned Reviews", href: "/nrc/my-queue", icon: Target },
-  { label: "Evidence Validation", href: "/nrc/evidence", icon: Shield },
-  { label: "Reports", href: "/nrc/reports", icon: BookOpen },
-  { label: "Audit Trail", href: "/nrc/audit-log", icon: Shield },
+  { label: "Review Queue", href: "/nrrc", icon: FileCheck },
+  { label: "Assigned Reviews", href: "/nrrc/my-queue", icon: Target },
+  { label: "Evidence Validation", href: "/nrrc/evidence", icon: Shield },
+  { label: "Reports", href: "/nrrc/reports", icon: BookOpen },
+  { label: "Audit Trail", href: "/nrrc/audit-log", icon: Shield },
 ];
 
 export const JURY_DASHBOARD_NAV: NavItem[] = [
@@ -499,11 +499,11 @@ export const PAGE_REGISTRY: PageDefinition[] = [
   { path: "/dashboard/settings", title: "Settings", description: "Account settings", component: "Settings", category: "dashboard", requiredRoles: ["user"] },
   
   // ==================== NRC DASHBOARD ====================
-  { path: "/nrc", title: "NRC Dashboard", description: "Review nominations", component: "NRCDashboard", category: "dashboard", requiredRoles: ["nrc", "admin"] },
-  { path: "/nrc/assigned", title: "Assigned Reviews", description: "Your assignments", component: "NRCAssigned", category: "dashboard", requiredRoles: ["nrc", "admin"] },
-  { path: "/nrc/evidence", title: "Evidence Validation", description: "Verify evidence", component: "NRCEvidence", category: "dashboard", requiredRoles: ["nrc", "admin"] },
-  { path: "/nrc/logs", title: "Approval Logs", description: "Decision history", component: "NRCLogs", category: "dashboard", requiredRoles: ["nrc", "admin"] },
-  { path: "/nrc/audit", title: "Audit Trail", description: "System audit logs", component: "NRCAudit", category: "dashboard", requiredRoles: ["nrc", "admin"] },
+  { path: "/nrrc", title: "NRRC Dashboard", description: "Review nominations", component: "NRCDashboard", category: "dashboard", requiredRoles: ["nrc", "admin"] },
+  { path: "/nrrc/assigned", title: "Assigned Reviews", description: "Your assignments", component: "NRCAssigned", category: "dashboard", requiredRoles: ["nrc", "admin"] },
+  { path: "/nrrc/evidence", title: "Evidence Validation", description: "Verify evidence", component: "NRCEvidence", category: "dashboard", requiredRoles: ["nrc", "admin"] },
+  { path: "/nrrc/logs", title: "Approval Logs", description: "Decision history", component: "NRCLogs", category: "dashboard", requiredRoles: ["nrc", "admin"] },
+  { path: "/nrrc/audit", title: "Audit Trail", description: "System audit logs", component: "NRCAudit", category: "dashboard", requiredRoles: ["nrc", "admin"] },
   
   // ==================== JURY DASHBOARD ====================
   { path: "/jury", title: "Jury Dashboard", description: "Score finalists", component: "JuryDashboard", category: "dashboard", requiredRoles: ["jury", "admin"], stageGated: "jury_scoring" },

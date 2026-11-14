@@ -87,7 +87,7 @@ Deno.serve(async (req: Request) => {
     .eq("user_id", userId);
   const roles = (roleRows ?? []).map((r: any) => r.role);
   if (!roles.includes("admin") && !roles.includes("nrc")) {
-    return json(403, { error: "Admin or NRC access required" });
+    return json(403, { error: "Admin or NRRC access required" });
   }
 
   let body: { nominee_id?: string; resend?: boolean };

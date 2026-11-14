@@ -46,7 +46,7 @@ export function DashboardLayout({ children, title, breadcrumbs }: DashboardLayou
   ];
 
   if (hasRole("nrc") || hasRole("admin")) {
-    sidebarSections.push({ title: "NRC Review", items: NRC_DASHBOARD_NAV, roles: ["nrc", "admin"] });
+    sidebarSections.push({ title: "NRRC Review", items: NRC_DASHBOARD_NAV, roles: ["nrc", "admin"] });
   }
   if (hasRole("jury") || hasRole("admin")) {
     sidebarSections.push({ title: "Jury Panel", items: JURY_DASHBOARD_NAV, roles: ["jury", "admin"] });

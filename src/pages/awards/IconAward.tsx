@@ -154,7 +154,7 @@ export default function IconAward() {
         {/* Icon slot inside the 18-category registry */}
         <TierCategoryCards
           tier="africa-education-icon"
-          heading="Africa Education Icon in the 18-Category Registry"
+          heading="Africa Education Icon in the 22-main-award Registry"
           sub="Icon is the lifetime meta-category among the 18. Explore how it sits alongside the Gold–Blue Garnet, Platinum and Influencer tiers."
         />
 
@@ -207,7 +207,7 @@ export default function IconAward() {
             highlights: ["Lifetime Education Impact", "Leadership", "Sustainability", "Inclusion"],
           }}
           faqs={[
-            { q: "Can the Icon Award be self-nominated?", a: "Yes, but with the same evidence standards. Self-nominations are scored identically and audited by the NRC engine." },
+            { q: "Can the Icon Award be self-nominated?", a: "Yes, but with the same evidence standards. Self-nominations are scored identically and audited by the NRRC engine." },
             { q: "How many Icons are recognised each year?", a: "Up to 9 — 3 Africa, 3 Diaspora, 3 Friends of Africa." },
             { q: "Is there public voting?", a: "No. The Icon Award is jury-evaluated under the EDX Matrix. Public voting is not used for recognition in 2026." },
           ]}

@@ -6,7 +6,7 @@ const PARENT = "/awards/platinum-certificate-categories";
 const url = (slug: string) => `${PARENT}/${slug}`;
 
 const juryReview =
-  "NRC eligibility → independent jury review → final Platinum certificate decision. No public vote.";
+  "NRRC eligibility → independent jury review → final Platinum certificate decision. No public vote.";
 const juryEvidence: string[] = [];
 
 export const PLATINUM_CATEGORIES: AwardCategoryConfig[] = [
@@ -39,7 +39,7 @@ export const PLATINUM_CATEGORIES: AwardCategoryConfig[] = [
       whoCanNominate: "Faculty, students, partners or institution self-nomination.",
       evidence: "Service overview, collection/catalogue evidence, usage stats, research-support evidence.",
       publicVoting: "No. Platinum categories are decided by independent jury review only.",
-      review: "NRC eligibility check followed by independent jury review and final decision.",
+      review: "NRRC eligibility check followed by independent jury review and final decision.",
     }),
     legacyComponentKey: "LibraryNigeria",
     mergedFrom: ["/categories/library-nigeria", "/category/library-nigeria"],
@@ -73,7 +73,7 @@ export const PLATINUM_CATEGORIES: AwardCategoryConfig[] = [
       whoCanNominate: "Peers, partners, academics or self-nomination.",
       evidence: "Published outputs, adoption/policy-impact evidence, funding disclosure, peer endorsements.",
       publicVoting: "No. Platinum categories are decided by independent jury review only.",
-      review: "NRC eligibility followed by independent jury review.",
+      review: "NRRC eligibility followed by independent jury review.",
     }),
     legacyComponentKey: "ResearchDevelopmentNigeria",
     mergedFrom: ["/categories/rd-nigeria", "/category/research-development-nigeria"],
@@ -104,10 +104,10 @@ export const PLATINUM_CATEGORIES: AwardCategoryConfig[] = [
       "Nominate Christian institutions and missions delivering measurable educational impact across Africa.",
     faqs: buildStandardFaqs({
       eligibility: "Faith-based institutions, missions or networks with documented education programmes.",
-      whoCanNominate: "Anyone, subject to NRC verification.",
+      whoCanNominate: "Anyone, subject to NRRC verification.",
       evidence: "Programme/beneficiary data, partner attestations, outcome evidence, governance disclosure.",
       publicVoting: "No. Platinum categories are decided by independent jury review only.",
-      review: "NRC eligibility followed by independent jury review.",
+      review: "NRRC eligibility followed by independent jury review.",
     }),
     legacyComponentKey: "ChristianEducationAfrica",
     mergedFrom: ["/categories/christian-africa", "/category/christian-education-africa"],
@@ -138,10 +138,10 @@ export const PLATINUM_CATEGORIES: AwardCategoryConfig[] = [
       "Nominate Islamic institutions and networks delivering measurable educational impact across Africa.",
     faqs: buildStandardFaqs({
       eligibility: "Islamic institutions or networks with documented education programmes.",
-      whoCanNominate: "Anyone, subject to NRC verification.",
+      whoCanNominate: "Anyone, subject to NRRC verification.",
       evidence: "Programme/beneficiary data, partner attestations, outcome evidence, governance disclosure.",
       publicVoting: "No. Platinum categories are decided by independent jury review only.",
-      review: "NRC eligibility followed by independent jury review.",
+      review: "NRRC eligibility followed by independent jury review.",
     }),
     legacyComponentKey: "IslamicEducationAfrica",
     mergedFrom: ["/categories/islamic-africa", "/category/islamic-education-africa"],
@@ -176,7 +176,7 @@ export const PLATINUM_CATEGORIES: AwardCategoryConfig[] = [
       whoCanNominate: "Civic groups, stakeholders, the public, or self-nomination with disclosure.",
       evidence: "Policy/legislation citations, budget evidence, outcome data with independent verification.",
       publicVoting: "No. Platinum categories are decided by independent jury review only.",
-      review: "NRC eligibility followed by independent jury review (policy-expert panel + integrity check).",
+      review: "NRRC eligibility followed by independent jury review (policy-expert panel + integrity check).",
     }),
     legacyComponentKey: "PoliticalLeadersNigeria",
     mergedFrom: ["/categories/political-nigeria", "/category/political-leaders-nigeria"],
@@ -192,7 +192,7 @@ export const PLATINUM_CATEGORIES: AwardCategoryConfig[] = [
     eligibilitySummary:
       "Bilateral or multilateral agencies, foreign governments, foundations or partnerships with documented programmes in Africa.",
     whoCanBeNominated: "Embassies, bilateral agencies, multilaterals, international foundations.",
-    whoCanNominate: "Anyone, subject to NRC verification.",
+    whoCanNominate: "Anyone, subject to NRRC verification.",
     requiredEvidence: [
       "Programme overview and country coverage",
       "Beneficiary data with citations",
@@ -208,10 +208,10 @@ export const PLATINUM_CATEGORIES: AwardCategoryConfig[] = [
       "Nominate bilateral, multilateral and international partners delivering measurable education impact in Africa.",
     faqs: buildStandardFaqs({
       eligibility: "Bilateral/multilateral agencies, foreign governments, foundations or partnerships with African programmes.",
-      whoCanNominate: "Anyone, subject to NRC verification.",
+      whoCanNominate: "Anyone, subject to NRRC verification.",
       evidence: "Programme overview, beneficiary data with citations, local-partner attestation, outcome evidence.",
       publicVoting: "No. Platinum categories are decided by independent jury review only.",
-      review: "NRC eligibility followed by independent jury review.",
+      review: "NRRC eligibility followed by independent jury review.",
     }),
     legacyComponentKey: "InternationalEducation",
     mergedFrom: [
@@ -251,7 +251,7 @@ export const PLATINUM_CATEGORIES: AwardCategoryConfig[] = [
       whoCanNominate: "Anyone, including diaspora members, beneficiaries, partners or self-nomination.",
       evidence: "Association registration, programme/beneficiary data, local-partner attestation, financial disclosure.",
       publicVoting: "No. Platinum categories are decided by independent jury review only.",
-      review: "NRC eligibility followed by independent jury review.",
+      review: "NRRC eligibility followed by independent jury review.",
     }),
     legacyComponentKey: "DiasporaEducation",
     mergedFrom: ["/categories/diaspora-impact", "/category/diaspora-education"],

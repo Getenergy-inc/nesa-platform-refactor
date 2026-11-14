@@ -88,7 +88,7 @@ const TIER_PRESENTATION: Record<TierSlug, TierPresentation> = {
       "Public figures whose verified campaigns, platforms, or programmes have advanced education. No judges, no voting, no ranking.",
     badges: [
       "Certificate of Recognition",
-      "NRC-Verified",
+      "NRRC-Verified",
       "Multiple Recipients Possible",
     ],
     cta: "Nominate an Influencer Enabler",
@@ -103,7 +103,7 @@ const TIER_PRESENTATION: Record<TierSlug, TierPresentation> = {
     badges: [
       "Certificate of Recognition",
       "7 Categories",
-      "NRC-Verified",
+      "NRRC-Verified",
     ],
     cta: "Explore Platinum Categories",
     ctaHref: "#directory",
@@ -117,7 +117,7 @@ const TIER_PRESENTATION: Record<TierSlug, TierPresentation> = {
     badges: [
       "Certificate of Recognition",
       "9 Categories",
-      "NRC-Verified",
+      "NRRC-Verified",
     ],
     cta: "Explore Gold-Blue Garnet Categories",
     ctaHref: "#directory",
@@ -216,7 +216,7 @@ function TierCard({
 }
 
 /* ────────────────────────────────────────────────────────────────────────── */
-/* 18-Form Directory                                                           */
+/* Recognition Field Directory                                                           */
 /* ────────────────────────────────────────────────────────────────────────── */
 
 const NOMINEE_TYPES = [
@@ -276,7 +276,7 @@ function DirectoryCard({
               : "border-emerald-500/50 text-emerald-300",
           ].join(" ")}
         >
-          {form.judged ? "Judged" : "NRC-Verified"}
+          {form.judged ? "Icon Judging" : "NRRC Research and Review"}
         </Badge>
       </div>
       <h4 className="font-playfair text-base leading-snug text-foreground group-hover:text-gold">
@@ -346,7 +346,7 @@ function FormDirectory({
           <h2 className="font-playfair text-2xl text-gold sm:text-3xl md:text-4xl">
             {narrowedForms
               ? `${narrowing?.family?.name} — Choose a Category`
-              : "18-Form Directory"}
+              : "Recognition Field Directory"}
           </h2>
           <p className="mt-2 text-sm text-foreground/70">
             {narrowedForms
@@ -444,7 +444,7 @@ function ProcessDiagram() {
   const iconSteps = [
     "Nomination",
     "Acceptance",
-    "NRC (EDI Matrix)",
+    "NRRC (EDI Matrix)",
     "Judges Arena (ICON_SCORING_CRITERIA)",
     "Grand Jury",
     "Governance Ratification",
@@ -453,7 +453,7 @@ function ProcessDiagram() {
   const certSteps = [
     "Nomination",
     "Acceptance",
-    "NRC (EDI Matrix)",
+    "NRRC (EDI Matrix)",
     "Governance Approval",
     "Certificate of Recognition",
   ];
@@ -468,9 +468,9 @@ function ProcessDiagram() {
           How Recognition Works
         </h2>
         <p className="mt-2 max-w-3xl text-sm text-foreground/70">
-          NRC verifies all four tiers using the EDI Matrix. Only the Africa
+          NRRC verifies all four tiers using the EDI Matrix. Only the Africa
           Education Icon Award proceeds to the Judges Arena, where judges apply
-          a separate lifetime-achievement scoring framework after NRC
+          a separate lifetime-achievement scoring framework after NRRC
           verification is complete.
         </p>
 
@@ -502,7 +502,7 @@ function ProcessDiagram() {
             <div className="mb-4 flex items-center gap-2">
               <BadgeCheck className="h-5 w-5 text-emerald-300" />
               <h3 className="font-playfair text-lg text-emerald-200">
-                Certificate Tiers (NRC-Verified)
+                Certificate Tiers (NRRC-Verified)
               </h3>
             </div>
             <p className="mb-3 text-xs uppercase tracking-wide text-emerald-300/80">
@@ -581,19 +581,19 @@ function ExistingNomineesBand() {
 const FAQS = [
   {
     q: "What counts as evidence of impact?",
-    a: "Anything that independently corroborates what the nominee has done: audited reports, press coverage, official policy documents, programme evaluations, beneficiary testimonials, photographs, video, or verifiable statistics. Self-reported claims without corroboration are not sufficient — the Nominee Research Corps assesses evidence against the category's EDI Matrix.",
+    a: "Anything that independently corroborates what the nominee has done: audited reports, press coverage, official policy documents, programme evaluations, beneficiary testimonials, photographs, video, or verifiable statistics. Self-reported claims without corroboration are not sufficient — the Nominee Research and Review Corps assesses evidence against the category's EDI Matrix.",
   },
   {
     q: "Can I nominate myself?",
-    a: "Individuals may not self-nominate for the Africa Education Icon Award. For all other tiers, organisations may submit their own institution or programme, but a third-party reference is expected during NRC verification.",
+    a: "Individuals may not self-nominate for the Africa Education Icon Award. For all other tiers, organisations may submit their own institution or programme, but a third-party reference is expected during NRRC verification.",
   },
   {
     q: "What happens after I submit?",
-    a: "You'll receive an acknowledgement immediately. Your nomination then moves through duplicate review, NRC evidence verification, EDI Matrix scoring, and — for the Africa Education Icon Award only — independent judging and Grand Jury deliberation, before Governance ratification.",
+    a: "You'll receive an acknowledgement immediately. Your nomination then moves through duplicate review, NRRC evidence verification, EDI Matrix scoring, and — for the Africa Education Icon Award only — independent judging and Grand Jury deliberation, before Governance ratification.",
   },
   {
     q: "Does sponsoring or donating affect my nominee's chances?",
-    a: "No. Sponsorship, partnership, donations, ticket purchases, endorsements, and visibility opportunities do not influence NRC verification, judging, or Governance decisions. Recognition is evidence-based only.",
+    a: "No. Sponsorship, partnership, donations, ticket purchases, endorsements, and visibility opportunities do not influence NRRC verification, judging, or Governance decisions. Recognition is evidence-based only.",
   },
   {
     q: "Can the same nominee win more than once?",
@@ -660,14 +660,14 @@ export default function NominateHub2026() {
         <title>Nominate an Enabler of Education for All | NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Nominate an individual, organisation, institution, government, programme or public figure advancing Education for All across Africa, the Diaspora and Friends of Africa. One flagship award, three Certificate of Recognition tiers, eighteen forms."
+          content="Nominate an Education Enabler. Help NESA-Africa identify credible people, institutions and programmes advancing education across Africa."
         />
       </Helmet>
 
       {/* Announcement bar */}
       <div className="border-b border-gold/20 bg-black/40">
         <div className="container mx-auto px-4 py-2 text-center text-xs sm:text-sm text-gold">
-          Public Nominations Open · 6 September 2026 — NESA-Africa 2026
+          Public Nominations Open 9 November 2026 – 31 March 2027 · Nomination is free
         </div>
       </div>
 
@@ -713,7 +713,7 @@ export default function NominateHub2026() {
             </p>
             <p className="mt-1 text-sm text-foreground/75">
               Submit the nominee&apos;s details and contribution story — the
-              Nominee Research Corps determines the correct recognition
+              Nominee Research and Review Corps determines the correct recognition
               pathway before review. You do not need to pick a category.
             </p>
             <div className="mt-3 flex flex-wrap gap-3 text-xs">
@@ -743,12 +743,10 @@ export default function NominateHub2026() {
             NESA-Africa 2026
           </div>
           <h1 className="font-playfair text-3xl leading-tight text-gold sm:text-5xl md:text-6xl">
-            Nominate an Enabler of Education for All Across Africa
+            Nominate an Education Enabler
           </h1>
           <p className="mt-5 max-w-3xl text-base text-foreground/85 sm:text-lg">
-            Identify an individual, organisation, institution, government,
-            programme, or public figure making a verified contribution to
-            education across Africa, the Diaspora, and among Friends of Africa.
+            Help NESA-Africa identify credible people, institutions and programmes advancing education across Africa.
           </p>
           <p className="mt-3 max-w-3xl text-sm text-gold/85 sm:text-base">
             Four Recognition Tiers · {MASTER_COUNTS.categories} Main Awards ·{" "}
@@ -760,12 +758,7 @@ export default function NominateHub2026() {
             <div className="flex items-start gap-3">
               <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
               <p className="text-xs text-foreground/85 sm:text-sm">
-                Recognition is based on verified educational impact, evaluated
-                through the Education Development Index (EDI) Matrix — not
-                popularity, sponsorship, or jury review. Sponsorship,
-                donations, ticket purchases, endorsements, and visibility
-                opportunities do not influence nominee approval, judging, or
-                Governance decisions.
+                Submitting a nomination begins a review process. It does not confirm identity verification, eligibility, shortlisting, judging or recognition. Do not submit passports, bank details, health records or other sensitive documents through the general form.
               </p>
             </div>
           </div>
@@ -773,7 +766,7 @@ export default function NominateHub2026() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
               <a href="#official-nomination-form">
-                Open the nomination form
+                Open the Official Nomination Form
                 <ArrowRight className="ml-2 h-4 w-4" />
               </a>
             </Button>
@@ -783,8 +776,8 @@ export default function NominateHub2026() {
               variant="outline"
               className="border-gold/40 text-gold hover:bg-gold/10"
             >
-              <Link to="/awards">
-                See the 22 awards
+              <Link to="/nominate#nominator-guidelines">
+                Check Nomination Requirements
                 <ChevronDown className="ml-2 h-4 w-4" />
               </Link>
             </Button>

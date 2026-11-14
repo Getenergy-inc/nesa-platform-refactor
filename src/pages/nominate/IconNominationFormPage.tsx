@@ -58,7 +58,7 @@ export default function IconNominationFormPage() {
           />
           <p className="mt-4 flex items-start gap-2 text-xs text-foreground/60">
             <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold" aria-hidden />
-            Every nomination is verified by the Nominee Research Corps before it reaches the
+            Every nomination is verified by the Nominee Research and Review Corps before it reaches the
             jury. Sponsors have no influence over outcomes.
           </p>
         </div>

@@ -17,7 +17,7 @@ export function VolunteerTrustBand() {
           <p className="font-display text-gold uppercase tracking-[0.18em] text-xs">Powered by People</p>
         </div>
         <p className="text-white text-base md:text-lg flex-1">
-          <span className="font-bold text-gold">{formatStat(stats.people)}</span> volunteers, judges & NRC members ·{" "}
+          <span className="font-bold text-gold">{formatStat(stats.people)}</span> volunteers, judges & NRRC members ·{" "}
           <span className="font-bold text-gold">{formatStat(stats.countries)}</span> countries ·{" "}
           <span className="font-bold text-gold">{formatStat(stats.activeChapters)}</span> active chapters
         </p>

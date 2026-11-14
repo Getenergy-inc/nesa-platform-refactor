@@ -29,10 +29,10 @@ const MILESTONES: TimelineMilestone[] = [
   },
   {
     id: "verification",
-    date: "16 September – 28 December 2026",
-    phase: "Rolling NRC Verification",
+    date: "16 September – 13 December 2026",
+    phase: "Rolling NRRC Verification",
     description:
-      "The Nominee Research Corps verifies identity, category fit, duplicates and documented evidence of education impact, applying the EDX framework (25% Education Impact · 30% Development Contribution · 45% Excellence & Reach).",
+      "The Nominee Research and Review Corps verifies identity, category fit, duplicates and documented evidence of education impact, applying the EDX framework (25% Education Impact · 30% Development Contribution · 45% Excellence & Reach).",
     icon: ShieldCheck,
   },
   {
@@ -45,7 +45,7 @@ const MILESTONES: TimelineMilestone[] = [
   },
   {
     id: "certificates",
-    date: "15 November – 28 December 2026",
+    date: "15 November – 13 December 2026",
     phase: "Certificate Approval & Publication",
     description:
       "Verified nominees are approved for Certificates of Recognition, published to the directory, and may request physical printed certificates ahead of the Gala.",
@@ -53,7 +53,7 @@ const MILESTONES: TimelineMilestone[] = [
   },
   {
     id: "gala",
-    date: "Monday, 28 December 2026",
+    date: "Sunday 13 December 2026",
     phase: "NESA-Africa 2026 Gold-Blue Garnet Awards Gala",
     description:
       "Recognised Education Enablers are celebrated at the NESA-Africa 2026 Gala with live broadcast across Africa and the African Diaspora.",
@@ -78,11 +78,11 @@ export function ProjectTimelineSection() {
             Project Timeline
           </p>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-            From 6 September 2026 to the 28 December 2026 Gala
+            From 6 September 2026 to the 13 December 2026 Gala
           </h2>
           <p className="text-white/70">
             The complete project timeline for the NESA-Africa 2026 Influencer Education
-            Impact Award — nominations, rolling NRC verification, certificate approval,
+            Impact Award — nominations, rolling NRRC verification, certificate approval,
             Gala and post-award legacy. There is no public voting in this tier.
           </p>
         </div>

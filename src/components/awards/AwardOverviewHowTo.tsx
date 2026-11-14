@@ -31,8 +31,8 @@ const STEPS = [
   },
   {
     icon: ShieldCheck,
-    title: "NRC verification",
-    body: "Our Nominee Research Corps (NRC) verifies claims, checks evidence and screens for conflicts of interest.",
+    title: "NRRC verification",
+    body: "Our Nominee Research and Review Corps (NRRC) verifies claims, checks evidence and screens for conflicts of interest.",
   },
   {
     icon: Trophy,
@@ -98,7 +98,7 @@ export function AwardOverviewHowTo({
           <h2 className="font-serif text-2xl md:text-3xl text-ivory">How to Nominate</h2>
           <p className="mt-2 text-sm text-ivory/70 max-w-2xl">
             Four transparent steps — from evidence to recognition. Nominations are free,
-            open to Africans and non-Africans, and NRC-verified before advancing.
+            open to Africans and non-Africans, and NRRC-verified before advancing.
           </p>
 
           <ol className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">

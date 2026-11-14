@@ -76,8 +76,8 @@ interface NomineeData {
 const RECOGNITION_STEPS = [
   { key: "submitted", label: "Nomination Submitted" },
   { key: "accepted", label: "Nomination Accepted" },
-  { key: "nrc_review", label: "NRC Review" },
-  { key: "nrc_verified", label: "NRC Verified" },
+  { key: "nrc_review", label: "NRRC Review" },
+  { key: "nrc_verified", label: "NRRC Verified" },
   { key: "governance", label: "Governance Approval" },
   { key: "published", label: "Public Publication" },
 ] as const;
@@ -566,7 +566,7 @@ export default function NomineeDashboard() {
                   </ul>
                 ) : (
                   <p className="text-sm text-muted-foreground italic">
-                    No evidence links attached yet. Contact your NRC reviewer via{" "}
+                    No evidence links attached yet. Contact your NRRC reviewer via{" "}
                     <strong>Messages & Support</strong> to add proof of impact
                     (articles, videos, case studies, links to programmes).
                   </p>
@@ -660,7 +660,7 @@ export default function NomineeDashboard() {
               </CardHeader>
               <CardContent className="space-y-3 text-sm">
                 <p className="text-muted-foreground">
-                  Reach the NRC or governance team about your nomination, evidence,
+                  Reach the NRRC or governance team about your nomination, evidence,
                   or profile. Please quote your nominee slug{" "}
                   <code className="text-xs">{nominee.slug}</code> in every message.
                 </p>

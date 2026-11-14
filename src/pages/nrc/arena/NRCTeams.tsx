@@ -25,10 +25,10 @@ export default function NRCTeams() {
 
   return (
     <NRCArenaLayout>
-      <Helmet><title>NRC Teams · NESA-Africa 2026</title></Helmet>
+      <Helmet><title>NRRC Teams · NESA-Africa 2026</title></Helmet>
       <header className="mb-5">
         <p className="text-xs uppercase tracking-wider text-gold/80">Operational teams</p>
-        <h1 className="font-display text-2xl font-bold">NRC Teams</h1>
+        <h1 className="font-display text-2xl font-bold">NRRC Teams</h1>
         <p className="text-white/60 text-sm mt-1">
           {NRC_TOTALS.teams} teams · {NRC_TOTALS.slots} approved member slots across 4 recognition tiers.
         </p>
@@ -63,7 +63,7 @@ export default function NRCTeams() {
         {teams.map((t) => (
           <Link
             key={t.slug}
-            to={`/nrc/teams/${t.slug}`}
+            to={`/nrrc/teams/${t.slug}`}
             className="rounded-xl border border-white/10 bg-white/[0.04] p-4 hover:border-gold hover:bg-white/[0.07] transition-colors"
           >
             <div className="flex items-start justify-between gap-2">

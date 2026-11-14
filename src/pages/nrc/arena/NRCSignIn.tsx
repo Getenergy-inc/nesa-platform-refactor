@@ -5,6 +5,6 @@ import { Navigate, useSearchParams } from "react-router-dom";
 
 export default function NRCSignIn() {
   const [params] = useSearchParams();
-  const next = params.get("next") || "/nrc/dashboard";
+  const next = params.get("next") || "/nrrc/dashboard";
   return <Navigate to={`/login?next=${encodeURIComponent(next)}`} replace />;
 }

@@ -33,7 +33,7 @@ export const PAGE_SEQUENCE: PageEntry[] = [
   { path: "/nominees", label: "Explore Existing Nominees", section: "Participate" },
   { path: "/directory", label: "Education Impact Directory", section: "Participate" },
   { path: "/judges", label: "Judges", section: "Participate" },
-  { path: "/nrc", label: "Nominee Research Corps", section: "Participate" },
+  { path: "/nrrc", label: "Nominee Research and Review Corps", section: "Participate" },
   { path: "/chapters", label: "Local Chapters & Volunteers", section: "Participate" },
   { path: "/vacancies", label: "Join Our Team", section: "Participate" },
 

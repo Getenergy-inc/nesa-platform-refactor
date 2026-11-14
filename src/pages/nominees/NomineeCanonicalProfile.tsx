@@ -71,7 +71,7 @@ export default function NomineeCanonicalProfile() {
           <>
             <p className="mt-3 text-white/60">
               The nominee record you are looking for is still in verification with the
-              Nominee Research Corps, or the link has changed.
+              Nominee Research and Review Corps, or the link has changed.
             </p>
             <Button asChild className="mt-6">
               <Link to="/nominees">Explore existing nominees</Link>
@@ -163,7 +163,7 @@ export default function NomineeCanonicalProfile() {
                 )}
                 {verified && (
                   <Badge variant="outline" className="border-emerald-400/40 text-emerald-300">
-                    <ShieldCheck className="mr-1 h-3 w-3" /> NRC verified
+                    <ShieldCheck className="mr-1 h-3 w-3" /> NRRC verified
                   </Badge>
                 )}
               </div>
@@ -181,12 +181,13 @@ export default function NomineeCanonicalProfile() {
                 </p>
               )}
               <p className="mt-5 max-w-2xl leading-relaxed text-white/80">{summary}</p>
+              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/60">This profile is part of an ongoing review process. Publication does not guarantee selection or recognition.</p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Button asChild>
-                  <Link to="/nominate">Nominate an enabler</Link>
+                  <Link to="/contact">Request a Correction</Link>
                 </Button>
                 <Button asChild variant="outline" className="border-gold/30 text-gold">
-                  <Link to="/nominee-portal">Is this you? Claim this profile</Link>
+                  <Link to="/nominee-portal">Submit Additional Evidence</Link>
                 </Button>
                 <NesaTvLink videoId={videoId} name={name} />
               </div>
@@ -197,7 +198,7 @@ export default function NomineeCanonicalProfile() {
           {story && (
             <section className="mt-12 rounded-2xl border border-white/10 bg-charcoal-light p-6 md:p-8">
               <h2 className="font-display text-xl font-semibold text-white">
-                Contribution to education
+                Education contribution under review
               </h2>
               <p className="mt-3 whitespace-pre-line leading-relaxed text-white/75">{story}</p>
             </section>
@@ -224,7 +225,7 @@ export default function NomineeCanonicalProfile() {
           {evidence.length > 0 && (
             <section className="mt-8 rounded-2xl border border-white/10 bg-charcoal-light p-6 md:p-8">
               <h2 className="font-display text-xl font-semibold text-white">
-                Verifiable evidence
+                Evidence documented
               </h2>
               <ul className="mt-3 space-y-2">
                 {evidence.map((href) => (

@@ -131,14 +131,14 @@ export default function Categories() {
       label: "Blue Garnet",
       icon: <Trophy className="h-4 w-4" />,
       categories: groups.blueGarnet,
-      subtitle: "Competitive Excellence — NRC verification → jury evaluation",
+      subtitle: "Competitive Excellence — NRRC verification → jury evaluation",
     },
     {
       key: "platinum",
       label: "Platinum",
       icon: <Shield className="h-4 w-4" />,
       categories: groups.platinum,
-      subtitle: "Institutional Leadership — NRC verification & governance criteria",
+      subtitle: "Institutional Leadership — NRRC verification & governance criteria",
     },
     {
       key: "gold-special",

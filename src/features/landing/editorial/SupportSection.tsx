@@ -25,8 +25,8 @@ const CARDS = [
   {
     title: "Become a Reviewer",
     body:
-      "Apply to the Nominee Research Corps and help verify the evidence behind every nomination.",
-    cta: "Apply to the NRC",
+      "Apply to the Nominee Research and Review Corps and help verify the evidence behind every nomination.",
+    cta: "Apply to the NRRC",
     href: "/judgeapply/nrc",
   },
 ];

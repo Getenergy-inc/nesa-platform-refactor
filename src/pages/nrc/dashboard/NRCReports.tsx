@@ -81,7 +81,7 @@ function ReportsContent() {
   return (
     <NRCDashboardLayout>
       <Helmet>
-        <title>Reports | NRC Dashboard</title>
+        <title>Reports | NRRC Dashboard</title>
       </Helmet>
 
       <div className="space-y-6">

@@ -86,7 +86,7 @@ const PATHWAY_CARDS: Array<{
     title: "Blue Garnet Awards",
     tagline: "Competitive Excellence Recognition",
     description:
-      "The competitive, voting-enabled track. NRC eligibility, jury shortlist, then a final jury score.",
+      "The competitive, voting-enabled track. NRRC eligibility, jury shortlist, then a final jury score.",
     qualifies:
       "NGOs, CSR programs, EduTech, STEM, Media, Creative Arts and State leadership.",
     cta: "Explore Blue Garnet",

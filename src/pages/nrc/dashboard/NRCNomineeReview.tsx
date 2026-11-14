@@ -76,7 +76,7 @@ function ReviewContent() {
           <div className="text-center">
             <p className="text-muted-foreground">Nominee not found</p>
             <Button asChild variant="outline" className="mt-4">
-              <Link to="/nrc/dashboard/nominees"><ArrowLeft className="mr-2 h-4 w-4" /> Back</Link>
+              <Link to="/nrrc/dashboard/nominees"><ArrowLeft className="mr-2 h-4 w-4" /> Back</Link>
             </Button>
           </div>
         </div>
@@ -101,14 +101,14 @@ function ReviewContent() {
   return (
     <NRCDashboardLayout>
       <Helmet>
-        <title>Review: {nominee.name} | NRC Dashboard</title>
+        <title>Review: {nominee.name} | NRRC Dashboard</title>
       </Helmet>
 
       <div className="space-y-4">
         {/* Back + Header */}
         <div className="flex items-center gap-3">
           <Button asChild variant="ghost" size="icon" className="h-8 w-8">
-            <Link to="/nrc/dashboard/nominees"><ArrowLeft className="h-4 w-4" /></Link>
+            <Link to="/nrrc/dashboard/nominees"><ArrowLeft className="h-4 w-4" /></Link>
           </Button>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
@@ -230,7 +230,7 @@ function ReviewContent() {
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-display flex items-center gap-2">
                   <Shield className="h-4 w-4 text-primary" />
-                  NRC Scoring Panel
+                  NRRC Scoring Panel
                 </CardTitle>
                 <p className="text-[11px] text-muted-foreground">Score each criterion 1–10</p>
               </CardHeader>

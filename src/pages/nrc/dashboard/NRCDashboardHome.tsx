@@ -66,7 +66,7 @@ function DashboardContent() {
     { name: "Submitted", value: stats.submitted, color: "#3b82f6" },
     { name: "Screening", value: stats.screening, color: "#f59e0b" },
     { name: "Verification", value: stats.verification, color: "#f97316" },
-    { name: "NRC Review", value: stats.review, color: "#8b5cf6" },
+    { name: "NRRC Review", value: stats.review, color: "#8b5cf6" },
     { name: "Cleared", value: stats.cleared, color: "#10b981" },
     { name: "Declined", value: stats.declined, color: "#ef4444" },
   ];
@@ -74,7 +74,7 @@ function DashboardContent() {
   const recentActivity = [
     { action: "Nomination reviewed", nominee: nominees[0]?.name || "N/A", time: "2 min ago", icon: CheckCircle2 },
     { action: "Document uploaded", nominee: nominees[1]?.name || "N/A", time: "15 min ago", icon: FileCheck },
-    { action: "Status changed to NRC Review", nominee: nominees[2]?.name || "N/A", time: "1 hr ago", icon: Shield },
+    { action: "Status changed to NRRC Review", nominee: nominees[2]?.name || "N/A", time: "1 hr ago", icon: Shield },
     { action: "Case flagged", nominee: nominees[5]?.name || "N/A", time: "2 hrs ago", icon: Flag },
     { action: "Nominee cleared", nominee: nominees[3]?.name || "N/A", time: "3 hrs ago", icon: CheckCircle2 },
     { action: "Clarification requested", nominee: nominees[4]?.name || "N/A", time: "5 hrs ago", icon: AlertTriangle },
@@ -94,7 +94,7 @@ function DashboardContent() {
   return (
     <NRCDashboardLayout>
       <Helmet>
-        <title>NRC Dashboard | NESA Africa</title>
+        <title>NRRC Dashboard | NESA Africa</title>
       </Helmet>
 
       <div className="space-y-6">
@@ -108,12 +108,12 @@ function DashboardContent() {
           </div>
           <div className="flex gap-2">
             <Button asChild size="sm" variant="outline">
-              <Link to="/nrc/dashboard/reports">
+              <Link to="/nrrc/dashboard/reports">
                 <BarChart3 className="mr-2 h-4 w-4" /> Reports
               </Link>
             </Button>
             <Button asChild size="sm">
-              <Link to="/nrc/dashboard/nominees">
+              <Link to="/nrrc/dashboard/nominees">
                 Review Nominees <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>

@@ -31,7 +31,7 @@ export const WALLET_PROHIBITIONS = [
   "It is not a voting wallet and holds no voting credits.",
   "It is not a nominee-ranking or award-selection mechanism.",
   "It cannot be used to purchase recognition, finalist status or an award.",
-  "It cannot influence judges, the NRC, or any assessment outcome.",
+  "It cannot influence judges, the NRRC, or any assessment outcome.",
 ];
 
 export const WALLET_SHORT_DISCLAIMER =
@@ -50,7 +50,7 @@ export const RECOGNITION_INDEPENDENCE_2026 = {
     "No public voting exists for the 2026 cycle.",
     "No voting credits exist, in any form or under any name.",
     "No payment-to-vote mechanism exists anywhere on this platform.",
-    "No wallet or payment activity of any kind can increase a nominee's score, influence assessment, influence NRC verification, influence recognition decisions, or purchase finalist or award status.",
+    "No wallet or payment activity of any kind can increase a nominee's score, influence assessment, influence NRRC verification, influence recognition decisions, or purchase finalist or award status.",
     "Sponsorship, donations, merchandise, ticket and membership payments are commercial or philanthropic transactions only, and are firewalled from nominee assessment.",
   ],
 };

@@ -91,7 +91,7 @@ export const PAGE_FAQS: PageFAQ[] = [
       },
       {
         q: "What does NESA-Africa 2026 represent?",
-        a: "NESA-Africa 2026 is the current edition of the awards cycle. It moves from public pre-nomination, through independent NRC verification, independent jury review, the Blue Garnet Awards Gala, and into post-award legacy impact through EduAid-Africa and Rebuild My School Africa.",
+        a: "NESA-Africa 2026 is the current edition of the awards cycle. It moves from public pre-nomination, through independent NRRC verification, independent jury review, the Blue Garnet Awards Gala, and into post-award legacy impact through EduAid-Africa and Rebuild My School Africa.",
       },
       {
         q: 'What is the motto "The African Blue-Garnet Awards for Recognising Africa’s Education Enablers"?',
@@ -203,7 +203,7 @@ export const PAGE_FAQS: PageFAQ[] = [
       },
       {
         q: "How are nominees reviewed?",
-        a: "The independent Nomination Review Committee (NRC) screens every submission against the 5-pillar Education Development Index (Access, Quality, Equity, Innovation, Impact) before publication.",
+        a: "The independent Nomination Review Committee (NRRC) screens every submission against the 5-pillar Education Development Index (Access, Quality, Equity, Innovation, Impact) before publication.",
       },
       {
         q: "How are winners selected?",
@@ -215,7 +215,7 @@ export const PAGE_FAQS: PageFAQ[] = [
       },
       {
         q: "How does NESA-Africa protect award integrity?",
-        a: "Through strict separation of governance, an independent NRC and jury, append-only audit logs for voting, sponsor firewalls, and published evaluation rubrics.",
+        a: "Through strict separation of governance, an independent NRRC and jury, append-only audit logs for voting, sponsor firewalls, and published evaluation rubrics.",
       },
       {
         q: "Can sponsors influence award outcomes?",
@@ -242,7 +242,7 @@ export const PAGE_FAQS: PageFAQ[] = [
       },
       {
         q: "Can one nominee enter more than one category?",
-        a: "Yes, where eligibility allows, but each submission must reflect distinct evidence and impact relevant to that category. The NRC may consolidate duplicate submissions.",
+        a: "Yes, where eligibility allows, but each submission must reflect distinct evidence and impact relevant to that category. The NRRC may consolidate duplicate submissions.",
       },
       {
         q: "Are there regional, national and continental categories?",
@@ -302,11 +302,11 @@ export const PAGE_FAQS: PageFAQ[] = [
       },
       {
         q: "Can I edit a nomination after submission?",
-        a: "Limited edits are allowed before NRC review begins. After review starts, updates are handled by contacting the secretariat at [CONFIRM EMAIL].",
+        a: "Limited edits are allowed before NRRC review begins. After review starts, updates are handled by contacting the secretariat at [CONFIRM EMAIL].",
       },
       {
         q: "What happens after I submit?",
-        a: "The submission enters the NRC review queue, is screened against the EDI pillars, and — if eligible — is published in the public nominee directory.",
+        a: "The submission enters the NRRC review queue, is screened against the EDI pillars, and — if eligible — is published in the public nominee directory.",
       },
       {
         q: "How will nominees be contacted?",
@@ -337,7 +337,7 @@ export const PAGE_FAQS: PageFAQ[] = [
     faqs: [
       {
         q: "What is public voting?",
-        a: "There is no public voting in the NESA-Africa 2026 cycle. Recognition is decided by NRC verification, EDI Matrix assessment, independent judging and governance ratification.",
+        a: "There is no public voting in the NESA-Africa 2026 cycle. Recognition is decided by NRRC verification, EDI Matrix assessment, independent judging and governance ratification.",
       },
       {
         q: "Who can vote?",
@@ -353,7 +353,7 @@ export const PAGE_FAQS: PageFAQ[] = [
       },
       {
         q: "Does public voting alone determine winners?",
-        a: "No. There is no public voting in 2026; recognition is decided by NRC verification, independent jury review and governance approval.",
+        a: "No. There is no public voting in 2026; recognition is decided by NRRC verification, independent jury review and governance approval.",
       },
       {
         q: "How does NESA-Africa prevent manipulation?",
@@ -393,7 +393,7 @@ export const PAGE_FAQS: PageFAQ[] = [
       },
       {
         q: "What information appears on a nominee profile?",
-        a: "Name, category, region, profile photo, impact summary, optional media, supporter actions (where applicable) and a verification badge once NRC review is complete.",
+        a: "Name, category, region, profile photo, impact summary, optional media, supporter actions (where applicable) and a verification badge once NRRC review is complete.",
       },
       {
         q: "How can a nominee update their profile?",
@@ -409,7 +409,7 @@ export const PAGE_FAQS: PageFAQ[] = [
       },
       {
         q: "Does a profile guarantee finalist or winner status?",
-        a: "No. A profile confirms eligibility and NRC verification only. Finalist and winner status follow the governance, jury and (where applicable) independent jury review process.",
+        a: "No. A profile confirms eligibility and NRRC verification only. Finalist and winner status follow the governance, jury and (where applicable) independent jury review process.",
       },
       {
         q: "Can sponsors contact nominees directly?",
@@ -735,7 +735,7 @@ export const PAGE_FAQS: PageFAQ[] = [
       },
       {
         q: "How are schools selected?",
-        a: "Communities nominate, the jury review and the NRC plus the EduAid-Africa technical team verify needs against the EDI matrix before funding is released.",
+        a: "Communities nominate, the jury review and the NRRC plus the EduAid-Africa technical team verify needs against the EDI matrix before funding is released.",
       },
       {
         q: "What safeguarding rules apply?",
@@ -1025,7 +1025,7 @@ export const PAGE_FAQS: PageFAQ[] = [
       { q: "What is the nominee directory?", a: "A public directory of verified NESA-Africa 2026 nominees by category, region and tier." },
       { q: "How do I find a nominee?", a: "Use the search, category filters and regional filters to navigate the directory." },
       { q: "How do I support a nominee?", a: "Open the nominee profile, share it on social media and vote during official voting windows." },
-      { q: "Are all listed nominees verified?", a: "Yes. Listed nominees have completed NRC verification under the 5-pillar EDI framework." },
+      { q: "Are all listed nominees verified?", a: "Yes. Listed nominees have completed NRRC verification under the 5-pillar EDI framework." },
     ],
   },
   {
@@ -1076,6 +1076,21 @@ export function getFAQsForPath(pathname: string): PageFAQ {
 // =============================================================
 export const FULL_FAQ_GROUPS: FAQGroup[] = [
   {
+    title: "Approved 2026 answers",
+    description: "Nomination, review and recognition integrity.",
+    faqs: [
+      { q: "Is nomination free?", a: "Yes. NESA-Africa does not charge a nomination fee." },
+      { q: "Does nomination guarantee recognition?", a: "No. Nomination begins a review process." },
+      { q: "Is there public voting in 2026?", a: "No. There is no public or AGC voting in the NESA-Africa 2026 awards." },
+      { q: "Who conducts nominee research?", a: "The Nominee Research and Review Corps conducts contact verification, consent, interviews, evidence research, profile preparation and preliminary review." },
+      { q: "Who makes the Icon decisions?", a: "Nine independent judges assess eligible Africa Education Icon dossiers." },
+      { q: "Can sponsors influence recognition?", a: "No. Sponsorship, donations and partnerships carry zero judging weight." },
+      { q: "Is the 2026 programme a physical gala?", a: "No public physical gala is currently authorised. The programme is scheduled to take place online on 13 December 2026." },
+      { q: "Is special-needs-school voting part of the awards?", a: "No. Any authorised 2027 regional school selection belongs to the EduAid-Africa intervention programme and is separate from NESA-Africa recognition." },
+      { q: "Does donating create votes?", a: "No. Donations must not purchase votes or influence school eligibility or NESA-Africa recognition." },
+    ],
+  },
+  {
     title: "A. General NESA-Africa",
     description:
       'New Education Standard Award Africa (NESA-Africa) and the motto "The African Blue-Garnet Awards for Recognising Africa’s Education Enablers".',
@@ -1121,7 +1136,7 @@ export const FULL_FAQ_GROUPS: FAQGroup[] = [
     description: "How nominations and assessment work.",
     faqs: [
       { q: "Who can be nominated?", a: "Educators, schools, NGOs, corporations, governments, foundations, influencers, media houses, diaspora communities and Friends of Africa." },
-      { q: "How are nominees verified?", a: "By the independent Nomination Review Committee (NRC) against the 5-pillar Education Development Index." },
+      { q: "How are nominees verified?", a: "By the independent Nomination Review Committee (NRRC) against the 5-pillar Education Development Index." },
       { q: "How does public voting work?", a: "There is no public voting in the 2026 cycle. Recognition is decided by verification, assessment, judging and governance ratification." },
       { q: "When does voting open?", a: "Gold Certificate [CONFIRM DATE] – [CONFIRM DATE]; Blue Garnet [CONFIRM DATE] – [CONFIRM DATE]." },
     ],

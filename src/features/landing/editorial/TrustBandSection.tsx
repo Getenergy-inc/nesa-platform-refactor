@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 const PILLARS = [
   {
     num: "01",
-    title: "Independent NRC Verification",
+    title: "Independent NRRC Verification",
     body:
-      "Every nomination researched and verified by our Nominee Research Corps before review.",
+      "Every nomination researched and verified by our Nominee Research and Review Corps before review.",
   },
   {
     num: "02",
@@ -16,7 +16,7 @@ const PILLARS = [
     num: "03",
     title: "No Public Voting in 2026",
     body:
-      "Nine independent Icon judges and nine Icon NRC members. Nomination is free.",
+      "Nine independent Icon judges and nine Icon NRRC members. Nomination is free.",
   },
 ];
 
@@ -34,7 +34,7 @@ export function TrustBandSection() {
           ))}
         </div>
         <p className="ed-disclaimer">
-          Recognition Cannot Be Bought. Nomination is free. Sponsorship, donations, partnerships, endorsements, publicity and media participation do not influence eligibility, scoring, judging or recognition decisions. <Link to="/governance">Read our integrity policy →</Link>
+          Recognition Cannot Be Bought. Nomination is free. Sponsorship, donations, partnerships, endorsements, publicity, webinars, podcasts and media participation carry zero weight in eligibility, judging or recognition decisions. <Link to="/about/governance">Read Governance and Integrity →</Link>
         </p>
       </div>
     </section>

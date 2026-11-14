@@ -49,11 +49,10 @@ export default function Policies() {
                 Transparency & Accountability
               </Badge>
               <h1 className="font-display text-3xl md:text-5xl font-bold text-white mb-4">
-                Policies & <span className="text-gold">Guidelines</span>
+                Policies and <span className="text-gold">Programme Standards</span>
               </h1>
               <p className="text-white/70 text-lg">
-                Our commitment to transparency, integrity, and ethical governance in recognizing 
-                Africa's education enablers.
+                The policy library explains how NESA-Africa manages nominations, research, judging, data, partnerships and public communications.
               </p>
               <p className="text-white/50 text-sm mt-4">
                 Last updated: {LAST_UPDATED}
@@ -218,14 +217,14 @@ export default function Policies() {
                     </div>
                   </PolicyBlock>
 
-                  <PolicyBlock title="4. Voting Guidelines" icon={Users}>
+                  <PolicyBlock title="4. Assessment and Decision Guidelines" icon={Users}>
                     <p className="text-muted-foreground mb-4">
-                      Voting participants must:
+                      Independent Icon judges and authorised reviewers must:
                     </p>
                     <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
-                      <li>Vote only once per nominee per voting period</li>
-                      <li>Not use automated systems or bots to cast votes</li>
-                      <li>Not attempt to manipulate voting outcomes</li>
+                      <li>Assess only eligible dossiers assigned through the authorised process</li>
+                      <li>Not use unauthorised automated systems to produce final assessments</li>
+                      <li>Not attempt to manipulate assessment or recognition outcomes</li>
                       <li>Not purchase or sell votes</li>
                     </ul>
                   </PolicyBlock>
@@ -272,9 +271,9 @@ export default function Policies() {
                     </ul>
                   </PolicyBlock>
 
-                  <PolicyBlock title="2. Nomination Review Committee (NRC)" icon={Users}>
+                  <PolicyBlock title="2. Nominee Research and Review Corps (NRRC)" icon={Users}>
                     <p className="text-muted-foreground mb-4">
-                      The NRC is responsible for:
+                      The NRRC is responsible for:
                     </p>
                     <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
                       <li>Reviewing and verifying all nominations</li>
@@ -283,7 +282,7 @@ export default function Policies() {
                       <li>Documenting review decisions with supporting rationale</li>
                     </ul>
                     <p className="text-muted-foreground mt-4">
-                      NRC members are bound by strict confidentiality agreements and must disclose 
+                      NRRC members are bound by strict confidentiality agreements and must disclose 
                       any potential conflicts of interest.
                     </p>
                   </PolicyBlock>
@@ -301,7 +300,7 @@ export default function Policies() {
                     <div className="mt-4 p-4 bg-primary/5 rounded-lg border border-primary/20">
                       <p className="text-sm text-foreground flex items-start gap-2">
                         <Shield className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                        <span>Jury members, NRC reviewers, and staff must complete COI disclosure forms before participating in award processes.</span>
+                        <span>Jury members, NRRC reviewers, and staff must complete COI disclosure forms before participating in award processes.</span>
                       </p>
                     </div>
                   </PolicyBlock>
@@ -327,8 +326,8 @@ export default function Policies() {
                     </p>
                     <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
                       <li>Nomination status changes (approval, rejection, escalation)</li>
-                      <li>Stage configuration changes (opening/closing voting periods)</li>
-                      <li>Vote submissions and jury scoring</li>
+                      <li>Stage configuration changes (opening/closing authorised review periods)</li>
+                      <li>Assessment submissions and judge scoring</li>
                       <li>Certificate issuance and verification</li>
                       <li>User role assignments and changes</li>
                     </ul>
@@ -345,9 +344,9 @@ export default function Policies() {
                     </p>
                     <ul className="list-disc pl-6 space-y-2 text-muted-foreground mt-4">
                       <li>Nomination submissions or nominee data</li>
-                      <li>Voting records or real-time results</li>
+                      <li>Judge assessments or real-time decision records</li>
                       <li>Jury deliberations or scoring</li>
-                      <li>NRC review processes or decisions</li>
+                      <li>NRRC review processes or decisions</li>
                     </ul>
                     <p className="text-muted-foreground mt-4">
                       This ensures award outcomes reflect genuine merit, not financial influence.
@@ -385,7 +384,7 @@ export default function Policies() {
                     <div className="mt-4 p-4 bg-primary/5 rounded-lg border border-primary/20">
                       <p className="text-sm text-foreground flex items-start gap-2">
                         <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                        <span>Certificates are available for download immediately after approval by the Nomination Review Committee (NRC).</span>
+                        <span>Certificates are available for download immediately after approval by the Nominee Research and Review Corps (NRRC).</span>
                       </p>
                     </div>
                   </PolicyBlock>
@@ -451,7 +450,7 @@ export default function Policies() {
                     <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
                       <li><strong>45-day reminder:</strong> You'll receive an email notification before expiry</li>
                       <li><strong>Renewal application:</strong> Submit updated evidence of continued excellence</li>
-                      <li><strong>NRC review:</strong> Your renewal is reviewed by the Nomination Review Committee</li>
+                      <li><strong>NRRC review:</strong> Your renewal is reviewed by the Nominee Research and Review Corps</li>
                       <li><strong>New certificate:</strong> Upon approval, a new 1-year certificate is issued</li>
                     </ul>
                     <div className="mt-4 p-4 bg-primary/5 rounded-lg border border-primary/20">
@@ -479,7 +478,7 @@ export default function Policies() {
                       If you're unable to download your certificate:
                     </p>
                     <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
-                      <li><strong>Check approval status:</strong> Ensure your nomination has been approved by NRC</li>
+                      <li><strong>Check approval status:</strong> Ensure your nomination has been approved by NRRC</li>
                       <li><strong>Verify email:</strong> Confirm your email address is verified in account settings</li>
                       <li><strong>Browser compatibility:</strong> Try using Chrome, Firefox, or Safari</li>
                       <li><strong>Disable blockers:</strong> Temporarily disable popup blockers or ad blockers</li>

@@ -27,7 +27,7 @@ const STATUS_STYLE: Record<NonNullable<NRCArenaPageProps["status"]>, string> = {
 
 export function NRCArenaPage({
   title,
-  eyebrow = "NRC Arena",
+  eyebrow = "NRRC Arena",
   description,
   status = "restricted",
   breadcrumb,
@@ -36,11 +36,11 @@ export function NRCArenaPage({
 }: NRCArenaPageProps) {
   return (
     <NRCArenaLayout>
-      <ArenaSeo workspace="NRC Arena" title={title} description={description} />
+      <ArenaSeo workspace="NRRC Arena" title={title} description={description} />
 
       {breadcrumb && breadcrumb.length > 0 && (
         <nav aria-label="Breadcrumb" className="mb-3 flex items-center gap-1.5 text-xs text-white/50">
-          <Link to="/nrc/dashboard" className="hover:text-gold">Dashboard</Link>
+          <Link to="/nrrc/dashboard" className="hover:text-gold">Dashboard</Link>
           {breadcrumb.map((b, i) => (
             <span key={i} className="inline-flex items-center gap-1.5">
               <ChevronRight className="h-3 w-3" aria-hidden />

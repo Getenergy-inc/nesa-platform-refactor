@@ -137,7 +137,7 @@ export default function CategoryDetailPage() {
               </span>
               <span className="opacity-30">•</span>
               <span className="inline-flex items-center gap-2">
-                <ShieldCheck className="h-4 w-4 text-gold" /> NRC Verified
+                <ShieldCheck className="h-4 w-4 text-gold" /> NRRC Verified
               </span>
             </div>
 
@@ -252,7 +252,7 @@ export default function CategoryDetailPage() {
                 Nominate for {category.name}
               </h2>
               <p className="mx-auto mt-3 max-w-2xl text-sm text-ivory/70">
-                Submit a nomination directly — NRC will evidence-check the entry
+                Submit a nomination directly — NRRC will evidence-check the entry
                 before it enters public review.{" "}
                 <span className="text-gold">{BRAND_TAGLINE}</span>.
               </p>

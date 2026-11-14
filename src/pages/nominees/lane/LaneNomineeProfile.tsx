@@ -76,7 +76,7 @@ export default function LaneNomineeProfile() {
         {!loading && !error && (
           <p className="mt-3 text-ivory/60">
             The nominee record you are looking for is still in verification with the
-            Nominee Research Corps, or the link has changed.
+            Nominee Research and Review Corps, or the link has changed.
           </p>
         )}
         {!loading && (
@@ -161,7 +161,7 @@ export default function LaneNomineeProfile() {
                   </p>
                   {profile.nrc_verified && (
                     <Badge className="border-0 bg-gold/15 text-gold">
-                      <ShieldCheck className="mr-1 h-3 w-3" /> NRC verified
+                      <ShieldCheck className="mr-1 h-3 w-3" /> NRRC verified
                     </Badge>
                   )}
                   {profile.website && (

@@ -45,10 +45,10 @@ export function NRCOnboardingGate({ children }: { children: ReactNode }) {
           <Lock className="mx-auto mb-3 h-8 w-8 text-gold" aria-hidden />
           <h1 className="font-display text-lg font-bold">Onboarding not complete</h1>
           <p className="mt-2 text-sm text-white/70">
-            Your review queue unlocks once every NRC compliance step is complete.
+            Your review queue unlocks once every NRRC compliance step is complete.
           </p>
           <Button asChild className="mt-4 bg-gold text-charcoal hover:bg-gold/90">
-            <Link to="/nrc/onboarding">Go to onboarding</Link>
+            <Link to="/nrrc/onboarding">Go to onboarding</Link>
           </Button>
         </div>
       </div>

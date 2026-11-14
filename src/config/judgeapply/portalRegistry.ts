@@ -74,16 +74,16 @@ const ABOUT: PortalArea = {
   icon: Info,
   tagline: "One portal. Two integrity engines.",
   intro:
-    "NESA-Africa 2026 is verified by two independent integrity engines — the Nominee Research Corps (NRC) and the Judges Panels. This portal explains how they are structured, how they safeguard integrity, and how you can serve.",
+    "NESA-Africa 2026 is verified by two independent integrity engines — the Nominee Research and Review Corps (NRRC) and the Judges Panels. This portal explains how they are structured, how they safeguard integrity, and how you can serve.",
   landing: {
     highlights: [
       {
         title: "Independent by design",
-        body: "The NRC verifies evidence. The Judges deliberate on merit. Neither can override the other.",
+        body: "The NRRC verifies evidence. The Judges deliberate on merit. Neither can override the other.",
         icon: ShieldCheck,
       },
       {
-        title: "Two-phase NRC pipeline",
+        title: "Two-phase NRRC pipeline",
         body: "Phase One is automated intake, screening, classification and routing. Phase Two is human research, verification, quality review and handover.",
         icon: Workflow,
       },
@@ -102,21 +102,21 @@ const ABOUT: PortalArea = {
     {
       slug: "structure",
       title: "Portal Structure",
-      short: "How the portal is organised across About, Judges and NRC.",
+      short: "How the portal is organised across About, Judges and NRRC.",
       icon: Layers,
       sections: [
         {
           heading: "One portal, three destinations",
           body:
-            "The /judgeapply portal groups everything volunteers, recommenders and applicants need across three destinations — About, Judges and NRC. Each destination has a landing page and a set of supporting pages.",
+            "The /judgeapply portal groups everything volunteers, recommenders and applicants need across three destinations — About, Judges and NRRC. Each destination has a landing page and a set of supporting pages.",
         },
         {
-          heading: "Judges and NRC are separate",
+          heading: "Judges and NRRC are separate",
           body:
-            "Judges deliberate on shortlisted nominees. The Nominee Research Corps (NRC) verifies evidence before shortlisting. These are separate rosters with separate governance, service standards and access controls.",
+            "Judges deliberate on shortlisted nominees. The Nominee Research and Review Corps (NRRC) verifies evidence before shortlisting. These are separate rosters with separate governance, service standards and access controls.",
           bullets: [
             "Judges are recommended, screened and invited — never self-appointed.",
-            "NRC members are trained researchers who follow a documented two-phase process.",
+            "NRRC members are trained researchers who follow a documented two-phase process.",
             "Dashboards for both are gated behind authenticated, role-based routes.",
           ],
         },
@@ -131,7 +131,7 @@ const ABOUT: PortalArea = {
         {
           heading: "Firewalled decision-making",
           body:
-            "Evidence review (NRC) and merit deliberation (Judges) are firewalled. NRC members do not score. Judges do not curate evidence. Conflicts of interest are declared and enforced at the assignment layer.",
+            "Evidence review (NRRC) and merit deliberation (Judges) are firewalled. NRRC members do not score. Judges do not curate evidence. Conflicts of interest are declared and enforced at the assignment layer.",
         },
         {
           heading: "Auditable at every step",
@@ -152,9 +152,9 @@ const ABOUT: PortalArea = {
             "Judges are recommended and invited. You can submit your interest and be recommended by an accredited institution or existing judge.",
         },
         {
-          heading: "Is joining the NRC the same as becoming a judge?",
+          heading: "Is joining the NRRC the same as becoming a judge?",
           body:
-            "No. The NRC is a separate research corps. Members verify evidence and never issue scores. Judges deliberate on shortlisted nominees.",
+            "No. The NRRC is a separate research corps. Members verify evidence and never issue scores. Judges deliberate on shortlisted nominees.",
         },
         {
           heading: "Does this portal grant me access to dashboards?",
@@ -284,12 +284,12 @@ const JUDGES: PortalArea = {
 
 const NRC: PortalArea = {
   id: "nrc",
-  label: "NRC",
+  label: "NRRC",
   path: "/judgeapply/nrc",
   icon: Users,
   tagline: "Verification. Evidence. Integrity. Impact.",
   intro:
-    "The Nominee Research Corps (NRC) verifies, curates and validates every nomination before it reaches the Judges. Our two-phase process combines automated intake with rigorous human review.",
+    "The Nominee Research and Review Corps (NRRC) verifies, curates and validates every nomination before it reaches the Judges. Our two-phase process combines automated intake with rigorous human review.",
   landing: {
     highlights: [
       {
@@ -299,17 +299,17 @@ const NRC: PortalArea = {
       },
       {
         title: "Phase Two — Human",
-        body: "Trained NRC members research, verify, quality-check and hand over qualified dossiers.",
+        body: "Trained NRRC members research, verify, quality-check and hand over qualified dossiers.",
         icon: ClipboardCheck,
       },
       {
         title: "Tiered teams",
-        body: "NRC teams are aligned to the four recognition tiers, with dedicated leads for evidence and quality.",
+        body: "NRRC teams are aligned to the four recognition tiers, with dedicated leads for evidence and quality.",
         icon: Building2,
       },
     ],
     ctas: [
-      { label: "Join the NRC", to: "/judgeapply/nrc/join", variant: "primary" },
+      { label: "Join the NRRC", to: "/judgeapply/nrc/join", variant: "primary" },
       { label: "Our process", to: "/judgeapply/nrc/process", variant: "secondary" },
     ],
   },
@@ -317,21 +317,21 @@ const NRC: PortalArea = {
     {
       slug: "process",
       title: "Our Process",
-      short: "The two-phase NRC pipeline in detail.",
+      short: "The two-phase NRRC pipeline in detail.",
       icon: Workflow,
       sections: [
         {
           heading: "Phase One — Automated intake",
           body:
-            "Nominations are ingested, de-duplicated, screened for eligibility, classified by tier and category and routed to the correct NRC team.",
+            "Nominations are ingested, de-duplicated, screened for eligibility, classified by tier and category and routed to the correct NRRC team.",
         },
         {
           heading: "Phase Two — Human verification",
           body:
-            "NRC members research the nominee, verify evidence, run a documented quality review and hand over the dossier to the appropriate Judges panel.",
+            "NRRC members research the nominee, verify evidence, run a documented quality review and hand over the dossier to the appropriate Judges panel.",
           bullets: [
             "Lead reviewer, evidence reviewer and quality reviewer roles per case.",
-            "Every action is logged in the NRC audit trail.",
+            "Every action is logged in the NRRC audit trail.",
             "Handovers to Judges are gated on quality-review sign-off.",
           ],
         },
@@ -339,21 +339,21 @@ const NRC: PortalArea = {
     },
     {
       slug: "tiers",
-      title: "NRC Teams by Tier",
-      short: "How NRC teams map to the four recognition tiers.",
+      title: "NRRC Teams by Tier",
+      short: "How NRRC teams map to the four recognition tiers.",
       icon: Layers,
       sections: [
         {
           heading: "Aligned to recognition tiers",
           body:
-            "Dedicated NRC teams serve Africa Education Icon (Tier 1), Gold-Blue Garnet (Tier 2), Platinum Recognition (Tier 3) and Influencer Education Impact (Tier 4).",
+            "Dedicated NRRC teams serve Africa Education Icon (Tier 1), Gold-Blue Garnet (Tier 2), Platinum Recognition (Tier 3) and Influencer Education Impact (Tier 4).",
         },
       ],
     },
     {
       slug: "service",
-      title: "NRC Service Standards",
-      short: "The commitments every NRC member makes.",
+      title: "NRRC Service Standards",
+      short: "The commitments every NRRC member makes.",
       icon: Scale,
       sections: [
         {
@@ -365,8 +365,8 @@ const NRC: PortalArea = {
     },
     {
       slug: "join",
-      title: "Join the NRC",
-      short: "Submit your interest in joining the Nominee Research Corps.",
+      title: "Join the NRRC",
+      short: "Submit your interest in joining the Nominee Research and Review Corps.",
       icon: Handshake,
       sections: [
         {
@@ -377,27 +377,27 @@ const NRC: PortalArea = {
         {
           heading: "How to apply",
           body:
-            "Submit your interest via the standard NRC application form. Selected candidates are trained on the NRC protocol before receiving assignments.",
+            "Submit your interest via the standard NRRC application form. Selected candidates are trained on the NRRC protocol before receiving assignments.",
         },
       ],
       cta: [
-        { label: "Open NRC application form", to: "/judge-apply", variant: "primary" },
+        { label: "Open NRRC application form", to: "/judge-apply", variant: "primary" },
       ],
     },
     {
       slug: "access",
-      title: "NRC Access",
-      short: "Secure sign-in for onboarded NRC members.",
+      title: "NRRC Access",
+      short: "Secure sign-in for onboarded NRRC members.",
       icon: Lock,
       sections: [
         {
           heading: "Restricted access",
           body:
-            "Only onboarded NRC members may sign in. Access is protected by authenticated role-based checks. This public page does not grant access on its own.",
+            "Only onboarded NRRC members may sign in. Access is protected by authenticated role-based checks. This public page does not grant access on its own.",
         },
       ],
       cta: [
-        { label: "Go to NRC Sign-In", to: "/nrc", variant: "primary" },
+        { label: "Go to NRRC Sign-In", to: "/nrrc", variant: "primary" },
       ],
     },
   ],

@@ -178,7 +178,7 @@
       "items": {
         "platinum": {
           "title": "Platinum",
-          "description": "Non-competitive. NRC verification + governance checks."
+          "description": "Non-competitive. NRRC verification + governance checks."
         },
         "gold": {
           "title": "Gold Stage",
@@ -312,7 +312,7 @@
       "tagline": "Your mentor. Your school founder. Your NGO leader. Your innovator. Your education impact hero.",
       "ecosystemKicker": "The Ecosystem",
       "ecosystemTitle": "Nominate the 2026 Honourees Shaping Africa's Future",
-      "valueProposition": "Across Africa and the diaspora, changemakers are transforming education through advocacy, innovation, funding, infrastructure, mentorship, technology, policy, community action, and social impact. Now is the time to recognise them. Nominate a changemaker for 2026 today — every submission enters independent NRC verification and EDI Matrix review.",
+      "valueProposition": "Across Africa and the diaspora, changemakers are transforming education through advocacy, innovation, funding, infrastructure, mentorship, technology, policy, community action, and social impact. Now is the time to recognise them. Nominate a changemaker for 2026 today — every submission enters independent NRRC verification and EDI Matrix review.",
       "nominateNow": "Nominate for 2026",
       "voteWithAGC": "Earn AGC",
       "watchLive": "Watch Live",
@@ -494,7 +494,7 @@
       "description": "Four distinct recognition platforms, each with unique criteria and selection processes.",
       "platinum": {
         "title": "Platinum Certificate",
-        "description": "Baseline recognition for service contribution to Education for All. Non-competitive, NRC verified, valid for 1 year."
+        "description": "Baseline recognition for service contribution to Education for All. Non-competitive, NRRC verified, valid for 1 year."
       },
       "icon": {
         "title": "Africa Education Icon",
@@ -971,7 +971,7 @@
       "acceptance": {
         "title": "Acceptance",
         "subtitle": "For Nominees",
-        "description": "NRC screening process, acceptance journey, and nominee dashboard status tracking.",
+        "description": "NRRC screening process, acceptance journey, and nominee dashboard status tracking.",
         "badge": "Step 2"
       },
       "judges": {
@@ -1180,7 +1180,7 @@
     },
     "nesaAfrica": {
       "title": "NESA-Africa 2026 | Honoring Africa's Education Changemakers",
-      "description": "Join NESA-Africa 2026 — nominate education changemakers, track independent NRC verification, discover nominees, and explore award categories driving Pan-African education impact.",
+      "description": "Join NESA-Africa 2026 — nominate education changemakers, track independent NRRC verification, discover nominees, and explore award categories driving Pan-African education impact.",
       "ogTitle": "NESA-Africa 2026 — Honoring Africa's Education Changemakers",
       "ogDescription": "The Pan-African education recognition movement — nominate, nominate, and discover changemakers across 10 African regions.",
       "keywords": "NESA-Africa 2026, Africa education awards, education changemakers, independent verification, Pan-African education impact, nominations, award categories"

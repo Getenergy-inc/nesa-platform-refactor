@@ -35,13 +35,13 @@ export default function NRCOnboarding() {
 
   return (
     <NRCArenaLayout>
-      <Helmet><title>NRC Onboarding · NESA-Africa 2026</title></Helmet>
+      <Helmet><title>NRRC Onboarding · NESA-Africa 2026</title></Helmet>
       <header className="mb-6">
         <p className="text-xs uppercase tracking-wider text-gold/80">Onboarding centre</p>
         <h1 className="font-display text-2xl font-bold">Appointment &amp; compliance</h1>
         <p className="text-white/65 mt-1 text-sm">
           All eleven compliance steps must be completed before your review queue unlocks. Activation
-          is then confirmed by NRC leadership.
+          is then confirmed by NRRC leadership.
         </p>
       </header>
 
@@ -63,9 +63,9 @@ export default function NRCOnboarding() {
           <Lock className="h-4 w-4" />
           <AlertTitle>No onboarding record yet</AlertTitle>
           <AlertDescription>
-            An onboarding checklist is created when you redeem an NRC invitation. If you have an
-            invitation, <Link to="/nrc/redeem" className="text-gold underline">redeem it here</Link>.
-            Otherwise you can <Link to="/nrc/apply" className="text-gold underline">apply to join the NRC</Link>.
+            An onboarding checklist is created when you redeem an NRRC invitation. If you have an
+            invitation, <Link to="/nrrc/redeem" className="text-gold underline">redeem it here</Link>.
+            Otherwise you can <Link to="/nrrc/apply" className="text-gold underline">apply to join the NRRC</Link>.
           </AlertDescription>
         </Alert>
       ) : (
@@ -78,7 +78,7 @@ export default function NRCOnboarding() {
             <Progress value={(doneCount / selfSteps.length) * 100} className="mt-2 h-2" />
             {complete && !row.activated && (
               <p className="mt-3 text-xs text-emerald-300">
-                All compliance steps complete — awaiting activation by NRC leadership.
+                All compliance steps complete — awaiting activation by NRRC leadership.
               </p>
             )}
             {row.activated && (

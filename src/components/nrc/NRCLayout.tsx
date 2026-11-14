@@ -28,10 +28,10 @@ interface NRCLayoutProps {
 }
 
 const navItems = [
-  { href: "/nrc", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/nrc/my-queue", label: "My Queue", icon: ClipboardList },
-  { href: "/nrc/members", label: "Members", icon: Users },
-  { href: "/nrc/settings", label: "Settings", icon: Settings },
+  { href: "/nrrc", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/nrrc/my-queue", label: "My Queue", icon: ClipboardList },
+  { href: "/nrrc/members", label: "Members", icon: Users },
+  { href: "/nrrc/settings", label: "Settings", icon: Settings },
 ];
 
 export function NRCLayout({ children }: NRCLayoutProps) {
@@ -41,17 +41,17 @@ export function NRCLayout({ children }: NRCLayoutProps) {
 
   const isActive = (href: string) =>
     location.pathname === href ||
-    (href !== "/nrc" && location.pathname.startsWith(href));
+    (href !== "/nrrc" && location.pathname.startsWith(href));
 
   return (
     <div className="min-h-screen bg-arena-bg text-arena-text">
-      <ArenaSeo workspace="NRC Arena" />
+      <ArenaSeo workspace="NRRC Arena" />
       <div className="flex min-h-screen w-full">
         <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-arena-rail lg:block">
           <div className="sticky top-0 flex h-screen flex-col overflow-y-auto">
             <ArenaExitRailLink />
-            <ArenaBrand workspace="NRC Arena" to="/nrc" />
-            <nav aria-label="NRC portal" className="flex-1 space-y-1 px-3">
+            <ArenaBrand workspace="NRRC Arena" to="/nrrc" />
+            <nav aria-label="NRRC portal" className="flex-1 space-y-1 px-3">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
@@ -74,25 +74,25 @@ export function NRCLayout({ children }: NRCLayoutProps) {
 
         <div className="flex min-w-0 flex-1 flex-col">
           <ArenaTopBar
-            title="NESA-Africa NRC Arena"
+            title="NESA-Africa NRRC Arena"
             subtitle="Verification · Research · Evidence · Handover"
             statusLabel="Verification Live"
             statusDetail={currentEdition.name}
             statusTone="live"
-            identityName={user?.email ?? "NRC Member"}
-            identityRole="NRC Member"
+            identityName={user?.email ?? "NRRC Member"}
+            identityRole="NRRC Member"
             notifications={3}
             actions={<ArenaExitButton />}
           />
 
           <main className="min-w-0 flex-1 px-4 py-6 pb-24 sm:px-6 lg:pb-16">{children}</main>
-          <ArenaFooter workspace="NRC Arena" />
+          <ArenaFooter workspace="NRRC Arena" />
         </div>
       </div>
 
       {/* Mobile navigation */}
       <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-white/10 bg-arena-rail lg:hidden">
-        <nav aria-label="NRC portal (mobile)" className="flex justify-around py-2">
+        <nav aria-label="NRRC portal (mobile)" className="flex justify-around py-2">
           {navItems.map((item) => (
             <Link
               key={item.href}

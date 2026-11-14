@@ -39,7 +39,7 @@ export const WORKFLOW_STATUS_CONFIG: Record<NomineeWorkflowStatus, { label: stri
   nomination_submitted: { label: "Nomination Submitted", color: "bg-blue-500/20 text-blue-400", step: 1, description: "Nomination received and registered in the NESA system." },
   eligibility_screening: { label: "Eligibility Screening", color: "bg-amber-500/20 text-amber-400", step: 2, description: "Automated screening of eligibility criteria and documentation completeness." },
   documentation_verification: { label: "Documentation Verification", color: "bg-orange-500/20 text-orange-400", step: 3, description: "Evidence and supporting documents under independent verification." },
-  nrc_review: { label: "NRC Expert Review", color: "bg-purple-500/20 text-purple-400", step: 4, description: "Nominee Research Corps conducting 2-of-3 quorum expert review." },
+  nrc_review: { label: "NRRC Expert Review", color: "bg-purple-500/20 text-purple-400", step: 4, description: "Nominee Research and Review Corps conducting 2-of-3 quorum expert review." },
   nomination_cleared: { label: "Nomination Cleared", color: "bg-emerald-500/20 text-emerald-400", step: 5, description: "Nominee verified and cleared for independent jury review and recognition." },
   rejected: { label: "Rejected", color: "bg-red-500/20 text-red-400", step: 0, description: "Nomination did not meet eligibility requirements." },
 };

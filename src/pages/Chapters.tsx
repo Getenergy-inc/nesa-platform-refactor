@@ -27,12 +27,12 @@ import { useChapterRegionCounts } from "@/hooks/useChapterRegionCounts";
 const AFRICA_REGION_LIST = listAfricaRegions();
 
 const chapterBenefits = [
-  "Lead nominations in your country",
-  "Host regional recognition events",
-  "Build local educator networks",
-  "Access exclusive training programs",
-  "Represent NESA at national forums",
-  "Coordinate with Ministry of Education"
+  "Promote verified programme information",
+  "Encourage credible nominations",
+  "Coordinate authorised volunteers",
+  "Support interviews and local research",
+  "Organise education learning activities",
+  "Support EduAid-Africa interventions and report local education needs"
 ];
 
 const chapterRoles = [
@@ -74,7 +74,7 @@ export default function Chapters() {
               SCEF Africa Local Chapters · International Friends of EduAid-Africa
             </Badge>
             <h1 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-              SCEF Africa Local Chapters <span className="text-gold">& International Friends of EduAid-Africa</span>
+              NESA-Africa and SCEF <span className="text-gold">Local Chapters</span>
             </h1>
             <p className="text-lg text-white/70 mb-4">
               The chapter network of the <span className="text-gold">Santos Creations
@@ -82,21 +82,18 @@ export default function Chapters() {
               NESA-Africa.
             </p>
             <p className="text-xl text-white/70 mb-8">
-              {REGIONAL_TAGLINE} <span className="text-gold">SCEF Africa Local Chapters</span> anchor
-              the work across the eight Africa regions, while <span className="text-gold">International
-              Friends of EduAid-Africa</span> chapters mobilise global support to fund, verify and
-              celebrate the Education Enablers advancing Education for All.
+              Local chapters connect education enablers, volunteers, institutions and supporters within African countries and Diaspora communities. Chapters support awareness, credible nominations, education activities and post-recognition programmes. They do not verify nominees, appoint judges or influence recognition decisions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-semibold" asChild>
                 <Link to="/contact">
                   <Flag className="w-5 h-5 mr-2" />
-                  Start a Local Chapter
+                  Apply to Establish a Chapter
                 </Link>
               </Button>
               <Button size="lg" variant="outline" className="border-gold/50 text-gold hover:bg-gold/10" asChild>
                 <Link to="/impact/friends-of-eduaid-africa">
-                  Join International Friends
+                  Join a Local Chapter
                 </Link>
               </Button>
             </div>
@@ -316,22 +313,21 @@ export default function Chapters() {
       <section className="py-16 border-t border-gold/10 bg-gradient-to-r from-gold/5 to-gold/10">
         <div className="container mx-auto px-4 text-center">
           <Globe2 className="w-12 h-12 text-gold mx-auto mb-4" />
-          <h2 className="text-3xl font-display font-bold mb-4 text-white">Start or Join an SCEF Chapter</h2>
+          <h2 className="text-3xl font-display font-bold mb-4 text-white">Join a Local Chapter</h2>
           <p className="text-white/60 max-w-2xl mx-auto mb-8">
-            Lead an SCEF Africa Local Chapter in your country, or join the International Friends
-            of EduAid-Africa community from anywhere in the world.
+            Chapters cannot sell recognition, guarantee outcomes, collect unauthorised award fees, appoint judges, access judge scores, publish private nominee information, open accounts without approval or commit SCEF or NESA-Africa without authority.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact">
               <Button size="lg" className="bg-gold hover:bg-gold/90 text-charcoal font-semibold">
-                Apply to Lead a Local Chapter
+                Submit Chapter Application
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </Link>
             <Button size="lg" variant="outline" className="border-gold/50 text-gold hover:bg-gold/10" asChild>
               <Link to="/impact/friends-of-eduaid-africa">
                 <Mail className="w-5 h-5 mr-2" />
-                Join International Friends
+                Join a Local Chapter
               </Link>
             </Button>
           </div>

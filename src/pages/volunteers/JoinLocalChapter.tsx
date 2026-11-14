@@ -81,7 +81,7 @@ export default function JoinLocalChapter() {
             Join a Local Chapter
           </h1>
           <p className="text-white/70">
-            Become part of a community advancing education in your region.
+            Connect with education enablers and volunteers supporting responsible education recognition and impact in your community. Applying does not create automatic chapter membership or authority to represent NESA-Africa or SCEF.
           </p>
         </motion.div>
 
@@ -90,7 +90,7 @@ export default function JoinLocalChapter() {
             <CheckCircle2 className="h-12 w-12 text-emerald-400 mx-auto mb-4" />
             <h2 className="font-playfair text-2xl text-gold mb-2">Application Received</h2>
             <p className="text-white/70 mb-6">
-              A chapter coordinator will reach out within 5 business days.
+              Your application has been recorded. This confirms receipt only and does not create chapter membership or authority to represent NESA-Africa or SCEF.
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               <Button asChild className="bg-gold text-charcoal hover:bg-gold/90">
@@ -151,7 +151,7 @@ export default function JoinLocalChapter() {
               </div>
             </div>
             <Button type="submit" disabled={loading} size="lg" className="w-full bg-gold text-charcoal hover:bg-gold/90">
-              {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <>Submit Application <ArrowRight className="ml-2 h-4 w-4" /></>}
+              {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <>Submit Chapter Application <ArrowRight className="ml-2 h-4 w-4" /></>}
             </Button>
           </form>
         )}

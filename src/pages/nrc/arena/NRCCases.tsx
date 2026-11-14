@@ -46,7 +46,7 @@ export default function NRCCases() {
             {SAMPLE.map((c) => (
               <tr key={c.id} className="hover:bg-white/[0.04]">
                 <td className="px-3 py-3">
-                  <Link to={`/nrc/cases/${c.id}`} className="font-mono text-xs text-gold hover:underline">{c.id}</Link>
+                  <Link to={`/nrrc/cases/${c.id}`} className="font-mono text-xs text-gold hover:underline">{c.id}</Link>
                 </td>
                 <td className="px-3 py-3 font-medium text-white">{c.nominee}</td>
                 <td className="px-3 py-3 hidden md:table-cell text-white/70">{c.tier}<br /><span className="text-xs text-white/40">{c.cat}</span></td>
@@ -63,7 +63,7 @@ export default function NRCCases() {
       </div>
 
       <p className="mt-3 text-[11px] text-white/40">
-        Sample data shown. Live case routing arrives with Phase 3 (NRC schema) and Phase 4 (automation engine).
+        Sample data shown. Live case routing arrives with Phase 3 (NRRC schema) and Phase 4 (automation engine).
       </p>
     </NRCArenaPage>
   );

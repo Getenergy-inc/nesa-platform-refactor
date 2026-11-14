@@ -6,7 +6,7 @@ const PARENT = "/awards/influencers-education-impact";
 const url = (slug: string) => `${PARENT}/${slug}`;
 
 const review =
-  "NRC eligibility → influencer jury review (verifying campaigns, reach, authenticity, outcomes) → public engagement signal → final score.";
+  "NRRC eligibility → influencer jury review (verifying campaigns, reach, authenticity, outcomes) → public engagement signal → final score.";
 
 export const INFLUENCERS_CATEGORIES: AwardCategoryConfig[] = [
   {
@@ -40,7 +40,7 @@ export const INFLUENCERS_CATEGORIES: AwardCategoryConfig[] = [
       whoCanNominate: "Anyone, including fans, partners, peers and self-nomination.",
       evidence: "Campaign overview, reach metrics, outcome evidence with citations, partner/foundation attestation.",
       publicVoting: "There is a public engagement signal, but final selection is jury-led.",
-      review: "NRC eligibility, influencer jury review (campaigns, reach, authenticity, outcomes), then final score.",
+      review: "NRRC eligibility, influencer jury review (campaigns, reach, authenticity, outcomes), then final score.",
     }),
     mergedFrom: ["/awards/africa-sports-education-impact"],
   },
@@ -74,7 +74,7 @@ export const INFLUENCERS_CATEGORIES: AwardCategoryConfig[] = [
       whoCanNominate: "Anyone, including fans, partners, peers and self-nomination.",
       evidence: "Campaign overview, reach metrics, outcome evidence with citations, partner attestation.",
       publicVoting: "There is a public engagement signal, but final selection is jury-led.",
-      review: "NRC eligibility, influencer jury review, then final score.",
+      review: "NRRC eligibility, influencer jury review, then final score.",
     }),
     mergedFrom: ["/awards/africa-music-education-impact"],
   },
@@ -108,7 +108,7 @@ export const INFLUENCERS_CATEGORIES: AwardCategoryConfig[] = [
       whoCanNominate: "Anyone — audiences, peers, partners or self-nomination.",
       evidence: "Channel links, audience metrics, sample portfolio, outcome evidence where available.",
       publicVoting: "There is a public engagement signal, but final selection is jury-led with an authenticity check.",
-      review: "NRC eligibility, influencer jury review with authenticity check, then final score.",
+      review: "NRRC eligibility, influencer jury review with authenticity check, then final score.",
     }),
     mergedFrom: [
       "/awards/digital-voices",

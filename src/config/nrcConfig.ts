@@ -27,7 +27,7 @@ export const WORKFLOW_STATUS_LABELS: Record<NRCWorkflowStatus, string> = {
   NRC_ASSIGNED: "Assigned to Reviewers",
   NRC_IN_REVIEW: "Under Review",
   NRC_QUERY_SENT: "Clarification Requested",
-  VERIFIED_BY_NRC: "Verified by NRC",
+  VERIFIED_BY_NRC: "Verified by NRRC",
   REJECTED_BY_NRC: "Not Eligible",
   PUBLISHED_FOR_VOTING: "Published for Voting",
 };
@@ -52,9 +52,9 @@ export const WORKFLOW_STATUS_COLORS: Record<NRCWorkflowStatus, string> = {
 export type NRCReviewerRole = "nrc_reviewer" | "nrc_lead" | "nrc_auditor";
 
 export const NRC_ROLE_LABELS: Record<NRCReviewerRole, string> = {
-  nrc_reviewer: "NRC Reviewer",
-  nrc_lead: "NRC Lead",
-  nrc_auditor: "NRC Auditor",
+  nrc_reviewer: "NRRC Reviewer",
+  nrc_lead: "NRRC Lead",
+  nrc_auditor: "NRRC Auditor",
 };
 
 export const NRC_ROLE_PERMISSIONS: Record<NRCReviewerRole, string[]> = {

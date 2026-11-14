@@ -78,7 +78,7 @@ export interface TierClusterConfig {
 
 // ─── Shared constants ────────────────────────────────────────────────
 const INTEGRITY_LINE =
-  "Recognition is decided by evidence-based NRC verification, independent Icon judging where applicable and governance approval. Sponsorship, donations and AGC Participation Credits do not influence recognition.";
+  "Recognition is decided by evidence-based NRRC verification, independent Icon judging where applicable and governance approval. Sponsorship, donations and AGC Participation Credits do not influence recognition.";
 
 // ─── ICON ────────────────────────────────────────────────────────────
 const ICON: TierClusterConfig = {
@@ -123,13 +123,13 @@ const ICON: TierClusterConfig = {
       "Undisclosed conflicts of interest",
     ],
     timelineNote:
-      "Icon nominations open 6 September 2026 and close 6 October 2026. Governance-approved laureates are announced at the NESA-Africa 2026 Recognition Gala on 28 December 2026 in Lagos.",
+      "Icon nominations open 6 September 2026 and close 6 October 2026. Governance-approved laureates are announced at the NESA-Africa 2026 Recognition Gala on 13 December 2026 in Lagos.",
   },
 
   nominees: {
     directoryFilterKey: "africa-education-icon",
     directoryLabel: "Explore Africa Education Icon nominees",
-    empty: "Icon nominations open 6 September 2026. Confirmed nominees will appear here as NRC verification completes.",
+    empty: "Icon nominations open 6 September 2026. Confirmed nominees will appear here as NRRC verification completes.",
     highlight: "Two decades of laureates (2006–2026) are catalogued in the Impact Directory.",
   },
 
@@ -139,7 +139,7 @@ const ICON: TierClusterConfig = {
     steps: [
       "Choose the Icon pathway (Curriculum · Philanthropy · Technical).",
       "Submit citable evidence of 10+ years of impact.",
-      "NRC verifies · 27 Icon Judges review · Governance approves.",
+      "NRRC verifies · 27 Icon Judges review · Governance approves.",
     ],
     ctaHref: "/nominate?tier=africa-education-icon",
     ctaLabel: "Start Icon Nomination",
@@ -189,7 +189,7 @@ const BLUE_GARNET: TierClusterConfig = {
       "Media, creative and policy actors expanding access",
     ],
     integrityModel:
-      "Two-stage flow: NRC evidence verification, then competitive judging against the Blue-Garnet 20-point rubric. Governance approves finalists.",
+      "Two-stage flow: NRRC evidence verification, then competitive judging against the Blue-Garnet 20-point rubric. Governance approves finalists.",
     positioning: "Nine competitive categories · Africa-wide · One 2026 cycle.",
   },
 
@@ -214,7 +214,7 @@ const BLUE_GARNET: TierClusterConfig = {
       "Undisclosed conflicts of interest with judges",
     ],
     timelineNote:
-      "Nominations open 6 September 2026, close 21 November 2026. Finalists announced after NRC verification. Winners revealed at the Gala on 28 December 2026.",
+      "Nominations open 6 September 2026, close 21 November 2026. Finalists announced after NRRC verification. Winners revealed at the Gala on 13 December 2026.",
   },
 
   nominees: {
@@ -230,7 +230,7 @@ const BLUE_GARNET: TierClusterConfig = {
     steps: [
       "Pick one of the nine Blue-Garnet categories.",
       "Upload signed impact evidence for the 2025–2026 cycle.",
-      "NRC verifies · Judges score · Governance approves finalists.",
+      "NRRC verifies · Judges score · Governance approves finalists.",
     ],
     ctaHref: "/nominate?tier=gold-blue-garnet",
     ctaLabel: "Start Blue-Garnet Nomination",
@@ -252,7 +252,7 @@ const BLUE_GARNET: TierClusterConfig = {
     nominees: {
       title: "Blue-Garnet Nominees & Finalists | NESA-Africa 2026",
       description:
-        "Browse Blue-Garnet 2026 nominees across nine competitive categories, verified by NRC and scored on the public rubric.",
+        "Browse Blue-Garnet 2026 nominees across nine competitive categories, verified by NRRC and scored on the public rubric.",
     },
     nominate: {
       title: "Nominate for Blue-Garnet 2026 | NESA-Africa",
@@ -280,7 +280,7 @@ const PLATINUM: TierClusterConfig = {
       "State governments, international partners, diaspora institutions",
     ],
     integrityModel:
-      "Non-competitive institutional recognition. NRC verifies systemic evidence; governance approves. No head-to-head scoring.",
+      "Non-competitive institutional recognition. NRRC verifies systemic evidence; governance approves. No head-to-head scoring.",
     positioning: "Seven institutional categories · Systemic · Non-competitive.",
   },
 
@@ -304,7 +304,7 @@ const PLATINUM: TierClusterConfig = {
       "Duplicate institutional records without consolidation",
     ],
     timelineNote:
-      "Platinum institutional nominations open 6 September 2026 and close 21 November 2026. Recognised institutions are honoured at the Gala on 28 December 2026.",
+      "Platinum institutional nominations open 6 September 2026 and close 21 November 2026. Recognised institutions are honoured at the Gala on 13 December 2026.",
   },
 
   nominees: {
@@ -320,7 +320,7 @@ const PLATINUM: TierClusterConfig = {
     steps: [
       "Choose the Platinum institutional category that fits.",
       "Attach charter, reports and third-party attestations.",
-      "NRC verifies · Governance approves institutional recognition.",
+      "NRRC verifies · Governance approves institutional recognition.",
     ],
     ctaHref: "/nominate?tier=platinum-recognition",
     ctaLabel: "Start Platinum Nomination",
@@ -342,7 +342,7 @@ const PLATINUM: TierClusterConfig = {
     nominees: {
       title: "Platinum Recognised Institutions | NESA-Africa 2026",
       description:
-        "Browse Platinum-recognised institutions across seven institutional categories, verified by NRC and approved by governance.",
+        "Browse Platinum-recognised institutions across seven institutional categories, verified by NRRC and approved by governance.",
     },
     nominate: {
       title: "Nominate for Platinum Recognition | NESA-Africa 2026",
@@ -370,7 +370,7 @@ const INFLUENCER: TierClusterConfig = {
       "African music icons championing learning access",
     ],
     integrityModel:
-      "NRC impact verification → Governance approval. Reach alone does not qualify — evidence of education outcomes does.",
+      "NRRC impact verification → Governance approval. Reach alone does not qualify — evidence of education outcomes does.",
     positioning: "Three subcategories · Verified reach · Verified impact.",
   },
 
@@ -394,7 +394,7 @@ const INFLUENCER: TierClusterConfig = {
       "Undisclosed brand relationships in submitted evidence",
     ],
     timelineNote:
-      "Influencer nominations open 6 September 2026, close 21 November 2026. Recognised influencers appear on the NESA-Africa Recognition Gala broadcast on 28 December 2026.",
+      "Influencer nominations open 6 September 2026, close 21 November 2026. Recognised influencers appear on the NESA-Africa Recognition Gala broadcast on 13 December 2026.",
   },
 
   nominees: {
@@ -410,7 +410,7 @@ const INFLUENCER: TierClusterConfig = {
     steps: [
       "Pick the Influencer subcategory (Social · Sports · Music).",
       "Attach analytics and independent outcome citations.",
-      "NRC verifies impact · Governance approves recognition.",
+      "NRRC verifies impact · Governance approves recognition.",
     ],
     ctaHref: "/nominate?tier=influencer-education-impact",
     ctaLabel: "Start Influencer Nomination",

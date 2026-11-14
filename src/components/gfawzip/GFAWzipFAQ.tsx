@@ -20,7 +20,7 @@ const FAQS: FAQ[] = [
   {
     question: "Can a payment influence recognition?",
     answer:
-      "No. No payment, donation, sponsorship or membership can increase a nominee's score, influence NRC verification or assessment, or purchase finalist or award status.",
+      "No. No payment, donation, sponsorship or membership can increase a nominee's score, influence NRRC verification or assessment, or purchase finalist or award status.",
   },
   {
     question: "What do I receive after payment?",

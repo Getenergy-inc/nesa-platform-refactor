@@ -58,7 +58,7 @@ export function EducationForAllMetrics({ metrics, nomineeName }: Props) {
 
         {!hasAny && (
           <Badge variant="outline" className="border-gold/25 text-gold/80 text-[10px] mt-2 mb-4">
-            Metrics pending NRC verification
+            Metrics pending NRRC verification
           </Badge>
         )}
 

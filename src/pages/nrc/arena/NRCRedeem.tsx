@@ -93,7 +93,7 @@ export default function NRCRedeem() {
       toast.message(
         "Account created. Confirm your email, then sign in and re-open this invitation link to finish."
       );
-      return nav(`/nrc/sign-in?next=${encodeURIComponent(`/nrc/redeem?token=${token}`)}`, {
+      return nav(`/nrrc/sign-in?next=${encodeURIComponent(`/nrrc/redeem?token=${token}`)}`, {
         replace: true,
       });
     }
@@ -103,20 +103,20 @@ export default function NRCRedeem() {
 
     setBusy(false);
     toast.success("Invitation redeemed. Complete your appointment onboarding to be activated.");
-    nav("/nrc/onboarding", { replace: true });
+    nav("/nrrc/onboarding", { replace: true });
   };
 
   return (
     <div className="min-h-screen bg-charcoal text-white flex items-center justify-center px-4 py-12">
       <Helmet>
-        <title>Redeem NRC Invitation — NESA-Africa 2026</title>
+        <title>Redeem NRRC Invitation — NESA-Africa 2026</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
           <Search className="mx-auto mb-3 h-9 w-9 text-gold" aria-hidden />
-          <h1 className="font-display text-2xl font-bold">Nominee Research Corps</h1>
+          <h1 className="font-display text-2xl font-bold">Nominee Research and Review Corps</h1>
           <p className="mt-1 text-sm text-white/60">Invitation redemption</p>
         </div>
 
@@ -139,9 +139,9 @@ export default function NRCRedeem() {
               <div className="flex items-start gap-3 rounded-lg border border-gold/25 bg-gold/5 p-3">
                 <KeyRound className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden />
                 <p className="text-xs text-white/70">
-                  NRC registration is invitation-only. Paste the single-use token from your
+                  NRRC registration is invitation-only. Paste the single-use token from your
                   invitation email. Not invited yet?{" "}
-                  <Link to="/nrc/apply" className="text-gold underline">
+                  <Link to="/nrrc/apply" className="text-gold underline">
                     Apply to join
                   </Link>
                   .

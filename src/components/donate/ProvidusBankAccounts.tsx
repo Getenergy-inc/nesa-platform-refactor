@@ -312,8 +312,8 @@ function PaymentConfirmationForm() {
     setSubmitting(true);
     setTimeout(() => {
       setSubmitting(false);
-      toast.success("Payment confirmation submitted", {
-        description: "Our team will follow up with your receipt or documentation.",
+      toast.success("Payment details submitted for review", {
+        description: "This confirms submission only. No receipt is issued until SCEF confirms the payment.",
       });
       (e.target as HTMLFormElement).reset();
     }, 600);
@@ -483,16 +483,15 @@ export function ProvidusBankAccounts() {
           className="text-center max-w-2xl mx-auto"
         >
           <Badge className="bg-gold/15 text-gold border border-gold/30 mb-3">
-            <Landmark className="h-3 w-3 mr-1" /> Manual Bank Transfer Option
+            <Landmark className="h-3 w-3 mr-1" /> Verified · Secure · Traceable
           </Badge>
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-white">
-            Official Bank Transfer Details
+          <h2 id="official-accounts" className="font-display text-2xl md:text-3xl font-bold text-white">
+            Support & Official Accounts
           </h2>
           <p className="text-sm text-white/70 mt-2">
-            GFA Wallet is the recommended payment option for faster tracking, receipts, and
-            program reporting. Manual bank transfer remains available through verified{" "}
-            <span className="text-gold font-medium">Providus Bank</span> accounts. Payments
-            should only be made through the verified accounts shown on this page.
+            Pay only into these official <span className="text-gold font-medium">Providus Bank</span> accounts.
+            Reference: SCEF, EDUAID or NESA + full name. No receipt is issued until SCEF confirms the payment.
+            Payments never affect nomination, eligibility, judging, recognition or school selection.
           </p>
         </motion.div>
 

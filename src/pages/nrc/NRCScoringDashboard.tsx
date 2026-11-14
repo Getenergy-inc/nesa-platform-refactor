@@ -75,7 +75,7 @@ function NRCScoringContent() {
   return (
     <NRCLayout>
       <Helmet>
-        <title>NRC Scoring Dashboard | NESA Africa</title>
+        <title>NRRC Scoring Dashboard | NESA Africa</title>
       </Helmet>
 
       <div className="space-y-6">
@@ -90,7 +90,7 @@ function NRCScoringContent() {
             { label: "Submitted", count: stats.submitted, color: "text-blue-400", icon: Clock },
             { label: "Screening", count: stats.screening, color: "text-amber-400", icon: Filter },
             { label: "Verification", count: stats.verification, color: "text-orange-400", icon: FileCheck },
-            { label: "NRC Review", count: stats.review, color: "text-purple-400", icon: Users },
+            { label: "NRRC Review", count: stats.review, color: "text-purple-400", icon: Users },
             { label: "Cleared", count: stats.cleared, color: "text-emerald-400", icon: CheckCircle2 },
             { label: "Rejected", count: stats.rejected, color: "text-red-400", icon: XCircle },
           ].map(s => (
@@ -100,7 +100,7 @@ function NRCScoringContent() {
                   Submitted: "nomination_submitted",
                   Screening: "eligibility_screening",
                   Verification: "documentation_verification",
-                  "NRC Review": "nrc_review",
+                  "NRRC Review": "nrc_review",
                   Cleared: "nomination_cleared",
                   Rejected: "rejected",
                 };
@@ -243,7 +243,7 @@ function NRCScoringContent() {
                     <div>
                       <div className="flex items-center gap-2 mb-2">
                         <Shield className="w-4 h-4 text-primary" />
-                        <span className="text-xs font-medium">NRC Status</span>
+                        <span className="text-xs font-medium">NRRC Status</span>
                       </div>
                       <NomineeWorkflowStatusBadge status={selectedNominee.workflowStatus} showSteps />
                     </div>

@@ -105,7 +105,7 @@ function PathwayRow({ pathway }: { pathway: InfluencerPathwayBucket }) {
         <div className="rounded-2xl border border-dashed border-gold/25 bg-white/[0.02] p-6 text-center">
           <p className="text-sm text-white/65">
             No verified nominee has been published in this pathway yet. Verified profiles
-            appear here as NRC verification completes.
+            appear here as NRRC verification completes.
           </p>
           <Button asChild size="sm" className="mt-3 bg-gold font-semibold text-charcoal hover:bg-gold/90">
             <Link to={pathway.nominateHref}>Submit a Nomination</Link>

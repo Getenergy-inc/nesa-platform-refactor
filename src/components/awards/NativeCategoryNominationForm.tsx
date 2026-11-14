@@ -306,7 +306,7 @@ function NativeCategoryNominationFormInner({
           <ShieldCheck className="mx-auto mb-3 h-8 w-8 text-gold" />
           <h3 className="font-playfair text-2xl text-gold mb-2">Nomination received</h3>
           <p className="text-sm text-foreground/75 max-w-md mx-auto">
-            Your submission for <span className="text-gold">{form.name}</span> is queued for NRC
+            Your submission for <span className="text-gold">{form.name}</span> is queued for NRRC
             review.
           </p>
           {nominationRef && (
@@ -372,7 +372,7 @@ function NativeCategoryNominationFormInner({
         <span>
           This is the official native intake form for{" "}
           <span className="text-gold">{form.name}</span>. Submissions are
-          evidence-checked by the NRC before review.
+          evidence-checked by the NRRC before review.
         </span>
       </div>
 

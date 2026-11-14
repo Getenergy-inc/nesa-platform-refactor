@@ -323,7 +323,7 @@ export default function MasterNomineeProfile() {
                 <CardContent className="p-5">
                   <div className="flex items-center gap-2 mb-3">
                     <Shield className="w-4 h-4 text-gold" />
-                    <h3 className="text-sm font-display text-ivory/80 font-medium">NRC Verification Pipeline</h3>
+                    <h3 className="text-sm font-display text-ivory/80 font-medium">NRRC Verification Pipeline</h3>
                   </div>
                   <NomineeWorkflowStatusBadge status={nominee.workflowStatus} showSteps />
                   <div className="mt-4 p-3 bg-charcoal/50 rounded-lg border border-gold/5">

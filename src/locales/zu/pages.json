@@ -236,7 +236,7 @@
       "description": "Izinkundla ezine ezihlukile zokwamukelwa ezinezinqubo eziyingqayizivele.",
       "platinum": {
         "title": "Isitifiketi se-Platinum",
-        "description": "Ukwamukelwa kwisisekelo ngomnikelo Wemfundo Yawo Wonke Umuntu. Akukho ukuncintisana, kuqinisekiswe yi-NRC."
+        "description": "Ukwamukelwa kwisisekelo ngomnikelo Wemfundo Yawo Wonke Umuntu. Akukho ukuncintisana, kuqinisekiswe yi-NRRC."
       },
       "icon": {
         "title": "I-Afrika Education Icon",
@@ -606,7 +606,7 @@
       "acceptance": {
         "title": "Ukwamukelwa",
         "subtitle": "Kwabaqokiwe",
-        "description": "Inqubo yokuhlolwa kwe-NRC, uhambo lokwamukelwa nokulandelela isimo.",
+        "description": "Inqubo yokuhlolwa kwe-NRRC, uhambo lokwamukelwa nokulandelela isimo.",
         "badge": "Isinyathelo 2"
       },
       "judges": {

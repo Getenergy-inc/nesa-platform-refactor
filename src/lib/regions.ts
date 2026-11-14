@@ -172,11 +172,11 @@ export const GOVERNANCE_STATS = {
 };
 
 export const NRC_DESCRIPTION = {
-  name: "Nominee Research Corps (NRC)",
-  model: "Hybrid NRC",
+  name: "Nominee Research and Review Corps (NRRC)",
+  model: "Hybrid NRRC",
   volunteers: 30,
   shortDescription:
-    "30 Hybrid NRC Volunteers verifying nominations across all 8 Africa regions and the African Diaspora",
+    "30 Hybrid NRRC Volunteers verifying nominations across all 8 Africa regions and the African Diaspora",
   fullDescription:
-    "The Hybrid NRC is a blended verification model combining core NRC members with volunteer NRC support. Operating both remotely and in-person, the 27-member Hybrid NRC ensures thorough, region-aware verification across the 8 Africa regions and the African Diaspora community before nominations advance to voting or jury evaluation.",
+    "The Hybrid NRRC is a blended verification model combining core NRRC members with volunteer NRRC support. Operating both remotely and in-person, the 27-member Hybrid NRRC ensures thorough, region-aware verification across the 8 Africa regions and the African Diaspora community before nominations advance to voting or jury evaluation.",
 };

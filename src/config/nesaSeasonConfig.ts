@@ -92,7 +92,7 @@ export const PHASES: PhaseConfig[] = [
   },
   {
     id: "nrc-review",
-    name: "NRC Review",
+    name: "NRRC Review",
     shortName: "Review",
     description: "Nomination Review Committee evaluates nominations",
     startDate: new Date("2026-05-01"),
@@ -317,9 +317,9 @@ export const AWARD_CATEGORIES: AwardCategory[] = [
 export const TIER_INFO: Record<AwardTier, { name: string; description: string; color: string; votingMethod: string }> = {
   platinum: {
     name: "Platinum",
-    description: "Highest honor, NRC-selected nominees elevated from Gold",
+    description: "Highest honor, NRRC-selected nominees elevated from Gold",
     color: "#E5E4E2",
-    votingMethod: "NRC Selection",
+    votingMethod: "NRRC Selection",
   },
   gold: {
     name: "Gold",
@@ -456,7 +456,7 @@ export const NOMINATION_PATHS: NominationPath[] = [
       "Select category & subcategory",
       "Provide nominee details",
       "Upload supporting evidence",
-      "Submit for NRC review",
+      "Submit for NRRC review",
     ],
     tier: "gold",
   },
@@ -474,7 +474,7 @@ export const NOMINATION_PATHS: NominationPath[] = [
       "Complete detailed application",
       "Provide achievement evidence",
       "Submit references",
-      "NRC verification",
+      "NRRC verification",
     ],
     tier: "gold",
   },
@@ -491,7 +491,7 @@ export const NOMINATION_PATHS: NominationPath[] = [
     process: [
       "Chapter identification",
       "Chapter review",
-      "Direct to NRC",
+      "Direct to NRRC",
       "Fast-tracked processing",
     ],
     tier: "platinum",

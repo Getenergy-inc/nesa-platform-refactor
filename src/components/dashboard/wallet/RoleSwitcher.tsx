@@ -26,7 +26,7 @@ const roleIcons: Record<AppRole, React.ReactNode> = {
 
 const roleLabels: Record<AppRole, string> = {
   user: "User",
-  nrc: "NRC Reviewer",
+  nrc: "NRRC Reviewer",
   jury: "Jury Member",
   chapter: "Chapter Coordinator",
   sponsor: "Sponsor",

@@ -21,7 +21,7 @@ export function NRCProtectedRoute({ children }: { children: ReactNode }) {
 
   if (!user) {
     const next = encodeURIComponent(location.pathname + location.search);
-    return <Navigate to={`/nrc/sign-in?next=${next}`} replace />;
+    return <Navigate to={`/nrrc/sign-in?next=${next}`} replace />;
   }
 
   const authorised = (roles ?? []).some((r) => r === "nrc" || r === "admin");

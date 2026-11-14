@@ -39,7 +39,7 @@ const DECISION_TITLES: Record<ReviewDecision, string> = {
   APPROVE: "Approve Nomination",
   REJECT: "Reject Nomination",
   REQUEST_MORE_EVIDENCE: "Request More Evidence",
-  ESCALATE: "Escalate to NRC Lead",
+  ESCALATE: "Escalate to NRRC Lead",
 };
 
 function NRCMyQueueContent() {
@@ -81,7 +81,7 @@ function NRCMyQueueContent() {
           `Quorum reached — nomination ${quorum.decision === "verified" ? "verified" : "rejected"}`
         );
       } else if (quorum?.reason === "split_decision") {
-        toast.warning("Split decision recorded — escalated to the NRC Lead");
+        toast.warning("Split decision recorded — escalated to the NRRC Lead");
       } else {
         toast.success("Your review was recorded. Awaiting the second reviewer.");
       }
@@ -353,7 +353,7 @@ function NRCMyQueueContent() {
               <AlertTriangle className="h-4 w-4" />
               <AlertDescription>
                 This records your individual verdict. The nomination's status only
-                changes once two of three NRC reviewers agree.
+                changes once two of three NRRC reviewers agree.
               </AlertDescription>
             </Alert>
 

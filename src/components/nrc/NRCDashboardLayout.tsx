@@ -30,48 +30,48 @@ const SIDEBAR_SECTIONS = [
   {
     label: "Dashboard",
     items: [
-      { href: "/nrc/dashboard", label: "Overview", icon: LayoutDashboard },
-      { href: "/nrc/dashboard/intake", label: "Intake Queue", icon: Inbox },
+      { href: "/nrrc/dashboard", label: "Overview", icon: LayoutDashboard },
+      { href: "/nrrc/dashboard/intake", label: "Intake Queue", icon: Inbox },
     ],
   },
   {
     label: "Nominees",
     items: [
-      { href: "/nrc/dashboard/nominees", label: "All Nominees", icon: Users },
-      { href: "/nrc/dashboard/nominees?status=nomination_submitted", label: "Pending Review", icon: Clock },
-      { href: "/nrc/dashboard/nominees?status=documentation_verification", label: "Under Verification", icon: FileCheck },
-      { href: "/nrc/dashboard/nominees?status=nomination_cleared", label: "Cleared", icon: CheckCircle },
-      { href: "/nrc/dashboard/nominees?status=rejected", label: "Declined", icon: XCircle },
+      { href: "/nrrc/dashboard/nominees", label: "All Nominees", icon: Users },
+      { href: "/nrrc/dashboard/nominees?status=nomination_submitted", label: "Pending Review", icon: Clock },
+      { href: "/nrrc/dashboard/nominees?status=documentation_verification", label: "Under Verification", icon: FileCheck },
+      { href: "/nrrc/dashboard/nominees?status=nomination_cleared", label: "Cleared", icon: CheckCircle },
+      { href: "/nrrc/dashboard/nominees?status=rejected", label: "Declined", icon: XCircle },
     ],
   },
   {
     label: "Review Tools",
     items: [
-      { href: "/nrc/dashboard/my-reviews", label: "My Assigned Reviews", icon: ClipboardList },
-      { href: "/nrc/dashboard/queue", label: "Scoring Queue", icon: BarChart3 },
-      { href: "/nrc/dashboard/flagged", label: "Flagged Cases", icon: Flag },
-      { href: "/nrc/dashboard/merge", label: "Merge & Dedup Tool", icon: Copy },
+      { href: "/nrrc/dashboard/my-reviews", label: "My Assigned Reviews", icon: ClipboardList },
+      { href: "/nrrc/dashboard/queue", label: "Scoring Queue", icon: BarChart3 },
+      { href: "/nrrc/dashboard/flagged", label: "Flagged Cases", icon: Flag },
+      { href: "/nrrc/dashboard/merge", label: "Merge & Dedup Tool", icon: Copy },
     ],
   },
   {
     label: "Standards",
     items: [
-      { href: "/nrc/dashboard/edi-analytics", label: "EDI Analytics", icon: TrendingUp },
+      { href: "/nrrc/dashboard/edi-analytics", label: "EDI Analytics", icon: TrendingUp },
       { href: "/guidelines/edi-matrix", label: "EDI Matrix", icon: Shield },
-      { href: "/nrc/dashboard/guidelines", label: "NRC Guidelines", icon: BookOpen },
+      { href: "/nrrc/dashboard/guidelines", label: "NRRC Guidelines", icon: BookOpen },
     ],
   },
   {
     label: "Reports",
     items: [
-      { href: "/nrc/dashboard/reports", label: "Review Progress", icon: BarChart3 },
+      { href: "/nrrc/dashboard/reports", label: "Review Progress", icon: BarChart3 },
     ],
   },
   {
     label: "Account",
     items: [
-      { href: "/nrc/dashboard/profile", label: "Profile", icon: User },
-      { href: "/nrc/dashboard/settings", label: "Settings", icon: Settings },
+      { href: "/nrrc/dashboard/profile", label: "Profile", icon: User },
+      { href: "/nrrc/dashboard/settings", label: "Settings", icon: Settings },
     ],
   },
 ];
@@ -100,7 +100,7 @@ export function NRCDashboardLayout({ children }: NRCDashboardLayoutProps) {
         </div>
       ) : (
         <div className="border-b border-white/10">
-          <ArenaBrand workspace="NRC Arena" to="/nrc/dashboard" compact />
+          <ArenaBrand workspace="NRRC Arena" to="/nrrc/dashboard" compact />
         </div>
       )}
 
@@ -157,15 +157,15 @@ export function NRCDashboardLayout({ children }: NRCDashboardLayoutProps) {
 
   return (
     <div className="min-h-screen bg-arena-bg text-arena-text">
-      <ArenaSeo workspace="NRC Arena" />
+      <ArenaSeo workspace="NRRC Arena" />
       <ArenaTopBar
-        title="NESA-Africa NRC Arena"
+        title="NESA-Africa NRRC Arena"
         subtitle="Internal Review System · NESA Africa 2026"
         statusLabel="Verification Live"
         statusDetail="2026 Cycle"
         statusTone="live"
         identityName={user?.email ?? "Reviewer"}
-        identityRole="NRC Reviewer"
+        identityRole="NRRC Reviewer"
         notifications={3}
         leading={
           <div className="flex items-center gap-1">
@@ -233,7 +233,7 @@ export function NRCDashboardLayout({ children }: NRCDashboardLayoutProps) {
         {/* Main Content */}
         <div className="flex min-w-0 flex-1 flex-col">
           <main className="min-w-0 flex-1 p-4 md:p-6 lg:p-8">{children}</main>
-          <ArenaFooter workspace="NRC Arena" />
+          <ArenaFooter workspace="NRRC Arena" />
         </div>
       </div>
     </div>

@@ -248,7 +248,7 @@ export function InfluencerNominationForm({
         )}
         <p className="text-sm text-foreground/75 max-w-md mx-auto">
           Thank you for helping NESA-Africa identify an Education Enabler. Your
-          submission has been forwarded to the Nominee Research Corps for review.
+          submission has been forwarded to the Nominee Research and Review Corps for review.
           A confirmation email will follow shortly.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
@@ -290,7 +290,7 @@ export function InfluencerNominationForm({
           Recognition is based on{" "}
           <span className="text-gold">verified education impact</span> — not popularity,
           celebrity status or follower count. Every nomination is independently reviewed by
-          the Nominee Research Corps (NRC).
+          the Nominee Research and Review Corps (NRRC).
         </span>
       </div>
 
@@ -299,7 +299,7 @@ export function InfluencerNominationForm({
         <div>
           <h3 className="font-playfair text-xl text-gold">1. Nominee Information</h3>
           <p className="text-xs text-foreground/60 mt-1">
-            Share only what you know — the NRC will research and enrich the profile.
+            Share only what you know — the NRRC will research and enrich the profile.
           </p>
         </div>
 
@@ -477,7 +477,7 @@ export function InfluencerNominationForm({
           />
           <span>
             I confirm that the information provided is accurate and submitted in good faith,
-            and I understand that recognition is subject to independent NRC verification.
+            and I understand that recognition is subject to independent NRRC verification.
           </span>
         </label>
       </section>
@@ -501,7 +501,7 @@ export function InfluencerNominationForm({
         <p className="font-semibold text-gold mb-2">What happens next</p>
         <ol className="space-y-1.5 text-xs leading-relaxed">
           <li>✅ Nomination received</li>
-          <li>✅ NRC verifies education impact</li>
+          <li>✅ NRRC verifies education impact</li>
           <li>✅ Duplicate check</li>
           <li>✅ Nominee contacted (where possible)</li>
           <li>✅ Profile created</li>

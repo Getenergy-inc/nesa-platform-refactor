@@ -50,12 +50,12 @@ export const awardTVShows: AwardTVShow[] = [
     showName: "TV Showcase 1 — Platinum + Influencer Education Impact",
     pairing: "Platinum + Influencer Education Impact",
     description:
-      "Platinum Recognition recipients and Influencer Education Impact enablers in one broadcast — NRC-verified profiles, impact stories and certificate presentations.",
+      "Platinum Recognition recipients and Influencer Education Impact enablers in one broadcast — NRRC-verified profiles, impact stories and certificate presentations.",
     segments: [
       {
         id: "platinum",
         title: "Platinum Recognition",
-        focus: "NRC-verified enabler profiles, impact evidence and certificate presentations.",
+        focus: "NRRC-verified enabler profiles, impact evidence and certificate presentations.",
         episodes: 12,
       },
       {
@@ -69,7 +69,7 @@ export const awardTVShows: AwardTVShow[] = [
     videoUrl: "https://www.youtube.com/embed/nQCXDX_X3rs",
     duration: "3 hours",
     episodes: 20,
-    features: ["NRC-verified nominees", "Impact stories", "Certificate ceremonies"],
+    features: ["NRRC-verified nominees", "Impact stories", "Certificate ceremonies"],
     socialLinks: sharedSocialLinks,
   },
   {

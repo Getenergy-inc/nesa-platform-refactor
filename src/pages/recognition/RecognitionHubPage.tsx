@@ -113,7 +113,7 @@ export default function RecognitionHubPage() {
         <title>Recognition Hub · NESA-Africa 2026</title>
         <meta
           name="description"
-          content="Enablers of Education for All Across Africa — explore the 4 tiers, 22 categories and 90 subcategories of the 2026 Recognition Architecture."
+          content="Four Recognition Tiers, 22 Main Awards and 90 Subcategories. NESA-Africa recognises different forms and levels of verified education contribution through an evidence-led framework."
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/recognition" />
       </Helmet>
@@ -125,11 +125,10 @@ export default function RecognitionHubPage() {
               NESA-Africa 2026
             </p>
             <h1 className="font-display text-3xl text-white md:text-5xl">
-              Recognition Architecture
+              Four Recognition Tiers, 22 Main Awards and 90 Subcategories
             </h1>
             <p className="mt-3 max-w-3xl text-sm text-white/75 md:text-base">
-              Enablers of Education for All Across Africa. Four recognition tiers,
-              eighteen categories and ninety-six subcategories — one canonical spine.
+              NESA-Africa recognises different forms and levels of verified education contribution through an evidence-led framework.
             </p>
             {!loading && !error && (
               <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/70">
@@ -138,14 +137,13 @@ export default function RecognitionHubPage() {
             )}
             <div className="mt-6 flex flex-wrap items-center gap-3 rounded-2xl border border-gold/30 bg-black/40 p-4">
               <p className="text-sm text-white/80">
-                <span className="font-semibold text-gold">New:</span> all 22 award landing pages
-                are live — each with its own story, pathways and tailored nomination form.
+                <span className="font-semibold text-gold">Notice:</span> Certificates of Recognition are separate from competitive awards and must not be presented as awards won.
               </p>
               <Link
-                to="/recognition/pages"
+                to="/nominate/help-me-choose"
                 className="inline-flex items-center gap-1 rounded-full bg-gold px-4 py-2 text-sm font-semibold text-charcoal hover:bg-gold/90"
               >
-                Browse the 22 pages
+                Help Me Choose a Recognition Field
                 <ChevronRight className="h-4 w-4" aria-hidden />
               </Link>
             </div>

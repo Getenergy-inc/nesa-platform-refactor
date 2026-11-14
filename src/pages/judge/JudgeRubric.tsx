@@ -96,7 +96,7 @@ export default function JudgeRubric() {
                       Independent Jury Review
                     </Badge>
                     <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
-                      NRC-Verified Evidence
+                      NRRC-Verified Evidence
                     </Badge>
                     <Badge className="bg-gold/20 text-gold border-gold/30">
                       5 Criteria

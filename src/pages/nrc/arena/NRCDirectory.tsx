@@ -28,11 +28,11 @@ export default function NRCDirectory() {
 
   return (
     <NRCArenaLayout>
-      <Helmet><title>NRC Directory · NESA-Africa 2026</title></Helmet>
+      <Helmet><title>NRRC Directory · NESA-Africa 2026</title></Helmet>
 
       <header className="mb-5">
         <p className="text-xs uppercase tracking-wider text-gold/80">Approved directory</p>
-        <h1 className="font-display text-2xl font-bold">NRC Member Directory</h1>
+        <h1 className="font-display text-2xl font-bold">NRRC Member Directory</h1>
         <p className="text-white/60 text-sm mt-1">
           Proposed structure · {NRC_TOTALS.slots} approved members across {NRC_TOTALS.teams} teams. Individual
           member profiles appear once appointments are activated.
@@ -79,7 +79,7 @@ export default function NRCDirectory() {
               {g.teams.map((team) => (
                 <Link
                   key={team.slug}
-                  to={`/nrc/teams/${team.slug}`}
+                  to={`/nrrc/teams/${team.slug}`}
                   className="rounded-xl border border-white/10 bg-white/[0.04] p-4 hover:border-gold hover:bg-white/[0.07] transition-colors"
                 >
                   <p className="font-display font-semibold text-white leading-snug">{team.name}</p>

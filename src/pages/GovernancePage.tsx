@@ -39,7 +39,7 @@ const sections: Section[] = [
     icon: UserCheck,
     title: "Conflict of Interest (COI)",
     content: [
-      "Mandatory COI declarations from every NRC reviewer, judge, sponsor representative and board member before any engagement with nominees.",
+      "Mandatory COI declarations from every NRRC reviewer, judge, sponsor representative and board member before any engagement with nominees.",
       "Automatic recusal when a relationship is declared (employment, board service, family, prior consulting, financial interest).",
       "COI records are retained for the full award cycle and available to auditors on request.",
     ],
@@ -47,11 +47,11 @@ const sections: Section[] = [
   {
     id: "independent-verification",
     icon: Shield,
-    title: "Independent Verification (NRC)",
+    title: "Independent Verification (NRRC)",
     content: [
-      "27 Nomination Review Committee (NRC) members verify every nomination against an 18-point rubric.",
+      "27 Nomination Review Committee (NRRC) members verify every nomination against an 18-point rubric.",
       "2-of-3 quorum rule: two independent reviewers must agree for approval or rejection.",
-      "72-hour SLA per reviewer, with automatic escalation to NRC Lead after 96 hours.",
+      "72-hour SLA per reviewer, with automatic escalation to NRRC Lead after 96 hours.",
       "All state changes are recorded in an append-only audit log.",
     ],
   },

@@ -25,16 +25,16 @@ export default function NRCArenaIndex() {
   const { data: publicStats, isLoading: statsLoading } = useArenaPublicStats();
 
   if (!loading && user && (roles ?? []).some((r) => r === "nrc" || r === "admin")) {
-    return <Navigate to="/nrc/dashboard" replace />;
+    return <Navigate to="/nrrc/dashboard" replace />;
   }
 
   return (
     <div className="min-h-screen bg-arena-bg text-arena-text">
       <Helmet>
-        <title>NRC Arena · NESA-Africa 2026</title>
+        <title>Nominee Research and Review Corps | NESA-Africa</title>
         <meta
           name="description"
-          content="The NESA-Africa Nominee Research Corps (NRC) Arena — verification, evidence and dossier preparation for the 2026 recognition cycle."
+          content="The Nominee Research and Review Corps provides research, verification and preliminary review for NESA-Africa recognition."
         />
       </Helmet>
 
@@ -48,30 +48,28 @@ export default function NRCArenaIndex() {
             </p>
           </div>
           <h1 className="mt-4 font-display text-4xl sm:text-5xl font-bold">
-            NRC Arena
+            Nominee Research and Review Corps
           </h1>
           <p className="mt-2 text-lg text-white/70">
             Verification · Research · Evidence · Dossier · Handover
           </p>
           <p className="mt-6 max-w-2xl text-white/70">
-            The Nominee Research Corps is the independent verification backbone of the
-            NESA-Africa 2026 recognition cycle. NRC members verify identity and eligibility,
-            build evidence-backed dossiers, and hand cases to the Judges Arena or Governance.
+            The Nominee Research and Review Corps provides the research, verification and preliminary-review foundation for NESA-Africa recognition. The NRRC does not make the final Africa Education Icon recognition decisions. Eligible Icon dossiers proceed to the nine independent judges.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
-              <Link to="/nrc/sign-in">
-                NRC Sign In <ArrowRight className="ml-2 h-4 w-4" />
+              <Link to="/nrrc/sign-in">
+                NRRC Member Sign In <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="border-gold/40 text-gold hover:bg-gold/10">
-              <Link to="/nrc/apply">Apply to Join the NRC</Link>
+              <Link to="/nrrc/research-standards">View Research and Review Standards</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="border-gold/40 text-gold hover:bg-gold/10">
-              <Link to="/nrc/directory">View NRC Directory</Link>
+              <Link to="/about/how-recognition-works">How Recognition Works</Link>
             </Button>
             <Button asChild variant="ghost" size="lg" className="text-white/80 hover:text-gold">
-              <Link to="/judgeapply/nrc">About the NRC</Link>
+              <Link to="/nrrc/research-standards">Read the Research and Review Standards</Link>
             </Button>
           </div>
         </div>
@@ -84,7 +82,7 @@ export default function NRCArenaIndex() {
               {
                 icon: Users,
                 value: arenaCount(publicStats?.publicNrcMembers, statsLoading),
-                label: "NRC researchers listed",
+                label: "NRRC researchers listed",
                 detail: "Published only after onboarding & consent",
               },
               {
@@ -129,19 +127,17 @@ export default function NRCArenaIndex() {
           <div>
             <h2 className="font-display text-2xl font-bold text-gold">Two separate arenas · one identity</h2>
             <p className="mt-3 text-white/70">
-              The NRC Arena and Judges Arena share NESA-Africa authentication and visual
-              identity but operate as fully separated systems. NRC handles verification;
-              Judges handle independent scoring and final voting.
+              The NRRC checks completeness, contacts nominees, obtains consent, conducts interviews, reviews evidence, prepares neutral profiles and organises dossiers. It does not select Icon recipients, promise recognition, alter judge scores, accept payments, treat sponsorship as evidence or publish unapproved information.
             </p>
           </div>
           <div className="grid gap-3">
-            <Link to="/nrc/sign-in" className="rounded-lg border border-gold/30 bg-arena-panel p-4 hover:border-gold">
-              <p className="text-gold font-semibold">NRC Arena →</p>
+            <Link to="/nrrc/sign-in" className="rounded-lg border border-gold/30 bg-arena-panel p-4 hover:border-gold">
+              <p className="text-gold font-semibold">NRRC Arena →</p>
               <p className="text-sm text-white/60">Verification · Evidence · Dossier · Handover</p>
             </Link>
             <Link to="/judges" className="rounded-lg border border-white/15 bg-arena-panel p-4 hover:border-gold">
               <p className="text-white font-semibold">Judges Arena →</p>
-              <p className="text-sm text-white/60">Independent Review · Scoring · Deliberation · Final Voting</p>
+              <p className="text-sm text-white/60">Independent Assessment · Conflict Controls · Moderated Outcome</p>
             </Link>
           </div>
         </div>

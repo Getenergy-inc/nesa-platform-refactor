@@ -196,7 +196,7 @@ export default function AdminNomineeMedia() {
           <h1 className="font-serif text-2xl font-bold">Nominee Media Review</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Approving an image here affects the public catalogue only. It does not change
-            nomination approval, NRC verification, judging or award results.
+            nomination approval, NRRC verification, judging or award results.
           </p>
         </header>
 

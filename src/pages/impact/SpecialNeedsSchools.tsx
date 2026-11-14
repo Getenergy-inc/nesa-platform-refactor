@@ -72,7 +72,7 @@ export default function SpecialNeedsSchools() {
             <span className="text-gold">Support a Special-Needs School</span>
           </nav>
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-gold">{SCHOOL_SUPPORT_PROGRAMME.presenters}</p>
-          <h1 className="mt-4 max-w-5xl font-display text-4xl font-bold leading-tight text-ivory md:text-6xl">{SCHOOL_SUPPORT_PROGRAMME.name}</h1>
+          <h1 className="mt-4 max-w-5xl font-display text-4xl font-bold leading-tight text-ivory md:text-6xl">Support a Special-Needs School Across Africa</h1>
           <p className="mt-4 max-w-3xl text-sm leading-relaxed text-ivory/65">{SCHOOL_SUPPORT_PROGRAMME.serviceLine}</p>
           <h2 className="mt-10 max-w-4xl font-display text-3xl font-bold leading-tight text-gold md:text-4xl">{SCHOOL_SUPPORT_PROGRAMME.headline}</h2>
           <p className="mt-5 max-w-3xl leading-relaxed text-ivory/85">{SCHOOL_SUPPORT_PROGRAMME.introduction}</p>
@@ -95,7 +95,7 @@ export default function SpecialNeedsSchools() {
             <ParticipationLink id="volunteer">Volunteer Your Skills</ParticipationLink>
           </div>
           <aside className="mt-6 max-w-3xl rounded-xl border border-gold/30 bg-gold/10 p-4 text-sm leading-relaxed text-ivory/85">
-            {SCHOOL_SUPPORT_NOMINATION_NOTICE} Only verified and approved schools may be publicly profiled or admitted to voting.
+            {SCHOOL_SUPPORT_NOMINATION_NOTICE} Only verified and approved schools may be publicly profiled or admitted to regional selection.
           </aside>
         </div>
       </Section>
@@ -120,7 +120,7 @@ export default function SpecialNeedsSchools() {
           <p className="mt-5 max-w-3xl leading-relaxed text-ivory/85">Use an approved eight-region framework covering Africa’s 54 countries.</p>
           <p className="mt-3 max-w-3xl leading-relaxed text-ivory/85">Do not publish a country-to-region mapping until it has received written programme approval.</p>
           <blockquote className="mt-6 border-l-2 border-gold pl-5 font-display text-2xl text-ivory">One approved beneficiary school from each of the eight African programme regions.</blockquote>
-          <p className="mt-6 max-w-3xl leading-relaxed text-ivory/85">The highest-voted eligible school in each region should proceed to final due diligence. A voting result is not, by itself, an automatic grant award.</p>
+          <p className="mt-6 max-w-3xl leading-relaxed text-ivory/85">Authorised regional selection is subject to verification, consent, needs assessment, safeguarding review and final due diligence. Selection is not an automatic grant award.</p>
           <h3 className="mt-6 font-semibold text-ivory">Final support remains subject to:</h3>
           <BulletList items={SCHOOL_SUPPORT_DUE_DILIGENCE} columns />
           <p className="mt-6 max-w-3xl text-sm leading-relaxed text-ivory/70">If the highest-voted school fails due diligence, the programme may assess the next eligible school in that region. This decision and its reasons must be documented.</p>
@@ -163,7 +163,7 @@ export default function SpecialNeedsSchools() {
           ) : specialNeeds.length === 0 ? (
             <div className="mt-8 rounded-2xl border border-gold/20 bg-ivory/[0.03] p-8 text-center">
               <p className="text-ivory/80">No verified and explicitly approved school profiles are currently available.</p>
-              <p className="mt-2 text-sm text-ivory/60">Only verified and approved schools may be publicly profiled or admitted to voting.</p>
+              <p className="mt-2 text-sm text-ivory/60">Only verified and approved schools may be publicly profiled or admitted to regional selection.</p>
               <div className="mt-5"><ParticipationLink id="nominate" primary>Nominate a Special-Needs School</ParticipationLink></div>
             </div>
           ) : (
@@ -238,7 +238,7 @@ export default function SpecialNeedsSchools() {
 
       <Section aria-labelledby="programme-timetable">
         <div className="mx-auto max-w-6xl">
-          <h2 id="programme-timetable" className="font-display text-3xl font-bold text-gold">2027 timetable</h2>
+          <h2 id="programme-timetable" className="font-display text-3xl font-bold text-gold">2027 Regional Special-Needs Education Support Programme</h2>
           <div className="mt-8 overflow-x-auto rounded-xl border border-gold/20">
             <table className="w-full min-w-[640px] border-collapse text-left text-sm">
               <thead className="bg-gold/10 text-gold"><tr><th scope="col" className="p-4 font-semibold">Period</th><th scope="col" className="p-4 font-semibold">Activity</th></tr></thead>

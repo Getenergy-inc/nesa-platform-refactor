@@ -149,7 +149,7 @@ const TICKET_FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Is the Gala the same as the TV Showcases?",
-    a: "No. TV Showcase 1 (Sunday, 22 November 2026) and TV Showcase 2 (Tuesday, 8 December 2026) are broadcast programmes, not ticketed physical events. Your ticket admits you to the physical Recognition Gala in Lagos on 28 December 2026 only.",
+    a: "No. TV Showcase 1 (Sunday, 22 November 2026) and TV Showcase 2 (Tuesday, 8 December 2026) are broadcast programmes, not ticketed physical events. Your ticket admits you to the physical Recognition Gala in Lagos on 13 December 2026 only.",
   },
   {
     q: "Does buying a ticket affect nominations, judging or recognition?",
@@ -165,7 +165,7 @@ const TICKET_FAQS: { q: string; a: string }[] = [
   },
   {
     q: "How do I receive my ticket?",
-    a: "You receive a confirmation email with payment instructions, followed by your receipt and QR e-ticket. Bring the QR e-ticket to the Gala on 28 December 2026.",
+    a: "You receive a confirmation email with payment instructions, followed by your receipt and QR e-ticket. Bring the QR e-ticket to the Gala on 13 December 2026.",
   },
 ];
 

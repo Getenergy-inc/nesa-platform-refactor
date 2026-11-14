@@ -20,7 +20,7 @@ export function NomineeCategoriesCard({ categories }: NomineeCategoriesCardProps
         return (
           <Badge variant="default" className="bg-green-600">
             <CheckCircle className="h-3 w-3 mr-1" />
-            NRC Verified
+            NRRC Verified
           </Badge>
         );
       case "jury_review":

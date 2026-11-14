@@ -213,10 +213,10 @@ export default function TierCategorySubcategoryPage() {
         <div className="grid gap-6 md:grid-cols-3">
           <div className="rounded-2xl border border-gold/20 bg-charcoal-light/50 p-5">
             <ShieldCheck className="h-6 w-6 text-gold" />
-            <h3 className="mt-3 font-serif text-lg text-ivory">NRC Verified</h3>
+            <h3 className="mt-3 font-serif text-lg text-ivory">NRRC Verified</h3>
             <p className="mt-1 text-sm text-ivory/65">
-              Recognition requires evidence review by the Nominee Research Corps.
-              A public listing alone does not imply NRC verification.
+              Recognition requires evidence review by the Nominee Research and Review Corps.
+              A public listing alone does not imply NRRC verification.
             </p>
           </div>
           <div className="rounded-2xl border border-gold/20 bg-charcoal-light/50 p-5">
@@ -224,7 +224,7 @@ export default function TierCategorySubcategoryPage() {
             <h3 className="mt-3 font-serif text-lg text-ivory">Evidence-led recognition</h3>
             <p className="mt-1 text-sm text-ivory/65">
               Public voting and popularity do not determine 2026 recognition.
-              Existing NRC and governance approval requirements remain unchanged.
+              Existing NRRC and governance approval requirements remain unchanged.
             </p>
           </div>
           <div className="rounded-2xl border border-gold/20 bg-charcoal-light/50 p-5">

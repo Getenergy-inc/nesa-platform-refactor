@@ -74,7 +74,7 @@ export default function EighteenCategoriesPage() {
               <span className="opacity-30">•</span>
               <span className="inline-flex items-center gap-2"><Users className="h-4 w-4 text-gold" /> Jury + Public</span>
               <span className="opacity-30">•</span>
-              <span className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-gold" /> NRC Verified</span>
+              <span className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-gold" /> NRRC Verified</span>
             </div>
 
             {/* Search */}

@@ -111,7 +111,7 @@ export default function InfluencerImpact2026() {
               label="Verified Nominees"
             />
             <StatCard value="3" label="Recognition Subcategories" />
-            <StatCard value="NRC" label="Verified Recognition" />
+            <StatCard value="NRRC" label="Verified Recognition" />
             <StatCard value={String(stats.regions)} label="Recognition Regions" />
           </div>
 
@@ -160,8 +160,8 @@ export default function InfluencerImpact2026() {
           <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <StatCard value="6 Sep 2026" label="Nominations Open" />
             <StatCard value={CERTIFICATE_WINDOW_CLOSE_LABEL} label="Nominations Close" />
-            <StatCard value="16 Sep – 28 Dec 2026" label="Rolling NRC Verification" />
-            <StatCard value="28 Dec 2026" label="Gold-Blue Garnet Gala" />
+            <StatCard value="16 Sep – 13 Dec 2026" label="Rolling NRRC Verification" />
+            <StatCard value="13 Dec 2026" label="Gold-Blue Garnet Gala" />
           </div>
         </div>
       </section>
@@ -178,7 +178,7 @@ export default function InfluencerImpact2026() {
             blurb: "Creators, podcasters, bloggers and digital advocates producing education content.",
             recognises: "Creators, podcasters, bloggers, digital advocates",
             scope: "Africa & Diaspora",
-            voteSplit: "NRC-verified · no public voting",
+            voteSplit: "NRRC-verified · no public voting",
             viewHref: "/awards/influencers-education-impact/education-content-social-media-influencers",
             nominateHref: "/nominate?tier=influencer-2026&track=social-media",
           },
@@ -188,7 +188,7 @@ export default function InfluencerImpact2026() {
             blurb: "Athletes, academies, coaches and sports leaders funding learning.",
             recognises: "Athletes, academies, coaches, sports leaders",
             scope: "Africa & Diaspora",
-            voteSplit: "NRC-verified · no public voting",
+            voteSplit: "NRRC-verified · no public voting",
             viewHref: "/awards/influencers-education-impact/african-footballers-supporting-education",
             nominateHref: "/nominate?tier=influencer-2026&track=sports",
           },
@@ -198,7 +198,7 @@ export default function InfluencerImpact2026() {
             blurb: "Musicians, performers, producers and music executives backing education.",
             recognises: "Musicians, performers, producers, music executives",
             scope: "Africa & Diaspora",
-            voteSplit: "NRC-verified · no public voting",
+            voteSplit: "NRRC-verified · no public voting",
             viewHref: "/awards/influencers-education-impact/african-musicians-supporting-education",
             nominateHref: "/nominate?tier=influencer-2026&track=music",
           },
@@ -212,7 +212,7 @@ export default function InfluencerImpact2026() {
       {/* Influencer slot inside the 18-category registry */}
       <TierCategoryCards
         tier="influencer-education-impact"
-        heading="Influencer Impact in the 18-Category Registry"
+        heading="Influencer Impact in the 22-main-award Registry"
         sub="Influencer Education Impact is the influence-for-education meta-category among the 18. Browse where it sits across the recognition spine."
       />
 
@@ -290,8 +290,8 @@ export default function InfluencerImpact2026() {
             <StepCard
               step="2"
               icon={UserCheck}
-              title="NRC Review"
-              body="The Nominee Research Corps checks identity, category fit, duplicates, and initial evidence."
+              title="NRRC Review"
+              body="The Nominee Research and Review Corps checks identity, category fit, duplicates, and initial evidence."
             />
             <StepCard
               step="3"

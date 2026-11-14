@@ -15,26 +15,26 @@ export interface RefactorRedirect {
 
 export const REFACTOR_REDIRECTS_2026: RefactorRedirect[] = [
   // --- Obsolete voting surfaces (2026 has no public voting on the four tiers) ---
-  { from: "/vote", to: "/nominees", reason: "2026 has no public voting" },
-  { from: "/vote/:categorySlug", to: "/nominees", reason: "vote pages deprecated" },
+  { from: "/vote", to: "/about/how-recognition-works", reason: "2026 has no public voting" },
+  { from: "/vote/:categorySlug", to: "/about/how-recognition-works", reason: "vote pages deprecated" },
   {
     from: "/awards/africa-education-icon/vote",
-    to: "/awards/africa-education-icon/nominees",
+    to: "/about/how-recognition-works",
     reason: "Icon award is jury-only",
   },
   {
     from: "/awards/platinum/vote",
-    to: "/awards/platinum/nominees",
+    to: "/about/how-recognition-works",
     reason: "Platinum is jury-only",
   },
   {
     from: "/awards/gold-blue-garnet/vote",
-    to: "/awards/gold-blue-garnet/nominees",
+    to: "/about/how-recognition-works",
     reason: "2026 is Recognition Edition; competition returns 2027",
   },
   {
     from: "/awards/influencer-education-impact/vote",
-    to: "/awards/influencer-education-impact/nominees",
+    to: "/about/how-recognition-works",
     reason: "Influencer recognition is impact-based, not popularity",
   },
 
