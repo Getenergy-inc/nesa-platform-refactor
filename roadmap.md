@@ -1,4 +1,5 @@
 ## First navigation bar additions — 14 Nov 2026
+- [ ] Add owner-requested Sign Up beside Sign In using the existing /register page and verify desktop/mobile navigation; do not change registration settings or permissions.
 - [x] Owner confirmed three separate links: Buy Merchandise, NRRC Portal and Judges Arena; merchandise goes to the existing Contact page, not a reopened shop.
 - [x] Verified all three desktop links by opening their existing destinations and all three mobile Quick Links at 915px; seven navigation tests passed and preview build OK. Styling and workspace guards unchanged; no publishing.
 
