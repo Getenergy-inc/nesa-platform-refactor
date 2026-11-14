@@ -8,7 +8,7 @@
 import { SupabaseClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 export type AppRole = "user" | "nrc" | "jury" | "chapter" | "sponsor" | "admin";
-export type RoleCode = "USER" | "NRRC" | "JURY" | "OLC_COORDINATOR" | "AMBASSADOR" | "SPONSOR" | "ADMIN";
+export type RoleCode = "USER" | "NRC" | "JURY" | "OLC_COORDINATOR" | "AMBASSADOR" | "SPONSOR" | "ADMIN";
 
 /**
  * Extract and verify JWT from Authorization header

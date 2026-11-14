@@ -10,7 +10,7 @@ import api from "./http";
 // TYPES
 // ==========================================
 
-export type NominationSource = "START_MEMBER" | "NRRC" | "PUBLIC";
+export type NominationSource = "START_MEMBER" | "NRC" | "PUBLIC";
 export type AcceptanceStatus = "PENDING" | "SENT" | "ACCEPTED" | "DECLINED";
 
 export interface NominationPayload {

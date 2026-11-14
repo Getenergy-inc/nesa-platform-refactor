@@ -378,39 +378,39 @@ import {
   NRCMembers as NRCMembersPage,
   NRCSettings,
   NRCScoringDashboard,
-} from "./pages/nrrc";
+} from "./pages/nrc";
 
 // NRC Arena — Foundation shell (Phase 1)
-import { NRCProtectedRoute } from "@/components/nrrc/arena/NRCProtectedRoute";
-import NRCProfileRevisions from "./pages/nrrc/NRCProfileRevisions";
+import { NRCProtectedRoute } from "@/components/nrc/arena/NRCProtectedRoute";
+import NRCProfileRevisions from "./pages/nrc/NRCProfileRevisions";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import NomineeCanonicalProfile from "./pages/nominees/NomineeCanonicalProfile";
 import LaneGalleryPage from "./pages/nominees/lane/LaneGalleryPage";
 import LaneNomineeProfile from "./pages/nominees/lane/LaneNomineeProfile";
 import NomineeProfileEditor from "./pages/nominee/NomineeProfileEditor";
-import PublicNRCMemberProfile from "./pages/nrrc/PublicNRCMemberProfile";
-import NRCArenaIndex from "./pages/nrrc/arena/NRCArenaIndex";
-import NRCSignIn from "./pages/nrrc/arena/NRCSignIn";
-import NRCRedeem from "./pages/nrrc/arena/NRCRedeem";
-import NRCApply from "./pages/nrrc/NRCApply";
-import NRCApplications from "./pages/nrrc/NRCApplications";
-import { NRCOnboardingGate } from "@/components/nrrc/arena/NRCOnboardingGate";
-import NRCOnboarding from "./pages/nrrc/arena/NRCOnboarding";
-import NRCProfile from "./pages/nrrc/arena/NRCProfile";
-import NRCDirectory from "./pages/nrrc/arena/NRCDirectory";
-import NRCTeams from "./pages/nrrc/arena/NRCTeams";
-import NRCTeamDetail from "./pages/nrrc/arena/NRCTeamDetail";
-import NRCArenaDashboard from "./pages/nrrc/arena/NRCDashboard";
-import NRCCases from "./pages/nrrc/arena/NRCCases";
-import NRCCaseDetail from "./pages/nrrc/arena/NRCCaseDetail";
-import NRCEvidence from "./pages/nrrc/arena/NRCEvidence";
-import NRCDuplicates from "./pages/nrrc/arena/NRCDuplicates";
-import NRCEndorsements from "./pages/nrrc/arena/NRCEndorsements";
-import NRCHandoverJudges from "./pages/nrrc/arena/NRCHandoverJudges";
-import NRCHandoverGovernance from "./pages/nrrc/arena/NRCHandoverGovernance";
-import NRCReportsPage from "./pages/nrrc/arena/NRCReportsPage";
-import NRCAuditLog from "./pages/nrrc/arena/NRCAuditLog";
-import NRCAutomation from "./pages/nrrc/arena/NRCAutomation";
+import PublicNRCMemberProfile from "./pages/nrc/PublicNRCMemberProfile";
+import NRCArenaIndex from "./pages/nrc/arena/NRCArenaIndex";
+import NRCSignIn from "./pages/nrc/arena/NRCSignIn";
+import NRCRedeem from "./pages/nrc/arena/NRCRedeem";
+import NRCApply from "./pages/nrc/NRCApply";
+import NRCApplications from "./pages/nrc/NRCApplications";
+import { NRCOnboardingGate } from "@/components/nrc/arena/NRCOnboardingGate";
+import NRCOnboarding from "./pages/nrc/arena/NRCOnboarding";
+import NRCProfile from "./pages/nrc/arena/NRCProfile";
+import NRCDirectory from "./pages/nrc/arena/NRCDirectory";
+import NRCTeams from "./pages/nrc/arena/NRCTeams";
+import NRCTeamDetail from "./pages/nrc/arena/NRCTeamDetail";
+import NRCArenaDashboard from "./pages/nrc/arena/NRCDashboard";
+import NRCCases from "./pages/nrc/arena/NRCCases";
+import NRCCaseDetail from "./pages/nrc/arena/NRCCaseDetail";
+import NRCEvidence from "./pages/nrc/arena/NRCEvidence";
+import NRCDuplicates from "./pages/nrc/arena/NRCDuplicates";
+import NRCEndorsements from "./pages/nrc/arena/NRCEndorsements";
+import NRCHandoverJudges from "./pages/nrc/arena/NRCHandoverJudges";
+import NRCHandoverGovernance from "./pages/nrc/arena/NRCHandoverGovernance";
+import NRCReportsPage from "./pages/nrc/arena/NRCReportsPage";
+import NRCAuditLog from "./pages/nrc/arena/NRCAuditLog";
+import NRCAutomation from "./pages/nrc/arena/NRCAutomation";
 import {
   NRCDashboardHome,
   NRCNomineeTable,
@@ -422,7 +422,7 @@ import {
   NRCIntakeQueue,
   NRCIntakeReview,
   NRCMergeTool,
-} from "./pages/nrrc/dashboard";
+} from "./pages/nrc/dashboard";
 
 // Admin Pages
 import {

@@ -40,7 +40,7 @@ export type RoleCode =
   | 'NOMINEE'
   | 'AMBASSADOR'
   | 'OLC_COORDINATOR'
-  | 'NRRC'
+  | 'NRC'
   | 'JURY'
   | 'SPONSOR'
   | 'ADMIN'
