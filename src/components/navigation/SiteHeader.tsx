@@ -91,7 +91,7 @@ function DropdownSimple({ item }: { item: NavItem }) {
                     })
                   }
                   className={cn(
-                    "block px-3 py-2 rounded-md text-sm hover:text-gold hover:bg-gold/10",
+                    "block px-3 py-2 rounded-md text-sm hover:text-gold hover:bg-gold/10 focus:bg-gold/10 focus:text-gold",
                     FOCUS_RING,
                     active ? "text-gold bg-gold/10" : "text-white/85",
                   )}
@@ -182,7 +182,7 @@ function DropdownSectioned({ item }: { item: NavItem }) {
                           })
                         }
                         className={cn(
-                          "block px-2 py-1.5 rounded text-[13px] leading-snug hover:text-gold hover:bg-gold/10",
+                          "block px-2 py-1.5 rounded text-[13px] leading-snug hover:text-gold hover:bg-gold/10 focus:bg-gold/10 focus:text-gold",
                           FOCUS_RING,
                           active ? "text-gold bg-gold/10" : "text-white/85",
                         )}
@@ -220,7 +220,7 @@ function DesktopNav() {
         {SITE_NAV.filter(item => item.children || item.sections || item.megaMenu).map(item => (
           <MenubarMenu key={item.href} value={item.href}>
             <MenubarTrigger className={cn(triggerCls(isActive(location.pathname, item.href)),
-              "bg-transparent data-[state=open]:bg-gold/10 data-[state=open]:text-gold")}
+              "bg-transparent focus:bg-gold/10 focus:text-gold data-[state=open]:bg-gold/10 data-[state=open]:text-gold")}
               onClick={() => trackNav("dropdown_open", { label: item.label, section: item.analyticsId, device: "desktop" })}>
               {item.shortLabel ?? item.label}
               <ChevronDown className="ml-1 h-3 w-3" aria-hidden />
