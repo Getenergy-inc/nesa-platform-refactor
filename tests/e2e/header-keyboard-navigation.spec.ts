@@ -27,7 +27,10 @@ test("desktop groups open, move and close using only the keyboard", async ({ pag
   await page.keyboard.press("Enter");
   await page.keyboard.press("ArrowRight");
   await expect(page.getByRole("menu", { name: "Recognition", exact: true })).toBeVisible();
+  await page.keyboard.press("ArrowDown");
+  await expect(page.getByRole("menu", { name: "Recognition", exact: true }).getByRole("menuitem").first()).toBeFocused();
   await page.keyboard.press("Escape");
+  await expect(primary.getByRole("menuitem", { name: "Recognition", exact: true })).toBeFocused();
   await page.keyboard.press("Tab");
   await expect(primary.getByRole("link", { name: "Contact", exact: true })).toBeFocused();
 });
