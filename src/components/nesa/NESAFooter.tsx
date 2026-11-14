@@ -20,56 +20,64 @@ interface FooterSection {
 
 const SECTIONS: FooterSection[] = [
   {
-    id: "programme",
-    title: "Programme",
+    id: "organisation",
+    title: "Organisation",
     links: [
-      { label: "Awards", href: "/awards" },
-      { label: "Nominate", href: "/nominate" },
-      { label: "2026 Online Recognition Programme", href: "/programme-2026" },
+      { label: "About NESA-Africa", href: "/about" },
+      { label: "About SCEF", href: "/about/scef" },
+      { label: "Governance", href: "/about/governance" },
+      { label: "Global Team", href: "/meet-the-team" },
+      { label: "Contact", href: "/contact" },
     ],
   },
   {
-    id: "about",
-    title: "About",
+    id: "recognition",
+    title: "Recognition",
     links: [
-      { label: "About", href: "/about" },
-      { label: "Governance", href: "/governance" },
-      { label: "Impact", href: "/impact" },
-    ],
-  },
-  {
-    id: "media",
-    title: "Media",
-    links: [
-      { label: "NESA-Africa TV", href: "/media/tv" },
-      { label: "Podcast", href: "/media/podcast" },
-      { label: "Webinars", href: "/media/webinars" },
-      { label: "e-Journal", href: "/journal" },
+      { label: "Four Recognition Tiers", href: "/recognition" },
+      { label: "Submit a Nomination", href: "/nominate" },
+      { label: "Nominee Directory", href: "/nominees" },
+      { label: "How Recognition Works", href: "/about/how-recognition-works" },
+      { label: "Certificates", href: "/recognition/certificates" },
     ],
   },
   {
     id: "involved",
     title: "Get Involved",
     links: [
-      { label: "Donate", href: "/donate" },
-      { label: SCHOOL_SUPPORT_ACTIONS.nominate.shortLabel, href: SCHOOL_SUPPORT_ACTIONS.nominate.href },
-      { label: SCHOOL_SUPPORT_ACTIONS.support.shortLabel, href: SCHOOL_SUPPORT_ACTIONS.support.href },
+      { label: "Volunteer", href: "/volunteer" },
+      { label: "Join a Local Chapter", href: "/chapters/join" },
       { label: "Sponsor", href: "/sponsors" },
       { label: "Partner", href: "/partners" },
-      { label: "Join the NRC", href: "/nrc/apply" },
-      { label: "Receive Programme Updates", contentRequired: true },
-      { label: "Volunteer", href: "/volunteer" },
+      { label: "Donate", href: "/donate" },
+      { label: "Nominee Portal", href: "/nominee-portal" },
+      { label: "NRRC Portal", href: "/nrrc" },
+      { label: "Judges Arena", href: "/judges" },
+      { label: "Volunteer Dashboard", href: "/volunteer/dashboard" },
+      { label: "Chapter Workspace", href: "/olc/dashboard" },
+    ],
+  },
+  {
+    id: "impact",
+    title: "Impact",
+    links: [
+      { label: "EduAid-Africa", href: "/eduaid-africa" },
+      { label: "Support a Special-Needs School", href: "/support-a-special-needs-school" },
+      { label: "Afri-EduTourism", href: "/afri-edutourism" },
+      { label: "Impact Stories", href: "/impact/stories" },
+      { label: "E-Journal", href: "/journal" },
     ],
   },
   {
     id: "legal",
-    title: "Legal",
+    title: "Legal and support",
     links: [
       { label: "Privacy", href: "/policies#privacy" },
       { label: "Terms", href: "/policies#terms" },
       { label: "Accessibility", href: "/policies#accessibility" },
       { label: "Safeguarding", href: "/policies#safeguarding" },
-      { label: "Complaints", href: "/policies#complaints" },
+      { label: "Complaints and Corrections", href: "/policies#complaints" },
+      { label: "Report a Concern", href: "/contact" },
     ],
   },
 ];
@@ -113,7 +121,7 @@ export function NESAFooter() {
               </div>
             </div>
             <p className="text-white/65 text-xs md:text-sm leading-relaxed mb-4 max-w-sm">
-              Recognising the Enablers of Education for All Across Africa. Hosted by Santos Creations Educational Foundation (SCEF).
+              NESA-Africa is hosted by Santos Creations Educational Foundation. Sponsorship, donations, partnerships and media participation do not influence nomination, judging or recognition decisions.
             </p>
             <FollowLinks className="justify-center md:justify-start" />
           </div>

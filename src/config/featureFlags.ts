@@ -17,4 +17,4 @@ export const PUBLIC_AWARD_VOTING = false;
 /**
  * Redirect target for archived voting routes while PUBLIC_AWARD_VOTING is off.
  */
-export const VOTING_SUNSET_REDIRECT = "/awards/gold-blue-garnet";
+export const VOTING_SUNSET_REDIRECT = "/about/how-recognition-works";

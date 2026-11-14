@@ -1,8 +1,5 @@
 // One static announcement; no carousel or countdown.
 
-import { PROGRAMME_END_LABEL } from "@/config/programme";
-import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
-
 export interface Announcement {
   id: string;
   text: string;
@@ -12,9 +9,9 @@ export interface Announcement {
 
 export const ANNOUNCEMENTS: Announcement[] = [
   {
-    id: "nominations-and-online-gala",
-    text: `Nominations Are Open · Nomination Is Free · Online Recognition Programme: ${PROGRAMME_END_LABEL}. Learn More`,
-    href: PUBLIC_ACTIONS_2026.onlineGala.href,
+    id: "nominations-and-online-programme",
+    text: "Public Nominations Open 9 November 2026 – 31 March 2027 · Online Recognition Programme: Sunday 13 December 2026. Learn More",
+    href: "/programme/2026",
     analyticsId: "announcement_programme",
   },
 ];
