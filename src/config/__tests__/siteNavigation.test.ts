@@ -3,6 +3,17 @@ import { SITE_NAV, MOBILE_SITE_NAV, SIGN_IN_WORKSPACES } from "@/config/siteNavi
 import { PROGRAMME_END_DATE, PROGRAMME_END_LONG_LABEL } from "@/config/programme";
 
 describe("2026–2027 navigation", () => {
+  it("lists exactly two Impact items on desktop and mobile, with the heading linking to /impact", () => {
+    for (const nav of [SITE_NAV, MOBILE_SITE_NAV]) {
+      const impact = nav.find(g => g.label === "Impact");
+      expect(impact?.href).toBe("/impact");
+      expect(impact?.headingLink).toBe(true);
+      expect(impact?.children?.map(c => [c.label, c.href])).toEqual([
+        ["Support a Special-Needs School", "/support-a-special-needs-school"],
+        ["Afri-EduTourism", "/afri-edutourism"],
+      ]);
+    }
+  });
   it("uses the approved desktop headings, with Nominees on mobile only", () => {
     expect(SITE_NAV.map(g => g.label)).toEqual(["About", "Recognition", "Impact", "Media", "Get Involved", "Contact"]);
     expect(MOBILE_SITE_NAV.map(g => g.label)).toEqual(["About", "Recognition", "Nominees", "Impact", "Media", "Get Involved", "Contact"]);

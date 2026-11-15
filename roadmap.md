@@ -161,3 +161,5 @@
 - [x] Phase 1: navigation, footer, routes, redirects (new /how-it-works, /research-and-judging, /get-involved pages)
 - [ ] Phase 2: remove gala/ticket/Lagos items — awaiting owner review of Phase 1
 - [ ] Phase 3–7: core pages, Impact/school page (14 categories), Contact form, tests — pending
+- [x] Lean Impact (15 Nov): two-item Impact menu, lean /impact page, homepage impact CTAs.
+- [ ] Phases 2–7 incl. owner master-draft refinements (see plan) — awaiting owner go-ahead.
