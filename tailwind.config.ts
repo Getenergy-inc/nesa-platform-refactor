@@ -19,6 +19,7 @@ export default {
         cursive: ['Great Vibes', 'cursive'],
       },
       colors: {
+        ea: { green: "hsl(var(--ea-green))", logo: "hsl(var(--ea-logo))", dark: "hsl(var(--ea-dark))", deep: "hsl(var(--ea-deep))", brown: "hsl(var(--ea-brown))", tan: "hsl(var(--ea-tan))", cream: "hsl(var(--ea-cream))", sand: "hsl(var(--ea-sand))", ink: "hsl(var(--ea-ink))", muted: "hsl(var(--ea-muted))", line: "hsl(var(--ea-line))" },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
