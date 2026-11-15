@@ -156,3 +156,8 @@
 ## Owner programme-date correction — 15 November 2026
 - [x] Correct existing online-programme dates to Monday 28 December 2026; preserve design, unrelated deadlines and publishing state.
 - [x] Run focused date checks and verify the programme date in the preview (27 checks passed; homepage, programme, About cycle and timeline checked; mobile programme checked).
+
+## Lean 14-page redraft (owner approved 15 Nov 2026)
+- [x] Phase 1: navigation, footer, routes, redirects (new /how-it-works, /research-and-judging, /get-involved pages)
+- [ ] Phase 2: remove gala/ticket/Lagos items — awaiting owner review of Phase 1
+- [ ] Phase 3–7: core pages, Impact/school page (14 categories), Contact form, tests — pending
