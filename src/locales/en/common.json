@@ -7,7 +7,11 @@
     "selectionIntro": "Up to nine Africa Education Icons of the Decade may be selected. Every nominee must provide a 10-year documented activity profile for evaluation against these eight weighted criteria.",
     "selectionNote": "Independent verification, jury review and authorised governance confirmation are required. A nomination or score does not guarantee selection. Public voting, sponsorship and donations do not influence selection.",
     "downloadEdi": "Download EDI Matrix PDF",
-    "categories": ["Education Philanthropy Icon", "Literary and New Curriculum Advocate Icon", "Technical Educator Icon"],
+    "categories": [
+      "Education Philanthropy Icon",
+      "Literary and New Curriculum Advocate Icon",
+      "Technical Educator Icon"
+    ],
     "production": "The programme will involve approximately 20–30 invited live participants. No public physical gala, ticket sale, corporate table or public venue is currently authorised.",
     "presentation": "Icon documentaries · Approved interviews · Education-impact stories · Regional contributions · International contributions · Certificates of Recognition · NESA-Africa TV coverage · Africa Education Enablers Podcast features.",
     "continuation": "Tier 2–4 nominations, verification and documentary recognition continue through 31 March 2027. Keeping the portal open does not guarantee recognition.",
@@ -119,5 +123,12 @@
   "loading": {
     "pleaseWait": "Please wait...",
     "loading": "Loading..."
+  },
+  "schoolSupportPage": {
+    "_translationReview": "Integrity notices (nominationNotice, notATier) require human translation review before non-English publication.",
+    "band": "A Rebuild My School Africa service · EduAid-Africa · presented with NESA-Africa",
+    "utility": "A service of Rebuild My School Africa · EduAid-Africa · Santos Creations Educational Foundation · Jointly presented with NESA-Africa",
+    "nominationNotice": "A nomination begins verification. It does not guarantee publication, voting eligibility, funding, a grant or an intervention. Only verified and approved schools are profiled.",
+    "notATier": "Regional school selection is separate from NESA-Africa award recognition. Donations, sponsorship and regional participation do not affect NESA-Africa judging or recognition decisions."
   }
 }

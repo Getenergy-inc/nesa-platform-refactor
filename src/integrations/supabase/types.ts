@@ -11540,6 +11540,144 @@ export type Database = {
           },
         ]
       }
+      support_fund_pledges: {
+        Row: {
+          acknowledged: boolean
+          amount: number | null
+          anonymous: boolean
+          category: string | null
+          contact_person: string | null
+          contact_role: string | null
+          contributions: string[]
+          country: string | null
+          created_at: string
+          currency: string | null
+          donor_name: string | null
+          donor_type: string | null
+          email: string
+          frequency: string | null
+          id: string
+          in_kind_description: string | null
+          kind: string
+          message: string | null
+          organisation: string | null
+          organisation_type: string | null
+          phone: string | null
+          preferred_contact: string | null
+          projects: string[]
+          recognition_name: string | null
+          ref: string
+          region: string | null
+          scope: string | null
+          site: string
+          status: Database["public"]["Enums"]["support_fund_status"]
+          website: string | null
+        }
+        Insert: {
+          acknowledged: boolean
+          amount?: number | null
+          anonymous?: boolean
+          category?: string | null
+          contact_person?: string | null
+          contact_role?: string | null
+          contributions?: string[]
+          country?: string | null
+          created_at?: string
+          currency?: string | null
+          donor_name?: string | null
+          donor_type?: string | null
+          email: string
+          frequency?: string | null
+          id?: string
+          in_kind_description?: string | null
+          kind: string
+          message?: string | null
+          organisation?: string | null
+          organisation_type?: string | null
+          phone?: string | null
+          preferred_contact?: string | null
+          projects?: string[]
+          recognition_name?: string | null
+          ref: string
+          region?: string | null
+          scope?: string | null
+          site?: string
+          status?: Database["public"]["Enums"]["support_fund_status"]
+          website?: string | null
+        }
+        Update: {
+          acknowledged?: boolean
+          amount?: number | null
+          anonymous?: boolean
+          category?: string | null
+          contact_person?: string | null
+          contact_role?: string | null
+          contributions?: string[]
+          country?: string | null
+          created_at?: string
+          currency?: string | null
+          donor_name?: string | null
+          donor_type?: string | null
+          email?: string
+          frequency?: string | null
+          id?: string
+          in_kind_description?: string | null
+          kind?: string
+          message?: string | null
+          organisation?: string | null
+          organisation_type?: string | null
+          phone?: string | null
+          preferred_contact?: string | null
+          projects?: string[]
+          recognition_name?: string | null
+          ref?: string
+          region?: string | null
+          scope?: string | null
+          site?: string
+          status?: Database["public"]["Enums"]["support_fund_status"]
+          website?: string | null
+        }
+        Relationships: []
+      }
+      support_fund_transfer_reports: {
+        Row: {
+          amount_sent: number
+          bank_transaction_id: string | null
+          created_at: string
+          currency: string | null
+          date_paid: string
+          id: string
+          ref: string
+          sender_name: string
+          site: string
+          status: Database["public"]["Enums"]["support_fund_status"]
+        }
+        Insert: {
+          amount_sent: number
+          bank_transaction_id?: string | null
+          created_at?: string
+          currency?: string | null
+          date_paid: string
+          id?: string
+          ref: string
+          sender_name: string
+          site?: string
+          status?: Database["public"]["Enums"]["support_fund_status"]
+        }
+        Update: {
+          amount_sent?: number
+          bank_transaction_id?: string | null
+          created_at?: string
+          currency?: string | null
+          date_paid?: string
+          id?: string
+          ref?: string
+          sender_name?: string
+          site?: string
+          status?: Database["public"]["Enums"]["support_fund_status"]
+        }
+        Relationships: []
+      }
       sync_batches: {
         Row: {
           created_at: string
@@ -14187,6 +14325,16 @@ export type Database = {
         | "certificates"
         | "rebuild_nominations"
         | "rebuild_voting"
+      support_fund_status:
+        | "expression_of_interest"
+        | "pledge_received"
+        | "payment_instruction_issued"
+        | "transfer_reported"
+        | "payment_received"
+        | "payment_reconciled"
+        | "receipt_issued"
+        | "intervention_allocated"
+        | "utilisation_reported"
       transaction_status: "pending" | "confirmed" | "failed" | "refunded"
       transaction_type: "donation" | "sponsorship" | "ticket"
       transfer_status:
@@ -14632,6 +14780,17 @@ export const Constants = {
         "certificates",
         "rebuild_nominations",
         "rebuild_voting",
+      ],
+      support_fund_status: [
+        "expression_of_interest",
+        "pledge_received",
+        "payment_instruction_issued",
+        "transfer_reported",
+        "payment_received",
+        "payment_reconciled",
+        "receipt_issued",
+        "intervention_allocated",
+        "utilisation_reported",
       ],
       transaction_status: ["pending", "confirmed", "failed", "refunded"],
       transaction_type: ["donation", "sponsorship", "ticket"],
