@@ -9,7 +9,7 @@ import {
 import {
   FileText,
   Vote,
-  Ticket,
+
   Heart,
   Users,
   Zap,

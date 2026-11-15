@@ -34,7 +34,7 @@ import {
   Sparkles,
   Star,
   Target,
-  Ticket,
+
   Trophy,
   Tv,
   UserPlus,
