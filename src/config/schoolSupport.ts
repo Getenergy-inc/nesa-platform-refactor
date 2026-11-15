@@ -1,3 +1,13 @@
+import collageAsset from "@/assets/school-support/inclusive-learning-collage.png.asset.json";
+import cat01 from "@/assets/school-support/category-01-visual-support.jpg.asset.json";
+import cat02 from "@/assets/school-support/category-02-deaf-and-hearing.jpg.asset.json";
+import cat03 from "@/assets/school-support/category-03-physical-and-mobility.jpg.asset.json";
+import cat04 from "@/assets/school-support/category-04-intellectual-and-developmental.jpg.asset.json";
+import cat05 from "@/assets/school-support/category-05-autism-and-communication.jpg.asset.json";
+import cat06 from "@/assets/school-support/category-06-learning-emotional-and-behavioural.jpg.asset.json";
+import cat07 from "@/assets/school-support/category-07-multiple-and-complex.jpg.asset.json";
+import cat08 from "@/assets/school-support/category-08-inclusive-early-intervention-and-vocational.jpg.asset.json";
+
 /** School intervention actions are independent of NESA award nomination. */
 export const SCHOOL_SUPPORT_ACTIONS = {
   nominate: { href: "/impact/nominate-school", label: "Nominate a Special-Needs School in Africa", shortLabel: "Nominate a School" },
@@ -321,6 +331,26 @@ export const SNS_COUNTRIES = [
 export const SNS_UNASSIGNED = { id: "732", name: "Western Sahara", color: "#C9C4B4", note: "disputed territory, not assigned" } as const;
 export const SNS_ISLAND_DOTS = ["132", "678", "174", "480", "690"] as const;
 
+/** Owner-supplied illustrative pictures, one per category, in category order. */
+export type SnsImage = { src: string; alt: string; credit: string };
+const SNS_CATEGORY_IMAGES: SnsImage[] = [
+  { src: cat01.url, alt: "A learner wearing sunglasses reads Braille at a desk while a teacher guides his hands, outside a school for the blind.", credit: "" },
+  { src: cat02.url, alt: "Two schoolgirls in checkered uniforms practise sign language together in front of a signed-alphabet classroom poster.", credit: "" },
+  { src: cat03.url, alt: "A smiling schoolgirl in a wheelchair uses a laptop on her lap in front of an accessible ramp with handrails.", credit: "" },
+  { src: cat04.url, alt: "A young learner builds a structure from colourful wooden blocks at a classroom table.", credit: "" },
+  { src: cat05.url, alt: "A learner wearing headphones points to a pictured daily-schedule board in a classroom.", credit: "" },
+  { src: cat06.url, alt: "A learner in a white school uniform traces the letter A with a finger in a tray of sand.", credit: "" },
+  { src: cat07.url, alt: "A smiling learner in a supportive wheelchair and her teacher look at an assistive communication tablet.", credit: "" },
+  { src: cat08.url, alt: "A teacher and three pupils hold up emotion cards showing angry, happy and calm faces.", credit: "" },
+];
+
+/** Owner-supplied panoramic picture of the eight support categories in classroom use. */
+export const SNS_HERO_IMAGE: SnsImage = {
+  src: collageAsset.url,
+  alt: "Panoramic picture of eight classroom scenes: a learner reading Braille with a teacher, two learners signing to each other, a learner using a wheelchair at a laptop, a learner building with counting blocks, a learner pointing at a visual schedule, a learner tracing a letter in sand, a learner using a communication tablet, and a teacher holding an emotion flashcard.",
+  credit: "",
+};
+
 export const SNS_CATEGORIES = [
   { title: "Visual Support Education", description: "Schools supporting learners who are blind or have low vision", icon: "eye", color: "#2E7D32", tags: ["Braille", "Low vision"] },
   { title: "Deaf and Hearing Support Education", description: "Schools supporting Deaf and hard-of-hearing learners", icon: "ear", color: "#6B4521", tags: ["Sign language", "Captioning"] },
@@ -330,7 +360,7 @@ export const SNS_CATEGORIES = [
   { title: "Learning, Emotional and Behavioural Support Education", description: "Schools supporting learners with dyslexia, dyscalculia, ADHD and significant emotional, behavioural or psychosocial needs", icon: "brain", color: "#4C8A3A", tags: ["Learning", "Wellbeing"] },
   { title: "Multiple and Complex Disabilities", description: "Schools serving learners with more than one disability or multidisciplinary needs", icon: "layers", color: "#553517", tags: ["Multidisciplinary care"] },
   { title: "Inclusive, Early-Intervention and Vocational Education", description: "Inclusive mainstream schools, specialist units, early-intervention centres, resource centres, vocational/transition programmes", icon: "sprout", color: "#24602A", tags: ["Inclusion", "Transition"] },
-].map((c) => ({ ...c, image: null as null | { src: string; alt: string; credit: string } }));
+].map((c, i) => ({ ...c, image: SNS_CATEGORY_IMAGES[i] ?? null }));
 export const SNS_CATEGORY_RULE = "Schools may select more than one category but state one principal category. Regional selection is one approved school per region, in any category, not eight category winners.";
 
 /** Video slots stay empty and hidden until approved illustrative videos are supplied. */

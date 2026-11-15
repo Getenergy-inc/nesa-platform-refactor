@@ -163,3 +163,8 @@
 - [ ] Phase 3–7: core pages, Impact/school page (14 categories), Contact form, tests — pending
 - [x] Lean Impact (15 Nov): two-item Impact menu, lean /impact page, homepage impact CTAs.
 - [ ] Phases 2–7 incl. owner master-draft refinements (see plan) — awaiting owner go-ahead.
+
+## Support a Special-Needs School pictures (owner supplied 15 Nov 2026)
+- [x] Publish the owner's panoramic eight-scene band and the eight category pictures to the site media library and place them on the page (hero band + category tiles).
+- [x] Check desktop (1280) and phone (360): band shows all eight scenes on desktop and four legible scenes on phone; category tiles show their photos; no overflow, no page errors.
+- [ ] EduAid-Africa logo replacement still pending owner upload — current logo remains.
