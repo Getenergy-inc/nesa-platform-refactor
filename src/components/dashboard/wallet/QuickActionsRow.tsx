@@ -60,12 +60,6 @@ export function QuickActionsRow({ onTopUp }: QuickActionsRowProps) {
       variant: "outline",
     },
     {
-      label: "Buy Ticket",
-      icon: <Ticket className="h-4 w-4" />,
-      href: "/tickets",
-      variant: "outline",
-    },
-    {
       label: "Donate",
       icon: <Heart className="h-4 w-4" />,
       href: "/donate",
