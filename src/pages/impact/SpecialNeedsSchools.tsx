@@ -189,7 +189,7 @@ function Body() {
           </aside>
         </div>
         <figure className="mx-auto mt-10 max-w-6xl overflow-hidden rounded-3xl border border-ea-tan/30">
-          <img src={SNS_HERO_IMAGE.src} alt={SNS_HERO_IMAGE.alt} className="w-full object-cover" />
+          <img src={SNS_HERO_IMAGE.src} alt={SNS_HERO_IMAGE.alt} className="aspect-square w-full object-cover sm:aspect-auto" />
           <figcaption className="bg-ea-deep/80 px-4 py-2 text-xs text-ea-cream/80">Illustrative images of inclusive learning across the programme's eight support categories.</figcaption>
         </figure>
       </section>
