@@ -21,6 +21,7 @@ for (const width of [360, 820, 1280]) {
       }
       await expect(merchandise).toBeVisible();
       await expect(merchandise).toHaveAttribute("href", "/contact?subject=merchandise");
+      await merchandise.scrollIntoViewIfNeeded();
       const box = await merchandise.boundingBox();
       if (!box) throw new Error("Merchandise link has no visible bounds");
       expect(box.x).toBeGreaterThanOrEqual(0);
