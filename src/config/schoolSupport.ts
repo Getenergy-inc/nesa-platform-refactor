@@ -1,3 +1,13 @@
+import collageAsset from "@/assets/school-support/inclusive-learning-collage.png.asset.json";
+import cat01 from "@/assets/school-support/category-01-visual-support.jpg.asset.json";
+import cat02 from "@/assets/school-support/category-02-deaf-and-hearing.jpg.asset.json";
+import cat03 from "@/assets/school-support/category-03-physical-and-mobility.jpg.asset.json";
+import cat04 from "@/assets/school-support/category-04-intellectual-and-developmental.jpg.asset.json";
+import cat05 from "@/assets/school-support/category-05-autism-and-communication.jpg.asset.json";
+import cat06 from "@/assets/school-support/category-06-learning-emotional-and-behavioural.jpg.asset.json";
+import cat07 from "@/assets/school-support/category-07-multiple-and-complex.jpg.asset.json";
+import cat08 from "@/assets/school-support/category-08-inclusive-early-intervention-and-vocational.jpg.asset.json";
+
 /** School intervention actions are independent of NESA award nomination. */
 export const SCHOOL_SUPPORT_ACTIONS = {
   nominate: { href: "/impact/nominate-school", label: "Nominate a Special-Needs School in Africa", shortLabel: "Nominate a School" },
@@ -330,7 +340,7 @@ export const SNS_CATEGORIES = [
   { title: "Learning, Emotional and Behavioural Support Education", description: "Schools supporting learners with dyslexia, dyscalculia, ADHD and significant emotional, behavioural or psychosocial needs", icon: "brain", color: "#4C8A3A", tags: ["Learning", "Wellbeing"] },
   { title: "Multiple and Complex Disabilities", description: "Schools serving learners with more than one disability or multidisciplinary needs", icon: "layers", color: "#553517", tags: ["Multidisciplinary care"] },
   { title: "Inclusive, Early-Intervention and Vocational Education", description: "Inclusive mainstream schools, specialist units, early-intervention centres, resource centres, vocational/transition programmes", icon: "sprout", color: "#24602A", tags: ["Inclusion", "Transition"] },
-].map((c) => ({ ...c, image: null as null | { src: string; alt: string; credit: string } }));
+].map((c, i) => ({ ...c, image: SNS_CATEGORY_IMAGES[i] ?? null }));
 export const SNS_CATEGORY_RULE = "Schools may select more than one category but state one principal category. Regional selection is one approved school per region, in any category, not eight category winners.";
 
 /** Video slots stay empty and hidden until approved illustrative videos are supplied. */
