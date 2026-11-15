@@ -1,3 +1,9 @@
+## Approved support-page follow-ups — 15 Nov 2026, 09:23 UTC
+- [x] Corrected local participation/verified-school links; preserved EduAid canonical; 17 focused checks passed.
+- [x] Saved anonymous donation EA-DN-261115-NKBM, its transfer report and sponsor EA-SP-261115-MUEL; actual rows read back, anonymous reads returned no rows. Deleted exactly those three follow-up records and confirmed zero remain. No money sent; earlier test records outside this follow-up were not deleted.
+- [x] Checked hero, selected Nigeria map, donation confirmation and keyboard tabs at 360px: document width 360px, no overflowing page-body containers; no layout changes needed. Captured desktop/mobile screenshots.
+- [x] Recorded page-only full-build/brand approval and separate-bank-transfer fund safeguards in memory and docs/PROJECT_NOTES.md. Supplied-asset placeholders retained; no header/footer/auth/redirect/permission changes; not published.
+
 ## Live donation persistence and access test — 15 Nov 2026
 - [x] Added real anonymous pledge/transfer UI submissions and anonymous/member read/update-denial checks; both live tests and eight existing safety tests passed. Real records independently read back; synthetic US$1 records retained, no payment made, no publishing or permission changes.
 - [ ] Verify administrator read/update through an authorised administrator session — retained test explicitly skips because the requesting account has only user role; never promote users or use privileged database tools as an RLS test.
