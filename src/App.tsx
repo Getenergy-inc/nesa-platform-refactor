@@ -36,7 +36,7 @@ const SlugRedirect = ({ to }: { to: (slug: string) => string }) => {
  *  Navigate; canonical slugs render the RegionNomineesHubPage directly. */
 const LegacyNrrcRedirect = () => {
   const location = useLocation();
-  const suffix = location.pathname.slice("/nrrc".length);
+  const suffix = location.pathname.slice("/nrc".length);
   return <Navigate to={`/nrrc${suffix}${location.search}${location.hash}`} replace />;
 };
 
