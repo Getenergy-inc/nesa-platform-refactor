@@ -1,6 +1,6 @@
 ## Merchandise enquiry links — 15 Nov 2026
-- [ ] Add Buy Merchandise after Donate in the shared Get Involved menu and footer; prefill Contact subject as Merchandise; preserve integrity wording and every shop redirect.
-- [ ] Update navigation tests for the current menus and check desktop/360px fit; no cart, checkout, payment or publishing.
+- [x] Added Buy Merchandise after Donate in the shared Get Involved menu and footer; Contact subject prefills Merchandise. Existing integrity wording and every shop redirect untouched.
+- [x] Six navigation unit checks passed; desktop/820px/360px browser checks confirmed menu link, Contact prefill and footer destination with zero horizontal overflow. Existing scrollable mobile menu retained. Updated retained E2E tests; JS runner blocked by missing browser executable, equivalent Python Playwright checks passed. Preview build OK; no cart, checkout, payment or publishing. Contact submission remains unavailable pending the official SCEF form link.
 
 ## Approved support-page follow-ups — 15 Nov 2026, 09:23 UTC
 - [x] Corrected local participation/verified-school links; preserved EduAid canonical; 17 focused checks passed.

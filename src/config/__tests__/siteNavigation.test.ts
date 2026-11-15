@@ -16,6 +16,18 @@ describe("2026–2027 navigation", () => {
     ]);
     expect(UTILITY_NAV.find(g => g.label === "How Recognition Works")?.href).toBe("/about/how-recognition-works");
   });
+  it("routes merchandise enquiries through Contact in both menus, between Donate and Contact Us", () => {
+    for (const navigation of [SITE_NAV, MOBILE_SITE_NAV]) {
+      const children = navigation.find(item => item.label === "Get Involved")?.children ?? [];
+      const donateIndex = children.findIndex(item => item.label === "Donate");
+      expect(donateIndex).toBeGreaterThanOrEqual(0);
+      expect(children.slice(donateIndex, donateIndex + 3)).toEqual([
+        { label: "Donate", href: "/donate" },
+        { label: "Buy Merchandise", href: "/contact?subject=merchandise" },
+        { label: "Contact Us", href: "/contact" },
+      ]);
+    }
+  });
   it("uses NRRC presentation routes without changing workspace access", () => {
     expect(SIGN_IN_WORKSPACES.map(g => g.href)).toEqual([
       "/nominee-portal", "/nrrc", "/judges", "/login?next=%2Fdashboard%2Fvolunteer",

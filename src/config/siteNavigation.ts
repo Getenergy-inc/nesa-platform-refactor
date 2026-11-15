@@ -63,6 +63,7 @@ export const SITE_NAV: NavItem[] = [
     { label: "Become a Sponsor", href: "/sponsors" },
     { label: "Partner With Us", href: "/partners" },
     { label: "Donate", href: "/donate" },
+    { label: "Buy Merchandise", href: "/contact?subject=merchandise" },
     { label: "Contact Us", href: "/contact" },
   ] },
   { label: "Contact", href: "/contact", analyticsId: "nav_contact" },
