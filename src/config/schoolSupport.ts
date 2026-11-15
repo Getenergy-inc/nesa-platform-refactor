@@ -331,6 +331,26 @@ export const SNS_COUNTRIES = [
 export const SNS_UNASSIGNED = { id: "732", name: "Western Sahara", color: "#C9C4B4", note: "disputed territory, not assigned" } as const;
 export const SNS_ISLAND_DOTS = ["132", "678", "174", "480", "690"] as const;
 
+/** Owner-supplied illustrative pictures, one per category, in category order. */
+export type SnsImage = { src: string; alt: string; credit: string };
+const SNS_CATEGORY_IMAGES: SnsImage[] = [
+  { src: cat01.url, alt: "A learner wearing sunglasses reads Braille at a desk while a teacher guides his hands, outside a school for the blind.", credit: "" },
+  { src: cat02.url, alt: "Two schoolgirls in checkered uniforms practise sign language together in front of a signed-alphabet classroom poster.", credit: "" },
+  { src: cat03.url, alt: "A smiling schoolgirl in a wheelchair uses a laptop on her lap in front of an accessible ramp with handrails.", credit: "" },
+  { src: cat04.url, alt: "A young learner builds a structure from colourful wooden blocks at a classroom table.", credit: "" },
+  { src: cat05.url, alt: "A learner wearing headphones points to a pictured daily-schedule board in a classroom.", credit: "" },
+  { src: cat06.url, alt: "A learner in a white school uniform traces the letter A with a finger in a tray of sand.", credit: "" },
+  { src: cat07.url, alt: "A smiling learner in a supportive wheelchair and her teacher look at an assistive communication tablet.", credit: "" },
+  { src: cat08.url, alt: "A teacher and three pupils hold up emotion cards showing angry, happy and calm faces.", credit: "" },
+];
+
+/** Owner-supplied panoramic picture of the eight support categories in classroom use. */
+export const SNS_HERO_IMAGE: SnsImage = {
+  src: collageAsset.url,
+  alt: "Panoramic picture of eight classroom scenes: a learner reading Braille with a teacher, two learners signing to each other, a learner using a wheelchair at a laptop, a learner building with counting blocks, a learner pointing at a visual schedule, a learner tracing a letter in sand, a learner using a communication tablet, and a teacher holding an emotion flashcard.",
+  credit: "",
+};
+
 export const SNS_CATEGORIES = [
   { title: "Visual Support Education", description: "Schools supporting learners who are blind or have low vision", icon: "eye", color: "#2E7D32", tags: ["Braille", "Low vision"] },
   { title: "Deaf and Hearing Support Education", description: "Schools supporting Deaf and hard-of-hearing learners", icon: "ear", color: "#6B4521", tags: ["Sign language", "Captioning"] },
