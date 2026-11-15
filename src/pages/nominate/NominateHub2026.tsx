@@ -657,10 +657,10 @@ export default function NominateHub2026() {
   return (
     <div className="min-h-screen bg-charcoal text-foreground">
       <Helmet>
-        <title>Nominate an Enabler of Education for All | NESA-Africa 2026</title>
+        <title>Nominate an Education Enabler | NESA-Africa</title>
         <meta
           name="description"
-          content="Nominate an Education Enabler. Help NESA-Africa identify credible people, institutions and programmes advancing education across Africa."
+          content="Submit a free nomination for a credible person, institution or programme advancing education across Africa."
         />
       </Helmet>
 
@@ -785,6 +785,37 @@ export default function NominateHub2026() {
         </div>
       </section>
 
+      {/* NOMINATION ESSENTIALS (owner brief, Page 5) */}
+      <section id="nominator-guidelines" className="border-b border-gold/15 py-12 md:py-16">
+        <div className="container mx-auto max-w-5xl px-4 grid gap-8 md:grid-cols-2 text-sm text-foreground/85 sm:text-base">
+          <div>
+            <h2 className="font-playfair text-2xl text-gold">Who may nominate</h2>
+            <p className="mt-3">Individuals, institutions, communities, professional associations, NGOs, foundations, government bodies, education authorities, previous beneficiaries, colleagues, and nominees themselves where self-nomination is allowed.</p>
+            <h2 className="mt-8 font-playfair text-2xl text-gold">Nomination is free</h2>
+            <p className="mt-3">No one should ask for payment to submit or improve a NESA-Africa nomination.</p>
+          </div>
+          <div>
+            <h2 className="font-playfair text-2xl text-gold">What you will need</h2>
+            <ul className="mt-3 list-disc pl-5 space-y-1">
+              {["Your name and working email", "The nominee's name and reliable contact details", "Country and operational region", "Participation pathway", "Recognition tier and award field", "A description of the contribution", "Dates and locations", "Beneficiary information", "Evidence links", "A truthfulness and lawful-submission declaration"].map((x) => <li key={x}>{x}</li>)}
+            </ul>
+          </div>
+          <div className="md:col-span-2 rounded-xl border border-gold/30 bg-black/40 p-4" role="note">
+            <strong className="text-gold">Privacy warning:</strong> do not send passports, national ID, bank details, health records, private verification tokens, confidential reports or sensitive personal data through the general form. A controlled evidence channel is provided when sensitive documents are legitimately needed.
+          </div>
+          <div className="md:col-span-2">
+            <h2 className="font-playfair text-2xl text-gold">What happens next</h2>
+            <p className="mt-3">The submission is recorded → completeness reviewed → duplicates checked → contact checked → acceptance and consent requested → evidence reviewed → NRRC research or interview → preliminary eligibility decision → eligible Icon dossiers go to the judges → decisions formally communicated.</p>
+            <p className="mt-3 text-foreground/70">After submitting you will see: “Your nomination has been received under reference [reference]. This confirms receipt only. It does not confirm verification, eligibility, shortlisting, judging or recognition.”</p>
+            <p className="mt-4 flex flex-wrap gap-4 text-gold">
+              <Link to="/privacy" className="underline">Privacy and Consent Notice</Link>
+              <Link to="/how-it-works" className="underline">How Recognition Works</Link>
+              <Link to="/contact?subject=nomination-assistance" className="underline">Contact Nomination Support</Link>
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* OFFICIAL GOOGLE NOMINATION FORM */}
       <section className="border-b border-gold/15 py-12 md:py-16">
         <div className="container mx-auto max-w-5xl px-4">
@@ -861,8 +892,7 @@ export default function NominateHub2026() {
         </div>
       </section>
 
-      {/* EXISTING NOMINEES (live count) */}
-      <ExistingNomineesBand />
+      {/* No general nominee count until data is reconciled (owner master draft). */}
 
       {/* FAQ */}
       <FAQSection />
