@@ -1,3 +1,7 @@
+## Merchandise enquiry links — 15 Nov 2026
+- [ ] Add Buy Merchandise after Donate in the shared Get Involved menu and footer; prefill Contact subject as Merchandise; preserve integrity wording and every shop redirect.
+- [ ] Update navigation tests for the current menus and check desktop/360px fit; no cart, checkout, payment or publishing.
+
 ## Approved support-page follow-ups — 15 Nov 2026, 09:23 UTC
 - [x] Corrected local participation/verified-school links; preserved EduAid canonical; 17 focused checks passed.
 - [x] Saved anonymous donation EA-DN-261115-NKBM, its transfer report and sponsor EA-SP-261115-MUEL; actual rows read back, anonymous reads returned no rows. Deleted exactly those three follow-up records and confirmed zero remain. No money sent; earlier test records outside this follow-up were not deleted.
