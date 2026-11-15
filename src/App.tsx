@@ -1562,7 +1562,7 @@ const App = () => (
                     path="/gallery"
                     element={
                       <WithLayout>
-                        <GalleryLanding />
+                        <NoIndex><GalleryLanding /></NoIndex>
                       </WithLayout>
                     }
                   />
@@ -1570,7 +1570,7 @@ const App = () => (
                     path="/gallery/:slug"
                     element={
                       <WithLayout>
-                        <GalleryCollection />
+                        <NoIndex><GalleryCollection /></NoIndex>
                       </WithLayout>
                     }
                   />
