@@ -1,3 +1,7 @@
+## Live donation persistence and access test — 15 Nov 2026
+- [ ] Add and run real anonymous pledge/transfer UI submissions and anonymous/member access checks.
+- [ ] Verify administrator read/update through an authorised administrator session; never promote users or use privileged database tools as an RLS test.
+
 ## Owner-approved wording and link pass — 14 Nov 2026
 - [x] Record the owner's exact "Phase 0 approved" statement at 06:07 UTC and confirmation that independent security sign-off is complete; reviewer name, original evidence reference and signing time remain unsupplied, so the structured publishing guard still fails closed.
 - [ ] Apply the supplied announcement, header, page, footer, official-account, NRRC, programme-date and retired-feature wording to existing surfaces only; preserve design and data.
