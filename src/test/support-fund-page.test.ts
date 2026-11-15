@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 vi.mock("@/integrations/supabase/client", () => ({ supabase: { from: () => ({ insert: async () => ({ error: null }) }) } }));
 import {
   SNS_REGIONS, SNS_COUNTRIES, SNS_CATEGORIES, SNS_BANK_ACCOUNTS, VOTING_OPEN, REGION_TARGET_USD, CONTINENTAL_TARGET_USD,
-  SNS_UNASSIGNED, makeSupportRef, SNS_CTAS, SNS_BASE, SNS_CANONICAL,
+  SNS_UNASSIGNED, makeSupportRef, SNS_CTAS, SNS_BASE, SNS_CANONICAL, SNS_HERO_IMAGE,
 } from "@/config/schoolSupport";
 import { submitPledge, assertNoSensitiveFields } from "@/services/supportFund";
 import * as fs from "node:fs";
@@ -32,6 +32,14 @@ describe("Support a Special-Needs School config", () => {
   it("has 8 categories and 4 bank accounts with the official numbers", () => {
     expect(SNS_CATEGORIES).toHaveLength(8);
     expect(Object.fromEntries(SNS_BANK_ACCOUNTS.map((a) => [a.currency, a.number]))).toEqual({ NGN: "1305744507", USD: "1307264500", EUR: "1307264531", GBP: "1307264548" });
+  });
+  it("gives every category its own owner-supplied picture and a hero picture", () => {
+    const srcs = SNS_CATEGORIES.map((c) => c.image?.src ?? "");
+    expect(srcs.every((s) => s.startsWith("/__l5e/assets-v1/"))).toBe(true);
+    expect(new Set(srcs).size).toBe(8);
+    expect(SNS_CATEGORIES.every((c) => (c.image?.alt ?? "").length > 30)).toBe(true);
+    expect(SNS_HERO_IMAGE.src.startsWith("/__l5e/assets-v1/")).toBe(true);
+    expect(SNS_HERO_IMAGE.alt.length).toBeGreaterThan(60);
   });
   it("keeps voting closed and targets at US$150,000 × 8 = US$1.2M", () => {
     expect(VOTING_OPEN).toBe(false);
