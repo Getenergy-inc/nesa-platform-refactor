@@ -9,7 +9,6 @@ Synthetic submissions are retained for audit; no bank transfer is performed.
 """
 import json
 import os
-import re
 import unittest
 import uuid
 from datetime import datetime, timezone
@@ -111,7 +110,8 @@ class SupportFundLiveTest(unittest.TestCase):
         for table, payload in (("support_fund_pledges", pledge),
                                ("support_fund_transfer_reports", reported.value.request.post_data_json)):
             response = self.api("POST", table, body={**payload, "ref": self.ref + "-DENIED", "site": "not-nesa"})
-            self.assertEqual(response.status, 403, "Anonymous insert bypassed the site restriction")
+            self.assertIn(response.status, (401, 403), "Anonymous insert bypassed the site restriction")
+            self.assertEqual(response.json().get("code"), "42501", "Must fail on database access policy, not unrelated validation")
         output = Path(os.environ.get("SUPPORT_FUND_RESULT_FILE", "/tmp/browser/support-fund-live/result.json"))
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(json.dumps({"ref": self.ref, "marker": self.marker, "amount": 1,
