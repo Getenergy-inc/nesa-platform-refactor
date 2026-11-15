@@ -250,3 +250,182 @@ export const SCHOOL_SUPPORT_PARTICIPATION: ReadonlyArray<{
 export function buildSchoolParticipationHref(id: SchoolParticipationId): string {
   return `${SCHOOL_SUPPORT_PARTICIPATE_ROUTE}?participation=${encodeURIComponent(id)}`;
 }
+
+/* ===================================================================
+ * 2027 page source of truth — Support a Special-Needs School Across Africa
+ * =================================================================== */
+export const SNS_BASE = "https://0dccfe96-032e-496e-82bd-c8af7c5b9e55.lovableproject.com/support-a-special-needs-school";
+export const SNS_CANONICAL = "https://eduaid.africa/support-a-special-needs-school";
+export const COUNTRY_MAP_APPROVED = false;
+export const SUPPORTER_DASHBOARD_ENABLED = false;
+export const SUPPORTER_DASHBOARD_URL = "https://eduaid.africa/account";
+export const REGION_TARGET_USD = 150_000;
+export const CONTINENTAL_TARGET_USD = 1_200_000;
+
+export const SNS_OWNERSHIP_LINE = "Support a Special-Needs School Across Africa is a service of Rebuild My School Africa (RMSA), an EduAid-Africa programme of Santos Creations Educational Foundation (SCEF).";
+export const SNS_RMSA_ROUTE = "/rebuild-my-school";
+export const SNS_BODY_BAND = "A Rebuild My School Africa service · EduAid-Africa · presented with NESA-Africa";
+export const SNS_UTILITY_LINE = "A service of Rebuild My School Africa · EduAid-Africa · Santos Creations Educational Foundation · Jointly presented with NESA-Africa";
+export const SNS_NOT_A_TIER = "Regional school selection is separate from NESA-Africa award recognition. Donations, sponsorship and regional participation do not affect NESA-Africa judging or recognition decisions.";
+export const SNS_PAYMENT_NOTICE = "Completing this form does not confirm payment. Support is confirmed only after reconciliation and an official receipt.";
+export const SNS_NARRATION_NOTICE = "Put your EA reference in the transfer narration. Pay only into accounts named EduAid Africa Ltd.";
+export const SNS_PERSONAL_ACCOUNT_WARNING = "EduAid-Africa will never ask you to pay into a personal account.";
+export const SNS_TARGET_NOTICE = "targets, not secured funding";
+export const SNS_GRANT_QUALIFIER = "subject to due diligence, available funds and written approval";
+export const SNS_VIDEO_CAPTION = "Illustrative AI-generated video · not a beneficiary school";
+
+export const SNS_CTAS = {
+  nominate: { label: "Nominate a Special-Needs School", href: `${SNS_BASE}/participate?participation=nominate` },
+  verified: { label: "View Verified Schools", href: `${SNS_BASE}#verified-schools` },
+  vote: { label: VOTING_PENDING_LABEL, href: "#vote", disabled: true },
+  donate: { label: "Donate to the Support Fund", href: "#donate" },
+  sponsor: { label: "Sponsor a Regional School", href: "#sponsor-form" },
+  partner: { label: "Become a Programme Partner", href: "#sponsor-form" },
+  volunteer: { label: "Volunteer Your Skills", href: `${SNS_BASE}/participate?participation=volunteer` },
+} as const;
+
+export const SNS_GOOGLE_FORM = "https://docs.google.com/forms/d/e/1FAIpQLSfSFHcQc9ehWdnPTfPRyzeMruCVOzVyjyI29uUSRR6E2g1JWw/viewform";
+export const SNS_GOOGLE_FORM_EMBED = `${SNS_GOOGLE_FORM}?embedded=true`;
+export const NESA_AWARD_NOMINATION_FORM = "https://forms.gle/E2FmpTkRq53JxRbS7";
+export const SNS_VIDEOS = [
+  { id: "Hdu_qlFLfrQ", title: "Special Needs Education" },
+  { id: "aP0SskrfioI", title: "EduAid-Africa" },
+] as const;
+
+export type RegionKey = "north" | "west" | "central" | "east" | "southern" | "sahel" | "horn" | "indian";
+export const SNS_REGIONS: ReadonlyArray<{ key: RegionKey; name: string; color: string; desk: string }> = [
+  { key: "north", name: "North Africa", color: "#7B4A1E", desk: "rmsanafricaeduaidafrica@gmail.com" },
+  { key: "west", name: "West Africa", color: "#2E7D32", desk: "rmsawafricaeduaidafrica@gmail.com" },
+  { key: "central", name: "Central Africa", color: "#2563A6", desk: "rmsacafricaeduaidafrica@gmail.com" },
+  { key: "east", name: "East Africa", color: "#A86B12", desk: "rmsaeafricaeduaidafrica@gmail.com" },
+  { key: "southern", name: "Southern Africa", color: "#9B2C4A", desk: "rmsasafricaeduaidafrica@gmail.com" },
+  { key: "sahel", name: "Sahel Region", color: "#C25E1F", desk: "rmsasaheleduaidafrica@gmail.com" },
+  { key: "horn", name: "Horn of Africa", color: "#6B4FA0", desk: "rmsahornafricaeduaidafrica@gmail.com" },
+  { key: "indian", name: "Indian Ocean Islands", color: "#0F8A84", desk: "rmsaindianoceaneduaidafrica@gmail.com" },
+];
+export const SNS_REGIONS_NOTE = "These are programme-operational regions, not an African Union classification.";
+export const SNS_MAP_DRAFT_NOTE = "Draft regional map, pending written programme approval";
+
+const C = (name: string, id: string, region: RegionKey) => ({ name, id, region });
+export const SNS_COUNTRIES = [
+  C("Algeria","012","north"),C("Egypt","818","north"),C("Libya","434","north"),C("Morocco","504","north"),C("Tunisia","788","north"),
+  C("Burkina Faso","854","sahel"),C("Chad","148","sahel"),C("Mali","466","sahel"),C("Mauritania","478","sahel"),C("Niger","562","sahel"),C("Sudan","729","sahel"),
+  C("Benin","204","west"),C("Cabo Verde","132","west"),C("Côte d'Ivoire","384","west"),C("The Gambia","270","west"),C("Ghana","288","west"),C("Guinea","324","west"),C("Guinea-Bissau","624","west"),C("Liberia","430","west"),C("Nigeria","566","west"),C("Senegal","686","west"),C("Sierra Leone","694","west"),C("Togo","768","west"),
+  C("Cameroon","120","central"),C("Central African Republic","140","central"),C("Republic of the Congo","178","central"),C("DR Congo","180","central"),C("Equatorial Guinea","226","central"),C("Gabon","266","central"),C("São Tomé and Príncipe","678","central"),
+  C("Burundi","108","east"),C("Kenya","404","east"),C("Rwanda","646","east"),C("South Sudan","728","east"),C("Tanzania","834","east"),C("Uganda","800","east"),
+  C("Djibouti","262","horn"),C("Eritrea","232","horn"),C("Ethiopia","231","horn"),C("Somalia","706","horn"),
+  C("Angola","024","southern"),C("Botswana","072","southern"),C("Eswatini","748","southern"),C("Lesotho","426","southern"),C("Malawi","454","southern"),C("Mozambique","508","southern"),C("Namibia","516","southern"),C("South Africa","710","southern"),C("Zambia","894","southern"),C("Zimbabwe","716","southern"),
+  C("Comoros","174","indian"),C("Madagascar","450","indian"),C("Mauritius","480","indian"),C("Seychelles","690","indian"),
+] as const;
+/** Somaliland renders as Somalia; Western Sahara is shown grey and unassigned. */
+export const SNS_UNASSIGNED = { id: "732", name: "Western Sahara", color: "#C9C4B4", note: "disputed territory, not assigned" } as const;
+export const SNS_ISLAND_DOTS = ["132", "678", "174", "480", "690"] as const;
+
+export const SNS_CATEGORIES = [
+  { title: "Visual Support Education", description: "Schools supporting learners who are blind or have low vision", icon: "eye", color: "#2E7D32", tags: ["Braille", "Low vision"] },
+  { title: "Deaf and Hearing Support Education", description: "Schools supporting Deaf and hard-of-hearing learners", icon: "ear", color: "#6B4521", tags: ["Sign language", "Captioning"] },
+  { title: "Physical and Mobility Support Education", description: "Schools supporting learners with physical disabilities, mobility challenges or cerebral palsy", icon: "accessibility", color: "#1F5C22", tags: ["Access", "Mobility"] },
+  { title: "Intellectual and Developmental Support Education", description: "Schools supporting learners with intellectual or developmental disabilities, including Down syndrome", icon: "puzzle", color: "#3D9B3D", tags: ["Adapted learning"] },
+  { title: "Autism and Communication Support Education", description: "Schools supporting autistic learners and learners with speech, language or communication needs", icon: "message-circle", color: "#8A5A2B", tags: ["AAC", "Sensory"] },
+  { title: "Learning, Emotional and Behavioural Support Education", description: "Schools supporting learners with dyslexia, dyscalculia, ADHD and significant emotional, behavioural or psychosocial needs", icon: "brain", color: "#4C8A3A", tags: ["Learning", "Wellbeing"] },
+  { title: "Multiple and Complex Disabilities", description: "Schools serving learners with more than one disability or multidisciplinary needs", icon: "layers", color: "#553517", tags: ["Multidisciplinary care"] },
+  { title: "Inclusive, Early-Intervention and Vocational Education", description: "Inclusive mainstream schools, specialist units, early-intervention centres, resource centres, vocational/transition programmes", icon: "sprout", color: "#24602A", tags: ["Inclusion", "Transition"] },
+].map((c) => ({ ...c, image: null as null | { src: string; alt: string; credit: string } }));
+export const SNS_CATEGORY_RULE = "Schools may select more than one category but state one principal category. Regional selection is one approved school per region, in any category, not eight category winners.";
+
+/** Video slots stay empty and hidden until approved illustrative videos are supplied. */
+export const CAT_VIDEOS: Array<string | null> = Array(8).fill(null);
+export const REGION_VIDEOS: Partial<Record<RegionKey, string>> = {};
+export const CAMPAIGN_VIDEOS: { fiveWays: string | null; eduTourism: string | null; donationTracking: string | null } = { fiveWays: null, eduTourism: null, donationTracking: null };
+
+export const SNS_ACCOUNTS = [
+  { label: "Website", value: "eduaid.africa", href: "https://eduaid.africa" },
+  { label: "Webinars", value: "eduaid.africa/webinars", href: "https://eduaid.africa/webinars" },
+  { label: "LinkedIn", value: "EduAid-Africa", href: "https://www.linkedin.com/in/eduaid-africa-6b4b3838a" },
+  { label: "YouTube", value: "EduAid-Africa", href: "https://www.youtube.com/watch?v=aP0SskrfioI" },
+  { label: "SCEF", value: "santoscreations.org", href: "https://santoscreations.org" },
+  { label: "NESA-Africa", value: "nesa.africa · info@nesa.africa", href: "https://nesa.africa" },
+] as const;
+/** Hidden until official handles are supplied. */
+export const SNS_HIDDEN_SOCIAL: Record<"facebook" | "instagram" | "x" | "tiktok" | "whatsapp", string | null> = { facebook: null, instagram: null, x: null, tiktok: null, whatsapp: null };
+
+export type SnsCurrency = "NGN" | "USD" | "EUR" | "GBP";
+export const SNS_BANK_HOLDER = "EduAid Africa Ltd";
+export const SNS_BANK_NAME = "Providus Bank";
+export const SNS_BANK_ACCOUNTS: ReadonlyArray<{ currency: SnsCurrency; number: string; purpose: string }> = [
+  { currency: "NGN", number: "1305744507", purpose: "Scholarships & Education Support" },
+  { currency: "USD", number: "1307264500", purpose: "International Education Support" },
+  { currency: "EUR", number: "1307264531", purpose: "European Education Funding" },
+  { currency: "GBP", number: "1307264548", purpose: "UK Education Support" },
+];
+export const SNS_DONATION_PRESETS: Record<SnsCurrency, number[]> = {
+  USD: [25, 50, 100, 250, 500, 1000], NGN: [10000, 25000, 50000, 100000, 250000, 500000],
+  GBP: [20, 40, 80, 200, 400, 800], EUR: [25, 50, 100, 250, 500, 1000],
+};
+export const SNS_SPONSOR_PRESETS = [5000, 10000, 25000, 50000, 75000, 150000];
+export const SNS_DONOR_TYPES = ["Individual", "Family", "Diaspora supporter", "Company/CSR", "NGO/foundation", "Faith-based organisation", "School/institution", "Volunteer group"] as const;
+export const SNS_SPONSOR_SCOPES = [
+  { id: "region", label: "Whole region (US$150,000)" }, { id: "share", label: "Share of a regional target" },
+  { id: "school", label: "One verified school" }, { id: "project", label: "Specific project" }, { id: "in-kind", label: "In-kind" },
+] as const;
+export const SNS_SPONSOR_PROJECTS = ["Accessible classrooms", "Assistive technology", "Accessible transportation", "Learning materials", "Teacher training", "Renewable energy", "Water and sanitation", "Vocational training", "Connectivity and digital learning", "A specific renovation project", "Programme verification and monitoring", "Approved documentary and impact reporting"] as const;
+export const SNS_PARTNER_CONTRIBUTIONS = ["Funding", "Professional expertise", "Construction and renovation services", "Assistive equipment", "Technology", "Teaching and training", "Logistics", "Monitoring and evaluation", "Media and public education", "Volunteer mobilisation", "Safeguarding expertise", "Independent audit or programme assurance"] as const;
+
+export const SNS_FIVE_WAYS = [
+  { key: "nominate", n: 1, title: "Nominate", timing: "Opens April 2027", text: "Put forward a specialist or inclusive school for verification." },
+  { key: "vote", n: 2, title: "Vote", timing: "Opens September 2027*", text: "Free regional voting among verified schools, once approved." },
+  { key: "donate", n: 3, title: "Donate", timing: "Pledges open now", text: "Give to the ring-fenced Support Fund by bank transfer." },
+  { key: "sponsor", n: 4, title: "Sponsor", timing: "US$150,000 per region", text: "Sponsor a regional school, a project or in-kind support." },
+  { key: "attend", n: 5, title: "Attend", timing: "October–December 2027", text: "Join EduTourism 2027 and regional commissioning ceremonies." },
+] as const;
+export const SNS_VOTE_FOOTNOTE = `*${VOTING_PENDING_LABEL}. Voting is free and never linked to money.`;
+
+export const SNS_ABOUT_CARDS = [
+  { title: "Why it matters", text: "Many specialist and inclusive schools serving learners with disabilities lack accessible buildings, equipment, trained staff and reliable funding." },
+  { title: "What we do", text: "We find, verify and support specialist and inclusive schools, then fund, advise or equip approved interventions." },
+  { title: "Who it serves", text: "Learners with disabilities and additional support needs, their teachers and the schools that serve them, in every region of Africa." },
+  { title: "How you can help", text: "Nominate a school, donate, sponsor a regional school, partner with the programme, volunteer your skills or attend in 2027." },
+] as const;
+export const SNS_PRINCIPLES = ["Evidence before support", "Safeguarding first", "Votes are never sold", "Open accountability"] as const;
+
+export const SNS_PROCESS_STEPS = ["Identify", "Nominate", "Verify", "Classify", "Publish", "Vote", "Select", "Due diligence", "Fund & support", "Monitor & report"] as const;
+export const SNS_NEXT_ELIGIBLE_NOTE = "If a selected school cannot complete due diligence, the next eligible verified school in the same region may be considered, subject to written approval.";
+export const SNS_ATTEND_ITEMS = ["Regional EduTourism visits to approved schools (Oct–Nov 2027)", "Regional Grant Awarding and Commissioning Ceremonies", "Volunteer and professional-service days", "Partner and media briefings, where approved"] as const;
+
+export const SNS_FAQ = [
+  { q: "Who runs this programme?", a: "Support a Special-Needs School Across Africa is a service of Rebuild My School Africa (RMSA), an EduAid-Africa programme of Santos Creations Educational Foundation (SCEF), presented jointly with NESA-Africa." },
+  { q: "Is it part of the NESA-Africa awards?", a: "No. It is not a NESA-Africa award tier. " + "Regional school selection is separate from NESA-Africa award recognition. Donations, sponsorship and regional participation do not affect NESA-Africa judging or recognition decisions." },
+  { q: "Does a nomination guarantee a grant?", a: "No. A nomination begins verification. It does not guarantee publication, voting eligibility, funding, a grant or an intervention. Any support is subject to due diligence, available funds and written approval." },
+  { q: "What is EduTourism 2027?", a: "Regional visits in October–November 2027 to approved schools, alongside Regional Grant Awarding and Commissioning Ceremonies. Dates and host cities will be announced." },
+  { q: "Can I choose a region?", a: "Yes. Donations and sponsorships can be directed to one of the eight regions or to where most needed." },
+  { q: "How is children's privacy protected?", a: "We never publish children's names, diagnoses, identity documents, personal contacts or unapproved school data. Only verified and approved school profiles are shown." },
+] as const;
+
+export type NullableNumber = number | null;
+/** Public accountability figures — all null until the first approved figures. Later read from the shared eduaid.africa public-stats endpoint. */
+export const PUBLIC_STATS: {
+  schoolsNominated: NullableNumber; uniqueAfterReview: NullableNumber; underVerification: NullableNumber; approvedForVoting: NullableNumber;
+  pledgedUsd: NullableNumber; transfersReportedUsd: NullableNumber; reconciledUsd: NullableNumber; receiptsIssued: NullableNumber;
+  interventionsApproved: NullableNumber; interventionsStarted: NullableNumber; interventionsCompleted: NullableNumber;
+  verifiedRegionalVotes: NullableNumber; lastUpdated: string | null;
+  regions: Record<RegionKey, { pledgedUsd: NullableNumber; reconciledUsd: NullableNumber }>;
+} = {
+  schoolsNominated: null, uniqueAfterReview: null, underVerification: null, approvedForVoting: null,
+  pledgedUsd: null, transfersReportedUsd: null, reconciledUsd: null, receiptsIssued: null,
+  interventionsApproved: null, interventionsStarted: null, interventionsCompleted: null,
+  verifiedRegionalVotes: null, lastUpdated: null,
+  regions: Object.fromEntries(["north","west","central","east","southern","sahel","horn","indian"].map((k) => [k, { pledgedUsd: null, reconciledUsd: null }])) as never,
+};
+export const PUBLIC_STATS_URL: string | null = null;
+
+export function bankAccountFor(currency: SnsCurrency) {
+  return SNS_BANK_ACCOUNTS.find((a) => a.currency === currency)!;
+}
+export function regionByKey(key: string | null | undefined) {
+  return SNS_REGIONS.find((r) => r.key === key) ?? null;
+}
+export function makeSupportRef(prefix: "DN" | "SP" | "PT", now = new Date()): string {
+  const d = now.toISOString().slice(2, 10).replace(/-/g, "");
+  const rand = Math.random().toString(36).slice(2, 6).toUpperCase().padEnd(4, "0");
+  return `EA-${prefix}-${d}-${rand}`;
+}
