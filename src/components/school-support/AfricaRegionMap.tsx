@@ -29,7 +29,7 @@ export function AfricaRegionMap() {
   }, []);
 
   const path = useMemo(() => {
-    const proj = geoMercator().fitExtent([[8, 8], [W - 8, H - 8]], { type: "Feature", properties: {}, geometry: { type: "Polygon", coordinates: [[[-25.5, -35.2], [57.8, -35.2], [57.8, 37.6], [-25.5, 37.6], [-25.5, -35.2]]] } } as never).clipExtent([[0, 0], [W, H]]);
+    const proj = geoMercator().fitExtent([[8, 8], [W - 8, H - 8]], { type: "MultiPoint", coordinates: [[-25.5, -35.2], [57.8, -35.2], [57.8, 37.6], [-25.5, 37.6]] } as never).clipExtent([[0, 0], [W, H]]);
     return { gen: geoPath(proj), proj };
   }, []);
 

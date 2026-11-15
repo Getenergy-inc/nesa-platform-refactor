@@ -165,7 +165,7 @@ function Body() {
       <section className="bg-gradient-to-br from-ea-deep via-ea-dark to-ea-deep px-4 py-14 text-ea-cream sm:px-6 sm:py-20">
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.6fr_1fr]">
           <div className="space-y-6">
-            <img src={eduaidLogo} alt="EduAid-Africa — Empowering Africa's Education Enablers · Funding Education Through Partnerships" className="h-16 w-auto rounded-xl bg-ea-cream p-1.5" />
+            <img src={eduaidLogo} alt="EduAid-Africa — Empowering Africa's Education Enablers · Funding Education Through Partnerships" className="h-20 w-auto rounded-xl bg-ea-cream p-1.5 sm:h-24" />
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-ea-tan">Nominate · Vote · Donate · Sponsor · Attend</p>
             <h1 className="text-4xl leading-tight sm:text-5xl lg:text-6xl">Support a Special-Needs School <span className="text-ea-tan">Across Africa</span></h1>
             <p className="max-w-2xl text-base leading-relaxed text-ea-cream/85">Help find, verify and support specialist and inclusive schools serving learners with disabilities and additional support needs — one approved school in each of eight African regions in 2027.</p>
