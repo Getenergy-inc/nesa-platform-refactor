@@ -30,3 +30,9 @@ requested approval and fund safeguards, not a new global design permission.
 - Contact: store enquiries securely with case reference; show in admin workspace; never claim email sent. Confirmation: "Your enquiry has been recorded under reference [reference]. This confirms receipt only and does not confirm approval, email delivery or completion."
 - Accessibility on every page: skip link, correct aria-expanded, Escape closes menus, inline validation + error summaries, reduced motion, captions/transcripts.
 - Release: staging evidence (navigation, role access, forms, redirects, metadata, accessibility, broken links) plus rollback plan before any production deployment.
+
+## Support a Special-Needs School pictures (15 Nov 2026)
+- Owner supplied two pictures: a panoramic eight-scene inclusive-learning band and an eight-card category grid. Both are published to the site media library as pointers under `src/assets/school-support/`.
+- The category grid was cut into eight picture-only tiles (the coloured banner with its baked-in number, title and summary was cropped off) so the page keeps its own real-text titles, descriptions and tags; category order matches the supplied card order 01–08.
+- Hero band: full eight-scene band on desktop; on phones the same picture shows as a square two-by-two crop so each scene stays legible.
+- Captions keep the existing "Illustrative image" wording; no credit line was invented.
