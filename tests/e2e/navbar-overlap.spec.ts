@@ -41,3 +41,13 @@ for (const width of [360, 820, 1280]) {
     });
   });
 }
+
+test.describe("lean header", () => {
+  test.use({ viewport: { width: 1280, height: 1800 } });
+  test("has no utility bar and keeps Nominees out of the desktop menu", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByRole("navigation", { name: "Utility" })).toHaveCount(0);
+    const primary = page.getByRole("navigation", { name: "Primary", exact: true });
+    await expect(primary.getByText("Nominees", { exact: true })).toHaveCount(0);
+  });
+});
