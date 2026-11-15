@@ -53,8 +53,8 @@ describe("school-support publication integrity", () => {
   });
 
   it("fails closed until an authorised HTTPS Google Form URL is supplied", () => {
-    expect(SNS_FORM_URL).toBe("");
-    expect(getSnsFormUrl()).toBeNull();
+    expect(getSnsFormUrl()).toBe(SNS_FORM_URL);
+    expect(getSnsFormUrl("")).toBeNull();
     expect(getSnsFormUrl("https://example.com/form")).toBeNull();
     expect(getSnsFormUrl("http://forms.gle/example")).toBeNull();
     expect(getSnsFormUrl("https://forms.gle/example")).toBe("https://forms.gle/example");
