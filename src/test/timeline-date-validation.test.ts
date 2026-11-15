@@ -173,7 +173,7 @@ describe("Timeline anchors — Complete Timeline Set source values", () => {
     ["final-verification-gala-production", "2026-11-25", "2026-11-29"],
     ["tv-show-1", "2026-11-22", undefined],
     ["tv-show-2", "2026-12-08", undefined],
-    ["recognition-gala", "2026-12-13", undefined],
+    ["recognition-gala", "2026-12-28", undefined],
     ["impact-legacy", "2026-12-22", "2027-12-28"],
   ];
 
@@ -186,10 +186,10 @@ describe("Timeline anchors — Complete Timeline Set source values", () => {
     });
   }
 
-  it("the Gala is the highlighted 13 December 2026 milestone", () => {
+  it("the Gala is the highlighted 28 December 2026 milestone", () => {
     const gala = anchor("recognition-gala");
     expect(gala.highlight).toBe(true);
-    expect(gala.dateLabel).toBe("Sunday 13 December 2026");
+    expect(gala.dateLabel).toBe("Monday 28 December 2026");
   });
 
   it("nomination windows state the Icon split correctly", () => {

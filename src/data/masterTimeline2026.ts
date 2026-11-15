@@ -587,8 +587,8 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
   },
   {
     id: "tv-show-3",
-    dateLabel: `Monday, ${PROGRAMME_END_LABEL}`,
-    startsAt: "2026-12-13T00:00:00Z",
+    dateLabel: PROGRAMME_END_LABEL,
+    startsAt: "2026-12-28T00:00:00Z",
     milestone: "TV Showcase 3 — Gala Live Coverage",
     activity: "Live broadcast of the Online Recognition Programme, principally recognising up to nine verified Africa Education Icons of the Decade.",
     outcome: "Continental live coverage",
@@ -597,8 +597,8 @@ export const MASTER_TIMELINE_2026: MasterTimelineEntry[
   },
   {
     id: "recognition-gala",
-    dateLabel: `Monday, ${PROGRAMME_END_LABEL}`,
-    startsAt: "2026-12-13T00:00:00Z",
+    dateLabel: PROGRAMME_END_LABEL,
+    startsAt: "2026-12-28T00:00:00Z",
     milestone: "NESA-Africa 2026 Online Recognition Programme",
     activity:
       "Principally recognise up to nine verified Africa Education Icons of the Decade through approved documentary profiles, interviews and digital presentations. Online only; approximately 20–30 approved participants may join the live production.",

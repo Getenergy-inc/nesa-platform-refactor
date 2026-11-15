@@ -1085,7 +1085,7 @@ export const FULL_FAQ_GROUPS: FAQGroup[] = [
       { q: "Who conducts nominee research?", a: "The Nominee Research and Review Corps conducts contact verification, consent, interviews, evidence research, profile preparation and preliminary review." },
       { q: "Who makes the Icon decisions?", a: "Nine independent judges assess eligible Africa Education Icon dossiers." },
       { q: "Can sponsors influence recognition?", a: "No. Sponsorship, donations and partnerships carry zero judging weight." },
-      { q: "Is the 2026 programme a physical gala?", a: "No public physical gala is currently authorised. The programme is scheduled to take place online on 13 December 2026." },
+      { q: "Is the 2026 programme a physical gala?", a: "No public physical gala is currently authorised. The programme is scheduled to take place online on 28 December 2026." },
       { q: "Is special-needs-school voting part of the awards?", a: "No. Any authorised 2027 regional school selection belongs to the EduAid-Africa intervention programme and is separate from NESA-Africa recognition." },
       { q: "Does donating create votes?", a: "No. Donations must not purchase votes or influence school eligibility or NESA-Africa recognition." },
     ],

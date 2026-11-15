@@ -401,9 +401,9 @@ export function buildTimeline(
     {
       id: "phase-7-gala",
       phase: "Phase 7 · Gold–Blue Garnet Awards Gala",
-      dateRange: `13 December ${ceremonyYear}`,
+      dateRange: `28 December ${ceremonyYear}`,
       description:
-        "Africa's flagship education recognition ceremony on 13 December 2026 celebrating the continent's leading Education Enablers across 15 regions (8 Africa + 7 Global).",
+        "Africa's flagship education recognition ceremony on 28 December 2026 celebrating the continent's leading Education Enablers across 15 regions (8 Africa + 7 Global).",
       type: "gala",
     },
     {
@@ -476,7 +476,7 @@ export function buildAwardPhases(awardYear: number): AwardPhaseConfig[] {
       title: "Blue Garnet Award",
       subtitle: "Highest Competitive Honour",
       period: `16 September – 13 December ${ceremonyYear}`,
-      showDate: `13 December ${ceremonyYear} (Gala)`,
+      showDate: `28 December ${ceremonyYear} (Gala)`,
       iconName: "Gem",
       features: [
         "From 135 Gold Certificate winners",
