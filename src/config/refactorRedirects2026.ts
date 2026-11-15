@@ -15,26 +15,26 @@ export interface RefactorRedirect {
 
 export const REFACTOR_REDIRECTS_2026: RefactorRedirect[] = [
   // --- Obsolete voting surfaces (2026 has no public voting on the four tiers) ---
-  { from: "/vote", to: "/about/how-recognition-works", reason: "2026 has no public voting" },
-  { from: "/vote/:categorySlug", to: "/about/how-recognition-works", reason: "vote pages deprecated" },
+  { from: "/vote", to: "/how-it-works", reason: "2026 has no public voting" },
+  { from: "/vote/:categorySlug", to: "/how-it-works", reason: "vote pages deprecated" },
   {
     from: "/awards/africa-education-icon/vote",
-    to: "/about/how-recognition-works",
+    to: "/how-it-works",
     reason: "Icon award is jury-only",
   },
   {
     from: "/awards/platinum/vote",
-    to: "/about/how-recognition-works",
+    to: "/how-it-works",
     reason: "Platinum is jury-only",
   },
   {
     from: "/awards/gold-blue-garnet/vote",
-    to: "/about/how-recognition-works",
+    to: "/how-it-works",
     reason: "2026 is Recognition Edition; competition returns 2027",
   },
   {
     from: "/awards/influencer-education-impact/vote",
-    to: "/about/how-recognition-works",
+    to: "/how-it-works",
     reason: "Influencer recognition is impact-based, not popularity",
   },
 
@@ -92,14 +92,14 @@ export const REFACTOR_REDIRECTS_2026: RefactorRedirect[] = [
   { from: "/media/press", to: "/press-room", reason: "Media Centre consolidation" },
 
   // Online Awards Gala — no physical attendance or ticket sales in 2026.
-  { from: "/gala", to: "/programme-2026", reason: "Canonical Online Awards Gala" },
-  { from: "/media/gala", to: "/programme-2026", reason: "Canonical Online Awards Gala" },
-  { from: "/gala-2026", to: "/programme-2026", reason: "Canonical Online Awards Gala" },
-  { from: "/events/gala", to: "/programme-2026", reason: "Canonical Online Awards Gala" },
-  { from: "/events/gala-2026", to: "/programme-2026", reason: "Canonical Online Awards Gala" },
-  { from: "/events/tickets", to: "/programme-2026", reason: "No ticket sales" },
-  { from: "/events/media-accreditation", to: "/programme-2026", reason: "Online programme" },
-  { from: "/events/attendance-request", to: "/programme-2026", reason: "No physical attendance" },
+  { from: "/gala", to: "/programme/2026", reason: "Canonical Online Awards Gala" },
+  { from: "/media/gala", to: "/programme/2026", reason: "Canonical Online Awards Gala" },
+  { from: "/gala-2026", to: "/programme/2026", reason: "Canonical Online Awards Gala" },
+  { from: "/events/gala", to: "/programme/2026", reason: "Canonical Online Awards Gala" },
+  { from: "/events/gala-2026", to: "/programme/2026", reason: "Canonical Online Awards Gala" },
+  { from: "/events/tickets", to: "/programme/2026", reason: "No ticket sales" },
+  { from: "/events/media-accreditation", to: "/programme/2026", reason: "Online programme" },
+  { from: "/events/attendance-request", to: "/programme/2026", reason: "No physical attendance" },
   { from: "/events/calendar", to: "/media#events", reason: "Media events calendar" },
   { from: "/webinars", to: "/media/webinars", reason: "Canonical webinar page" },
 

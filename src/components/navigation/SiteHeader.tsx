@@ -17,7 +17,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { LanguageSwitcher } from "@/components/i18n";
-import { SITE_NAV, MOBILE_SITE_NAV, SIGN_IN_WORKSPACES, UTILITY_NAV, type NavItem, type NavChild, type NavSection } from "@/config/siteNavigation";
+import { SITE_NAV, MOBILE_SITE_NAV, SIGN_IN_WORKSPACES, type NavItem, type NavChild, type NavSection } from "@/config/siteNavigation";
 import { CURRENT_PHASE, NOMINATE_CTA } from "@/config/campaignPhase";
 import { trackNav } from "@/lib/analytics";
 import { AnnouncementBar } from "@/components/navigation/AnnouncementBar";
@@ -73,6 +73,15 @@ function DropdownSimple({ item }: { item: NavItem }) {
         </div>
       )}
       <ul className="grid gap-1 p-2">
+        {!item.children?.some((c) => c.href === item.href) && (
+          <li>
+            <MenubarItem asChild>
+              <Link to={item.href} className={cn("block px-3 py-2 rounded-md text-sm font-semibold text-gold/90 hover:bg-gold/10 focus:bg-gold/10", FOCUS_RING)}>
+                {item.label} overview
+              </Link>
+            </MenubarItem>
+          </li>
+        )}
         {item.children?.map((c) => {
           const active = isActive(location.pathname, c.href);
           return (
@@ -523,40 +532,6 @@ function MobileMenu() {
             </Accordion>
           </nav>
 
-          {/* Navbar 2 → its own collapsed "Quick Links" accordion */}
-          <nav aria-label="Mobile quick links" className="mt-4 border-t border-gold/20 pt-3">
-            <Accordion type="single" collapsible className="w-full">
-              <AccordionItem value="quick-links" className="border-gold/15">
-                <AccordionTrigger className={cn("text-white hover:text-gold px-3 text-sm rounded-md", FOCUS_RING)}>
-                  Quick Links
-                </AccordionTrigger>
-                <AccordionContent className="pb-1">
-                  {UTILITY_NAV.map((item) => (
-                    <a
-                      key={item.href}
-                      href={item.href}
-                      target={item.external ? "_blank" : undefined}
-                      rel={item.external ? "noopener noreferrer" : undefined}
-                      onClick={() => {
-                        close();
-                        trackNav("mobile_drawer_item_click", {
-                          parent: "Quick Links",
-                          label: item.label,
-                          href: item.href,
-                          section: item.analyticsId,
-                          device: "mobile",
-                        });
-                      }}
-                      className={cn(linkCls, item.emphasis && "text-gold font-semibold")}
-                    >
-                      {item.label}
-                    </a>
-                  ))}
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          </nav>
-
 
           <div className="mt-4 border-t border-gold/20 pt-3 space-y-1">
             {user ? (
@@ -609,56 +584,6 @@ function MobileMenu() {
   );
 }
 
-/* ------------------------------- Utility bar ------------------------------ */
-
-function UtilityNavBar() {
-  const location = useLocation();
-  return (
-    <div className="hidden xl:block border-b border-gold/15 bg-black/40">
-      <nav
-        aria-label="Utility"
-        className="container mx-auto px-4 h-8 flex items-center gap-6 overflow-x-auto"
-      >
-        {UTILITY_NAV.map((item) => {
-          const active = isActive(location.pathname, item.href);
-          if (item.href === "/login") {
-            return <AccountMenu key={item.href} label="Sign In" menuLabel="Utility sign in menu"
-              className="h-auto font-mono text-[11px] tracking-wide px-1 py-0 text-white/60" />;
-          }
-          return (
-            <a
-              key={item.href}
-              href={item.href}
-              target={item.external ? "_blank" : undefined}
-              rel={item.external ? "noopener noreferrer" : undefined}
-              aria-current={active ? "page" : undefined}
-              onClick={() =>
-                trackNav("utility_nav_click", {
-                  label: item.label,
-                  href: item.href,
-                  section: item.analyticsId,
-                  device: "desktop",
-                })
-              }
-              className={cn(
-                "font-mono text-[11px] tracking-wide whitespace-nowrap transition-colors rounded px-1",
-                FOCUS_RING,
-                item.emphasis
-                  ? "text-gold font-bold hover:text-gold/80"
-                  : active
-                    ? "text-gold"
-                    : "text-white/60 hover:text-gold",
-              )}
-            >
-              {item.label}
-            </a>
-          );
-        })}
-      </nav>
-    </div>
-  );
-}
-
 /* ---------------------------------- Root ---------------------------------- */
 
 export function SiteHeader() {
@@ -670,7 +595,6 @@ export function SiteHeader() {
         className="fixed top-0 left-0 right-0 z-50 bg-charcoal/95 backdrop-blur border-b border-gold/20"
       >
         <AnnouncementBar />
-        <UtilityNavBar />
         <div className="container mx-auto px-4 flex items-center justify-between gap-2 h-14 xl:h-16">
           <BrandBlock />
           <DesktopNav />

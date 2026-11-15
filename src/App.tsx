@@ -256,6 +256,9 @@ import AboutConsolidated from "./pages/about/AboutConsolidated";
 import GlobalTeam from "./pages/about/GlobalTeam";
 import MeetOurGlobalTeam from "./pages/MeetOurGlobalTeam";
 import CsrLanePage from "./pages/get-involved/CsrLanePage";
+import GetInvolvedPage from "./pages/get-involved/GetInvolvedPage";
+import HowItWorksPage from "./pages/HowItWorksPage";
+import ResearchAndJudgingPage from "./pages/ResearchAndJudgingPage";
 import NgoLanePage from "./pages/get-involved/NgoLanePage";
 import FoundationsLanePage from "./pages/get-involved/FoundationsLanePage";
 import EduTechLanePage from "./pages/get-involved/EduTechLanePage";
@@ -572,9 +575,9 @@ const App = () => (
                   />
 
                   {/* Retired AGC/voting-credit surfaces → GFAwzip Wallet */}
-                  <Route path="/earn-agc" element={<Navigate to="/about/how-recognition-works" replace />} />
-                  <Route path="/agc-rewards" element={<Navigate to="/about/how-recognition-works" replace />} />
-                  <Route path="/earn-voting-coins" element={<Navigate to="/about/how-recognition-works" replace />} />
+                  <Route path="/earn-agc" element={<Navigate to="/how-it-works" replace />} />
+                  <Route path="/agc-rewards" element={<Navigate to="/how-it-works" replace />} />
+                  <Route path="/earn-voting-coins" element={<Navigate to="/how-it-works" replace />} />
 
                   {/* === 301 LEGACY REDIRECTS === */}
                   {/* Auth legacy */}
@@ -648,14 +651,16 @@ const App = () => (
                   <Route path="/policies/privacy" element={<Navigate to="/policies" replace />} />
                   <Route path="/policies/terms" element={<Navigate to="/policies" replace />} />
                   <Route path="/policies/voting-integrity" element={<Navigate to="/policies" replace />} />
-                  <Route path="/get-involved" element={<Navigate to="/support" replace />} />
+                  <Route path="/get-involved" element={<WithLayout><GetInvolvedPage /></WithLayout>} />
+                  <Route path="/how-it-works" element={<WithLayout><HowItWorksPage /></WithLayout>} />
+                  <Route path="/research-and-judging" element={<WithLayout><ResearchAndJudgingPage /></WithLayout>} />
                   <Route path="/press" element={<Navigate to="/media" replace />} />
 
                   {/* === 2026 nav ecosystem — new hrefs preserved via redirect to nearest live page === */}
                   {/* About sub-pages -> consolidated About with hash anchors */}
                   <Route path="/about/vision-mission" element={<Navigate to="/about#vision" replace />} />
-                  <Route path="/about/how-it-works" element={<Navigate to="/about#how-it-works" replace />} />
-                  <Route path="/about/how-recognition-works" element={<Navigate to="/about#how-it-works" replace />} />
+                  <Route path="/about/how-it-works" element={<Navigate to="/how-it-works" replace />} />
+                  <Route path="/about/how-recognition-works" element={<Navigate to="/how-it-works" replace />} />
                   <Route path="/about/judges" element={<Navigate to="/judges" replace />} />
                   <Route path="/about/integrity" element={<Navigate to="/governance" replace />} />
                   <Route path="/about/verification" element={<Navigate to="/governance#verification" replace />} />

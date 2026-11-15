@@ -1,4 +1,4 @@
-// NESA-Africa 2026 footer — Programme · About · Media · Get Involved · Legal.
+// NESA-Africa 2026 footer — About · Recognition · Get Involved · Impact · Portals · Policies.
 import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import nesaStamp from "@/assets/nesa-stamp.jpeg";
@@ -18,68 +18,51 @@ interface FooterSection {
 }
 
 const SECTIONS: FooterSection[] = [
-  {
-    id: "organisation",
-    title: "Organisation",
-    links: [
-      { label: "About NESA-Africa", href: "/about" },
-      { label: "About SCEF", href: "/about/scef" },
-      { label: "Governance", href: "/about/governance" },
-      { label: "Global Team", href: "/meet-the-team" },
-      { label: "Contact", href: "/contact" },
-    ],
-  },
-  {
-    id: "recognition",
-    title: "Recognition",
-    links: [
-      { label: "Four Recognition Tiers", href: "/recognition" },
-      { label: "Submit a Nomination", href: "/nominate" },
-      { label: "Nominee Directory", href: "/nominees" },
-      { label: "How Recognition Works", href: "/about/how-recognition-works" },
-      { label: "Certificates", href: "/recognition/certificates" },
-    ],
-  },
-  {
-    id: "involved",
-    title: "Get Involved",
-    links: [
-      { label: "Volunteer", href: "/volunteer" },
-      { label: "Join a Local Chapter", href: "/chapters/join" },
-      { label: "Sponsor", href: "/sponsors" },
-      { label: "Partner", href: "/partners" },
-      { label: "Donate", href: "/donate" },
-      { label: "Buy Merchandise", href: "/contact?subject=merchandise" },
-      { label: "Nominee Portal", href: "/nominee-portal" },
-      { label: "NRRC Portal", href: "/nrrc" },
-      { label: "Judges Arena", href: "/judges" },
-      { label: "Volunteer Dashboard", href: "/volunteer/dashboard" },
-      { label: "Chapter Workspace", href: "/olc/dashboard" },
-    ],
-  },
-  {
-    id: "impact",
-    title: "Impact",
-    links: [
-      { label: "EduAid-Africa", href: "/eduaid-africa" },
-      { label: "Support a Special-Needs School", href: "/support-a-special-needs-school" },
-      { label: "Afri-EduTourism", href: "/afri-edutourism" },
-      { label: "Impact Stories", href: "/impact/stories" },
-      { label: "E-Journal", href: "/journal" },
-    ],
-  },
-  {
-    id: "legal",
-    title: "Legal and support",
-    links: [
-      { label: "Privacy", href: "/policies#privacy" },
-      { label: "Terms", href: "/policies#terms" },
-      { label: "Accessibility", href: "/policies#accessibility" },
-      { label: "Safeguarding", href: "/policies#safeguarding" },
-      { label: "Complaints and Corrections", href: "/policies#complaints" },
-      { label: "Report a Concern", href: "/contact" },
-    ],
-  },
+  { id: "about", title: "About", links: [
+    { label: "About NESA-Africa", href: "/about" },
+    { label: "About SCEF", href: "/about/scef" },
+    { label: "Governance", href: "/about/governance" },
+    { label: "Global Team", href: "/meet-the-team" },
+    { label: "Contact", href: "/contact" },
+  ] },
+  { id: "recognition", title: "Recognition", links: [
+    { label: "Four Recognition Tiers", href: "/recognition" },
+    { label: "Submit a Nomination", href: "/nominate" },
+    { label: "Nominee Directory", href: "/nominees" },
+    { label: "How Recognition Works", href: "/how-it-works" },
+    { label: "Certificates", href: "/recognition/certificates" },
+  ] },
+  { id: "involved", title: "Get Involved", links: [
+    { label: "Volunteer", href: "/volunteer" },
+    { label: "Join a Local Chapter", href: "/chapters/join" },
+    { label: "Sponsor", href: "/sponsors" },
+    { label: "Partner", href: "/partners" },
+    { label: "Donate", href: "/donate" },
+    { label: "Buy Merchandise", href: "/contact?subject=merchandise" },
+  ] },
+  { id: "impact", title: "Impact", links: [
+    { label: "EduAid-Africa", href: "/eduaid-africa" },
+    { label: "Rebuild My School Africa", href: "/rebuild-my-school" },
+    { label: "Support a Special-Needs School", href: "/support-a-special-needs-school" },
+    { label: "Afri-EduTourism", href: "/afri-edutourism" },
+    { label: "Impact Stories", href: "/impact/stories" },
+    { label: "E-Journal", href: "/journal" },
+  ] },
+  { id: "portals", title: "Portals", links: [
+    { label: "Nominee Portal", href: "/nominee-portal" },
+    { label: "NRRC Portal", href: "/nrrc" },
+    { label: "Judges Arena", href: "/judges" },
+    { label: "Volunteer and Chapter Workspace", href: "/login?next=%2Fdashboard%2Fvolunteer" },
+    { label: "Administrator Sign-In", href: "/login?next=%2Fadmin" },
+  ] },
+  { id: "policies", title: "Policies", links: [
+    { label: "Privacy", href: "/policies#privacy" },
+    { label: "Terms", href: "/policies#terms" },
+    { label: "Accessibility", href: "/policies#accessibility" },
+    { label: "Safeguarding", href: "/policies#safeguarding" },
+    { label: "Complaints and Corrections", href: "/policies#complaints" },
+    { label: "Report a Concern", href: "/contact" },
+  ] },
 ];
 
 function trackFooter(section: string, label: string, href: string) {
@@ -111,7 +94,7 @@ export function NESAFooter() {
     <footer className="bg-charcoal border-t border-gold/20 pb-24 lg:pb-8" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">Site footer</h2>
       <div className="container mx-auto px-4 pt-10 md:pt-14">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-7 md:gap-10 mb-8">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-8 md:gap-10 mb-8">
           <div className="lg:col-span-2 text-center md:text-left">
             <div className="flex items-center gap-3 justify-center md:justify-start mb-3">
               <img src={nesaStamp} alt="NESA-Africa" width={44} height={44} loading="lazy" decoding="async" className="h-11 w-11 rounded-full object-contain" />
@@ -121,7 +104,7 @@ export function NESAFooter() {
               </div>
             </div>
             <p className="text-white/65 text-xs md:text-sm leading-relaxed mb-4 max-w-sm">
-              NESA-Africa is hosted by Santos Creations Educational Foundation. Sponsorship, donations, partnerships and media participation do not influence nomination, judging or recognition decisions.
+              NESA-Africa is hosted by Santos Creations Educational Foundation. Sponsorship, donations, partnerships, merchandise and media participation do not influence nomination, judging or recognition decisions.
             </p>
             <FollowLinks className="justify-center md:justify-start" />
           </div>
