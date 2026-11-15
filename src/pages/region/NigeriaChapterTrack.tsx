@@ -45,15 +45,15 @@ export default function NigeriaChapterTrack() {
               </p>
               <p className="text-white/60 text-base max-w-2xl">
                 The NESA-Africa Gala is hosted in Nigeria. Access national participation, 
-                ticketing, and host chapter announcements — while staying connected to the 
+                and host chapter announcements — while staying connected to the 
                 continental award ladder.
               </p>
 
               <div className="flex flex-wrap gap-3 mt-8">
-                <Link to="/buy-your-ticket">
+                <Link to="/programme/2026">
                   <Button className="bg-emerald-500 hover:bg-emerald-600 text-white gap-2 rounded-full">
                     <Ticket className="h-4 w-4" />
-                    Get Gala Tickets
+                    Explore the 2026 Online Programme
                   </Button>
                 </Link>
                 <Link to="/media/gala">
