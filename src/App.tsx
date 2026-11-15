@@ -1,3 +1,4 @@
+import LeanImpactPage from "@/pages/impact/LeanImpactPage";
 import { Toaster } from "@/components/ui/toaster";
 import { WithOfficialNominationForm } from "@/components/nominate/OfficialNominationForm";
 import { AdminBareShell } from "@/components/admin/AdminBareShell";
@@ -807,7 +808,7 @@ const App = () => (
                     path="/impact"
                     element={
                       <WithLayout>
-                        <EducationSocialImpactOverview />
+                        <LeanImpactPage />
                       </WithLayout>
                     }
                   />

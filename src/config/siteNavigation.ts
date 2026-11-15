@@ -13,6 +13,8 @@ export interface NavItem {
   megaMenu?: "education-enablers";
   analyticsId?: string;
   panelHeading?: string;
+  /** Render the panel heading as the tappable link to `href` instead of an "… overview" list item. */
+  headingLink?: boolean;
   panelSubheading?: string;
   panelFooter?: { note: string; ctaLabel: string; ctaHref: string };
 }
@@ -38,14 +40,9 @@ export const SITE_NAV: NavItem[] = [
     { label: "Nominee Directory", href: "/nominees" },
     { label: "Certificates of Recognition", href: "/recognition/certificates" },
   ] },
-  { label: "Impact", href: "/impact", analyticsId: "nav_impact", children: [
-    { label: "EduAid-Africa", href: "/eduaid-africa" },
-    { label: "Rebuild My School Africa", href: "/rebuild-my-school" },
+  { label: "Impact", href: "/impact", analyticsId: "nav_impact", headingLink: true, children: [
     { label: "Support a Special-Needs School", href: "/support-a-special-needs-school" },
-    { label: "Regional Interventions", href: "/impact/regional" },
     { label: "Afri-EduTourism", href: "/afri-edutourism" },
-    { label: "Impact Stories", href: "/impact/stories" },
-    { label: "Support Education", href: "/support" },
   ] },
   { label: "Media", href: "/media", analyticsId: "nav_media", children: [
     { label: "Media Hub", href: "/media" },

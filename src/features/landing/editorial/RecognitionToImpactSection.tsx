@@ -32,9 +32,12 @@ export function RecognitionToImpactSection() {
           ))}
         </ol>
 
-        <div className="mt-10 text-center">
-          <Link to="/impact" className="ed-btn-ghost">
-            See how recognition becomes intervention →
+        <div className="mt-10 flex flex-wrap justify-center gap-3">
+          <Link to="/support-a-special-needs-school" className="ed-btn-primary">
+            Support a Special-Needs School
+          </Link>
+          <Link to="/afri-edutourism" className="ed-btn-ghost">
+            Explore Afri-EduTourism
           </Link>
         </div>
       </div>

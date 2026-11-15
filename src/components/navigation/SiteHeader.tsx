@@ -72,8 +72,17 @@ function DropdownSimple({ item }: { item: NavItem }) {
           )}
         </div>
       )}
+      {item.headingLink && (
+        <div className="px-3 pt-3 pb-2 border-b border-gold/15">
+          <MenubarItem asChild>
+            <Link to={item.href} className={cn("block rounded-md text-sm font-semibold text-gold leading-tight hover:underline", FOCUS_RING)}>
+              {item.label}
+            </Link>
+          </MenubarItem>
+        </div>
+      )}
       <ul className="grid gap-1 p-2">
-        {!item.children?.some((c) => c.href === item.href) && (
+        {!item.headingLink && !item.children?.some((c) => c.href === item.href) && (
           <li>
             <MenubarItem asChild>
               <Link to={item.href} className={cn("block px-3 py-2 rounded-md text-sm font-semibold text-gold/90 hover:bg-gold/10 focus:bg-gold/10", FOCUS_RING)}>
@@ -509,7 +518,7 @@ function MobileMenu() {
                           onClick={close}
                           className={cn(linkCls, "font-semibold text-gold/90")}
                         >
-                          {item.label} overview
+                          {item.headingLink ? item.label : `${item.label} overview`}
                         </Link>
                       )}
                       {renderChildren(item)}
