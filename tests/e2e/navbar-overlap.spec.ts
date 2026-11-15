@@ -51,3 +51,41 @@ test.describe("lean header", () => {
     await expect(primary.getByText("Nominees", { exact: true })).toHaveCount(0);
   });
 });
+
+const IMPACT_LINKS = [
+  { name: "Support a Special-Needs School", href: "/support-a-special-needs-school" },
+  { name: "Afri-EduTourism", href: "/afri-edutourism" },
+];
+
+for (const width of [360, 1280]) {
+  test.describe(`Impact menu at ${width}px`, () => {
+    test.use({ viewport: { width, height: 1800 } });
+
+    test("shows exactly two links and the Impact heading opens /impact", async ({ page }) => {
+      await page.goto("/");
+      const header = page.locator("header").first();
+      let panel, heading;
+      if (width < 1200) {
+        await header.getByRole("button", { name: "Open navigation", exact: true }).click();
+        const nav = page.getByRole("navigation", { name: "Mobile primary", exact: true });
+        await nav.getByRole("button", { name: "Impact", exact: true }).click();
+        panel = nav.getByRole("region", { name: "Impact", exact: true });
+        heading = panel.getByRole("link", { name: "Impact", exact: true });
+      } else {
+        await header.getByRole("menuitem", { name: "Impact", exact: true }).click();
+        panel = page.getByRole("menu").filter({ visible: true });
+        heading = panel.getByRole("menuitem", { name: "Impact", exact: true });
+      }
+      const links = panel.getByRole(width < 1200 ? "link" : "menuitem").filter({ hasNotText: /^Impact$/ });
+      await expect(links).toHaveCount(2);
+      for (const [i, l] of IMPACT_LINKS.entries()) {
+        await expect(links.nth(i)).toHaveText(l.name);
+        await expect(links.nth(i)).toHaveAttribute("href", l.href);
+      }
+      await expect(panel.getByText(/overview|EduAid-Africa|Rebuild My School|Impact Stories/)).toHaveCount(0);
+      await expect(heading).toHaveAttribute("href", "/impact");
+      await heading.click();
+      await expect(page).toHaveURL(/\/impact$/);
+    });
+  });
+}
