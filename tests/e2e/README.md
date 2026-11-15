@@ -1,5 +1,26 @@
 # Visual regression tests (Playwright)
 
+## Real Support Fund persistence and access checks
+
+`support-fund-live.test.py` submits a donation pledge and transfer report through
+the running page to the real database, without mocking responses. It checks
+anonymous inserts, rejected out-of-scope inserts, anonymous/member read/update
+denial, and administrator read/update/read-back on both actual saved records.
+
+```bash
+SUPPORT_FUND_MEMBER_SESSION_FILE=/secure/member-session.json \
+SUPPORT_FUND_ADMIN_SESSION_FILE=/secure/admin-session.json \
+python3 tests/e2e/support-fund-live.test.py
+```
+
+Use authorised `lovable auth-session` JSON files; never commit sessions, print
+tokens, promote users, or substitute a service-role key. The default preview is
+`http://localhost:8080`; override with `SUPPORT_FUND_BASE_URL`. Missing member or
+admin sessions explicitly skip their checks, not claim a full pass. Results and
+a screenshot go to `/tmp/browser/support-fund-live/` by default. Runs retain two
+clearly labelled synthetic records (US$1 pledge/report, no payment sent) for audit.
+Admin tests only alter and restore test names, never reconcile or issue a receipt.
+
 Catches subtle layout shifts and placeholder-fallback regressions on nominee
 surfaces (`/nominees/:slug`, directory cards, landing carousel, search results).
 
