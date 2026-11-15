@@ -14,7 +14,7 @@ import {
   SCHOOL_SUPPORT_PROGRAMME, SCHOOL_SUPPORT_SPONSOR_TYPES, SCHOOL_SUPPORT_SPONSORSHIP_INTEGRITY, SCHOOL_SUPPORT_TIMETABLE,
   SCHOOL_SUPPORT_TIMETABLE_NOTICE, SCHOOL_SUPPORT_VOTING_REQUIREMENTS, SCHOOL_SUPPORT_VOTING_SAFEGUARDS,
   SNS_ABOUT_CARDS, SNS_ATTEND_ITEMS, SNS_BANK_ACCOUNTS, SNS_BANK_HOLDER, SNS_BANK_NAME, SNS_BODY_BAND, SNS_CANONICAL,
-  SNS_CATEGORIES, SNS_CATEGORY_RULE, SNS_COUNTRIES, SNS_CTAS, SNS_FAQ, SNS_FIVE_WAYS, SNS_MAP_DRAFT_NOTE, SNS_NARRATION_NOTICE,
+  SNS_CATEGORIES, SNS_CATEGORY_RULE, SNS_COUNTRIES, SNS_CTAS, SNS_FAQ, SNS_FIVE_WAYS, SNS_HERO_IMAGE, SNS_MAP_DRAFT_NOTE, SNS_NARRATION_NOTICE,
   SNS_NEXT_ELIGIBLE_NOTE, SNS_NOT_A_TIER, SNS_PERSONAL_ACCOUNT_WARNING, SNS_PRINCIPLES, SNS_PROCESS_STEPS, SNS_REGIONS,
   SNS_RMSA_ROUTE, SNS_UTILITY_LINE, SNS_VIDEO_CAPTION, SNS_VIDEOS, SNS_VOTE_FOOTNOTE, SNS_ACCOUNTS,
   SCHOOL_SUPPORT_NOMINATION_NOTICE, VOTING_PENDING_LABEL, canPublishSupportSchool, type RegionKey,
@@ -188,6 +188,10 @@ function Body() {
             <p className="mt-4 text-xs font-semibold text-ea-tan">Targets, not secured funding.</p>
           </aside>
         </div>
+        <figure className="mx-auto mt-10 max-w-6xl overflow-hidden rounded-3xl border border-ea-tan/30">
+          <img src={SNS_HERO_IMAGE.src} alt={SNS_HERO_IMAGE.alt} className="w-full object-cover" />
+          <figcaption className="bg-ea-deep/80 px-4 py-2 text-xs text-ea-cream/80">Illustrative images of inclusive learning across the programme's eight support categories.</figcaption>
+        </figure>
       </section>
 
       <p role="note" className="bg-ea-tan px-4 py-3 text-center text-sm font-semibold text-ea-deep">{tr("nominationNotice", "A nomination begins verification. It does not guarantee publication, voting eligibility, funding, a grant or an intervention. Only verified and approved schools are profiled.")}</p>
