@@ -6,12 +6,12 @@ import { Button } from "@/components/ui/button";
 
 export interface LeanCta { label: string; href: string; primary?: boolean }
 
-export function LeanHero({ title, path, seoTitle, description, children }: {
-  title: string; path: string; seoTitle: string; description: string; children?: ReactNode;
+export function LeanHero({ title, path, seoTitle, description, canonicalUrl, children }: {
+  title: string; path: string; seoTitle: string; description: string; canonicalUrl?: string; children?: ReactNode;
 }) {
   return (
     <>
-      <AboutSeo title={seoTitle} description={description} path={path} />
+      <AboutSeo title={seoTitle} description={description} path={path} canonicalUrl={canonicalUrl} />
       <section className="bg-charcoal pt-28 pb-14 md:pt-32 md:pb-20">
         <div className="container mx-auto px-4 max-w-4xl">
           <h1 className="font-display text-3xl md:text-5xl font-bold text-gold leading-tight">{title}</h1>
