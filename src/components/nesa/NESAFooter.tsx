@@ -49,6 +49,7 @@ const SECTIONS: FooterSection[] = [
       { label: "Sponsor", href: "/sponsors" },
       { label: "Partner", href: "/partners" },
       { label: "Donate", href: "/donate" },
+      { label: "Buy Merchandise", href: "/contact?subject=merchandise" },
       { label: "Nominee Portal", href: "/nominee-portal" },
       { label: "NRRC Portal", href: "/nrrc" },
       { label: "Judges Arena", href: "/judges" },

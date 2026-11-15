@@ -79,7 +79,7 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "",
+    subject: subjectParam === "merchandise" ? "Merchandise" : "",
     department: isPresenterApplication ? "Presenter Applications" : "",
     message: ""
   });
@@ -101,7 +101,11 @@ export default function Contact() {
     if (isPresenterApplication) {
       setActiveTab("presenter");
     }
-  }, [isPresenterApplication]);
+    if (subjectParam === "merchandise") {
+      setActiveTab("general");
+      setFormData(previous => ({ ...previous, subject: "Merchandise" }));
+    }
+  }, [isPresenterApplication, subjectParam]);
 
   const handleGeneralSubmit = (e: React.FormEvent) => e.preventDefault();
   const handlePresenterSubmit = (e: React.FormEvent) => e.preventDefault();
