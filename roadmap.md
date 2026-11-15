@@ -5,6 +5,7 @@
 - [x] Recorded page-only full-build/brand approval and separate-bank-transfer fund safeguards in memory and docs/PROJECT_NOTES.md. Supplied-asset placeholders retained; no header/footer/auth/redirect/permission changes; not published.
 
 ## Live donation persistence and access test — 15 Nov 2026
+- [ ] Owner requested approved administrator setup at 12:16 UTC; awaiting the named administrator email (account-selection question skipped). Existing admin endpoints require an existing admin; no documented first-admin bootstrap was found. Do not select or promote an arbitrary member/test account. After explicit account designation, arrange the owner-authorised initial role grant and run retained live administrator/anonymous access checks without privileged bypass.
 - [x] Added real anonymous pledge/transfer UI submissions and anonymous/member read/update-denial checks; both live tests and eight existing safety tests passed. Real records independently read back; synthetic US$1 records retained, no payment made, no publishing or permission changes.
 - [ ] Verify administrator read/update through an authorised administrator session — blocked on 15 Nov 2026: account inventory contains 37 stored `user` roles and no `admin` role; both Support Fund tables require `has_role(auth.uid(), 'admin')` for reads/updates. No administrator session is supplied and no authorised administrator account can be minted. Inventory queries are not access-test evidence; never promote users or substitute privileged SQL. Retained live test is ready once an authorised administrator exists.
 
