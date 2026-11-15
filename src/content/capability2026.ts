@@ -11,7 +11,7 @@ export const POSITIONING = {
   theme: "The African Blue-Garnet Awards for Recognising Africa’s Education Enablers",
   flagshipEvent: "Gold-Blue Garnet Awards Gala",
   date: "28 December 2026",
-  location: "Lagos, Nigeria",
+  location: "Online",
   organisedBy: "Santos Creations Educational Foundation",
   impactPartners: ["EduAid-Africa", "Rebuild My School Africa"],
   closingSalute:
@@ -41,7 +41,7 @@ export const ABOUT_INTRO = {
   body: [
     "NESA-Africa exists to celebrate and support the Enablers of Education for All Across Africa — the individuals, organisations, institutions and partnerships creating real educational impact through leadership, funding, innovation, advocacy, service, public policy, media influence and community transformation.",
     "Through nominations, verification, independent judging, public participation, media storytelling, recognition events and post-award impact programmes, NESA-Africa provides a trusted continental platform for recognising education impact.",
-    "The 2026 edition is themed The African Blue-Garnet Awards for Recognising Africa’s Education Enablers. The flagship event is the Gold-Blue Garnet Awards Gala on 28 December 2026 in Lagos, Nigeria.",
+    "The 2026 edition is themed The African Blue-Garnet Awards for Recognising Africa’s Education Enablers. The 2026 Online Recognition Programme is scheduled for Monday, 28 December 2026.",
   ],
 } as const;
 
@@ -86,7 +86,7 @@ export const CORE_IDENTITY = [
   { label: "Core Mandate", value: "Recognising Africa’s Education Enablers" },
   { label: "Flagship Event", value: "Gold-Blue Garnet Awards Gala" },
   { label: "Date", value: "28 December 2026" },
-  { label: "Location", value: "Lagos, Nigeria" },
+  { label: "Format", value: "Online" },
   { label: "Organised By", value: "Santos Creations Educational Foundation" },
   { label: "Impact Partners", value: "EduAid-Africa and Rebuild My School Africa" },
 ] as const;

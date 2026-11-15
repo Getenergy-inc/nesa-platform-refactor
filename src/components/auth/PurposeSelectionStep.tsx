@@ -79,12 +79,6 @@ const purposeOptions: Omit<PurposeOption, "selected">[] = [
     title: "Apply as NRRC Volunteer",
     description: "Apply to the Nominee Research and Review Corps — you will be taken to the application form",
   },
-  {
-    id: "gala",
-    icon: <Ticket className="h-5 w-5" />,
-    title: "Get Gala Ticket",
-    description: "Attend the prestigious NESA-Africa Awards Gala",
-  },
 ];
 
 interface PurposeSelectionStepProps {

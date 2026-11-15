@@ -47,7 +47,7 @@ const GALA = {
   date: PROGRAMME_END_LABEL,
   time: "18:00 WAT",
   venue: "International Conference Centre",
-  city: "Lagos, Nigeria",
+  city: "Online",
 };
 
 // ============== EXPERIENCE PILLARS ==============
@@ -132,7 +132,7 @@ const eventJsonLd = {
   location: {
     "@type": "Place",
     name: GALA.venue,
-    address: { "@type": "PostalAddress", addressLocality: "Lagos", addressCountry: "NG" },
+    url: "https://nesa.africa/programme/2026",
   },
   image: ["https://nesaafrica.lovable.app/og/gala.jpg"],
   description: "The NESA-Africa Online Recognition Programme — Africa's premier celebration of education changemakers.",
@@ -182,10 +182,10 @@ export default function Gala() {
   return (
     <>
       <Helmet>
-        <title>{`NESA-Africa ${year} Online Recognition Programme | Lagos · 28 Dec 2026`}</title>
+        <title>{`NESA-Africa ${year} Online Recognition Programme · 28 Dec 2026`}</title>
         <meta
           name="description"
-          content={`The NESA-Africa ${year} Online Recognition Programme — a cinematic continental celebration of Africa's education changemakers. Lagos · 28 Dec 2026.`}
+          content={`The NESA-Africa ${year} Online Recognition Programme — a cinematic continental celebration of Africa's education changemakers. Online · Monday 28 Dec 2026.`}
         />
         <link rel="canonical" href="https://nesaafrica.lovable.app/media/gala" />
         <meta property="og:title" content={`NESA-Africa ${year} Online Recognition Programme`} />
