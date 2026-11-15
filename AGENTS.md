@@ -1,5 +1,7 @@
 # Architecture rules
 
+- Test live Support Fund persistence through the page and access rules through real anonymous/member/admin Data API sessions; never substitute privileged SQL or promote fixture users, because either bypasses the rule under test.
+
 - Keep PDF-backed research pathways in a presentation-only registry; legacy taxonomy, nomination keys and eligibility remain authoritative to avoid reclassifying existing nominations.
 - Stage research manifests in the existing private import review queue with source page/row and exact normalized-name/category/pathway deduplication; never publish candidates from research imports.
 - Use the existing canonical nomination-window constants in category metadata so dates cannot drift between shared pages.
