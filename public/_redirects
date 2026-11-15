@@ -64,9 +64,11 @@
 /gala/attendance                                             /programme/2026      301
 /nrc                                                         /nrrc                301
 /nrc/*                                                       /nrrc/:splat         301
-/events                                                      /media/gala          301
-/events/tourism                                              /media/gala          301
-/vote                                                        /about/how-recognition-works 301
+/events                                                      /programme/2026      301
+/events/tourism                                              /programme/2026      301
+/vote                                                        /how-it-works        301
+/about/how-recognition-works                                 /how-it-works        301
+/media/gala                                                  /programme/2026      301
 /dashboard/votes                                             /                    301
 /dashboard/wallet                                            /                    301
 /rebuild                                                     /support-a-special-needs-school 301
@@ -75,7 +77,7 @@
 /special-needs-education-support                             /support-a-special-needs-school 301
 /language                                                    /                    301
 
-# --- 2. SPA routes (565 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (567 explicit paths from src/App.tsx) ---
 /recognition/influencer-education-impact/african-sports-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-music-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-social-media-influencers /index.html          200
@@ -279,6 +281,7 @@
 /nrrc/teams/:teamSlug                                        /index.html          200
 /programs/nesa-africa                                        /index.html          200
 /recognition/platinum                                        /index.html          200
+/research-and-judging                                        /index.html          200
 /sponsorship-packages                                        /index.html          200
 /volunteer/production                                        /index.html          200
 pathways/:pathwaySlug                                        /index.html          200
@@ -467,6 +470,7 @@ voting/:groupId                                              /index.html        
 /endorsements                                                /index.html          200
 /gala/tickets                                                /index.html          200
 /get-involved                                                /index.html          200
+/how-it-works                                                /index.html          200
 /judge-signup                                                /index.html          200
 /judge-status                                                /index.html          200
 /judge-verify                                                /index.html          200

@@ -1,20 +1,24 @@
 import { describe, it, expect } from "vitest";
-import { SITE_NAV, MOBILE_SITE_NAV, SIGN_IN_WORKSPACES, UTILITY_NAV } from "@/config/siteNavigation";
+import { SITE_NAV, MOBILE_SITE_NAV, SIGN_IN_WORKSPACES } from "@/config/siteNavigation";
 import { PROGRAMME_END_DATE, PROGRAMME_END_LONG_LABEL } from "@/config/programme";
 
 describe("2026–2027 navigation", () => {
-  it("shows the seven approved main labels and direct nominee access", () => {
-    expect(SITE_NAV.map(g => g.label)).toEqual(["About", "Recognition", "Nominees", "Impact", "Media", "Get Involved", "Contact"]);
-    expect(MOBILE_SITE_NAV.map(g => g.label)).toEqual(SITE_NAV.map(g => g.label));
-    expect(SITE_NAV.find(g => g.label === "Recognition")?.children?.some(c => c.href === "/nominees")).toBe(true);
+  it("uses the approved desktop headings, with Nominees on mobile only", () => {
+    expect(SITE_NAV.map(g => g.label)).toEqual(["About", "Recognition", "Impact", "Media", "Get Involved", "Contact"]);
+    expect(MOBILE_SITE_NAV.map(g => g.label)).toEqual(["About", "Recognition", "Nominees", "Impact", "Media", "Get Involved", "Contact"]);
+    expect(SITE_NAV.find(g => g.label === "Get Involved")?.href).toBe("/get-involved");
   });
-  it("uses the nine approved utility destinations", () => {
-    expect(UTILITY_NAV.map(g => g.label)).toEqual([
-      "How Recognition Works", "EduAid-Africa", "Support a Special-Needs School",
-      "Become a Sponsor", "Partner With Us", "Join a Webinar", "Listen to the Podcast",
-      "Watch NESA-Africa TV", "Volunteer",
-    ]);
-    expect(UTILITY_NAV.find(g => g.label === "How Recognition Works")?.href).toBe("/about/how-recognition-works");
+  it("links the new recognition pages and renamed media items", () => {
+    const about = SITE_NAV.find(g => g.label === "About")?.children ?? [];
+    expect(about.find(c => c.label === "How Recognition Works")?.href).toBe("/how-it-works");
+    expect(about.find(c => c.label === "Research and Judging")?.href).toBe("/research-and-judging");
+    expect(about.find(c => c.label === "2026 Online Programme")?.href).toBe("/programme/2026");
+    const media = (SITE_NAV.find(g => g.label === "Media")?.children ?? []).map(c => c.label);
+    expect(media).toEqual(["Media Hub", "Webinars", "Podcast", "NESA-Africa TV", "Documentaries and Interviews", "EduAid-Africa E-Journal", "Press and News"]);
+  });
+  it("keeps legacy pages out of the menus", () => {
+    const hrefs = MOBILE_SITE_NAV.flatMap(g => [g.href, ...(g.children ?? []).map(c => c.href)]);
+    for (const h of hrefs) expect(h).not.toMatch(/2027|2028|vision-2035|gallery|^\/nrc(\/|$)/);
   });
   it("routes merchandise enquiries through Contact in both menus, between Donate and Contact Us", () => {
     for (const navigation of [SITE_NAV, MOBILE_SITE_NAV]) {
@@ -35,7 +39,7 @@ describe("2026–2027 navigation", () => {
     ]);
   });
   it("has no voting, AGC, ticket, table or specialist-recruitment links", () => {
-    const all = [...SITE_NAV.flatMap((g) => [g, ...(g.children ?? [])]), ...UTILITY_NAV, ...SIGN_IN_WORKSPACES];
+    const all = [...SITE_NAV.flatMap((g) => [g, ...(g.children ?? [])]), ...SIGN_IN_WORKSPACES];
     for (const i of all) expect(i.href).not.toMatch(/vote|agc|ticket|table|wallet|judgeapply|nrc\/apply/i);
   });
 });

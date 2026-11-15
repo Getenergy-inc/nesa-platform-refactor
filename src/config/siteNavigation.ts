@@ -22,10 +22,11 @@ export const PRIMARY_NAV_VISIBLE_XL = 7;
 export const SITE_NAV: NavItem[] = [
   { label: "About", href: "/about", analyticsId: "nav_about", children: [
     { label: "About NESA-Africa", href: "/about" },
-    { label: "How Recognition Works", href: "/about/how-recognition-works" },
+    { label: "How Recognition Works", href: "/how-it-works" },
+    { label: "Research and Judging", href: "/research-and-judging" },
     { label: "Governance and Integrity", href: "/about/governance" },
-    { label: "2026 Programme", href: "/about/nesa-africa-2026" },
-    { label: "Timeline", href: "/about/timeline" },
+    { label: "2026 Online Programme", href: "/programme/2026" },
+    { label: "Timeline", href: "/timeline" },
     { label: "Global Team", href: "/meet-the-team" },
   ] },
   { label: "Recognition", href: "/recognition", analyticsId: "nav_recognition", children: [
@@ -37,7 +38,6 @@ export const SITE_NAV: NavItem[] = [
     { label: "Nominee Directory", href: "/nominees" },
     { label: "Certificates of Recognition", href: "/recognition/certificates" },
   ] },
-  { label: "Nominees", href: "/nominees", analyticsId: "nav_nominees" },
   { label: "Impact", href: "/impact", analyticsId: "nav_impact", children: [
     { label: "EduAid-Africa", href: "/eduaid-africa" },
     { label: "Rebuild My School Africa", href: "/rebuild-my-school" },
@@ -49,14 +49,14 @@ export const SITE_NAV: NavItem[] = [
   ] },
   { label: "Media", href: "/media", analyticsId: "nav_media", children: [
     { label: "Media Hub", href: "/media" },
-    { label: "Join a Webinar", href: "/media/webinars" },
-    { label: "Listen to the Podcast", href: "/media/podcast" },
-    { label: "Watch NESA-Africa TV", href: "/media/tv" },
+    { label: "Webinars", href: "/media/webinars" },
+    { label: "Podcast", href: "/media/podcast" },
+    { label: "NESA-Africa TV", href: "/media/tv" },
     { label: "Documentaries and Interviews", href: "/media#interviews" },
     { label: "EduAid-Africa E-Journal", href: "/journal" },
     { label: "Press and News", href: "/media#news" },
   ] },
-  { label: "Get Involved", href: "/volunteer", analyticsId: "nav_get_involved", children: [
+  { label: "Get Involved", href: "/get-involved", analyticsId: "nav_get_involved", children: [
     { label: "Volunteer", href: "/volunteer" },
     { label: "Join a Local Chapter", href: "/chapters/join" },
     { label: "Join Our Team", href: "/vacancies" },
@@ -69,7 +69,12 @@ export const SITE_NAV: NavItem[] = [
   { label: "Contact", href: "/contact", analyticsId: "nav_contact" },
 ];
 
-export const MOBILE_SITE_NAV: NavItem[] = SITE_NAV;
+/** Mobile adds direct Nominees access after Recognition (mobile only). */
+export const MOBILE_SITE_NAV: NavItem[] = [
+  ...SITE_NAV.slice(0, 2),
+  { label: "Nominees", href: "/nominees", analyticsId: "nav_nominees" },
+  ...SITE_NAV.slice(2),
+];
 
 /** Destination choices only: selecting one never assigns or changes a role. */
 export const SIGN_IN_WORKSPACES: NavChild[] = [
@@ -85,28 +90,7 @@ export const MOBILE_QUICK_ACTIONS: NavItem[] = [
   { label: "Home", href: "/", analyticsId: "mobile_home" },
   { label: "Recognition", href: "/recognition", analyticsId: "mobile_recognition" },
   { label: "Nominate", href: "/nominate", analyticsId: "mobile_nominate" },
-  { label: "Get Involved", href: "/volunteer", analyticsId: "mobile_get_involved" },
-];
-
-export interface UtilityNavItem {
-  label: string;
-  href: string;
-  analyticsId: string;
-  emphasis?: boolean;
-  external?: boolean;
-}
-
-/** Owner-approved upper-bar information links. */
-export const UTILITY_NAV: UtilityNavItem[] = [
-  { label: "How Recognition Works", href: "/about/how-recognition-works", analyticsId: "util_recognition_process" },
-  { label: "EduAid-Africa", href: "/eduaid-africa", analyticsId: "util_eduaid" },
-  { label: "Support a Special-Needs School", href: "/support-a-special-needs-school", analyticsId: "util_school_support" },
-  { label: "Become a Sponsor", href: "/sponsors", analyticsId: "util_sponsor" },
-  { label: "Partner With Us", href: "/partners", analyticsId: "util_partner" },
-  { label: "Join a Webinar", href: "/media/webinars", analyticsId: "util_webinar" },
-  { label: "Listen to the Podcast", href: "/media/podcast", analyticsId: "util_podcast" },
-  { label: "Watch NESA-Africa TV", href: "/media/tv", analyticsId: "util_tv" },
-  { label: "Volunteer", href: "/volunteer", analyticsId: "util_volunteer" },
+  { label: "Get Involved", href: "/get-involved", analyticsId: "mobile_get_involved" },
 ];
 
 export { NOMINATE_CTA, CURRENT_PHASE } from "./campaignPhase";
