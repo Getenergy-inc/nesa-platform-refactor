@@ -11,6 +11,7 @@ export interface AboutSeoProps {
   breadcrumbs?: Array<{ name: string; path: string }>;
   faqs?: Array<{ question: string; answer: string }>;
   type?: "website" | "article";
+  canonicalUrl?: string; // absolute override for pages with an owner-set canonical
 }
 
 /**
@@ -27,8 +28,9 @@ export function AboutSeo({
   breadcrumbs,
   faqs,
   type = "website",
+  canonicalUrl,
 }: AboutSeoProps) {
-  const url = `${SITE_URL}${path}`;
+  const url = canonicalUrl ?? `${SITE_URL}${path}`;
 
   const webPageLd = {
     "@context": "https://schema.org",

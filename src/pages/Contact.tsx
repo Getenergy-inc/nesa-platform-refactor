@@ -69,6 +69,12 @@ const regionalOffices = [
   { region: "Central Africa", city: "Kinshasa, DRC", email: "centralafrica@nesa.africa" }
 ];
 
+// Site-relative ?subject= prefills (Phase 6 maps these onto enquiry types).
+export const CONTACT_SUBJECT_PREFILLS: Record<string, string> = {
+  merchandise: "Merchandise",
+  "afri-edutourism": "Afri-EduTourism mission",
+};
+
 export default function Contact() {
   const [searchParams] = useSearchParams();
   const subjectParam = searchParams.get("subject");
@@ -79,7 +85,7 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: subjectParam === "merchandise" ? "Merchandise" : "",
+    subject: (subjectParam && CONTACT_SUBJECT_PREFILLS[subjectParam]) || "",
     department: isPresenterApplication ? "Presenter Applications" : "",
     message: ""
   });
@@ -101,9 +107,10 @@ export default function Contact() {
     if (isPresenterApplication) {
       setActiveTab("presenter");
     }
-    if (subjectParam === "merchandise") {
+    const prefill = subjectParam ? CONTACT_SUBJECT_PREFILLS[subjectParam] : undefined;
+    if (prefill) {
       setActiveTab("general");
-      setFormData(previous => ({ ...previous, subject: "Merchandise" }));
+      setFormData(previous => ({ ...previous, subject: prefill }));
     }
   }, [isPresenterApplication, subjectParam]);
 
