@@ -75,7 +75,6 @@ import { PublicLayout } from "@/components/layout/PublicLayout";
 import { CustomerCareChat } from "@/components/support/CustomerCareChat";
 
 // Pages
-import NESALandingPage from "./features/landing/NESALandingPage";
 import UpcomingEventsPage from "./pages/UpcomingEvents";
 import EventsPage from "./pages/EventsPage";
 import ResourcesPage from "./pages/ResourcesPage";
@@ -559,7 +558,7 @@ const App = () => (
                   <Route path="/" element={<WithLayout><LeanHomePage /></WithLayout>} />
                   <Route
                     path="/programs/nesa-africa"
-                    element={<NESALandingPage />}
+                    element={<Navigate to="/" replace />}
                   />
                   <Route
                     path="/upcoming-events"
