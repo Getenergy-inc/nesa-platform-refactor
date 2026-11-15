@@ -25,23 +25,22 @@ describe("2026–2027 navigation", () => {
     expect(about.find(c => c.label === "Research and Judging")?.href).toBe("/research-and-judging");
     expect(about.find(c => c.label === "2026 Online Programme")?.href).toBe("/programme/2026");
     const media = (SITE_NAV.find(g => g.label === "Media")?.children ?? []).map(c => c.label);
-    expect(SITE_NAV.find(g => g.label === "Media")?.children?.find(c => c.label === "Documentaries and Interviews")?.href).toBe("/media#documentaries");
-    expect(media).toEqual(["Media Hub", "Webinars", "Africa Education Enablers Podcast", "NESA-Africa TV", "Documentaries and Interviews", "EduAid-Africa E-Journal", "Press and News"]);
+    expect(media).toEqual(["Media Hub", "Webinars", "Podcast", "NESA-Africa TV", "Documentaries and Interviews", "EduAid-Africa E-Journal", "Press and News"]);
   });
   it("keeps legacy pages out of the menus", () => {
     const hrefs = MOBILE_SITE_NAV.flatMap(g => [g.href, ...(g.children ?? []).map(c => c.href)]);
     for (const h of hrefs) expect(h).not.toMatch(/2027|2028|vision-2035|gallery|^\/nrc(\/|$)/);
   });
-  it("routes merchandise enquiries through Contact in both menus, after Donate, with no Contact Us item (Contact is in the header)", () => {
+  it("routes merchandise enquiries through Contact in both menus, between Donate and Contact Us", () => {
     for (const navigation of [SITE_NAV, MOBILE_SITE_NAV]) {
       const children = navigation.find(item => item.label === "Get Involved")?.children ?? [];
       const donateIndex = children.findIndex(item => item.label === "Donate");
       expect(donateIndex).toBeGreaterThanOrEqual(0);
-      expect(children.slice(donateIndex)).toEqual([
+      expect(children.slice(donateIndex, donateIndex + 3)).toEqual([
         { label: "Donate", href: "/donate" },
         { label: "Buy Merchandise", href: "/contact?subject=merchandise" },
+        { label: "Contact Us", href: "/contact" },
       ]);
-      expect(children.some(item => item.label === "Contact Us")).toBe(false);
     }
   });
   it("uses NRRC presentation routes without changing workspace access", () => {

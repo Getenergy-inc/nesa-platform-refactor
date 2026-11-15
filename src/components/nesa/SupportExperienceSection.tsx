@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Ticket, ShoppingBag, Music, ArrowRight, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import galaImg from "@/assets/movement/gala-ticket.jpg";
 import merchImg from "@/assets/movement/merchandise.jpg";
 import anthemImg from "@/assets/movement/anthem.jpg";
 import ambassadorsImg from "@/assets/movement/ambassadors.jpg";
@@ -20,13 +21,25 @@ interface CardItem {
 
 const items: CardItem[] = [
   {
+    icon: Ticket,
+    eyebrow: "Online Recognition Programme",
+    title: "Buy Your Gala Ticket",
+    description:
+      "Reserve your seat at the NESA-Africa Online Recognition Programme — an unforgettable night honoring Africa's education changemakers.",
+    cta: "Buy Tickets",
+    href: "/buy-your-ticket",
+    accent: "from-gold/20 to-gold/5",
+    image: galaImg,
+    imageAlt: "NESA-Africa Online Recognition Programme ballroom with golden trophy",
+  },
+  {
     icon: ShoppingBag,
     eyebrow: "Shop & Support",
     title: "Buy Official Merchandise",
     description:
-      "Official NESA-Africa and EduAid-Africa merchandise is available on request while the online shop is closed. Merchandise purchases never influence nominations or results.",
-    cta: "Enquire About Merchandise",
-    href: "/contact?subject=merchandise",
+      "Wear the movement. Every purchase from the official NESA store funds Rebuild My School Africa and education legacy projects.",
+    cta: "Visit Shop",
+    href: "/shop",
     accent: "from-emerald-500/15 to-emerald-500/5",
     image: merchImg,
     imageAlt: "Young African ambassadors wearing NESA-Africa branded apparel",

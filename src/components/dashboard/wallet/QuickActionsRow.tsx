@@ -9,7 +9,7 @@ import {
 import {
   FileText,
   Vote,
-
+  Ticket,
   Heart,
   Users,
   Zap,
@@ -57,6 +57,12 @@ export function QuickActionsRow({ onTopUp }: QuickActionsRowProps) {
       href: "/awards/gold-blue-garnet",
       disabled: !votingOpen,
       tooltip: !votingOpen ? "Voting Closed" : undefined,
+      variant: "outline",
+    },
+    {
+      label: "Buy Ticket",
+      icon: <Ticket className="h-4 w-4" />,
+      href: "/tickets",
       variant: "outline",
     },
     {

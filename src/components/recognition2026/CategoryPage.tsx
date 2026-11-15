@@ -22,23 +22,7 @@ import { Button } from "@/components/ui/button";
 import { AwardResearchContext } from "@/components/awards/AwardResearchContext";
 import { ChevronRight, ShieldCheck, ArrowRight } from "lucide-react";
 
-const CANONICAL_ORIGIN = "https://nesa.africa";
-
-// Owner-approved standard copy for every recognition category page (15 Nov 2026).
-export const STANDARD_EVIDENCE = [
-  "Institutional information", "Dates and locations", "Beneficiary information", "Outputs and outcomes",
-  "Independent reports and evaluations", "Public records", "Responsible media coverage",
-  "Safeguarding information", "Evidence of inclusion and sustainability",
-];
-export const NOT_ENOUGH_ON_ITS_OWN = [
-  "Social-media popularity", "Self-written claims", "Unverified testimonials", "Sponsorship of NESA-Africa",
-  "Donations", "Personal relationships", "Paid publicity", "Taking part in a NESA-Africa programme",
-];
-export const AFTER_NOMINATION_STEPS = [
-  "Completeness review", "Duplicate check", "Contact verification", "Acceptance and consent", "Evidence review",
-  "NRRC research and review", "Preliminary eligibility decision", "Judging, where applicable",
-  "Recognition decision", "Formal notification",
-];
+const CANONICAL_ORIGIN = "https://nesaafrica.lovable.app";
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-GB", {
@@ -84,7 +68,7 @@ const JUMP_LINKS: { id: string; label: string }[] = [
   { id: "eligibility", label: "Eligibility" },
   { id: "evidence", label: "Evidence" },
   { id: "nomination-form", label: "Nominate" },
-  { id: "review", label: "After nomination" },
+  { id: "review", label: "Review" },
   { id: "integrity", label: "Integrity" },
   { id: "faqs", label: "FAQs" },
 ];
@@ -321,34 +305,45 @@ export default function CategoryPage() {
         </Section>
 
         {/* 8. Evidence Required */}
-        <Section id="evidence" title="Evidence that strengthens a nomination">
+        <Section id="evidence" title="Evidence Required">
           <ul className="list-disc pl-5 space-y-1">
-            {[...cat.evidenceRequired, ...STANDARD_EVIDENCE.filter((e) => !cat.evidenceRequired.includes(e))].map((e, i) => (
+            {cat.evidenceRequired.map((e, i) => (
               <li key={i}>{e}</li>
             ))}
-          </ul>
-          <h3 className="font-semibold text-white pt-2">Not enough on its own</h3>
-          <ul className="list-disc pl-5 space-y-1">
-            {NOT_ENOUGH_ON_ITS_OWN.map((e) => <li key={e}>{e}</li>)}
           </ul>
         </Section>
 
         {/* 9. Embedded Nomination Form (placeholder — Phase 3/4) */}
-        <Section id="nomination-form" title="Submit a Nomination">
-          <p>Nomination is free. Submitting a nomination begins a review; it does not confirm verification, eligibility, judging or recognition.</p>
-          <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold-dark">
-            <Link to={`/nominate?tier=${cat.tier}&category=${cat.slug}`}>Submit a Nomination</Link>
-          </Button>
+        <Section id="nomination-form" title="Nomination Form">
+          <div className="rounded-xl border border-dashed border-gold/40 bg-white/5 p-6 text-center">
+            <p className="text-white/70 text-sm">
+              The dedicated nomination form for{" "}
+              <span className="text-gold font-semibold">{cat.shortName}</span>{" "}
+              will be embedded here.
+            </p>
+            <p className="text-white/50 text-xs mt-2">
+              Reference number format:{" "}
+              <code>NESA-2026-{cat.code}-000001</code>
+            </p>
+            <Button
+              asChild
+              size="lg"
+              className="mt-4 bg-gold text-charcoal hover:bg-gold-dark"
+            >
+              <Link to={`/nominate?tier=${cat.tier}&category=${cat.slug}`}>
+                Open Interim Nomination Form
+              </Link>
+            </Button>
+          </div>
         </Section>
 
         {/* 10. Review Process */}
-        <Section id="review" title="After nomination">
+        <Section id="review" title="Review Process">
           <ol className="list-decimal pl-5 space-y-1">
-            {AFTER_NOMINATION_STEPS.map((step) => (
-              <li key={step}>{step}</li>
+            {cat.reviewRoute.map((step, i) => (
+              <li key={i}>{step}</li>
             ))}
           </ol>
-          <p className="font-medium">Nomination does not guarantee eligibility, judging or recognition.</p>
         </Section>
 
         {/* 11. Integrity Notice */}
@@ -404,10 +399,21 @@ export default function CategoryPage() {
         <Section id="final-cta" title="Take Action">
           <div className="flex flex-wrap gap-3">
             <Button asChild className="bg-gold text-charcoal hover:bg-gold-dark">
-              <Link to={`/nominate?tier=${cat.tier}&category=${cat.slug}`}>Submit a Nomination</Link>
+              <a href="#nomination-form">Start a Nomination</a>
             </Button>
-            <Button asChild variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
-              <Link to="/recognition">Return to Recognition</Link>
+            <Button
+              asChild
+              variant="outline"
+              className="border-gold/40 text-gold hover:bg-gold/10"
+            >
+              <Link to={tierDef.href}>Nominate Another Education Enabler</Link>
+            </Button>
+            <Button
+              asChild
+              variant="ghost"
+              className="text-white/80 hover:text-gold"
+            >
+              <Link to="/recognition">Return to Recognition 2026</Link>
             </Button>
           </div>
         </Section>

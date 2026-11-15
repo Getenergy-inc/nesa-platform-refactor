@@ -26,6 +26,7 @@ import { AwardPlaqueMotionSection } from "@/components/nesa/AwardPlaqueMotionSec
 import { InfluencerPathwayNomineeSlider } from "@/components/awards/InfluencerPathwayNomineeSlider";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
+import { UtilityBar } from "@/components/nesa/UtilityBar";
 import { LazySection } from "@/components/ui/lazy-section";
 import { MobileBottomActions } from "@/components/navigation/MobileBottomActions";
 import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicator";
@@ -93,6 +94,7 @@ export function NESALandingPage() {
       <ScrollProgressIndicator />
 
       <div className="nesa-ed min-h-screen pt-14 sm:pt-16 pb-16">
+        <UtilityBar />
         <NESAHeader />
 
         {/* 1. HERO */}

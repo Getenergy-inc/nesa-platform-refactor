@@ -1,6 +1,6 @@
 // About NESA-Africa 2027 — second public cycle, pre-launch state.
 // Same institutional shell as 2026; phases greyed / unconfirmed
-// except the known December 2027 programme month.
+// except the known December 2027 Gala month in Lagos.
 import { AboutSeo } from "@/pages/about/AboutSeo";
 import {
   AboutSealHero,
@@ -33,7 +33,7 @@ const PHASES_2027: TimelinePhase[] = [
   { phaseName: "Finalists Revealed", window: "Two TV shows · dates to be confirmed", status: "unconfirmed", events: [] },
   {
     phaseName: "Recognition Gala",
-    window: "December 2027",
+    window: "December 2027 · Lagos",
     status: "upcoming",
     spotlight: true,
     events: [{ date: "December 2027", title: "NESA-Africa 2027 Recognition Gala", detail: "Exact date to be confirmed" }],
@@ -46,7 +46,7 @@ export default function AboutCycle2027() {
     <>
       <AboutSeo
         title="About NESA-Africa 2027 · Second Public Award Cycle"
-        description="NESA-Africa 2027 — the second public award cycle. Continues verification-only recognition across all four tiers."
+        description="NESA-Africa 2027 — the second public award cycle. Continues verification-only recognition across all four tiers, culminating in the December 2027 Recognition Gala in Lagos."
         path="/about/nesa-africa-2027"
         breadcrumbs={[
           { name: "Home", path: "/" },

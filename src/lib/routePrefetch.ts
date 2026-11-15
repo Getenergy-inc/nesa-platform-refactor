@@ -35,6 +35,7 @@ const ROUTE_CHUNKS: Array<[RegExp, Importer]> = [
   [/^\/about/, () => import("@/pages/about/AboutConsolidated")],
   [/^\/regions/, () => import("@/pages/region/RegionsIndexPage")],
   [/^\/chapters/, () => import("@/pages/Chapters")],
+  [/^\/tickets/, () => import("@/pages/Tickets")],
   [/^\/donate/, () => import("@/pages/Donate")],
 ];
 

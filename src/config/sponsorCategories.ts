@@ -46,7 +46,7 @@ export const SPONSOR_CATEGORIES: SponsorCategory[] = [
     shortLabel: "Blue Garnet Gala",
     tagline: "Headline Africa's premier education awards night.",
     description:
-      "Broadcast and approved delivery support for the Online Recognition Programme — Monday, 28 December 2026. Sponsorship carries no weight in recognition.",
+      "Headline, table, red-carpet, broadcast and branding partnerships for the Online Recognition Programme — 28 December 2026, Lagos.",
     icon: Sparkles,
     accent: "from-gold/30 via-gold/10 to-transparent",
     audience: "C-suite executives, ministers, philanthropists, media and dignitaries from 54 African countries",

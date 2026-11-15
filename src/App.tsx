@@ -75,6 +75,7 @@ import { PublicLayout } from "@/components/layout/PublicLayout";
 import { CustomerCareChat } from "@/components/support/CustomerCareChat";
 
 // Pages
+import NESALandingPage from "./features/landing/NESALandingPage";
 import UpcomingEventsPage from "./pages/UpcomingEvents";
 import EventsPage from "./pages/EventsPage";
 import ResourcesPage from "./pages/ResourcesPage";
@@ -268,12 +269,7 @@ import AboutCycle2027 from "./pages/about/AboutCycle2027";
 import AboutCycle2028_2030 from "./pages/about/AboutCycle2028_2030";
 import EduAidAfricaImpact from "./pages/eduaid/EduAidAfricaImpact";
 import MediaHubConsolidated from "./pages/media/MediaHubConsolidated";
-import LeanHomePage from "./pages/lean/LeanHomePage";
-import LeanAboutPage from "./pages/lean/LeanAboutPage";
-import LeanRecognitionPage from "./pages/lean/LeanRecognitionPage";
-import LeanProgrammePage from "./pages/lean/LeanProgrammePage";
-import LeanMediaPage from "./pages/lean/LeanMediaPage";
-import { NoIndex } from "./components/seo/NoIndex";
+import GalaConsolidated from "./pages/gala/GalaConsolidated";
 import SupportConsolidated from "./pages/support/SupportConsolidated";
 // Legacy `pages/impact/ImpactHub.tsx` is retained on disk (no programme data
 // deleted) but is superseded by EducationSocialImpactOverview at /impact.
@@ -555,10 +551,10 @@ const App = () => (
                 <AttributionCapture />
                 <Routes>
                   {/* Landing - has its own header/footer */}
-                  <Route path="/" element={<WithLayout><LeanHomePage /></WithLayout>} />
+                  <Route path="/" element={<NESALandingPage />} />
                   <Route
                     path="/programs/nesa-africa"
-                    element={<Navigate to="/" replace />}
+                    element={<NESALandingPage />}
                   />
                   <Route
                     path="/upcoming-events"
@@ -731,7 +727,7 @@ const App = () => (
                   <Route path="/contact/partnerships" element={<Navigate to="/contact" replace />} />
 
                   {/* Canonical consolidation aliases per 2026 IA refactor */}
-                  <Route path="/recognition" element={<WithLayout><LeanRecognitionPage /></WithLayout>} />
+                  <Route path="/recognition" element={<WithLayout><RecognitionHubPage /></WithLayout>} />
                   <Route path="/companies" element={<Navigate to="/education-enablers" replace />} />
                   <Route path="/organisations" element={<Navigate to="/education-enablers" replace />} />
                   <Route path="/organizations" element={<Navigate to="/education-enablers" replace />} />
@@ -760,20 +756,20 @@ const App = () => (
                     path="/about"
                     element={
                       <WithLayout>
-                        <LeanAboutPage />
+                        <AboutConsolidated />
                       </WithLayout>
                     }
                   />
                   <Route path="/about/team" element={<WithLayout><GlobalTeam /></WithLayout>} />
                   <Route path="/team" element={<Navigate to="/about/team" replace />} />
                   <Route path="/about/nesa-africa-2026" element={<WithLayout><AboutCycle2026 /></WithLayout>} />
-                  <Route path="/about/nesa-africa-2027" element={<WithLayout><NoIndex><AboutCycle2027 /></NoIndex></WithLayout>} />
-                  <Route path="/about/nesa-africa-2028-2030" element={<WithLayout><NoIndex><AboutCycle2028_2030 /></NoIndex></WithLayout>} />
+                  <Route path="/about/nesa-africa-2027" element={<WithLayout><AboutCycle2027 /></WithLayout>} />
+                  <Route path="/about/nesa-africa-2028-2030" element={<WithLayout><AboutCycle2028_2030 /></WithLayout>} />
                   {/* Legacy short-path redirects */}
                   <Route path="/about/2026" element={<Navigate to="/about/nesa-africa-2026" replace />} />
                   <Route path="/about/2027" element={<Navigate to="/about/nesa-africa-2027" replace />} />
                   <Route path="/about/2028-2030" element={<Navigate to="/about/nesa-africa-2028-2030" replace />} />
-                  <Route path="/about/vision-2035" element={<Navigate to="/about" replace />} />
+                  <Route path="/about/vision-2035" element={<Navigate to="/about#vision-2035" replace />} />
                   <Route path="/about/governance" element={<Navigate to="/about#governance" replace />} />
                   <Route
                     path="/governance"
@@ -1227,7 +1223,7 @@ const App = () => (
                   />
 
                   {/* Canonical Awards Spine — Pathway → Category → Subcategory */}
-                  <Route path="/recognition" element={<WithLayout><LeanRecognitionPage /></WithLayout>} />
+                  <Route path="/recognition" element={<WithLayout><RecognitionHubPage /></WithLayout>} />
 
                   {/* === 38-page canonical spec (2026 refactor) ===
                       Renders existing tier & category components at the
@@ -1265,8 +1261,8 @@ const App = () => (
 
 
                   {/* Core spec URLs — render existing content at canonical paths */}
-                  <Route path="/programme-2026" element={<Navigate to="/programme/2026" replace />} />
-                  <Route path="/programme/2026" element={<WithLayout><LeanProgrammePage /></WithLayout>} />
+                  <Route path="/programme-2026" element={<WithLayout><GalaConsolidated /></WithLayout>} />
+                  <Route path="/programme/2026" element={<WithLayout><GalaConsolidated /></WithLayout>} />
                   <Route path="/gala" element={<Navigate to="/programme/2026" replace />} />
                   <Route path="/support" element={<WithLayout><SupportConsolidated /></WithLayout>} />
                   <Route path="/participate" element={<WithLayout><ParticipatePage /></WithLayout>} />
@@ -1555,13 +1551,13 @@ const App = () => (
                   />
 
                   {/* Media */}
-                  <Route path="/media" element={<WithLayout><LeanMediaPage /></WithLayout>} />
+                  <Route path="/media" element={<WithLayout><MediaHubConsolidated /></WithLayout>} />
                   {/* Gallery */}
                   <Route
                     path="/gallery"
                     element={
                       <WithLayout>
-                        <NoIndex><GalleryLanding /></NoIndex>
+                        <GalleryLanding />
                       </WithLayout>
                     }
                   />
@@ -1569,7 +1565,7 @@ const App = () => (
                     path="/gallery/:slug"
                     element={
                       <WithLayout>
-                        <NoIndex><GalleryCollection /></NoIndex>
+                        <GalleryCollection />
                       </WithLayout>
                     }
                   />

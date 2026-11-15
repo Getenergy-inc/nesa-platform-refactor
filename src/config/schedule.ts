@@ -220,7 +220,7 @@ export function buildScheduledEvents(
         // Canonical Gala countdown target: 28 Dec 2026, 00:00 WAT (see config/programme.ts)
         date: awardYear === 2026 ? GALA_COUNTDOWN_TARGET : createSeasonDate(awardYear, template.galas.blueGarnetGala.monthDay, template.galas.blueGarnetGala.yearOffset),
         description: "Grand ceremony — 9 Blue Garnet winners",
-        venue: "Online",
+        venue: "Lagos, Nigeria",
       },
     ],
     legacy: [

@@ -37,6 +37,7 @@ describe("Gala countdown — canonical target", () => {
 
   it("countdown surfaces import the shared constant instead of hard-coding a date", () => {
     const files = [
+      "src/components/nesa/CountdownSection.tsx",
       "src/pages/media/Gala.tsx",
       "src/config/schedule.ts",
       "src/config/nesaSeasonConfig.ts",
@@ -52,6 +53,7 @@ describe("Gala countdown — canonical target", () => {
     const files = [
       "src/config/programme.ts",
       "src/config/schedule.ts",
+      "src/components/nesa/CountdownSection.tsx",
       "src/features/landing/editorial/GalaBandSection.tsx",
       "src/pages/media/Gala.tsx",
     ];

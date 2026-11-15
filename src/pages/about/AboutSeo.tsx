@@ -1,9 +1,7 @@
 import { Helmet } from "react-helmet-async";
 
-// Each domain uses its own canonical (owner master draft, 15 Nov 2026).
-const SITE_URL = "https://nesa.africa";
-const ASSET_URL = "https://nesaafrica.lovable.app";
-const DEFAULT_OG_IMAGE = `${ASSET_URL}/og-image.png`;
+const SITE_URL = "https://nesaafrica.lovable.app";
+const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 
 export interface AboutSeoProps {
   title: string;

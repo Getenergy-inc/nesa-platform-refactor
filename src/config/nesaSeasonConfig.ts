@@ -62,7 +62,7 @@ export const CURRENT_SEASON: SeasonEdition = {
   theme: "From Recognition to Real Impact Across Africa",
   tagline: "A Continental Platform for Education Transformation",
   ceremonyDate: GALA_COUNTDOWN_TARGET,
-  ceremonyLocation: "Online",
+  ceremonyLocation: "Lagos, Nigeria",
   ceremonyVenue: "Eko Convention Centre",
 };
 

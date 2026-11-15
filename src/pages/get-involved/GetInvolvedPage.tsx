@@ -7,7 +7,7 @@ const BLOCKS: Array<{ title: string; body: string; ctas: LeanCta[] }> = [
   { title: "Partner with us", body: "Technology, accessibility, media, research, education interventions, regional school support, training and Afri-EduTourism.", ctas: [{ label: "Propose a Partnership", href: "/partners" }] },
   { title: "Sponsor responsibly", body: "Sponsors support approved delivery without nomination, judging or editorial influence.", ctas: [{ label: "Become a Sponsor", href: "/sponsors" }] },
   { title: "Donate", body: "Donations support approved education documentation, accessibility, school interventions and EduAid-Africa services, by bank transfer to EduAid Africa Ltd.", ctas: [{ label: "Support Education", href: "/support" }] },
-  { title: "Buy merchandise", body: "Official NESA-Africa and EduAid-Africa merchandise is available on request while the online shop is closed.", ctas: [{ label: "Enquire About Merchandise", href: "/contact?subject=merchandise", primary: true }] },
+  { title: "Buy merchandise", body: "Official NESA-Africa and EduAid-Africa merchandise is available on request while the online shop is closed.", ctas: [{ label: "Buy Merchandise", href: "/contact?subject=merchandise", primary: true }] },
 ];
 
 export default function GetInvolvedPage() {

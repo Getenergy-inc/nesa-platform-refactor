@@ -14,7 +14,7 @@ import { readFileSync, writeFileSync } from "fs";
 import { resolve } from "path";
 import { ALL_CATEGORIES, GROUP_META } from "../src/config/awardCategories/index.ts";
 
-const BASE_URL = "https://nesa.africa"; // each domain uses its own canonical
+const BASE_URL = "https://nesaafrica.lovable.app";
 const APP_TSX = resolve("src/App.tsx");
 
 interface SitemapEntry {
@@ -103,40 +103,55 @@ const GOLD_TRACKS = [
   "social-media-for-education",
 ];
 
-// Lean 14-page site (owner master draft, 15 Nov 2026). Voting, ticketing, gala,
-// legacy-cycle, gallery and Vision 2035 pages are never listed.
 const curated: SitemapEntry[] = [
   { path: "/", changefreq: "daily", priority: "1.0" },
-  { path: "/about", changefreq: "monthly", priority: "0.7" },
-  { path: "/recognition", changefreq: "weekly", priority: "0.9" },
-  { path: "/recognition/africa-education-icon", changefreq: "weekly", priority: "0.8" },
-  { path: "/recognition/influencers", changefreq: "weekly", priority: "0.8" },
-  { path: "/recognition/platinum", changefreq: "weekly", priority: "0.8" },
-  { path: "/recognition/gold-blue-garnet", changefreq: "weekly", priority: "0.8" },
-  { path: "/recognition/certificates", changefreq: "monthly", priority: "0.6" },
+  // Award pillars
+  { path: "/awards/africa-education-icon", changefreq: "weekly", priority: "0.9" },
+  { path: "/awards/gold-special-recognition", changefreq: "weekly", priority: "0.9" },
+  { path: "/awards/csr-education", changefreq: "weekly", priority: "0.9" },
+  { path: "/awards/digital-voices", changefreq: "weekly", priority: "0.9" },
+  { path: "/awards/global-partnerships", changefreq: "weekly", priority: "0.9" },
+  { path: "/awards/winners", changefreq: "weekly", priority: "0.8" },
+  // Nominee directories
+  { path: "/nominees", changefreq: "daily", priority: "0.9" },
+  { path: "/nominees/africa-education-icon-award", changefreq: "weekly", priority: "0.8" },
+  { path: "/nominees/gold-special-recognition", changefreq: "weekly", priority: "0.8" },
+  { path: "/nominees/west-africa", changefreq: "weekly", priority: "0.85" },
+  { path: "/nominees/east-africa", changefreq: "weekly", priority: "0.85" },
+  { path: "/nominees/north-africa", changefreq: "weekly", priority: "0.85" },
+  { path: "/nominees/central-africa", changefreq: "weekly", priority: "0.85" },
+  { path: "/nominees/southern-africa", changefreq: "weekly", priority: "0.85" },
+  // Participation
   { path: "/nominate", changefreq: "weekly", priority: "0.9" },
-  { path: "/nominees", changefreq: "daily", priority: "0.8" },
-  { path: "/how-it-works", changefreq: "monthly", priority: "0.8" },
-  { path: "/research-and-judging", changefreq: "monthly", priority: "0.7" },
-  { path: "/programme/2026", changefreq: "weekly", priority: "0.8" },
+  { path: "/vote", changefreq: "daily", priority: "0.9" },
+  { path: "/trending", changefreq: "daily", priority: "0.85" },
+  { path: "/how-voting-works", changefreq: "monthly", priority: "0.6" },
+  { path: "/earn-agc", changefreq: "weekly", priority: "0.8" },
+  { path: "/about-agc", changefreq: "monthly", priority: "0.6" },
+  // Ecosystem
+  { path: "/about", changefreq: "monthly", priority: "0.6" },
+  { path: "/about/governance", changefreq: "monthly", priority: "0.5" },
+  { path: "/about/scef", changefreq: "monthly", priority: "0.5" },
+  { path: "/about/vision-2035", changefreq: "monthly", priority: "0.5" },
+  { path: "/ambassadors", changefreq: "monthly", priority: "0.6" },
+  { path: "/judges", changefreq: "monthly", priority: "0.6" },
+  { path: "/volunteer", changefreq: "monthly", priority: "0.6" },
+  { path: "/sponsors", changefreq: "monthly", priority: "0.6" },
+  { path: "/chapters", changefreq: "monthly", priority: "0.6" },
+  { path: "/contact", changefreq: "monthly", priority: "0.4" },
+  { path: "/donate", changefreq: "monthly", priority: "0.6" },
+  // Media
   { path: "/media", changefreq: "weekly", priority: "0.6" },
-  { path: "/media/webinars", changefreq: "weekly", priority: "0.5" },
-  { path: "/media/podcast", changefreq: "weekly", priority: "0.5" },
-  { path: "/media/tv", changefreq: "weekly", priority: "0.5" },
-  { path: "/get-involved", changefreq: "monthly", priority: "0.7" },
-  { path: "/impact", changefreq: "monthly", priority: "0.7" },
-  { path: "/support-a-special-needs-school", changefreq: "weekly", priority: "0.8" },
-  { path: "/afri-edutourism", changefreq: "monthly", priority: "0.6" },
-  { path: "/contact", changefreq: "monthly", priority: "0.5" },
-  { path: "/governance", changefreq: "monthly", priority: "0.5" },
-  { path: "/timeline", changefreq: "monthly", priority: "0.5" },
-  { path: "/meet-the-team", changefreq: "monthly", priority: "0.4" },
-  { path: "/volunteer", changefreq: "monthly", priority: "0.5" },
-  { path: "/sponsors", changefreq: "monthly", priority: "0.5" },
-  { path: "/partners", changefreq: "monthly", priority: "0.5" },
-  { path: "/donate", changefreq: "monthly", priority: "0.5" },
-  { path: "/eduaid-africa", changefreq: "monthly", priority: "0.5" },
-  { path: "/rebuild-my-school", changefreq: "monthly", priority: "0.5" },
+  { path: "/videos", changefreq: "weekly", priority: "0.6" },
+  // Governance / impact
+  { path: "/pathways", changefreq: "monthly", priority: "0.5" },
+  { path: "/ecosystem", changefreq: "monthly", priority: "0.5" },
+  { path: "/movement", changefreq: "monthly", priority: "0.5" },
+  { path: "/impact", changefreq: "monthly", priority: "0.5" },
+  { path: "/programs", changefreq: "monthly", priority: "0.5" },
+  // Auth landing — explicitly the canonical public-facing login (not /auth/* aliases)
+  { path: "/login", changefreq: "yearly", priority: "0.3" },
+  { path: "/register", changefreq: "yearly", priority: "0.3" },
 ];
 
 const iconNested: SitemapEntry[] = ICON_SUBCATEGORIES.flatMap((sub) => [

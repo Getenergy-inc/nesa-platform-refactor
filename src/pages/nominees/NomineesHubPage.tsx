@@ -16,6 +16,7 @@ import { Search, Sparkles } from "lucide-react";
 
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
+import { UtilityBar } from "@/components/nesa/UtilityBar";
 import { MobileBottomActions } from "@/components/navigation/MobileBottomActions";
 import { BackToTopButton } from "@/components/ui/back-to-top";
 import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicator";
@@ -97,22 +98,6 @@ export function catalogueRedirectTarget(params: URLSearchParams): string | null 
   return `/nominees/catalogue?${next.toString()}`;
 }
 
-export const NOMINATION_STATUS_TABLE: [string, string][] = [
-  ["Nomination received", "A submission has been recorded"],
-  ["Contact verification in progress", "Identity and contact details are being checked"],
-  ["Consent pending", "Acceptance or publication consent not yet given"],
-  ["Evidence review in progress", "Claims and supporting information are being examined"],
-  ["NRRC research and review in progress", "The NRRC is preparing or reviewing the profile and dossier"],
-  ["Eligible for judging", "Checks complete; an Icon dossier may go to the judges"],
-  ["Recognition decision completed", "The recognition process has concluded"],
-];
-
-/** Nominee email delivery statuses — separate from nomination status (owner master draft). */
-export const NOMINEE_EMAIL_STATUSES = [
-  "Letter prepared", "Queued", "Sent", "Delivery confirmed", "Retryable failure",
-  "Permanent failure", "Reply received", "Reply outstanding",
-] as const;
-
 export default function NomineesHubPage() {
   const { data: nominees, isLoading, isError, error: loadError, refetch } = useCatalogueNominees();
   const stats = useSiteStats();
@@ -175,16 +160,16 @@ export default function NomineesHubPage() {
   return (
     <>
       <Helmet>
-        <title>NESA-Africa Nominees | Profiles and Review Status</title>
+        <title>{`${DIRECTORY_NAME} — NESA-Africa 2026`}</title>
         <meta
           name="description"
-          content="Explore authorised NESA-Africa nominee profiles and controlled review statuses."
+          content="Explore verified Education Enablers recognised by NESA-Africa 2026 — people, organisations and institutions advancing Education for All across Africa."
         />
         <link rel="canonical" href={CANONICAL} />
-        <meta property="og:title" content="NESA-Africa Nominees | Profiles and Review Status" />
+        <meta property="og:title" content={`${DIRECTORY_NAME} — NESA-Africa 2026`} />
         <meta
           property="og:description"
-          content="Explore authorised NESA-Africa nominee profiles and controlled review statuses."
+          content="Africa's verified directory of Education Enablers: 4 recognition tiers, 22 categories, eight African regions and the global African community."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={CANONICAL} />
@@ -195,6 +180,7 @@ export default function NomineesHubPage() {
       <ScrollProgressIndicator />
 
       <div className="nesa-ed min-h-screen pt-14 sm:pt-16 pb-16">
+        <UtilityBar />
         <NESAHeader />
 
         <main>
@@ -258,33 +244,6 @@ export default function NomineesHubPage() {
             </div>
           </section>
 
-          {/* REVIEW STATUSES (owner brief, Page 6) */}
-          <section className="ed-section" aria-labelledby="dir-statuses">
-            <div className="ed-wrap">
-              <div className="ed-section-head">
-                <h2 id="dir-statuses" className="ed-section-title">Review statuses</h2>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-sm">
-                  <thead><tr><th scope="col" className="p-2">Status</th><th scope="col" className="p-2">Meaning</th></tr></thead>
-                  <tbody>
-                    {NOMINATION_STATUS_TABLE.map(([st, m]) => (
-                      <tr key={st} className="border-t border-current/10"><td className="p-2 font-semibold">{st}</td><td className="p-2">{m}</td></tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <p className="ed-section-sub" role="note" style={{ marginTop: 16 }}>Publishing a profile does not guarantee eligibility, shortlisting, judging, selection or recognition. Information may be corrected as verification continues.</p>
-              <p className="ed-section-sub">Counter policy: there is no single combined nominee number. Any counter states the status counted, the data source, the last-updated date, the responsible owner and whether reconciliation is complete.</p>
-              <p className="ed-section-sub">Nominee email status is tracked separately from nomination status. An email marked “Sent” never changes a nomination status.</p>
-              <div className="ed-hero-cta-row">
-                <Link to="/nominees/catalogue" className="ed-btn-ghost">Explore Profiles</Link>
-                <Link to="/nominate" className="ed-btn-primary">Submit a Nomination</Link>
-                <Link to="/contact?subject=profile-correction" className="ed-btn-ghost">Request a Correction</Link>
-              </div>
-            </div>
-          </section>
-
           {/* 2 — RECOGNITION TIERS */}
           <section className="ed-section" aria-labelledby="dir-tiers">
             <div className="ed-wrap">
@@ -306,7 +265,7 @@ export default function NomineesHubPage() {
                     <h3>{t.name}</h3>
                     <p>{t.blurb}</p>
                     <p className="ed-mono" style={{ color: "var(--ed-gold)", fontSize: "0.78rem" }}>
-                      Status-controlled profiles
+                      {isLoading ? "…" : `${(tierCounts[t.slug] ?? 0).toLocaleString()} nominees`}
                     </p>
                     <Link
                       to={`/nominees/catalogue?tier=${t.slug}`}
@@ -381,7 +340,7 @@ export default function NomineesHubPage() {
                 </p>
               </div>
 
-              <GeographicReachMap counts={{}} loading={false} />
+              <GeographicReachMap counts={regionCounts} loading={isLoading} />
             </div>
           </section>
 
