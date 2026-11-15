@@ -33,7 +33,7 @@ class SupportFundLiveTest(unittest.TestCase):
     def setUpClass(cls):
         cls.pw = sync_playwright().start()
         cls.browser = cls.pw.chromium.launch(headless=True)
-        cls.context = cls.browser.new_context(viewport={"width": 1280, "height": 1800})
+        cls.context = cls.browser.new_context(viewport={"width": 1280, "height": 1800}, reduced_motion="reduce")
         cls.page = cls.context.new_page()
         cls.base = os.environ.get("SUPPORT_FUND_BASE_URL", "http://localhost:8080")
         cls.page.goto(cls.base, wait_until="domcontentloaded")
@@ -101,7 +101,11 @@ class SupportFundLiveTest(unittest.TestCase):
         transfer.get_by_label("Name on the sending account*", exact=True).fill(self.marker)
         transfer.get_by_label("Bank transaction ID (optional)", exact=True).fill("AUTOMATED-TEST-NO-PAYMENT")
         with page.expect_response(lambda r: "/rest/v1/support_fund_transfer_reports" in r.url and r.request.method == "POST") as reported:
-            transfer.get_by_role("button", name="Report my transfer", exact=True).click()
+            # Keyboard submission avoids the unchanged site's fixed navigation
+            # and scroll-triggered overlays intercepting pointer clicks.
+            submit = transfer.get_by_role("button", name="Report my transfer", exact=True)
+            submit.focus()
+            submit.press("Enter")
         self.assertEqual(reported.value.status, 201, "Real anonymous transfer insert failed")
         self.assertEqual(reported.value.request.post_data_json["ref"], self.ref)
         page.get_by_role("status").filter(has_text="Transfer reported · awaiting reconciliation").wait_for()
