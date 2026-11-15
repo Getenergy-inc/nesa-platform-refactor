@@ -254,7 +254,7 @@ export function buildSchoolParticipationHref(id: SchoolParticipationId): string 
 /* ===================================================================
  * 2027 page source of truth — Support a Special-Needs School Across Africa
  * =================================================================== */
-export const SNS_BASE = "https://0dccfe96-032e-496e-82bd-c8af7c5b9e55.lovableproject.com/support-a-special-needs-school";
+export const SNS_BASE = "/support-a-special-needs-school";
 export const SNS_CANONICAL = "https://eduaid.africa/support-a-special-needs-school";
 export const COUNTRY_MAP_APPROVED = false;
 export const SUPPORTER_DASHBOARD_ENABLED = false;

@@ -2,13 +2,22 @@ import { describe, it, expect, vi } from "vitest";
 vi.mock("@/integrations/supabase/client", () => ({ supabase: { from: () => ({ insert: async () => ({ error: null }) }) } }));
 import {
   SNS_REGIONS, SNS_COUNTRIES, SNS_CATEGORIES, SNS_BANK_ACCOUNTS, VOTING_OPEN, REGION_TARGET_USD, CONTINENTAL_TARGET_USD,
-  SNS_UNASSIGNED, makeSupportRef, SNS_CTAS,
+  SNS_UNASSIGNED, makeSupportRef, SNS_CTAS, SNS_BASE, SNS_CANONICAL,
 } from "@/config/schoolSupport";
 import { submitPledge, assertNoSensitiveFields } from "@/services/supportFund";
 import * as fs from "node:fs";
 import * as path from "node:path";
 
 describe("Support a Special-Needs School config", () => {
+  it("keeps participation and verified-school links on the current NESA site", () => {
+    expect(SNS_BASE).toBe("/support-a-special-needs-school");
+    expect(SNS_CTAS.nominate.href).toBe("/support-a-special-needs-school/participate?participation=nominate");
+    expect(SNS_CTAS.volunteer.href).toBe("/support-a-special-needs-school/participate?participation=volunteer");
+    expect(SNS_CTAS.verified.href).toBe("/support-a-special-needs-school#verified-schools");
+  });
+  it("retains the EduAid-Africa canonical independently of local action links", () => {
+    expect(SNS_CANONICAL).toBe("https://eduaid.africa/support-a-special-needs-school");
+  });
   it("has 8 regions with 8 distinct desks", () => {
     expect(SNS_REGIONS).toHaveLength(8);
     expect(new Set(SNS_REGIONS.map((r) => r.desk)).size).toBe(8);

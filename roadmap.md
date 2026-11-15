@@ -1,3 +1,9 @@
+## Approved support-page follow-ups — 15 Nov 2026, 09:23 UTC
+- [ ] Correct local participation/verified-school links; preserve EduAid canonical.
+- [ ] Save one anonymous donation, transfer report and sponsor enquiry; verify private reads and saved rows, then remove exactly those three test records.
+- [ ] Check hero, selected map, donation confirmation and tabs at 360px; fix page-body overflow and attach desktop/mobile screenshots.
+- [ ] Record page-only full-build/brand approval and separate-bank-transfer fund safeguards in memory and project notes. Keep supplied-asset placeholders and do not publish.
+
 ## Live donation persistence and access test — 15 Nov 2026
 - [x] Added real anonymous pledge/transfer UI submissions and anonymous/member read/update-denial checks; both live tests and eight existing safety tests passed. Real records independently read back; synthetic US$1 records retained, no payment made, no publishing or permission changes.
 - [ ] Verify administrator read/update through an authorised administrator session — retained test explicitly skips because the requesting account has only user role; never promote users or use privileged database tools as an RLS test.
