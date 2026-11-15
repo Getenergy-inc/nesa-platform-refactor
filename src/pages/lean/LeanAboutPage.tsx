@@ -26,7 +26,7 @@ export default function LeanAboutPage() {
         <LeanCtas ctas={[
           { label: "Explore the 2026 Programme", href: "/programme/2026", primary: true },
           { label: "How Recognition Works", href: "/how-it-works" },
-          { label: "About SCEF", href: "/about/scef-profile" },
+          { label: "About SCEF", href: "/about#scef" },
           { label: "Meet the Global Team", href: "/meet-the-team" },
         ]} />
       </LeanSection>

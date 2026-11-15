@@ -808,7 +808,7 @@ export default function NominateHub2026() {
             <p className="mt-3">The submission is recorded → completeness reviewed → duplicates checked → contact checked → acceptance and consent requested → evidence reviewed → NRRC research or interview → preliminary eligibility decision → eligible Icon dossiers go to the judges → decisions formally communicated.</p>
             <p className="mt-3 text-foreground/70">After submitting you will see: “Your nomination has been received under reference [reference]. This confirms receipt only. It does not confirm verification, eligibility, shortlisting, judging or recognition.”</p>
             <p className="mt-4 flex flex-wrap gap-4 text-gold">
-              <Link to="/privacy" className="underline">Privacy and Consent Notice</Link>
+              <Link to="/policies#privacy" className="underline">Privacy and Consent Notice</Link>
               <Link to="/how-it-works" className="underline">How Recognition Works</Link>
               <Link to="/contact?subject=nomination-assistance" className="underline">Contact Nomination Support</Link>
             </p>
