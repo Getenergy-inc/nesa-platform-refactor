@@ -56,10 +56,10 @@ export default function NigeriaChapterTrack() {
                     Explore the 2026 Online Programme
                   </Button>
                 </Link>
-                <Link to="/media/gala">
+                <Link to="/media">
                   <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 gap-2 rounded-full">
                     <Play className="h-4 w-4" />
-                    Watch Livestream
+                    Watch Published Programmes
                   </Button>
                 </Link>
               </div>
