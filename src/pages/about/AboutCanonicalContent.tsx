@@ -271,9 +271,9 @@ export function AboutCanonicalContent() {
             <p className="text-xs uppercase tracking-[0.25em] text-ivory/55 mb-2">
               2026 Online Recognition Programme
             </p>
-            <p className="font-mono text-2xl md:text-3xl text-gold">13 December 2026</p>
+            <p className="font-mono text-2xl md:text-3xl text-gold">28 December 2026</p>
             <p className="text-sm text-ivory/70 mt-2">
-              Sunday, 13 December 2026 · Online. No public physical gala, ticket sale, corporate table or public venue is currently authorised.
+              Monday, 28 December 2026 · Online. No public physical gala, ticket sale, corporate table or public venue is currently authorised.
             </p>
           </div>
           <div className="rounded-2xl border border-gold/25 bg-white/[0.03] p-6">

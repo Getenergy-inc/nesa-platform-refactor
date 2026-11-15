@@ -41,7 +41,7 @@ const mediaCategories = [
     description: "Online programme recognising up to nine Africa Education Icons with approximately 20–30 invited live participants.",
     href: "/programme/2026",
     icon: Trophy,
-    badge: "13 Dec 2026",
+    badge: "28 Dec 2026",
     badgeColor: "bg-primary",
   },
 ];

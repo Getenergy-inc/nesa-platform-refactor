@@ -137,3 +137,7 @@
 - [ ] Confirm volunteer badge list is only public badge definitions — database unreachable this turn.
 - [ ] Lean Website Pack v2 (WP-1–WP-12) — blocked on "Gate 0 approved"; Icon weight visibility needs confirmation
 - [ ] Reconcile public judge/NRC counts after Gate 0 — NRC confirmed at 9 per tier (36 total); Icon category confirmed at exactly 9 judges; other judge totals unconfirmed.
+
+## Owner programme-date correction — 15 November 2026
+- [x] Correct existing online-programme dates to Monday 28 December 2026; preserve design, unrelated deadlines and publishing state.
+- [x] Run focused date checks and verify the programme date in the preview (27 checks passed; homepage, programme, About cycle and timeline checked; mobile programme checked).
