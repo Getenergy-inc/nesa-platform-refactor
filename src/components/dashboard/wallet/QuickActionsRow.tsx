@@ -9,7 +9,6 @@ import {
 import {
   FileText,
   Vote,
-  Ticket,
   Heart,
   Users,
   Zap,
@@ -60,12 +59,6 @@ export function QuickActionsRow({ onTopUp }: QuickActionsRowProps) {
       variant: "outline",
     },
     {
-      label: "Buy Ticket",
-      icon: <Ticket className="h-4 w-4" />,
-      href: "/tickets",
-      variant: "outline",
-    },
-    {
       label: "Donate",
       icon: <Heart className="h-4 w-4" />,
       href: "/donate",
@@ -85,7 +78,7 @@ export function QuickActionsRow({ onTopUp }: QuickActionsRowProps) {
         <CardTitle className="text-sm font-medium">Quick Actions</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
+        <div className="grid grid-cols-3 gap-2 sm:grid-cols-5">
           {actions.map((action) => {
             const buttonContent = (
               <Button

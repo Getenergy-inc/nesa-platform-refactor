@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { SUPPORTED_LOCALES } from "@/config/i18n.config";
 
-const SITE = "https://nesaafrica.lovable.app";
+const SITE = "https://nesa.africa";
 
 interface LocalizedSEOProps {
   /** Localized page title (single string). */

@@ -1261,7 +1261,7 @@ const App = () => (
 
 
                   {/* Core spec URLs — render existing content at canonical paths */}
-                  <Route path="/programme-2026" element={<WithLayout><GalaConsolidated /></WithLayout>} />
+                  <Route path="/programme-2026" element={<Navigate to="/programme/2026" replace />} />
                   <Route path="/programme/2026" element={<WithLayout><GalaConsolidated /></WithLayout>} />
                   <Route path="/gala" element={<Navigate to="/programme/2026" replace />} />
                   <Route path="/support" element={<WithLayout><SupportConsolidated /></WithLayout>} />
