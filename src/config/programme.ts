@@ -41,6 +41,9 @@ export const PROGRAMME_END_LABEL = "Monday 28 December 2026";
 /** Long label including the approved attendance mode. */
 export const PROGRAMME_END_LONG_LABEL = "Monday 28 December 2026 · Online";
 
+/** Owner-approved public notice shared by the homepage and programme page. */
+export const PROGRAMME_PUBLIC_NOTICE = "The NESA-Africa 2026 Online Recognition Programme is scheduled for Monday, 28 December 2026. Live participation is by invitation and operational approval. Public viewing information will be released after approval and technical testing.";
+
 /** Post-award legacy window (Rebuild My School Africa etc.). */
 export const LEGACY_WINDOW_LABEL = "December 2026 – December 2027";
 

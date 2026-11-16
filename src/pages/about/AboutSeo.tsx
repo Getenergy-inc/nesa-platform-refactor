@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 
-const SITE_URL = "https://nesaafrica.lovable.app";
+const SITE_URL = "https://nesa.africa";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 
 export interface AboutSeoProps {

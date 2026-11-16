@@ -47,9 +47,9 @@ export const SITE_NAV: NavItem[] = [
   { label: "Media", href: "/media", analyticsId: "nav_media", children: [
     { label: "Media Hub", href: "/media" },
     { label: "Webinars", href: "/media/webinars" },
-    { label: "Podcast", href: "/media/podcast" },
+    { label: "Africa Education Enablers Podcast", href: "/media/podcast" },
     { label: "NESA-Africa TV", href: "/media/tv" },
-    { label: "Documentaries and Interviews", href: "/media#interviews" },
+    { label: "Documentaries and Interviews", href: "/media#documentaries" },
     { label: "EduAid-Africa E-Journal", href: "/journal" },
     { label: "Press and News", href: "/media#news" },
   ] },
@@ -61,7 +61,6 @@ export const SITE_NAV: NavItem[] = [
     { label: "Partner With Us", href: "/partners" },
     { label: "Donate", href: "/donate" },
     { label: "Buy Merchandise", href: "/contact?subject=merchandise" },
-    { label: "Contact Us", href: "/contact" },
   ] },
   { label: "Contact", href: "/contact", analyticsId: "nav_contact" },
 ];
