@@ -59,6 +59,8 @@
 /cookie-policy                                               /policies            301
 /tickets                                                     /programme/2026      301
 /buy-your-ticket                                             /programme/2026      301
+/gala                                                        /programme/2026      301
+/programme-2026                                              /programme/2026      301
 /gala/tickets                                                /programme/2026      301
 /gala/tables                                                 /programme/2026      301
 /gala/attendance                                             /programme/2026      301

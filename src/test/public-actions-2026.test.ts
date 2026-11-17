@@ -34,7 +34,7 @@ describe("2026 public actions", () => {
 
   it("redirects legacy Gala destinations to the online programme", () => {
     for (const from of ["/gala", "/media/gala", "/gala-2026", "/events/gala"]) {
-      expect(REFACTOR_REDIRECTS_2026.find((redirect) => redirect.from === from)?.to).toBe("/programme-2026");
+      expect(REFACTOR_REDIRECTS_2026.find((redirect) => redirect.from === from)?.to).toBe("/programme/2026");
     }
   });
 });
