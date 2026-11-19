@@ -16,7 +16,7 @@ export default function NigeriaChapterTrack() {
         <title>Nigeria Host Chapter | NESA-Africa — West Africa Region</title>
         <meta
           name="description"
-          content="Nigeria Host Chapter for NESA-Africa 2026. Lagos 2026 Gala, national participation, ticketing, and livestream."
+          content="Nigeria Chapter for NESA-Africa 2026: national participation, chapter announcements and the online recognition programme."
         />
       </Helmet>
 
@@ -41,22 +41,20 @@ export default function NigeriaChapterTrack() {
                 NESA-Africa — <span className="text-emerald-400">Nigeria</span>
               </h1>
               <p className="text-white/70 text-lg mb-2">
-                Nigeria Host Chapter (Lagos 2026)
+                Nigeria Chapter · West Africa
               </p>
               <p className="text-white/60 text-base max-w-2xl">
-                The NESA-Africa Gala is hosted in Nigeria. Access national participation, 
-                ticketing, and host chapter announcements — while staying connected to the 
-                continental award ladder.
+                Access national participation, chapter announcements and the online recognition programme while staying connected to the continental recognition framework.
               </p>
 
               <div className="flex flex-wrap gap-3 mt-8">
-                <Link to="/buy-your-ticket">
+                <Link to="/programme/2026">
                   <Button className="bg-emerald-500 hover:bg-emerald-600 text-white gap-2 rounded-full">
-                    <Ticket className="h-4 w-4" />
-                    Get Gala Tickets
+                    <Globe className="h-4 w-4" />
+                    View Online Programme
                   </Button>
                 </Link>
-                <Link to="/media/gala">
+                <Link to="/media/tv">
                   <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 gap-2 rounded-full">
                     <Play className="h-4 w-4" />
                     Watch Livestream
@@ -71,22 +69,18 @@ export default function NigeriaChapterTrack() {
         <section className="py-12">
           <div className="container">
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {/* Gala Countdown */}
               <Card className="bg-white/5 border-emerald-500/20">
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
                     <Calendar className="h-5 w-5 text-emerald-400" />
-                    Lagos 2026 Gala
+                    2026 Online Recognition Programme
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-white/60 text-sm mb-4">
-                    The award ceremony celebrating Africa's education champions takes place in Lagos.
+                    Monday 28 December 2026 · online only. Public viewing information follows approval and technical testing.
                   </p>
-                  <div className="text-center py-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
-                    <p className="text-xs text-white/40 uppercase tracking-wider mb-1">Countdown</p>
-                    <p className="text-2xl font-display font-bold text-emerald-400">To Be Announced</p>
-                  </div>
+                  <Link to="/programme/2026" className="text-sm font-semibold text-emerald-400 hover:underline">Programme details →</Link>
                 </CardContent>
               </Card>
 

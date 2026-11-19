@@ -415,9 +415,7 @@ export default function About() {
         </p>
         <TickList items={ABOUT_NRC_QUESTIONS} />
         <p className="mt-8 max-w-3xl text-sm leading-relaxed text-ivory/75 md:text-base">
-          The NRRC combines data entry, automated review (identity matching, duplicate detection,
-          source analysis) and independent human review. Artificial intelligence may assist
-          research, but final verification decisions remain subject to accountable human review.
+          Nine Icon NRRC members serve three per Icon category, separately from nine independent Icon judges. The NRRC combines data entry, automated review and accountable human review. Artificial intelligence may assist research, but final verification decisions remain subject to accountable human review.
         </p>
         <Link
           to="/nrrc"
@@ -464,7 +462,7 @@ export default function About() {
             <p className="mt-4 max-w-3xl text-base leading-relaxed text-ivory/80">
               NESA-Africa maintains a strict institutional and technical separation between
               recognition decisions and commercial or fundraising relationships. Sponsorship,
-              donations, partnerships, advertising, ticket purchases, merchandise or any other
+              donations, partnerships, advertising, merchandise or any other
               financial relationship do <strong className="text-gold">not</strong> influence:
             </p>
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">

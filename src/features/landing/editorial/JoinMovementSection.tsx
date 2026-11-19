@@ -6,7 +6,7 @@ import { BRAND } from "@/config/brandHierarchy";
 
 const SECONDARY = [
   { label: "Partner", href: "/partners" },
-  { label: "Sponsor", href: "/get-involved/gala-sponsorship" },
+  { label: "Sponsor", href: "/sponsors" },
   { label: "Support", href: "/support" },
 ];
 

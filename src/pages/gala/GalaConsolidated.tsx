@@ -65,9 +65,6 @@ export default function GalaConsolidated() {
             <Button asChild size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
               <Link to="/media/tv">{t("onlineGala.watch")}</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
-              <Link to="/contact?subject=media">{t("onlineGala.exploreMedia")}</Link>
-            </Button>
           </div>
           <p className="mt-6 text-sm text-white/60">{t("onlineGala.restrictions")}</p>
         </div>

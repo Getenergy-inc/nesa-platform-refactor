@@ -143,11 +143,11 @@ export const TIMELINE_STAGES = [
   "Recognition Approval",
   "Public Profile Publication",
   "Recognition Package",
-  "Optional Gala Participation",
+  "Optional Online Programme Participation",
 ];
 
 export const GALA_NOTE =
-  "The NESA-Africa 2026 Gala and Awards Ceremony is scheduled for 28 December 2026 in Lagos, Nigeria. Attendance is optional and does not affect recognition.";
+  "The NESA-Africa 2026 Online Recognition Programme is scheduled for Monday 28 December 2026. Participation is optional and does not affect recognition.";
 
 export const RECOGNITION_PACKAGE: Record<AwardTier, string[]> = {
   "blue-garnet": [
@@ -164,7 +164,7 @@ export const RECOGNITION_PACKAGE: Record<AwardTier, string[]> = {
     "Verified Institutional Profile",
     "NESA TV feature consideration",
     "Relevant institutional directory listing",
-    "Optional Gala presentation request",
+    "Optional online programme presentation request",
   ],
 };
 

@@ -97,7 +97,7 @@ export default function NominateOfficial() {
 
   const [form, setForm] = useState<FormState>(init);
   const [submitting, setSubmitting] = useState(false);
-  const [submittedId, setSubmittedId] = useState<string | null>(null);
+  const [submittedReceipt, setSubmittedReceipt] = useState<{ id: string; acceptanceLinkGenerated: boolean; hasNomineeEmail: boolean } | null>(null);
 
   useEffect(() => {
     // Prefill nominator name/email if signed in
@@ -166,8 +166,9 @@ export default function NominateOfficial() {
         },
       });
       if (error) throw error;
-      const id = (data as { nomination_id?: string })?.nomination_id ?? null;
-      setSubmittedId(id);
+      const receipt = data as { nomination_id?: string; acceptance_link_generated?: boolean } | null;
+      const id = receipt?.nomination_id ?? null;
+      if (id) setSubmittedReceipt({ id, acceptanceLinkGenerated: receipt?.acceptance_link_generated === true, hasNomineeEmail: Boolean(form.nominee_email.trim()) });
       toast.success("Official nomination submitted. Our review team will contact you.");
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Submission failed";
@@ -177,7 +178,7 @@ export default function NominateOfficial() {
     }
   };
 
-  if (submittedId) {
+  if (submittedReceipt) {
     return (
       <div className="bg-charcoal min-h-screen">
         <div className="container max-w-2xl py-16">
@@ -185,14 +186,15 @@ export default function NominateOfficial() {
             <CheckCircle2 className="w-14 h-14 text-gold mx-auto" />
             <h1 className="text-2xl font-playfair">Nomination received</h1>
             <p className="text-muted-foreground">
-              Reference: <code className="text-gold">{submittedId}</code>
+              Reference: <code className="text-gold">{submittedReceipt.id}</code>
             </p>
-            <p className="text-sm text-muted-foreground">
-              We've logged your official nomination and queued it for evidence review. You'll receive an
-              email update when status changes.
-            </p>
+            <div className="space-y-2 text-sm text-muted-foreground" aria-live="polite">
+              <p>Your nomination is recorded and queued for review.</p>
+              <p><strong className="text-foreground">Nominator acknowledgement:</strong> email queued; delivery is not confirmed by this receipt.</p>
+              <p><strong className="text-foreground">Nominee acceptance:</strong> {submittedReceipt.acceptanceLinkGenerated ? (submittedReceipt.hasNomineeEmail ? "acceptance email queued separately; delivery is not yet confirmed." : "acceptance link created for authorised manual follow-up because no nominee email was supplied.") : "no new acceptance link was generated; the review team will use the existing nominee record or follow up separately."}</p>
+            </div>
             <div className="flex gap-3 justify-center pt-4">
-              <Button onClick={() => { setSubmittedId(null); setForm(init); }}>
+              <Button onClick={() => { setSubmittedReceipt(null); setForm(init); }}>
                 Submit another
               </Button>
             </div>

@@ -446,6 +446,7 @@ import AdminVolunteersCMS from "./pages/admin/AdminVolunteersCMS";
 import AdminRecruitmentTracker from "./pages/admin/AdminRecruitmentTracker";
 import AdminNGOReviewQueue from "./pages/admin/AdminNGOReviewQueue";
 import AdminResearchStaging from "./pages/admin/AdminResearchStaging";
+import AdminContactEnquiries from "./pages/admin/AdminContactEnquiries";
 import AdminNomineeMedia from "./pages/admin/AdminNomineeMedia";
 import NomineeMediaSubmission from "./pages/nominee/NomineeMediaSubmission";
 
@@ -2151,6 +2152,7 @@ const App = () => (
                   <Route path="/admin/recruitment" element={<AdminRecruitmentTracker />} />
                   <Route path="/admin/ngo-review" element={<AdminNGOReviewQueue />} />
                   <Route path="/admin/research-staging" element={<AdminResearchStaging />} />
+                  <Route path="/admin/contact-enquiries" element={<ProtectedRoute requiredRoles={["admin"]}><AdminBareShell><AdminContactEnquiries /></AdminBareShell></ProtectedRoute>} />
                   <Route path="/admin/nominee-media" element={<AdminNomineeMedia />} />
 
                   <Route path="/admin/subcategories" element={<AdminPathwaysCMS />} />

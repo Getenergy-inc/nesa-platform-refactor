@@ -37,7 +37,7 @@ const QUICK_ACTIONS = [
     icon: CreditCard,
     color: "hsl(var(--primary))",
     links: [
-      { label: "Buy Gala Ticket", href: "/buy-your-ticket", icon: Ticket, description: "NESA-Africa Gala 2026" },
+      { label: "View Online Programme", href: "/programme/2026", icon: Globe, description: "Monday 28 December 2026 · online only" },
       { label: "Donate Now", href: "/donate", icon: Heart, description: "Support education causes" },
       { label: "Become a Sponsor", href: "/partners", icon: Award, description: "Corporate partnerships" },
     ],
@@ -53,11 +53,11 @@ const QUICK_ACTIONS = [
     ],
   },
   {
-    category: "Voting",
-    icon: Vote,
+    category: "Recognition",
+    icon: Award,
     color: "hsl(var(--chart-2))",
     links: [
-      { label: "Vote for Nominees", href: "/awards/gold-blue-garnet", icon: Vote, description: "Use AGC to vote" },
+      { label: "How Recognition Works", href: "/how-it-works", icon: Award, description: "Evidence-led review with no public voting" },
       { label: "View Nominees", href: "/nominees", icon: Users, description: "Browse all nominees" },
       { label: "Categories", href: "/categories", icon: Award, description: "Award categories" },
     ],
@@ -90,7 +90,7 @@ const PAYMENT_PROVIDERS = [
 const KEY_FEATURES = [
   { icon: Globe, title: "Multi-Currency", description: "Pay in your local currency" },
   { icon: Shield, title: "Secure", description: "Bank-grade encryption" },
-  { icon: QrCode, title: "QR Receipts", description: "Instant e-tickets & confirmations" },
+  { icon: QrCode, title: "QR Receipts", description: "Instant receipts & confirmations" },
   { icon: Gift, title: "Instant Receipts", description: "Every payment receipted and reconciled" },
 ];
 
@@ -105,7 +105,7 @@ export default function GFAWzipLinks() {
         <title>GFAWzip Links | Quick Access to All Wallet Features</title>
         <meta
           name="description"
-          content="Quick access hub for GFAWzip Wallet - Buy tickets, donate, vote, view your wallet, and connect payment providers. All NESA-Africa payment actions in one place."
+          content="Quick access hub for GFAWzip Wallet: donate, view your wallet, explore recognition and connect payment providers. Payments never influence recognition."
         />
       </Helmet>
 
@@ -292,7 +292,7 @@ export default function GFAWzipLinks() {
                   ⚠️ GFAwzip Wallet is a Payment Channel Only
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  No withdrawals, no cash-out, no payouts. AGC is used exclusively for voting within the NESA-Africa ecosystem.
+                  No withdrawals, cash-out or payouts through this service. Payments and participation credits never influence NESA-Africa recognition.
                 </p>
               </div>
             </div>

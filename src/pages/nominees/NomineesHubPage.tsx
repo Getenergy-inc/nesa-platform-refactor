@@ -1,91 +1,32 @@
-// ============================================================================
-// Africa Education Impact Directory — /nominees
-//
-// Editorial Recognition edition: mirrors the homepage design system
-// (`.nesa-ed` skin) and its objectives — identity, recognition architecture,
-// verified discovery, geographic reach, integrity firewall, conversion.
-//
-// Presentation-only refactor. Data layer (useCatalogueNominees / buildCatalogue
-// / useSiteStats) is unchanged.
-// ============================================================================
-
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Search, Sparkles } from "lucide-react";
-
-import { NESAHeader } from "@/components/nesa/NESAHeader";
-import { NESAFooter } from "@/components/nesa/NESAFooter";
-import { UtilityBar } from "@/components/nesa/UtilityBar";
 import { MobileBottomActions } from "@/components/navigation/MobileBottomActions";
 import { BackToTopButton } from "@/components/ui/back-to-top";
 import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicator";
-import { GeographicReachMap } from "@/components/nominees/GeographicReachMap";
-
-import { useCatalogueNominees } from "@/lib/directory/masterCatalogueSource";
-import { buildCatalogue } from "@/lib/directory/buildCatalogue";
 import { CATALOGUE_TIERS } from "@/config/directory/catalogueTaxonomy";
-import { useSiteStats } from "@/config/siteStats";
-import { DIRECTORY_NAME, REGION_FRAMING } from "@/config/platformCopy";
+import { DIRECTORY_NAME } from "@/config/platformCopy";
 import { NOMINATIONS_OPEN_LABEL } from "@/config/nominationWindows2026";
-import { normalizeRegion } from "@/lib/regions";
 import { trackEvent } from "@/lib/analytics";
-import type { EnrichedDatabaseNominee } from "@/hooks/useNominees";
-
 import "@/features/landing/editorial/editorial.css";
 import "./nomineesEditorial.css";
 
 const CANONICAL = "https://nesa.africa/nominees";
-
-const ENABLER_TYPES = [
-  "People", "Organisations", "Companies", "NGOs", "Governments", "Ministries",
-  "Universities", "Schools", "Libraries", "Research Centres", "Faith-Based Organisations",
-  "Foundations", "Development Partners", "Media Organisations", "CSR Programmes",
-  "Social Enterprises", "EdTech Startups", "STEM Programmes", "Creative Industry",
-  "Sports Foundations", "Music Foundations", "Diaspora Associations",
-  "International Agencies", "Friends of Africa",
-];
-
 const INTEGRITY = [
-  {
-    title: "No public voting",
-    body: "Recognition is never bought or crowd-sourced. Every profile in this directory is reviewed by the NRRC and governance board.",
-  },
-  {
-    title: "Evidence-led verification",
-    body: "Nominees are assessed against documented, citable education impact — not popularity, follower count or self-declaration.",
-  },
-  {
-    title: "Listing is not an award",
-    body: "Publication of a profile does not guarantee eligibility, shortlisting, judging, selection or recognition. Information may be corrected as verification continues.",
-  },
+  { title: "No public voting", body: "Recognition is never bought or crowd-sourced. Publication follows the applicable research, verification and governance controls." },
+  { title: "Evidence-led verification", body: "Nominees are assessed against documented, citable education impact — not popularity, follower count or self-declaration." },
+  { title: "Listing is not an award", body: "Publication of a profile does not guarantee eligibility, shortlisting, judging, selection or recognition. Information may be corrected as verification continues." },
 ];
+const CATALOGUE_FILTER_PARAMS = ["family", "tier", "category", "subcategory", "region", "country", "year", "verification", "organisation"];
+const AWARD_FAMILY_TO_TIER: Record<string, string> = { icon: "africa-education-icon", influencer: "influencer-education-impact", "gold-bluegarnet": "blue-garnet", "blue-garnet": "blue-garnet", platinum: "platinum" };
 
-// Filter params that belong to the Recognition Catalogue. Historically every
-// one of these was silently ignored on /nominees, so links such as
-// `/nominees?family=csr-education` dumped visitors into the full directory.
-// They are now forwarded, intact, to /nominees/catalogue which reads them all.
-const CATALOGUE_FILTER_PARAMS = [
-  "family", "tier", "category", "subcategory", "region",
-  "country", "year", "verification", "organisation",
-];
-
-/** Legacy `?awardFamily=` values map onto catalogue tier slugs. */
-const AWARD_FAMILY_TO_TIER: Record<string, string> = {
-  icon: "africa-education-icon",
-  influencer: "influencer-education-impact",
-  "gold-bluegarnet": "blue-garnet",
-  "blue-garnet": "blue-garnet",
-  platinum: "platinum",
-};
-
-/** Build the catalogue URL for an incoming filtered /nominees request. */
 export function catalogueRedirectTarget(params: URLSearchParams): string | null {
   const next = new URLSearchParams();
   let matched = false;
-  CATALOGUE_FILTER_PARAMS.forEach((k) => {
-    const v = params.get(k);
-    if (v) { next.set(k, v); matched = true; }
+  CATALOGUE_FILTER_PARAMS.forEach((key) => {
+    const value = params.get(key);
+    if (value) { next.set(key, value); matched = true; }
   });
   const awardFamily = params.get("awardFamily");
   if (awardFamily) {
@@ -99,374 +40,93 @@ export function catalogueRedirectTarget(params: URLSearchParams): string | null 
 }
 
 export default function NomineesHubPage() {
-  const { data: nominees, isLoading, isError, error: loadError, refetch } = useCatalogueNominees();
-  const stats = useSiteStats();
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const [search, setSearch] = useState(params.get("q") ?? "");
   const redirectTo = catalogueRedirectTarget(params);
 
-  useEffect(() => {
-    trackEvent("directory_view", { name: DIRECTORY_NAME, surface: "nominees_hub" });
-  }, []);
+  useEffect(() => { trackEvent("directory_view", { name: DIRECTORY_NAME, surface: "nominees_hub" }); }, []);
 
-  const catalogue = useMemo(() => buildCatalogue(nominees), [nominees]);
-
-  const tierCounts = useMemo(() => {
-    const out: Record<string, number> = {};
-    catalogue.tiers.forEach((t) => { out[t.slug] = t.count; });
-    return out;
-  }, [catalogue]);
-
-  const regionCounts = useMemo(() => {
-    const out = new Map<string, number>();
-    (nominees ?? []).forEach((n) => {
-      const r = normalizeRegion(n.region ?? n.country ?? "");
-      if (!r) return;
-      out.set(r, (out.get(r) ?? 0) + 1);
-    });
-    return out;
-  }, [nominees]);
-
-  const featured = useMemo(() => {
-    const list = (nominees ?? []).slice();
-    return list
-      .sort((a, b) => Number(b.nrcVerified) - Number(a.nrcVerified) || a.name.localeCompare(b.name))
-      .slice(0, 8);
-  }, [nominees]);
-
-  const total = (nominees ?? []).length;
-
-  const goToCatalogue = (extra?: Record<string, string>) => {
-    const p = new URLSearchParams(extra ?? {});
-    if (search.trim()) p.set("q", search.trim());
-    const q = p.toString();
+  const goToCatalogue = () => {
+    const query = new URLSearchParams();
+    if (search.trim()) query.set("q", search.trim());
+    const value = query.toString();
     trackEvent("directory_search", { surface: "nominees_hub", query: search.trim() });
-    navigate(q ? `/nominees/catalogue?${q}` : "/nominees/catalogue");
+    navigate(value ? `/nominees/catalogue?${value}` : "/nominees/catalogue");
   };
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    name: `${DIRECTORY_NAME} — NESA-Africa 2026`,
-    description:
-      "Africa's verified discovery platform for Education Enablers across eight African regions, the Diaspora and Friends of Africa.",
-    url: CANONICAL,
-  };
-
-  // Hooks above must run unconditionally; the redirect is decided last.
   if (redirectTo) return <Navigate to={redirectTo} replace />;
 
   return (
     <>
       <Helmet>
-        <title>{`${DIRECTORY_NAME} — NESA-Africa 2026`}</title>
-        <meta
-          name="description"
-          content="Explore verified Education Enablers recognised by NESA-Africa 2026 — people, organisations and institutions advancing Education for All across Africa."
-        />
+        <title>Nominees | NESA-Africa 2026</title>
+        <meta name="description" content="Search authorised NESA-Africa nominee profiles by name, organisation, country or recognition tier. Publication remains subject to review and consent." />
         <link rel="canonical" href={CANONICAL} />
-        <meta property="og:title" content={`${DIRECTORY_NAME} — NESA-Africa 2026`} />
-        <meta
-          property="og:description"
-          content="Africa's verified directory of Education Enablers: 4 recognition tiers, 22 categories, eight African regions and the global African community."
-        />
+        <meta property="og:title" content="Nominees | NESA-Africa 2026" />
+        <meta property="og:description" content="Explore authorised Education Enabler profiles across four recognition tiers." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={CANONICAL} />
         <meta name="twitter:card" content="summary_large_image" />
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
-
       <ScrollProgressIndicator />
-
-      <div className="nesa-ed min-h-screen pt-14 sm:pt-16 pb-16">
-        <UtilityBar />
-        <NESAHeader />
-
+      <div className="nesa-ed min-h-screen pb-16">
         <main>
-          {/* 1 — HERO */}
           <section className="ed-dir-hero" aria-labelledby="dir-heading">
             <div className="ed-dir-hero-inner">
-              <div className="ed-badge">
-                <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
-                NOMINATIONS OPEN {NOMINATIONS_OPEN_LABEL.toUpperCase()} · NESA-AFRICA 2026
-              </div>
-
-              <div className="ed-kicker" style={{ marginTop: 18 }}>
-                Recognising Africa’s Education Enablers
-              </div>
-
-              <h1 id="dir-heading" className="ed-dir-title">
-                Nominee Profiles
-                <br />
-                <span className="ed-accent">and Review Status</span>
-              </h1>
-
-              <p className="ed-dir-sub">
-                This directory publishes authorised information only at the appropriate review stage and subject to consent, evidence and publication controls.
-              </p>
-
-              <form
-                className="ed-dir-search"
-                onSubmit={(e) => { e.preventDefault(); goToCatalogue(); }}
-                role="search"
-              >
+              <div className="ed-badge"><Sparkles className="h-3.5 w-3.5" aria-hidden="true" />NOMINATIONS OPEN {NOMINATIONS_OPEN_LABEL.toUpperCase()} · NESA-AFRICA 2026</div>
+              <h1 id="dir-heading" className="ed-dir-title">Nominee Profiles <span className="ed-accent">and Review Status</span></h1>
+              <p className="ed-dir-sub">This directory publishes authorised information only at the appropriate review stage and subject to consent, evidence and publication controls.</p>
+              <form className="ed-dir-search" onSubmit={(event) => { event.preventDefault(); goToCatalogue(); }} role="search">
                 <label htmlFor="dir-search" className="sr-only">Search the directory</label>
-                <input
-                  id="dir-search"
-                  type="search"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Search a nominee, organisation, country or category…"
-                />
-                <button type="submit" className="ed-btn-primary">
-                  <Search className="inline h-4 w-4 mr-1.5 -mt-0.5" aria-hidden="true" />
-                  Search
-                </button>
+                <input id="dir-search" type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search a nominee, organisation, country or category…" />
+                <button type="submit" className="ed-btn-primary"><Search className="mr-1.5 inline h-4 w-4" aria-hidden="true" />Search</button>
               </form>
-
-              <div className="ed-dir-counters">
-                <Counter num="Controlled" label="Publication Status" />
-                <Counter num={stats.tiers} label="Recognition Tiers" />
-                <Counter num={stats.categories} label="Categories" />
-                <Counter num={stats.subcategories} label="Subcategories" />
-                <Counter num={`${stats.africanRegions}+2`} label="Regions & Communities" />
-              </div>
-
               <div className="ed-hero-cta-row" style={{ justifyContent: "center" }}>
-                <Link to="/nominate" className="ed-btn-primary">
-                  Submit a Nomination
-                </Link>
-                <Link to="/nominees/catalogue" className="ed-btn-ghost">
-                  Browse the Full Catalogue →
-                </Link>
+                <Link to="/nominate" className="ed-btn-primary">Submit a Nomination</Link>
+                <Link to="/nominees/catalogue" className="ed-btn-ghost">Browse the Full Catalogue →</Link>
               </div>
             </div>
           </section>
 
-          {/* 2 — RECOGNITION TIERS */}
           <section className="ed-section" aria-labelledby="dir-tiers">
             <div className="ed-wrap">
               <div className="ed-section-head">
                 <div className="ed-eyebrow">Browse by Recognition Tier</div>
-                <h2 id="dir-tiers" className="ed-section-title">
-                  Four Tiers. One Recognition Architecture.
-                </h2>
-                <p className="ed-section-sub">
-                  Each tier carries its own nominee type, evidence requirements and review route.
-                  Open a tier to see every nominee recorded under it.
-                </p>
+                <h2 id="dir-tiers" className="ed-section-title">Four Tiers. One Recognition Architecture.</h2>
+                <p className="ed-section-sub">Each tier has its own nominee type, evidence requirements and review route.</p>
               </div>
-
               <div className="ed-dir-grid-4">
-                {CATALOGUE_TIERS.map((t) => (
-                  <article key={t.slug} className="ed-card">
-                    <div className="ed-card-badge">TIER {t.tierNumber}</div>
-                    <h3>{t.name}</h3>
-                    <p>{t.blurb}</p>
-                    <p className="ed-mono" style={{ color: "var(--ed-gold)", fontSize: "0.78rem" }}>
-                      {isLoading ? "…" : `${(tierCounts[t.slug] ?? 0).toLocaleString()} nominees`}
-                    </p>
-                    <Link
-                      to={`/nominees/catalogue?tier=${t.slug}`}
-                      className="ed-link-inline"
-                      onClick={() => trackEvent("directory_tier_click", { tier: t.slug })}
-                    >
-                      Explore nominees →
-                    </Link>
+                {CATALOGUE_TIERS.map((tier) => (
+                  <article key={tier.slug} className="ed-card">
+                    <div className="ed-card-badge">TIER {tier.tierNumber}</div>
+                    <h3>{tier.name}</h3>
+                    <p>{tier.blurb}</p>
+                    <Link to={`/nominees/catalogue?tier=${tier.slug}`} className="ed-link-inline" onClick={() => trackEvent("directory_tier_click", { tier: tier.slug })}>Explore nominees →</Link>
                   </article>
                 ))}
               </div>
             </div>
           </section>
 
-          {/* 3 — VERIFIED PROFILES */}
-          <section className="ed-section ed-section-ink" aria-labelledby="dir-featured">
+          <section className="ed-section ed-section-ink" aria-labelledby="dir-publication">
             <div className="ed-wrap">
-              <div className="ed-section-head">
-                <div className="ed-eyebrow">Verified Profiles</div>
-                <h2 id="dir-featured" className="ed-section-title">
-                  Education Enablers in the Register
-                </h2>
-                <p className="ed-section-sub">
-                  NRRC-verified profiles appear first. A listing records a nomination — it is not an
-                  award.
-                </p>
-              </div>
-
-              {isError ? (
-                <div className="ed-dir-empty" role="alert">
-                  <p>The nominee directory could not be loaded.</p>
-                  <p style={{ opacity: 0.7, marginTop: 6 }}>
-                    {(loadError as Error)?.message ?? "Please check your connection and try again."}
-                  </p>
-                  <button type="button" onClick={() => refetch()} style={{ marginTop: 12, textDecoration: "underline" }}>
-                    Retry
-                  </button>
-                </div>
-              ) : isLoading ? (
-                <div className="ed-nom-grid">
-                  {Array.from({ length: 8 }).map((_, i) => (
-                    <div key={i} className="ed-nom-card" style={{ height: 260, opacity: 0.4 }} />
-                  ))}
-                </div>
-              ) : featured.length === 0 ? (
-                <div className="ed-dir-empty">
-                  Nominee profiles appear here as 2026 nominations are verified.
-                </div>
-              ) : (
-                <div className="ed-nom-grid">
-                  {featured.map((n) => <NomineeTile key={n.id} nominee={n} />)}
-                </div>
-              )}
-
-              <div style={{ textAlign: "center", marginTop: 36 }}>
-                <Link to="/nominees/catalogue" className="ed-btn-primary">
-                  Open the Full Recognition Catalogue →
-                </Link>
-              </div>
+              <div className="ed-section-head"><div className="ed-eyebrow">Controlled Publication</div><h2 id="dir-publication" className="ed-section-title">Authorised profiles appear after approval</h2></div>
+              <div className="ed-dir-empty">Nominee profiles appear here as nominations complete the required verification, consent and publication review.</div>
             </div>
           </section>
 
-          {/* 4 — GEOGRAPHIC REACH */}
-          <section id="regions" className="ed-section" aria-labelledby="dir-regions">
-            <div className="ed-wrap">
-              <div className="ed-section-head">
-                <div className="ed-eyebrow">Geographic Reach</div>
-                <h2 id="dir-regions" className="ed-section-title">{REGION_FRAMING.headline}</h2>
-                <p className="ed-section-sub">
-                  Filter the register by where impact happens — across Africa, in the Diaspora, and
-                  among Friends of Africa.
-                </p>
-              </div>
-
-              <GeographicReachMap counts={regionCounts} loading={isLoading} />
-            </div>
-          </section>
-
-          {/* 5 — ENABLER TYPES */}
-          <section className="ed-section ed-section-ink" aria-labelledby="dir-types">
-            <div className="ed-wrap">
-              <div className="ed-section-head">
-                <div className="ed-eyebrow">Who We Honour</div>
-                <h2 id="dir-types" className="ed-section-title">Every Kind of Education Enabler</h2>
-                <p className="ed-section-sub">
-                  Recognition is open to individuals and institutions alike — from ministries and
-                  universities to foundations, EdTech founders and diaspora associations.
-                </p>
-              </div>
-
-              <div className="ed-dir-chips">
-                {ENABLER_TYPES.map((t) => (
-                  <Link
-                    key={t}
-                    to={`/nominees/catalogue?q=${encodeURIComponent(t)}`}
-                    className="ed-dir-chip"
-                  >
-                    {t}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* 6 — INTEGRITY FIREWALL */}
           <section className="ed-section" aria-labelledby="dir-integrity">
             <div className="ed-wrap">
-              <div className="ed-section-head">
-                <div className="ed-eyebrow">Integrity Safeguards</div>
-                <h2 id="dir-integrity" className="ed-section-title">
-                  How a Profile Earns Its Place
-                </h2>
-              </div>
-
-              <div className="ed-grid-3">
-                {INTEGRITY.map((i) => (
-                  <article key={i.title} className="ed-card">
-                    <h3>{i.title}</h3>
-                    <p>{i.body}</p>
-                  </article>
-                ))}
-              </div>
-
-              <p className="ed-disclaimer" style={{ marginTop: 28 }}>
-                NESA-Africa operates a governance firewall between nomination, verification and
-                judging. Inclusion in this directory confers no award, ranking or endorsement.
-              </p>
-            </div>
-          </section>
-
-          {/* 7 — CONVERSION */}
-          <section className="ed-section ed-section-ink" aria-labelledby="dir-cta">
-            <div className="ed-wrap">
-              <div className="ed-section-head">
-                <div className="ed-eyebrow">Take Part</div>
-                <h2 id="dir-cta" className="ed-section-title">
-                  Someone You Know Belongs in This Register
-                </h2>
-                <p className="ed-section-sub">
-                  Nominations are open 9 November 2026 – 31 March 2027. Submission is free and begins a review process; it does not guarantee recognition.
-                </p>
-              </div>
-
-              <div className="ed-hero-cta-row" style={{ justifyContent: "center" }}>
-                <Link
-                  to="/nominate"
-                  className="ed-btn-primary"
-                  onClick={() => trackEvent("directory_cta_click", { cta: "nominate" })}
-                >
-                  Start a Nomination
-                </Link>
-                <Link to="/awards" className="ed-btn-ghost">
-                  See the Recognition Framework →
-                </Link>
-                <Link to="/contact" className="ed-btn-ghost">
-                  Request a Correction →
-                </Link>
-              </div>
+              <div className="ed-section-head"><div className="ed-eyebrow">Integrity Safeguards</div><h2 id="dir-integrity" className="ed-section-title">How a Profile Earns Its Place</h2></div>
+              <div className="ed-grid-3">{INTEGRITY.map((item) => <article key={item.title} className="ed-card"><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
+              <p className="ed-disclaimer" style={{ marginTop: 28 }}>NESA-Africa separates nomination, verification and judging. Inclusion in this directory confers no award, ranking or endorsement.</p>
             </div>
           </section>
         </main>
-
-        <NESAFooter />
       </div>
-
       <BackToTopButton />
       <MobileBottomActions />
     </>
-  );
-}
-
-function Counter({ num, label }: { num: string | number; label: string }) {
-  return (
-    <div className="ed-dir-counter">
-      <div className="ed-dir-counter-num">{num}</div>
-      <div className="ed-dir-counter-label">{label}</div>
-    </div>
-  );
-}
-
-function NomineeTile({ nominee }: { nominee: EnrichedDatabaseNominee }) {
-  return (
-    <Link to={`/nominees/${encodeURIComponent(nominee.slug)}`} className="ed-nom-card">
-      <div className="ed-nom-media">
-        <img
-          src={nominee.photoUrl}
-          alt={nominee.name}
-          loading="lazy"
-          onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/images/placeholder.svg"; }}
-          style={{ objectFit: nominee.imageType === "logo" ? "contain" : "cover" }}
-        />
-      </div>
-      <div className="ed-nom-body">
-        <div className="ed-nom-name">{nominee.name}</div>
-        <div className="ed-nom-meta">
-          {[nominee.country, nominee.categoryName].filter(Boolean).join(" · ")}
-        </div>
-        <span className="ed-nom-tag">
-          {nominee.nrcVerified ? "NRRC Verified" : "Nomination Recorded"}
-        </span>
-      </div>
-    </Link>
   );
 }

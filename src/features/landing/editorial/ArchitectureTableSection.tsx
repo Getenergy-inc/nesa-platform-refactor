@@ -5,25 +5,25 @@ import { trackEvent } from "@/lib/analytics";
 const ROWS = [
   {
     tier: "Africa Education Icon Award",
-    structure: "3 subcategories · 9 laureate positions",
+    structure: "3 main awards · up to 9 recipients",
     review: "NRRC, Icon Jury and governance",
     href: "/awards/africa-education-icon",
   },
   {
     tier: "Influencer Education Impact",
-    structure: "3 subcategories",
+    structure: "3 main awards",
     review: "NRRC and governance",
     href: "/awards/influencers-education-impact",
   },
   {
     tier: "Platinum Recognition",
-    structure: "7 categories · 27 subcategories",
+    structure: "7 main awards · 27 subcategories",
     review: "Due diligence, NRRC and governance",
     href: "/awards/platinum-recognition",
   },
   {
     tier: "Gold-Blue Garnet Recognition",
-    structure: "9 categories · 63 subcategories",
+    structure: "9 main awards · 63 subcategories",
     review: "NRRC and governance",
     href: "/awards/gold-blue-garnet",
   },

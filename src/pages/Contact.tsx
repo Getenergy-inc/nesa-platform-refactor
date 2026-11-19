@@ -1,453 +1,124 @@
-import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useSearchParams, Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { CheckCircle2, MessageSquare, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Clock, 
-  MessageSquare,
-  Building2,
-  Globe,
-  Mic,
-  Video,
-  Upload,
-} from "lucide-react";
-import { FollowLinks } from "@/components/nesa/FollowLinks";
-import { ScefFormRequired } from "@/components/nesa/ContentRequired";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { CONTACT_ENQUIRY_TYPES, CONTACT_SUBJECT_PREFILLS, type ContactEnquiryType } from "@/config/contactEnquiries";
+import { submitContactEnquiry } from "@/services/contactEnquiries";
 
-const contactInfo = [
-  {
-    icon: Mail,
-    title: "Email Us",
-    details: ["info@nesa.africa", "support@nesa.africa"],
-    description: "For general inquiries and support"
-  },
-  {
-    icon: Phone,
-    title: "Call Us",
-    details: ["+234 800 NESA AFRICA", "+27 11 XXX XXXX"],
-    description: "Monday to Friday, 9am - 5pm WAT"
-  },
-  {
-    icon: MapPin,
-    title: "Visit Us",
-    details: ["SCEF House", "Victoria Island, Lagos, Nigeria"],
-    description: "Pan-African Secretariat"
-  },
-  {
-    icon: Clock,
-    title: "Office Hours",
-    details: ["Mon - Fri: 9:00 AM - 5:00 PM WAT", "Sat: 10:00 AM - 2:00 PM WAT"],
-    description: "Closed on Sundays and public holidays"
-  }
-];
+export { CONTACT_SUBJECT_PREFILLS } from "@/config/contactEnquiries";
 
-const departments = [
-  { name: "General Inquiries", email: "info@nesa.africa" },
-  { name: "Nomination assistance · Nominee acceptance · Consent or correction · Evidence submission", email: "nominees@nesa.africa" },
-  { name: "Partners & Sponsors", email: "partners@nesa.africa" },
-  { name: "Media & Press", email: "press@nesa.africa" },
-  { name: "Volunteer & Engagement", email: "engagement@nesa.africa" },
-  { name: "Chapters Support", email: "chapters@nesa.africa" },
-  { name: "Online Programme & Media", email: "events@nesa.africa" },
-  { name: "NRRC support · Judges Arena support", email: "judges@nesa.africa" },
-  { name: "Ambassadors", email: "ambassadors@nesa.africa" },
-];
-
-const regionalOffices = [
-  { region: "West Africa", city: "Lagos, Nigeria", email: "westafrica@nesa.africa" },
-  { region: "East Africa", city: "Nairobi, Kenya", email: "eastafrica@nesa.africa" },
-  { region: "Southern Africa", city: "Johannesburg, South Africa", email: "southernafrica@nesa.africa" },
-  { region: "North Africa", city: "Cairo, Egypt", email: "northafrica@nesa.africa" },
-  { region: "Central Africa", city: "Kinshasa, DRC", email: "centralafrica@nesa.africa" }
-];
-
-// Site-relative ?subject= prefills (Phase 6 maps these onto enquiry types).
-export const CONTACT_SUBJECT_PREFILLS: Record<string, string> = {
-  merchandise: "Merchandise",
-  "afri-edutourism": "Afri-EduTourism mission",
+const INITIAL = {
+  name: "", email: "", organisation: "", enquiry_type: "General enquiry" as ContactEnquiryType,
+  country: "", phone: "", preferred_contact: "Email" as "Email" | "Phone" | "Either",
+  subject: "", message: "", related_reference: "", consent: false, website: "",
 };
+const FAQ = [
+  ["Is nomination free?", "Yes. NESA-Africa nomination is free. No payment, sponsorship or donation improves eligibility or recognition."],
+  ["Can I send evidence through this form?", "Select Evidence submission and provide a short description. Do not upload or paste confidential evidence, identity documents, bank details, health records or children's personal data into this general form."],
+  ["How do I correct a nominee profile?", "Select Correction or update, identify the profile and include its public link or reference if available. Corrections remain subject to verification."],
+  ["How do I ask about merchandise?", "Select Merchandise. This records an enquiry only; it does not open a cart, checkout or payment flow. Merchandise purchases never influence nominations or results."],
+  ["How do I ask about school support?", "Select School support. School nomination, verification and support are separate from NESA-Africa award recognition."],
+  ["Will I receive a reference?", "Yes. A successfully saved enquiry displays a case reference. The reference confirms recording, not a response time, approval or outcome."],
+];
 
 export default function Contact() {
   const [searchParams] = useSearchParams();
-  const subjectParam = searchParams.get("subject");
-  const isPresenterApplication = subjectParam === "presenter";
-
-  const [activeTab, setActiveTab] = useState<string>(isPresenterApplication ? "presenter" : "general");
-
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: (subjectParam && CONTACT_SUBJECT_PREFILLS[subjectParam]) || "",
-    department: isPresenterApplication ? "Presenter Applications" : "",
-    message: ""
-  });
-
-  const [presenterData, setPresenterData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    country: "",
-    experience: "",
-    languages: "",
-    portfolioUrl: "",
-    socialMedia: "",
-    bio: "",
-    motivation: "",
-  });
+  const subjectParam = searchParams.get("subject") ?? "";
+  const [form, setForm] = useState(INITIAL);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const [reference, setReference] = useState("");
 
   useEffect(() => {
-    if (isPresenterApplication) {
-      setActiveTab("presenter");
-    }
-    const prefill = subjectParam ? CONTACT_SUBJECT_PREFILLS[subjectParam] : undefined;
-    if (prefill) {
-      setActiveTab("general");
-      setFormData(previous => ({ ...previous, subject: prefill }));
-    }
-  }, [isPresenterApplication, subjectParam]);
+    const prefill = CONTACT_SUBJECT_PREFILLS[subjectParam];
+    if (!prefill) return;
+    setForm((current) => ({
+      ...current,
+      enquiry_type: prefill,
+      subject: current.subject || (subjectParam === "merchandise" ? "Merchandise enquiry" : subjectParam === "afri-edutourism" ? "Afri-EduTourism mission enquiry" : `${prefill} enquiry`),
+    }));
+    setReference("");
+    setError("");
+  }, [subjectParam]);
 
-  const handleGeneralSubmit = (e: React.FormEvent) => e.preventDefault();
-  const handlePresenterSubmit = (e: React.FormEvent) => e.preventDefault();
+  const update = <K extends keyof typeof INITIAL>(key: K, value: (typeof INITIAL)[K]) => setForm((current) => ({ ...current, [key]: value }));
+  const submit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (submitting) return;
+    setError("");
+    setSubmitting(true);
+    try {
+      const savedReference = await submitContactEnquiry(form);
+      setReference(savedReference);
+      setForm({ ...INITIAL, enquiry_type: form.enquiry_type });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (submissionError) {
+      setError(submissionError instanceof Error ? submissionError.message : "We could not save your enquiry. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-charcoal">
-      {/* Hero Section */}
+      <Helmet>
+        <title>Contact and Help | NESA-Africa</title>
+        <meta name="description" content="Send NESA-Africa a general, nomination, evidence, media, partnership, merchandise or school-support enquiry and receive a private case reference." />
+        <link rel="canonical" href="https://nesa.africa/contact" />
+        <meta property="og:title" content="Contact and Help | NESA-Africa" />
+        <meta property="og:description" content="Record an enquiry with NESA-Africa and receive a case reference." />
+        <meta property="og:url" content="https://nesa.africa/contact" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
+
       <section className="relative bg-gradient-to-br from-gold/5 via-charcoal to-gold/5 py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 bg-nesa-gold/20 text-nesa-gold border-nesa-gold/30">
-              Get in Touch
-            </Badge>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Contact <span className="text-nesa-gold">NESA-Africa</span>
-            </h1>
-            <p className="text-xl text-muted-foreground">
-              Select the subject that best matches your enquiry so it can be routed appropriately. Do not send passports, bank details, confidential evidence or other sensitive documents through the general contact form.
-            </p>
-          </div>
+        <div className="container mx-auto px-4"><div className="mx-auto max-w-4xl text-center">
+          <MessageSquare className="mx-auto mb-4 h-8 w-8 text-gold" aria-hidden />
+          <h1 className="font-display text-4xl font-bold text-foreground md:text-5xl">Contact <span className="text-gold">and Help</span></h1>
+          <p className="mt-6 text-xl text-muted-foreground">Select the subject that best matches your enquiry so it can be recorded and routed appropriately.</p>
+          <p className="mx-auto mt-4 max-w-3xl rounded-xl border border-gold/25 bg-gold/5 p-4 text-sm text-white/75">Do not send passports, bank details, card information, PINs, OTPs, confidential evidence, health records or children's personal data through this general contact form.</p>
+        </div></div>
+      </section>
+
+      <section className="py-12 md:py-16" aria-labelledby="contact-form-heading">
+        <div className="container mx-auto max-w-4xl px-4">
+          {reference && <div role="status" className="mb-6 rounded-2xl border border-gold/40 bg-gold/10 p-6 text-center"><CheckCircle2 className="mx-auto h-10 w-10 text-gold" aria-hidden /><h2 className="mt-3 font-display text-2xl text-gold">Enquiry recorded</h2><p className="mt-2 text-white/75">Your case reference is <strong className="font-mono text-gold">{reference}</strong>. Keep it for future correspondence.</p><p className="mt-2 text-sm text-white/60">This confirms recording only. It does not confirm delivery of an email, a response time, approval or an outcome.</p></div>}
+          <Card>
+            <CardHeader><CardTitle id="contact-form-heading" className="font-display text-2xl text-gold">Send an enquiry</CardTitle></CardHeader>
+            <CardContent>
+              <form onSubmit={submit} className="space-y-5">
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="space-y-2"><Label htmlFor="contact-name">Full name *</Label><Input id="contact-name" autoComplete="name" value={form.name} onChange={(event) => update("name", event.target.value)} required maxLength={160} /></div>
+                  <div className="space-y-2"><Label htmlFor="contact-email">Email address *</Label><Input id="contact-email" type="email" autoComplete="email" value={form.email} onChange={(event) => update("email", event.target.value)} required maxLength={320} /></div>
+                  <div className="space-y-2"><Label htmlFor="contact-organisation">Organisation (optional)</Label><Input id="contact-organisation" autoComplete="organization" value={form.organisation} onChange={(event) => update("organisation", event.target.value)} maxLength={200} /></div>
+                  <div className="space-y-2"><Label htmlFor="contact-country">Country *</Label><Input id="contact-country" autoComplete="country-name" value={form.country} onChange={(event) => update("country", event.target.value)} required maxLength={120} /></div>
+                  <div className="space-y-2"><Label htmlFor="contact-type">Enquiry type *</Label><select id="contact-type" className="min-h-10 w-full rounded-md border border-input bg-background px-3 text-sm" value={form.enquiry_type} onChange={(event) => update("enquiry_type", event.target.value as ContactEnquiryType)} required>{CONTACT_ENQUIRY_TYPES.map((type) => <option key={type}>{type}</option>)}</select></div>
+                  <div className="space-y-2"><Label htmlFor="contact-phone">Phone (optional)</Label><Input id="contact-phone" type="tel" autoComplete="tel" value={form.phone} onChange={(event) => update("phone", event.target.value)} maxLength={60} /></div>
+                  <div className="space-y-2"><Label htmlFor="contact-preferred">Preferred contact method *</Label><select id="contact-preferred" className="min-h-10 w-full rounded-md border border-input bg-background px-3 text-sm" value={form.preferred_contact} onChange={(event) => update("preferred_contact", event.target.value as "Email" | "Phone" | "Either")}><option>Email</option><option>Phone</option><option>Either</option></select></div>
+                  <div className="space-y-2"><Label htmlFor="contact-reference">Related reference (optional)</Label><Input id="contact-reference" value={form.related_reference} onChange={(event) => update("related_reference", event.target.value)} maxLength={100} placeholder="Nomination, profile or case reference" /></div>
+                </div>
+                <div className="space-y-2"><Label htmlFor="contact-subject">Subject *</Label><Input id="contact-subject" value={form.subject} onChange={(event) => update("subject", event.target.value)} required minLength={3} maxLength={240} /></div>
+                <div className="space-y-2"><Label htmlFor="contact-message">Message *</Label><Textarea id="contact-message" rows={7} value={form.message} onChange={(event) => update("message", event.target.value)} required minLength={20} maxLength={5000} placeholder="Explain what you need without including sensitive documents or financial details." /><p className="text-xs text-muted-foreground">{form.message.length}/5,000 characters</p></div>
+                <div className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true"><label htmlFor="contact-website">Leave this field empty</label><input id="contact-website" tabIndex={-1} autoComplete="off" value={form.website} onChange={(event) => update("website", event.target.value)} /></div>
+                <div className="flex items-start gap-3 rounded-xl border border-gold/20 p-4"><Checkbox id="contact-consent" checked={form.consent} onCheckedChange={(checked) => update("consent", checked === true)} required /><Label htmlFor="contact-consent" className="text-sm font-normal leading-relaxed">I consent to NESA-Africa recording and reviewing this enquiry and using the supplied contact details to respond. I have not included sensitive documents, payment credentials or children's personal data. *</Label></div>
+                {error && <p role="alert" className="rounded-lg border border-destructive/40 bg-destructive/10 p-3 text-sm">{error}</p>}
+                <Button type="submit" size="lg" disabled={submitting || !form.consent} className="bg-gold text-charcoal hover:bg-gold/90">{submitting ? "Saving enquiry…" : "Submit enquiry"}</Button>
+              </form>
+            </CardContent>
+          </Card>
+          <div className="mt-6 flex flex-wrap gap-4 text-sm"><Link to="/help" className="text-gold underline">Visit the Help Centre</Link><Link to="/policies#privacy" className="text-gold underline">Read the privacy policy</Link></div>
         </div>
       </section>
 
-      {/* Contact Info Cards */}
-      <section className="py-12 -mt-8">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {contactInfo.map((info, index) => (
-              <Card key={index} className="text-center">
-                <CardContent className="pt-6">
-                  <div className="w-12 h-12 bg-nesa-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <info.icon className="w-6 h-6 text-nesa-gold" />
-                  </div>
-                  <h3 className="font-semibold mb-2">{info.title}</h3>
-                  {info.details.map((detail, detailIndex) => (
-                    <p key={detailIndex} className="text-sm font-medium">{detail}</p>
-                  ))}
-                  <p className="text-xs text-muted-foreground mt-2">{info.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Form & Departments */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Forms with Tabs */}
-            <Card>
-              <CardHeader>
-                <Tabs value={activeTab} onValueChange={setActiveTab}>
-                  <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="general">
-                      <MessageSquare className="mr-2 h-4 w-4" />
-                      General Enquiry
-                    </TabsTrigger>
-                    <TabsTrigger value="presenter">
-                      <Mic className="mr-2 h-4 w-4" />
-                      Presenter Application
-                    </TabsTrigger>
-                  </TabsList>
-                </Tabs>
-              </CardHeader>
-              <CardContent>
-                <Tabs value={activeTab} onValueChange={setActiveTab}>
-                  {/* General Contact Form */}
-                  <TabsContent value="general" className="mt-0">
-                    <form onSubmit={handleGeneralSubmit} className="space-y-4">
-                      <div className="grid md:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="name">Full Name</Label>
-                          <Input
-                            id="name"
-                            placeholder="Your name"
-                            value={formData.name}
-                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                            required
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="email">Email Address</Label>
-                          <Input
-                            id="email"
-                            type="email"
-                            placeholder="your@email.com"
-                            value={formData.email}
-                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            required
-                          />
-                        </div>
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="department">Department</Label>
-                        <select
-                          id="department"
-                          className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
-                          value={formData.department}
-                          onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-                          required
-                        >
-                          <option value="">Select a department</option>
-                          {departments.map((dept, index) => (
-                            <option key={index} value={dept.name}>{dept.name}</option>
-                          ))}
-                        </select>
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="subject">Subject</Label>
-                        <Input
-                          id="subject"
-                          placeholder="What is this regarding?"
-                          value={formData.subject}
-                          onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                          required
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="message">Message</Label>
-                        <Textarea
-                          id="message"
-                          placeholder="Your message... Do not include passports, bank details, confidential evidence or other sensitive documents."
-                          rows={5}
-                          value={formData.message}
-                          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                          required
-                        />
-                      </div>
-                      <ScefFormRequired kind="contact" />
-                    </form>
-                  </TabsContent>
-
-                  {/* Presenter Application Form */}
-                  <TabsContent value="presenter" className="mt-0">
-                    <div className="mb-6 rounded-lg bg-primary/10 p-4">
-                      <div className="flex items-center gap-3 mb-2">
-                        <Mic className="h-5 w-5 text-primary" />
-                        <h3 className="font-semibold">Become an Online Recognition Programme Presenter</h3>
-                      </div>
-                      <p className="text-sm text-muted-foreground">
-                        We're looking for dynamic presenters and anchors to host segments of the 
-                        NESA-Africa Online Recognition Programme. Share your experience and portfolio below.
-                      </p>
-                    </div>
-
-                    <form onSubmit={handlePresenterSubmit} className="space-y-4">
-                      <div className="grid md:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="p-name">Full Name *</Label>
-                          <Input
-                            id="p-name"
-                            placeholder="Your name"
-                            value={presenterData.name}
-                            onChange={(e) => setPresenterData({ ...presenterData, name: e.target.value })}
-                            required
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="p-email">Email Address *</Label>
-                          <Input
-                            id="p-email"
-                            type="email"
-                            placeholder="your@email.com"
-                            value={presenterData.email}
-                            onChange={(e) => setPresenterData({ ...presenterData, email: e.target.value })}
-                            required
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid md:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="p-phone">Phone Number *</Label>
-                          <Input
-                            id="p-phone"
-                            type="tel"
-                            placeholder="+234 XXX XXX XXXX"
-                            value={presenterData.phone}
-                            onChange={(e) => setPresenterData({ ...presenterData, phone: e.target.value })}
-                            required
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="p-country">Country *</Label>
-                          <Input
-                            id="p-country"
-                            placeholder="e.g. Nigeria"
-                            value={presenterData.country}
-                            onChange={(e) => setPresenterData({ ...presenterData, country: e.target.value })}
-                            required
-                          />
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="p-experience">Hosting/Presenting Experience *</Label>
-                        <Textarea
-                          id="p-experience"
-                          placeholder="Describe your experience hosting events, TV shows, podcasts, or live broadcasts..."
-                          rows={3}
-                          value={presenterData.experience}
-                          onChange={(e) => setPresenterData({ ...presenterData, experience: e.target.value })}
-                          required
-                        />
-                      </div>
-
-                      <div className="grid md:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="p-languages">Languages Spoken *</Label>
-                          <Input
-                            id="p-languages"
-                            placeholder="e.g. English, French, Swahili"
-                            value={presenterData.languages}
-                            onChange={(e) => setPresenterData({ ...presenterData, languages: e.target.value })}
-                            required
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="p-portfolio">Portfolio/Showreel URL</Label>
-                          <Input
-                            id="p-portfolio"
-                            type="url"
-                            placeholder="https://youtube.com/..."
-                            value={presenterData.portfolioUrl}
-                            onChange={(e) => setPresenterData({ ...presenterData, portfolioUrl: e.target.value })}
-                          />
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="p-social">Social Media Handles</Label>
-                        <Input
-                          id="p-social"
-                          placeholder="e.g. @yourhandle (Instagram, Twitter/X, LinkedIn)"
-                          value={presenterData.socialMedia}
-                          onChange={(e) => setPresenterData({ ...presenterData, socialMedia: e.target.value })}
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="p-bio">Short Bio *</Label>
-                        <Textarea
-                          id="p-bio"
-                          placeholder="Tell us about yourself in 2-3 sentences..."
-                          rows={2}
-                          value={presenterData.bio}
-                          onChange={(e) => setPresenterData({ ...presenterData, bio: e.target.value })}
-                          required
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="p-motivation">Why do you want to host the NESA-Africa Online Recognition Programme? *</Label>
-                        <Textarea
-                          id="p-motivation"
-                          placeholder="Share your motivation and what you would bring to the event..."
-                          rows={3}
-                          value={presenterData.motivation}
-                          onChange={(e) => setPresenterData({ ...presenterData, motivation: e.target.value })}
-                          required
-                        />
-                      </div>
-
-                      <ScefFormRequired kind="contact" />
-                    </form>
-                  </TabsContent>
-                </Tabs>
-              </CardContent>
-            </Card>
-
-            {/* Departments & Social */}
-            <div className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Building2 className="w-5 h-5 text-nesa-gold" />
-                    Department Contacts
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {departments.map((dept, index) => (
-                      <div key={index} className="flex justify-between items-center py-2 border-b last:border-0">
-                        <span className="font-medium">{dept.name}</span>
-                        <a href={`mailto:${dept.email}`} className="text-nesa-gold hover:underline text-sm">
-                          {dept.email}
-                        </a>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Globe className="w-5 h-5 text-nesa-gold" />
-                    Follow Us
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <FollowLinks className="flex-wrap gap-3" linkClassName="rounded-full bg-muted text-foreground hover:bg-nesa-gold hover:text-black" />
-                  <p className="text-sm text-muted-foreground mt-4">
-                    Stay connected with NESA-Africa for the latest updates, 
-                    nominee stories, and education enablers news.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Regional Offices */}
-      <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Regional Offices</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
-            {regionalOffices.map((office, index) => (
-              <Card key={index} className="text-center">
-                <CardContent className="pt-6">
-                  <Badge className="mb-3 bg-nesa-gold/20 text-nesa-gold border-nesa-gold/30">
-                    {office.region}
-                  </Badge>
-                  <p className="font-semibold">{office.city}</p>
-                  <a href={`mailto:${office.email}`} className="text-sm text-nesa-gold hover:underline">
-                    {office.email}
-                  </a>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      <section className="border-t border-gold/15 bg-charcoal-light/20 py-16" aria-labelledby="contact-faq"><div className="container mx-auto max-w-3xl px-4"><h2 id="contact-faq" className="font-display text-3xl text-gold">Frequently asked questions</h2><Accordion type="single" collapsible className="mt-6">{FAQ.map(([question, answer], index) => <AccordionItem key={question} value={`contact-${index}`}><AccordionTrigger className="text-left">{question}</AccordionTrigger><AccordionContent className="leading-relaxed text-white/70">{answer}</AccordionContent></AccordionItem>)}</Accordion><div className="mt-8 flex items-start gap-3 rounded-xl border border-gold/25 p-4"><ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-gold" /><p className="text-sm text-white/70">Contact submissions carry zero weight in nomination, eligibility, judging or recognition. No destination email is configured; enquiries are recorded for authorised administrator review.</p></div></div></section>
     </div>
   );
 }

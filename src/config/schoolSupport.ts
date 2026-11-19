@@ -22,7 +22,7 @@ export const SNS_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfSFHcQc9e
 
 /** Voting remains unavailable until technical and governance approval authorises this flag. */
 export const VOTING_OPEN = false;
-export const VOTING_PENDING_LABEL = "Voting Opens in September 2027, Subject to Verification and Approval";
+export const VOTING_PENDING_LABEL = "Regional school participation opens in September 2027, subject to verification and approval";
 export const VOTING_OPEN_LABEL = "Vote for a School in Your Region";
 
 export function getSchoolVotingLabel(votingOpen: boolean = VOTING_OPEN): string {
@@ -98,12 +98,18 @@ export const SCHOOL_SUPPORT_DUE_DILIGENCE = [
 export const SCHOOL_SUPPORT_CATEGORIES = [
   { title: "Visual Support Education", description: "Schools supporting learners who are blind or have low vision." },
   { title: "Deaf and Hearing Support Education", description: "Schools supporting Deaf and hard-of-hearing learners." },
-  { title: "Physical and Mobility Support Education", description: "Schools supporting learners with physical disabilities, mobility challenges or cerebral palsy." },
+  { title: "Physical and Mobility Support Education", description: "Schools supporting learners with physical disabilities or mobility challenges." },
   { title: "Intellectual and Developmental Support Education", description: "Schools supporting learners with intellectual or developmental disabilities, including Down syndrome." },
-  { title: "Autism and Communication Support Education", description: "Schools supporting autistic learners and learners with speech, language or communication needs." },
-  { title: "Learning, Emotional and Behavioural Support Education", description: "Schools supporting learners with dyslexia, dyscalculia, ADHD and significant emotional, behavioural or psychosocial needs." },
+  { title: "Autism and Communication Support Education", description: "Schools supporting autistic learners and learners with communication needs." },
+  { title: "Learning, Emotional and Behavioural Support Education", description: "Schools supporting learners with learning differences and emotional, behavioural or psychosocial needs." },
   { title: "Multiple and Complex Disabilities", description: "Schools serving learners with more than one disability or substantial multidisciplinary support needs." },
-  { title: "Inclusive, Early-Intervention and Vocational Education", description: "Inclusive mainstream schools, specialist units, early-intervention centres, resource centres and vocational or transition programmes." },
+  { title: "Inclusive, Early-Intervention and Vocational Education", description: "Inclusive mainstream schools, specialist units, early-intervention centres and resource centres." },
+  { title: "Cerebral Palsy Support Education", description: "Schools supporting learners with cerebral palsy through accessible learning and appropriate specialist support." },
+  { title: "Speech, Language and Communication Support Education", description: "Schools supporting speech, language, communication and augmentative communication needs." },
+  { title: "Assistive Technology and Digital Learning Support Education", description: "Programmes providing assistive devices, accessible digital learning and related skills." },
+  { title: "Special-Needs Teacher Training and Professional Development", description: "Programmes strengthening inclusive teaching, specialist knowledge and classroom practice." },
+  { title: "Transition, Life-Skills and Vocational Preparation", description: "Programmes preparing learners for greater independence, employment and adult life." },
+  { title: "Family, Caregiver and Community Inclusion Support", description: "Programmes strengthening family guidance, caregiver support and community inclusion." },
 ] as const;
 
 export const SCHOOL_SUPPORT_INTERVENTIONS = [
@@ -265,7 +271,7 @@ export function buildSchoolParticipationHref(id: SchoolParticipationId): string 
  * 2027 page source of truth — Support a Special-Needs School Across Africa
  * =================================================================== */
 export const SNS_BASE = "/support-a-special-needs-school";
-export const SNS_CANONICAL = "https://eduaid.africa/support-a-special-needs-school";
+export const SNS_CANONICAL = "https://nesa.africa/support-a-special-needs-school";
 export const COUNTRY_MAP_APPROVED = false;
 export const SUPPORTER_DASHBOARD_ENABLED = false;
 export const SUPPORTER_DASHBOARD_URL = "https://eduaid.africa/account";
@@ -278,7 +284,7 @@ export const SNS_BODY_BAND = "A Rebuild My School Africa service · EduAid-Afric
 export const SNS_UTILITY_LINE = "A service of Rebuild My School Africa · EduAid-Africa · Santos Creations Educational Foundation · Jointly presented with NESA-Africa";
 export const SNS_NOT_A_TIER = "Regional school selection is separate from NESA-Africa award recognition. Donations, sponsorship and regional participation do not affect NESA-Africa judging or recognition decisions.";
 export const SNS_PAYMENT_NOTICE = "Completing this form does not confirm payment. Support is confirmed only after reconciliation and an official receipt.";
-export const SNS_NARRATION_NOTICE = "Put your EA reference in the transfer narration. Pay only into accounts named EduAid Africa Ltd.";
+export const SNS_NARRATION_NOTICE = "Bank transfer only. Never provide card details, PINs or OTPs. Put your EA reference in the transfer narration. Pay only into accounts named EduAid Africa Ltd.";
 export const SNS_PERSONAL_ACCOUNT_WARNING = "EduAid-Africa will never ask you to pay into a personal account.";
 export const SNS_TARGET_NOTICE = "targets, not secured funding";
 export const SNS_GRANT_QUALIFIER = "subject to due diligence, available funds and written approval";
@@ -314,7 +320,7 @@ export const SNS_REGIONS: ReadonlyArray<{ key: RegionKey; name: string; color: s
   { key: "indian", name: "Indian Ocean Islands", color: "#0F8A84", desk: "rmsaindianoceaneduaidafrica@gmail.com" },
 ];
 export const SNS_REGIONS_NOTE = "These are programme-operational regions, not an African Union classification.";
-export const SNS_MAP_DRAFT_NOTE = "Draft regional map, pending written programme approval";
+export const SNS_MAP_DRAFT_NOTE = "Regional country mapping is under governance review and will be published only after written approval.";
 
 const C = (name: string, id: string, region: RegionKey) => ({ name, id, region });
 export const SNS_COUNTRIES = [
@@ -354,17 +360,23 @@ export const SNS_HERO_IMAGE: SnsImage = {
 export const SNS_CATEGORIES = [
   { title: "Visual Support Education", description: "Schools supporting learners who are blind or have low vision", icon: "eye", color: "#2E7D32", tags: ["Braille", "Low vision"] },
   { title: "Deaf and Hearing Support Education", description: "Schools supporting Deaf and hard-of-hearing learners", icon: "ear", color: "#6B4521", tags: ["Sign language", "Captioning"] },
-  { title: "Physical and Mobility Support Education", description: "Schools supporting learners with physical disabilities, mobility challenges or cerebral palsy", icon: "accessibility", color: "#1F5C22", tags: ["Access", "Mobility"] },
+  { title: "Physical and Mobility Support Education", description: "Schools supporting learners with physical disabilities or mobility challenges", icon: "accessibility", color: "#1F5C22", tags: ["Access", "Mobility"] },
   { title: "Intellectual and Developmental Support Education", description: "Schools supporting learners with intellectual or developmental disabilities, including Down syndrome", icon: "puzzle", color: "#3D9B3D", tags: ["Adapted learning"] },
-  { title: "Autism and Communication Support Education", description: "Schools supporting autistic learners and learners with speech, language or communication needs", icon: "message-circle", color: "#8A5A2B", tags: ["AAC", "Sensory"] },
-  { title: "Learning, Emotional and Behavioural Support Education", description: "Schools supporting learners with dyslexia, dyscalculia, ADHD and significant emotional, behavioural or psychosocial needs", icon: "brain", color: "#4C8A3A", tags: ["Learning", "Wellbeing"] },
+  { title: "Autism and Communication Support Education", description: "Schools supporting autistic learners and learners with communication needs", icon: "message-circle", color: "#8A5A2B", tags: ["AAC", "Sensory"] },
+  { title: "Learning, Emotional and Behavioural Support Education", description: "Schools supporting learners with learning differences and emotional, behavioural or psychosocial needs", icon: "brain", color: "#4C8A3A", tags: ["Learning", "Wellbeing"] },
   { title: "Multiple and Complex Disabilities", description: "Schools serving learners with more than one disability or multidisciplinary needs", icon: "layers", color: "#553517", tags: ["Multidisciplinary care"] },
-  { title: "Inclusive, Early-Intervention and Vocational Education", description: "Inclusive mainstream schools, specialist units, early-intervention centres, resource centres, vocational/transition programmes", icon: "sprout", color: "#24602A", tags: ["Inclusion", "Transition"] },
+  { title: "Inclusive, Early-Intervention and Vocational Education", description: "Inclusive mainstream schools, specialist units, early-intervention centres and resource centres", icon: "sprout", color: "#24602A", tags: ["Inclusion", "Early intervention"] },
+  { title: "Cerebral Palsy Support Education", description: "Schools supporting learners with cerebral palsy through accessible learning and appropriate specialist support", icon: "accessibility", color: "#1F5C22", tags: ["Cerebral palsy", "Accessibility"] },
+  { title: "Speech, Language and Communication Support Education", description: "Schools supporting speech, language, communication and augmentative communication needs", icon: "message-circle", color: "#8A5A2B", tags: ["Speech", "Communication"] },
+  { title: "Assistive Technology and Digital Learning Support Education", description: "Programmes providing assistive devices, accessible digital learning and related skills", icon: "eye", color: "#2E7D32", tags: ["Assistive technology", "Digital learning"] },
+  { title: "Special-Needs Teacher Training and Professional Development", description: "Programmes strengthening inclusive teaching, specialist knowledge and classroom practice", icon: "brain", color: "#4C8A3A", tags: ["Teacher training", "Professional development"] },
+  { title: "Transition, Life-Skills and Vocational Preparation", description: "Programmes preparing learners for greater independence, employment and adult life", icon: "sprout", color: "#24602A", tags: ["Life skills", "Vocational preparation"] },
+  { title: "Family, Caregiver and Community Inclusion Support", description: "Programmes strengthening family guidance, caregiver support and community inclusion", icon: "layers", color: "#553517", tags: ["Families", "Community inclusion"] },
 ].map((c, i) => ({ ...c, image: SNS_CATEGORY_IMAGES[i] ?? null }));
 export const SNS_CATEGORY_RULE = "Schools may select more than one category but state one principal category. Regional selection is one approved school per region, in any category, not eight category winners.";
 
 /** Video slots stay empty and hidden until approved illustrative videos are supplied. */
-export const CAT_VIDEOS: Array<string | null> = Array(8).fill(null);
+export const CAT_VIDEOS: Array<string | null> = Array(14).fill(null);
 export const REGION_VIDEOS: Partial<Record<RegionKey, string>> = {};
 export const CAMPAIGN_VIDEOS: { fiveWays: string | null; eduTourism: string | null; donationTracking: string | null } = { fiveWays: null, eduTourism: null, donationTracking: null };
 
@@ -408,7 +420,7 @@ export const SNS_FIVE_WAYS = [
   { key: "sponsor", n: 4, title: "Sponsor", timing: "US$150,000 per region", text: "Sponsor a regional school, a project or in-kind support." },
   { key: "attend", n: 5, title: "Attend", timing: "October–December 2027", text: "Join EduTourism 2027 and regional commissioning ceremonies." },
 ] as const;
-export const SNS_VOTE_FOOTNOTE = `*${VOTING_PENDING_LABEL}. Voting is free and never linked to money.`;
+export const SNS_VOTE_FOOTNOTE = `*${VOTING_PENDING_LABEL}. Participation is free and never linked to money.`;
 
 export const SNS_ABOUT_CARDS = [
   { title: "Why it matters", text: "Many specialist and inclusive schools serving learners with disabilities lack accessible buildings, equipment, trained staff and reliable funding." },

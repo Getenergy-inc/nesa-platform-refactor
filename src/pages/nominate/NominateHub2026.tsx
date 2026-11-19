@@ -593,7 +593,7 @@ const FAQS = [
   },
   {
     q: "Does sponsoring or donating affect my nominee's chances?",
-    a: "No. Sponsorship, partnership, donations, ticket purchases, endorsements, and visibility opportunities do not influence NRRC verification, judging, or Governance decisions. Recognition is evidence-based only.",
+    a: "No. Sponsorship, partnership, donations, merchandise purchases, endorsements, and visibility opportunities do not influence NRRC verification, judging, or Governance decisions. Recognition is evidence-based only.",
   },
   {
     q: "Can the same nominee win more than once?",

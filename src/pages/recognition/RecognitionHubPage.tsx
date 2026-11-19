@@ -1,263 +1,110 @@
-// Recognition Hub — DB-driven index of the NESA-Africa 2026 spine.
-// Reads recognition_tiers / _categories / _subcategories seeded in Stage 3–4.
-// Serves as the canonical entry point for the 4-tier / 18-category /
-// 96-subcategory architecture, replacing scattered legacy hubs.
-
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { ChevronRight, Loader2 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { ChevronRight, ShieldCheck } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { MASTER_AWARDS, MASTER_COUNTS } from "@/config/awardMaster2026";
+import { TIERS, type TierSlug } from "@/config/recognition2026/tiers";
 
-type Tier = {
-  id: string;
-  slug: string;
-  name: string;
-  rank: number;
-  description: string | null;
-};
-type Category = {
-  id: string;
-  tier_id: string;
-  slug: string;
-  name: string;
-  tagline: string | null;
-  description: string | null;
-  sort_order: number | null;
-};
-type Sub = {
-  id: string;
-  category_id: string;
-  slug: string;
-  name: string;
-  description: string | null;
-  sort_order: number | null;
-};
+const CANONICAL = "https://nesa.africa/recognition";
 
-const CYCLE_SLUG = "nesa-africa-2026";
-
+/** Presentation-only registry: legacy categories, nomination keys and records stay authoritative. */
 export default function RecognitionHubPage() {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [tiers, setTiers] = useState<Tier[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [subs, setSubs] = useState<Sub[]>([]);
-  const [activeTier, setActiveTier] = useState<string | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        const { data: cycle, error: cycleErr } = await supabase
-          .from("recognition_cycles")
-          .select("id")
-          .eq("slug", CYCLE_SLUG)
-          .maybeSingle();
-        if (cycleErr) throw cycleErr;
-        if (!cycle) throw new Error("Recognition cycle not found");
-
-        const [{ data: t }, { data: c }, { data: s }] = await Promise.all([
-          supabase
-            .from("recognition_tiers")
-            .select("id, slug, name, rank, description")
-            .eq("cycle_id", cycle.id)
-            .order("rank"),
-          supabase
-            .from("recognition_categories")
-            .select("id, tier_id, slug, name, tagline, description, sort_order")
-            .order("sort_order", { nullsFirst: false }),
-          supabase
-            .from("recognition_subcategories")
-            .select("id, category_id, slug, name, description, sort_order")
-            .order("sort_order", { nullsFirst: false }),
-        ]);
-        if (cancelled) return;
-        setTiers((t as Tier[]) ?? []);
-        setCategories((c as Category[]) ?? []);
-        setSubs((s as Sub[]) ?? []);
-        setActiveTier(((t as Tier[]) ?? [])[0]?.id ?? null);
-      } catch (e) {
-        if (!cancelled) setError(e instanceof Error ? e.message : "Failed to load recognition spine");
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  const catsByTier = useMemo(() => {
-    const map = new Map<string, Category[]>();
-    for (const c of categories) {
-      const arr = map.get(c.tier_id) ?? [];
-      arr.push(c);
-      map.set(c.tier_id, arr);
-    }
-    return map;
-  }, [categories]);
-
-  const subsByCat = useMemo(() => {
-    const map = new Map<string, Sub[]>();
-    for (const s of subs) {
-      const arr = map.get(s.category_id) ?? [];
-      arr.push(s);
-      map.set(s.category_id, arr);
-    }
-    return map;
-  }, [subs]);
+  const [activeTier, setActiveTier] = useState<TierSlug>(TIERS[0].slug);
+  const selectedTier = TIERS.find((tier) => tier.slug === activeTier) ?? TIERS[0];
+  const awards = useMemo(() => MASTER_AWARDS.filter((award) => award.tier === activeTier), [activeTier]);
 
   return (
     <>
       <Helmet>
-        <title>Recognition Hub · NESA-Africa 2026</title>
-        <meta
-          name="description"
-          content="Four Recognition Tiers, 22 Main Awards and 90 Subcategories. NESA-Africa recognises different forms and levels of verified education contribution through an evidence-led framework."
-        />
-        <link rel="canonical" href="https://nesaafrica.lovable.app/recognition" />
+        <title>Recognition | NESA-Africa 2026</title>
+        <meta name="description" content="Explore four recognition tiers, 22 main awards and 90 subcategories within NESA-Africa's evidence-led recognition framework." />
+        <link rel="canonical" href={CANONICAL} />
+        <meta property="og:title" content="Recognition | NESA-Africa 2026" />
+        <meta property="og:description" content="Four recognition tiers, 22 main awards and 90 subcategories, with no public voting in 2026." />
+        <meta property="og:url" content={CANONICAL} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
       <div className="min-h-screen bg-charcoal text-white">
         <main className="mx-auto max-w-6xl px-4 py-10 md:py-14">
           <header className="mb-10">
-            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.25em] text-gold">
-              NESA-Africa 2026
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.25em] text-gold">NESA-Africa 2026</p>
+            <h1 className="font-display text-3xl text-white md:text-5xl">Four Recognition Tiers, 22 Main Awards and 90 Subcategories</h1>
+            <p className="mt-3 max-w-3xl text-sm text-white/75 md:text-base">NESA-Africa recognises different forms and levels of verified education contribution through an evidence-led framework.</p>
+            <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/70">
+              {MASTER_COUNTS.tiers} tiers · {MASTER_COUNTS.categories} main awards · {MASTER_COUNTS.subcategories} subcategories
             </p>
-            <h1 className="font-display text-3xl text-white md:text-5xl">
-              Four Recognition Tiers, 22 Main Awards and 90 Subcategories
-            </h1>
-            <p className="mt-3 max-w-3xl text-sm text-white/75 md:text-base">
-              NESA-Africa recognises different forms and levels of verified education contribution through an evidence-led framework.
-            </p>
-            {!loading && !error && (
-              <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/70">
-                {tiers.length} tiers · {categories.length} categories · {subs.length} subcategories
-              </p>
-            )}
             <div className="mt-6 flex flex-wrap items-center gap-3 rounded-2xl border border-gold/30 bg-black/40 p-4">
-              <p className="text-sm text-white/80">
-                <span className="font-semibold text-gold">Notice:</span> Certificates of Recognition are separate from competitive awards and must not be presented as awards won.
-              </p>
-              <Link
-                to="/nominate/help-me-choose"
-                className="inline-flex items-center gap-1 rounded-full bg-gold px-4 py-2 text-sm font-semibold text-charcoal hover:bg-gold/90"
-              >
-                Help Me Choose a Recognition Field
-                <ChevronRight className="h-4 w-4" aria-hidden />
-              </Link>
+              <ShieldCheck className="h-5 w-5 shrink-0 text-gold" aria-hidden />
+              <p className="min-w-0 flex-1 text-sm text-white/80">Nomination is free. Recognition depends on evidence, verification and the applicable review route — never sponsorship, donations or public voting.</p>
+              <Button asChild className="bg-gold text-charcoal hover:bg-gold/90"><Link to="/nominate">Submit a Nomination</Link></Button>
             </div>
           </header>
 
-
-          {loading && (
-            <div className="flex items-center gap-2 text-white/70" role="status">
-              <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
-              Loading recognition spine…
+          <section aria-labelledby="tier-heading" className="mb-12">
+            <h2 id="tier-heading" className="font-display text-2xl text-gold md:text-3xl">Choose a recognition tier</h2>
+            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {TIERS.map((tier) => {
+                const tierAwards = MASTER_AWARDS.filter((award) => award.tier === tier.slug);
+                const subcategories = tierAwards.reduce((sum, award) => sum + award.subcategories.length, 0);
+                return (
+                  <article key={tier.slug} className="flex flex-col rounded-xl border border-gold/20 bg-black/40 p-5">
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Tier {tier.order}</p>
+                    <h3 className="mt-2 font-display text-xl text-white">{tier.name}</h3>
+                    <p className="mt-3 flex-1 text-sm leading-relaxed text-white/70">{tier.summary}</p>
+                    <p className="mt-4 text-xs text-gold/85">{tierAwards.length} main awards · {subcategories} subcategories</p>
+                    <p className="mt-2 text-xs text-white/60">{tier.decisionMethod2026}</p>
+                    <div className="mt-5 flex flex-wrap gap-3 text-sm font-semibold">
+                      <Link to={tier.href} className="text-gold hover:underline">Explore tier →</Link>
+                      <Link to={`/nominate?tier=${tier.slug}`} className="text-white/75 hover:text-gold">Nominate →</Link>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
-          )}
+          </section>
 
-          {error && (
-            <div className="rounded-xl border border-red-500/40 bg-red-500/10 p-4 text-sm text-red-100">
-              {error}
+          <section aria-labelledby="awards-heading">
+            <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div>
+                <h2 id="awards-heading" className="font-display text-2xl text-white md:text-3xl">Main awards</h2>
+                <p className="mt-2 text-sm text-white/65">Open a tier to view its approved presentation categories. Existing nomination routes remain unchanged.</p>
+              </div>
+              <Link to="/nominate/help-me-choose" className="inline-flex items-center gap-1 text-sm font-semibold text-gold hover:underline">Help me choose <ChevronRight className="h-4 w-4" /></Link>
             </div>
-          )}
+            <nav aria-label="Filter main awards by tier" className="mb-8 flex flex-wrap gap-2">
+              {TIERS.map((tier) => (
+                <button key={tier.slug} type="button" aria-pressed={activeTier === tier.slug} onClick={() => setActiveTier(tier.slug)} className={`rounded-full px-4 py-2 text-sm font-semibold transition ${activeTier === tier.slug ? "bg-gold text-charcoal" : "border border-white/15 text-white/80 hover:border-gold/60"}`}>
+                  Tier {tier.order} · {tier.shortName}
+                </button>
+              ))}
+            </nav>
+            <div className="mb-6 max-w-3xl">
+              <h3 className="font-display text-xl text-gold">{selectedTier.name}</h3>
+              <p className="mt-2 text-sm text-white/70">{selectedTier.summary}</p>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2">
+              {awards.map((award) => (
+                <article key={award.slug} className="flex flex-col rounded-xl border border-gold/20 bg-black/40 p-5">
+                  <p className="text-xs font-semibold text-gold/80">Award {award.number}</p>
+                  <h3 className="mt-2 font-display text-lg text-white">{award.title}</h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-white/65">{award.overview}</p>
+                  <p className="mt-3 text-xs text-white/55">{award.subcategories.length} {award.subcategories.length === 1 ? "subcategory" : "subcategories"}</p>
+                  <footer className="mt-4 flex flex-wrap gap-4 text-sm font-semibold">
+                    <Link to={award.href} className="text-gold hover:underline">Category details →</Link>
+                    <Link to={award.nominationHref} className="text-white/75 hover:text-gold">Nominate →</Link>
+                  </footer>
+                </article>
+              ))}
+            </div>
+          </section>
 
-          {!loading && !error && tiers.length > 0 && (
-            <>
-              <nav
-                aria-label="Recognition tiers"
-                className="mb-8 flex flex-wrap gap-2"
-              >
-                {tiers.map((t) => (
-                  <button
-                    key={t.id}
-                    type="button"
-                    onClick={() => setActiveTier(t.id)}
-                    className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
-                      activeTier === t.id
-                        ? "bg-gold text-charcoal"
-                        : "border border-white/15 text-white/80 hover:border-gold/60"
-                    }`}
-                  >
-                    Tier {t.rank} · {t.name}
-                  </button>
-                ))}
-              </nav>
-
-              {tiers
-                .filter((t) => t.id === activeTier)
-                .map((tier) => {
-                  const cats = catsByTier.get(tier.id) ?? [];
-                  return (
-                    <section key={tier.id} aria-label={`${tier.name} categories`}>
-                      {tier.description && (
-                        <p className="mb-6 max-w-3xl text-sm text-white/70">
-                          {tier.description}
-                        </p>
-                      )}
-                      <div className="grid gap-4 md:grid-cols-2">
-                        {cats.map((c) => {
-                          const catSubs = subsByCat.get(c.id) ?? [];
-                          return (
-                            <article
-                              key={c.id}
-                              className="rounded-xl border border-gold/20 bg-black/40 p-5"
-                            >
-                              <header className="mb-3">
-                                <h2 className="font-display text-lg text-white">
-                                  {c.name}
-                                </h2>
-                                {c.tagline && (
-                                  <p className="mt-1 text-xs text-gold/80">{c.tagline}</p>
-                                )}
-                                {c.description && (
-                                  <p className="mt-2 line-clamp-3 text-sm text-white/65">
-                                    {c.description}
-                                  </p>
-                                )}
-                              </header>
-                              {catSubs.length > 0 ? (
-                                <ul className="flex flex-wrap gap-2">
-                                  {catSubs.map((s) => (
-                                    <li key={s.id}>
-                                      <Link
-                                        to={`/awards/explore/${tier.slug}/${c.slug}/${s.slug}`}
-                                        className="inline-flex items-center gap-1 rounded-full border border-gold/30 bg-black/60 px-3 py-1 text-xs text-white/85 hover:border-gold hover:bg-gold/10 hover:text-gold"
-                                      >
-                                        {s.name}
-                                        <ChevronRight className="h-3 w-3" aria-hidden />
-                                      </Link>
-                                    </li>
-                                  ))}
-                                </ul>
-                              ) : (
-                                <p className="text-xs text-white/50">
-                                  Subcategories publish with the nomination window.
-                                </p>
-                              )}
-                              <footer className="mt-4">
-                                <Link
-                                  to={`/awards/explore/${tier.slug}/${c.slug}`}
-                                  className="text-xs font-semibold text-gold hover:underline"
-                                >
-                                  Open category →
-                                </Link>
-                              </footer>
-                            </article>
-                          );
-                        })}
-                        {cats.length === 0 && (
-                          <p className="text-sm text-white/60">
-                            No categories seeded for this tier yet.
-                          </p>
-                        )}
-                      </div>
-                    </section>
-                  );
-                })}
-            </>
-          )}
+          <aside className="mt-12 rounded-2xl border border-gold/30 bg-gold/5 p-6" aria-label="Recognition integrity notice">
+            <h2 className="font-display text-xl text-gold">One framework, two recognition routes</h2>
+            <p className="mt-3 text-sm leading-relaxed text-white/75">Only the Africa Education Icon Award proceeds to independent Icon judging. Influencer, Platinum and Gold-Blue Garnet recognition follows NRRC research, due diligence where applicable and governance approval. Certificates of Recognition are not competitive awards won.</p>
+          </aside>
         </main>
       </div>
     </>

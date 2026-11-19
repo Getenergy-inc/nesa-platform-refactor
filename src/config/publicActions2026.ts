@@ -8,7 +8,7 @@ export const PUBLIC_ACTIONS_2026 = {
     external: true,
   },
   exploreAwards: { label: "Explore the Awards", href: "/awards", external: false },
-  recognitionProcess: { label: "How Recognition Works →", href: "/about/how-recognition-works", external: false },
+  recognitionProcess: { label: "How Recognition Works →", href: "/how-it-works", external: false },
   onlineGala: { label: "Explore the 2026 Programme", href: "/programme/2026", external: false },
   supportEducation: { label: "Support Education", href: "/eduaid-africa", external: false },
 } as const;

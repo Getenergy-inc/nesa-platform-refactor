@@ -878,6 +878,63 @@ export type Database = {
           },
         ]
       }
+      contact_enquiries: {
+        Row: {
+          consent: boolean
+          country: string
+          created_at: string
+          email: string
+          enquiry_type: string
+          id: string
+          message: string
+          name: string
+          organisation: string | null
+          phone: string | null
+          preferred_contact: string
+          reference: string
+          related_reference: string | null
+          status: string
+          subject: string
+          updated_at: string
+        }
+        Insert: {
+          consent?: boolean
+          country: string
+          created_at?: string
+          email: string
+          enquiry_type: string
+          id?: string
+          message: string
+          name: string
+          organisation?: string | null
+          phone?: string | null
+          preferred_contact: string
+          reference: string
+          related_reference?: string | null
+          status?: string
+          subject: string
+          updated_at?: string
+        }
+        Update: {
+          consent?: boolean
+          country?: string
+          created_at?: string
+          email?: string
+          enquiry_type?: string
+          id?: string
+          message?: string
+          name?: string
+          organisation?: string | null
+          phone?: string | null
+          preferred_contact?: string
+          reference?: string
+          related_reference?: string | null
+          status?: string
+          subject?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       content_pages: {
         Row: {
           author_id: string | null

@@ -40,7 +40,7 @@ export function EditorialHero() {
           >
             Submit a Nomination
           </a>
-          <Link to="/about#how-it-works" className="ed-btn-ghost">
+          <Link to="/how-it-works" className="ed-btn-ghost">
             How Recognition Works
           </Link>
         </div>

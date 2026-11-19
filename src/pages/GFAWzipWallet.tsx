@@ -42,7 +42,7 @@ export default function GFAWzipWallet() {
         <title>GFAWzip Wallet | Multi-Currency Payments for NESA-Africa</title>
         <meta
           name="description"
-          content="Pay NESA-Africa tickets, merchandise, sponsorships, EduAid-Africa donations and SCEF membership dues in any currency with the GFAwzip Wallet. Instant receipts. Payments only — no voting credits."
+          content="Pay for approved NESA-Africa merchandise, sponsorships, EduAid-Africa donations and SCEF membership dues in any currency with the GFAwzip Wallet. Instant receipts. Payments only — no voting credits."
         />
       </Helmet>
 
@@ -103,9 +103,9 @@ export default function GFAWzipWallet() {
                     </a>
                   </Button>
                   <Button size="lg" variant="outline" asChild>
-                    <Link to="/buy-your-ticket">
-                      <Ticket className="mr-2 h-5 w-5" />
-                      Buy Your Ticket
+                    <Link to="/programme/2026">
+                      <Globe className="mr-2 h-5 w-5" />
+                      View the Online Programme
                     </Link>
                   </Button>
                 </div>
@@ -180,7 +180,7 @@ export default function GFAWzipWallet() {
                     <Ticket className="h-10 w-10 text-primary mb-4" />
                     <h3 className="font-semibold text-foreground mb-2">Pay for Services</h3>
                     <p className="text-sm text-muted-foreground">
-                      Use it for tickets, donations, sponsorships, and approved ecosystem services.
+                      Use it for donations, sponsorships, merchandise enquiries and other approved ecosystem services.
                     </p>
                   </CardContent>
                 </Card>
@@ -242,13 +242,13 @@ export default function GFAWzipWallet() {
                 <Card className="bg-card shadow-card border-border">
                   <CardHeader>
                     <Ticket className="h-8 w-8 text-gold mb-2" />
-                    <CardTitle className="text-lg">Ticket Payments</CardTitle>
+                    <CardTitle className="text-lg">Approved Service Payments</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-2 text-sm text-muted-foreground">
                       <li className="flex items-center gap-2">
                         <CheckCircle className="h-4 w-4 text-primary" />
-                        QR e-ticket
+                        Payment confirmation
                       </li>
                       <li className="flex items-center gap-2">
                         <CheckCircle className="h-4 w-4 text-primary" />

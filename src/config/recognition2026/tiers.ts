@@ -103,7 +103,7 @@ export const TIERS: TierDefinition[] = [
 ];
 
 export const INTEGRITY_NOTICE_2026 =
-  "NESA-Africa 2026 does not use public voting for award recognition. Sponsorship, donations, Gala tickets, merchandise, endorsements, GFAwzip Wallet transactions, AGC Participation Credits, follower numbers and public popularity do not influence verification or recognition.";
+  "NESA-Africa 2026 does not use public voting for award recognition. Sponsorship, donations, merchandise, endorsements, wallet transactions, participation credits, follower numbers and public popularity do not influence verification or recognition.";
 
 export function getTier(slug: TierSlug): TierDefinition | undefined {
   return TIERS.find((t) => t.slug === slug);

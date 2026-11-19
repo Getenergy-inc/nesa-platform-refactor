@@ -87,10 +87,10 @@ function RegionCards() {
               <p>Selected school: to be announced after verification</p>
               <p>EduTourism 2027: regional visit Oct–Nov 2027</p>
               <p>Grant awarding &amp; commissioning ceremony · host city TBA</p>
-              <details className="rounded-xl bg-ea-sand p-2">
-                <summary className="cursor-pointer text-xs font-semibold">{countries.length} countries{!COUNTRY_MAP_APPROVED && " (draft)"}</summary>
+              {COUNTRY_MAP_APPROVED && <details className="rounded-xl bg-ea-sand p-2">
+                <summary className="cursor-pointer text-xs font-semibold">{countries.length} countries</summary>
                 <p className="mt-1 text-xs text-ea-muted">{countries.map((c) => c.name).join(" · ")}</p>
-              </details>
+              </details>}
               <a href={`mailto:${r.desk}`} className="break-all text-xs font-semibold text-ea-green underline">{r.desk}</a>
               <p className="text-xs font-semibold">Status: nominations open April 2027</p>
               {vid && <ClickToLoadVideo id={vid} title={`${r.name} illustrative video`} caption={SNS_VIDEO_CAPTION} />}
@@ -181,7 +181,7 @@ function Body() {
           <aside className="self-start rounded-3xl border border-ea-tan/40 bg-ea-cream/5 p-6">
             <h2 className="text-2xl text-ea-tan">2027 at a glance</h2>
             <dl className="mt-4 grid grid-cols-2 gap-4">
-              {[["8", "regions"], ["8", "categories"], ["US$150k", "per region"], [`US$${(CONTINENTAL_TARGET_USD / 1e6).toFixed(1)}M`, "continental"]].map(([v, l]) => (
+              {[["8", "regions"], [String(SNS_CATEGORIES.length), "categories"], ["US$150k", "per region"], [`US$${(CONTINENTAL_TARGET_USD / 1e6).toFixed(1)}M`, "continental"]].map(([v, l]) => (
                 <div key={l}><dt className="sr-only">{l}</dt><dd><span className="block font-serif text-3xl font-semibold">{v}</span><span className="text-xs text-ea-cream/70">{l}</span></dd></div>
               ))}
             </dl>
@@ -190,7 +190,7 @@ function Body() {
         </div>
         <figure className="mx-auto mt-10 max-w-6xl overflow-hidden rounded-3xl border border-ea-tan/30">
           <img src={SNS_HERO_IMAGE.src} alt={SNS_HERO_IMAGE.alt} className="aspect-square w-full object-cover sm:aspect-auto" />
-          <figcaption className="bg-ea-deep/80 px-4 py-2 text-xs text-ea-cream/80">Illustrative images of inclusive learning across the programme's eight support categories.</figcaption>
+          <figcaption className="bg-ea-deep/80 px-4 py-2 text-xs text-ea-cream/80">Owner-supplied illustrative images of inclusive learning.</figcaption>
         </figure>
       </section>
 
@@ -243,7 +243,7 @@ function Body() {
       </Wrap>
 
       <Wrap id="categories" className="bg-ea-sand">
-        <SectionHead eyebrow="Eight categories" title="Eight categories of special-needs education" />
+        <SectionHead eyebrow="Fourteen categories" title="Fourteen categories of special-needs education" />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {SNS_CATEGORIES.map((c, i) => {
             const Icon = ICONS[c.icon] ?? Sprout;

@@ -9,9 +9,9 @@ export const POSITIONING = {
   positioning: "Africa's Education Recognition & Impact Platform",
   mandate: "Recognising Africa’s Education Enablers",
   theme: "The African Blue-Garnet Awards for Recognising Africa’s Education Enablers",
-  flagshipEvent: "Gold-Blue Garnet Awards Gala",
-  date: "28 December 2026",
-  location: "Lagos, Nigeria",
+  flagshipEvent: "NESA-Africa 2026 Online Recognition Programme",
+  date: "Monday 28 December 2026",
+  location: "Online only",
   organisedBy: "Santos Creations Educational Foundation",
   impactPartners: ["EduAid-Africa", "Rebuild My School Africa"],
   closingSalute:
@@ -41,7 +41,7 @@ export const ABOUT_INTRO = {
   body: [
     "NESA-Africa exists to celebrate and support the Enablers of Education for All Across Africa — the individuals, organisations, institutions and partnerships creating real educational impact through leadership, funding, innovation, advocacy, service, public policy, media influence and community transformation.",
     "Through nominations, verification, independent judging, public participation, media storytelling, recognition events and post-award impact programmes, NESA-Africa provides a trusted continental platform for recognising education impact.",
-    "The 2026 edition is themed The African Blue-Garnet Awards for Recognising Africa’s Education Enablers. The flagship event is the Gold-Blue Garnet Awards Gala on 28 December 2026 in Lagos, Nigeria.",
+    "The 2026 edition is themed The African Blue-Garnet Awards for Recognising Africa’s Education Enablers. The focused online recognition programme takes place on Monday 28 December 2026.",
   ],
 } as const;
 
@@ -84,9 +84,9 @@ export const CORE_IDENTITY = [
   { label: "Theme", value: "The African Blue-Garnet Awards for Recognising Africa’s Education Enablers" },
   { label: "Positioning", value: "Africa's Education Recognition & Impact Platform" },
   { label: "Core Mandate", value: "Recognising Africa’s Education Enablers" },
-  { label: "Flagship Event", value: "Gold-Blue Garnet Awards Gala" },
-  { label: "Date", value: "28 December 2026" },
-  { label: "Location", value: "Lagos, Nigeria" },
+  { label: "Flagship Event", value: "NESA-Africa 2026 Online Recognition Programme" },
+  { label: "Date", value: "Monday 28 December 2026" },
+  { label: "Location", value: "Online only" },
   { label: "Organised By", value: "Santos Creations Educational Foundation" },
   { label: "Impact Partners", value: "EduAid-Africa and Rebuild My School Africa" },
 ] as const;
@@ -117,8 +117,8 @@ export const WHAT_WE_DO = [
     body: "Visibility and engagement opportunities for organisations investing in education through CSR, grants, sponsorships, scholarships, institutional support and social impact programmes.",
   },
   {
-    title: "Independent jury review and Participation",
-    body: "Public participation through AGC-powered voting, nominee discovery, awareness campaigns, digital engagement and continental mobilisation.",
+    title: "Independent Judging and Participation",
+    body: "Nominee discovery, awareness campaigns, digital engagement and continental mobilisation without public voting or paid influence.",
   },
   {
     title: "Post-Award Education Impact",
@@ -128,8 +128,8 @@ export const WHAT_WE_DO = [
 
 export const RECOGNITION_ARCHITECTURE_STATS = [
   { value: "4", label: "Recognition Tiers" },
-  { value: "18", label: "Award Categories" },
-  { value: "100+", label: "Recognition Subcategories" },
+  { value: "22", label: "Main Awards" },
+  { value: "90", label: "Recognition Subcategories" },
   { value: "9", label: "Recognition Pillars" },
   { value: "8", label: "Africa Regions" },
   { value: "2", label: "Global Communities" },
@@ -186,8 +186,8 @@ export const CONTINENTAL_REACH =
 
 export const KEY_PROGRAMMES = [
   {
-    title: "Gold-Blue Garnet Awards Gala",
-    body: "The flagship recognition ceremony of NESA-Africa 2026, bringing together nominees, winners, sponsors, judges, partners, education leaders, government representatives, media organisations, volunteers and stakeholders. 28 December 2026 · Lagos, Nigeria.",
+    title: "NESA-Africa 2026 Online Recognition Programme",
+    body: "A focused online programme recognising up to nine Africa Education Icons, with approved Certificates of Recognition, interviews, documentaries and education-impact media. Monday 28 December 2026 · online only.",
   },
   {
     title: "Africa Education Hall of Fame",
@@ -195,7 +195,7 @@ export const KEY_PROGRAMMES = [
   },
   {
     title: "NESA Africa TV",
-    body: "The media and storytelling arm of the recognition journey — nominee interviews, documentaries, weekly updates, partner features, sponsor visibility and gala coverage.",
+    body: "The media and storytelling arm of the recognition journey — nominee interviews, documentaries, weekly updates, partner features, sponsor visibility and online programme coverage.",
   },
   {
     title: "EduAid-Africa",
@@ -219,8 +219,8 @@ export const CAPABILITY_AREAS = [
   { title: "Recognition Programme Design", body: "Award category development, recognition subcategory structuring, nomination framework design, nominee profile development, award tier architecture and continental participation structure." },
   { title: "Nomination and Verification Management", body: "Public nomination collection, nominee documentation, category review, verification support, regional classification and integrity screening." },
   { title: "Jury and Governance Coordination", body: "Judge onboarding, evaluation framework support, conflict-of-interest guidance, scoring process coordination, governance communication and independent review support." },
-  { title: "Media Production and Storytelling", body: "NESA Africa TV programming, documentary production, nominee interviews, public awareness campaigns, gala broadcast planning, social media activation and regional correspondent reporting." },
-  { title: "Event and Gala Management", body: "Awards gala planning, recognition showcase production, stage and broadcast coordination, red carpet media, sponsor visibility integration, press conference coordination and winner announcement management." },
+  { title: "Media Production and Storytelling", body: "NESA Africa TV programming, documentary production, nominee interviews, public awareness campaigns, online programme broadcast planning, social media activation and regional correspondent reporting." },
+  { title: "Online Programme Management", body: "Online recognition programme planning, showcase production, broadcast coordination, approved media participation, press coordination and recipient announcement management." },
   { title: "Partnership and Sponsorship Engagement", body: "Corporate sponsorship packages, CSR visibility opportunities, donor engagement, embassy and bilateral partnership outreach, institutional partnership development and education impact partnership alignment." },
   { title: "Public Engagement", body: "Nominee discovery campaigns, digital engagement, community mobilisation and regional participation." },
   { title: "Impact Programme Activation", body: "Scholarship mobilisation, school support initiatives, special needs education support, EduAid-Africa webinars, Rebuild My School Africa campaigns and Afri-EduTourism legacy activities." },

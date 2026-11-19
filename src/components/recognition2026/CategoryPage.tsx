@@ -21,8 +21,9 @@ import { NOMINEE_TYPE_LABELS } from "@/config/recognition2026/nomineeTypes";
 import { Button } from "@/components/ui/button";
 import { AwardResearchContext } from "@/components/awards/AwardResearchContext";
 import { ChevronRight, ShieldCheck, ArrowRight } from "lucide-react";
+import { OfficialNominationForm } from "@/components/nominate/OfficialNominationForm";
 
-const CANONICAL_ORIGIN = "https://nesaafrica.lovable.app";
+const CANONICAL_ORIGIN = "https://nesa.africa";
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-GB", {
@@ -313,28 +314,9 @@ export default function CategoryPage() {
           </ul>
         </Section>
 
-        {/* 9. Embedded Nomination Form (placeholder — Phase 3/4) */}
         <Section id="nomination-form" title="Nomination Form">
-          <div className="rounded-xl border border-dashed border-gold/40 bg-white/5 p-6 text-center">
-            <p className="text-white/70 text-sm">
-              The dedicated nomination form for{" "}
-              <span className="text-gold font-semibold">{cat.shortName}</span>{" "}
-              will be embedded here.
-            </p>
-            <p className="text-white/50 text-xs mt-2">
-              Reference number format:{" "}
-              <code>NESA-2026-{cat.code}-000001</code>
-            </p>
-            <Button
-              asChild
-              size="lg"
-              className="mt-4 bg-gold text-charcoal hover:bg-gold-dark"
-            >
-              <Link to={`/nominate?tier=${cat.tier}&category=${cat.slug}`}>
-                Open Interim Nomination Form
-              </Link>
-            </Button>
-          </div>
+          <p className="mb-5 text-white/60">Reference format: NESA-2026-{cat.code}-000001. A submission begins review; it does not confirm eligibility or recognition.</p>
+          <OfficialNominationForm id={`nomination-form-${cat.slug}`} awardName={cat.name} heading={`Nominate for ${cat.shortName}`} />
         </Section>
 
         {/* 10. Review Process */}
