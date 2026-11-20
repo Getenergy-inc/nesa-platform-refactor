@@ -10,7 +10,8 @@ import { PublicAccessibilityControls } from "@/components/accessibility/PublicAc
 import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
 import { BackToTopButton } from "@/components/ui/back-to-top";
 import "./editorial/editorial.css";
-import { EditorialHero, LivingGallerySection, DirectoryStatsSection, RecognitionToImpactSection, GalaBandSection } from "./editorial";
+import { EditorialHero, LivingGallerySection, DirectoryStatsSection, RecognitionToImpactSection, GalaBandSection, IconLifetimeSection, IconFlagshipSection, BoardOfAdvisorsSection, PartnersBandSection } from "./editorial";
+import { AwardPlaqueMotionSection } from "@/components/nesa/AwardPlaqueMotionSection";
 
 const HowItWorksHomeSection = lazy(() => import("@/components/nesa/HowItWorksHomeSection").then((m) => ({ default: m.HowItWorksHomeSection })));
 const RecognitionTiersHomeSection = lazy(() => import("@/components/nesa/RecognitionTiersHomeSection").then((m) => ({ default: m.RecognitionTiersHomeSection })));
@@ -32,12 +33,17 @@ export function NESALandingPage() {
       <div id="main-content" tabIndex={-1} className="nesa-ed min-h-screen pt-[92px] xl:pt-[104px] pb-16">
         <NESAHeader />
         <EditorialHero />
+        <LazySection><AwardPlaqueMotionSection /></LazySection>
         <LazySection><DirectoryStatsSection /></LazySection>
         <LazySection><HowItWorksHomeSection /></LazySection>
         <LazySection><RecognitionTiersHomeSection /></LazySection>
+        <LazySection><IconFlagshipSection /></LazySection>
+        <LazySection><IconLifetimeSection /></LazySection>
         <LazySection><LivingGallerySection /></LazySection>
         <LazySection><GalaBandSection /></LazySection>
         <LazySection><RecognitionToImpactSection /></LazySection>
+        <LazySection><BoardOfAdvisorsSection /></LazySection>
+        <LazySection><PartnersBandSection /></LazySection>
         <LazySection><FinalCTASection /></LazySection>
         <NESAFooter />
       </div>
