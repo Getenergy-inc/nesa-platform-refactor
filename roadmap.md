@@ -1,3 +1,7 @@
+## Tier 2 landing page — 20 Nov 2026
+- [x] Rebuilt `/awards/influencer-education-impact` around the three approved Influencers Education Impact categories, existing Tier 2 artwork, live nominee data, free official nomination and no-public-voting governance; removed duplicate grids, the separate on-site form and the incorrect Gold-Blue Garnet gala label.
+- [x] Added three focused page regressions; four focused tests passed with the related homepage test. Verified category/directory destinations, official form, artwork, desktop/360px layouts and zero page errors; corrected clipped mobile hero content. No database/permission changes or publishing.
+
 ## Lean public site Phases 2–7 — 20 Nov 2026
 - [x] Completed the owner-approved content/structure refactor under the design freeze: online-programme cleanup, lean core pages, four-tier/22-award/90-subcategory presentation, separated nominee notifications, private Contact enquiries, 14 school-support categories and canonical/retired-route metadata.
 - [x] Full production build passed with the Phase 0 guard intact; final 24 focused regressions, 18 desktop/mobile navigation checks and 30 desktop/360 page captures passed. Real anonymous Contact insertion and anonymous read/update denial passed; the exact synthetic row was deleted and confirmed absent.
