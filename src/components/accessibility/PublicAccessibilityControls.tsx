@@ -38,7 +38,7 @@ export function PublicAccessibilityControls() {
   const reset = () => { setSize(0); setContrast(false); };
 
   return (
-    <div className="fixed bottom-24 left-4 z-40 md:bottom-6">
+    <div className="fixed bottom-28 left-3 z-40 md:bottom-6 md:left-4">
       {open && (
         <div role="dialog" aria-label="Accessibility preferences" className="mb-3 w-64 rounded-xl border border-gold/40 bg-charcoal p-4 text-ivory shadow-2xl">
           <div className="flex items-center justify-between gap-3">
