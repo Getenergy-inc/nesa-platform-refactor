@@ -1,3 +1,8 @@
+## Lean public site Phases 2–7 — 20 Nov 2026
+- [x] Completed the owner-approved content/structure refactor under the design freeze: online-programme cleanup, lean core pages, four-tier/22-award/90-subcategory presentation, separated nominee notifications, private Contact enquiries, 14 school-support categories and canonical/retired-route metadata.
+- [x] Full production build passed with the Phase 0 guard intact; final 24 focused regressions, 18 desktop/mobile navigation checks and 30 desktop/360 page captures passed. Real anonymous Contact insertion and anonymous read/update denial passed; the exact synthetic row was deleted and confirmed absent.
+- [ ] Authorised member/admin Contact access remains unverified; do not promote an account. Country mapping stays hidden pending written approval. No destination email is configured. Nothing was published or deployed.
+
 ## Merchandise enquiry links — 15 Nov 2026
 - [x] Added Buy Merchandise after Donate in the shared Get Involved menu and footer; Contact subject prefills Merchandise. Existing integrity wording and every shop redirect untouched.
 - [x] Six navigation unit checks passed; desktop/820px/360px browser checks confirmed menu link, Contact prefill and footer destination with zero horizontal overflow. Existing scrollable mobile menu retained. Updated retained E2E tests; JS runner blocked by missing browser executable, equivalent Python Playwright checks passed. Preview build OK; no cart, checkout, payment or publishing. Contact submission remains unavailable pending the official SCEF form link.

@@ -32,6 +32,6 @@ describe("Afri-EduTourism lean page", () => {
     const ctas = screen.getAllByRole("link", { name: "Register Interest in a 2027 Mission" });
     expect(ctas).toHaveLength(2);
     ctas.forEach((a) => expect(a.getAttribute("href")).toBe("/contact?subject=afri-edutourism"));
-    expect(CONTACT_SUBJECT_PREFILLS["afri-edutourism"]).toBe("Afri-EduTourism mission");
+    expect(CONTACT_SUBJECT_PREFILLS["afri-edutourism"]).toBe("General enquiry");
   });
 });

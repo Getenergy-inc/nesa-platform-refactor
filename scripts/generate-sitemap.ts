@@ -14,7 +14,7 @@ import { readFileSync, writeFileSync } from "fs";
 import { resolve } from "path";
 import { ALL_CATEGORIES, GROUP_META } from "../src/config/awardCategories/index.ts";
 
-const BASE_URL = "https://nesaafrica.lovable.app";
+const BASE_URL = "https://nesa.africa";
 const APP_TSX = resolve("src/App.tsx");
 
 interface SitemapEntry {
@@ -55,6 +55,7 @@ while ((m = PATH_ONLY_RE.exec(source)) !== null) {
 const PRIVATE_PREFIXES = [
   "/admin",
   "/nrc",
+  "/nrrc",
   "/olc",
   "/dashboard",
   "/wallet",
@@ -70,8 +71,15 @@ const PRIVATE_PREFIXES = [
   "/reset-password",
 ];
 
+const RETIRED_OR_LEGACY_PREFIXES = [
+  "/tickets", "/buy-your-ticket", "/gala", "/media/gala", "/programme-2026",
+  "/2027", "/2028", "/2029", "/2030", "/vision-2035", "/gallery", "/nrc",
+  "/shop", "/buy-merchandise", "/merchandise", "/vote",
+];
+
 function isIndexable(path: string): boolean {
   if (path === "*" || path === "/*") return false;
+  if (RETIRED_OR_LEGACY_PREFIXES.some((prefix) => path === prefix || path.startsWith(prefix + "/"))) return false;
   if (path.includes(":")) return false; // dynamic
   if (redirectSources.has(path)) return false;
   if (PRIVATE_PREFIXES.some((p) => path === p || path.startsWith(p + "/") || path === p.replace(/\/$/, ""))) {

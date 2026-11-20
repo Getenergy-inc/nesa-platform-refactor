@@ -194,13 +194,12 @@ export const PAYMENT_METHODS: PaymentMethod[] = [
 
 export const GALA_EVENT = {
   name: 'NESA-Africa 2026 Online Recognition Programme',
-  date: `Sunday, ${PROGRAMME_END_LABEL}`,
+  date: PROGRAMME_END_LABEL,
   year: 2026,
-  time: '18:00 WAT',
-  /** No venue confirmed yet — do not invent one. */
-  venue: 'Venue details to be announced',
-  city: 'Lagos, Nigeria',
-  dressCode: 'Black Tie / Traditional Formal',
+  time: 'Programme time to be announced',
+  venue: 'Online programme',
+  city: 'Online only',
+  dressCode: 'Not applicable',
 };
 
 // ============== FAQ ==============

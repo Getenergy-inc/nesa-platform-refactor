@@ -63,7 +63,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, useNavigationType } from "react-router-dom";
-import { HelmetProvider } from "react-helmet-async";
+import { HelmetProvider, Helmet } from "react-helmet-async";
 import { captureUtmFromSearch, captureReferralFromSearch } from "@/lib/attribution";
 import { NominationLinkRouter } from "@/components/nominate/NominationLinkRouter";
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -526,6 +526,18 @@ const AttributionCapture = () => {
 
 
 // Wrapper component that applies PublicLayout
+const LEGACY_NOINDEX_PREFIXES = [
+  "/tickets", "/buy-your-ticket", "/gala", "/media/gala", "/programme-2026",
+  "/2027", "/2028", "/2029", "/2030", "/vision-2035", "/gallery", "/nrc",
+  "/shop", "/buy-merchandise", "/merchandise", "/vote",
+];
+
+function LegacyRouteMetadata() {
+  const { pathname } = useLocation();
+  const noindex = LEGACY_NOINDEX_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(prefix + "/"));
+  return noindex ? <Helmet><meta name="robots" content="noindex,nofollow" /></Helmet> : null;
+}
+
 const WithLayout = ({
   children,
   showFooter = true,
@@ -550,6 +562,7 @@ const App = () => (
                 <ScrollToTop />
                 <NominationLinkRouter />
                 <AttributionCapture />
+                <LegacyRouteMetadata />
                 <Routes>
                   {/* Landing - has its own header/footer */}
                   <Route path="/" element={<NESALandingPage />} />

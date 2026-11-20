@@ -211,7 +211,7 @@ export default function Timeline() {
     {
       step: "03",
       title: "Judges Arena",
-      body: "27 volunteer judges across 9 pathways review NRRC-verified nominees, select finalists, and cast the final ranked-choice ballot.",
+      body: "Nine independent Icon judges, three per Icon category, assess eligible NRRC-verified dossiers independently.",
       statusLabel: judgesActive ? "In progress" : "Not yet active",
       tone: judgesActive ? "gold" : "stone",
       metric: judgesActive ? formatCount(status.judgeAssignments) : undefined,
@@ -221,10 +221,8 @@ export default function Timeline() {
       step: "04",
       title: "Online Recognition Programme",
       body: ONLINE_GALA.copy.summary,
-      statusLabel: countdown.isExpired ? "Celebrated" : `${countdown.days} days to go`,
+      statusLabel: "Monday 28 December 2026 · Online",
       tone: "sapphire",
-      metric: countdown.isExpired ? undefined : String(countdown.days),
-      metricLabel: countdown.isExpired ? undefined : "days remaining",
     },
   ];
 

@@ -360,9 +360,9 @@ export default function GFAWzipWallet() {
                   </a>
                 </Button>
                 <Button size="lg" variant="outline" asChild>
-                  <Link to="/buy-your-ticket">
-                    <Ticket className="mr-2 h-5 w-5" />
-                    Buy Your Ticket
+                  <Link to="/programme/2026">
+                    <Globe className="mr-2 h-5 w-5" />
+                    View the Online Programme
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild>

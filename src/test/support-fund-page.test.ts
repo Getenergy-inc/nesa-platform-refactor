@@ -15,8 +15,8 @@ describe("Support a Special-Needs School config", () => {
     expect(SNS_CTAS.volunteer.href).toBe("/support-a-special-needs-school/participate?participation=volunteer");
     expect(SNS_CTAS.verified.href).toBe("/support-a-special-needs-school#verified-schools");
   });
-  it("retains the EduAid-Africa canonical independently of local action links", () => {
-    expect(SNS_CANONICAL).toBe("https://eduaid.africa/support-a-special-needs-school");
+  it("uses the NESA canonical independently of EduAid programme ownership", () => {
+    expect(SNS_CANONICAL).toBe("https://nesa.africa/support-a-special-needs-school");
   });
   it("has 8 regions with 8 distinct desks", () => {
     expect(SNS_REGIONS).toHaveLength(8);
@@ -29,15 +29,17 @@ describe("Support a Special-Needs School config", () => {
     expect(SNS_COUNTRIES.every((c) => keys.has(c.region))).toBe(true);
     expect(SNS_COUNTRIES.some((c) => c.id === SNS_UNASSIGNED.id)).toBe(false);
   });
-  it("has 8 categories and 4 bank accounts with the official numbers", () => {
-    expect(SNS_CATEGORIES).toHaveLength(8);
+  it("has 14 categories and 4 bank accounts with the official numbers", () => {
+    expect(SNS_CATEGORIES).toHaveLength(14);
     expect(Object.fromEntries(SNS_BANK_ACCOUNTS.map((a) => [a.currency, a.number]))).toEqual({ NGN: "1305744507", USD: "1307264500", EUR: "1307264531", GBP: "1307264548" });
   });
-  it("gives every category its own owner-supplied picture and a hero picture", () => {
-    const srcs = SNS_CATEGORIES.map((c) => c.image?.src ?? "");
-    expect(srcs.every((s) => s.startsWith("/__l5e/assets-v1/"))).toBe(true);
-    expect(new Set(srcs).size).toBe(8);
-    expect(SNS_CATEGORIES.every((c) => (c.image?.alt ?? "").length > 30)).toBe(true);
+  it("retains the eight owner-supplied category pictures and hero without inventing six more", () => {
+    const pictured = SNS_CATEGORIES.filter((c) => c.image);
+    expect(pictured).toHaveLength(8);
+    expect(pictured.every((c) => c.image?.src.startsWith("/__l5e/assets-v1/"))).toBe(true);
+    expect(new Set(pictured.map((c) => c.image?.src)).size).toBe(8);
+    expect(pictured.every((c) => (c.image?.alt ?? "").length > 30)).toBe(true);
+    expect(SNS_CATEGORIES.slice(8).every((c) => c.image === null)).toBe(true);
     expect(SNS_HERO_IMAGE.src.startsWith("/__l5e/assets-v1/")).toBe(true);
     expect(SNS_HERO_IMAGE.alt.length).toBeGreaterThan(60);
   });

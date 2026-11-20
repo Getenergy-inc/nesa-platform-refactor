@@ -215,12 +215,12 @@ export function buildScheduledEvents(
     galas: [
       {
         id: "blue-garnet-gala",
-        name: "Blue Garnet Awards Gala",
+        name: "NESA-Africa Online Recognition Programme",
         type: "gala",
-        // Canonical Gala countdown target: 28 Dec 2026, 00:00 WAT (see config/programme.ts)
+        // Canonical programme date: 28 Dec 2026 (see config/programme.ts)
         date: awardYear === 2026 ? GALA_COUNTDOWN_TARGET : createSeasonDate(awardYear, template.galas.blueGarnetGala.monthDay, template.galas.blueGarnetGala.yearOffset),
-        description: "Grand ceremony — 9 Blue Garnet winners",
-        venue: "Lagos, Nigeria",
+        description: "Focused online recognition of up to nine Africa Education Icons",
+        venue: "Online only",
       },
     ],
     legacy: [

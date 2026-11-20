@@ -14,7 +14,7 @@ const announcements = [
   },
   {
     id: 2,
-    title: "NESA-Africa Recognition Gala — 28 December 2026",
+    title: "NESA-Africa Online Recognition Programme — 28 December 2026",
     date: "Save the Date",
     highlight: false,
   },
@@ -28,9 +28,9 @@ const announcements = [
 
 const quickLinks = [
   { label: "Apply as Judge", href: "/judgeapply", icon: Star },
-  { label: "Buy Gala Tickets", href: "/buy-your-ticket", icon: Calendar },
+  { label: "View Online Programme", href: "/programme/2026", icon: Calendar },
   { label: "View Regions", href: "/regions", icon: Globe },
-  { label: "Shop Merchandise", href: "/shop", icon: ExternalLink },
+  { label: "Merchandise Enquiry", href: "/contact?subject=merchandise", icon: ExternalLink },
 ];
 
 export function AnnouncementsPanel() {

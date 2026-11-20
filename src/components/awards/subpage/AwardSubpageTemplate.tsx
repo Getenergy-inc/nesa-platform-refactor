@@ -320,9 +320,6 @@ export function AwardSubpageTemplate({ content }: { content: AwardSubpageContent
           </div>
         ) : null}
 
-        {/* 1c. Award-specific countdown (optional) */}
-        {content.countdown ? <AwardCountdownBlock countdown={content.countdown} /> : null}
-
         {/* 1d. Category story */}
         {content.story ? <AwardStoryBlock story={content.story} /> : null}
         <AwardResearchContext categorySlug={content.slug} />

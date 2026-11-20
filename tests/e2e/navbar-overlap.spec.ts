@@ -29,7 +29,8 @@ for (const width of [360, 820, 1280]) {
       expect(box.y + box.height).toBeLessThanOrEqual(1800);
       await merchandise.click();
       await expect(page).toHaveURL(/\/contact\?subject=merchandise$/);
-      await expect(page.getByRole("textbox", { name: "Subject", exact: true })).toHaveValue("Merchandise");
+      await expect(page.getByLabel("Enquiry type *", { exact: true })).toHaveValue("Merchandise");
+      await expect(page.getByRole("textbox", { name: "Subject *", exact: true })).toHaveValue("Merchandise enquiry");
       expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
     });
 

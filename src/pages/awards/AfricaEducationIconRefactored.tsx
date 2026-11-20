@@ -65,13 +65,12 @@ const CLASSIFICATION_CARDS = [
 ];
 
 const TIMELINE = [
-  { date: "1 Aug 2026", label: "Public Nominations Open" },
-  { date: "6 Oct 2026", label: "Nominations Close" },
-  { date: "1–13 Sept 2026", label: "NRRC Verification & Dossiers" },
-  { date: "14–30 Sept 2026", label: "Judges Arena — Panel Screening" },
-  { date: "1–7 Oct 2026", label: "Grand Jury Ranked-Choice Voting" },
-  { date: "8–15 Oct 2026", label: "Governance Ratification" },
-  { date: "28 Dec 2026", label: "Recognition Gala · Lagos, Nigeria" },
+  { date: "9 Nov 2026", label: "Public Nominations Open" },
+  { date: "31 Mar 2027", label: "Nominations Close" },
+  { date: "After submission", label: "NRRC Verification & Dossiers" },
+  { date: "After eligibility review", label: "Independent Icon Judging" },
+  { date: "After judging", label: "Governance Ratification" },
+  { date: "28 Dec 2026", label: "Online Recognition Programme" },
 ];
 
 const FAQ = [

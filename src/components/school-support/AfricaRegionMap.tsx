@@ -10,11 +10,8 @@ const W = 640, H = 680;
 const byId = new Map(SNS_COUNTRIES.map((c) => [c.id, c]));
 const counts = SNS_REGIONS.map((r) => ({ ...r, n: SNS_COUNTRIES.filter((c) => c.region === r.key).length }));
 
-export function AfricaRegionMap() {
+function ApprovedAfricaRegionMap() {
   const { goDonate, goSponsor, goAnchor } = useSupportPage();
-  if (!COUNTRY_MAP_APPROVED) {
-    return <p role="note" className="rounded-2xl border border-dashed border-ea-green bg-ea-green/5 p-5 text-sm font-semibold text-ea-green">{SNS_MAP_DRAFT_NOTE}</p>;
-  }
   const [features, setFeatures] = useState<Feature<Geometry, { name?: string }>[] | null>(null);
   const [failed, setFailed] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
@@ -104,4 +101,11 @@ export function AfricaRegionMap() {
       </div>
     </div>
   );
+}
+
+export function AfricaRegionMap() {
+  if (!COUNTRY_MAP_APPROVED) {
+    return <p role="note" className="rounded-2xl border border-dashed border-ea-green bg-ea-green/5 p-5 text-sm font-semibold text-ea-green">{SNS_MAP_DRAFT_NOTE}</p>;
+  }
+  return <ApprovedAfricaRegionMap />;
 }

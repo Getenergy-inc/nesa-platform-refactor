@@ -79,7 +79,7 @@
 /special-needs-education-support                             /support-a-special-needs-school 301
 /language                                                    /                    301
 
-# --- 2. SPA routes (567 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (551 explicit paths from src/App.tsx) ---
 /recognition/influencer-education-impact/african-sports-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-music-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-social-media-influencers /index.html          200
@@ -176,7 +176,6 @@
 /nrrc/dashboard/edi-analytics                                /index.html          200
 /recognition/gold-blue-garnet                                /index.html          200
 /subcategories-to-recognition                                /index.html          200
-/about/how-recognition-works                                 /index.html          200
 /about/nesa-africa-2028-2030                                 /index.html          200
 /awards/explore/:pathwaySlug                                 /index.html          200
 /awards/influencer-education                                 /index.html          200
@@ -215,6 +214,7 @@
 /nrrc/handover/governance                                    /index.html          200
 /partners/prospects/:slug                                    /index.html          200
 /recognition/certificates                                    /index.html          200
+/admin/contact-enquiries                                     /index.html          200
 /awards/gold-blue-garnet                                     /index.html          200
 /category/edutech-africa                                     /index.html          200
 /dashboard/notifications                                     /index.html          200
@@ -352,7 +352,6 @@ nominee/:nomineeId                                           /index.html        
 /categories/:slug                                            /index.html          200
 /contributors/:id                                            /index.html          200
 /dashboard/region                                            /index.html          200
-/dashboard/wallet                                            /index.html          200
 /enabler-database                                            /index.html          200
 /get-involved/csr                                            /index.html          200
 /get-involved/ngo                                            /index.html          200
@@ -377,12 +376,10 @@ governance-review                                            /index.html        
 /awards/platinum                                             /index.html          200
 /awards/timeline                                             /index.html          200
 /buy-merchandise                                             /index.html          200
-/buy-your-ticket                                             /index.html          200
 /dashboard/judge                                             /index.html          200
 /directory/:slug                                             /index.html          200
 /events/calendar                                             /index.html          200
 /forgot-password                                             /index.html          200
-/gala/attendance                                             /index.html          200
 /impact/regional                                             /index.html          200
 /judge/dashboard                                             /index.html          200
 /my-certificates                                             /index.html          200
@@ -422,7 +419,6 @@ nominee-pipeline                                             /index.html        
 /nrrc/dashboard                                              /index.html          200
 /nrrc/directory                                              /index.html          200
 /policies/terms                                              /index.html          200
-/programme-2026                                              /index.html          200
 /programme/2026                                              /index.html          200
 /region/nigeria                                              /index.html          200
 /reset-password                                              /index.html          200
@@ -470,7 +466,6 @@ voting/:groupId                                              /index.html        
 /earn-credits                                                /index.html          200
 /endorse-nesa                                                /index.html          200
 /endorsements                                                /index.html          200
-/gala/tickets                                                /index.html          200
 /get-involved                                                /index.html          200
 /how-it-works                                                /index.html          200
 /judge-signup                                                /index.html          200
@@ -506,7 +501,6 @@ nominee/:slug                                                /index.html        
 /awards/gold                                                 /index.html          200
 /awards/icon                                                 /index.html          200
 /bulk-orders                                                 /index.html          200
-/gala/tables                                                 /index.html          200
 /help-center                                                 /index.html          200
 /icon-jury/*                                                 /index.html          200
 /judge-apply                                                 /index.html          200
@@ -535,7 +529,6 @@ nominee/:slug                                                /index.html        
 /judge/chat                                                  /index.html          200
 /judge/help                                                  /index.html          200
 /judgeapply                                                  /index.html          200
-/media/gala                                                  /index.html          200
 /membership                                                  /index.html          200
 /nrrc/apply                                                  /index.html          200
 /nrrc/cases                                                  /index.html          200
@@ -587,21 +580,16 @@ dashboard                                                    /index.html        
 /journal                                                     /index.html          200
 /nominee                                                     /index.html          200
 /partner                                                     /index.html          200
-/rebuild                                                     /index.html          200
 /regions                                                     /index.html          200
 /results                                                     /index.html          200
 /sign-in                                                     /index.html          200
 /sponsor                                                     /index.html          200
 /stories                                                     /index.html          200
 /support                                                     /index.html          200
-/tickets                                                     /index.html          200
 my-panel                                                     /index.html          200
 nominees                                                     /index.html          200
 pathways                                                     /index.html          200
 /awards                                                      /index.html          200
-/donate                                                      /index.html          200
-/eduaid                                                      /index.html          200
-/events                                                      /index.html          200
 /impact                                                      /index.html          200
 /judges                                                      /index.html          200
 /region                                                      /index.html          200
@@ -622,7 +610,6 @@ scoring                                                      /index.html        
 /media                                                       /index.html          200
 /merch                                                       /index.html          200
 /music                                                       /index.html          200
-/nrc/*                                                       /index.html          200
 /press                                                       /index.html          200
 /store                                                       /index.html          200
 /trust                                                       /index.html          200
@@ -631,19 +618,16 @@ voting                                                       /index.html        
 /auth                                                        /index.html          200
 /cart                                                        /index.html          200
 /faqs                                                        /index.html          200
-/gala                                                        /index.html          200
 /help                                                        /index.html          200
 /jury                                                        /index.html          200
 /news                                                        /index.html          200
 /nrrc                                                        /index.html          200
 /shop                                                        /index.html          200
 /team                                                        /index.html          200
-/vote                                                        /index.html          200
 audit                                                        /index.html          200
 notes                                                        /index.html          200
 /edx                                                         /index.html          200
 /faq                                                         /index.html          200
-/nrc                                                         /index.html          200
 /otp                                                         /index.html          200
 help                                                         /index.html          200
 /                                                            /index.html          200

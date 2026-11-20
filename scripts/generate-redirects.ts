@@ -180,7 +180,8 @@ const legacyBlock = legacy301
   .map(([from, to]) => rule(from, to, 301))
   .join("\n");
 
-const spaBlock = spaPaths.map((p) => rule(p, "/index.html", 200)).join("\n");
+const publicSpaPaths = spaPaths.filter((path) => !FORCE_LIVE_ROUTE_REDIRECTS.has(path));
+const spaBlock = publicSpaPaths.map((p) => rule(p, "/index.html", 200)).join("\n");
 
 const tail = `
 # Final catch-all — REAL HTTP 404 for anything not matched above.
@@ -193,7 +194,7 @@ const output = `${banner}
 # --- 1. Legacy 301 aliases ---
 ${legacyBlock}
 
-# --- 2. SPA routes (${spaPaths.length} explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (${publicSpaPaths.length} explicit paths from src/App.tsx) ---
 ${spaBlock}
 
 # --- 3. True-404 fallback ---
@@ -201,5 +202,5 @@ ${tail}`;
 
 writeFileSync(OUT, output);
 console.log(
-  `_redirects written: ${legacy301.length} legacy 301s + ${spaPaths.length} SPA 200s + 1 true 404`,
+  `_redirects written: ${legacy301.length} legacy 301s + ${publicSpaPaths.length} SPA 200s + 1 true 404`,
 );

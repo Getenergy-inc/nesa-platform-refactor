@@ -48,15 +48,14 @@ export const PAGE_SEQUENCE: PageEntry[] = [
   { path: "/impact/stories", label: "Impact Stories & Media", section: "Impact" },
   { path: "/eduaid-africa", label: "EduAid-Africa", section: "Impact" },
 
-  // Media & Gala
+  // Media & Online Programme
   { path: "/media", label: "Media & Stories", section: "Media" },
-  { path: "/gala", label: "Award Gala", section: "Media" },
-  { path: "/tickets", label: "Buy Gala Ticket", section: "Media" },
+  { path: "/programme/2026", label: "Online Recognition Programme", section: "Media" },
 
   // Support
   { path: "/support", label: "Support NESA-Africa", section: "Support" },
   { path: "/donate", label: "Donate", section: "Support" },
-  { path: "/merch", label: "Merchandise", section: "Support" },
+  { path: "/contact?subject=merchandise", label: "Merchandise Enquiry", section: "Support" },
   { path: "/sponsors", label: "Sponsors & Partners", section: "Support" },
   { path: "/endorsements", label: "Endorsements", section: "Support" },
   { path: "/contact", label: "Contact", section: "Support" },

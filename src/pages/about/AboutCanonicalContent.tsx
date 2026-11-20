@@ -3,6 +3,8 @@
 // instead of paragraph stacks. All governance / non-influence / no-public-voting
 // text below is protected and reproduced verbatim.
 
+import { Link } from "react-router-dom";
+
 const JOURNEY: [string, string][] = [
   ["1997", "Founded as an educational tourism and cultural heritage vision, Minna, Niger State"],
   ["2006", "Registered as a business name"],
@@ -278,15 +280,8 @@ export function AboutCanonicalContent() {
           </div>
           <div className="rounded-2xl border border-gold/25 bg-white/[0.03] p-6">
             <p className="text-xs uppercase tracking-[0.25em] text-ivory/55 mb-2">Contact</p>
-            <p className="text-sm text-ivory/85">
-              19 Godwin Okigbo Street, Marsha, Surulere, Lagos, Nigeria
-            </p>
-            <p className="text-sm text-ivory/85 mt-1">
-              +234 805 667 7770 ·{" "}
-              <a href="mailto:info@nesa.africa" className="text-gold underline">
-                info@nesa.africa
-              </a>
-            </p>
+            <p className="text-sm text-ivory/85">Use Contact and Help to record an enquiry and receive a case reference.</p>
+            <Link to="/contact" className="mt-2 inline-block text-sm text-gold underline">Open Contact and Help</Link>
           </div>
         </div>
       </div>

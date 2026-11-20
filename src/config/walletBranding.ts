@@ -80,7 +80,7 @@ export const PAYMENT_DESTINATIONS: Record<PaymentOrgId, PaymentDestination> = {
     shortName: "NESA-Africa",
     programPrefix: "nesa",
     covers: [
-      "Gala tickets and events",
+      "Approved programme services",
       "Merchandise",
       "Sponsorship and partnership",
       "Award-related commercial services",

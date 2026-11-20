@@ -390,10 +390,10 @@ export function AboutContactBlock({
             <Users className="w-4 h-4 text-gold" /> Nominate · Judge · Volunteer
           </div>
           <div className="flex items-center justify-center gap-2 rounded-lg border border-gold/20 bg-charcoal-light/25 p-3">
-            <Globe2 className="w-4 h-4 text-gold" /> 15 Regions · 8 Africa + 7 Global
+            <Globe2 className="w-4 h-4 text-gold" /> 8 Operational Regions · Diaspora & Friends of Africa
           </div>
           <div className="flex items-center justify-center gap-2 rounded-lg border border-gold/20 bg-charcoal-light/25 p-3">
-            <Calendar className="w-4 h-4 text-gold" /> Gala · 28 Dec 2026 · Lagos
+            <Calendar className="w-4 h-4 text-gold" /> Online Programme · 28 Dec 2026
           </div>
         </div>
         <div className="flex flex-wrap justify-center gap-3 pt-2">
@@ -407,8 +407,7 @@ export function AboutContactBlock({
           )}
         </div>
         <p className="text-ivory/60 text-xs pt-6 border-t border-gold/10 max-w-2xl mx-auto">
-          19 Godwin Okigbo Street, Marsha, Surulere, Lagos, Nigeria · +234 805 667 7770 ·{" "}
-          <a href="mailto:info@nesa.africa" className="text-gold underline">info@nesa.africa</a>
+          <Link to="/contact" className="text-gold underline">Contact NESA-Africa through Contact and Help</Link>
         </p>
       </div>
     </section>

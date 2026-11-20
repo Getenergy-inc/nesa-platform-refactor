@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Ticket, ShoppingBag, Music, ArrowRight, Users } from "lucide-react";
+import { Ticket, ShoppingBag, Music, ArrowRight, Users, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import galaImg from "@/assets/movement/gala-ticket.jpg";
+import programmeImg from "@/assets/african-school-classroom.jpg";
 import merchImg from "@/assets/movement/merchandise.jpg";
 import anthemImg from "@/assets/movement/anthem.jpg";
 import ambassadorsImg from "@/assets/movement/ambassadors.jpg";
@@ -21,16 +21,16 @@ interface CardItem {
 
 const items: CardItem[] = [
   {
-    icon: Ticket,
-    eyebrow: "Online Recognition Programme",
-    title: "Buy Your Gala Ticket",
+    icon: Globe,
+    eyebrow: "Monday 28 December 2026 · Online only",
+    title: "Explore the Online Recognition Programme",
     description:
-      "Reserve your seat at the NESA-Africa Online Recognition Programme — an unforgettable night honoring Africa's education changemakers.",
-    cta: "Buy Tickets",
-    href: "/buy-your-ticket",
+      "Discover the focused programme recognising up to nine Africa Education Icons through approved interviews, documentaries and education-impact media.",
+    cta: "View Programme",
+    href: "/programme/2026",
     accent: "from-gold/20 to-gold/5",
-    image: galaImg,
-    imageAlt: "NESA-Africa Online Recognition Programme ballroom with golden trophy",
+    image: programmeImg,
+    imageAlt: "African learners in a classroom representing education-impact storytelling",
   },
   {
     icon: ShoppingBag,
@@ -38,8 +38,8 @@ const items: CardItem[] = [
     title: "Buy Official Merchandise",
     description:
       "Wear the movement. Every purchase from the official NESA store funds Rebuild My School Africa and education legacy projects.",
-    cta: "Visit Shop",
-    href: "/shop",
+    cta: "Enquire About Merchandise",
+    href: "/contact?subject=merchandise",
     accent: "from-emerald-500/15 to-emerald-500/5",
     image: merchImg,
     imageAlt: "Young African ambassadors wearing NESA-Africa branded apparel",
