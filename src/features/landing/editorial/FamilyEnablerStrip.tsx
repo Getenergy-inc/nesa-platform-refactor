@@ -97,13 +97,17 @@ export function FamilyEnablerStrip({
   familySlug,
   familyName,
   exploreHref,
+  categoryFilter,
 }: {
   familySlug: string;
   familyName: string;
   exploreHref: string;
+  /** Optional: only show records whose database category is in this list. */
+  categoryFilter?: string[];
 }) {
   const q = useFamilyBuckets();
-  const entries = q.data?.[familySlug] ?? [];
+  const all = q.data?.[familySlug] ?? [];
+  const entries = categoryFilter ? all.filter((e) => e.categorySlug && categoryFilter.includes(e.categorySlug)) : all;
 
   if (q.isLoading) return <StripSkeleton />;
 

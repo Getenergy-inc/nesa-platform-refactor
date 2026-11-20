@@ -1,3 +1,12 @@
+import { TierArtworkBand, SchoolSupportBanner } from "@/features/tiers/TierPageExtras";
+import AwardPlaqueMotionSection from "@/components/nesa/AwardPlaqueMotionSection";
+import { IconLifetimeSection } from "@/features/landing/editorial/IconLifetimeSection";
+import { IconScaleSection } from "@/features/landing/editorial/IconScaleSection";
+import { IconTimelineTicker } from "@/features/landing/editorial/IconTimelineTicker";
+import { IconGovernanceNote } from "@/features/landing/editorial/IconGovernanceNote";
+import { IconClosingSection } from "@/features/landing/editorial/IconClosingSection";
+import tierIconImage from "@/assets/story/tier-africa-education-icon.jpg";
+import iconCertificate from "@/assets/certificates/icon-certificate.jpeg";
 import { TierNomineeDirectory } from "@/features/tiers/TierNomineeDirectory";
 import { lazy, Suspense, useEffect } from "react";
 import { OfficialNominationForm } from "@/components/nominate/OfficialNominationForm";
@@ -190,6 +199,19 @@ export default function AfricaEducationIcon() {
           </div>
         </div>
       </section>
+
+      {/* Moved from the old homepage: plaque, pathways + nominee strips, scale, timeline, governance, closing */}
+      <TierArtworkBand image={tierIconImage} badge={iconCertificate} name="Africa Education Icon" />
+      <div className="nesa-ed">
+        <AwardPlaqueMotionSection />
+        <IconLifetimeSection />
+        <IconScaleSection />
+        <IconTimelineTicker />
+        <div id="governance" className="scroll-mt-28">
+          <IconGovernanceNote />
+        </div>
+        <IconClosingSection />
+      </div>
 
       {/* 3. Nomination form */}
       <section id="nominate" className="py-12 md:py-16">
@@ -543,6 +565,7 @@ export default function AfricaEducationIcon() {
       </section>
 
       <TierNomineeDirectory tier={1} title="Africa Education Icon nominees" />
+      <SchoolSupportBanner />
 
       {/* 15. Footer integrity statement */}
       <section className="py-8 border-t border-gold/15 bg-charcoal">

@@ -12,9 +12,16 @@ export type TierNumber = 1 | 2 | 3 | 4;
 /** DB category slugs → tier (presentation only). */
 export const TIER_DB_CATEGORIES: Record<2 | 3 | 4, string[]> = {
   2: ["africa-social-media-influencer-education", "africa-music-influencer-education", "africa-sports-influencer-education"],
-  3: ["international-bilateral-education", "political-leaders-education-nigeria", "islamic-education-impact-africa", "christian-education-impact-africa", "diaspora-education-impact", "best-research-development-nigeria", "best-tertiary-institution-library"],
-  4: ["best-csr-education-africa", "best-csr-education-nigeria", "best-ngo-education-africa", "best-ngo-education-nigeria", "best-edutech-organisation-africa", "best-stem-education-africa", "creative-arts-education-nigeria", "best-media-educational-advocacy-nigeria", "best-education-policy-state-nigeria"],
+  3: ["international-bilateral-education", "political-leaders-education-nigeria", "islamic-education-impact-africa", "christian-education-impact-africa", "diaspora-education-impact", "diaspora-educational-impact", "international-partnership-education", "best-research-development-nigeria", "best-tertiary-institution-library"],
+  4: ["best-csr-education-africa", "best-csr-education-nigeria", "best-ngo-education-africa", "best-ngo-education-nigeria", "best-edutech-organisation-africa", "best-stem-education-africa", "creative-arts-education-nigeria", "best-media-educational-advocacy-nigeria", "best-media-education-advocacy-nigeria", "best-edtech-innovation-africa", "best-education-policy-state-nigeria"],
 };
+
+/** Tier of a database category slug, or null. */
+export function tierOfDbCategory(slug?: string | null): 2 | 3 | 4 | null {
+  if (!slug) return null;
+  for (const n of [2, 3, 4] as const) if (TIER_DB_CATEGORIES[n].includes(slug)) return n;
+  return null;
+}
 
 export const TIER_HREF: Record<TierNumber, string> = {
   1: "/awards/africa-education-icon",
@@ -110,9 +117,6 @@ export function TierNomineeDirectory({ tier, title }: { tier: TierNumber; title:
             )}
           </>
         )}
-        <Link to="/impact/special-needs-schools" className="mt-10 block rounded-xl border border-gold/25 bg-gold/5 p-4 text-sm text-white/85 hover:border-gold/60">
-          {t("tierPage.school", "After the awards: Support a Special-Needs School Across Africa through EduAid-Africa →")}
-        </Link>
       </div>
     </section>
   );

@@ -33,7 +33,7 @@ export const SITE_NAV: NavItem[] = [
   ] },
   { label: "Recognition", href: "/recognition", analyticsId: "nav_recognition", children: [
     { label: "Four Recognition Tiers", href: "/recognition" },
-    { label: "Africa Education Icon", href: "/recognition/africa-education-icon" },
+    { label: "Africa Education Icon", href: "/awards/africa-education-icon" },
     { label: "Influencers Education Impact", href: "/recognition/influencers" },
     { label: "Platinum Certificate", href: "/recognition/platinum" },
     { label: "Gold–Blue Garnet", href: "/recognition/gold-blue-garnet" },

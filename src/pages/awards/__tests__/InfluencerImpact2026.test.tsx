@@ -14,6 +14,7 @@ vi.mock("react-i18next", () => ({
 vi.mock("react-helmet-async", () => ({ Helmet: ({ children }: { children: React.ReactNode }) => <>{children}</> }));
 vi.mock("@/components/nesa/NESAHeader", () => ({ NESAHeader: () => <div /> }));
 vi.mock("@/hooks/useNominees", () => ({ useNominees: () => ({ data: [], isLoading: false }) }));
+vi.mock("@/hooks/useFamilyGallery", () => ({ useFamilyBuckets: () => ({ data: {}, isLoading: false }) }));
 vi.mock("@/components/nesa/NESAFooter", () => ({ NESAFooter: () => <div /> }));
 vi.mock("@/components/seo/LocalizedSEO", () => ({ LocalizedSEO: () => null }));
 vi.mock("@/lib/analytics", () => ({ trackEvent: vi.fn() }));

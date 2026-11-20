@@ -1,3 +1,4 @@
+import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
 // Homepage flagship — Africa Education Icon Award (Lifetime Achievement).
 //
 // Copy comes from ICON_AWARD_SECTION / ICON_PATHWAYS in brandHierarchy.ts.
@@ -93,12 +94,14 @@ export function IconLifetimeSection() {
               <p>{c.description}</p>
 
               <div className="mt-4 flex flex-wrap items-center gap-2">
-                <Link
-                  to={c.nominateHref}
+                <a
+                  href={PUBLIC_ACTIONS_2026.nominate.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex h-9 items-center rounded-full bg-gold px-4 text-xs font-semibold text-charcoal transition-colors hover:bg-gold/90"
                 >
                   Nominate
-                </Link>
+                </a>
                 <Link
                   to={c.nomineesHref}
                   className="inline-flex h-9 items-center rounded-full border border-gold/40 px-4 text-xs font-semibold text-gold transition-colors hover:bg-gold/10"

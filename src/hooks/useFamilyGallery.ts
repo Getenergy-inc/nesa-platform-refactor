@@ -67,6 +67,8 @@ export interface FamilyGalleryEntry {
   region: string | null;
   /** The record's ACTUAL award subcategory label, as stored in the database. */
   categoryLabel: string;
+  /** Database category slug the record belongs to (presentation filtering only). */
+  categorySlug?: string;
   familySlug: string;
   familyName: string;
   /** Role / organisation line, when the record carries one. */
@@ -130,7 +132,7 @@ async function fetchFamilyBuckets(): Promise<Record<string, FamilyGalleryEntry[]
   // subcategory id -> { label, family }
   const subMeta = new Map<
     string,
-    { label: string; familySlug: string; familyName: string }
+    { label: string; categorySlug: string; familySlug: string; familyName: string }
   >();
   for (const s of subs as any[]) {
     const cat = catById.get(s.category_id);
@@ -143,6 +145,7 @@ async function fetchFamilyBuckets(): Promise<Record<string, FamilyGalleryEntry[]
       // The specific award subcategory as stored — falls back to the parent
       // category name when the subcategory is unnamed.
       label: (s.name || cat.name || "").trim() || cat.name,
+      categorySlug: cat.slug,
       familySlug: family.slug,
       familyName: family.name,
     });
@@ -202,6 +205,7 @@ async function fetchFamilyBuckets(): Promise<Record<string, FamilyGalleryEntry[]
         country: tidy(r.country, 40),
         region: tidy(r.region, 40),
         categoryLabel: meta.label,
+        categorySlug: meta.categorySlug,
         familySlug: meta.familySlug,
         familyName: meta.familyName,
         title: tidy(r.title, 90),

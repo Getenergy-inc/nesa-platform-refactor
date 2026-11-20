@@ -1,3 +1,4 @@
+import { TierFamiliesSection, SchoolSupportBanner } from "@/features/tiers/TierPageExtras";
 import { TierNomineeDirectory } from "@/features/tiers/TierNomineeDirectory";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -405,7 +406,9 @@ export default function InfluencerImpact2026() {
             </div>
           </div>
         </section>
+        <TierFamiliesSection tier={2} title="Influencer Education Impact pathway" />
         <TierNomineeDirectory tier={2} title="Influencers Education Impact nominees" />
+        <SchoolSupportBanner />
       </main>
 
       <NESAFooter />

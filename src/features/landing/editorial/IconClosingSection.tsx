@@ -1,3 +1,4 @@
+import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
 // Homepage — closing Icon band. Gala date comes from the canonical
 // programme config via ICON_CLOSING_SECTION.
 
@@ -35,9 +36,9 @@ export function IconClosingSection() {
             <Link to="/nominees/africa-education-icon-award" className="ed-btn-ghost">
               Explore Existing Icon Nominees →
             </Link>
-            <Link to={ICON_AWARD_SECTION.nominateHref} className="ed-btn-primary">
+            <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer" className="ed-btn-primary">
               Nominate an Education Icon →
-            </Link>
+            </a>
           </div>
         </div>
       </div>

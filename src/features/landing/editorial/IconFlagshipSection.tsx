@@ -1,3 +1,4 @@
+import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
 // Homepage — Africa Education Icon flagship band.
 // Names and eligible communities are sourced from brandHierarchy.ts, never
 // retyped in prose, to prevent naming drift.
@@ -53,9 +54,9 @@ export function IconFlagshipSection() {
             <Link to="/nominees/africa-education-icon-award" className="ed-btn-primary">
               Explore Africa Education Icons →
             </Link>
-            <Link to="/nominate/africa-education-icon" className="ed-btn-ghost">
+            <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer" className="ed-btn-ghost">
               Submit a Nomination →
-            </Link>
+            </a>
           </div>
 
           <p className="mt-6 text-xs text-white/50">{ICON_NO_PUBLIC_VOTING_NOTE}</p>

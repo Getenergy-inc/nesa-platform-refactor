@@ -1,3 +1,4 @@
+import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
 import { Link } from "react-router-dom";
 import { Sparkles } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -23,13 +24,15 @@ export function EditorialHero() {
           {t("landingLean.hero.line", "The Africa Education Icon Award honours lifetime impact on education across Africa — and every award opens a door to support schools.")}
         </p>
         <div className="ed-hero-cta-row">
-          <Link
-            to="/nominate/africa-education-icon"
+          <a
+            href={PUBLIC_ACTIONS_2026.nominate.href}
+            target="_blank"
+            rel="noopener noreferrer"
             className="ed-btn-primary"
-            onClick={() => trackEvent("hero_cta_click", { slot: "primary", href: "/nominate/africa-education-icon", surface: "home" })}
+            onClick={() => trackEvent("hero_cta_click", { slot: "primary", href: PUBLIC_ACTIONS_2026.nominate.href, surface: "home" })}
           >
             {t("landingLean.hero.ctaIcon", "Nominate an Africa Education Icon")}
-          </Link>
+          </a>
           <Link
             to="/impact/special-needs-schools"
             className="ed-btn-ghost"

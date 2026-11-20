@@ -1,3 +1,6 @@
+import { WhoCanBeEnablerSection } from "@/features/landing/editorial/WhoCanBeEnablerSection";
+import { DirectoryStatsSection } from "@/features/landing/editorial/DirectoryStatsSection";
+import "@/features/landing/editorial/editorial.css";
 // /awards — NESA-Africa Recognition Framework gateway.
 //
 // Goal: explain HOW recognition works before exposing categories.
@@ -641,6 +644,11 @@ export default function AwardsPage() {
             </motion.div>
           </div>
         </section>
+        {/* Moved from the old homepage */}
+        <div className="nesa-ed">
+          <WhoCanBeEnablerSection />
+          <DirectoryStatsSection />
+        </div>
       </div>
     </>
   );
