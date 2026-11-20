@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import faweKenya from "@/assets/endorsements/fawe-kenya.jpeg";
 import csacefa from "@/assets/endorsements/csacefa.jpeg";
 
-const ENDORSERS = [
+export const ENDORSERS = [
   {
     id: "fawe-kenya",
     name: "Forum for African Women Educationalists — Kenya Chapter",

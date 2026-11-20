@@ -13,15 +13,15 @@
 
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { MapPin } from "lucide-react";
 import { LIVING_GALLERY_MIN_RECORDS } from "@/hooks/useLivingGallery";
 import { RECOGNITION_FAMILIES, BRAND, ICON_AWARD_SECTION, ICON_PATHWAYS } from "@/config/brandHierarchy";
-import { PROGRAMME_END_LABEL } from "@/config/programme";
 import { bySubcategory, type IconSubcategorySlug, type IconNominee } from "@/data/iconAward";
 import { StripScroller } from "./StripScroller";
 
 /** Cap on cards rendered in the strip (the pool itself is much larger). */
-const GALLERY_CARD_LIMIT = 36;
+const GALLERY_CARD_LIMIT = 12;
 
 /** Rendered card box — width/height attributes match the CSS box exactly. */
 const CARD_W = 280;
@@ -45,7 +45,7 @@ function GalleryCard({ entry }: { entry: GalleryEntry }) {
     .toUpperCase();
 
   return (
-    <article className="group relative flex w-[78vw] max-w-[320px] shrink-0 snap-center flex-col overflow-hidden rounded-2xl border border-gold/20 bg-white/[0.03] transition-colors hover:border-gold/50 focus-within:border-gold sm:w-[46vw] lg:w-[280px]">
+    <article className="group relative flex w-[78vw] max-w-[320px] shrink-0 snap-center flex-col overflow-hidden rounded-2xl border border-gold/20 bg-white/[0.03] transition-colors hover:border-gold/50 focus-within:border-gold sm:w-[46vw] lg:w-[220px]">
       <div className="relative aspect-[4/5] w-full overflow-hidden bg-charcoal/60">
         {n.image_url && !broken ? (
           <img
@@ -84,7 +84,7 @@ function GalleryCard({ entry }: { entry: GalleryEntry }) {
           </p>
         )}
         {n.impact_summary && (
-          <p className="text-xs leading-relaxed text-white/70 line-clamp-3">{n.impact_summary}</p>
+          <p className="text-xs leading-relaxed text-white/70 line-clamp-2">{n.impact_summary}</p>
         )}
         <Link
           to={entry.href}
@@ -163,20 +163,17 @@ export function LivingGallerySection() {
   const { entries, total } = useIconGalleryPool();
   const hasEnough = entries.length >= LIVING_GALLERY_MIN_RECORDS;
 
-  const { gallery, tagline } = ICON_AWARD_SECTION;
-  const lede = "Across Africa and beyond, educators, philanthropists, institutions, innovators, advocates, public leaders, artists, athletes and community organisations are helping learners overcome barriers and access better educational opportunities.";
-  const invite = gallery.invite.replace("{date}", PROGRAMME_END_LABEL);
+  const { t } = useTranslation("pages");
+  const { gallery } = ICON_AWARD_SECTION;
 
   return (
-    <section className="ed-section" aria-labelledby="ed-living-gallery-heading">
+    <section className="ed-section" style={{ paddingBlock: "56px" }} aria-labelledby="ed-living-gallery-heading">
       <div className="ed-wrap">
         <div className="ed-section-head">
           <div className="ed-eyebrow">{gallery.eyebrow}</div>
           <h2 id="ed-living-gallery-heading" className="ed-section-title">
             {gallery.title}
           </h2>
-          <p className="ed-section-sub">{lede}</p>
-          <p className="ed-section-sub">{invite}</p>
         </div>
 
         {hasEnough ? (
@@ -193,10 +190,7 @@ export function LivingGallerySection() {
 
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <Link to="/nominees/africa-education-icon-award" className="ed-btn-ghost">
-                Meet Africa's Education Enablers →
-              </Link>
-              <Link to={ICON_AWARD_SECTION.awardHref} className="ed-btn-ghost">
-                {tagline} →
+                {t("landingLean.gallery.all", "Meet all Icon nominees →")}
               </Link>
             </div>
           </>

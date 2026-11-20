@@ -1,20 +1,19 @@
-// NESA-Africa Landing Page — Editorial Recognition Edition (homepage only).
+// NESA-Africa Landing Page — Lean edition (homepage only).
 //
-// Section order:
-//   1.  Editorial hero (Icon Award lead, 6 certificate pills, dual CTA, trophy card)
-//   2.  Public nominations notice (6 September 2026) + compact Icon key-dates ticker
-//   3.  Meet Africa’s Education Enablers — living gallery (database-driven)
-//   4.  Africa Education Icon flagship + three pathway cards (ONE Icon moment)
-//   5.  Icon scale stats (live)
-//   6.  Six recognition pathways
-//   7.  Who can be an Education Enabler?
-//   8.  Impact directory + live stats
-//   9.  From recognition to impact
-//   10. Built for trust
-//   11. Gala countdown — 28 December 2026 — with the Icon closing message adjacent
-//   12. Volunteer band + SCEF's Board of Advisors
-//   13. Join the movement · final CTA · governance firewall
+// Two messages: (1) Tier 1 Africa Education Icon Award, and (2) after the
+// awards, Support a Special-Needs School Across Africa via EduAid-Africa.
 //
+// Section order (7):
+//   1. Hero — eyebrow, title, one line, two CTAs (Icon nomination · school support)
+//   2. Public nominations notice (compact, one line)
+//   3. Tier 1 · Africa Education Icon — flagship + three pathways, nominee strip (max 12),
+//      one-line governance summary
+//   4. The four tiers at a glance (TierStripSection)
+//   5. After the awards — Support a Special-Needs School (SchoolImpactSection)
+//   6. Trust — three points, endorser logos, governance link
+//   7. Online Awards Gala band + single closing CTA
+//
+// Other homepage components remain in ./editorial for tier and other pages.
 // Visual skin lives in ./editorial/editorial.css, scoped under `.nesa-ed`.
 
 import { lazy } from "react";
@@ -22,50 +21,28 @@ import { useTranslation } from "react-i18next";
 import { LocalizedSEO } from "@/components/seo/LocalizedSEO";
 
 import { PublicNominationsNotice } from "@/components/nesa/PublicNominationsNotice";
-import { AwardPlaqueMotionSection } from "@/components/nesa/AwardPlaqueMotionSection";
-import { InfluencerPathwayNomineeSlider } from "@/components/awards/InfluencerPathwayNomineeSlider";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
 import { LazySection } from "@/components/ui/lazy-section";
 import { MobileBottomActions } from "@/components/navigation/MobileBottomActions";
 import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicator";
-import { ExitIntentPopup } from "@/components/nesa/ExitIntentPopup";
 import { BackToTopButton } from "@/components/ui/back-to-top";
 import { FloatingFAQButton } from "@/components/nesa/PageFAQ";
-import { SchoolSupportFundSection } from "@/components/impact/SchoolSupportFundSection";
 
 import "./editorial/editorial.css";
 import {
   EditorialHero,
   LivingGallerySection,
-  IconLifetimeSection,
   IconFlagshipSection,
-  IconGovernanceNote,
-  RecognitionFamiliesSection,
-  WhoCanBeEnablerSection,
-  DirectoryStatsSection,
-  RecognitionToImpactSection,
-  TrustBandSection,
-  VolunteerBandSection,
-  BoardOfAdvisorsSection,
+  IconGovernanceLine,
   GalaBandSection,
-  JoinMovementSection,
-  HelpRecogniseSection,
-  PartnersBandSection,
-
 } from "./editorial";
 
-
-
-
-const GovernanceFirewallSection = lazy(() =>
-  import("@/components/nesa/GovernanceFirewallSection").then((m) => ({
-    default: m.GovernanceFirewallSection,
-  })),
-);
-const FinalCTASection = lazy(() =>
-  import("@/components/nesa/FinalCTASection").then((m) => ({ default: m.FinalCTASection })),
-);
+const lean = () => import("./editorial/LeanHomeSections");
+const TierStripSection = lazy(() => lean().then((m) => ({ default: m.TierStripSection })));
+const SchoolImpactSection = lazy(() => lean().then((m) => ({ default: m.SchoolImpactSection })));
+const TrustPartnersSection = lazy(() => lean().then((m) => ({ default: m.TrustPartnersSection })));
+const ClosingCTASection = lazy(() => lean().then((m) => ({ default: m.ClosingCTASection })));
 
 export function NESALandingPage() {
   const { t } = useTranslation("pages");
@@ -74,10 +51,7 @@ export function NESALandingPage() {
     <>
       <LocalizedSEO
         pathname="/"
-        title={t(
-          "seo.landing.title",
-          "NESA-Africa 2026 | Recognising Africa’s Education Enablers",
-        )}
+        title={t("seo.landing.title", "NESA-Africa 2026 | Recognising Africa’s Education Enablers")}
         description={t(
           "seo.landing.description",
           "NESA-Africa identifies, documents and recognises people and institutions expanding education access, quality, inclusion, innovation and opportunity across Africa.",
@@ -98,91 +72,30 @@ export function NESALandingPage() {
         {/* 1. HERO */}
         <EditorialHero />
 
-        {/* 2. PUBLIC NOTICE — nominations open 6 September 2026 */}
-        <PublicNominationsNotice />
+        {/* 2. PUBLIC NOTICE (compact) */}
+        <PublicNominationsNotice compact />
 
-        {/* 3. AFRICA EDUCATION ICON — the single flagship moment: intro band,
-            three pathway cards, then the Icon governance statement. */}
+        {/* 3. TIER 1 · AFRICA EDUCATION ICON */}
         <IconFlagshipSection />
-        <IconLifetimeSection />
-        <IconGovernanceNote />
-
-        {/* 3b. AWARD PLAQUE + LOGO MOTION GRAPHIC */}
-        <AwardPlaqueMotionSection />
-
-        {/* 4. LIVING GALLERY — Meet Africa’s Education Enablers */}
         <LivingGallerySection />
+        <IconGovernanceLine />
 
+        {/* 4. THE FOUR TIERS AT A GLANCE */}
+        <LazySection><TierStripSection /></LazySection>
 
+        {/* 5. AFTER THE AWARDS: EDUCATION SOCIAL IMPACT */}
+        <LazySection><SchoolImpactSection /></LazySection>
 
+        {/* 6. TRUST */}
+        <LazySection><TrustPartnersSection /></LazySection>
 
-
-        {/* 5. ONE CONTINENTAL MISSION. SIX RECOGNITION PATHWAYS. */}
-        <RecognitionFamiliesSection />
-
-        {/* 5b. INFLUENCER EDUCATION IMPACT — the three live pathway sliders
-            (Music · Social Media · Sports), same data source as
-            /awards/influencer-education-impact so the two never drift. */}
-        <LazySection>
-          <InfluencerPathwayNomineeSlider
-            eyebrow="Influencer Education Impact"
-            headingLead="Three Influencer Pathways,"
-            headingHighlight="One Education Mission"
-            footerLink={{
-              to: "/awards/influencer-education-impact",
-              label: "Explore Influencer Education Impact",
-            }}
-          />
-        </LazySection>
-
-        {/* 6. WHO CAN BE AN EDUCATION ENABLER? */}
-        <WhoCanBeEnablerSection />
-
-        {/* 7. IMPACT DIRECTORY + LIVE STATS */}
-        <DirectoryStatsSection />
-
-        {/* 8. FROM RECOGNITION TO IMPACT */}
-        <RecognitionToImpactSection />
-        <SchoolSupportFundSection />
-
-        {/* 9. BUILT FOR TRUST */}
-        <TrustBandSection />
-
-        {/* 9b. ENDORSERS & PARTNERS */}
-        <PartnersBandSection />
-
-
-
-        {/* 10. GALA COUNTDOWN — 28 December 2026 */}
+        {/* 7. GALA + FINAL CTA */}
         <GalaBandSection />
-
-        {/* SUPPORTING BANDS — people and moments */}
-        <VolunteerBandSection />
-        <BoardOfAdvisorsSection />
-
-
-
-        {/* 9. JOIN THE MOVEMENT */}
-        <JoinMovementSection />
-
-        {/* 10. FINAL CTA */}
-        <HelpRecogniseSection />
-
-
-        {/* GOVERNANCE & INTEGRITY FIREWALL */}
-        <LazySection>
-          <GovernanceFirewallSection />
-        </LazySection>
-
-        <LazySection>
-          <FinalCTASection />
-        </LazySection>
-
+        <LazySection><ClosingCTASection /></LazySection>
 
         <NESAFooter />
       </div>
 
-      <ExitIntentPopup />
       <BackToTopButton />
       <MobileBottomActions />
       <FloatingFAQButton />

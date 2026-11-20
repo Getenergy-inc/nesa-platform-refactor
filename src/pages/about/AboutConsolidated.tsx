@@ -12,6 +12,8 @@ import About from "@/pages/about/About";
 import SCEF from "@/pages/about/SCEF";
 import Vision2035 from "@/pages/about/Vision2035";
 import FAQ from "@/pages/FAQ";
+import "@/features/landing/editorial/editorial.css";
+import { BoardOfAdvisorsSection } from "@/features/landing/editorial/BoardOfAdvisorsSection";
 
 const SECTIONS = [
   { id: "about", label: "About" },
@@ -115,6 +117,8 @@ export default function AboutConsolidated() {
       >
         <SCEF />
       </Disclosure>
+
+      <div className="nesa-ed"><BoardOfAdvisorsSection /></div>
 
       <Disclosure
         id="vision-2035"

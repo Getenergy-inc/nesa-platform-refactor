@@ -1,3 +1,5 @@
+import "@/features/landing/editorial/editorial.css";
+import { VolunteerBandSection } from "@/features/landing/editorial/VolunteerBandSection";
 import { LeanHero, LeanSection, LeanCtas, type LeanCta } from "@/components/lean/LeanPage";
 
 const BLOCKS: Array<{ title: string; body: string; ctas: LeanCta[] }> = [
@@ -24,6 +26,7 @@ export default function GetInvolvedPage() {
           <LeanCtas ctas={b.ctas} />
         </LeanSection>
       ))}
+      <div className="nesa-ed"><VolunteerBandSection /></div>
       <LeanSection title="Integrity notice">
         <p>Sponsorship, donations, partnerships, endorsements, merchandise purchases and media participation carry zero weight in nomination, eligibility, judging or recognition.</p>
       </LeanSection>

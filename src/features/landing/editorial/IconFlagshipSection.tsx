@@ -8,6 +8,7 @@ import {
   BRAND,
   RECOGNITION_COMMUNITIES,
   ICON_NO_PUBLIC_VOTING_NOTE,
+  ICON_PATHWAYS,
 } from "@/config/brandHierarchy";
 
 export function IconFlagshipSection() {
@@ -38,11 +39,21 @@ export function IconFlagshipSection() {
             ))}
           </ul>
 
+          <ul className="mt-6 grid gap-3 text-left sm:grid-cols-3" aria-label="Icon pathways">
+            {ICON_PATHWAYS.map((p) => (
+              <li key={p.slug} className="rounded-xl border border-gold/20 bg-white/[0.03] p-4">
+                <h3 className="font-serif text-base text-white">{p.name}</h3>
+                <p className="mt-1 text-xs leading-relaxed text-white/65">{p.blurb}</p>
+                <Link to={p.nomineesHref} className="mt-2 inline-block text-xs font-semibold text-gold hover:underline">View nominees →</Link>
+              </li>
+            ))}
+          </ul>
+
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link to="/nominees/africa-education-icon-award" className="ed-btn-primary">
               Explore Africa Education Icons →
             </Link>
-            <Link to="/nominate" className="ed-btn-ghost">
+            <Link to="/nominate/africa-education-icon" className="ed-btn-ghost">
               Submit a Nomination →
             </Link>
           </div>

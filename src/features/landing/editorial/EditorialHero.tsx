@@ -1,47 +1,41 @@
 import { Link } from "react-router-dom";
 import { Sparkles } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import stageBackdrop from "@/assets/nesa-stage-backdrop.jpg";
 import { trackEvent } from "@/lib/analytics";
-import { BRAND } from "@/config/brandHierarchy";
-import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
 
+/** Lean homepage hero: one line, two actions (Icon nomination · school support). */
 export function EditorialHero() {
+  const { t } = useTranslation("pages");
   return (
     <section className="ed-hero" aria-labelledby="ed-hero-heading">
       <div className="ed-hero-photo" aria-hidden="true"><img src={stageBackdrop} alt="" /></div>
-
       <div className="ed-hero-content">
         <div className="ed-badge">
           <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
-          NESA-AFRICA 2026
+          {t("landingLean.hero.eyebrow", "NESA-Africa 2026")}
         </div>
-
-        <div className="ed-hero-lead">NESA-<span className="ed-yr">Africa</span></div>
-        <div className="ed-quote">&ldquo;{BRAND.programme}&rdquo;</div>
-
         <h1 id="ed-hero-heading" className="ed-hero-headline">
-          Recognising Africa&rsquo;s<br />
-          <span className="ed-accent">Education Enablers</span>
+          {t("landingLean.hero.titleLead", "Recognising Africa’s")}<br />
+          <span className="ed-accent">{t("landingLean.hero.titleAccent", "Education Enablers")}</span>
         </h1>
-
         <p className="ed-hero-sub">
-          The African Blue-Garnet Awards for Education identify, document and recognise people and institutions whose verified work expands education access, quality, inclusion, innovation and opportunity across Africa.
+          {t("landingLean.hero.line", "The Africa Education Icon Award honours lifetime impact on education across Africa — and every award opens a door to support schools.")}
         </p>
-        <p className="ed-hero-sub italic">Evidence-led research. Independent Icon judging. No public voting in 2026.</p>
-
         <div className="ed-hero-cta-row">
-          <a
-            href={PUBLIC_ACTIONS_2026.nominate.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Submit a Nomination"
+          <Link
+            to="/nominate/africa-education-icon"
             className="ed-btn-primary"
-            onClick={() => trackEvent("hero_cta_click", { slot: "primary", href: PUBLIC_ACTIONS_2026.nominate.href, surface: "home" })}
+            onClick={() => trackEvent("hero_cta_click", { slot: "primary", href: "/nominate/africa-education-icon", surface: "home" })}
           >
-            Submit a Nomination
-          </a>
-          <Link to="/how-it-works" className="ed-btn-ghost">
-            How Recognition Works
+            {t("landingLean.hero.ctaIcon", "Nominate an Africa Education Icon")}
+          </Link>
+          <Link
+            to="/impact/special-needs-schools"
+            className="ed-btn-ghost"
+            onClick={() => trackEvent("hero_cta_click", { slot: "secondary", href: "/impact/special-needs-schools", surface: "home" })}
+          >
+            {t("landingLean.hero.ctaSchool", "Support a Special-Needs School")}
           </Link>
         </div>
       </div>
