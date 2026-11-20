@@ -1,3 +1,7 @@
+## Icon category nominee portraits — 20 Nov 2026
+- [x] Restored a separate horizontally scrollable nominee portrait strip inside each Africa Education Icon category; all 421 existing records are included (136 Philanthropy, 166 Literary & Curriculum, 119 Technical Educator), with initials fallbacks for missing portraits. Removed the old mixed 12-card strip; school-support content and all image/data files remain unchanged.
+- [x] Per-category completeness/link tests pass; desktop/360px scrolling, visible portrait loading, a real profile destination and zero page errors verified. Not published.
+
 ## Tier 2 landing page — 20 Nov 2026
 - [x] Rebuilt `/awards/influencer-education-impact` around the three approved Influencers Education Impact categories, existing Tier 2 artwork, live nominee data, free official nomination and no-public-voting governance; removed duplicate grids, the separate on-site form and the incorrect Gold-Blue Garnet gala label.
 - [x] Added three focused page regressions; four focused tests passed with the related homepage test. Verified category/directory destinations, official form, artwork, desktop/360px layouts and zero page errors; corrected clipped mobile hero content. No database/permission changes or publishing.

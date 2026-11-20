@@ -9,6 +9,8 @@ import tierGarnet from "@/assets/story/tier-gold-blue-garnet.jpg";
 import { SCHOOL_SUPPORT_PROGRAMME } from "@/config/schoolSupport";
 import { ICON_PATHWAYS } from "@/config/brandHierarchy";
 import { bySubcategory, type IconSubcategorySlug, type IconNominee } from "@/data/iconAward";
+import { getInitials } from "@/components/influencer-impact/InitialsAvatar";
+import { StripScroller } from "./StripScroller";
 import { useIconAwardStats } from "./useIconAwardStats";
 import { ENDORSERS } from "./PartnersBandSection";
 
@@ -127,16 +129,60 @@ export function ClosingCTASection() {
  * left = Tier 1 Africa Education Icon landing; right = Special Needs Education
  * Support Africa, the post-award service. Copy comes from approved config.
  */
+function IconCategoryNomineeStrip({ pathwayName, nominees }: { pathwayName: string; nominees: IconNominee[] }) {
+  const { t } = useTranslation("pages");
+
+  if (nominees.length === 0) {
+    return <p className="mt-4 text-xs text-white/50">{t("landingLean.pillars.noNominees", "Nominee profiles will appear here as they are added.")}</p>;
+  }
+
+  return (
+    <StripScroller label={`${pathwayName} ${t("landingLean.pillars.nomineesLabel", "nominees")}`} autoScroll={false} className="mt-4">
+      {nominees.map((n) => {
+        const hasPortrait = !!n.image_url && !/placeholder/i.test(n.image_url);
+        return (
+          <Link
+            key={n.id}
+            to={`/nominees/africa-education-icon-award/${n.award_subcategory_slug}/${n.classification_slug}/${n.slug}`}
+            aria-label={t("landingLean.pillars.viewNominee", `View ${n.name}'s nominee profile`)}
+            className="group block w-[112px] shrink-0 snap-start overflow-hidden rounded-xl border border-gold/15 bg-white/[0.03] transition-colors hover:border-gold/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+          >
+            <div className="aspect-[4/5] w-full overflow-hidden bg-charcoal">
+              {hasPortrait ? (
+                <img
+                  src={n.image_url}
+                  alt={n.name}
+                  width={112}
+                  height={140}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                />
+              ) : (
+                <span role="img" aria-label={t("landingLean.pillars.photoPending", `${n.name} — portrait pending verification`)} className="flex h-full w-full items-center justify-center bg-gold/5 font-display text-2xl font-bold text-gold">
+                  {getInitials(n.name)}
+                </span>
+              )}
+            </div>
+            <span className="block p-2">
+              <span className="line-clamp-2 text-[11px] font-semibold leading-tight text-white group-hover:text-gold">{n.name}</span>
+              {n.country && <span className="mt-1 block truncate text-[10px] text-white/55">{n.country}</span>}
+            </span>
+          </Link>
+        );
+      })}
+    </StripScroller>
+  );
+}
+
 export function TwoPillarsSection() {
   const { t } = useTranslation("pages");
-  const nominees = useMemo(() => {
-    const pools = ICON_PATHWAYS.map((p) =>
-      bySubcategory(p.slug as IconSubcategorySlug).filter((n) => !!n.image_url && !/placeholder/i.test(n.image_url)),
-    );
-    const out: IconNominee[] = [];
-    for (let i = 0; out.length < 12 && i < 40; i++) for (const pool of pools) if (pool[i] && out.length < 12) out.push(pool[i]);
-    return out;
-  }, []);
+  const nomineesByPathway = useMemo(
+    () => Object.fromEntries(
+      ICON_PATHWAYS.map((p) => [p.slug, bySubcategory(p.slug as IconSubcategorySlug)]),
+    ) as Record<string, IconNominee[]>,
+    [],
+  );
   const p = SCHOOL_SUPPORT_PROGRAMME;
   const btnPrimary = "inline-flex h-9 items-center rounded-full bg-gold px-4 text-xs font-semibold text-charcoal transition-colors hover:bg-gold/90";
   const btnGhost = "inline-flex h-9 items-center rounded-full border border-gold/40 px-4 text-xs font-semibold text-gold transition-colors hover:bg-gold/10";
@@ -172,6 +218,7 @@ export function TwoPillarsSection() {
                   <Link to={pw.nomineesHref} className="mt-2 inline-block text-xs font-semibold text-gold hover:underline">
                     {t("landingLean.pillars.viewCategory", "View category nominees →")}
                   </Link>
+                  <IconCategoryNomineeStrip pathwayName={pw.name} nominees={nomineesByPathway[pw.slug] ?? []} />
                 </li>
               ))}
             </ul>
@@ -180,18 +227,6 @@ export function TwoPillarsSection() {
               <Link to="/nominees/africa-education-icon-award" className={btnGhost}>{t("landingLean.pillars.meet", "Meet Icon nominees")}</Link>
               <Link to="/awards/africa-education-icon" className={btnGhost}>{t("landingLean.pillars.iconPage", "Tier 1 page →")}</Link>
             </div>
-            {nominees.length > 0 && (
-              <ul className="mt-4 flex list-none snap-x gap-3 overflow-x-auto pb-2" aria-label={t("landingLean.pillars.iconStrip", "Africa Education Icon nominees")}>
-                {nominees.map((n) => (
-                  <li key={n.id} className="w-[112px] shrink-0 snap-start">
-                    <Link to={`/nominees/africa-education-icon-award/${n.award_subcategory_slug}/${n.classification_slug}/${n.slug}`} className="block overflow-hidden rounded-xl border border-gold/15 hover:border-gold/50">
-                      <img src={n.image_url!} alt={n.name} loading="lazy" decoding="async" className="aspect-[4/5] w-full object-cover" />
-                      <span className="block p-1.5 text-[11px] font-semibold leading-tight text-white line-clamp-2">{n.name}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
           </article>
 
           {/* Post-award service — Special Needs Education Support Africa */}
