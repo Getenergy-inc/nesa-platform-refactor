@@ -1,3 +1,4 @@
+import { TierNomineeDirectory } from "@/features/tiers/TierNomineeDirectory";
 import { lazy, Suspense, useEffect } from "react";
 import { OfficialNominationForm } from "@/components/nominate/OfficialNominationForm";
 import { IconSelectionCriteria } from "@/components/awards/IconSelectionCriteria";
@@ -540,6 +541,8 @@ export default function AfricaEducationIcon() {
           </div>
         </motion.div>
       </section>
+
+      <TierNomineeDirectory tier={1} title="Africa Education Icon nominees" />
 
       {/* 15. Footer integrity statement */}
       <section className="py-8 border-t border-gold/15 bg-charcoal">

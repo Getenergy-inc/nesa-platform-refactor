@@ -14,6 +14,7 @@ import { ICON_PATHWAYS } from "@/config/brandHierarchy";
 import { ICON_NOMINEES, bySubcategory, type IconSubcategorySlug, type IconNominee } from "@/data/iconAward";
 import { getInitials } from "@/components/influencer-impact/InitialsAvatar";
 import { useNominees } from "@/hooks/useNominees";
+import { TIER_DB_CATEGORIES } from "@/features/tiers/TierNomineeDirectory";
 import { StripScroller } from "./StripScroller";
 import { useIconAwardStats } from "./useIconAwardStats";
 import { ENDORSERS } from "./PartnersBandSection";
@@ -38,12 +39,6 @@ export function IconGovernanceLine() {
   );
 }
 
-/** DB category slugs → homepage tier (presentation only; eligibility untouched). */
-const TIER_DB_CATEGORIES: Record<2 | 3 | 4, string[]> = {
-  2: ["africa-social-media-influencer-education", "africa-music-influencer-education", "africa-sports-influencer-education"],
-  3: ["international-bilateral-education", "political-leaders-education-nigeria", "islamic-education-impact-africa", "christian-education-impact-africa", "diaspora-education-impact", "best-research-development-nigeria", "best-tertiary-institution-library"],
-  4: ["best-csr-education-africa", "best-csr-education-nigeria", "best-ngo-education-africa", "best-ngo-education-nigeria", "best-edutech-organisation-africa", "best-stem-education-africa", "creative-arts-education-nigeria", "best-media-educational-advocacy-nigeria", "best-education-policy-state-nigeria"],
-};
 const STRIP_MAX = 16;
 
 type StripPerson = { id: string; name: string; photo: string | null; href: string };
@@ -94,13 +89,13 @@ export function TierStripSection() {
   }, [live, icon.nominees]);
 
   const tiers = [
-    { n: 1, name: t("landingLean.tiers.t1.name", "Africa Education Icon"), body: t("landingLean.tiers.t1.body", "The flagship lifetime honour for transformative contribution to education across Africa, 2006–2026."), href: "/awards/africa-education-icon", nomineesHref: "/nominees", img: tierIcon,
+    { n: 1, name: t("landingLean.tiers.t1.name", "Africa Education Icon"), body: t("landingLean.tiers.t1.body", "The flagship lifetime honour for transformative contribution to education across Africa, 2006–2026."), href: "/awards/africa-education-icon", nomineesHref: "", img: tierIcon,
       features: [t("landingLean.tiers.t1.f1", "Three categories: Philanthropy · Literary & New Curriculum Advocate · Technical Educator"), t("landingLean.tiers.t1.f2", "Nine independent judges and nine Icon NRRC members"), t("landingLean.tiers.t1.f3", "Honoured at the online programme, Monday 28 December 2026")] },
-    { n: 2, name: t("landingLean.tiers.t2.name", "Influencers Education Impact"), body: t("landingLean.tiers.t2.body", "Music, social media and sports voices using their reach to advance education."), href: "/awards/influencer-education-impact", nomineesHref: "/awards/influencer-education-impact", img: tierInfluencer,
+    { n: 2, name: t("landingLean.tiers.t2.name", "Influencers Education Impact"), body: t("landingLean.tiers.t2.body", "Music, social media and sports voices using their reach to advance education."), href: "/awards/influencer-education-impact", nomineesHref: "", img: tierInfluencer,
       features: [t("landingLean.tiers.t2.f1", "Three categories: Music · Social Media · Sports"), t("landingLean.tiers.t2.f2", "Evidence-led NRRC verification"), t("landingLean.tiers.t2.f3", "Free nomination · no public voting in 2026")] },
-    { n: 3, name: t("landingLean.tiers.t3.name", "Platinum Recognition"), body: t("landingLean.tiers.t3.body", "Certificates of Recognition for verified institutional and organisational education impact."), href: "/awards/platinum-recognition", nomineesHref: "/nominees", img: tierPlatinum,
+    { n: 3, name: t("landingLean.tiers.t3.name", "Platinum Recognition"), body: t("landingLean.tiers.t3.body", "Certificates of Recognition for verified institutional and organisational education impact."), href: "/awards/platinum-recognition", nomineesHref: "", img: tierPlatinum,
       features: [t("landingLean.tiers.t3.f1", "Faith-based, political, diaspora, research and international partnership categories"), t("landingLean.tiers.t3.f2", "Certificates of Recognition from 29 December 2026"), t("landingLean.tiers.t3.f3", "Nominations open to 31 March 2027")] },
-    { n: 4, name: t("landingLean.tiers.t4.name", "Gold–Blue Garnet"), body: t("landingLean.tiers.t4.body", "Recognition for verified education enablers across Africa’s regions and the Diaspora."), href: "/awards/gold-blue-garnet", nomineesHref: "/nominees", img: tierGarnet,
+    { n: 4, name: t("landingLean.tiers.t4.name", "Gold–Blue Garnet"), body: t("landingLean.tiers.t4.body", "Recognition for verified education enablers across Africa’s regions and the Diaspora."), href: "/awards/gold-blue-garnet", nomineesHref: "", img: tierGarnet,
       features: [t("landingLean.tiers.t4.f1", "CSR, NGO, EdTech, STEM, creative arts, media and policy categories"), t("landingLean.tiers.t4.f2", "Regional and Diaspora education enablers"), t("landingLean.tiers.t4.f3", "Nominations open to 31 March 2027")] },
   ];
 
@@ -128,7 +123,7 @@ export function TierStripSection() {
                   {p.total ? <p className="text-xs text-white/60">{p.total} {t("landingLean.tiers.nominees", "nominees")}</p> : null}
                   <div className="mt-auto flex flex-wrap gap-4 pt-1 text-sm font-semibold">
                     <Link to={tier.href} className="text-gold hover:underline">{t("landingLean.tiers.explore", "Explore tier →")}</Link>
-                    <Link to={tier.nomineesHref} className="text-white/80 hover:underline">{t("landingLean.tiers.meet", "Meet the nominees →")}</Link>
+                    <Link to={`${tier.href}#tier-nominees`} className="text-white/80 hover:underline">{t("landingLean.tiers.meet", "Meet the nominees →")}</Link>
                   </div>
                 </div>
               </li>

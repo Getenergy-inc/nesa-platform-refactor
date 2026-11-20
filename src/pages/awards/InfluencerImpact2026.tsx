@@ -1,3 +1,4 @@
+import { TierNomineeDirectory } from "@/features/tiers/TierNomineeDirectory";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -404,6 +405,7 @@ export default function InfluencerImpact2026() {
             </div>
           </div>
         </section>
+        <TierNomineeDirectory tier={2} title="Influencers Education Impact nominees" />
       </main>
 
       <NESAFooter />

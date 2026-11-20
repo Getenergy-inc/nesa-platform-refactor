@@ -1,3 +1,4 @@
+import { TierNomineeDirectory } from "@/features/tiers/TierNomineeDirectory";
 import AwardCategoryStandardPage from "./AwardCategoryStandardPage";
 import TierCategoriesGrid from "@/components/recognition2026/TierCategoriesGrid";
 
@@ -10,6 +11,7 @@ export default function BlueGarnetAward() {
         tier="gold-blue-garnet"
         intro="Nine categories under the Gold-Blue Garnet 2026 Recognition Edition — open each category page to view eligibility, evidence and the dedicated nomination pathway."
       />
+      <TierNomineeDirectory tier={4} title="Gold–Blue Garnet nominees" />
     </>
   );
 }
