@@ -14114,30 +14114,7 @@ export type Database = {
           p_subcategory_slug?: string
           p_token: string
         }
-        Returns: {
-          award_tier: string | null
-          category_slug: string | null
-          converted_at: string | null
-          converted_to_nomination_id: string | null
-          converted_user_id: string | null
-          created_at: string
-          draft_token: string
-          expires_at: string
-          form_type: string
-          id: string
-          nominator_email: string | null
-          nominee_data: Json
-          session_id: string | null
-          status: string
-          subcategory_slug: string | null
-          updated_at: string
-        }
-        SetofOptions: {
-          from: "*"
-          to: "nomination_drafts"
-          isOneToOne: true
-          isSetofReturn: false
-        }
+        Returns: undefined
       }
     }
     Enums: {
