@@ -49,7 +49,7 @@ export const REFACTOR_REDIRECTS_2026: RefactorRedirect[] = [
   { from: "/about-us", to: "/about", reason: "Duplicate About" },
   { from: "/about/overview", to: "/about", reason: "Duplicate About" },
   { from: "/faqs", to: "/help", reason: "FAQs consolidated into Help Centre" },
-  { from: "/faq", to: "/help", reason: "FAQs consolidated into Help Centre" },
+  { from: "/faq", to: "/contact#faq", reason: "Contact and FAQ consolidated" },
   { from: "/sponsor-us", to: "/sponsors", reason: "Duplicate sponsor landing" },
   { from: "/sponsor/enquire", to: "/sponsors/enquire", reason: "Canonicalise sponsor enquiry" },
   { from: "/become-a-sponsor", to: "/sponsors", reason: "Duplicate sponsor CTA page" },
@@ -120,8 +120,8 @@ export const REFACTOR_REDIRECTS_2026: RefactorRedirect[] = [
   { from: "/reports", to: "/resources#reports", reason: "Resources hub" },
   { from: "/impact/reports", to: "/journal", reason: "EduAid-Africa Journal" },
 
-  // Recognition tier alias (spec says /awards/platinum canonical)
-  { from: "/awards/platinum-recognition", to: "/awards/platinum", reason: "Canonical tier slug" },
+  // Recognition tier alias (Website Content v2 canonical)
+  { from: "/awards/platinum", to: "/awards/platinum-recognition", reason: "Canonical tier slug" },
 
   // Community merges — /community was never built; /get-involved is the real
   // Community hub page, so no redirect is registered for it.

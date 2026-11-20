@@ -655,6 +655,14 @@ const App = () => (
 
 
 
+                  {/* Website Content v2 — canonical public destinations. */}
+                  <Route path="/icons" element={<Navigate to="/nominees" replace />} />
+                  <Route path="/recipients" element={<Navigate to="/nominees" replace />} />
+                  <Route path="/integrity" element={<Navigate to="/about#governance" replace />} />
+                  <Route path="/join-nrc" element={<Navigate to="/get-involved" replace />} />
+                  <Route path="/voting" element={<Navigate to="/" replace />} />
+                  <Route path="/agc" element={<Navigate to="/" replace />} />
+
                   {/* Misc legacy paths flagged in audit */}
                   <Route path="/jury" element={<Navigate to="/judges" replace />} />
                   <Route path="/music" element={<Navigate to="/media" replace />} />
@@ -667,7 +675,7 @@ const App = () => (
                   <Route path="/policies/terms" element={<Navigate to="/policies" replace />} />
                   <Route path="/policies/voting-integrity" element={<Navigate to="/policies" replace />} />
                   <Route path="/get-involved" element={<WithLayout><GetInvolvedPage /></WithLayout>} />
-                  <Route path="/how-it-works" element={<WithLayout><HowItWorksPage /></WithLayout>} />
+                  <Route path="/how-it-works" element={<Navigate to="/awards#how" replace />} />
                   <Route path="/research-and-judging" element={<WithLayout><ResearchAndJudgingPage /></WithLayout>} />
                   <Route path="/press" element={<Navigate to="/media" replace />} />
 
@@ -682,7 +690,7 @@ const App = () => (
                   <Route path="/about/eligibility" element={<Navigate to="/awards/eligibility" replace />} />
                   <Route path="/about/partners" element={<Navigate to="/sponsors" replace />} />
                   {/* /faqs is canonical (Phase D); /faq legacy points to it */}
-                  <Route path="/faq" element={<Navigate to="/faqs" replace />} />
+                  <Route path="/faq" element={<Navigate to="/contact#faq" replace />} />
 
                   {/* Awards sub-pages */}
                   <Route path="/awards/eligibility" element={<Navigate to="/awards#eligibility" replace />} />
@@ -785,25 +793,11 @@ const App = () => (
                   <Route path="/about/2028-2030" element={<Navigate to="/about/nesa-africa-2028-2030" replace />} />
                   <Route path="/about/vision-2035" element={<Navigate to="/about#vision-2035" replace />} />
                   <Route path="/about/governance" element={<Navigate to="/about#governance" replace />} />
-                  <Route
-                    path="/governance"
-                    element={
-                      <WithLayout>
-                        <GovernancePage />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/governance" element={<Navigate to="/about#governance" replace />} />
                   <Route path="/edx-matrix" element={<EDXMatrixPage />} />
                   <Route path="/edx" element={<Navigate to="/edx-matrix" replace />} />
                   <Route path="/about/timeline" element={<Navigate to="/timeline" replace />} />
-                  <Route
-                    path="/timeline"
-                    element={
-                      <WithLayout>
-                        <Timeline />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/timeline" element={<Navigate to="/awards#timeline" replace />} />
                   <Route path="/voting-timeline" element={<Navigate to="/timeline" replace />} />
                   <Route path="/awards/timeline" element={<Navigate to="/timeline" replace />} />
 
@@ -826,14 +820,7 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route
-                    path="/support-a-special-needs-school"
-                    element={
-                      <WithLayout>
-                        <SpecialNeedsSchools />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/support-a-special-needs-school" element={<Navigate to="/impact/special-needs-schools" replace />} />
                   <Route path="/support-a-special-needs-school/2027" element={<WithLayout><SpecialNeedsSchools /></WithLayout>} />
                   <Route
                     path="/support-a-special-needs-school/participate"
@@ -1041,14 +1028,7 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route
-                    path="/awards/platinum"
-                    element={
-                      <WithLayout>
-                        <PlatinumAward />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/awards/platinum" element={<Navigate to="/awards/platinum-recognition" replace />} />
                   <Route
                     path="/awards/icon"
                     element={
@@ -2378,14 +2358,7 @@ const App = () => (
                     <Route path="nominee/:slug" element={<ArenaReview />} />
                     <Route path="discussion" element={<ArenaDiscussion />} />
                   </Route>
-                  <Route
-                    path="/partners"
-                    element={
-                      <WithLayout>
-                        <Partners />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/partners" element={<Navigate to="/about#partners" replace />} />
                   <Route
                     path="/partners/prospects/:slug"
                     element={
@@ -2419,14 +2392,7 @@ const App = () => (
                       </WithLayout>
                     }
                   />
-                  <Route
-                    path="/volunteer"
-                    element={
-                      <WithLayout>
-                        <Volunteer />
-                      </WithLayout>
-                    }
-                  />
+                  <Route path="/volunteer" element={<Navigate to="/get-involved" replace />} />
                   <Route
                     path="/volunteers"
                     element={

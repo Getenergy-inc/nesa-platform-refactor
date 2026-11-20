@@ -35,6 +35,8 @@ import { NOMINATION_WINDOW_LABEL } from "@/config/nominationWindows2026";
 import { PROGRAMME_END_LONG_LABEL } from "@/config/programme";
 import { trackEvent } from "@/lib/analytics";
 import tierImage from "@/assets/story/tier-influencer-education-impact.jpg";
+import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
+import { SiteClosingBand } from "@/components/nesa/SiteWideContent2026";
 
 const DIRECTORY_ROUTE = "/awards/influencer-education-impact/nominees";
 const TIER = AWARD_TIERS_2026.find((tier) => tier.id === "influencers")!;
@@ -165,7 +167,9 @@ export default function InfluencerImpact2026() {
               <div className="mt-7 flex flex-wrap justify-center gap-3 lg:justify-start">
                 <Button asChild size="lg" className="h-auto min-h-11 w-full whitespace-normal bg-gold px-4 py-3 text-center text-sm font-semibold text-charcoal hover:bg-gold/90 sm:w-auto sm:text-base">
                   <a
-                    href="#nominate"
+                    href={PUBLIC_ACTIONS_2026.nominate.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={() => trackEvent("influencer_hero_cta_click", { cta: "nominate" })}
                   >
                     <Sparkles className="mr-2 h-4 w-4" aria-hidden="true" />
@@ -266,7 +270,7 @@ export default function InfluencerImpact2026() {
                             <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                           </Link>
                         </Button>
-                        <a href="#nominate" className="py-2 text-center text-xs font-semibold text-gold hover:underline">
+                        <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer" className="py-2 text-center text-xs font-semibold text-gold hover:underline">
                           {t("tier2Influencer.categories.nominate", "Nominate in this category →")}
                         </a>
                       </div>
@@ -411,6 +415,7 @@ export default function InfluencerImpact2026() {
         <SchoolSupportBanner />
       </main>
 
+      <SiteClosingBand />
       <NESAFooter />
     </>
   );

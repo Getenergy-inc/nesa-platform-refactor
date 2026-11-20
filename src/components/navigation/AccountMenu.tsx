@@ -27,6 +27,7 @@ import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { trackNav } from "@/lib/analytics";
 import { SIGN_IN_WORKSPACES } from "@/config/siteNavigation";
+import { useTranslation } from "react-i18next";
 
 const SIGNED_IN = [
   { label: "My Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -37,6 +38,7 @@ const SIGNED_IN = [
 
 export function AccountMenu({ className, label, menuLabel }: { className?: string; label?: string; menuLabel?: string }) {
   const { user, signOut } = useAuth();
+  const { t } = useTranslation("pages");
 
   const triggerCls = cn(
     "inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-sm text-white/85",
@@ -53,10 +55,10 @@ export function AccountMenu({ className, label, menuLabel }: { className?: strin
             variant="ghost"
             type="button"
             className={triggerCls}
-            aria-label={menuLabel ?? "Sign in menu"}
+            aria-label={menuLabel ?? t("navigation.signInMenu", "Sign in menu")}
             onClick={() => trackNav("account_menu_open", { device: "desktop", state: "signed_out" })}
           >
-            {!label && <UserCircle2 className="h-4 w-4" aria-hidden />} {label ?? "Sign In"}
+            {!label && <UserCircle2 className="h-4 w-4" aria-hidden />} {label ?? t("navigation.signIn", "Sign in")}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-56 bg-charcoal border-gold/20 text-white/90">

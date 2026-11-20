@@ -33,7 +33,7 @@ export function RecognitionToImpactSection() {
         </ol>
 
         <div className="mt-10 flex flex-wrap justify-center gap-3">
-          <Link to="/support-a-special-needs-school" className="ed-btn-primary">
+          <Link to="/impact/special-needs-schools" className="ed-btn-primary">
             Support a Special-Needs School
           </Link>
           <Link to="/afri-edutourism" className="ed-btn-ghost">

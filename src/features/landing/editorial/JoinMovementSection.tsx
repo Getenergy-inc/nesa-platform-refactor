@@ -3,6 +3,7 @@
 
 import { Link } from "react-router-dom";
 import { BRAND } from "@/config/brandHierarchy";
+import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
 
 const SECONDARY = [
   { label: "Partner", href: "/partners" },
@@ -21,9 +22,9 @@ export function JoinMovementSection() {
         <p className="ed-section-sub mx-auto max-w-xl">{BRAND.programmeTagline}</p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Link to="/nominate" className="ed-btn-primary">
+          <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer" className="ed-btn-primary">
             Submit a Nomination
-          </Link>
+          </a>
           <Link to="/participate" className="ed-btn-ghost">
             Participate →
           </Link>

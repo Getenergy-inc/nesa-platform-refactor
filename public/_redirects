@@ -79,7 +79,7 @@
 /special-needs-education-support                             /support-a-special-needs-school 301
 /language                                                    /                    301
 
-# --- 2. SPA routes (551 explicit paths from src/App.tsx) ---
+# --- 2. SPA routes (557 explicit paths from src/App.tsx) ---
 /recognition/influencer-education-impact/african-sports-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-music-icons-supporting-education /index.html          200
 /recognition/influencer-education-impact/african-social-media-influencers /index.html          200
@@ -536,6 +536,7 @@ nominee/:slug                                                /index.html        
 /olc/wallet                                                  /index.html          200
 /orders/:id                                                  /index.html          200
 /press-room                                                  /index.html          200
+/recipients                                                  /index.html          200
 /shop/:slug                                                  /index.html          200
 /volunteers                                                  /index.html          200
 assignments                                                  /index.html          200
@@ -546,6 +547,7 @@ assignments                                                  /index.html        
 /directory                                                   /index.html          200
 /ecosystem                                                   /index.html          200
 /icon-jury                                                   /index.html          200
+/integrity                                                   /index.html          200
 /judge/coi                                                   /index.html          200
 /resources                                                   /index.html          200
 /shop/cart                                                   /index.html          200
@@ -557,6 +559,7 @@ discussion                                                   /index.html        
 /chapters                                                    /index.html          200
 /checkout                                                    /index.html          200
 /earn-agc                                                    /index.html          200
+/join-nrc                                                    /index.html          200
 /media/tv                                                    /index.html          200
 /movement                                                    /index.html          200
 /nominate                                                    /index.html          200
@@ -597,6 +600,7 @@ pathways                                                     /index.html        
 /signup                                                      /index.html          200
 /verify                                                      /index.html          200
 /videos                                                      /index.html          200
+/voting                                                      /index.html          200
 /wallet                                                      /index.html          200
 profile                                                      /index.html          200
 results                                                      /index.html          200
@@ -604,6 +608,7 @@ scoring                                                      /index.html        
 /about                                                       /index.html          200
 /admin                                                       /index.html          200
 /award                                                       /index.html          200
+/icons                                                       /index.html          200
 /judge                                                       /index.html          200
 /links                                                       /index.html          200
 /login                                                       /index.html          200
@@ -626,6 +631,7 @@ voting                                                       /index.html        
 /team                                                        /index.html          200
 audit                                                        /index.html          200
 notes                                                        /index.html          200
+/agc                                                         /index.html          200
 /edx                                                         /index.html          200
 /faq                                                         /index.html          200
 /otp                                                         /index.html          200

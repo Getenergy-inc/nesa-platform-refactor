@@ -6,6 +6,8 @@ import { RECOGNITION_FAMILIES } from "@/config/brandHierarchy";
 import { CATEGORIES } from "@/config/recognition2026/categories";
 import { FamilyEnablerStrip } from "@/features/landing/editorial/FamilyEnablerStrip";
 import { TIER_DB_CATEGORIES } from "./TierNomineeDirectory";
+import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
+import { RecognitionIntegrityLine } from "@/components/nesa/SiteWideContent2026";
 import "@/features/landing/editorial/editorial.css";
 
 const TIER_SLUG = { 2: "influencer-education-impact", 3: "platinum", 4: "gold-blue-garnet" } as const;
@@ -46,7 +48,7 @@ export function TierFamiliesSection({ tier, title }: { tier: 2 | 3 | 4; title: s
                   <h3><Link to={`/recognition/${f.slug}`} className="hover:underline">{f.name}</Link></h3>
                   <p>{f.lede}</p>
                   <div className="mt-4 flex flex-wrap items-center gap-2">
-                    <Link to={cta.nominate ?? `/nominate?family=${f.slug}`} className="inline-flex h-9 items-center rounded-full bg-gold px-4 text-xs font-semibold text-charcoal transition-colors hover:bg-gold/90">Nominate</Link>
+                    <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer" className="inline-flex h-9 items-center rounded-full bg-gold px-4 text-xs font-semibold text-charcoal transition-colors hover:bg-gold/90">Nominate</a>
                     <Link to={exploreHref} className="inline-flex h-9 items-center rounded-full border border-gold/40 px-4 text-xs font-semibold text-gold transition-colors hover:bg-gold/10">Meet the nominees</Link>
                     <Link to={`/recognition/${f.slug}`} className="inline-flex h-9 items-center rounded-full border border-white/15 px-4 text-xs font-semibold text-white/80 transition-colors hover:border-gold/40 hover:text-gold">Explore {f.name} →</Link>
                   </div>
@@ -77,6 +79,7 @@ export function SchoolSupportBanner() {
   const { t } = useTranslation("pages");
   return (
     <div className="bg-charcoal pb-12">
+      <RecognitionIntegrityLine className="mb-8" />
       <div className="container mx-auto max-w-6xl px-4">
         <Link to="/impact/special-needs-schools" className="block rounded-xl border border-gold/25 bg-gold/5 p-4 text-sm text-white/85 hover:border-gold/60">
           {t("tierPage.school", "After the awards: Support a Special-Needs School Across Africa through EduAid-Africa →")}

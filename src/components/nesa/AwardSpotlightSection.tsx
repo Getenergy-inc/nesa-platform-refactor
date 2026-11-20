@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { PathwayVideoCard, type PathwayVideoCardData } from "./PathwayVideoCard";
 import { usePathwayCards } from "@/hooks/usePathwayCards";
+import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
 const posterIcon = "/images/placeholder.png";
 const posterCsr = "/images/placeholder.png";
 const posterInfluencer = "/images/placeholder.png";
@@ -47,7 +48,7 @@ const pathways: PathwayVideoCardData[] = [
     previewSummary:
       "Inside the Africa Education Icon of the Decade — the lifetime tier honouring literary advocates, technical educators, and education champions reshaping the continent.",
     primaryCta: { label: "Explore Icon Nominees", href: "/nominees/icon" },
-    secondaryCta: { label: "Nominate a Legend", href: "/nominate?category=icon" },
+    secondaryCta: { label: "Nominate a Legend", href: PUBLIC_ACTIONS_2026.nominate.href },
     tertiaryCta: { label: "Explore Nominees", href: "/nominees?category=icon" },
     engagementCtaLabel: "Watch Legacy Preview",
   },
@@ -78,7 +79,7 @@ const pathways: PathwayVideoCardData[] = [
     previewSummary:
       "Meet the corporations whose CSR programmes are funding scholarships, schools, and digital learning — competing on the Blue Garnet stage for Africa's top corporate education honour.",
     primaryCta: { label: "Explore Corporate Nominees", href: "/awards/csr-education" },
-    secondaryCta: { label: "Submit Your CSR Story", href: "/nominate?category=csr-education" },
+    secondaryCta: { label: "Submit Your CSR Story", href: PUBLIC_ACTIONS_2026.nominate.href },
     tertiaryCta: { label: "Explore Nominees", href: "/nominees?category=csr-education" },
     engagementCtaLabel: "View Impact Story",
   },
@@ -109,7 +110,7 @@ const pathways: PathwayVideoCardData[] = [
     previewSummary:
       "Discover the artists, athletes and creators using their platforms to drive literacy, scholarships and school access — honoured under NESA-Africa's Gold Recognition tier.",
     primaryCta: { label: "Explore Gold Nominees", href: "/nominees/gold" },
-    secondaryCta: { label: "Vote With AGC", href: "/awards/gold-blue-garnet" },
+    secondaryCta: { label: "Nominate an Influencer", href: PUBLIC_ACTIONS_2026.nominate.href },
     tertiaryCta: { label: "Explore Nominees", href: "/nominees?category=influencers" },
     engagementCtaLabel: "Explore the Journey",
   },
@@ -229,7 +230,7 @@ export function AwardSpotlightSection() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link to="/nominate">
+            <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer">
               <Button
                 size="lg"
                 className="w-full sm:w-auto bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2 px-7 shadow-[0_0_30px_-8px_hsl(var(--gold)/0.6)]"
@@ -237,14 +238,14 @@ export function AwardSpotlightSection() {
                 Start a Nomination
                 <ArrowRight className="h-4 w-4" />
               </Button>
-            </Link>
-            <Link to="/awards/gold-blue-garnet">
+            </a>
+            <Link to="/nominees">
               <Button
                 size="lg"
                 variant="outline"
                 className="w-full sm:w-auto border-gold/60 text-gold hover:bg-gold/10 rounded-full gap-2 px-7"
               >
-                Vote for Nominees
+                Explore Nominees
               </Button>
             </Link>
             <Link to="/categories">

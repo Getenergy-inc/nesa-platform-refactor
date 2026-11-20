@@ -24,10 +24,9 @@ import { AnnouncementBar } from "@/components/navigation/AnnouncementBar";
 import { EducationEnablersMegaMenu } from "@/components/navigation/EducationEnablersMegaMenu";
 import { NavSearch } from "@/components/navigation/NavSearch";
 import { AccountMenu } from "@/components/navigation/AccountMenu";
-import { WorkspaceSwitcher } from "@/components/navigation/WorkspaceSwitcher";
 import { MOBILE_MENU_OPEN_EVENT } from "@/components/navigation/MobileBottomActions";
 import { NESALogo } from "@/components/nesa/NESALogo";
-import { SchoolSupportChoice } from "@/components/impact/SchoolSupportActions";
+import { useTranslation } from "react-i18next";
 
 function SkipLink() {
   return (
@@ -61,6 +60,7 @@ const FOCUS_RING =
 
 function DropdownSimple({ item }: { item: NavItem }) {
   const location = useLocation();
+  const { t } = useTranslation("pages");
   const wide = !!(item.panelHeading || item.panelFooter);
   return (
     <div className={cn(wide ? "w-[340px]" : "w-[300px]", "bg-charcoal border border-gold/20")}>
@@ -86,7 +86,7 @@ function DropdownSimple({ item }: { item: NavItem }) {
           <li>
             <MenubarItem asChild>
               <Link to={item.href} className={cn("block px-3 py-2 rounded-md text-sm font-semibold text-gold/90 hover:bg-gold/10 focus:bg-gold/10", FOCUS_RING)}>
-                {item.label} overview
+                {t(`navigation.labels.${item.label}`, item.label)} {t("navigation.overview", "overview")}
               </Link>
             </MenubarItem>
           </li>
@@ -114,7 +114,7 @@ function DropdownSimple({ item }: { item: NavItem }) {
                     active ? "text-gold bg-gold/10" : "text-white/85",
                   )}
                 >
-                  {c.label}
+                  {t(`navigation.labels.${c.label}`, c.label)}
                 </Link>
               </MenubarItem>
             </li>
@@ -152,6 +152,7 @@ function DropdownSimple({ item }: { item: NavItem }) {
 
 function DropdownSectioned({ item }: { item: NavItem }) {
   const location = useLocation();
+  const { t } = useTranslation("pages");
   const sections = item.sections ?? [];
   const cols = sections.length;
   const widthCls =
@@ -221,6 +222,7 @@ function DropdownSectioned({ item }: { item: NavItem }) {
 
 function DesktopNav() {
   const location = useLocation();
+  const { t } = useTranslation("pages");
   const [value, setValue] = useState("");
 
   useEffect(() => { setValue(""); }, [location.pathname, location.hash]);
@@ -232,30 +234,34 @@ function DesktopNav() {
   );
 
   return (
-    <nav className="hidden xl:flex flex-1 min-w-0 justify-center" aria-label="Primary">
-      <Menubar value={value} onValueChange={setValue} loop
-        className="h-auto border-0 bg-transparent p-0 space-x-0">
-        {SITE_NAV.filter(item => item.children || item.sections || item.megaMenu).map(item => (
-          <MenubarMenu key={item.href} value={item.href}>
-            <MenubarTrigger className={cn(triggerCls(isActive(location.pathname, item.href)),
-              "bg-transparent focus:bg-gold/10 focus:text-gold data-[state=open]:bg-gold/10 data-[state=open]:text-gold")}
-              onClick={() => trackNav("dropdown_open", { label: item.label, section: item.analyticsId, device: "desktop" })}>
-              {item.shortLabel ?? item.label}
-              <ChevronDown className="ml-1 h-3 w-3" aria-hidden />
-            </MenubarTrigger>
-            <MenubarContent alignOffset={0} sideOffset={6} className="min-w-0 p-0 border-gold/20 bg-charcoal text-foreground">
-              {item.megaMenu === "education-enablers" ? <EducationEnablersMegaMenu />
-                : item.sections ? <DropdownSectioned item={item} /> : <DropdownSimple item={item} />}
-            </MenubarContent>
-          </MenubarMenu>
-        ))}
+    <nav className="hidden xl:flex flex-1 min-w-0 justify-center" aria-label={t("navigation.primary", "Primary")}>
+      <Menubar value={value} onValueChange={setValue} loop className="h-auto border-0 bg-transparent p-0 space-x-0">
+        {SITE_NAV.map((item) => {
+          const hasPanel = !!(item.children || item.sections || item.megaMenu);
+          if (!hasPanel) {
+            const active = isActive(location.pathname, item.href);
+            return (
+              <Link key={item.href} to={item.href} className={triggerCls(active)} aria-current={active ? "page" : undefined}>
+                {t(`navigation.labels.${item.label}`, item.label)}
+              </Link>
+            );
+          }
+          return (
+            <MenubarMenu key={item.href} value={item.href}>
+              <MenubarTrigger className={cn(triggerCls(isActive(location.pathname, item.href)),
+                "bg-transparent focus:bg-gold/10 focus:text-gold data-[state=open]:bg-gold/10 data-[state=open]:text-gold")}
+                onClick={() => trackNav("dropdown_open", { label: item.label, section: item.analyticsId, device: "desktop" })}>
+                {t(`navigation.labels.${item.shortLabel ?? item.label}`, item.shortLabel ?? item.label)}
+                <ChevronDown className="ml-1 h-3 w-3" aria-hidden />
+              </MenubarTrigger>
+              <MenubarContent alignOffset={0} sideOffset={6} className="min-w-0 p-0 border-gold/20 bg-charcoal text-foreground">
+                {item.megaMenu === "education-enablers" ? <EducationEnablersMegaMenu />
+                  : item.sections ? <DropdownSectioned item={item} /> : <DropdownSimple item={item} />}
+              </MenubarContent>
+            </MenubarMenu>
+          );
+        })}
       </Menubar>
-      {SITE_NAV.filter(item => !item.children && !item.sections && !item.megaMenu).map(item => (
-        <Link key={item.href} to={item.href} className={triggerCls(isActive(location.pathname, item.href))}
-          aria-current={isActive(location.pathname, item.href) ? "page" : undefined}>
-          {item.label}
-        </Link>
-      ))}
     </nav>
   );
 }
@@ -264,6 +270,7 @@ function DesktopNav() {
 /* --------------------------------- CTAs --------------------------------- */
 
 function NominateButton({ className }: { className?: string }) {
+  const { t } = useTranslation("pages");
   return (
     <Button
       asChild
@@ -281,7 +288,7 @@ function NominateButton({ className }: { className?: string }) {
           })
         }
       >
-        {NOMINATE_CTA.label}
+        {t("navigation.nominate", "Nominate")}
       </a>
     </Button>
   );
@@ -324,7 +331,6 @@ function SecondaryPhaseCTA({ className }: { className?: string }) {
 function AccountActions() {
   return (
     <div className="hidden xl:flex items-center gap-1">
-      <WorkspaceSwitcher />
       <LanguageSwitcher className="text-sm" />
       <AccountMenu />
     </div>
@@ -334,6 +340,7 @@ function AccountActions() {
 /* ------------------------------ Mobile drawer ----------------------------- */
 
 function MobileMenu() {
+  const { t } = useTranslation("pages");
   const [open, setOpen] = useState(false);
   const [signInOpen, setSignInOpen] = useState("");
   const signInTriggerRef = useRef<HTMLButtonElement>(null);
@@ -431,9 +438,9 @@ function MobileMenu() {
             EdTech
           </div>
           <Link to="/education-enablers/edtech" onClick={close} className={linkCls}>EdTech Education Enablers</Link>
-          <Link to="/nominate" onClick={close} className={cn(linkCls, "text-gold font-semibold")}>
+          <a href={NOMINATE_CTA.href} target="_blank" rel="noopener noreferrer" onClick={close} className={cn(linkCls, "text-gold font-semibold")}>
             Submit a Nomination
-          </Link>
+          </a>
         </>
       );
     }
@@ -471,17 +478,10 @@ function MobileMenu() {
         </SheetHeader>
         <div className="flex-1 overflow-y-auto p-3">
           <div className="mb-3"><NavSearch className="!h-9 !w-full" /></div>
-          <div className="grid grid-cols-1 gap-2 mb-3">
+          <div className="mb-3">
             <NominateButton className="w-full h-auto min-h-11 whitespace-normal text-center py-2" />
-            {!user && <Button variant="outline" className="border-gold/60 text-gold hover:bg-gold/10 hover:text-gold min-h-11"
-              onClick={() => {
-                setSignInOpen("sign-in");
-              }}>
-              Sign In
-            </Button>}
           </div>
 
-          <div className="mb-3"><SchoolSupportChoice /></div>
           <nav aria-label="Mobile primary">
             <Accordion type="single" collapsible className="w-full">
               {MOBILE_SITE_NAV.map((item) => {
@@ -496,7 +496,7 @@ function MobileMenu() {
                         aria-current={isActive(location.pathname, item.href) ? "page" : undefined}
                         className={cn("block px-3 py-3 text-sm text-white hover:text-gold rounded-md", FOCUS_RING)}
                       >
-                        {item.label}
+                        {t(`navigation.labels.${item.label}`, item.label)}
                       </Link>
                     </div>
                   );
@@ -504,7 +504,7 @@ function MobileMenu() {
                 return (
                   <AccordionItem key={item.href} value={item.href} className="border-gold/15">
                     <AccordionTrigger className={cn("text-white hover:text-gold px-3 text-sm rounded-md", FOCUS_RING)}>
-                      {item.label}
+                      {t(`navigation.labels.${item.label}`, item.label)}
                     </AccordionTrigger>
                     <AccordionContent className="pb-1">
                       {item.panelHeading && (
@@ -518,7 +518,7 @@ function MobileMenu() {
                           onClick={close}
                           className={cn(linkCls, "font-semibold text-gold/90")}
                         >
-                          {item.headingLink ? item.label : `${item.label} overview`}
+                          {item.headingLink ? t(`navigation.labels.${item.label}`, item.label) : `${t(`navigation.labels.${item.label}`, item.label)} ${t("navigation.overview", "overview")}`}
                         </Link>
                       )}
                       {renderChildren(item)}
@@ -561,7 +561,7 @@ function MobileMenu() {
                 <div className="px-3 py-2"><LanguageSwitcher /></div>
                 <Accordion type="single" collapsible value={signInOpen} onValueChange={setSignInOpen} id="mobile-sign-in" className="w-full">
                   <AccordionItem value="sign-in" className="border-gold/15">
-                    <AccordionTrigger ref={signInTriggerRef} className={cn("text-white hover:text-gold px-3 text-sm rounded-md", FOCUS_RING)}>Sign In</AccordionTrigger>
+                    <AccordionTrigger ref={signInTriggerRef} className={cn("text-white hover:text-gold px-3 text-sm rounded-md", FOCUS_RING)}>{t("navigation.signIn", "Sign in")}</AccordionTrigger>
                     <AccordionContent>
                       <p className="px-3 py-2 text-xs text-gold">Select Your Workspace</p>
                       {SIGN_IN_WORKSPACES.map(({ label, href, description }) => (
@@ -609,8 +609,8 @@ export function SiteHeader() {
           <DesktopNav />
           <div className="flex items-center gap-1.5 shrink-0">
             <NavSearch className="hidden 2xl:inline-flex" />
-            <AccountActions />
             <NominateButton className="text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 h-9 sm:h-10 whitespace-nowrap" />
+            <AccountActions />
             <MobileMenu />
           </div>
         </div>

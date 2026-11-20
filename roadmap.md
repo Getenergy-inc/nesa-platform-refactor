@@ -1,3 +1,10 @@
+## Website Content v2 — Message A of 3 — 20 Nov 2026
+- [x] Replace the shared desktop/mobile navigation, four-column footer, mobile actions and requested legacy redirects without changing access rules.
+- [x] Add the shared integrity line and closing band where requested; remove only visible retired-feature links/pop-ups.
+- [x] Apply the seven-section homepage wording and school-support/About anchors while retaining nominee strips, imagery, data and branding.
+- [x] Run focused tests/build and verify desktop (1280px) and phone (360px); report the online-programme address and any unmatched links. Do not publish.
+- Online programme: `/programme/2026`. Every listed destination resolves; Academy uses an honest placeholder pending approved content and a text wordmark because no logo exists.
+
 ## Landing school imagery, plaque and online programme — 20 Nov 2026
 - [x] Restored the owner-supplied school collage and eight category pictures inside the existing single school-support panel; added SCEF, EduAid-Africa and Friends of EduAid-Africa logos extracted from the supplied HTML through CDN asset pointers. Ignored the HTML's empty image placeholders, workflows, styling and eight-category programme taxonomy.
 - [x] Restored the existing award-plaque component immediately before the existing focused online-programme band; retained Monday 28 December 2026 · Online Only and the approved focused-programme wording.

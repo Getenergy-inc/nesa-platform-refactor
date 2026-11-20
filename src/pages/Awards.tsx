@@ -47,6 +47,11 @@ import { TenRegionsBannerSection } from "@/components/nesa/TenRegionsBannerSecti
 import { AwardTiersSummarySection } from "@/components/nesa/AwardTiersSummarySection";
 import { GovernanceFirewallSection } from "@/components/nesa/GovernanceFirewallSection";
 import { PageFAQSection } from "@/components/nesa/PageFAQ";
+import { RecognitionIntegrityLine } from "@/components/nesa/SiteWideContent2026";
+import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
+import { NOMINATION_WINDOW_LABEL } from "@/config/nominationWindows2026";
+import { PROGRAMME_END_LONG_LABEL } from "@/config/programme";
+import { useTranslation } from "react-i18next";
 
 const SITE = "https://nesaafrica.lovable.app";
 
@@ -169,6 +174,7 @@ function track(section: string, label: string, destination: string) {
 }
 
 export default function AwardsPage() {
+  const { t } = useTranslation("pages");
   return (
     <>
       <Helmet>
@@ -257,17 +263,21 @@ export default function AwardsPage() {
                   variant="outline"
                   className="border-gold/40 text-gold hover:bg-gold/10 rounded-full px-8"
                 >
-                  <Link
-                    to="/nominate"
-                    onClick={() => track("hero", "Start a Nomination", "/nominate")}
+                  <a
+                    href={PUBLIC_ACTIONS_2026.nominate.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => track("hero", "Start a Nomination", PUBLIC_ACTIONS_2026.nominate.href)}
                   >
                     Start a Nomination
-                  </Link>
+                  </a>
                 </Button>
               </div>
             </div>
           </div>
         </section>
+
+        <RecognitionIntegrityLine />
 
         {/* ─── 1A. CANONICAL TIER EXPLORER + IMPACT JOURNEY ── */}
         <section className="border-y border-gold/10 bg-charcoal/95 py-16 md:py-20">
@@ -336,7 +346,7 @@ export default function AwardsPage() {
         </section>
 
         {/* ─── 2. HOW RECOGNITION WORKS ──────────────────── */}
-        <section className="py-16 md:py-24 bg-charcoal-light/20 border-y border-gold/10">
+        <section id="how" className="scroll-mt-28 py-16 md:py-24 bg-charcoal-light/20 border-y border-gold/10">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <span className="text-[11px] uppercase tracking-[0.18em] text-gold font-semibold">
@@ -373,6 +383,16 @@ export default function AwardsPage() {
                 </motion.li>
               ))}
             </ol>
+          </div>
+        </section>
+
+        <section id="timeline" aria-labelledby="awards-timeline-heading" className="scroll-mt-28 border-b border-gold/10 bg-charcoal py-14">
+          <div className="container mx-auto max-w-4xl px-4 text-center">
+            <h2 id="awards-timeline-heading" className="font-display text-3xl font-bold text-white">{t("awardsPage.timeline.title", "Programme timeline")}</h2>
+            <dl className="mt-8 grid gap-4 sm:grid-cols-2">
+              <div className="rounded-xl border border-gold/20 bg-white/[0.03] p-5"><dt className="text-sm text-white/60">{t("awardsPage.timeline.nominations", "Public nominations")}</dt><dd className="mt-2 font-semibold text-gold">{NOMINATION_WINDOW_LABEL}</dd></div>
+              <div className="rounded-xl border border-gold/20 bg-white/[0.03] p-5"><dt className="text-sm text-white/60">{t("awardsPage.timeline.programme", "Online Recognition Programme")}</dt><dd className="mt-2 font-semibold text-gold">{PROGRAMME_END_LONG_LABEL}</dd></div>
+            </dl>
           </div>
         </section>
 
@@ -454,7 +474,7 @@ export default function AwardsPage() {
         <TenRegionsBannerSection />
 
         {/* ─── 5. THE 2026 AWARD ARCHITECTURE ────────────── */}
-        <section className="py-16 md:py-24 bg-gradient-to-b from-charcoal to-charcoal-light/20">
+        <section id="architecture" className="scroll-mt-28 py-16 md:py-24 bg-gradient-to-b from-charcoal to-charcoal-light/20">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <span className="text-[11px] uppercase tracking-[0.18em] text-gold font-semibold">
@@ -599,15 +619,15 @@ export default function AwardsPage() {
                   size="lg"
                   className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8"
                 >
-                  <Link
-                    to="/nominate"
-                    onClick={() =>
-                      track("final_action", "Nominate for 2026", "/nominate")
-                    }
+                  <a
+                    href={PUBLIC_ACTIONS_2026.nominate.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => track("final_action", "Nominate for 2026", PUBLIC_ACTIONS_2026.nominate.href)}
                   >
                     <Award className="mr-2 h-5 w-5" />
                     Nominate for 2026
-                  </Link>
+                  </a>
                 </Button>
                 <Button
                   asChild

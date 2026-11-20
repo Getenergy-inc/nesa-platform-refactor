@@ -23,6 +23,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { trackEvent } from "@/lib/analytics";
+import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
 
 /**
  * Splits long institutional prose into a scannable lead statement and the
@@ -80,6 +81,14 @@ function MoreText({ text, label = "Read the full statement" }: { text: string; l
 // ─────────────────────────────────────────────────────────────────────────────
 
 export type AwardCta = { label: string; href: string };
+
+function AwardCtaLink({ cta, children, ariaLabel }: { cta: AwardCta; children: React.ReactNode; ariaLabel?: string }) {
+  if (/nominate|nomination/i.test(cta.label)) {
+    return <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer" aria-label={ariaLabel}>{children}</a>;
+  }
+  return <Link to={cta.href} aria-label={ariaLabel}>{children}</Link>;
+}
+
 export type AwardStat = { label: string; value: string | number };
 
 export type Subcategory = {
@@ -235,10 +244,10 @@ export function AwardHeroStandard({
                     })
                   }
                 >
-                  <Link to={primaryCta.href}>
+                  <AwardCtaLink cta={primaryCta}>
                     {primaryCta.label}
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
+                  </AwardCtaLink>
                 </Button>
               )}
               {secondaryCta && (
@@ -547,7 +556,7 @@ export function HallOfFamePreview({
             <p className="text-white/75 max-w-xl mx-auto">{emptyMessage}</p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <Button asChild className="bg-gold text-charcoal hover:bg-gold/90">
-                <Link to={nominateHref}>Nominate in This Category</Link>
+                <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer">Nominate in This Category</a>
               </Button>
               <Button
                 asChild
@@ -694,9 +703,9 @@ export function SubcategoryPathways({
                     })
                   }
                 >
-                  <Link to={s.nominateHref} aria-label={`Nominate for ${s.title}`}>
+                  <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer" aria-label={`Nominate for ${s.title}`}>
                     Nominate Here
-                  </Link>
+                  </a>
                 </Button>
               </div>
             </motion.div>
@@ -793,7 +802,7 @@ export function IntegrityFirewallBlock() {
           </p>
           <div className="mt-5">
             <Link
-              to="/about/governance"
+              to="/about#governance"
               className="inline-flex items-center text-gold text-sm font-semibold hover:underline"
             >
               Read Governance Framework <ArrowRight className="ml-1 h-4 w-4" />
@@ -850,7 +859,7 @@ export function FinalAwardCTA({
               })
             }
           >
-            <Link to={primaryCta.href}>{primaryCta.label}</Link>
+            <AwardCtaLink cta={primaryCta}>{primaryCta.label}</AwardCtaLink>
           </Button>
           <Button
             asChild

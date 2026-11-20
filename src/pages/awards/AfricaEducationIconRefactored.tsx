@@ -42,6 +42,8 @@ import {
 } from "@/components/ui/accordion";
 import { ICON_NOMINEES, ICON_SUBCATEGORIES } from "@/data/iconAward";
 import { trackEvent } from "@/lib/analytics";
+import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
+import { NOMINATION_WINDOW_LABEL } from "@/config/nominationWindows2026";
 
 const IconNominationWizard = lazy(() =>
   import("@/components/awards/IconNominationWizard").then((m) => ({ default: m.IconNominationWizard })),
@@ -126,11 +128,11 @@ export default function AfricaEducationIcon() {
         <title>Africa Education Icon Award 2026 · NESA-Africa Lifetime Recognition</title>
         <meta
           name="description"
-          content="Nominate an Africa Education Icon (2006–2026). Three lifetime pathways, three classifications, nine laureates. Public nominations open 6 September 2026."
+          content={`Nominate an Africa Education Icon (2006–2026). Three lifetime pathways, three classifications, nine laureates. Public nominations: ${NOMINATION_WINDOW_LABEL}.`}
         />
         <link rel="canonical" href={PAGE_URL} />
         <meta property="og:title" content="Africa Education Icon Award 2026 · NESA-Africa" />
-        <meta property="og:description" content="Recognising Africa’s Education Enablers. Public nominations open 6 September 2026." />
+        <meta property="og:description" content={`Recognising Africa’s Education Enablers. Public nominations: ${NOMINATION_WINDOW_LABEL}.`} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={PAGE_URL} />
         <meta name="twitter:card" content="summary_large_image" />
@@ -139,7 +141,7 @@ export default function AfricaEducationIcon() {
       {/* 1. Announcement bar */}
       <div className="bg-gold text-charcoal">
         <div className="container mx-auto px-4 py-2 text-center text-xs sm:text-sm font-semibold">
-          Public Nominations Open · 6 September 2026 — NESA-Africa 2026
+          Public Nominations Open · {NOMINATION_WINDOW_LABEL} — NESA-Africa 2026
         </div>
       </div>
 
@@ -164,15 +166,10 @@ export default function AfricaEducationIcon() {
           </p>
 
           <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <Button
-              size="lg"
-              className="bg-gold text-charcoal hover:bg-gold/90 rounded-full"
-              onClick={() => {
-                trackEvent("icon_hero_cta", { target: "nominate" });
-                scrollTo("nominate");
-              }}
-            >
-              <Sparkles className="mr-2 h-4 w-4" /> Start Nomination
+            <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90 rounded-full">
+              <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("icon_hero_cta", { target: "nominate" })}>
+                <Sparkles className="mr-2 h-4 w-4" /> Start Nomination
+              </a>
             </Button>
             <Button
               size="lg"
@@ -324,12 +321,8 @@ export default function AfricaEducationIcon() {
             >
               Add Supporting Evidence
             </Button>
-            <Button
-              variant="outline"
-              className="border-gold/40 text-gold hover:bg-gold/10"
-              onClick={() => scrollTo("nominate")}
-            >
-              Re-Nominate an Existing Nominee
+            <Button asChild variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
+              <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer">Re-Nominate an Existing Nominee</a>
             </Button>
           </div>
         </div>
@@ -436,12 +429,11 @@ export default function AfricaEducationIcon() {
             </div>
             <div>
               <h2 className="font-display text-2xl md:text-3xl font-bold text-white">
-                Judges Arena — 27 Independent Judges, 9 Specialist Panels
+                Judges Arena — Nine Independent Icon Judges
               </h2>
               <p className="text-white/75 mt-3">
-                The Judges Arena is a secure, jury-only chamber. 27 Independent Judges are assigned
-                across 9 Specialist Panels (three per pathway, one per classification). Panels screen
-                and shortlist. The Grand Jury then confirms the 9 laureates through ranked-choice voting.
+                The Judges Arena is a secure, jury-only chamber. Nine independent Icon judges assess
+                verified lifetime evidence across the three pathways before governance ratification.
               </p>
               <Button asChild variant="outline" className="mt-4 border-gold/40 text-gold hover:bg-gold/10">
                 <Link to="/judges">
@@ -536,18 +528,13 @@ export default function AfricaEducationIcon() {
             Nominate them today and help preserve their legacy for future generations.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-2">
-            <Button
-              size="lg"
-              className="bg-gold text-charcoal hover:bg-gold/90 rounded-full"
-              onClick={() => {
-                trackEvent("icon_final_cta", { target: "nominate" });
-                scrollTo("nominate");
-              }}
-            >
-              Start the Nomination <ArrowRight className="ml-2 h-4 w-4" />
+            <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90 rounded-full">
+              <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("icon_final_cta", { target: "nominate" })}>
+                Start the Nomination <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
             </Button>
             <Button asChild variant="outline" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full">
-              <Link to="/nominate?category=africa-education-icon-award">Recommend a Candidate</Link>
+              <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer">Recommend a Candidate</a>
             </Button>
             <Button asChild variant="outline" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full">
               <Link to="/judges">Become an Independent Judge</Link>

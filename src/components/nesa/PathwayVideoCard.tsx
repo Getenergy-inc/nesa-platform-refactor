@@ -24,6 +24,11 @@ const ytEmbedsEnabled =
 
 export type PathwayCardCTA = { label: string; href: string };
 
+function PathwayCtaLink({ cta, children }: { cta: PathwayCardCTA; children: React.ReactNode }) {
+  if (/^https?:\/\//.test(cta.href)) return <a href={cta.href} target="_blank" rel="noopener noreferrer">{children}</a>;
+  return <Link to={cta.href}>{children}</Link>;
+}
+
 export type PathwayVideoCardData = {
   id: string;
   icon: LucideIcon;
@@ -357,17 +362,17 @@ export function PathwayVideoCard({ card, index }: Props) {
               asChild
               className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2 px-5 shadow-[0_0_24px_-8px_hsl(var(--gold)/0.6)]"
             >
-              <Link to={card.primaryCta.href}>
+              <PathwayCtaLink cta={card.primaryCta}>
                 {card.primaryCta.label}
                 <ArrowRight className="h-4 w-4" />
-              </Link>
+              </PathwayCtaLink>
             </Button>
             <Button
               asChild
               variant="outline"
               className="border-gold/50 text-gold hover:bg-gold/10 rounded-full px-5 bg-transparent"
             >
-              <Link to={card.secondaryCta.href}>{card.secondaryCta.label}</Link>
+              <PathwayCtaLink cta={card.secondaryCta}>{card.secondaryCta.label}</PathwayCtaLink>
             </Button>
             {card.tertiaryCta && (
               <Button
@@ -375,10 +380,10 @@ export function PathwayVideoCard({ card, index }: Props) {
                 variant="outline"
                 className="border-white/25 text-white hover:bg-white/10 hover:text-gold rounded-full px-5 bg-transparent gap-2"
               >
-                <Link to={card.tertiaryCta.href}>
+                <PathwayCtaLink cta={card.tertiaryCta}>
                   {card.tertiaryCta.label}
                   <ArrowRight className="h-4 w-4" />
-                </Link>
+                </PathwayCtaLink>
               </Button>
             )}
             <button
@@ -479,10 +484,10 @@ export function PathwayVideoCard({ card, index }: Props) {
                   )}
                   <div className="flex flex-col sm:flex-row gap-2.5">
                     <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-6">
-                      <Link to={card.primaryCta.href}>{card.primaryCta.label}</Link>
+                      <PathwayCtaLink cta={card.primaryCta}>{card.primaryCta.label}</PathwayCtaLink>
                     </Button>
                     <Button asChild variant="outline" className="border-gold/50 text-gold hover:bg-gold/10 rounded-full px-6 bg-transparent">
-                      <Link to={card.secondaryCta.href}>{card.secondaryCta.label}</Link>
+                      <PathwayCtaLink cta={card.secondaryCta}>{card.secondaryCta.label}</PathwayCtaLink>
                     </Button>
                   </div>
                 </div>

@@ -1,58 +1,57 @@
 import { describe, it, expect } from "vitest";
-import { SITE_NAV, MOBILE_SITE_NAV, SIGN_IN_WORKSPACES } from "@/config/siteNavigation";
+import { SITE_NAV, MOBILE_SITE_NAV, SIGN_IN_WORKSPACES, MOBILE_QUICK_ACTIONS } from "@/config/siteNavigation";
 import { PROGRAMME_END_DATE, PROGRAMME_END_LONG_LABEL } from "@/config/programme";
+import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
 
-describe("2026–2027 navigation", () => {
-  it("lists exactly two Impact items on desktop and mobile, with the heading linking to /impact", () => {
-    for (const nav of [SITE_NAV, MOBILE_SITE_NAV]) {
-      const impact = nav.find(g => g.label === "Impact");
-      expect(impact?.href).toBe("/impact");
-      expect(impact?.headingLink).toBe(true);
-      expect(impact?.children?.map(c => [c.label, c.href])).toEqual([
-        ["Support a Special-Needs School", "/support-a-special-needs-school"],
-        ["Afri-EduTourism", "/afri-edutourism"],
-      ]);
-    }
-  });
-  it("uses the approved desktop headings, with Nominees on mobile only", () => {
-    expect(SITE_NAV.map(g => g.label)).toEqual(["About", "Recognition", "Impact", "Media", "Get Involved", "Contact"]);
-    expect(MOBILE_SITE_NAV.map(g => g.label)).toEqual(["About", "Recognition", "Nominees", "Impact", "Media", "Get Involved", "Contact"]);
+describe("Website Content v2 navigation", () => {
+  it("uses the same six approved headings in the same order on desktop and phone", () => {
+    const labels = ["Awards", "Nominees", "Support a School", "Online Programme", "About", "Get Involved"];
+    expect(SITE_NAV.map(g => g.label)).toEqual(labels);
+    expect(MOBILE_SITE_NAV.map(g => g.label)).toEqual(labels);
     expect(SITE_NAV.find(g => g.label === "Get Involved")?.href).toBe("/get-involved");
   });
-  it("links the new recognition pages and renamed media items", () => {
-    const about = SITE_NAV.find(g => g.label === "About")?.children ?? [];
-    expect(about.find(c => c.label === "How Recognition Works")?.href).toBe("/how-it-works");
-    expect(about.find(c => c.label === "Research and Judging")?.href).toBe("/research-and-judging");
-    expect(about.find(c => c.label === "2026 Online Programme")?.href).toBe("/programme/2026");
-    const media = (SITE_NAV.find(g => g.label === "Media")?.children ?? []).map(c => c.label);
-    expect(media).toEqual(["Media Hub", "Webinars", "Africa Education Enablers Podcast", "NESA-Africa TV", "Documentaries and Interviews", "EduAid-Africa E-Journal", "Press and News"]);
-    expect(SITE_NAV.find(g => g.label === "Media")?.children?.find(c => c.label === "Documentaries and Interviews")?.href).toBe("/media#documentaries");
+
+  it("lists the four tiers, recognition process and timeline under Awards", () => {
+    expect(SITE_NAV[0].children).toEqual([
+      { label: "How recognition works", href: "/awards#how" },
+      { label: "Tier 1 Africa Education Icon", href: "/awards/africa-education-icon" },
+      { label: "Tier 2 Influencers Education Impact", href: "/awards/influencer-education-impact" },
+      { label: "Tier 3 Platinum Recognition", href: "/awards/platinum-recognition" },
+      { label: "Tier 4 Gold–Blue Garnet", href: "/awards/gold-blue-garnet" },
+      { label: "Timeline", href: "/awards#timeline" },
+    ]);
   });
-  it("keeps legacy pages out of the menus", () => {
+
+  it("uses the consolidated About anchors and live online-programme page", () => {
+    expect(SITE_NAV.find(g => g.label === "About")?.children).toEqual([
+      { label: "SCEF and the five arms", href: "/about#scef" },
+      { label: "Governance", href: "/about#governance" },
+      { label: "Board of Advisors", href: "/about#advisors" },
+      { label: "Partners", href: "/about#partners" },
+    ]);
+    expect(SITE_NAV.find(g => g.label === "Online Programme")?.href).toBe("/programme/2026");
+  });
+
+  it("keeps legacy pages and retired features out of public navigation", () => {
     const hrefs = MOBILE_SITE_NAV.flatMap(g => [g.href, ...(g.children ?? []).map(c => c.href)]);
-    for (const h of hrefs) expect(h).not.toMatch(/2027|2028|vision-2035|gallery|^\/nrc(\/|$)/);
-  });
-  it("routes merchandise enquiries through Contact after Donate, without a duplicate Contact Us item", () => {
-    for (const navigation of [SITE_NAV, MOBILE_SITE_NAV]) {
-      const children = navigation.find(item => item.label === "Get Involved")?.children ?? [];
-      const donateIndex = children.findIndex(item => item.label === "Donate");
-      expect(donateIndex).toBeGreaterThanOrEqual(0);
-      expect(children.slice(donateIndex)).toEqual([
-        { label: "Donate", href: "/donate" },
-        { label: "Buy Merchandise", href: "/contact?subject=merchandise" },
-      ]);
-      expect(children.some(item => item.label === "Contact Us")).toBe(false);
+    for (const h of hrefs) {
+      expect(h).not.toMatch(/2027|2028|vision-2035|gallery|^\/nrc(\/|$)/);
+      expect(h).not.toMatch(/vote|agc|ticket|table|wallet|shop|judgeapply|nrc\/apply/i);
     }
   });
-  it("uses NRRC presentation routes without changing workspace access", () => {
+
+  it("uses exactly two phone actions and sends Nominate to the official external form", () => {
+    expect(MOBILE_QUICK_ACTIONS.map(item => item.label)).toEqual(["Nominate", "Support a School"]);
+    expect(MOBILE_QUICK_ACTIONS[0].href).toBe(PUBLIC_ACTIONS_2026.nominate.href);
+    expect(MOBILE_QUICK_ACTIONS[0].href).toMatch(/^https:\/\//);
+    expect(MOBILE_QUICK_ACTIONS[1].href).toBe("/impact/special-needs-schools");
+  });
+
+  it("keeps sign-in workspace choices unchanged and never grants access through navigation", () => {
     expect(SIGN_IN_WORKSPACES.map(g => g.href)).toEqual([
       "/nominee-portal", "/nrrc", "/judges", "/login?next=%2Fdashboard%2Fvolunteer",
       "/login?next=%2Folc%2Fdashboard", "/login?next=%2Fadmin",
     ]);
-  });
-  it("has no voting, AGC, ticket, table or specialist-recruitment links", () => {
-    const all = [...SITE_NAV.flatMap((g) => [g, ...(g.children ?? [])]), ...SIGN_IN_WORKSPACES];
-    for (const i of all) expect(i.href).not.toMatch(/vote|agc|ticket|table|wallet|judgeapply|nrc\/apply/i);
   });
 });
 

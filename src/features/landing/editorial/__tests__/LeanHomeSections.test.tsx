@@ -4,7 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 import { TwoPillarsSection } from "../LeanHomeSections";
 import { ICON_PATHWAYS } from "@/config/brandHierarchy";
 import { bySubcategory, type IconSubcategorySlug } from "@/data/iconAward";
-import { SNS_CATEGORIES, SNS_HERO_IMAGE, SCHOOL_SUPPORT_PROGRAMME } from "@/config/schoolSupport";
+import { SNS_CATEGORIES, SNS_HERO_IMAGE } from "@/config/schoolSupport";
 import { vi } from "vitest";
 
 vi.mock("@/features/landing/editorial/StripScroller", () => ({
@@ -28,7 +28,7 @@ describe("lean homepage Tier 1 categories", () => {
     ICON_PATHWAYS.forEach((pathway, index) => {
       const card = cards[index];
       expect(within(card).getByRole("heading", { name: pathway.name })).toBeInTheDocument();
-      expect(within(card).getByRole("link", { name: "View category nominees →" })).toHaveAttribute(
+      expect(within(card).getByRole("link", { name: "View nominees →" })).toHaveAttribute(
         "href",
         pathway.nomineesHref,
       );
@@ -64,7 +64,7 @@ describe("lean homepage Tier 1 categories", () => {
       </MemoryRouter>,
     );
 
-    const schoolPanel = screen.getByRole("heading", { name: SCHOOL_SUPPORT_PROGRAMME.headline }).closest("article");
+    const schoolPanel = screen.getByRole("heading", { name: "From recognition to impact: Support a Special-Needs School Across Africa" }).closest("article");
     expect(schoolPanel).not.toBeNull();
     expect(within(schoolPanel!).getByRole("img", { name: SNS_HERO_IMAGE.alt })).toHaveAttribute("src", SNS_HERO_IMAGE.src);
 

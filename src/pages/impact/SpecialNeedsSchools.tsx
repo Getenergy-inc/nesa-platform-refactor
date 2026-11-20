@@ -27,6 +27,7 @@ import { TakePartTabs } from "@/components/school-support/TakePartTabs";
 import { AccountabilityDashboard } from "@/components/school-support/AccountabilityDashboard";
 import { ClickToLoadVideo } from "@/components/school-support/ClickToLoadVideo";
 import { SectionHead, Wrap, card, dash, fmtMoney, pillOnDark, pillOutline, pillPrimary } from "@/components/school-support/ui";
+import { RecognitionIntegrityLine } from "@/components/nesa/SiteWideContent2026";
 
 const ICONS: Record<string, LucideIcon> = { eye: Eye, ear: Ear, accessibility: Accessibility, puzzle: Puzzle, "message-circle": MessageCircle, brain: Brain, layers: Layers, sprout: Sprout };
 const SNS_DESCRIPTION = "Nominate, donate to, sponsor or partner with specialist and inclusive schools serving learners with disabilities across eight African regions. A Rebuild My School Africa service of EduAid-Africa, presented with NESA-Africa.";
@@ -53,12 +54,12 @@ function ActionTiles({ dark }: { dark?: boolean }) {
         const vote = w.key === "vote"; const gold = w.key === "nominate";
         return (
           <li key={w.key}>
-            <button type="button" onClick={act[w.key]} aria-describedby={vote ? "vote-footnote" : undefined}
+            <button type="button" onClick={vote ? undefined : act[w.key]} disabled={vote} aria-describedby={vote ? "vote-footnote" : undefined}
               className={"flex h-full w-full flex-col items-start gap-1 rounded-2xl p-4 text-left transition-colors " +
                 (gold ? "bg-ea-tan text-ea-deep" : vote ? "border-2 border-dashed border-ea-tan/70 text-ea-cream" : dark ? "bg-ea-cream/10 text-ea-cream hover:bg-ea-cream/15" : "bg-ea-sand text-ea-ink")}>
               <span className="text-xs font-bold">{w.n}</span>
               <span className="font-serif text-lg font-semibold">{w.title}</span>
-              <span className="text-xs opacity-80">{vote ? "opens Sept 2027*" : w.timing}</span>
+              <span className="text-xs opacity-80">{vote ? "Opens September 2027" : w.timing}</span>
             </button>
           </li>
         );
@@ -143,6 +144,7 @@ function Body() {
   return (
     <div className="eduaid-page" data-size={size} data-contrast={contrast ? "high" : "normal"}>
       <p className="bg-ea-brown px-4 py-1.5 text-center text-xs font-semibold text-ea-cream">{tr("band", SNS_BODY_BAND)}</p>
+      <RecognitionIntegrityLine className="border-ea-line bg-ea-deep text-ea-cream" />
       <div className="border-b border-ea-line bg-ea-sand px-4 py-2">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2">
           <p className="text-xs text-ea-muted">{tr("utility", SNS_UTILITY_LINE)}</p>
@@ -231,6 +233,7 @@ function Body() {
       </Wrap>
 
       <Wrap id="sponsor-form" className="bg-ea-sand">
+        <span id="partner" className="block scroll-mt-28" />
         <div className="grid gap-8 lg:grid-cols-[1fr_1.4fr]">
           <SectionHead eyebrow="Sponsors & partners" title="Sponsor a Regional School / Become a Programme Partner" intro={<>Sponsor a whole region, a share of a regional target, a verified school, a specific project or in-kind support — or offer your expertise as a programme partner. Any support is subject to due diligence, available funds and written approval. Sponsors and partners are listed only after a written agreement or verified contribution.</>} />
           <div className="rounded-3xl border border-ea-line bg-ea-cream p-5 shadow-sm sm:p-7"><SponsorPartnerForm /></div>
@@ -298,6 +301,7 @@ function Body() {
       </Wrap>
 
       <Wrap id="take-part" className="bg-ea-sand">
+        <span id="nominate" className="block scroll-mt-28" />
         <SectionHead eyebrow="Take part" title="Take part" />
         <TakePartTabs />
       </Wrap>

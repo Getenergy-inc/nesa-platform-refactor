@@ -14,6 +14,9 @@ import Vision2035 from "@/pages/about/Vision2035";
 import FAQ from "@/pages/FAQ";
 import "@/features/landing/editorial/editorial.css";
 import { BoardOfAdvisorsSection } from "@/features/landing/editorial/BoardOfAdvisorsSection";
+import { PartnersBandSection } from "@/features/landing/editorial/PartnersBandSection";
+import { GovernanceFirewallSection } from "@/components/nesa/GovernanceFirewallSection";
+import { RecognitionIntegrityLine } from "@/components/nesa/SiteWideContent2026";
 
 const SECTIONS = [
   { id: "about", label: "About" },
@@ -106,6 +109,7 @@ export default function AboutConsolidated() {
         </ul>
       </nav>
 
+      <RecognitionIntegrityLine />
       <section id="about"><About /></section>
 
       <Disclosure
@@ -118,7 +122,7 @@ export default function AboutConsolidated() {
         <SCEF />
       </Disclosure>
 
-      <div className="nesa-ed"><BoardOfAdvisorsSection /></div>
+      <div id="advisors" className="nesa-ed scroll-mt-28"><BoardOfAdvisorsSection /></div>
 
       <Disclosure
         id="vision-2035"
@@ -140,12 +144,8 @@ export default function AboutConsolidated() {
         <FAQ />
       </Disclosure>
 
-      <section className="py-8 px-4 max-w-4xl mx-auto text-center border-t border-gold/10">
-        <p className="text-white/70 text-sm">
-          Governance, Integrity Firewall, NRRC and Conflict-of-Interest policies now live on the dedicated{" "}
-          <a href="/governance" className="text-gold underline">Governance & Integrity</a> page.
-        </p>
-      </section>
+      <div id="governance" className="scroll-mt-28"><GovernanceFirewallSection /></div>
+      <div id="partners" className="nesa-ed scroll-mt-28"><PartnersBandSection /></div>
     </>
   );
 }

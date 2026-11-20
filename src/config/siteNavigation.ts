@@ -19,58 +19,31 @@ export interface NavItem {
   panelFooter?: { note: string; ctaLabel: string; ctaHref: string };
 }
 
-export const PRIMARY_NAV_VISIBLE_XL = 7;
+export const PRIMARY_NAV_VISIBLE_XL = 6;
 
 export const SITE_NAV: NavItem[] = [
+  { label: "Awards", href: "/awards", analyticsId: "nav_awards", children: [
+    { label: "How recognition works", href: "/awards#how" },
+    { label: "Tier 1 Africa Education Icon", href: "/awards/africa-education-icon" },
+    { label: "Tier 2 Influencers Education Impact", href: "/awards/influencer-education-impact" },
+    { label: "Tier 3 Platinum Recognition", href: "/awards/platinum-recognition" },
+    { label: "Tier 4 Gold–Blue Garnet", href: "/awards/gold-blue-garnet" },
+    { label: "Timeline", href: "/awards#timeline" },
+  ] },
+  { label: "Nominees", href: "/nominees", analyticsId: "nav_nominees" },
+  { label: "Support a School", href: "/impact/special-needs-schools", analyticsId: "nav_support_school" },
+  { label: "Online Programme", href: "/programme/2026", analyticsId: "nav_online_programme" },
   { label: "About", href: "/about", analyticsId: "nav_about", children: [
-    { label: "About NESA-Africa", href: "/about" },
-    { label: "How Recognition Works", href: "/how-it-works" },
-    { label: "Research and Judging", href: "/research-and-judging" },
-    { label: "Governance and Integrity", href: "/about/governance" },
-    { label: "2026 Online Programme", href: "/programme/2026" },
-    { label: "Timeline", href: "/timeline" },
-    { label: "Global Team", href: "/meet-the-team" },
+    { label: "SCEF and the five arms", href: "/about#scef" },
+    { label: "Governance", href: "/about#governance" },
+    { label: "Board of Advisors", href: "/about#advisors" },
+    { label: "Partners", href: "/about#partners" },
   ] },
-  { label: "Recognition", href: "/recognition", analyticsId: "nav_recognition", children: [
-    { label: "Four Recognition Tiers", href: "/recognition" },
-    { label: "Africa Education Icon", href: "/awards/africa-education-icon" },
-    { label: "Influencers Education Impact", href: "/recognition/influencers" },
-    { label: "Platinum Certificate", href: "/recognition/platinum" },
-    { label: "Gold–Blue Garnet", href: "/recognition/gold-blue-garnet" },
-    { label: "Nominee Directory", href: "/nominees" },
-    { label: "Certificates of Recognition", href: "/recognition/certificates" },
-  ] },
-  { label: "Impact", href: "/impact", analyticsId: "nav_impact", headingLink: true, children: [
-    { label: "Support a Special-Needs School", href: "/support-a-special-needs-school" },
-    { label: "Afri-EduTourism", href: "/afri-edutourism" },
-  ] },
-  { label: "Media", href: "/media", analyticsId: "nav_media", children: [
-    { label: "Media Hub", href: "/media" },
-    { label: "Webinars", href: "/media/webinars" },
-    { label: "Africa Education Enablers Podcast", href: "/media/podcast" },
-    { label: "NESA-Africa TV", href: "/media/tv" },
-    { label: "Documentaries and Interviews", href: "/media#documentaries" },
-    { label: "EduAid-Africa E-Journal", href: "/journal" },
-    { label: "Press and News", href: "/media#news" },
-  ] },
-  { label: "Get Involved", href: "/get-involved", analyticsId: "nav_get_involved", children: [
-    { label: "Volunteer", href: "/volunteer" },
-    { label: "Join a Local Chapter", href: "/chapters/join" },
-    { label: "Join Our Team", href: "/vacancies" },
-    { label: "Become a Sponsor", href: "/sponsors" },
-    { label: "Partner With Us", href: "/partners" },
-    { label: "Donate", href: "/donate" },
-    { label: "Buy Merchandise", href: "/contact?subject=merchandise" },
-  ] },
-  { label: "Contact", href: "/contact", analyticsId: "nav_contact" },
+  { label: "Get Involved", href: "/get-involved", analyticsId: "nav_get_involved" },
 ];
 
-/** Mobile adds direct Nominees access after Recognition (mobile only). */
-export const MOBILE_SITE_NAV: NavItem[] = [
-  ...SITE_NAV.slice(0, 2),
-  { label: "Nominees", href: "/nominees", analyticsId: "nav_nominees" },
-  ...SITE_NAV.slice(2),
-];
+/** Phone navigation intentionally uses the same order as desktop. */
+export const MOBILE_SITE_NAV: NavItem[] = SITE_NAV;
 
 /** Destination choices only: selecting one never assigns or changes a role. */
 export const SIGN_IN_WORKSPACES: NavChild[] = [
@@ -83,10 +56,8 @@ export const SIGN_IN_WORKSPACES: NavChild[] = [
 ];
 
 export const MOBILE_QUICK_ACTIONS: NavItem[] = [
-  { label: "Home", href: "/", analyticsId: "mobile_home" },
-  { label: "Recognition", href: "/recognition", analyticsId: "mobile_recognition" },
-  { label: "Nominate", href: "/nominate", analyticsId: "mobile_nominate" },
-  { label: "Get Involved", href: "/get-involved", analyticsId: "mobile_get_involved" },
+  { label: "Nominate", href: NOMINATE_CTA.href, analyticsId: "mobile_nominate" },
+  { label: "Support a School", href: "/impact/special-needs-schools", analyticsId: "mobile_support_school" },
 ];
 
 export { NOMINATE_CTA, CURRENT_PHASE } from "./campaignPhase";

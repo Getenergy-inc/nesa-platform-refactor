@@ -2,6 +2,7 @@
 
 import { Link } from "react-router-dom";
 import { ENABLER_AUDIENCES, EDUCATION_ENABLER_DEFINITION } from "@/config/brandHierarchy";
+import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
 
 export function WhoCanBeEnablerSection() {
   return (
@@ -24,9 +25,9 @@ export function WhoCanBeEnablerSection() {
         </ul>
 
         <div className="mt-10 flex flex-wrap justify-center gap-3">
-          <Link to="/nominate" className="ed-btn-primary">
+          <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer" className="ed-btn-primary">
             Submit a Nomination
-          </Link>
+          </a>
           <Link to="/nominate/help-me-choose" className="ed-btn-ghost">
             Not sure which recognition applies? →
           </Link>
