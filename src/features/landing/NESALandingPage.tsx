@@ -3,15 +3,15 @@
 // Two messages: (1) Tier 1 Africa Education Icon Award, and (2) after the
 // awards, Support a Special-Needs School Across Africa via EduAid-Africa.
 //
-// Section order (7):
+// Section order (6):
 //   1. Hero — eyebrow, title, one line, two CTAs (Icon nomination · school support)
 //   2. Public nominations notice (compact, one line)
-//   3. Two pillars — Tier 1 Africa Education Icon (pathways, nominee strip max 12) beside
-//      Special Needs Education Support Africa (post-award write-up), then governance line
+//   3. Two pillars — Tier 1 Africa Education Icon (three category cards, nominee strip max 12)
+//      beside one concise Special Needs Education Support Africa post-award panel,
+//      then governance line
 //   4. The four tiers at a glance (TierStripSection)
-//   5. After the awards — Support a Special-Needs School (SchoolImpactSection)
-//   6. Trust — three points, endorser logos, governance link
-//   7. Online Awards Gala band + single closing CTA
+//   5. Trust — three points, endorser logos, governance link
+//   6. Online Awards Gala band + single closing CTA
 //
 // Other homepage components remain in ./editorial for tier and other pages.
 // Visual skin lives in ./editorial/editorial.css, scoped under `.nesa-ed`.
@@ -39,7 +39,6 @@ import {
 
 const lean = () => import("./editorial/LeanHomeSections");
 const TierStripSection = lazy(() => lean().then((m) => ({ default: m.TierStripSection })));
-const SchoolImpactSection = lazy(() => lean().then((m) => ({ default: m.SchoolImpactSection })));
 const TrustPartnersSection = lazy(() => lean().then((m) => ({ default: m.TrustPartnersSection })));
 const ClosingCTASection = lazy(() => lean().then((m) => ({ default: m.ClosingCTASection })));
 
@@ -82,13 +81,10 @@ export function NESALandingPage() {
         {/* 4. THE FOUR TIERS AT A GLANCE */}
         <LazySection><TierStripSection /></LazySection>
 
-        {/* 5. AFTER THE AWARDS: EDUCATION SOCIAL IMPACT */}
-        <LazySection><SchoolImpactSection /></LazySection>
-
-        {/* 6. TRUST */}
+        {/* 5. TRUST */}
         <LazySection><TrustPartnersSection /></LazySection>
 
-        {/* 7. GALA + FINAL CTA */}
+        {/* 6. GALA + FINAL CTA */}
         <GalaBandSection />
         <LazySection><ClosingCTASection /></LazySection>
 

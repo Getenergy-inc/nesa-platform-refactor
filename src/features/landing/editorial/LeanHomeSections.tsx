@@ -6,7 +6,7 @@ import tierIcon from "@/assets/story/tier-africa-education-icon.jpg";
 import tierInfluencer from "@/assets/story/tier-influencer-education-impact.jpg";
 import tierPlatinum from "@/assets/story/tier-platinum.jpg";
 import tierGarnet from "@/assets/story/tier-gold-blue-garnet.jpg";
-import { SNS_CATEGORIES, SCHOOL_SUPPORT_PROGRAMME } from "@/config/schoolSupport";
+import { SCHOOL_SUPPORT_PROGRAMME } from "@/config/schoolSupport";
 import { ICON_PATHWAYS } from "@/config/brandHierarchy";
 import { bySubcategory, type IconSubcategorySlug, type IconNominee } from "@/data/iconAward";
 import { useIconAwardStats } from "./useIconAwardStats";
@@ -62,58 +62,6 @@ export function TierStripSection() {
             </li>
           ))}
         </ul>
-      </div>
-    </section>
-  );
-}
-
-/** After the awards — Support a Special-Needs School Across Africa. */
-export function SchoolImpactSection() {
-  const { t } = useTranslation("pages");
-  const steps = [
-    t("landingLean.impact.s1", "SCEF"),
-    t("landingLean.impact.s2", "NESA-Africa (recognise)"),
-    t("landingLean.impact.s3", "EduAid-Africa (support)"),
-  ];
-  return (
-    <section className="ed-section ed-section-ink" aria-labelledby="ed-school-heading">
-      <div className="ed-wrap">
-        <div className="ed-section-head">
-          <div className="ed-eyebrow">{t("landingLean.impact.eyebrow", "After the awards: Education Social Impact")}</div>
-          <h2 id="ed-school-heading" className="ed-section-title">
-            {t("landingLean.impact.title", "From recognition to impact: Support a Special-Needs School Across Africa")}
-          </h2>
-          <p className="ed-section-sub">
-            {t("landingLean.impact.line", "Recognition is the start. Through EduAid-Africa, SCEF and NESA-Africa turn recognition into support for specialist and inclusive schools — one verified school in each of eight African regions in 2027.")}
-          </p>
-        </div>
-        <ol className="mb-6 flex list-none flex-wrap items-center justify-center gap-2 text-sm text-white/85" aria-label={t("landingLean.impact.stepsLabel", "How support flows")}>
-          {steps.map((s, i) => (
-            <li key={s} className="flex items-center gap-2">
-              <span className="ed-stat-pill">{s}</span>
-              {i < steps.length - 1 && <span aria-hidden="true" className="text-gold">→</span>}
-            </li>
-          ))}
-        </ol>
-        <ul className="flex list-none snap-x gap-3 overflow-x-auto pb-3" aria-label={t("landingLean.impact.catsLabel", "Support categories")}>
-          {SNS_CATEGORIES.filter((c) => c.image).map((c) => (
-            <li key={c.title} className="w-36 shrink-0 snap-start">
-              <img src={c.image!.src} alt={c.image!.alt} loading="lazy" decoding="async" className="aspect-square w-full rounded-lg object-cover" />
-              <p className="mt-1 text-xs leading-snug text-white/75">{c.title}</p>
-            </li>
-          ))}
-        </ul>
-        <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <Link to={`${SCHOOL}#take-part`} className="ed-btn-primary">{t("landingLean.impact.nominate", "Nominate a School")}</Link>
-          <button type="button" disabled aria-disabled="true" className="ed-btn-ghost cursor-not-allowed opacity-60">
-            {t("landingLean.impact.vote", "Vote (opens Sept 2027)")}
-          </button>
-          <Link to={`${SCHOOL}#donate`} className="ed-btn-ghost">{t("landingLean.impact.donate", "Donate / Fund a Scholarship")}</Link>
-          <Link to={`${SCHOOL}#sponsor-form`} className="ed-btn-ghost">{t("landingLean.impact.sponsor", "Sponsor or Partner")}</Link>
-        </div>
-        <p className="ed-disclaimer mt-6">
-          {t("landingLean.impact.integrity", "Donations and sponsorship never influence awards, judging or school selection.")}
-        </p>
       </div>
     </section>
   );
@@ -209,9 +157,22 @@ export function TwoPillarsSection() {
             <div className="ed-card-badge">{t("landingLean.pillars.iconBadge", "Tier 1 · Flagship · 2006–2026")}</div>
             <h3><Link to="/awards/africa-education-icon" className="hover:underline">{t("landingLean.pillars.iconTitle", "Africa Education Icon Award")}</Link></h3>
             <p>{t("landingLean.pillars.iconBody", "Africa’s flagship lifetime education honour, recognising individuals whose verified contributions advanced Education for All across Africa between 2006 and 2026.")}</p>
-            <ul className="mt-3 space-y-1 text-sm text-white/75" aria-label={t("landingLean.pillars.pathways", "Icon pathways")}>
-              {ICON_PATHWAYS.map((pw) => (
-                <li key={pw.slug}>· <Link to={pw.nomineesHref} className="hover:text-gold">{pw.name}</Link></li>
+            <ul className="mt-4 space-y-3" aria-label={t("landingLean.pillars.pathways", "Africa Education Icon categories")}>
+              {ICON_PATHWAYS.map((pw, index) => (
+                <li key={pw.slug} className="rounded-xl border border-gold/20 bg-white/[0.03] p-4">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-gold">
+                    {t("landingLean.pillars.categoryLabel", "Category")} {index + 1}
+                  </p>
+                  <h4 className="mt-1 font-serif text-base text-white">
+                    {t(`landingLean.pillars.categories.${pw.slug}.name`, pw.name)}
+                  </h4>
+                  <p className="mt-1 text-xs leading-relaxed text-white/65">
+                    {t(`landingLean.pillars.categories.${pw.slug}.blurb`, pw.blurb)}
+                  </p>
+                  <Link to={pw.nomineesHref} className="mt-2 inline-block text-xs font-semibold text-gold hover:underline">
+                    {t("landingLean.pillars.viewCategory", "View category nominees →")}
+                  </Link>
+                </li>
               ))}
             </ul>
             <div className="mt-4 flex flex-wrap gap-2">
@@ -245,14 +206,6 @@ export function TwoPillarsSection() {
               <Link to={`${SCHOOL}#take-part`} className={btnGhost}>{t("landingLean.impact.nominate", "Nominate a School")}</Link>
               <Link to={`${SCHOOL}#donate`} className={btnGhost}>{t("landingLean.pillars.donate", "Donate")}</Link>
             </div>
-            <ul className="mt-4 flex list-none snap-x gap-3 overflow-x-auto pb-2" aria-label={t("landingLean.impact.catsLabel", "Support categories")}>
-              {SNS_CATEGORIES.filter((c) => c.image).map((c) => (
-                <li key={c.title} className="w-[112px] shrink-0 snap-start">
-                  <img src={c.image!.src} alt={c.image!.alt} loading="lazy" decoding="async" className="aspect-[4/5] w-full rounded-xl object-cover" />
-                  <span className="mt-1 block text-[11px] leading-tight text-white/75 line-clamp-2">{c.title}</span>
-                </li>
-              ))}
-            </ul>
             <p className="mt-3 text-xs text-white/55">{t("landingLean.pillars.snsSeparate", "This is not a NESA-Africa award tier. Donations and sponsorship never influence awards, judging or school selection.")}</p>
           </article>
         </div>
