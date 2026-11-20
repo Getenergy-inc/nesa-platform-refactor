@@ -1,153 +1,77 @@
-import { useState, useEffect, useCallback } from "react";
-import { X, Award, ArrowRight, Sparkles, ShieldCheck } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { ArrowRight, Award, ShieldCheck, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
 
-const STORAGE_KEY = "nesa_exit_popup_shown";
-const COOLDOWN_HOURS = 4;
+const STORAGE_KEY = "nesa_exit_popup_shown_v2";
+const DESKTOP_QUERY = "(min-width:1024px) and (pointer:fine)";
+const SUPPRESSED_PREFIXES = ["/nominate", "/login", "/register", "/nominee-portal", "/nrrc", "/judges", "/admin", "/dashboard"];
 
-/**
- * ExitIntentPopup - Captures leaving users with compelling CTA
- * Only shows once per 24 hours
- */
 export function ExitIntentPopup() {
+  const { pathname } = useLocation();
   const [isOpen, setIsOpen] = useState(false);
-  const [hasTriggered, setHasTriggered] = useState(false);
-
-  const shouldShowPopup = useCallback(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (!stored) return true;
-      
-      const lastShown = parseInt(stored, 10);
-      const hoursAgo = (Date.now() - lastShown) / (1000 * 60 * 60);
-      return hoursAgo > COOLDOWN_HOURS;
-    } catch {
-      return true;
-    }
-  }, []);
-
-  const markShown = useCallback(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, Date.now().toString());
-    } catch {
-      // Ignore storage errors
-    }
-  }, []);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const suppressed = SUPPRESSED_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
 
   useEffect(() => {
-    if (hasTriggered || !shouldShowPopup()) return;
+    if (suppressed) return;
+    let alreadyShown = false;
+    try { alreadyShown = localStorage.getItem(STORAGE_KEY) === "1"; } catch { /* storage may be unavailable */ }
+    if (alreadyShown) return;
 
-    const handleMouseLeave = (e: MouseEvent) => {
-      // Only trigger when mouse leaves from top of viewport
-      if (e.clientY <= 5 && !hasTriggered) {
-        setHasTriggered(true);
-        setIsOpen(true);
-        markShown();
-      }
+    const media = window.matchMedia(DESKTOP_QUERY);
+    const onMouseLeave = (event: MouseEvent) => {
+      if (!media.matches || event.clientY > 0) return;
+      try { localStorage.setItem(STORAGE_KEY, "1"); } catch { /* storage may be unavailable */ }
+      setIsOpen(true);
     };
+    document.addEventListener("mouseleave", onMouseLeave);
+    return () => document.removeEventListener("mouseleave", onMouseLeave);
+  }, [pathname, suppressed]);
 
-    // Also trigger after 20 seconds if user hasn't engaged
-    const timeoutId = setTimeout(() => {
-      if (!hasTriggered && shouldShowPopup()) {
-        setHasTriggered(true);
-        setIsOpen(true);
-        markShown();
-      }
-    }, 20000);
-
-    document.addEventListener("mouseleave", handleMouseLeave);
-
-    return () => {
-      document.removeEventListener("mouseleave", handleMouseLeave);
-      clearTimeout(timeoutId);
-    };
-  }, [hasTriggered, shouldShowPopup, markShown]);
-
-  const handleClose = () => {
-    setIsOpen(false);
-  };
+  useEffect(() => {
+    if (!isOpen) return;
+    closeRef.current?.focus();
+    const onKeyDown = (event: KeyboardEvent) => { if (event.key === "Escape") setIsOpen(false); };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [isOpen]);
 
   return (
     <AnimatePresence>
-      {isOpen && (
+      {isOpen && !suppressed && (
         <>
-          {/* Backdrop */}
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[200]" onClick={() => setIsOpen(false)} />
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[200]"
-            onClick={handleClose}
-          />
-
-          {/* Popup */}
-          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="exit-intent-title"
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 md:w-full md:max-w-lg z-[201]"
+            className="fixed bottom-6 right-6 z-[201] w-full max-w-lg"
           >
-            <div className="relative bg-charcoal rounded-2xl border border-gold/30 p-6 md:p-8 shadow-2xl shadow-gold/10">
-              {/* Close button */}
-              <button
-                onClick={handleClose}
-                className="absolute top-4 right-4 h-8 w-8 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-colors"
-                aria-label="Close"
-              >
+            <div className="relative bg-charcoal rounded-2xl border border-gold/30 p-8 shadow-2xl shadow-gold/10">
+              <button ref={closeRef} onClick={() => setIsOpen(false)} className="absolute top-4 right-4 h-8 w-8 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-colors" aria-label="Close dialog">
                 <X className="h-4 w-4" />
               </button>
-
-              {/* Content */}
               <div className="text-center">
-                {/* Icon */}
-                <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-gold/20 mb-6">
-                  <Award className="h-8 w-8 text-gold" />
-                </div>
-
-                {/* Headline */}
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-3">
-                  Before You Go
-                </h2>
-
+                <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-gold/20 mb-6"><Award className="h-8 w-8 text-gold" /></div>
+                <h2 id="exit-intent-title" className="font-display text-2xl md:text-3xl font-bold text-white mb-3">Before You Go</h2>
                 <p className="text-white/70 mb-6 max-w-sm mx-auto">
-                  Someone in your world is already an enabler of Education for All — a teacher, a founder, a mentor no one's recognised yet. Put their name forward. It takes minutes, it's free, and every submission goes through{" "}
-                  <span className="text-gold font-semibold">independent NRRC verification</span>.
+                  Someone in your world is already enabling education. Nomination is free, and every nomination is reviewed by the Nominee Research and Review Corps; Icon dossiers are assessed by independent judges.
                 </p>
-
-                {/* Value props */}
                 <div className="flex items-center justify-center gap-4 mb-6 text-sm">
-                  <div className="flex items-center gap-1.5 text-gold">
-                    <Sparkles className="h-4 w-4" />
-                    <span>Free to submit</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 text-gold">
-                    <ShieldCheck className="h-4 w-4" />
-                    <span>Independently verified</span>
-                  </div>
+                  <span className="flex items-center gap-1.5 text-gold"><Award className="h-4 w-4" />Free to submit</span>
+                  <span className="flex items-center gap-1.5 text-gold"><ShieldCheck className="h-4 w-4" />Independent Icon judging</span>
                 </div>
-
-                {/* CTAs */}
                 <div className="space-y-3">
-                  <Link to="/nominate" onClick={handleClose} className="block">
-                    <Button
-                      size="lg"
-                      className="w-full bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2"
-                    >
-                      <Award className="h-4 w-4" />
-                      Nominate an Enabler
-                      <ArrowRight className="h-4 w-4" />
-                    </Button>
+                  <Link to="/nominate" onClick={() => setIsOpen(false)} className="block">
+                    <Button size="lg" className="w-full bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full gap-2">Submit a Nomination<ArrowRight className="h-4 w-4" /></Button>
                   </Link>
-
-                  <button
-                    onClick={handleClose}
-                    className="text-sm text-white/50 hover:text-white/70 transition-colors"
-                  >
-                    Maybe later
-                  </button>
+                  <button onClick={() => setIsOpen(false)} className="text-sm text-white/50 hover:text-white/70 transition-colors">Maybe later</button>
                 </div>
               </div>
             </div>

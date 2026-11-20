@@ -304,12 +304,12 @@ export const FOOTER_NAV: NavSection[] = [
     label: "Participate",
     items: [
       { label: "Nominate", href: "/nominate" },
-      { label: "Vote", href: "/awards/gold-blue-garnet" },
+      { label: "How Recognition Works", href: "/how-it-works" },
       { label: "Apply to be a Judge", href: "/judgeapply" },
       { label: "Partners", href: "/partners" },
-      { label: "Join a Local Chapter", href: "/chapters" },
+      { label: "Join a Local Chapter", href: "/chapters/join" },
       { label: "Volunteer", href: "/volunteer" },
-      { label: "Buy Merchandise", href: "/shop" },
+      { label: "Buy Merchandise", href: "/contact?subject=merchandise" },
 
     ],
   },

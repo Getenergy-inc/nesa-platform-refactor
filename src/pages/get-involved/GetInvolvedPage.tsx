@@ -6,7 +6,7 @@ const BLOCKS: Array<{ title: string; body: string; ctas: LeanCta[] }> = [
   { title: "Join our team", body: "Paid and volunteer vacancies across SCEF programmes.", ctas: [{ label: "View Vacancies", href: "/vacancies" }] },
   { title: "Partner with us", body: "Technology, accessibility, media, research, education interventions, regional school support, training and Afri-EduTourism.", ctas: [{ label: "Propose a Partnership", href: "/partners" }] },
   { title: "Sponsor responsibly", body: "Sponsors support approved delivery without nomination, judging or editorial influence.", ctas: [{ label: "Become a Sponsor", href: "/sponsors" }] },
-  { title: "Donate", body: "Donations support approved education documentation, accessibility, school interventions and EduAid-Africa services, by bank transfer to EduAid Africa Ltd.", ctas: [{ label: "Support Education", href: "/support" }] },
+  { title: "Donate", body: "Donations support approved education documentation, accessibility, school interventions and EduAid-Africa services, by bank transfer to EduAid Africa Ltd.", ctas: [{ label: "Support Education", href: "/donate" }] },
   { title: "Buy merchandise", body: "Official NESA-Africa and EduAid-Africa merchandise is available on request while the online shop is closed.", ctas: [{ label: "Enquire About Merchandise", href: "/contact?subject=merchandise", primary: true }] },
 ];
 
@@ -27,6 +27,7 @@ export default function GetInvolvedPage() {
       <LeanSection title="Integrity notice">
         <p>Sponsorship, donations, partnerships, endorsements, merchandise purchases and media participation carry zero weight in nomination, eligibility, judging or recognition.</p>
       </LeanSection>
+      <LeanSection title="Choose your next step" tone="dark"><LeanCtas ctas={[{ label: "Apply to Volunteer", href: "/volunteer", primary: true }, { label: "Support a Special-Needs School", href: "/support-a-special-needs-school" }]} /></LeanSection>
     </main>
   );
 }

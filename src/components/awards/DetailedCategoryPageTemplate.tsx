@@ -90,7 +90,7 @@ export default function DetailedCategoryPageTemplate({ page, theme = "corporate"
               <Link to={page.secondaryCta.href}>{page.secondaryCta.label}</Link>
             </Button>
             <Button asChild size="lg" variant="ghost" className="text-white hover:bg-white/10">
-              <Link to="/awards/18-categories">View All Categories</Link>
+              <Link to="/recognition">View All Recognition Tiers</Link>
             </Button>
           </div>
         </div>
@@ -422,10 +422,10 @@ export default function DetailedCategoryPageTemplate({ page, theme = "corporate"
             </Button>
           </div>
           <Link
-            to="/awards/18-categories"
+            to="/recognition"
             className="mt-6 inline-block text-sm text-gold underline underline-offset-4"
           >
-            View All Award Categories
+            View All Recognition Tiers
           </Link>
         </div>
       </section>

@@ -25,21 +25,19 @@ export function EditorialHero() {
         </h1>
 
         <p className="ed-hero-sub">
-          The African Blue-Garnet Awards for Education identify, document and recognise people and institutions whose verified work expands education access, quality, inclusion, innovation and opportunity across Africa.
+          We find, verify and celebrate the people and institutions expanding education across Africa. Nomination is free.
         </p>
         <p className="ed-hero-sub italic">Evidence-led research. Independent Icon judging. No public voting in 2026.</p>
 
         <div className="ed-hero-cta-row">
-          <a
-            href={PUBLIC_ACTIONS_2026.nominate.href}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to={PUBLIC_ACTIONS_2026.nominate.href}
             aria-label="Submit a Nomination"
             className="ed-btn-primary"
             onClick={() => trackEvent("hero_cta_click", { slot: "primary", href: PUBLIC_ACTIONS_2026.nominate.href, surface: "home" })}
           >
             Submit a Nomination
-          </a>
+          </Link>
           <Link to="/how-it-works" className="ed-btn-ghost">
             How Recognition Works
           </Link>

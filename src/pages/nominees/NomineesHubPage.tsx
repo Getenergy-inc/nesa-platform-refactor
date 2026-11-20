@@ -4,7 +4,6 @@ import { Helmet } from "react-helmet-async";
 import { Search, Sparkles } from "lucide-react";
 import { MobileBottomActions } from "@/components/navigation/MobileBottomActions";
 import { BackToTopButton } from "@/components/ui/back-to-top";
-import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicator";
 import { CATALOGUE_TIERS } from "@/config/directory/catalogueTaxonomy";
 import { DIRECTORY_NAME } from "@/config/platformCopy";
 import { NOMINATIONS_OPEN_LABEL } from "@/config/nominationWindows2026";
@@ -60,8 +59,8 @@ export default function NomineesHubPage() {
   return (
     <>
       <Helmet>
-        <title>Nominees | NESA-Africa 2026</title>
-        <meta name="description" content="Search authorised NESA-Africa nominee profiles by name, organisation, country or recognition tier. Publication remains subject to review and consent." />
+        <title>NESA-Africa Nominees | Profiles and Review Status</title>
+        <meta name="description" content="Explore authorised NESA-Africa nominee profiles and controlled review statuses." />
         <link rel="canonical" href={CANONICAL} />
         <meta property="og:title" content="Nominees | NESA-Africa 2026" />
         <meta property="og:description" content="Explore authorised Education Enabler profiles across four recognition tiers." />
@@ -69,7 +68,6 @@ export default function NomineesHubPage() {
         <meta property="og:url" content={CANONICAL} />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
-      <ScrollProgressIndicator />
       <div className="nesa-ed min-h-screen pb-16">
         <main>
           <section className="ed-dir-hero" aria-labelledby="dir-heading">
@@ -84,7 +82,8 @@ export default function NomineesHubPage() {
               </form>
               <div className="ed-hero-cta-row" style={{ justifyContent: "center" }}>
                 <Link to="/nominate" className="ed-btn-primary">Submit a Nomination</Link>
-                <Link to="/nominees/catalogue" className="ed-btn-ghost">Browse the Full Catalogue →</Link>
+                <Link to="/nominees/catalogue" className="ed-btn-ghost">Explore Profiles</Link>
+                <Link to="/contact?subject=correction" className="text-sm text-white/70 underline hover:text-gold">Request a Correction</Link>
               </div>
             </div>
           </section>
@@ -106,6 +105,20 @@ export default function NomineesHubPage() {
                   </article>
                 ))}
               </div>
+            </div>
+          </section>
+
+          <section className="ed-section" aria-labelledby="dir-statuses">
+            <div className="ed-wrap"><div className="ed-section-head"><div className="ed-eyebrow">Controlled review statuses</div><h2 id="dir-statuses" className="ed-section-title">What each status means</h2></div>
+              <dl className="grid gap-3 md:grid-cols-2">{[
+                ["Nomination received", "A submission has been recorded."],
+                ["Contact verification in progress", "Identity and contact details are being checked."],
+                ["Consent pending", "Acceptance or publication consent has not yet been given."],
+                ["Evidence review in progress", "Claims and supporting information are being examined."],
+                ["NRRC research and review in progress", "The NRRC is preparing or reviewing the profile and dossier."],
+                ["Eligible for judging", "Checks are complete; an Icon dossier may go to the judges."],
+                ["Recognition decision completed", "The recognition process has concluded."],
+              ].map(([status, meaning]) => <div key={status} className="rounded-xl border border-gold/20 bg-white/[0.03] p-4"><dt className="font-semibold text-gold">{status}</dt><dd className="mt-1 text-sm text-white/65">{meaning}</dd></div>)}</dl>
             </div>
           </section>
 

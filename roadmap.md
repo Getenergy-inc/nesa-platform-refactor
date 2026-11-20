@@ -1,5 +1,5 @@
 ## Consolidated master refactor v3 + Support Engine — 20 Nov 2026
-- [ ] Owner approval required before application code changes; phased A–G plan prepared from both attachments. Master v3 is authoritative; HTML is content/workflow reference only, with no raw HTML, FormSubmit inbox or voting workflow. Preserve design, data, roles, Support Fund safeguards and Phase 0 guard; do not publish.
+- [ ] Execute owner-approved phases A–G from both attachments. Master v3 is authoritative; HTML is content/workflow reference only, with no raw HTML, FormSubmit inbox or voting workflow. Preserve design, data, roles, Support Fund safeguards and Phase 0 guard; do not publish.
 - [x] Owner chose “both”: keep every current Support picture and add suitable embedded HTML logos/flyers through asset pointers; no existing category image replacement.
 
 ## Lean public site Phases 2–7 — 20 Nov 2026

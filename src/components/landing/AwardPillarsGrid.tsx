@@ -247,7 +247,7 @@ export function AwardPillarsGrid() {
             <ImpactStat icon={BookOpen} title="Building the Future" sub="Through Learning" />
             <ImpactStat icon={Globe} title="Uniting Africa & The World" sub="For Education" />
             <Link
-              to="/awards"
+              to="/recognition"
               className="col-span-2 md:col-span-1 inline-flex items-center justify-center gap-2 rounded-full bg-gold text-black font-semibold px-5 py-3 text-sm hover:bg-gold/90 transition"
             >
               Explore All Categories <ArrowRight className="w-4 h-4" />

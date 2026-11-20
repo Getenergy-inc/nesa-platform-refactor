@@ -462,6 +462,23 @@
   }
 }
 
+/* Public keyboard and visitor-controlled accessibility preferences. */
+.skip-link {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 1000;
+  transform: translateY(-160%);
+  border-radius: 0.5rem;
+  background: hsl(var(--gold));
+  color: hsl(var(--charcoal));
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+}
+.skip-link:focus { transform: translateY(0); }
+:focus-visible { outline: 3px solid hsl(var(--gold)); outline-offset: 3px; }
+html[data-public-contrast="high"] body { filter: contrast(1.14); }
+
 /* ============= Phase 3 mobile performance pass ============= */
 
 /* Respect reduced-motion: kill non-essential animations & transitions */

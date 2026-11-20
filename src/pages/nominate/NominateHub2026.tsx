@@ -881,7 +881,7 @@ export default function NominateHub2026() {
           <div className="mt-8">
             <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
               <a href="#tier-selector">
-                Start a Nomination
+                Open the Official Nomination Form
                 <ArrowRight className="ml-2 h-4 w-4" />
               </a>
             </Button>

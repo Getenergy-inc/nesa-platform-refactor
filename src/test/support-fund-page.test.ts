@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
 vi.mock("@/integrations/supabase/client", () => ({ supabase: { from: () => ({ insert: async () => ({ error: null }) }) } }));
 import {
-  SNS_REGIONS, SNS_COUNTRIES, SNS_CATEGORIES, SNS_BANK_ACCOUNTS, VOTING_OPEN, REGION_TARGET_USD, CONTINENTAL_TARGET_USD,
+  SNS_REGIONS, SNS_COUNTRIES, SNS_CATEGORIES, SNS_BANK_ACCOUNTS, REGIONAL_PARTICIPATION_OPEN, REGION_TARGET_USD, CONTINENTAL_TARGET_USD,
   SNS_UNASSIGNED, makeSupportRef, SNS_CTAS, SNS_BASE, SNS_CANONICAL, SNS_HERO_IMAGE,
 } from "@/config/schoolSupport";
 import { submitPledge, assertNoSensitiveFields } from "@/services/supportFund";
@@ -43,9 +43,9 @@ describe("Support a Special-Needs School config", () => {
     expect(SNS_HERO_IMAGE.src.startsWith("/__l5e/assets-v1/")).toBe(true);
     expect(SNS_HERO_IMAGE.alt.length).toBeGreaterThan(60);
   });
-  it("keeps voting closed and targets at US$150,000 × 8 = US$1.2M", () => {
-    expect(VOTING_OPEN).toBe(false);
-    expect(SNS_CTAS.vote.disabled).toBe(true);
+  it("keeps regional participation closed and targets at US$150,000 × 8 = US$1.2M", () => {
+    expect(REGIONAL_PARTICIPATION_OPEN).toBe(false);
+    expect(SNS_CTAS.participate.disabled).toBe(true);
     expect(REGION_TARGET_USD * SNS_REGIONS.length).toBe(CONTINENTAL_TARGET_USD);
     expect(CONTINENTAL_TARGET_USD).toBe(1_200_000);
   });

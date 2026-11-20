@@ -8,15 +8,15 @@ export function AccountabilityDashboard() {
   const s = PUBLIC_STATS;
   const empty = allNull(s);
   const kpis: Array<[string, string]> = [
-    ["Schools nominated", dash(s.schoolsNominated)], ["Approved for voting", dash(s.approvedForVoting)],
+    ["Schools nominated", dash(s.schoolsNominated)], ["Approved for regional participation", dash(s.approvedForParticipation)],
     ["Funds pledged", usd(s.pledgedUsd)], ["Funds reconciled", usd(s.reconciledUsd)],
     ["Interventions completed", dash(s.interventionsCompleted)], ["Last updated", dash(s.lastUpdated)],
   ];
   const cards: Array<{ title: string; rows: Array<[string, string]> }> = [
-    { title: "School pipeline", rows: [["Nominated", dash(s.schoolsNominated)], ["Unique after duplicate review", dash(s.uniqueAfterReview)], ["Under verification", dash(s.underVerification)], ["Approved for voting", dash(s.approvedForVoting)]] },
+    { title: "School pipeline", rows: [["Nominated", dash(s.schoolsNominated)], ["Unique after duplicate review", dash(s.uniqueAfterReview)], ["Under verification", dash(s.underVerification)], ["Approved for regional participation", dash(s.approvedForParticipation)]] },
     { title: "Money trail (USD)", rows: [["Pledged", usd(s.pledgedUsd)], ["Transfers reported", usd(s.transfersReportedUsd)], ["Reconciled on bank statement", usd(s.reconciledUsd)], ["Receipts issued", dash(s.receiptsIssued)]] },
     { title: "Interventions", rows: [["Approved", dash(s.interventionsApproved)], ["Started", dash(s.interventionsStarted)], ["Completed", dash(s.interventionsCompleted)]] },
-    { title: "Verified regional votes", rows: [["Total verified votes", dash(s.verifiedRegionalVotes)]] },
+    { title: "Regional participation", rows: [["Verified regional participants", dash(s.verifiedRegionalParticipants)]] },
   ];
   return (
     <div className="space-y-6">

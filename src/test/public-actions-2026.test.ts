@@ -1,16 +1,15 @@
 import { describe, expect, it } from "vitest";
 import { SOCIAL_LINKS, SOCIAL_PROFILE_URLS } from "@/config/socialLinks";
 import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
-import { OFFICIAL_NOMINATION_FORM_URL } from "@/config/nomination/officialGoogleForm";
 import { NOMINATION_WINDOW_LABEL } from "@/config/nominationWindows2026";
 import { REFACTOR_REDIRECTS_2026 } from "@/config/refactorRedirects2026";
 import { AWARD_TIERS_TOTALS } from "@/config/awardTiers2026";
 import { SITE_STATS_FALLBACK } from "@/config/siteStats";
 
 describe("2026 public actions", () => {
-  it("uses the official Google Form as the only nomination destination", () => {
-    expect(PUBLIC_ACTIONS_2026.nominate.href).toBe(OFFICIAL_NOMINATION_FORM_URL);
-    expect(PUBLIC_ACTIONS_2026.nominate.external).toBe(true);
+  it("routes the public nomination CTA through the official nomination page", () => {
+    expect(PUBLIC_ACTIONS_2026.nominate.href).toBe("/nominate");
+    expect(PUBLIC_ACTIONS_2026.nominate.external).toBe(false);
   });
 
   it("publishes the approved nomination and certificate window", () => {

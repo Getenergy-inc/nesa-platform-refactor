@@ -7,6 +7,16 @@ import cat05 from "@/assets/school-support/category-05-autism-and-communication.
 import cat06 from "@/assets/school-support/category-06-learning-emotional-and-behavioural.jpg.asset.json";
 import cat07 from "@/assets/school-support/category-07-multiple-and-complex.jpg.asset.json";
 import cat08 from "@/assets/school-support/category-08-inclusive-early-intervention-and-vocational.jpg.asset.json";
+import friendsLogo from "@/assets/school-support/html-friends-of-eduaid-logo.jpg.asset.json";
+import academyLogo from "@/assets/school-support/html-eduaid-academy-logo.jpg.asset.json";
+import nominateFlyer from "@/assets/school-support/html-nominate-school.jpg.asset.json";
+import donateFlyer from "@/assets/school-support/html-donate-support.jpg.asset.json";
+import sponsorFlyer from "@/assets/school-support/html-sponsor-school.jpg.asset.json";
+import regionFlyer from "@/assets/school-support/html-support-region.jpg.asset.json";
+import interventionFlyer from "@/assets/school-support/html-fund-intervention.jpg.asset.json";
+import equipmentFlyer from "@/assets/school-support/html-donate-equipment.jpg.asset.json";
+import volunteerFlyer from "@/assets/school-support/html-volunteer-services.jpg.asset.json";
+import partnerFlyer from "@/assets/school-support/html-programme-partner.jpg.asset.json";
 
 /** School intervention actions are independent of NESA award nomination. */
 export const SCHOOL_SUPPORT_ACTIONS = {
@@ -20,13 +30,13 @@ export const SCHOOL_SUPPORT_PARTICIPATE_ROUTE = `${SCHOOL_SUPPORT_ROUTE}/partici
 /** CONTENT REQUIRED: supply the authorised NESA-Africa Google Form URL. */
 export const SNS_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfSFHcQc9ehWdnPTfPRyzeMruCVOzVyjyI29uUSRR6E2g1JWw/viewform";
 
-/** Voting remains unavailable until technical and governance approval authorises this flag. */
-export const VOTING_OPEN = false;
-export const VOTING_PENDING_LABEL = "Regional school participation opens in September 2027, subject to verification and approval";
-export const VOTING_OPEN_LABEL = "Vote for a School in Your Region";
+/** Regional participation remains unavailable until technical and governance approval authorises it. */
+export const REGIONAL_PARTICIPATION_OPEN = false;
+export const REGIONAL_PARTICIPATION_PENDING_LABEL = "Regional school participation opens in September 2027, subject to verification and approval";
+export const REGIONAL_PARTICIPATION_OPEN_LABEL = "Take Part in Regional School Participation";
 
-export function getSchoolVotingLabel(votingOpen: boolean = VOTING_OPEN): string {
-  return votingOpen ? VOTING_OPEN_LABEL : VOTING_PENDING_LABEL;
+export function getSchoolParticipationLabel(participationOpen: boolean = REGIONAL_PARTICIPATION_OPEN): string {
+  return participationOpen ? REGIONAL_PARTICIPATION_OPEN_LABEL : REGIONAL_PARTICIPATION_PENDING_LABEL;
 }
 
 /** Only authorised HTTPS Google Forms links may become public participation links. */
@@ -76,8 +86,8 @@ export const SCHOOL_SUPPORT_PROCESS = [
   { title: "Verify", description: "its identity, learners, needs and safeguarding arrangements." },
   { title: "Classify", description: "the school by its principal services and intervention needs." },
   { title: "Publish", description: "only approved school profiles." },
-  { title: "Vote", description: "for an eligible school within the appropriate African region." },
-  { title: "Select", description: "the highest-voted eligible school from each region." },
+  { title: "Participate", description: "in authorised regional school participation after verification and approval." },
+  { title: "Select", description: "one eligible school from each region under the published selection rules." },
   { title: "Complete due diligence", description: "and confirm the appropriate intervention." },
   { title: "Fund, advise or support", description: "the approved regional school." },
   { title: "Monitor and report", description: "the intervention and educational impact." },
@@ -91,7 +101,7 @@ export const SCHOOL_SUPPORT_DUE_DILIGENCE = [
   "school-management consent",
   "site or remote assessment",
   "funding availability",
-  "absence of voting manipulation",
+  "documented compliance with published selection rules",
   "written programme approval",
 ] as const;
 
@@ -135,27 +145,26 @@ export const SCHOOL_SUPPORT_INTERVENTIONS = [
   "technical or operational advice",
 ] as const;
 
-export const SCHOOL_SUPPORT_NOMINATION_NOTICE = "A nomination begins a verification process. It does not guarantee publication, voting eligibility, funding, sponsorship, a grant or an intervention.";
+export const SCHOOL_SUPPORT_NOMINATION_NOTICE = "A nomination begins a verification process. It does not guarantee publication, regional selection eligibility, funding, sponsorship, a grant or an intervention.";
 
-export const SCHOOL_SUPPORT_VOTING_REQUIREMENTS = [
+export const SCHOOL_SUPPORT_PARTICIPATION_REQUIREMENTS = [
   "all participating schools have passed verification",
   "publication consent has been obtained",
   "safeguarding reviews are complete",
   "regional classifications are approved",
-  "voting rules are published",
-  "duplicate and fraudulent-vote controls are tested",
+  "regional participation and selection rules are published",
+  "regional eligibility and review controls are tested",
   "technical and governance approval is recorded",
 ] as const;
 
-export const SCHOOL_SUPPORT_VOTING_SAFEGUARDS = [
-  "verified email or telephone confirmation",
-  "one controlled voting entitlement per verified participant",
-  "anti-bot protection",
-  "duplicate detection",
+export const SCHOOL_SUPPORT_PARTICIPATION_SAFEGUARDS = [
+  "verified participant contact details",
+  "documented regional eligibility checks",
+  "independent review of selection records",
   "audit logs",
-  "regional eligibility controls",
+  "conflict-of-interest controls",
   "published opening and closing times",
-  "documented recount and dispute procedures",
+  "documented review and dispute procedures",
 ] as const;
 
 export const SCHOOL_SUPPORT_SPONSOR_TYPES = [
@@ -205,7 +214,7 @@ export const SCHOOL_SUPPORT_PARTNERSHIP_OPPORTUNITIES = [
   "independent audit or programme assurance",
 ] as const;
 
-export const SCHOOL_SUPPORT_SPONSORSHIP_INTEGRITY = "Sponsorship, donations and partnerships support approved education interventions. They do not influence school verification, voting totals, NESA-Africa award judging or recognition decisions.";
+export const SCHOOL_SUPPORT_SPONSORSHIP_INTEGRITY = "Sponsorship, donations and partnerships support approved education interventions. They do not influence school verification, regional selection, NESA-Africa award judging or recognition decisions.";
 export const SCHOOL_SUPPORT_DONATION_NOTICE = "Completing a donation or sponsorship form does not confirm that payment has been received. Support is confirmed only after successful reconciliation and an official acknowledgement or receipt.";
 export const SCHOOL_SUPPORT_TIMETABLE_NOTICE = "The timetable is subject to governance approval, funding availability, school verification, safeguarding requirements and operational readiness.";
 
@@ -225,10 +234,9 @@ export const SCHOOL_SUPPORT_TIMETABLE = [
   { period: "April 2027", activity: "School nominations open" },
   { period: "April–August 2027", activity: "Verification, consent, needs assessment, safeguarding review and regional classification" },
   { period: "August 2027", activity: "Regional shortlist and public-information review" },
-  { period: "September 2027", activity: "Authorised regional selection" },
+  { period: "September 2027", activity: "Regional school participation and selection, subject to verification and approval" },
   { period: "October–November 2027", activity: "Controlled funding releases, intervention delivery and EduTourism activities" },
   { period: "December 2027", activity: "Outcome presentation, partner recognition and preliminary reporting" },
-  { period: "2028 onward", activity: "Intervention completion, monitoring and public impact reporting where required" },
   { period: "2028 onward", activity: "Intervention completion, monitoring and public impact reporting where required" },
 ] as const;
 
@@ -236,8 +244,8 @@ export const SCHOOL_SUPPORT_DASHBOARD_FIELDS = [
   "schools nominated",
   "unique schools after duplicate review",
   "schools under verification",
-  "schools approved for voting",
-  "verified regional vote totals",
+  "schools approved for regional participation",
+  "verified regional participation totals",
   "funds pledged",
   "funds received and reconciled",
   "interventions approved",
@@ -246,7 +254,7 @@ export const SCHOOL_SUPPORT_DASHBOARD_FIELDS = [
   "last-updated date",
 ] as const;
 
-export type SchoolParticipationId = "nominate" | "vote" | "donate" | "sponsor" | "region" | "partner" | "volunteer" | "equipment";
+export type SchoolParticipationId = "nominate" | "participate" | "donate" | "sponsor" | "region" | "partner" | "volunteer" | "equipment";
 
 export const SCHOOL_SUPPORT_PARTICIPATION: ReadonlyArray<{
   id: SchoolParticipationId;
@@ -254,7 +262,7 @@ export const SCHOOL_SUPPORT_PARTICIPATION: ReadonlyArray<{
   description: string;
 }> = [
   { id: "nominate", label: "Nominate a school", description: "Begin the verification and needs-assessment process for an eligible special-needs or inclusive school." },
-  { id: "vote", label: "Vote for a verified school", description: "Take part in school-only regional participation after verification, safeguarding and governance approval." },
+  { id: "participate", label: "Take part in regional school participation", description: "Participate after verification, publication consent, safeguarding, regional classification and published governance approval." },
   { id: "donate", label: "Donate", description: "Express interest in donating to the Support Fund without providing payment credentials in the form." },
   { id: "sponsor", label: "Sponsor a school", description: "Support one verified school or an approved intervention, subject to due diligence and available funds." },
   { id: "region", label: "Support a region", description: "Support an approved African programme region and its verified education interventions." },
@@ -293,7 +301,7 @@ export const SNS_VIDEO_CAPTION = "Illustrative AI-generated video · not a benef
 export const SNS_CTAS = {
   nominate: { label: "Nominate a Special-Needs School", href: `${SNS_BASE}/participate?participation=nominate` },
   verified: { label: "View Verified Schools", href: `${SNS_BASE}#verified-schools` },
-  vote: { label: VOTING_PENDING_LABEL, href: "#vote", disabled: true },
+  participate: { label: REGIONAL_PARTICIPATION_PENDING_LABEL, href: "#regional-participation", disabled: true },
   donate: { label: "Donate to the Support Fund", href: "#donate" },
   sponsor: { label: "Sponsor a Regional School", href: "#sponsor-form" },
   partner: { label: "Become a Programme Partner", href: "#sponsor-form" },
@@ -415,12 +423,28 @@ export const SNS_PARTNER_CONTRIBUTIONS = ["Funding", "Professional expertise", "
 
 export const SNS_FIVE_WAYS = [
   { key: "nominate", n: 1, title: "Nominate", timing: "Opens April 2027", text: "Put forward a specialist or inclusive school for verification." },
-  { key: "vote", n: 2, title: "Vote", timing: "Opens September 2027*", text: "Free regional voting among verified schools, once approved." },
+  { key: "participate", n: 2, title: "Participate", timing: "Opens September 2027*", text: "Regional school participation after verification, safeguarding and governance approval." },
   { key: "donate", n: 3, title: "Donate", timing: "Pledges open now", text: "Give to the ring-fenced Support Fund by bank transfer." },
   { key: "sponsor", n: 4, title: "Sponsor", timing: "US$150,000 per region", text: "Sponsor a regional school, a project or in-kind support." },
   { key: "attend", n: 5, title: "Attend", timing: "October–December 2027", text: "Join EduTourism 2027 and regional commissioning ceremonies." },
 ] as const;
-export const SNS_VOTE_FOOTNOTE = `*${VOTING_PENDING_LABEL}. Participation is free and never linked to money.`;
+export const SNS_PARTICIPATION_FOOTNOTE = `*${REGIONAL_PARTICIPATION_PENDING_LABEL}. Participation is free and never linked to money.`;
+
+export const SNS_SUPPORT_FLYERS = [
+  { title: "Nominate a school", src: nominateFlyer.url, alt: "EduAid-Africa flyer inviting nominations for special-needs and inclusive schools; nominations open April 2027.", href: SNS_CTAS.nominate.href },
+  { title: "Donate", src: donateFlyer.url, alt: "EduAid-Africa flyer inviting pledges of funds, equipment, services or construction support.", href: "#donate" },
+  { title: "Sponsor a verified school", src: sponsorFlyer.url, alt: "EduAid-Africa flyer inviting sponsorship of an approved project at a verified school.", href: "#sponsor-form" },
+  { title: "Support a whole region", src: regionFlyer.url, alt: "EduAid-Africa flyer inviting support for an approved school in one of eight programme regions.", href: "#regions" },
+  { title: "Fund one intervention", src: interventionFlyer.url, alt: "EduAid-Africa flyer listing renovation, assistive technology, transport, training and school infrastructure support.", href: "#sponsor-form" },
+  { title: "Donate equipment or materials", src: equipmentFlyer.url, alt: "EduAid-Africa flyer inviting assistive devices, furniture, books and learning materials.", href: "#sponsor-form" },
+  { title: "Volunteer professional services", src: volunteerFlyer.url, alt: "EduAid-Africa flyer inviting screened teaching, therapy, architecture, ICT, media and monitoring volunteers.", href: SNS_CTAS.volunteer.href },
+  { title: "Become a programme partner", src: partnerFlyer.url, alt: "EduAid-Africa flyer inviting companies, foundations, institutions and professional bodies to become partners.", href: "#sponsor-form" },
+] as const;
+
+export const SNS_PROGRAMME_LOGOS = {
+  friends: { src: friendsLogo.url, alt: "Friends of EduAid-Africa — Together, We Make Education Possible Across Africa" },
+  academy: { src: academyLogo.url, alt: "EduAid-Africa Academy — Learning for Africa's Education Enablers" },
+} as const;
 
 export const SNS_ABOUT_CARDS = [
   { title: "Why it matters", text: "Many specialist and inclusive schools serving learners with disabilities lack accessible buildings, equipment, trained staff and reliable funding." },
@@ -428,16 +452,16 @@ export const SNS_ABOUT_CARDS = [
   { title: "Who it serves", text: "Learners with disabilities and additional support needs, their teachers and the schools that serve them, in every region of Africa." },
   { title: "How you can help", text: "Nominate a school, donate, sponsor a regional school, partner with the programme, volunteer your skills or attend in 2027." },
 ] as const;
-export const SNS_PRINCIPLES = ["Evidence before support", "Safeguarding first", "Votes are never sold", "Open accountability"] as const;
+export const SNS_PRINCIPLES = ["Evidence before support", "Safeguarding first", "Participation is never linked to money", "Open accountability"] as const;
 
-export const SNS_PROCESS_STEPS = ["Identify", "Nominate", "Verify", "Classify", "Publish", "Vote", "Select", "Due diligence", "Fund & support", "Monitor & report"] as const;
+export const SNS_PROCESS_STEPS = ["Identify", "Nominate", "Verify", "Classify", "Publish", "Participate", "Select", "Due diligence", "Fund & support", "Monitor & report"] as const;
 export const SNS_NEXT_ELIGIBLE_NOTE = "If a selected school cannot complete due diligence, the next eligible verified school in the same region may be considered, subject to written approval.";
 export const SNS_ATTEND_ITEMS = ["Regional EduTourism visits to approved schools (Oct–Nov 2027)", "Regional Grant Awarding and Commissioning Ceremonies", "Volunteer and professional-service days", "Partner and media briefings, where approved"] as const;
 
 export const SNS_FAQ = [
   { q: "Who runs this programme?", a: "Support a Special-Needs School Across Africa is a service of Rebuild My School Africa (RMSA), an EduAid-Africa programme of Santos Creations Educational Foundation (SCEF), presented jointly with NESA-Africa." },
   { q: "Is it part of the NESA-Africa awards?", a: "No. It is not a NESA-Africa award tier. " + "Regional school selection is separate from NESA-Africa award recognition. Donations, sponsorship and regional participation do not affect NESA-Africa judging or recognition decisions." },
-  { q: "Does a nomination guarantee a grant?", a: "No. A nomination begins verification. It does not guarantee publication, voting eligibility, funding, a grant or an intervention. Any support is subject to due diligence, available funds and written approval." },
+  { q: "Does a nomination guarantee a grant?", a: "No. A nomination begins verification. It does not guarantee publication, regional selection eligibility, funding, a grant or an intervention. Any support is subject to due diligence, available funds and written approval." },
   { q: "What is EduTourism 2027?", a: "Regional visits in October–November 2027 to approved schools, alongside Regional Grant Awarding and Commissioning Ceremonies. Dates and host cities will be announced." },
   { q: "Can I choose a region?", a: "Yes. Donations and sponsorships can be directed to one of the eight regions or to where most needed." },
   { q: "How is children's privacy protected?", a: "We never publish children's names, diagnoses, identity documents, personal contacts or unapproved school data. Only verified and approved school profiles are shown." },
@@ -446,16 +470,16 @@ export const SNS_FAQ = [
 export type NullableNumber = number | null;
 /** Public accountability figures — all null until the first approved figures. Later read from the shared eduaid.africa public-stats endpoint. */
 export const PUBLIC_STATS: {
-  schoolsNominated: NullableNumber; uniqueAfterReview: NullableNumber; underVerification: NullableNumber; approvedForVoting: NullableNumber;
+  schoolsNominated: NullableNumber; uniqueAfterReview: NullableNumber; underVerification: NullableNumber; approvedForParticipation: NullableNumber;
   pledgedUsd: NullableNumber; transfersReportedUsd: NullableNumber; reconciledUsd: NullableNumber; receiptsIssued: NullableNumber;
   interventionsApproved: NullableNumber; interventionsStarted: NullableNumber; interventionsCompleted: NullableNumber;
-  verifiedRegionalVotes: NullableNumber; lastUpdated: string | null;
+  verifiedRegionalParticipants: NullableNumber; lastUpdated: string | null;
   regions: Record<RegionKey, { pledgedUsd: NullableNumber; reconciledUsd: NullableNumber }>;
 } = {
-  schoolsNominated: null, uniqueAfterReview: null, underVerification: null, approvedForVoting: null,
+  schoolsNominated: null, uniqueAfterReview: null, underVerification: null, approvedForParticipation: null,
   pledgedUsd: null, transfersReportedUsd: null, reconciledUsd: null, receiptsIssued: null,
   interventionsApproved: null, interventionsStarted: null, interventionsCompleted: null,
-  verifiedRegionalVotes: null, lastUpdated: null,
+  verifiedRegionalParticipants: null, lastUpdated: null,
   regions: Object.fromEntries(["north","west","central","east","southern","sahel","horn","indian"].map((k) => [k, { pledgedUsd: null, reconciledUsd: null }])) as never,
 };
 export const PUBLIC_STATS_URL: string | null = null;

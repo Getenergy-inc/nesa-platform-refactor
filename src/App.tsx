@@ -784,7 +784,7 @@ const App = () => (
                   <Route path="/about/2027" element={<Navigate to="/about/nesa-africa-2027" replace />} />
                   <Route path="/about/2028-2030" element={<Navigate to="/about/nesa-africa-2028-2030" replace />} />
                   <Route path="/about/vision-2035" element={<Navigate to="/about#vision-2035" replace />} />
-                  <Route path="/about/governance" element={<Navigate to="/about#governance" replace />} />
+                  <Route path="/about/governance" element={<WithLayout><Governance /></WithLayout>} />
                   <Route
                     path="/governance"
                     element={
@@ -807,7 +807,7 @@ const App = () => (
                   <Route path="/voting-timeline" element={<Navigate to="/timeline" replace />} />
                   <Route path="/awards/timeline" element={<Navigate to="/timeline" replace />} />
 
-                  <Route path="/about/scef" element={<Navigate to="/about#scef" replace />} />
+                  <Route path="/about/scef" element={<WithLayout><SCEF /></WithLayout>} />
                   <Route path="/about/awards-recognition" element={<Navigate to="/recognition" replace />} />
                   <Route path="/about/social-impact" element={<Navigate to="/eduaid-africa" replace />} />
                   <Route

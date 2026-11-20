@@ -374,7 +374,7 @@ export const PAGE_FAQS: PageFAQ[] = [
       {
         q: "Where can voters see official updates?",
         a: "On this voting page, the official NESA-Africa newsletter, and verified NESA-Africa social channels.",
-        ctas: [{ label: "How Voting Works", href: "/how-voting-works" }],
+        ctas: [{ label: "How Recognition Works", href: "/how-it-works" }],
       },
     ],
   },

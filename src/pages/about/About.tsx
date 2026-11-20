@@ -537,8 +537,8 @@ export default function About() {
       <Section
         id="scef-ecosystem"
         eyebrow="Parent Ecosystem"
-        title="The SCEF Ecosystem"
-        lede="Santos Creations Educational Foundation provides the organisational and governance structure for NESA-Africa. NESA-Africa operates alongside EduAid-Africa and other SCEF education-support services. Participation in one programme does not guarantee recognition in another."
+        title="Hosted by SCEF"
+        lede="SCEF provides the organisational and governance structure for NESA-Africa, which runs alongside EduAid-Africa, Rebuild My School Africa and other SCEF education services. Taking part in one programme does not guarantee recognition in another."
       >
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {ABOUT_ECOSYSTEM.map((item) => (

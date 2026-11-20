@@ -48,8 +48,6 @@ export const REFACTOR_REDIRECTS_2026: RefactorRedirect[] = [
   // --- Duplicate About / FAQ / Sponsor surfaces ---
   { from: "/about-us", to: "/about", reason: "Duplicate About" },
   { from: "/about/overview", to: "/about", reason: "Duplicate About" },
-  { from: "/faqs", to: "/help", reason: "FAQs consolidated into Help Centre" },
-  { from: "/faq", to: "/help", reason: "FAQs consolidated into Help Centre" },
   { from: "/sponsor-us", to: "/sponsors", reason: "Duplicate sponsor landing" },
   { from: "/sponsor/enquire", to: "/sponsors/enquire", reason: "Canonicalise sponsor enquiry" },
   { from: "/become-a-sponsor", to: "/sponsors", reason: "Duplicate sponsor CTA page" },

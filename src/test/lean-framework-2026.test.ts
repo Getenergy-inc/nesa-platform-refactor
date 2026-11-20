@@ -3,7 +3,7 @@ import { MASTER_AWARDS, MASTER_COUNTS } from "@/config/awardMaster2026";
 import { PROGRAMME_PUBLIC_NOTICE } from "@/config/programme";
 import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
 import { REFACTOR_REDIRECTS_2026 } from "@/config/refactorRedirects2026";
-import { COUNTRY_MAP_APPROVED, SNS_CATEGORIES, SNS_MAP_DRAFT_NOTE, VOTING_OPEN, VOTING_PENDING_LABEL } from "@/config/schoolSupport";
+import { COUNTRY_MAP_APPROVED, REGIONAL_PARTICIPATION_OPEN, REGIONAL_PARTICIPATION_PENDING_LABEL, SNS_CATEGORIES, SNS_MAP_DRAFT_NOTE } from "@/config/schoolSupport";
 
 describe("approved lean framework", () => {
   it("presents exactly four tiers, 22 main awards and 90 subcategories", () => {
@@ -26,9 +26,9 @@ describe("approved lean framework", () => {
 
   it("lists 14 support categories and keeps regional selection closed", () => {
     expect(SNS_CATEGORIES).toHaveLength(14);
-    expect(VOTING_OPEN).toBe(false);
-    expect(VOTING_PENDING_LABEL).toBe("Regional school participation opens in September 2027, subject to verification and approval");
-    expect(VOTING_PENDING_LABEL).not.toMatch(/voting/i);
+    expect(REGIONAL_PARTICIPATION_OPEN).toBe(false);
+    expect(REGIONAL_PARTICIPATION_PENDING_LABEL).toBe("Regional school participation opens in September 2027, subject to verification and approval");
+    expect(REGIONAL_PARTICIPATION_PENDING_LABEL).not.toMatch(/voting/i);
   });
 
   it("fails closed on unapproved country mapping with the exact governance notice", () => {

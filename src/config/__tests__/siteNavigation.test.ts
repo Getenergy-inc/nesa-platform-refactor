@@ -14,13 +14,25 @@ describe("2026–2027 navigation", () => {
       ]);
     }
   });
-  it("uses the approved desktop headings, with Nominees on mobile only", () => {
+  it("uses the approved headings and keeps Nominee Directory inside Recognition on mobile", () => {
     expect(SITE_NAV.map(g => g.label)).toEqual(["About", "Recognition", "Impact", "Media", "Get Involved", "Contact"]);
-    expect(MOBILE_SITE_NAV.map(g => g.label)).toEqual(["About", "Recognition", "Nominees", "Impact", "Media", "Get Involved", "Contact"]);
+    expect(MOBILE_SITE_NAV.map(g => g.label)).toEqual(["About", "Recognition", "Impact", "Media", "Get Involved", "Contact"]);
     expect(SITE_NAV.find(g => g.label === "Get Involved")?.href).toBe("/get-involved");
+    expect(MOBILE_SITE_NAV.find(g => g.label === "Recognition")?.children?.some(c => c.label === "Nominee Directory" && c.href === "/nominees")).toBe(true);
+  });
+  it("uses each panel heading as its page link without duplicate overview items", () => {
+    for (const item of SITE_NAV.filter(g => g.children || g.sections)) {
+      expect(item.headingLink).toBe(true);
+      expect(item.children?.some(c => c.href === item.href && c.label !== "Media Hub") ?? false).toBe(false);
+      expect(item.children?.some(c => /overview/i.test(c.label)) ?? false).toBe(false);
+    }
+    const recognition = SITE_NAV.find(g => g.label === "Recognition")?.children ?? [];
+    expect(recognition.some(c => c.label === "Certificates of Recognition")).toBe(false);
+    const aboutItems = SITE_NAV.find(g => g.label === "About")?.sections?.flatMap(s => s.items) ?? [];
+    expect(aboutItems.some(c => c.label === "Timeline")).toBe(false);
   });
   it("links the new recognition pages and renamed media items", () => {
-    const about = SITE_NAV.find(g => g.label === "About")?.children ?? [];
+    const about = SITE_NAV.find(g => g.label === "About")?.sections?.flatMap(s => s.items) ?? [];
     expect(about.find(c => c.label === "How Recognition Works")?.href).toBe("/how-it-works");
     expect(about.find(c => c.label === "Research and Judging")?.href).toBe("/research-and-judging");
     expect(about.find(c => c.label === "2026 Online Programme")?.href).toBe("/programme/2026");

@@ -78,20 +78,20 @@ const INTENT_PATTERNS: Record<string, { patterns: RegExp[]; category: string; ct
     category: "nominations",
     cta: "/nominate"
   },
-  voting: {
-    patterns: [/vote/i, /voting/i, /public vote/i, /gold winner/i],
-    category: "public_voting",
-    cta: "/vote"
+  recognition_process: {
+    patterns: [/vote/i, /voting/i, /public vote/i, /gold winner/i, /recognition process/i],
+    category: "recognition_process",
+    cta: "/how-it-works"
   },
   blue_garnet: {
     patterns: [/blue garnet/i, /60.*40/i, /hybrid.*award/i, /premium.*award/i],
     category: "blue_garnet_awards",
-    cta: "/awards/blue-garnet"
+    cta: "/recognition/gold-blue-garnet"
   },
   africa_icon: {
     patterns: [/africa icon/i, /icon award/i, /elite.*recognition/i],
     category: "africa_icon_awards",
-    cta: "/awards/africa-icon"
+    cta: "/recognition/africa-education-icon"
   },
   donations: {
     patterns: [/donat/i, /support.*eduaid/i, /give.*money/i, /contribute/i, /sponsor/i],
@@ -111,7 +111,7 @@ const INTENT_PATTERNS: Record<string, { patterns: RegExp[]; category: string; ct
   local_chapters: {
     patterns: [/local chapter/i, /join.*chapter/i, /chapter.*membership/i, /community.*mobiliz/i],
     category: "local_chapters",
-    cta: "/chapters"
+    cta: "/chapters/join"
   },
   technical: {
     patterns: [/error/i, /bug/i, /not work/i, /broken/i, /won'?t submit/i, /page.*load/i],
@@ -215,24 +215,23 @@ RESPONSE GUIDELINES:
 - Keep answers focused but comprehensive
 - Use markdown for better readability when helpful
 
-CRITICAL DISTINCTIONS (NEVER MIX THESE UP):
-- "Nominate Now" = Submit someone for consideration | "Vote Now" = Cast public votes for nominees
-- "Gold Winner" = Public voting winner | "Blue Garnet" = Premium tier (60% judges + 40% public)
-- "Africa Icon" = Elite internal judges-only award | "Blue Garnet" = Hybrid public+judges award
-- "Public vote" = Anyone can vote | "Judges vote" = Internal panel only
-- "Judge application" = Apply to become a judge | "Judge account" = Active judging access
-- "Pending approval" = Awaiting organizer confirmation | "Pending assignment" = Approved but not yet assigned categories
+CRITICAL 2026 RULES (NEVER CONTRADICT THESE):
+- There is no public voting and no AGC voting in 2026. Never direct a user to /vote or describe voting as a recognition method.
+- Nomination is free and begins a review; it does not guarantee eligibility, shortlisting, judging or recognition.
+- The Nominee Research and Review Corps (NRRC) researches and reviews factual dossiers. Nine independent Icon judges assess eligible Icon dossiers.
+- Sponsorship, donations, partnerships, merchandise, media participation and wallet activity carry zero weight in recognition decisions.
+- The 2026 programme is online on Monday 28 December 2026; there is no public physical gala or ticket sale.
+- Special-needs school support is separate from NESA-Africa awards. Its 2027 process is called regional participation, never voting.
 
 CTA ROUTING (Guide users to the right action):
-- Judge applications → /judgeapply
-- Judge status check → /judge-status
-- Judge signup/login → /judge-signup or /account/login
-- OTP verification → /account/otp
-- Nominations → /nominate or "Nominate Now"
-- Voting → /vote or "Vote Now"
+- Recognition process, including questions about voting → /how-it-works
+- Nominations → /nominate with the label "Submit a Nomination"
+- Nominee profiles → /nominees
 - Donations → /donate
-- Local chapters → /chapters
+- Sponsorship → /sponsors
+- Local chapters → /chapters/join
 - Technical support → /contact
+- Judge access → /judges; never imply that selecting a workspace assigns a role
 ${intentContext}
 ${escalationInstructions}
 
@@ -241,31 +240,29 @@ ${faqContext}
 
 ABOUT NESA-AFRICA PROGRAMS:
 
-1. AWARDS ECOSYSTEM:
-   - Platinum Recognition: Non-competitive, impact-verified recognition
-   - Gold Awards: 100% public voting
-   - Blue Garnet Awards: Premium tier (60% internal judges + 40% public vote)
-   - Africa Icon Awards: Elite recognition by internal judges only (nine independent Icon judges, 9 Icons selected)
+1. RECOGNITION FRAMEWORK:
+   - Four tiers, 22 main awards and 90 subcategories.
+   - Africa Education Icon: three pathways, with up to nine Icons assessed by nine independent judges.
+   - Influencers Education Impact: three pathways through NRRC research/review and the approved governance process.
+   - Platinum Certificate: 7 awards and 27 subcategories through evidence-led research, review and governance approval.
+   - Gold–Blue Garnet: 9 awards and 63 subcategories through evidence-led research, review and governance approval.
 
 2. EDUAID AFRICA:
-   - Education support initiative for scholarships, learning materials, teacher support
-   - Accepts donations, sponsorships, in-kind contributions, volunteer support
+   - Education support initiative for scholarships, learning materials, teacher support and verified school interventions.
+   - Accepts bank-transfer pledges, sponsorships, in-kind contributions and volunteer support through authorised channels.
 
 3. REBUILD MY SCHOOL AFRICA:
-   - School restoration initiative for infrastructure, WASH, furniture, learning resources
-   - Schools apply through program channel or local chapters
+   - School restoration, accessibility and special-needs-school support, separate from award recognition.
 
 4. LOCAL CHAPTERS:
-   - Community-based mobilization and implementation
-   - Regional coordination across all African countries
+   - Community-based awareness, credible nominations and education activities.
+   - Chapters cannot verify nominees, appoint judges or influence recognition.
 
 5. JUDGING SYSTEM (2026):
-   - 27 internal judges across Icon and Blue Garnet categories
-   - OTP verification required for judge account security
-   - Conflict of Interest (COI) declarations mandatory
-   - Scores locked independently—no judge sees others' scores
+   - Nine independent Icon judges, three for each Icon award.
+   - Written acceptance, identity confirmation, confidentiality, conflict declarations, assignment, calibration and secure-access testing are required.
 
-Remember: You're not just answering questions—you're protecting the credibility of Africa's premier education recognition platform and guiding users to take meaningful action.`;
+Remember: You're not just answering questions—you're protecting the credibility of Africa's education recognition platform and guiding users to accurate, meaningful action.`;
 }
 
 Deno.serve(async (req) => {

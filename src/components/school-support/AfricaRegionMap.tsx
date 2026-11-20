@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { geoMercator, geoPath, geoCentroid } from "d3-geo";
 import { feature } from "topojson-client";
 import type { FeatureCollection, Feature, Geometry } from "geojson";
-import { COUNTRY_MAP_APPROVED, REGION_TARGET_USD, SNS_COUNTRIES, SNS_CTAS, SNS_ISLAND_DOTS, SNS_MAP_DRAFT_NOTE, SNS_REGIONS, SNS_REGIONS_NOTE, SNS_UNASSIGNED, VOTING_PENDING_LABEL, regionByKey, type RegionKey } from "@/config/schoolSupport";
+import { COUNTRY_MAP_APPROVED, REGIONAL_PARTICIPATION_PENDING_LABEL, REGION_TARGET_USD, SNS_COUNTRIES, SNS_CTAS, SNS_ISLAND_DOTS, SNS_MAP_DRAFT_NOTE, SNS_REGIONS, SNS_REGIONS_NOTE, SNS_UNASSIGNED, regionByKey, type RegionKey } from "@/config/schoolSupport";
 import { useSupportPage } from "./SupportPageContext";
 import { chip, pillOutline, pillPrimary } from "./ui";
 
@@ -90,7 +90,7 @@ function ApprovedAfricaRegionMap() {
               <p className="mt-2 text-sm">Regional desk: <a className="font-semibold text-ea-green underline" href={`mailto:${region.desk}`}>{region.desk}</a></p>
               <div className="mt-4 flex flex-wrap gap-2">
                 <a className={pillPrimary} href={SNS_CTAS.nominate.href}>Nominate</a>
-                <button type="button" className={pillOutline} title={VOTING_PENDING_LABEL} onClick={() => goAnchor("vote")}>Vote</button>
+                <button type="button" className={pillOutline} title={REGIONAL_PARTICIPATION_PENDING_LABEL} onClick={() => goAnchor("regional-participation")}>Participate</button>
                 <button type="button" className={pillOutline} onClick={() => goDonate(region.key)}>Donate</button>
                 <button type="button" className={pillOutline} onClick={() => goSponsor("sponsor", region.key)}>Sponsor</button>
                 <button type="button" className={pillOutline} onClick={() => goAnchor("edutourism")}>Attend</button>

@@ -77,7 +77,7 @@ export function MerchandiseShowcase() {
                   {item.name}
                 </h3>
                 <div className="flex items-center justify-between">
-                  <span className="text-gold font-bold text-base md:text-lg">{item.price}</span>
+                  <span className="text-gold font-bold text-base md:text-lg">Available on request</span>
                   <ShoppingBag className="h-4 w-4 text-gold/60 group-hover:text-gold transition-colors" />
                 </div>
               </div>
@@ -91,17 +91,17 @@ export function MerchandiseShowcase() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <Link to="/shop">
+          <Link to="/contact?subject=merchandise">
             <Button
               size="lg"
               className="bg-gold hover:bg-gold-dark text-charcoal font-bold rounded-full gap-2 px-8 group"
             >
-              Visit the Official Shop
+              Enquire About Merchandise
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
           <p className="text-white/50 text-xs mt-4">
-            Earn <span className="text-gold font-semibold">5 AGC</span> for every $1 spent • Free shipping on orders over $50
+            No prices, stock, cart or checkout while the shop is closed. Purchases never influence recognition decisions.
           </p>
         </motion.div>
       </div>

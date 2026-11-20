@@ -9,6 +9,7 @@ import { PageFAQSection, FloatingFAQButton } from "@/components/nesa/PageFAQ";
 import { TrustSpine } from "@/components/trust/TrustSpine";
 import { ExploreNomineesCTA } from "@/components/nominees/ExploreNomineesCTA";
 import { MobileBottomActions } from "@/components/navigation/MobileBottomActions";
+import { PublicAccessibilityControls } from "@/components/accessibility/PublicAccessibilityControls";
 import { useLocation } from "react-router-dom";
 
 
@@ -41,6 +42,7 @@ export function PublicLayout({
 
   return (
     <div className="min-h-screen bg-charcoal flex flex-col">
+      <a href="#main-content" className="skip-link">Skip to main content</a>
       <NESAHeader />
       <main id="main-content" tabIndex={-1} className="flex-1 pt-[92px] xl:pt-[134px] pb-16">
         {children}
@@ -55,6 +57,7 @@ export function PublicLayout({
       {showFooter && <NESAFooter />}
       <ExitIntentPopup />
       <FloatingFAQButton />
+      <PublicAccessibilityControls />
       <MobileBottomActions />
     </div>
   );

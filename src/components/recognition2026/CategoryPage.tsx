@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { AwardResearchContext } from "@/components/awards/AwardResearchContext";
 import { ChevronRight, ShieldCheck, ArrowRight } from "lucide-react";
 import { OfficialNominationForm } from "@/components/nominate/OfficialNominationForm";
+import { getMasterAwards } from "@/config/awardMaster2026";
 
 const CANONICAL_ORIGIN = "https://nesa.africa";
 
@@ -88,6 +89,7 @@ export default function CategoryPage() {
 
   const canonicalUrl = `${CANONICAL_ORIGIN}${getCategoryPath(cat)}`;
   const siblings = getCategoriesForTier(cat.tier).filter((c) => c.slug !== cat.slug);
+  const approvedSubcategoryCount = getMasterAwards(cat.slug).reduce((sum, award) => sum + award.subcategories.length, 0);
 
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -145,8 +147,7 @@ export default function CategoryPage() {
           </Link>
           <span className="text-white/40">·</span>
           <span className="text-white/60">
-            Tier {tierDef.order} of 4 · {tierDef.totalCategories}{" "}
-            {tierDef.totalCategories === 1 ? "category" : "categories"}
+            Recognition tier {tierDef.order} of 4
           </span>
           <span className="text-white/40 hidden sm:inline">·</span>
           <span className="text-white/60 hidden sm:inline">
@@ -192,7 +193,7 @@ export default function CategoryPage() {
             <div className="rounded-lg border border-gold/20 bg-white/5 p-3">
               <dt className="text-white/50 uppercase tracking-wide">Subcategories</dt>
               <dd className="text-gold font-semibold mt-1">
-                {cat.subcategories.length || "See tier"}
+                {approvedSubcategoryCount}
               </dd>
             </div>
             <div className="rounded-lg border border-gold/20 bg-white/5 p-3">
@@ -215,7 +216,7 @@ export default function CategoryPage() {
               size="lg"
               className="bg-gold text-charcoal hover:bg-gold-dark font-semibold"
             >
-              <a href="#nomination-form">Start a Nomination</a>
+              <a href="#nomination-form">Submit a Nomination</a>
             </Button>
             <Button
               asChild
@@ -223,7 +224,7 @@ export default function CategoryPage() {
               variant="outline"
               className="border-gold/40 text-gold hover:bg-gold/10"
             >
-              <Link to="/nominees">View Existing Education Enablers</Link>
+              <Link to={`/nominees?category=${cat.slug}`}>View nominees in this award</Link>
             </Button>
           </div>
         </header>
@@ -262,29 +263,10 @@ export default function CategoryPage() {
           </ul>
         </Section>
 
-        {/* 5. Approved Subcategories */}
-        <Section id="subcategories" title="Approved Subcategories">
-          {cat.subcategories.length === 0 ? (
-            <p className="text-white/60 italic">
-              Subcategory list finalising — publishes with the form in Phase 4.
-            </p>
-          ) : (
-            <ul className="grid gap-3 md:grid-cols-2">
-              {cat.subcategories.map((sc) => (
-                <li
-                  key={sc.code}
-                  className="rounded-lg border border-gold/20 bg-white/5 p-4"
-                >
-                  <div className="text-gold font-semibold text-sm">{sc.name}</div>
-                  <p className="text-white/70 text-xs mt-1">{sc.description}</p>
-                  <p className="text-white/50 text-[11px] mt-2">
-                    <strong className="text-white/70">Evidence:</strong>{" "}
-                    {sc.evidenceSummary}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          )}
+        {/* 5. Scope count only until the 90-name register is approved */}
+        <Section id="subcategories" title="Subcategory scope">
+          <p><strong className="text-gold">{approvedSubcategoryCount}</strong> counted subcategories for this award field.</p>
+          <p className="text-white/60 italic">Subcategory details will be published once the approved register is confirmed.</p>
         </Section>
 
         {/* 6. Geographic Coverage */}
@@ -381,21 +363,14 @@ export default function CategoryPage() {
         <Section id="final-cta" title="Take Action">
           <div className="flex flex-wrap gap-3">
             <Button asChild className="bg-gold text-charcoal hover:bg-gold-dark">
-              <a href="#nomination-form">Start a Nomination</a>
+              <a href="#nomination-form">Submit a Nomination</a>
             </Button>
             <Button
               asChild
               variant="outline"
               className="border-gold/40 text-gold hover:bg-gold/10"
             >
-              <Link to={tierDef.href}>Nominate Another Education Enabler</Link>
-            </Button>
-            <Button
-              asChild
-              variant="ghost"
-              className="text-white/80 hover:text-gold"
-            >
-              <Link to="/recognition">Return to Recognition 2026</Link>
+              <Link to="/recognition">Return to Recognition</Link>
             </Button>
           </div>
         </Section>

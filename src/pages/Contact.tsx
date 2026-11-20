@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { CONTACT_ENQUIRY_TYPES, CONTACT_SUBJECT_PREFILLS, type ContactEnquiryType } from "@/config/contactEnquiries";
+import { CONTACT_ENQUIRY_TYPES, CONTACT_SUBJECT_LABELS, CONTACT_SUBJECT_PREFILLS, type ContactEnquiryType } from "@/config/contactEnquiries";
 import { submitContactEnquiry } from "@/services/contactEnquiries";
 
 export { CONTACT_SUBJECT_PREFILLS } from "@/config/contactEnquiries";
@@ -42,7 +42,7 @@ export default function Contact() {
     setForm((current) => ({
       ...current,
       enquiry_type: prefill,
-      subject: current.subject || (subjectParam === "merchandise" ? "Merchandise enquiry" : subjectParam === "afri-edutourism" ? "Afri-EduTourism mission enquiry" : `${prefill} enquiry`),
+      subject: current.subject || CONTACT_SUBJECT_LABELS[subjectParam] || `${prefill} enquiry`,
     }));
     setReference("");
     setError("");
@@ -115,6 +115,17 @@ export default function Contact() {
             </CardContent>
           </Card>
           <div className="mt-6 flex flex-wrap gap-4 text-sm"><Link to="/help" className="text-gold underline">Visit the Help Centre</Link><Link to="/policies#privacy" className="text-gold underline">Read the privacy policy</Link></div>
+        </div>
+      </section>
+
+      <section className="border-t border-gold/15 bg-charcoal-light/20 py-16" aria-labelledby="contact-assignment">
+        <div className="container mx-auto max-w-4xl px-4">
+          <Card><CardHeader><CardTitle id="contact-assignment" className="font-display text-2xl text-gold">How enquiries are assigned</CardTitle></CardHeader><CardContent className="space-y-3 text-sm leading-relaxed text-white/70">
+            <p>Nomination and nominee matters are reviewed by the authorised NESA-Africa administration and NRRC support team.</p>
+            <p>Judging matters are routed through authorised judging support.</p>
+            <p>School-support, donation and sponsorship matters are routed to EduAid-Africa and the relevant programme team.</p>
+            <p>Safeguarding and privacy concerns are restricted to authorised reviewers.</p>
+          </CardContent></Card>
         </div>
       </section>
 
