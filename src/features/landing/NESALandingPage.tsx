@@ -6,8 +6,8 @@
 // Section order (7):
 //   1. Hero — eyebrow, title, one line, two CTAs (Icon nomination · school support)
 //   2. Public nominations notice (compact, one line)
-//   3. Tier 1 · Africa Education Icon — flagship + three pathways, nominee strip (max 12),
-//      one-line governance summary
+//   3. Two pillars — Tier 1 Africa Education Icon (pathways, nominee strip max 12) beside
+//      Special Needs Education Support Africa (post-award write-up), then governance line
 //   4. The four tiers at a glance (TierStripSection)
 //   5. After the awards — Support a Special-Needs School (SchoolImpactSection)
 //   6. Trust — three points, endorser logos, governance link
@@ -32,9 +32,8 @@ import { FloatingFAQButton } from "@/components/nesa/PageFAQ";
 import "./editorial/editorial.css";
 import {
   EditorialHero,
-  LivingGallerySection,
-  IconFlagshipSection,
   IconGovernanceLine,
+  TwoPillarsSection,
   GalaBandSection,
 } from "./editorial";
 
@@ -76,8 +75,8 @@ export function NESALandingPage() {
         <PublicNominationsNotice compact />
 
         {/* 3. TIER 1 · AFRICA EDUCATION ICON */}
-        <IconFlagshipSection />
-        <LivingGallerySection />
+        <TwoPillarsSection />
+        <div className="pt-10" />
         <IconGovernanceLine />
 
         {/* 4. THE FOUR TIERS AT A GLANCE */}
