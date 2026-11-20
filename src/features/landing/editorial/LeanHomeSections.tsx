@@ -1,5 +1,5 @@
 // Lean homepage sections (homepage only). Reuse the `.nesa-ed` editorial skin.
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import tierIcon from "@/assets/story/tier-africa-education-icon.jpg";
@@ -11,8 +11,9 @@ import eduAidLogo from "@/assets/school-support/eduaid-africa-logo.webp.asset.js
 import friendsLogo from "@/assets/school-support/friends-of-eduaid-africa-logo.jpg.asset.json";
 import scefLogo from "@/assets/school-support/scef-logo.png.asset.json";
 import { ICON_PATHWAYS } from "@/config/brandHierarchy";
-import { bySubcategory, type IconSubcategorySlug, type IconNominee } from "@/data/iconAward";
+import { ICON_NOMINEES, bySubcategory, type IconSubcategorySlug, type IconNominee } from "@/data/iconAward";
 import { getInitials } from "@/components/influencer-impact/InitialsAvatar";
+import { useNominees } from "@/hooks/useNominees";
 import { StripScroller } from "./StripScroller";
 import { useIconAwardStats } from "./useIconAwardStats";
 import { ENDORSERS } from "./PartnersBandSection";
@@ -37,16 +38,72 @@ export function IconGovernanceLine() {
   );
 }
 
-/** Homepage tier order: 1 Icon · 2 Influencers · 3 Platinum · 4 Gold–Blue Garnet. */
+/** DB category slugs → homepage tier (presentation only; eligibility untouched). */
+const TIER_DB_CATEGORIES: Record<2 | 3 | 4, string[]> = {
+  2: ["africa-social-media-influencer-education", "africa-music-influencer-education", "africa-sports-influencer-education"],
+  3: ["international-bilateral-education", "political-leaders-education-nigeria", "islamic-education-impact-africa", "christian-education-impact-africa", "diaspora-education-impact", "best-research-development-nigeria", "best-tertiary-institution-library"],
+  4: ["best-csr-education-africa", "best-csr-education-nigeria", "best-ngo-education-africa", "best-ngo-education-nigeria", "best-edutech-organisation-africa", "best-stem-education-africa", "creative-arts-education-nigeria", "best-media-educational-advocacy-nigeria", "best-education-policy-state-nigeria"],
+};
+const STRIP_MAX = 16;
+
+type StripPerson = { id: string; name: string; photo: string | null; href: string };
+
+function TierNomineeStrip({ people, label }: { people: StripPerson[]; label: string }) {
+  const { t } = useTranslation("pages");
+  const [broken, setBroken] = useState<Set<string>>(new Set());
+  if (people.length === 0) {
+    return <p className="text-xs text-white/60">{t("landingLean.tiers.empty", "Published nominee profiles for this tier will appear here.")}</p>;
+  }
+  return (
+    <StripScroller label={label} autoScroll={false}>
+      {people.map((p) => (
+        <Link key={p.id} to={p.href} className="flex w-20 shrink-0 flex-col items-center gap-1 text-center" title={p.name}>
+          {p.photo && !broken.has(p.id) ? (
+            <img src={p.photo} alt={p.name} loading="lazy" decoding="async" onError={() => setBroken((b) => new Set(b).add(p.id))} className="h-16 w-16 rounded-full border border-gold/30 bg-white object-cover" />
+          ) : (
+            <span aria-label={p.name} className="flex h-16 w-16 items-center justify-center rounded-full border border-gold/30 bg-white/5 text-sm font-semibold text-gold">{getInitials(p.name)}</span>
+          )}
+          <span className="line-clamp-2 text-[10px] leading-tight text-white/75">{p.name}</span>
+        </Link>
+      ))}
+    </StripScroller>
+  );
+}
+
+/** Homepage tier order: 1 Icon · 2 Influencers · 3 Platinum · 4 Gold–Blue Garnet — real nominee photos + key features. */
 export function TierStripSection() {
   const { t } = useTranslation("pages");
   const icon = useIconAwardStats();
+  const { data: live = [] } = useNominees();
+
+  const people = useMemo(() => {
+    const iconPeople: StripPerson[] = ICON_NOMINEES.filter((n) => n.image_url).slice(0, STRIP_MAX).map((n) => ({
+      id: n.id, name: n.name, photo: n.image_url,
+      href: `/nominees/africa-education-icon-award/${n.award_subcategory_slug}/${n.classification_slug}/${n.slug}`,
+    }));
+    const forTier = (tier: 2 | 3 | 4) => {
+      const set = new Set(TIER_DB_CATEGORIES[tier]);
+      const all = live.filter((n) => n.categorySlug && set.has(n.categorySlug));
+      const withPhoto = all.filter((n) => n.photoUrl.startsWith("http") && !/placeholder/i.test(n.photoUrl));
+      return {
+        total: all.length,
+        list: withPhoto.slice(0, STRIP_MAX).map((n) => ({ id: n.id, name: n.name, photo: n.photoUrl || null, href: `/nominees/${n.slug}` })),
+      };
+    };
+    return { 1: { total: icon.nominees, list: iconPeople }, 2: forTier(2), 3: forTier(3), 4: forTier(4) } as Record<number, { total: number | null; list: StripPerson[] }>;
+  }, [live, icon.nominees]);
+
   const tiers = [
-    { n: 1, name: t("landingLean.tiers.t1.name", "Africa Education Icon"), body: t("landingLean.tiers.t1.body", "The flagship lifetime honour for transformative contribution to education across Africa, 2006–2026."), href: "/awards/africa-education-icon", img: tierIcon, count: icon.nominees },
-    { n: 2, name: t("landingLean.tiers.t2.name", "Influencers Education Impact"), body: t("landingLean.tiers.t2.body", "Music, social media and sports voices using their reach to advance education."), href: "/awards/influencer-education-impact", img: tierInfluencer, count: null },
-    { n: 3, name: t("landingLean.tiers.t3.name", "Platinum Recognition"), body: t("landingLean.tiers.t3.body", "Certificates of Recognition for verified institutional and organisational education impact."), href: "/awards/platinum-recognition", img: tierPlatinum, count: null },
-    { n: 4, name: t("landingLean.tiers.t4.name", "Gold–Blue Garnet"), body: t("landingLean.tiers.t4.body", "Recognition for verified education enablers across Africa’s regions and the Diaspora."), href: "/awards/gold-blue-garnet", img: tierGarnet, count: null },
+    { n: 1, name: t("landingLean.tiers.t1.name", "Africa Education Icon"), body: t("landingLean.tiers.t1.body", "The flagship lifetime honour for transformative contribution to education across Africa, 2006–2026."), href: "/awards/africa-education-icon", nomineesHref: "/nominees", img: tierIcon,
+      features: [t("landingLean.tiers.t1.f1", "Three categories: Philanthropy · Literary & New Curriculum Advocate · Technical Educator"), t("landingLean.tiers.t1.f2", "Nine independent judges and nine Icon NRRC members"), t("landingLean.tiers.t1.f3", "Honoured at the online programme, Monday 28 December 2026")] },
+    { n: 2, name: t("landingLean.tiers.t2.name", "Influencers Education Impact"), body: t("landingLean.tiers.t2.body", "Music, social media and sports voices using their reach to advance education."), href: "/awards/influencer-education-impact", nomineesHref: "/awards/influencer-education-impact", img: tierInfluencer,
+      features: [t("landingLean.tiers.t2.f1", "Three categories: Music · Social Media · Sports"), t("landingLean.tiers.t2.f2", "Evidence-led NRRC verification"), t("landingLean.tiers.t2.f3", "Free nomination · no public voting in 2026")] },
+    { n: 3, name: t("landingLean.tiers.t3.name", "Platinum Recognition"), body: t("landingLean.tiers.t3.body", "Certificates of Recognition for verified institutional and organisational education impact."), href: "/awards/platinum-recognition", nomineesHref: "/nominees", img: tierPlatinum,
+      features: [t("landingLean.tiers.t3.f1", "Faith-based, political, diaspora, research and international partnership categories"), t("landingLean.tiers.t3.f2", "Certificates of Recognition from 29 December 2026"), t("landingLean.tiers.t3.f3", "Nominations open to 31 March 2027")] },
+    { n: 4, name: t("landingLean.tiers.t4.name", "Gold–Blue Garnet"), body: t("landingLean.tiers.t4.body", "Recognition for verified education enablers across Africa’s regions and the Diaspora."), href: "/awards/gold-blue-garnet", nomineesHref: "/nominees", img: tierGarnet,
+      features: [t("landingLean.tiers.t4.f1", "CSR, NGO, EdTech, STEM, creative arts, media and policy categories"), t("landingLean.tiers.t4.f2", "Regional and Diaspora education enablers"), t("landingLean.tiers.t4.f3", "Nominations open to 31 March 2027")] },
   ];
+
   return (
     <section className="ed-section" aria-labelledby="ed-tiers-heading">
       <div className="ed-wrap">
@@ -54,23 +111,29 @@ export function TierStripSection() {
           <div className="ed-eyebrow">{t("landingLean.tiers.eyebrow", "Four tiers")}</div>
           <h2 id="ed-tiers-heading" className="ed-section-title">{t("landingLean.tiers.title", "The Four Tiers at a Glance")}</h2>
         </div>
-        <ul className="grid list-none gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {tiers.map((tier) => (
-            <li key={tier.n} className="flex flex-col overflow-hidden rounded-2xl border border-gold/20 bg-white/[0.03]">
-              <img src={tier.img} alt="" loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
-              <div className="flex flex-1 flex-col gap-2 p-4">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-gold">{t("landingLean.tiers.tierLabel", "Tier")} {tier.n}</p>
-                <h3 className="font-serif text-lg text-white">{tier.name}</h3>
-                <p className="text-sm text-white/70">{tier.body}</p>
-                {tier.count != null && (
-                  <p className="text-xs text-white/60">{tier.count} {t("landingLean.tiers.nominees", "nominees")}</p>
-                )}
-                <Link to={tier.href} className="mt-auto pt-2 text-sm font-semibold text-gold hover:underline">
-                  {t("landingLean.tiers.explore", "Explore tier →")}
-                </Link>
-              </div>
-            </li>
-          ))}
+        <ul className="grid list-none gap-4 lg:grid-cols-2">
+          {tiers.map((tier) => {
+            const p = people[tier.n];
+            return (
+              <li key={tier.n} className="flex min-w-0 flex-col overflow-hidden rounded-2xl border border-gold/20 bg-white/[0.03]">
+                <img src={tier.img} alt={tier.name} loading="lazy" decoding="async" className="aspect-[21/9] w-full object-cover" />
+                <div className="flex min-w-0 flex-1 flex-col gap-3 p-4">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-gold">{t("landingLean.tiers.tierLabel", "Tier")} {tier.n}</p>
+                  <h3 className="font-serif text-lg text-white">{tier.name}</h3>
+                  <p className="text-sm text-white/70">{tier.body}</p>
+                  <ul className="list-none space-y-1 text-xs text-white/75">
+                    {tier.features.map((f) => (<li key={f} className="flex gap-2"><span aria-hidden className="text-gold">◆</span><span>{f}</span></li>))}
+                  </ul>
+                  <TierNomineeStrip people={p.list} label={`${tier.name} ${t("landingLean.tiers.nominees", "nominees")}`} />
+                  {p.total ? <p className="text-xs text-white/60">{p.total} {t("landingLean.tiers.nominees", "nominees")}</p> : null}
+                  <div className="mt-auto flex flex-wrap gap-4 pt-1 text-sm font-semibold">
+                    <Link to={tier.href} className="text-gold hover:underline">{t("landingLean.tiers.explore", "Explore tier →")}</Link>
+                    <Link to={tier.nomineesHref} className="text-white/80 hover:underline">{t("landingLean.tiers.meet", "Meet the nominees →")}</Link>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>
