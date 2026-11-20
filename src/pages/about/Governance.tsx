@@ -1,6 +1,5 @@
 import { AboutSeo } from "@/pages/about/AboutSeo";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -26,13 +25,13 @@ const firewalls = [
     icon: Lock,
     title: "Stage Locking",
     description: "Every significant status change records the responsible user, date and time, previous status, new status, supporting evidence and reason.",
-    details: ["Nominations stage-gated", "Review permissions enforced", "Results secured until formal approval"],
+    details: ["Nominations stage-gated", "Voting windows enforced", "Results sealed until ceremony"],
   },
   {
     icon: Eye,
     title: "Full Audit Trail",
     description: "All relevant reviewers and judges must disclose actual, potential or perceived conflicts and recuse themselves from affected cases.",
-    details: ["NRRC review logs", "Assessment timestamps", "Certificate issuance records"],
+    details: ["NRRC review logs", "Vote timestamps", "Certificate issuance records"],
   },
   {
     icon: Scale,
@@ -77,12 +76,11 @@ export default function Governance() {
                 </span>
               </div>
               <h1 className="mb-6 font-display text-4xl font-bold text-white md:text-5xl">
-                Independent, Evidence-Led and Accountable
+                Governance, Integrity and Independence
               </h1>
               <p className="text-lg text-white/70">
-                SCEF provides governance oversight. The NRRC handles research, contact checks, consent, interviews and profiles; nine independent Icon judges assess eligible Icon dossiers without performing the research role. Technical, programme and media teams have separate responsibilities.
+                NESA-Africa operates through defined responsibilities, documented criteria, conflict controls and separation between research, judging, partnerships and programme production.
               </p>
-              <div className="mt-8 flex flex-wrap gap-3"><Button asChild className="bg-primary text-primary-foreground"><Link to="/nominate">Submit a Nomination</Link></Button><Button asChild variant="outline" className="border-primary/50 text-primary"><Link to="/contact?subject=concern">Report a Concern</Link></Button></div>
             </div>
           </div>
         </section>
@@ -126,7 +124,7 @@ export default function Governance() {
               Role-Based Access Control
             </h2>
             <p className="mx-auto mb-12 max-w-2xl text-center text-white/60">
-              Responsibilities are limited by role and appointment. Selecting a workspace never grants access.
+              10 distinct user roles with graduated permissions — from public viewing to full administrative control.
             </p>
             <div className="mx-auto max-w-3xl overflow-hidden rounded-xl border border-white/10">
               <div className="grid grid-cols-3 gap-4 bg-white/5 p-4 text-sm font-medium text-white/80">
@@ -158,10 +156,10 @@ export default function Governance() {
             </h2>
             <div className="mx-auto grid max-w-2xl gap-4">
               {[
-                { label: "Privacy Policy", href: "/policies#privacy" },
-                { label: "Terms of Service", href: "/policies#terms" },
-                { label: "Conflict of Interest Policy", href: "/policies#conflicts" },
-                { label: "Report a Concern", href: "/contact?subject=concern" },
+                { label: "Privacy Policy", href: "/policies/privacy" },
+                { label: "Terms of Service", href: "/policies/terms" },
+                { label: "Conflict of Interest Policy", href: "/policies/coi" },
+                { label: "Report a Concern", href: "/contact" },
               ].map((doc) => (
                 <Link
                   key={doc.href}

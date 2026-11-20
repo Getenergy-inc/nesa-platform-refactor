@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { Link, useSearchParams } from "react-router-dom";
 import Section from "@/components/Section";
 import {
-  getSchoolParticipationLabel,
+  getSchoolVotingLabel,
   getSnsFormUrl,
   SCHOOL_SUPPORT_DONATION_NOTICE,
   SCHOOL_SUPPORT_NOMINATION_NOTICE,
@@ -10,15 +10,14 @@ import {
   SCHOOL_SUPPORT_PROGRAMME,
   SCHOOL_SUPPORT_ROUTE,
   SCHOOL_SUPPORT_SPONSORSHIP_INTEGRITY,
-  REGIONAL_PARTICIPATION_OPEN,
+  VOTING_OPEN,
   type SchoolParticipationId,
 } from "@/config/schoolSupport";
 
 export default function SpecialNeedsSchoolParticipate() {
   const [searchParams] = useSearchParams();
   const requested = searchParams.get("participation");
-  const normalizedRequest = requested === "vote" ? "participate" : requested;
-  const selected = SCHOOL_SUPPORT_PARTICIPATION.find((option) => option.id === normalizedRequest);
+  const selected = SCHOOL_SUPPORT_PARTICIPATION.find((option) => option.id === requested);
   const formUrl = getSnsFormUrl();
 
   return (
@@ -48,7 +47,7 @@ export default function SpecialNeedsSchoolParticipate() {
           <div className="mt-8 grid gap-5 md:grid-cols-2">
             {SCHOOL_SUPPORT_PARTICIPATION.map((option) => {
               const isSelected = selected?.id === option.id;
-              const isParticipation = option.id === "participate";
+              const isVoting = option.id === "vote";
               return (
                 <article
                   key={option.id}
@@ -56,9 +55,9 @@ export default function SpecialNeedsSchoolParticipate() {
                   aria-current={isSelected ? "true" : undefined}
                   className={`scroll-mt-36 rounded-xl border p-6 ${isSelected ? "border-gold bg-gold/10" : "border-gold/20 bg-ivory/[0.03]"}`}
                 >
-                  <h3 className="font-display text-xl font-bold text-ivory">{isParticipation && !REGIONAL_PARTICIPATION_OPEN ? getSchoolParticipationLabel() : option.label}</h3>
+                  <h3 className="font-display text-xl font-bold text-ivory">{isVoting && !VOTING_OPEN ? getSchoolVotingLabel() : option.label}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-ivory/70">{option.description}</p>
-                  {isParticipation && !REGIONAL_PARTICIPATION_OPEN && <p className="mt-3 text-sm text-gold">Regional school participation is not currently available.</p>}
+                  {isVoting && !VOTING_OPEN && <p className="mt-3 text-sm text-gold">Voting is not currently available.</p>}
                   {option.id === "nominate" && <p className="mt-3 text-sm leading-relaxed text-ivory/65">{SCHOOL_SUPPORT_NOMINATION_NOTICE}</p>}
                 </article>
               );
@@ -68,7 +67,7 @@ export default function SpecialNeedsSchoolParticipate() {
           <div className="mt-10 rounded-2xl border border-gold/30 bg-gold/10 p-6 md:p-8">
             <h2 className="font-display text-2xl font-bold text-ivory">NESA-Africa participation form</h2>
             <p className="mt-3 text-sm leading-relaxed text-ivory/75">The first question is “How would you like to participate?” Use the form’s conditional sections to continue with your selected option.</p>
-            {selected && <p className="mt-3 text-sm text-gold">Selected: {selected.id === "participate" && !REGIONAL_PARTICIPATION_OPEN ? getSchoolParticipationLabel() : selected.label}</p>}
+            {selected && <p className="mt-3 text-sm text-gold">Selected: {selected.id === "vote" && !VOTING_OPEN ? getSchoolVotingLabel() : selected.label}</p>}
             {formUrl ? (
               <a
                 href={formUrl}
@@ -95,8 +94,8 @@ export default function SpecialNeedsSchoolParticipate() {
         <div className="mx-auto max-w-5xl">
           <h2 id="participation-safeguards" className="font-display text-3xl font-bold text-gold">Participation safeguards</h2>
           <div className="mt-6 space-y-5 text-sm leading-relaxed text-ivory/80">
-            <p>Regional school participation applies only to the Africa Special Needs Education Support Fund and is separate from NESA-Africa award recognition.</p>
-            <p>Participation is free. Donations and sponsorships must not purchase access, advantage or influence over regional selection.</p>
+            <p>Public participation applies only to the Africa Special Needs Education Support Fund and must not be presented as voting for the NESA-Africa 2026 awards.</p>
+            <p>Do not sell votes. Donations and sponsorships must not purchase additional votes or influence vote totals.</p>
             <p>{SCHOOL_SUPPORT_SPONSORSHIP_INTEGRITY}</p>
             <p>The Google Form may collect donation or sponsorship interest, but it must not collect card numbers, PINs, passwords, banking credentials or verification codes.</p>
             <p>{SCHOOL_SUPPORT_DONATION_NOTICE}</p>

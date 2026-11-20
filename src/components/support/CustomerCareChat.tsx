@@ -10,11 +10,11 @@ import ReactMarkdown from "react-markdown";
 
 const CAPABILITY_LINKS: { label: string; to: string }[] = [
   { label: "Nominations", to: "/nominate" },
-  { label: "How Recognition Works", to: "/how-it-works" },
-  { label: "Sponsorship", to: "/sponsors" },
+  { label: "Voting", to: "/awards/gold-blue-garnet" },
+  { label: "Sponsorship", to: "/sponsor" },
   { label: "Volunteering", to: "/volunteer" },
   { label: "Judging", to: "/judges" },
-  { label: "Local Chapters", to: "/chapters/join" },
+  { label: "Local Chapters", to: "/chapters" },
   { label: "RMSA", to: "/rebuild-my-school" },
   { label: "EduAid", to: "/eduaid-africa" },
 ];
@@ -133,7 +133,7 @@ export function CustomerCareChat() {
                     Official NESA-Africa Support Assistant
                   </p>
                   <p className="text-sm text-muted-foreground mb-4">
-                    I can help with nominations, the recognition process, sponsorship, volunteering,
+                    I can help with nominations, voting, sponsorship, volunteering,
                     judging, local chapters, RMSA and EduAid-Africa.
                   </p>
                   <div className="flex flex-wrap gap-1.5 justify-center mb-4">
@@ -150,12 +150,12 @@ export function CustomerCareChat() {
                   </div>
                   <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground mb-3">
                     <ShieldCheck className="h-3 w-3 text-primary" />
-                    <span>Independent of judging and recognition decisions.</span>
+                    <span>Independent of judging, voting & sponsorship outcomes.</span>
                   </div>
                   <div className="flex flex-wrap gap-2 justify-center mb-4">
                     {[
                       "How do I nominate someone?",
-                      "How does recognition work?",
+                      "How does voting work?",
                       "Certificate verification",
                     ].map((suggestion) => (
                       <button

@@ -8,7 +8,6 @@ import { useTranslation } from "react-i18next";
 const SECTIONS = [
   { id: "overview", label: "overview" },
   { id: "icons", label: "icons" },
-  { id: "key-dates", label: "keyDates" },
   { id: "participation", label: "participationNav" },
   { id: "broadcast", label: "broadcastNav" },
   { id: "faq", label: "faqsNav" },
@@ -58,10 +57,13 @@ export default function GalaConsolidated() {
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
-              <Link to="#updates">Receive Programme Updates</Link>
+              <Link to="/contact?subject=media">Receive Programme Updates</Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
               <Link to="/recognition/africa-education-icon">{t("onlineGala.exploreIcons")} <ArrowRight className="ml-2 h-4 w-4" /></Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
+              <Link to="/media/tv">{t("onlineGala.watch")}</Link>
             </Button>
           </div>
           <p className="mt-6 text-sm text-white/60">{t("onlineGala.restrictions")}</p>
@@ -105,14 +107,6 @@ export default function GalaConsolidated() {
         </div>
       </section>
 
-      <section id="key-dates" className="border-t border-gold/15 bg-charcoal py-16 text-white">
-        <div className="container mx-auto max-w-4xl px-4">
-          <h2 className="font-display text-3xl font-bold">Key dates</h2>
-          <ul className="mt-4 space-y-3 text-white/75"><li><strong className="text-gold">28 December 2026:</strong> online recognition programme.</li><li><strong className="text-gold">Continuing recognition:</strong> applicable nomination and review windows continue to 31 March 2027.</li></ul>
-          <Link to="/timeline" className="mt-5 inline-block font-semibold text-gold hover:underline">Full timeline</Link>
-        </div>
-      </section>
-
       <section id="participation" className="border-t border-gold/15 bg-charcoal-light/20 py-16 text-white">
         <div className="container mx-auto max-w-4xl px-4">
           <h2 className="font-display text-3xl font-bold">Participation</h2>
@@ -121,13 +115,10 @@ export default function GalaConsolidated() {
       </section>
 
       <section id="broadcast" className="bg-charcoal py-16 text-white">
-        <span id="updates" className="block scroll-mt-28" />
         <div className="container mx-auto max-w-4xl px-4 text-center">
           <Radio className="mx-auto h-8 w-8 text-gold" aria-hidden />
           <h2 className="mt-4 font-display text-3xl font-bold">{t("onlineGala.watch")}</h2>
           <p className="mt-3 text-white/70">Public viewing information will be released after approval and technical testing.</p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3"><Button asChild className="bg-gold text-charcoal"><Link to="/contact?subject=programme">Receive Programme Updates</Link></Button><Button asChild variant="outline" className="border-gold/40 text-gold"><Link to="/media/tv">Watch Published Programmes</Link></Button></div>
-          <Link to="/contact?subject=media" className="mt-5 inline-block text-sm text-white/70 underline hover:text-gold">Media Enquiries</Link>
         </div>
       </section>
 

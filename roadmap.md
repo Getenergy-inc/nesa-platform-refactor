@@ -1,7 +1,3 @@
-## Consolidated master refactor v3 + Support Engine — 20 Nov 2026
-- [ ] Execute owner-approved phases A–G from both attachments. Master v3 is authoritative; HTML is content/workflow reference only, with no raw HTML, FormSubmit inbox or voting workflow. Preserve design, data, roles, Support Fund safeguards and Phase 0 guard; do not publish.
-- [x] Owner chose “both”: keep every current Support picture and add suitable embedded HTML logos/flyers through asset pointers; no existing category image replacement.
-
 ## Lean public site Phases 2–7 — 20 Nov 2026
 - [x] Completed the owner-approved content/structure refactor under the design freeze: online-programme cleanup, lean core pages, four-tier/22-award/90-subcategory presentation, separated nominee notifications, private Contact enquiries, 14 school-support categories and canonical/retired-route metadata.
 - [x] Full production build passed with the Phase 0 guard intact; final 24 focused regressions, 18 desktop/mobile navigation checks and 30 desktop/360 page captures passed. Real anonymous Contact insertion and anonymous read/update denial passed; the exact synthetic row was deleted and confirmed absent.
@@ -177,4 +173,3 @@
 - [x] Publish the owner's panoramic eight-scene band and the eight category pictures to the site media library and place them on the page (hero band + category tiles).
 - [x] Check desktop (1280) and phone (360): band shows all eight scenes on desktop and four legible scenes on phone; category tiles show their photos; no overflow, no page errors.
 - [ ] EduAid-Africa logo replacement still pending owner upload — current logo remains.
-- [x] Restore homepage pictures/graphics (owner request 20 Nov)

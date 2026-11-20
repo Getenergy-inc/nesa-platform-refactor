@@ -1,35 +1,160 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
-const TIERS = [
-  { number: "01", name: "Africa Education Icon", description: "Principal 2026 focus: up to nine Icons through NRRC research and independent judging.", count: "3 pathways", href: "/recognition/africa-education-icon" },
-  { number: "02", name: "Influencers Education Impact", description: "Public figures whose verified work has expanded education opportunity.", count: "3 pathways", href: "/recognition/influencers" },
-  { number: "03", name: "Platinum Certificate", description: "Evidence-led institutional and leadership recognition through research, review and governance.", count: "7 awards · 27 subcategories", href: "/recognition/platinum" },
-  { number: "04", name: "Gold–Blue Garnet", description: "Regional and national education contributions assessed through evidence and governance.", count: "9 awards · 63 subcategories", href: "/recognition/gold-blue-garnet" },
+/**
+ * Compact "Recognition Architecture at a Glance" table.
+ * Replaces the previous 4-card grid because the four tiers are already
+ * introduced in detail by <CallForNominationIconAward />.
+ */
+
+type Row = {
+  tier: string;
+  structure: string;
+  review: string;
+  href: string;
+};
+
+const ROWS: Row[] = [
+  {
+    tier: "Africa Education Icon Award",
+    structure: "3 subcategories · 9 laureate positions",
+    review: "NRRC, Icon Jury and governance",
+    href: "/awards/africa-education-icon",
+  },
+  {
+    tier: "Influencer Education Impact",
+    structure: "3 subcategories",
+    review: "NRRC and governance",
+    href: "/awards/influencers-education-impact",
+  },
+  {
+    tier: "Platinum Recognition",
+    structure: "7 categories · 27 subcategories",
+    review: "Due diligence, NRRC and governance",
+    href: "/awards/platinum-recognition",
+  },
+  {
+    tier: "Gold-Blue Garnet Recognition",
+    structure: "9 categories · 63 subcategories",
+    review: "NRRC and governance",
+    href: "/awards/gold-blue-garnet",
+  },
 ];
 
 export function RecognitionTiersHomeSection() {
   return (
-    <section className="relative py-20 md:py-28 bg-charcoal" aria-labelledby="recognition-tiers-heading">
-      <div className="container relative z-10">
+    <section
+      className="relative py-20 md:py-28 bg-charcoal"
+      aria-labelledby="recognition-architecture-heading"
+    >
+      <div className="container relative z-10 max-w-5xl">
         <div className="max-w-3xl mx-auto text-center mb-10">
-          <p className="text-gold/80 text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase mb-3">NESA-Africa 2026 Recognition</p>
-          <h2 id="recognition-tiers-heading" className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">Four Recognition <span className="text-gold">Tiers</span></h2>
-          <p className="text-white/75 text-base md:text-lg">Four tiers · 22 main awards · 90 subcategories. No public voting in 2026.</p>
+          <p className="text-gold/80 text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase mb-3">
+            NESA-Africa 2026 Recognition
+          </p>
+          <h2
+            id="recognition-architecture-heading"
+            className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4"
+          >
+            Recognition Architecture <span className="text-gold">at a Glance</span>
+          </h2>
+          <p className="text-white/75 text-base md:text-lg">
+            Four tiers · Eighteen categories · Ninety-six subcategories. Each category has its own nomination form, nominee type, evidence requirements and geographic classification.
+          </p>
         </div>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {TIERS.map((tier, i) => (
-            <motion.article key={tier.name} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.35, delay: i * 0.05 }} className="rounded-2xl border border-gold/20 bg-charcoal/60 p-6 flex flex-col">
-              <p className="text-gold/70 text-xs font-bold tracking-[0.18em]">TIER {tier.number}</p>
-              <h3 className="mt-3 font-display text-xl font-bold text-white">{tier.name}</h3>
-              <p className="mt-3 text-sm text-gold font-semibold">{tier.count}</p>
-              <p className="mt-3 text-sm leading-relaxed text-white/70">{tier.description}</p>
-              <Link to={tier.href} className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-semibold text-gold hover:underline">Explore<ArrowRight className="h-4 w-4" /></Link>
-            </motion.article>
+
+        {/* Desktop table */}
+        <div className="hidden md:block overflow-hidden rounded-2xl border border-gold/25 bg-charcoal/60">
+          <table className="w-full text-left text-sm">
+            <thead className="bg-charcoal/80 text-gold/85 uppercase text-[11px] tracking-[0.14em]">
+              <tr>
+                <th scope="col" className="px-5 py-3 font-semibold">Tier</th>
+                <th scope="col" className="px-5 py-3 font-semibold">Structure</th>
+                <th scope="col" className="px-5 py-3 font-semibold">Review Route</th>
+                <th scope="col" className="px-5 py-3" />
+              </tr>
+            </thead>
+            <tbody>
+              {ROWS.map((row, i) => (
+                <motion.tr
+                  key={row.tier}
+                  initial={{ opacity: 0, y: 8 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.35, delay: i * 0.05 }}
+                  className="border-t border-gold/10 hover:bg-gold/[0.04] transition-colors"
+                >
+                  <td className="px-5 py-4 font-display text-base font-bold text-white">{row.tier}</td>
+                  <td className="px-5 py-4 text-white/75">{row.structure}</td>
+                  <td className="px-5 py-4 text-white/65">{row.review}</td>
+                  <td className="px-5 py-4 text-right">
+                    <Link
+                      to={row.href}
+                      onClick={() =>
+                        trackEvent("home_cta_click", {
+                          cta: "architecture_row",
+                          label: row.tier,
+                          to: row.href,
+                          section: "recognition_architecture",
+                        })
+                      }
+                      className="inline-flex items-center gap-1 text-gold text-sm font-semibold hover:underline"
+                    >
+                      View <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  </td>
+                </motion.tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Mobile stacked list */}
+        <ul className="md:hidden space-y-3">
+          {ROWS.map((row) => (
+            <li
+              key={row.tier}
+              className="rounded-2xl border border-gold/20 bg-charcoal/60 p-4"
+            >
+              <p className="font-display text-base font-bold text-white">{row.tier}</p>
+              <p className="mt-1 text-sm text-white/75">{row.structure}</p>
+              <p className="mt-1 text-xs text-white/55">{row.review}</p>
+              <Link
+                to={row.href}
+                onClick={() =>
+                  trackEvent("home_cta_click", {
+                    cta: "architecture_row",
+                    label: row.tier,
+                    to: row.href,
+                    section: "recognition_architecture",
+                  })
+                }
+                className="mt-3 inline-flex items-center gap-1 text-gold text-sm font-semibold"
+              >
+                View <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </li>
           ))}
+        </ul>
+
+        <div className="mt-10 text-center">
+          <Link
+            to="/awards"
+            onClick={() =>
+              trackEvent("home_cta_click", {
+                cta: "explore_recognition_framework",
+                to: "/awards",
+                section: "recognition_architecture",
+              })
+            }
+            className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-charcoal hover:bg-amber-400 transition"
+          >
+            Explore the Complete Recognition Framework
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
-        <div className="mt-10 text-center"><Link to="/recognition" className="inline-flex items-center gap-2 rounded-full border border-gold/50 px-5 py-2.5 text-sm font-semibold text-gold hover:bg-gold/10 transition">Explore all recognition tiers<ArrowRight className="h-4 w-4" /></Link></div>
       </div>
     </section>
   );

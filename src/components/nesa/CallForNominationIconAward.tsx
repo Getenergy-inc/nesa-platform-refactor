@@ -359,9 +359,9 @@ export function CallForNominationIconAward() {
             asChild
             size="lg"
             className="bg-gold font-bold text-charcoal shadow-lg shadow-gold/20 hover:bg-gold/90"
-            onClick={() => handleClick("/recognition", "View All Recognition Tiers", "view_all_categories_click")}
+            onClick={() => handleClick("/awards", "View All Nomination Categories", "view_all_categories_click")}
           >
-            <Link to="/recognition">
+            <Link to="/awards">
               <LayoutGrid className="mr-2 h-4 w-4" /> View All Nomination Categories
             </Link>
           </Button>

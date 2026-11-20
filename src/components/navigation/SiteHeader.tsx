@@ -115,7 +115,6 @@ function DropdownSimple({ item }: { item: NavItem }) {
                   )}
                 >
                   {c.label}
-                  {c.description && <span className="mt-0.5 block text-xs text-white/50">{c.description}</span>}
                 </Link>
               </MenubarItem>
             </li>
@@ -165,15 +164,6 @@ function DropdownSectioned({ item }: { item: NavItem }) {
           : "w-[380px]";
   return (
     <div className={cn(widthCls, "bg-charcoal border border-gold/20 p-4")}>
-      {item.headingLink && (
-        <div className="mb-3 border-b border-gold/15 pb-2">
-          <MenubarItem asChild>
-            <Link to={item.href} className={cn("block rounded-md px-2 text-sm font-semibold text-gold leading-tight hover:underline", FOCUS_RING)}>
-              {item.label}
-            </Link>
-          </MenubarItem>
-        </div>
-      )}
       <div
         className={cn(
           "grid gap-4",
@@ -279,8 +269,10 @@ function NominateButton({ className }: { className?: string }) {
       asChild
       className={cn("bg-gold text-charcoal hover:bg-gold/90 font-semibold shadow-sm", className)}
     >
-      <Link
-        to={NOMINATE_CTA.href}
+      <a
+        href={NOMINATE_CTA.href}
+        target="_blank"
+        rel="noopener noreferrer"
         onClick={() =>
           trackNav("nominate_now_click", {
             href: NOMINATE_CTA.href,
@@ -290,7 +282,7 @@ function NominateButton({ className }: { className?: string }) {
         }
       >
         {NOMINATE_CTA.label}
-      </Link>
+      </a>
     </Button>
   );
 }
@@ -586,12 +578,14 @@ function MobileMenu() {
         </div>
         <div className="shrink-0 border-t border-gold/20 bg-charcoal p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
           <Button asChild className="w-full min-h-11 bg-gold text-charcoal hover:bg-gold/90 font-semibold">
-            <Link
-              to={NOMINATE_CTA.href}
+            <a
+              href={NOMINATE_CTA.href}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => trackNav("nominate_now_click", { href: NOMINATE_CTA.href, phase: CURRENT_PHASE.phase, device: "mobile" })}
             >
               Submit a Nomination
-            </Link>
+            </a>
           </Button>
         </div>
       </SheetContent>

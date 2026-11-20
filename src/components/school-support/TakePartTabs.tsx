@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { REGIONAL_PARTICIPATION_PENDING_LABEL, SNS_CTAS, SNS_GOOGLE_FORM, SNS_GOOGLE_FORM_EMBED, SNS_NOT_A_TIER } from "@/config/schoolSupport";
+import { SNS_CTAS, SNS_GOOGLE_FORM, SNS_GOOGLE_FORM_EMBED, SNS_NOT_A_TIER, VOTING_PENDING_LABEL } from "@/config/schoolSupport";
 import { DonateForm } from "./DonateForm";
 import { SponsorPartnerForm } from "./SponsorPartnerForm";
 import { useSupportPage } from "./SupportPageContext";
 import { pillOutline, pillPrimary } from "./ui";
 
 const TABS = [
-  { id: "nominate", label: "Nominate", text: "Put forward a specialist or inclusive school serving learners with disabilities. A nomination begins verification. It does not guarantee publication, regional selection eligibility, funding, a grant or an intervention." },
-  { id: "participate", label: "Participate", text: `${REGIONAL_PARTICIPATION_PENDING_LABEL}. Participation is free, governed by published regional rules and never linked to money.` },
+  { id: "nominate", label: "Nominate", text: "Put forward a specialist or inclusive school serving learners with disabilities. A nomination begins verification. It does not guarantee publication, voting eligibility, funding, a grant or an intervention." },
+  { id: "vote", label: "Vote", text: `${VOTING_PENDING_LABEL}. Voting will be free, one controlled entitlement per verified participant, and never linked to money.` },
   { id: "donate", label: "Donate", text: "Give to the ring-fenced Africa Special Needs Education Support Fund by bank transfer, to a region or where most needed." },
   { id: "sponsor", label: "Sponsor", text: "Sponsor a whole region (US$150,000), share a regional target, support one verified school, a specific project or give in kind — or become a programme partner." },
   { id: "attend", label: "Attend", text: "Register interest in EduTourism 2027 regional visits (Oct–Nov 2027) and the Regional Grant Awarding and Commissioning Ceremonies." },
@@ -37,7 +37,7 @@ export function TakePartTabs() {
               <h3 className="text-2xl">{t.label}</h3>
               <p className="text-sm leading-relaxed text-ea-muted">{t.text}</p>
               {t.id === "nominate" && <a href={SNS_CTAS.nominate.href} className={pillPrimary}>{SNS_CTAS.nominate.label}</a>}
-              {t.id === "participate" && <span aria-disabled="true" className={pillOutline + " cursor-not-allowed border-dashed opacity-80"}>{REGIONAL_PARTICIPATION_PENDING_LABEL}</span>}
+              {t.id === "vote" && <span aria-disabled="true" className={pillOutline + " cursor-not-allowed border-dashed opacity-80"}>{VOTING_PENDING_LABEL}</span>}
               {t.id === "attend" && <a href="#edutourism" className={pillPrimary}>See EduTourism 2027</a>}
               <p className="text-xs text-ea-muted">
                 {t.id === "donate" ? "Prefer the form? Complete the donation form on the right. It is already set to 'Donate', so there is no participation type to choose."

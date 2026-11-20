@@ -142,11 +142,11 @@ export function FeaturedChangemakersSection() {
         {/* Primary CTAs into the discovery ecosystem */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3">
           <CTA to="/nominees" label="Explore Existing Nominees" icon={Users} primary />
-          <CTA to="/recognition" label="View Recognition Tiers" icon={Trophy} />
-          <CTA to="/recognition" label="View Subcategory Scope" icon={Sparkles} />
+          <CTA to="/awards" label="View Categories" icon={Trophy} />
+          <CTA to="/awards#subcategories" label="View Subcategories" icon={Sparkles} />
           <CTA to="/nominees?group=africa-regional" label="Regional Nominees" icon={MapPin} />
           <CTA to="/nominees?category=special-needs" label="Special Needs Schools" icon={Accessibility} />
-          <CTA to="/nominate" label="Submit a Nomination" icon={ArrowRight} primary />
+          <CTA to="/nominate" label="Nominate a Changemaker" icon={ArrowRight} primary />
         </div>
 
         {/* Governance note */}

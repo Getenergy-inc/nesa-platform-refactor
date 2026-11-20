@@ -126,15 +126,15 @@ export function WearTheMovementSection() {
           transition={{ duration: 0.6 }}
         >
           <p className="text-white/60 text-xs sm:text-sm max-w-md leading-relaxed">
-            Official merchandise is available by enquiry while the online shop is closed.
-            Merchandise purchases never influence nominations or recognition decisions.
+            Every purchase supports the NESA-Africa education impact ecosystem
+            and helps amplify the movement across Africa and the diaspora.
           </p>
           <div className="mt-5 flex flex-col sm:flex-row items-center gap-3">
             <Link
-              to="/contact?subject=merchandise"
+              to="/shop"
               className="inline-flex items-center gap-2 rounded-full bg-gold px-6 sm:px-7 py-3 text-sm font-semibold text-charcoal hover:brightness-110 transition shadow-[0_10px_28px_-10px_hsl(var(--gold)/0.7)]"
             >
-              Enquire About Merchandise
+              Explore the Collection
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link

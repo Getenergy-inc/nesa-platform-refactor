@@ -80,8 +80,8 @@ export function ArchitectureTableSection() {
         </div>
 
         <div style={{ textAlign: "center", marginTop: 36 }}>
-          <Link to="/recognition" className="ed-btn-primary">
-            View All Recognition Tiers →
+          <Link to="/awards" className="ed-btn-primary">
+            Explore the Complete Recognition Framework →
           </Link>
         </div>
       </div>

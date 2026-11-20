@@ -22,29 +22,29 @@ export interface NavItem {
 export const PRIMARY_NAV_VISIBLE_XL = 7;
 
 export const SITE_NAV: NavItem[] = [
-  { label: "About", href: "/about", analyticsId: "nav_about", headingLink: true, sections: [
-    { title: "How recognition works", items: [
-      { label: "How Recognition Works", href: "/how-it-works" },
-      { label: "Research and Judging", href: "/research-and-judging" },
-      { label: "Governance and Integrity", href: "/about/governance" },
-    ] },
-    { title: "2026 and people", items: [
-      { label: "2026 Online Programme", href: "/programme/2026" },
-      { label: "Global Team", href: "/meet-the-team" },
-    ] },
+  { label: "About", href: "/about", analyticsId: "nav_about", children: [
+    { label: "About NESA-Africa", href: "/about" },
+    { label: "How Recognition Works", href: "/how-it-works" },
+    { label: "Research and Judging", href: "/research-and-judging" },
+    { label: "Governance and Integrity", href: "/about/governance" },
+    { label: "2026 Online Programme", href: "/programme/2026" },
+    { label: "Timeline", href: "/timeline" },
+    { label: "Global Team", href: "/meet-the-team" },
   ] },
-  { label: "Recognition", href: "/recognition", analyticsId: "nav_recognition", headingLink: true, children: [
-    { label: "Africa Education Icon", href: "/recognition/africa-education-icon", description: "3 pathways · principal 2026 focus" },
-    { label: "Influencers Education Impact", href: "/recognition/influencers", description: "3 pathways" },
-    { label: "Platinum Certificate", href: "/recognition/platinum", description: "7 awards · 27 subcategories" },
-    { label: "Gold–Blue Garnet", href: "/recognition/gold-blue-garnet", description: "9 awards · 63 subcategories" },
+  { label: "Recognition", href: "/recognition", analyticsId: "nav_recognition", children: [
+    { label: "Four Recognition Tiers", href: "/recognition" },
+    { label: "Africa Education Icon", href: "/recognition/africa-education-icon" },
+    { label: "Influencers Education Impact", href: "/recognition/influencers" },
+    { label: "Platinum Certificate", href: "/recognition/platinum" },
+    { label: "Gold–Blue Garnet", href: "/recognition/gold-blue-garnet" },
     { label: "Nominee Directory", href: "/nominees" },
+    { label: "Certificates of Recognition", href: "/recognition/certificates" },
   ] },
   { label: "Impact", href: "/impact", analyticsId: "nav_impact", headingLink: true, children: [
     { label: "Support a Special-Needs School", href: "/support-a-special-needs-school" },
     { label: "Afri-EduTourism", href: "/afri-edutourism" },
   ] },
-  { label: "Media", href: "/media", analyticsId: "nav_media", headingLink: true, children: [
+  { label: "Media", href: "/media", analyticsId: "nav_media", children: [
     { label: "Media Hub", href: "/media" },
     { label: "Webinars", href: "/media/webinars" },
     { label: "Africa Education Enablers Podcast", href: "/media/podcast" },
@@ -53,7 +53,7 @@ export const SITE_NAV: NavItem[] = [
     { label: "EduAid-Africa E-Journal", href: "/journal" },
     { label: "Press and News", href: "/media#news" },
   ] },
-  { label: "Get Involved", href: "/get-involved", analyticsId: "nav_get_involved", headingLink: true, children: [
+  { label: "Get Involved", href: "/get-involved", analyticsId: "nav_get_involved", children: [
     { label: "Volunteer", href: "/volunteer" },
     { label: "Join a Local Chapter", href: "/chapters/join" },
     { label: "Join Our Team", href: "/vacancies" },
@@ -65,8 +65,12 @@ export const SITE_NAV: NavItem[] = [
   { label: "Contact", href: "/contact", analyticsId: "nav_contact" },
 ];
 
-/** Mobile mirrors the canonical navigation; Nominee Directory stays inside Recognition. */
-export const MOBILE_SITE_NAV: NavItem[] = SITE_NAV;
+/** Mobile adds direct Nominees access after Recognition (mobile only). */
+export const MOBILE_SITE_NAV: NavItem[] = [
+  ...SITE_NAV.slice(0, 2),
+  { label: "Nominees", href: "/nominees", analyticsId: "nav_nominees" },
+  ...SITE_NAV.slice(2),
+];
 
 /** Destination choices only: selecting one never assigns or changes a role. */
 export const SIGN_IN_WORKSPACES: NavChild[] = [

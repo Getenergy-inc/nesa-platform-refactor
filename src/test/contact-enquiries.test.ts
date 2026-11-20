@@ -20,12 +20,10 @@ const valid = {
 describe("Contact and Help enquiries", () => {
   beforeEach(() => insert.mockClear());
 
-  it("contains exactly the 20 approved enquiry types", () => {
-    expect(CONTACT_ENQUIRY_TYPES).toHaveLength(20);
+  it("contains exactly the 18 approved enquiry types", () => {
+    expect(CONTACT_ENQUIRY_TYPES).toHaveLength(18);
     expect(CONTACT_ENQUIRY_TYPES).toContain("Merchandise");
-    expect(CONTACT_ENQUIRY_TYPES).toContain("Special-needs school support");
-    expect(CONTACT_ENQUIRY_TYPES).toContain("Safeguarding concern");
-    expect(CONTACT_ENQUIRY_TYPES).toContain("Judges Arena support");
+    expect(CONTACT_ENQUIRY_TYPES).toContain("School support");
   });
 
   it("preselects Merchandise and maps Afri-EduTourism to General enquiry", () => {

@@ -1,6 +1,6 @@
 // Support a Special-Needs School Across Africa — RMSA / EduAid-Africa service presented with NESA-Africa.
 // Page body only uses the scoped EduAid-Africa theme (.eduaid-page); the NESA header/footer are untouched.
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -12,15 +12,14 @@ import {
   CAMPAIGN_VIDEOS, CAT_VIDEOS, CONTINENTAL_TARGET_USD, COUNTRY_MAP_APPROVED, REGION_TARGET_USD, REGION_VIDEOS,
   SCHOOL_SUPPORT_DONATION_STATUSES, SCHOOL_SUPPORT_DUE_DILIGENCE, SCHOOL_SUPPORT_INTERVENTIONS, SCHOOL_SUPPORT_POSSIBILITIES,
   SCHOOL_SUPPORT_PROGRAMME, SCHOOL_SUPPORT_SPONSOR_TYPES, SCHOOL_SUPPORT_SPONSORSHIP_INTEGRITY, SCHOOL_SUPPORT_TIMETABLE,
-  SCHOOL_SUPPORT_TIMETABLE_NOTICE, SCHOOL_SUPPORT_PARTICIPATION_REQUIREMENTS, SCHOOL_SUPPORT_PARTICIPATION_SAFEGUARDS,
+  SCHOOL_SUPPORT_TIMETABLE_NOTICE, SCHOOL_SUPPORT_VOTING_REQUIREMENTS, SCHOOL_SUPPORT_VOTING_SAFEGUARDS,
   SNS_ABOUT_CARDS, SNS_ATTEND_ITEMS, SNS_BANK_ACCOUNTS, SNS_BANK_HOLDER, SNS_BANK_NAME, SNS_BODY_BAND, SNS_CANONICAL,
   SNS_CATEGORIES, SNS_CATEGORY_RULE, SNS_COUNTRIES, SNS_CTAS, SNS_FAQ, SNS_FIVE_WAYS, SNS_HERO_IMAGE, SNS_MAP_DRAFT_NOTE, SNS_NARRATION_NOTICE,
   SNS_NEXT_ELIGIBLE_NOTE, SNS_NOT_A_TIER, SNS_PERSONAL_ACCOUNT_WARNING, SNS_PRINCIPLES, SNS_PROCESS_STEPS, SNS_REGIONS,
-  SNS_RMSA_ROUTE, SNS_UTILITY_LINE, SNS_VIDEO_CAPTION, SNS_VIDEOS, SNS_PARTICIPATION_FOOTNOTE, SNS_ACCOUNTS,
-  SNS_PROGRAMME_LOGOS, SNS_SUPPORT_FLYERS,
-  SCHOOL_SUPPORT_NOMINATION_NOTICE, REGIONAL_PARTICIPATION_PENDING_LABEL, canPublishSupportSchool, type RegionKey,
+  SNS_RMSA_ROUTE, SNS_UTILITY_LINE, SNS_VIDEO_CAPTION, SNS_VIDEOS, SNS_VOTE_FOOTNOTE, SNS_ACCOUNTS,
+  SCHOOL_SUPPORT_NOMINATION_NOTICE, VOTING_PENDING_LABEL, canPublishSupportSchool, type RegionKey,
 } from "@/config/schoolSupport";
-import { SupportPageProvider, scrollToId, useSupportPage } from "@/components/school-support/SupportPageContext";
+import { SupportPageProvider, useSupportPage } from "@/components/school-support/SupportPageContext";
 import { DonateForm } from "@/components/school-support/DonateForm";
 import { SponsorPartnerForm } from "@/components/school-support/SponsorPartnerForm";
 import { AfricaRegionMap } from "@/components/school-support/AfricaRegionMap";
@@ -46,57 +45,25 @@ function ActionTiles({ dark }: { dark?: boolean }) {
   const { goDonate, goSponsor, goAnchor } = useSupportPage();
   const act: Record<string, () => void> = {
     nominate: () => { window.location.href = SNS_CTAS.nominate.href; },
-    participate: () => goAnchor("regional-participation"), donate: () => goDonate(), sponsor: () => goSponsor("sponsor"), attend: () => goAnchor("edutourism"),
+    vote: () => goAnchor("vote"), donate: () => goDonate(), sponsor: () => goSponsor("sponsor"), attend: () => goAnchor("edutourism"),
   };
   return (
     <ol className="grid grid-cols-2 gap-3 sm:grid-cols-5">
       {SNS_FIVE_WAYS.map((w) => {
-        const participation = w.key === "participate"; const gold = w.key === "nominate";
+        const vote = w.key === "vote"; const gold = w.key === "nominate";
         return (
           <li key={w.key}>
-            <button type="button" onClick={act[w.key]} aria-describedby={participation ? "participation-footnote" : undefined}
+            <button type="button" onClick={act[w.key]} aria-describedby={vote ? "vote-footnote" : undefined}
               className={"flex h-full w-full flex-col items-start gap-1 rounded-2xl p-4 text-left transition-colors " +
-                (gold ? "bg-ea-tan text-ea-deep" : participation ? "border-2 border-dashed border-ea-tan/70 text-ea-cream" : dark ? "bg-ea-cream/10 text-ea-cream hover:bg-ea-cream/15" : "bg-ea-sand text-ea-ink")}>
+                (gold ? "bg-ea-tan text-ea-deep" : vote ? "border-2 border-dashed border-ea-tan/70 text-ea-cream" : dark ? "bg-ea-cream/10 text-ea-cream hover:bg-ea-cream/15" : "bg-ea-sand text-ea-ink")}>
               <span className="text-xs font-bold">{w.n}</span>
               <span className="font-serif text-lg font-semibold">{w.title}</span>
-              <span className="text-xs opacity-80">{participation ? "opens Sept 2027*" : w.timing}</span>
+              <span className="text-xs opacity-80">{vote ? "opens Sept 2027*" : w.timing}</span>
             </button>
           </li>
         );
       })}
     </ol>
-  );
-}
-
-function ParticipationFlyers() {
-  return (
-    <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-      {SNS_SUPPORT_FLYERS.map((flyer) => (
-        <a key={flyer.title} href={flyer.href} className="group overflow-hidden rounded-2xl border border-ea-line bg-ea-sand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ea-green">
-          <img src={flyer.src} alt={flyer.alt} loading="lazy" className="aspect-[4/5] w-full object-cover" />
-          <span className="block p-3 text-sm font-semibold text-ea-ink group-hover:text-ea-green">{flyer.title}</span>
-        </a>
-      ))}
-    </div>
-  );
-}
-
-function ProgrammeNetworks() {
-  return (
-    <div className="grid gap-6 md:grid-cols-2">
-      <article className="rounded-2xl border border-ea-line bg-ea-cream p-6">
-        <img src={SNS_PROGRAMME_LOGOS.friends.src} alt={SNS_PROGRAMME_LOGOS.friends.alt} loading="lazy" className="h-24 w-full object-contain object-left" />
-        <h3 className="mt-5 text-2xl">Friends of EduAid-Africa</h3>
-        <p className="mt-3 text-sm leading-relaxed text-ea-muted">A continental community of education enablers mobilising resources, goodwill and practical support for African learners and schools. Friends of EduAid-Africa helps connect individuals, Diaspora supporters, institutions and communities to the Africa Special Needs Education Support Fund.</p>
-        <a href="#donate" className={`${pillPrimary} mt-5`}>Support the Support Fund</a>
-      </article>
-      <article className="rounded-2xl border border-ea-line bg-ea-cream p-6">
-        <img src={SNS_PROGRAMME_LOGOS.academy.src} alt={SNS_PROGRAMME_LOGOS.academy.alt} loading="lazy" className="h-24 w-full object-contain object-left" />
-        <h3 className="mt-5 text-2xl">EduAid-Africa Academy</h3>
-        <p className="mt-3 text-sm leading-relaxed text-ea-muted">The learning and capacity-building arm supporting teachers, school leaders, volunteers, partners and education enablers through webinars, courses, publications and professional learning.</p>
-        <a href="/contact?subject=volunteer" className={`${pillOutline} mt-5`}>Offer learning or professional support</a>
-      </article>
-    </div>
   );
 }
 
@@ -173,10 +140,6 @@ function Body() {
   const [contrast, setContrast] = useState(false);
   const tr = (k: string, d: string) => t(`schoolSupportPage.${k}`, { defaultValue: d });
 
-  useEffect(() => {
-    if (window.location.hash === "#vote") requestAnimationFrame(() => scrollToId("regional-participation"));
-  }, []);
-
   return (
     <div className="eduaid-page" data-size={size} data-contrast={contrast ? "high" : "normal"}>
       <p className="bg-ea-brown px-4 py-1.5 text-center text-xs font-semibold text-ea-cream">{tr("band", SNS_BODY_BAND)}</p>
@@ -192,7 +155,7 @@ function Body() {
 
       <nav aria-label="On this page" className="sticky top-0 z-20 border-b border-ea-line bg-ea-cream/95 px-4 backdrop-blur">
         <ul className="mx-auto flex max-w-6xl gap-4 overflow-x-auto py-2 text-xs font-semibold">
-          {[["about", "About"], ["donate", "Donate"], ["sponsor-form", "Sponsor"], ["regions", "Regions"], ["take-part", "Take part"], ["verified-schools", "Verified schools"], ["regional-participation", "Participate"], ["faq", "FAQ"], ["connect", "Connect"]].map(([id, l]) => (
+          {[["about", "About"], ["donate", "Donate"], ["sponsor-form", "Sponsor"], ["regions", "Regions"], ["take-part", "Take part"], ["verified-schools", "Verified schools"], ["vote", "Vote"], ["faq", "FAQ"], ["connect", "Connect"]].map(([id, l]) => (
             <li key={id}><a href={`#${id}`} className="inline-block whitespace-nowrap py-2 text-ea-green hover:underline">{l}</a></li>
           ))}
         </ul>
@@ -203,11 +166,11 @@ function Body() {
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.6fr_1fr]">
           <div className="space-y-6">
             <img src={eduaidLogo} alt="EduAid-Africa — Empowering Africa's Education Enablers · Funding Education Through Partnerships" className="h-20 w-auto rounded-xl bg-ea-cream p-1.5 sm:h-24" />
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-ea-tan">Nominate · Participate · Donate · Sponsor · Attend</p>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-ea-tan">Nominate · Vote · Donate · Sponsor · Attend</p>
             <h1 className="text-4xl leading-tight sm:text-5xl lg:text-6xl">Support a Special-Needs School <span className="text-ea-tan">Across Africa</span></h1>
             <p className="max-w-2xl text-base leading-relaxed text-ea-cream/85">Help find, verify and support specialist and inclusive schools serving learners with disabilities and additional support needs — one approved school in each of eight African regions in 2027.</p>
             <ActionTiles dark />
-            <p id="participation-footnote" className="text-xs text-ea-cream/70">{SNS_PARTICIPATION_FOOTNOTE}</p>
+            <p id="vote-footnote" className="text-xs text-ea-cream/70">{SNS_VOTE_FOOTNOTE}</p>
             <div className="flex flex-wrap gap-2">
               <a href={SNS_CTAS.verified.href} className={pillOnDark}>{SNS_CTAS.verified.label}</a>
               <button type="button" className={pillOnDark} onClick={() => goSponsor("partner")}>{SNS_CTAS.partner.label}</button>
@@ -231,7 +194,7 @@ function Body() {
         </figure>
       </section>
 
-      <p role="note" className="bg-ea-tan px-4 py-3 text-center text-sm font-semibold text-ea-deep">{tr("nominationNotice", "A nomination begins verification. It does not guarantee publication, regional selection eligibility, funding, a grant or an intervention. Only verified and approved schools are profiled.")}</p>
+      <p role="note" className="bg-ea-tan px-4 py-3 text-center text-sm font-semibold text-ea-deep">{tr("nominationNotice", "A nomination begins verification. It does not guarantee publication, voting eligibility, funding, a grant or an intervention. Only verified and approved schools are profiled.")}</p>
 
       <Wrap id="about">
         <SectionHead eyebrow="About the programme" title="About the programme" />
@@ -255,11 +218,6 @@ function Body() {
           {SNS_FIVE_WAYS.map((w) => <div key={w.key} className={card}><p className="text-xs font-bold text-ea-green">{w.n}</p><h3 className="text-xl">{w.title}</h3><p className="mt-1 text-xs font-semibold text-ea-brown">{w.timing}</p><p className="mt-2 text-sm text-ea-muted">{w.text}</p></div>)}
         </div>
         {CAMPAIGN_VIDEOS.fiveWays && <div className="mt-6 max-w-2xl"><ClickToLoadVideo id={CAMPAIGN_VIDEOS.fiveWays} title="Five ways to take part" caption={SNS_VIDEO_CAPTION} /></div>}
-      </Wrap>
-
-      <Wrap id="participation-resources" className="bg-ea-cream">
-        <SectionHead eyebrow="Participation resources" title="Choose a Practical Way to Help" intro="Use an authorised programme action. Every school nomination, regional selection and intervention remains subject to verification, safeguarding, due diligence and written approval." />
-        <ParticipationFlyers />
       </Wrap>
 
       <Wrap id="donate">
@@ -344,29 +302,24 @@ function Body() {
         <TakePartTabs />
       </Wrap>
 
-      <Wrap id="programme-networks" className="bg-ea-cream">
-        <SectionHead eyebrow="Programme networks" title="Friends, Learning and Professional Support" />
-        <ProgrammeNetworks />
-      </Wrap>
-
       <Wrap id="verified-schools">
         <SectionHead eyebrow="Accountability" title="View Verified Schools" intro={SCHOOL_SUPPORT_NOMINATION_NOTICE} />
         <VerifiedSchools />
         <div className="mt-10"><AccountabilityDashboard /></div>
       </Wrap>
 
-      <Wrap id="regional-participation" className="bg-ea-sand">
+      <Wrap id="vote" className="bg-ea-sand">
         <div className="grid gap-8 lg:grid-cols-2">
           <div>
             <SectionHead eyebrow="2027 timetable" title="2027 timetable" intro={SCHOOL_SUPPORT_TIMETABLE_NOTICE} />
-            <ol className="space-y-2">{SCHOOL_SUPPORT_TIMETABLE.map((x) => <li key={x.period + x.activity} className="grid grid-cols-[9rem_1fr] gap-3 rounded-xl bg-ea-cream p-3 text-sm"><strong>{x.period}</strong><span>{x.activity}</span></li>)}</ol>
+            <ol className="space-y-2">{SCHOOL_SUPPORT_TIMETABLE.filter((x, i, a) => a.findIndex((y) => y.period === x.period && y.activity === x.activity) === i).map((x) => <li key={x.period + x.activity} className="grid grid-cols-[9rem_1fr] gap-3 rounded-xl bg-ea-cream p-3 text-sm"><strong>{x.period}</strong><span>{x.activity}</span></li>)}</ol>
           </div>
           <div>
-            <SectionHead eyebrow="Regional participation" title="Regional school participation" />
-            <span aria-disabled="true" className={pillOutline + " cursor-not-allowed border-dashed"}>{REGIONAL_PARTICIPATION_PENDING_LABEL}</span>
-            <h3 className="mt-6 text-lg">Regional participation may open only after</h3><ol className="mt-2 list-decimal space-y-1 pl-5 text-sm">{SCHOOL_SUPPORT_PARTICIPATION_REQUIREMENTS.map((x) => <li key={x}>{x}</li>)}</ol>
-            <h3 className="mt-6 text-lg">Safeguards</h3><ul className="mt-2 space-y-1 text-sm">{SCHOOL_SUPPORT_PARTICIPATION_SAFEGUARDS.map((x) => <li key={x}>• {x}</li>)}</ul>
-            <p className="mt-6 rounded-2xl bg-ea-deep p-4 font-serif text-xl font-semibold text-ea-tan">Participation is free and never linked to money.</p>
+            <SectionHead eyebrow="Vote" title="Vote" />
+            <span aria-disabled="true" className={pillOutline + " cursor-not-allowed border-dashed"}>{VOTING_PENDING_LABEL}</span>
+            <h3 className="mt-6 text-lg">Voting may open only after</h3><ol className="mt-2 list-decimal space-y-1 pl-5 text-sm">{SCHOOL_SUPPORT_VOTING_REQUIREMENTS.map((x) => <li key={x}>{x}</li>)}</ol>
+            <h3 className="mt-6 text-lg">Safeguards</h3><ul className="mt-2 space-y-1 text-sm">{SCHOOL_SUPPORT_VOTING_SAFEGUARDS.map((x) => <li key={x}>• {x}</li>)}</ul>
+            <p className="mt-6 rounded-2xl bg-ea-deep p-4 font-serif text-xl font-semibold text-ea-tan">Votes are never sold.</p>
           </div>
         </div>
       </Wrap>
@@ -395,7 +348,7 @@ function Body() {
       <Wrap dark>
         <h2 className="max-w-3xl text-3xl text-ea-cream sm:text-4xl">{SCHOOL_SUPPORT_PROGRAMME.campaignLine}</h2>
         <div className="mt-6"><ActionTiles dark /></div>
-        <p className="mt-4 text-xs text-ea-cream/70">{SNS_PARTICIPATION_FOOTNOTE}</p>
+        <p className="mt-4 text-xs text-ea-cream/70">{SNS_VOTE_FOOTNOTE}</p>
       </Wrap>
 
       <Wrap id="connect">

@@ -115,7 +115,7 @@ export function AwardPlaqueMotionSection() {
           </p>
           <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
             <Link
-              to="/recognition"
+              to="/awards"
               className="inline-flex items-center rounded-md bg-gold px-5 py-2.5 text-sm font-semibold text-charcoal hover:bg-gold-dark transition-colors"
             >
               Explore Recognition Tiers

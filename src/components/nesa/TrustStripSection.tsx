@@ -27,7 +27,7 @@ export function TrustStripSection() {
           </p>
 
           <Link
-            to="/about/governance"
+            to="/about#governance"
             className="inline-flex items-center gap-1 text-gold font-semibold text-sm whitespace-nowrap hover:underline"
           >
             How governance works <ArrowRight className="h-4 w-4" />
