@@ -6,7 +6,10 @@ import tierIcon from "@/assets/story/tier-africa-education-icon.jpg";
 import tierInfluencer from "@/assets/story/tier-influencer-education-impact.jpg";
 import tierPlatinum from "@/assets/story/tier-platinum.jpg";
 import tierGarnet from "@/assets/story/tier-gold-blue-garnet.jpg";
-import { SCHOOL_SUPPORT_PROGRAMME } from "@/config/schoolSupport";
+import { SNS_CATEGORIES, SNS_HERO_IMAGE, SCHOOL_SUPPORT_PROGRAMME } from "@/config/schoolSupport";
+import eduAidLogo from "@/assets/school-support/eduaid-africa-logo.webp.asset.json";
+import friendsLogo from "@/assets/school-support/friends-of-eduaid-africa-logo.jpg.asset.json";
+import scefLogo from "@/assets/school-support/scef-logo.png.asset.json";
 import { ICON_PATHWAYS } from "@/config/brandHierarchy";
 import { bySubcategory, type IconSubcategorySlug, type IconNominee } from "@/data/iconAward";
 import { getInitials } from "@/components/influencer-impact/InitialsAvatar";
@@ -15,6 +18,11 @@ import { useIconAwardStats } from "./useIconAwardStats";
 import { ENDORSERS } from "./PartnersBandSection";
 
 const SCHOOL = "/impact/special-needs-schools";
+const SCHOOL_ORGANISATION_LOGOS = [
+  { id: "scef", src: scefLogo.url },
+  { id: "eduaid", src: eduAidLogo.url },
+  { id: "friends", src: friendsLogo.url },
+] as const;
 
 /** One-line Icon governance summary under the nominee strip. */
 export function IconGovernanceLine() {
@@ -233,15 +241,49 @@ export function TwoPillarsSection() {
           <article className="ed-card">
             <div className="ed-card-badge">{t("landingLean.pillars.snsBadge", "Post-award service · EduAid-Africa")}</div>
             <h3><Link to={SCHOOL} className="hover:underline">{t("landingLean.pillars.snsTitle", p.headline)}</Link></h3>
-            <p>{t("landingLean.pillars.snsIntro", "After the awards, recognition turns into support. Through EduAid-Africa, SCEF and NESA-Africa help identify, verify and support specialist schools and inclusive mainstream schools serving learners with disabilities and additional support needs.")}</p>
+            <img
+              src={SNS_HERO_IMAGE.src}
+              alt={SNS_HERO_IMAGE.alt}
+              loading="lazy"
+              decoding="async"
+              className="mt-4 h-auto w-full rounded-xl border border-gold/20 object-cover"
+            />
+            <p className="mt-4">{t("landingLean.pillars.snsIntro", "After the awards, recognition turns into support. Through EduAid-Africa, SCEF and NESA-Africa help identify, verify and support specialist schools and inclusive mainstream schools serving learners with disabilities and additional support needs.")}</p>
             <p className="mt-2 text-sm text-white/70">{t("landingLean.pillars.snsRegions", "The 2027 programme aims to identify one priority school in each of eight operational African regions for verified intervention support. Fundraising target: US$150,000 per region, US$1.2 million in total — a target, not secured funding.")}</p>
             <p className="mt-2 text-sm text-white/70">{t("landingLean.pillars.snsSupport", "Subject to due diligence, available funds and written approval, a selected school may receive accessibility assistance, equipment and learning materials, assistive technology, advisory services or volunteer support.")}</p>
+            <ul className="mt-5 flex list-none snap-x gap-3 overflow-x-auto pb-3" aria-label={t("landingLean.pillars.snsCategories", "School support category pictures")}>
+              {SNS_CATEGORIES.filter((category) => category.image).slice(0, 8).map((category) => (
+                <li key={category.title} className="w-[104px] shrink-0 snap-start">
+                  <img
+                    src={category.image!.src}
+                    alt={category.image!.alt}
+                    loading="lazy"
+                    decoding="async"
+                    className="aspect-square w-full rounded-lg border border-gold/15 object-cover"
+                  />
+                  <span className="mt-1.5 block text-[10px] leading-tight text-white/65">{category.title}</span>
+                </li>
+              ))}
+            </ul>
             <div className="mt-4 flex flex-wrap gap-2">
               <Link to={SCHOOL} className={btnPrimary}>{t("landingLean.pillars.snsPage", "Visit the programme page")}</Link>
               <Link to={`${SCHOOL}#take-part`} className={btnGhost}>{t("landingLean.impact.nominate", "Nominate a School")}</Link>
               <Link to={`${SCHOOL}#donate`} className={btnGhost}>{t("landingLean.pillars.donate", "Donate")}</Link>
             </div>
             <p className="mt-3 text-xs text-white/55">{t("landingLean.pillars.snsSeparate", "This is not a NESA-Africa award tier. Donations and sponsorship never influence awards, judging or school selection.")}</p>
+            <ul className="mt-5 grid list-none grid-cols-3 items-center gap-2 border-t border-gold/15 pt-4" aria-label={t("landingLean.pillars.snsOrganisations", "School support organisations")}>
+              {SCHOOL_ORGANISATION_LOGOS.map((logo) => (
+                <li key={logo.id} className="flex h-16 items-center justify-center rounded-lg bg-cream p-2">
+                  <img
+                    src={logo.src}
+                    alt={t(`landingLean.pillars.snsLogos.${logo.id}`, { scef: "Santos Creations Educational Foundation", eduaid: "EduAid-Africa", friends: "Friends of EduAid-Africa" }[logo.id])}
+                    loading="lazy"
+                    decoding="async"
+                    className="max-h-full w-full object-contain"
+                  />
+                </li>
+              ))}
+            </ul>
           </article>
         </div>
       </div>

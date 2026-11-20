@@ -3,15 +3,16 @@
 // Two messages: (1) Tier 1 Africa Education Icon Award, and (2) after the
 // awards, Support a Special-Needs School Across Africa via EduAid-Africa.
 //
-// Section order (6):
+// Section order (7):
 //   1. Hero — eyebrow, title, one line, two CTAs (Icon nomination · school support)
 //   2. Public nominations notice (compact, one line)
-//   3. Two pillars — Tier 1 Africa Education Icon (three category cards, nominee strip max 12)
-//      beside one concise Special Needs Education Support Africa post-award panel,
+//   3. Two pillars — Tier 1 Africa Education Icon (three complete category nominee strips)
+//      beside one Special Needs Education Support Africa panel with owner-supplied imagery,
 //      then governance line
 //   4. The four tiers at a glance (TierStripSection)
 //   5. Trust — three points, endorser logos, governance link
-//   6. Online Awards Gala band + single closing CTA
+//   6. Award plaque and NESA-Africa seal
+//   7. Focused Online Recognition Programme + single closing CTA
 //
 // Other homepage components remain in ./editorial for tier and other pages.
 // Visual skin lives in ./editorial/editorial.css, scoped under `.nesa-ed`.
@@ -41,6 +42,7 @@ const lean = () => import("./editorial/LeanHomeSections");
 const TierStripSection = lazy(() => lean().then((m) => ({ default: m.TierStripSection })));
 const TrustPartnersSection = lazy(() => lean().then((m) => ({ default: m.TrustPartnersSection })));
 const ClosingCTASection = lazy(() => lean().then((m) => ({ default: m.ClosingCTASection })));
+const AwardPlaqueMotionSection = lazy(() => import("@/components/nesa/AwardPlaqueMotionSection"));
 
 export function NESALandingPage() {
   const { t } = useTranslation("pages");
@@ -84,7 +86,10 @@ export function NESALandingPage() {
         {/* 5. TRUST */}
         <LazySection><TrustPartnersSection /></LazySection>
 
-        {/* 6. GALA + FINAL CTA */}
+        {/* 6. AWARD PLAQUE */}
+        <LazySection><AwardPlaqueMotionSection /></LazySection>
+
+        {/* 7. FOCUSED ONLINE PROGRAMME + FINAL CTA */}
         <GalaBandSection />
         <LazySection><ClosingCTASection /></LazySection>
 

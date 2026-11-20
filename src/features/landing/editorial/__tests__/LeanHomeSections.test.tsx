@@ -4,6 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 import { TwoPillarsSection } from "../LeanHomeSections";
 import { ICON_PATHWAYS } from "@/config/brandHierarchy";
 import { bySubcategory, type IconSubcategorySlug } from "@/data/iconAward";
+import { SNS_CATEGORIES, SNS_HERO_IMAGE, SCHOOL_SUPPORT_PROGRAMME } from "@/config/schoolSupport";
 import { vi } from "vitest";
 
 vi.mock("@/features/landing/editorial/StripScroller", () => ({
@@ -54,5 +55,27 @@ describe("lean homepage Tier 1 categories", () => {
       // Every record has either its real portrait or the accessible initials fallback.
       expect(within(strip).getAllByRole("img")).toHaveLength(expected.length);
     });
+  });
+
+  it("restores the school collage, eight supplied category pictures and three organisation logos", () => {
+    render(
+      <MemoryRouter>
+        <TwoPillarsSection />
+      </MemoryRouter>,
+    );
+
+    const schoolPanel = screen.getByRole("heading", { name: SCHOOL_SUPPORT_PROGRAMME.headline }).closest("article");
+    expect(schoolPanel).not.toBeNull();
+    expect(within(schoolPanel!).getByRole("img", { name: SNS_HERO_IMAGE.alt })).toHaveAttribute("src", SNS_HERO_IMAGE.src);
+
+    const categoryPictures = within(schoolPanel!).getByRole("list", { name: "School support category pictures" });
+    const expectedCategories = SNS_CATEGORIES.filter((category) => category.image).slice(0, 8);
+    expect(within(categoryPictures).getAllByRole("listitem")).toHaveLength(8);
+    expectedCategories.forEach((category) => {
+      expect(within(categoryPictures).getByRole("img", { name: category.image!.alt })).toHaveAttribute("src", category.image!.src);
+    });
+
+    const organisations = within(schoolPanel!).getByRole("list", { name: "School support organisations" });
+    expect(within(organisations).getAllByRole("img")).toHaveLength(3);
   });
 });

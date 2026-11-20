@@ -1,3 +1,8 @@
+## Landing school imagery, plaque and online programme — 20 Nov 2026
+- [x] Restored the owner-supplied school collage and eight category pictures inside the existing single school-support panel; added SCEF, EduAid-Africa and Friends of EduAid-Africa logos extracted from the supplied HTML through CDN asset pointers. Ignored the HTML's empty image placeholders, workflows, styling and eight-category programme taxonomy.
+- [x] Restored the existing award-plaque component immediately before the existing focused online-programme band; retained Monday 28 December 2026 · Online Only and the approved focused-programme wording.
+- [x] Six focused tests passed. Desktop/360px checks loaded all 12 real CDN-backed school images and the plaque, confirmed plaque/programme order, no horizontal page overflow and zero page errors. The hosted preview page requires sign-in, so visual verification used the local page with responses from the verified preview CDN. Not published.
+
 ## Icon category nominee portraits — 20 Nov 2026
 - [x] Restored a separate horizontally scrollable nominee portrait strip inside each Africa Education Icon category; all 421 existing records are included (136 Philanthropy, 166 Literary & Curriculum, 119 Technical Educator), with initials fallbacks for missing portraits. Removed the old mixed 12-card strip; school-support content and all image/data files remain unchanged.
 - [x] Per-category completeness/link tests pass; desktop/360px scrolling, visible portrait loading, a real profile destination and zero page errors verified. Not published.
