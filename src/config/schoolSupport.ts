@@ -22,7 +22,8 @@ export const SNS_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfSFHcQc9e
 
 /** Voting remains unavailable until technical and governance approval authorises this flag. */
 export const VOTING_OPEN = false;
-export const VOTING_PENDING_LABEL = "Regional school participation opens in September 2027, subject to verification and approval";
+export const SCHOOL_BALLOT_RULES = { maximumSchools: 7, votesPerPersonPerBallot: 1 } as const;
+export const VOTING_PENDING_LABEL = "Voting is not open yet. It opens in September 2027 after approval.";
 export const VOTING_OPEN_LABEL = "Vote for a School in Your Region";
 
 export function getSchoolVotingLabel(votingOpen: boolean = VOTING_OPEN): string {
@@ -224,10 +225,11 @@ export const SCHOOL_SUPPORT_TIMETABLE = [
   { period: "February–March 2027", activity: "Governance, fundraising, financial controls, forms and regional rules" },
   { period: "April 2027", activity: "School nominations open" },
   { period: "April–August 2027", activity: "Verification, consent, needs assessment, safeguarding review and regional classification" },
-  { period: "August 2027", activity: "Regional shortlist and public-information review" },
-  { period: "September 2027", activity: "Authorised regional selection" },
-  { period: "October–November 2027", activity: "Controlled funding releases, intervention delivery and EduTourism activities" },
-  { period: "December 2027", activity: "Outcome presentation, partner recognition and preliminary reporting" },
+  { period: "August 2027", activity: "School profiles and voting tests" },
+  { period: "September 2027", activity: "Voting, subject to approval" },
+  { period: "October 2027", activity: "Due diligence and support begins" },
+  { period: "November 2027", activity: "Monitoring" },
+  { period: "December 2027", activity: "Supported schools presented" },
   { period: "2028 onward", activity: "Intervention completion, monitoring and public impact reporting where required" },
   { period: "2028 onward", activity: "Intervention completion, monitoring and public impact reporting where required" },
 ] as const;

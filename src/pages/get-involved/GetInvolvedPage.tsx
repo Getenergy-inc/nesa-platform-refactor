@@ -1,41 +1,30 @@
 import "@/features/landing/editorial/editorial.css";
 import { VolunteerBandSection } from "@/features/landing/editorial/VolunteerBandSection";
-import { LeanHero, LeanSection, LeanCtas, type LeanCta } from "@/components/lean/LeanPage";
+import { LeanHero, LeanSection, LeanCtas } from "@/components/lean/LeanPage";
 import { useTranslation } from "react-i18next";
+import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
+import { ParticipationInterestForm } from "@/components/school-support/ParticipationInterestForm";
+import { RecognitionIntegrityLine } from "@/components/nesa/SiteWideContent2026";
 
-const BLOCKS: Array<{ id?: string; title: string; body: string; ctas: LeanCta[] }> = [
-  { id: "volunteer", title: "Volunteer", body: "Contribute skills in NRRC research and nominee contact, technology, data quality, website QA, social media, graphic design, documentary production, webinars and podcasts, communications, translation, accessibility, safeguarding, partnerships, fundraising or administration. Applying is not appointment or onboarding.", ctas: [{ label: "Apply to Volunteer", href: "/get-involved#volunteer" }] },
-  { id: "chapters", title: "Join a local chapter", body: "Chapters connect enablers, volunteers, institutions and supporters in African countries and Diaspora communities. They support awareness, credible nominations, education activities and EduAid-Africa interventions. They cannot verify nominees, appoint judges or influence recognition.", ctas: [{ label: "Find a Chapter", href: "/chapters" }, { label: "Join a Chapter", href: "/chapters/join" }, { label: "Apply to Establish a Chapter", href: "/contact?subject=chapter" }] },
-  { title: "Join our team", body: "Paid and volunteer vacancies across SCEF programmes.", ctas: [{ label: "View Vacancies", href: "/vacancies" }] },
-  { title: "Partner with us", body: "Technology, accessibility, media, research, education interventions, regional school support, training and Afri-EduTourism.", ctas: [{ label: "Propose a Partnership", href: "/partners" }] },
-  { title: "Sponsor responsibly", body: "Sponsors support approved delivery without nomination, judging or editorial influence.", ctas: [{ label: "Become a Sponsor", href: "/sponsors" }] },
-  { title: "Donate", body: "Donations support approved education documentation, accessibility, school interventions and EduAid-Africa services, by bank transfer to EduAid Africa Ltd.", ctas: [{ label: "Support Education", href: "/support" }] },
-  { title: "Buy merchandise", body: "Official NESA-Africa and EduAid-Africa merchandise is available on request while the online shop is closed.", ctas: [{ label: "Enquire About Merchandise", href: "/contact?subject=merchandise", primary: true }] },
+const BLOCKS = [
+  { title: "Nominate", body: "Know an education enabler? Tell us.", button: "Nominate", href: PUBLIC_ACTIONS_2026.nominate.href },
+  { title: "Support a school", body: "Nominate, vote, donate or fund a scholarship.", button: "Support a school", href: "/impact/special-needs-schools" },
+  { id: "volunteer", title: "Volunteer", body: "Give time to research, media or school support.", button: "Volunteer", href: "/contact?topic=volunteer" },
+  { id: "chapters", title: "Start or join a chapter", body: "Friends of EduAid-Africa are SCEF's local chapters around the world.", button: "Start or join a chapter", href: "/contact?topic=chapter" },
+  { title: "Partner or sponsor", body: "Back a school, a region or the programme.", button: "Sponsor or Partner", href: "/impact/special-needs-schools#partner" },
+  { title: "Learn with the Academy", body: "Courses for teachers, volunteers and young people.", button: "Learn with the Academy", href: "#academy" },
 ];
-
 export default function GetInvolvedPage() {
   const { t } = useTranslation("pages");
-  return (
-    <main id="main-content">
-      <LeanHero title="Contribute to Education Recognition and Impact" path="/get-involved"
-        seoTitle="Get Involved With NESA-Africa and EduAid-Africa"
-        description="Take part through nomination, volunteering, local chapters, partnerships, sponsorship, responsible education support or official merchandise.">
-        <p>Take part through nomination, volunteering, local chapters, partnerships, sponsorship, responsible education support or official merchandise.</p>
-      </LeanHero>
-      {BLOCKS.map((b, i) => (
-        <LeanSection key={b.title} id={b.id} title={b.title} tone={i % 2 ? "dark" : "light"}>
-          <p>{b.body}</p>
-          <LeanCtas ctas={b.ctas} />
-        </LeanSection>
-      ))}
-      <LeanSection id="academy" title={t("getInvolved.academy.title", "EduAid-Africa Academy")} tone="dark">
-        <p>{t("getInvolved.academy.body", "Approved Academy programme details will be published here when they are available.")}</p>
-        <LeanCtas ctas={[{ label: t("getInvolved.academy.cta", "Ask about the Academy"), href: "/contact", primary: true }]} />
-      </LeanSection>
-      <div className="nesa-ed"><VolunteerBandSection /></div>
-      <LeanSection title="Integrity notice">
-        <p>Sponsorship, donations, partnerships, endorsements, merchandise purchases and media participation carry zero weight in nomination, eligibility, judging or recognition.</p>
-      </LeanSection>
-    </main>
-  );
+  return <main id="main-content">
+    <LeanHero title={t("getInvolved.messageC.title", "Choose how you help")} path="/get-involved" seoTitle={t("getInvolved.messageC.seo", "Get Involved With NESA-Africa and EduAid-Africa")} description={t("getInvolved.messageC.description", "Nominate, support a school, volunteer, join a chapter, partner or learn with the Academy.")} />
+    {BLOCKS.map((block, index) => <LeanSection key={block.title} id={block.id} title={t(`getInvolved.messageC.${index}.title`, block.title)} tone={index % 2 ? "dark" : "light"}><p>{t(`getInvolved.messageC.${index}.body`, block.body)}</p><LeanCtas ctas={[{ label: t(`getInvolved.messageC.${index}.button`, block.button), href: block.href, primary: true }]} /></LeanSection>)}
+    <LeanSection id="academy" title={t("getInvolved.messageC.academyTitle", "EduAid-Africa Academy")} tone="dark">
+      <p>{t("getInvolved.messageC.academyLine", "Practical learning for inclusive education and Africa's next generation.")}</p>
+      <ul className="mt-5 list-disc space-y-2 pl-5">{["Special-needs education teacher training", "Webinars and podcast learning", "Youth digital and AI skills", "Volunteer, chapter, NRRC and judge training"].map((offer, index) => <li key={offer}>{t(`getInvolved.messageC.offers.${index}`, offer)}</li>)}</ul>
+      <p className="my-5">{t("getInvolved.messageC.academyDates", "Courses and dates are announced to registered learners first.")}</p>
+      <h3 className="mb-4 font-display text-xl">{t("getInvolved.messageC.register", "Register interest")}</h3><ParticipationInterestForm kind="academy" />
+    </LeanSection>
+    <div className="nesa-ed"><VolunteerBandSection /></div><RecognitionIntegrityLine />
+  </main>;
 }

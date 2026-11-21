@@ -3,6 +3,12 @@ import { Link } from "react-router-dom";
 import { ArrowRight, CalendarDays, Crown, Radio, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ONLINE_GALA, PROGRAMME_END_LABEL, PROGRAMME_PUBLIC_NOTICE } from "@/config/programme";
+import { downloadProgrammeCalendar } from "@/lib/programmeCalendar";
+import { PROGRAMME_END_DATE } from "@/config/programme";
+import { YOUTUBE_CHANNEL } from "@/lib/youtube";
+import { ProgrammeVideo2026 } from "@/components/nesa/ProgrammeVideo2026";
+import rawVideos from "@/data/videos.json";
+import { validateVideos } from "@/lib/validate";
 import { useTranslation } from "react-i18next";
 
 const SECTIONS = [
@@ -27,6 +33,9 @@ const PROGRAMME_ELEMENTS = [
 /** Online-only 2026 programme. No physical event, ticket, voting or venue content. */
 export default function GalaConsolidated() {
   const { t } = useTranslation("common");
+  const tr = (key: string, text: string) => t(`programme2026.${key}`, { defaultValue: text });
+  const programmeDay = new Date().toISOString().slice(0, 10) >= PROGRAMME_END_DATE;
+  const videos = validateVideos(rawVideos).slice(0, 6);
   return (
     <>
       <Helmet>
@@ -50,15 +59,13 @@ export default function GalaConsolidated() {
 
       <section id="overview" className="border-b border-gold/15 bg-charcoal py-16 text-white md:py-24">
         <div className="container mx-auto max-w-5xl px-4 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">Monday, 28 December 2026 · Online only</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">{tr("date", `${PROGRAMME_END_LABEL} · 18:00 WAT · Online only`)}</p>
           <h1 className="mt-4 font-display text-4xl font-bold md:text-6xl">NESA-Africa 2026 <span className="text-gold">Online Recognition Programme</span></h1>
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-white/75">
             {t("onlineGala.summary")}
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90">
-              <Link to="/contact?subject=media">Receive Programme Updates</Link>
-            </Button>
+            {programmeDay ? <Button asChild size="lg"><a href={`${YOUTUBE_CHANNEL.url}/live`} target="_blank" rel="noopener noreferrer">{tr("watchLive", "Watch live")}</a></Button> : <Button size="lg" onClick={downloadProgrammeCalendar}>{tr("calendar", "Add to calendar")}</Button>}
             <Button asChild size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
               <Link to="/recognition/africa-education-icon">{t("onlineGala.exploreIcons")} <ArrowRight className="ml-2 h-4 w-4" /></Link>
             </Button>
@@ -66,7 +73,7 @@ export default function GalaConsolidated() {
               <Link to="/media/tv">{t("onlineGala.watch")}</Link>
             </Button>
           </div>
-          <p className="mt-6 text-sm text-white/60">{t("onlineGala.restrictions")}</p>
+          <p className="mt-6 text-sm text-white/60">{tr("restrictions", "No public physical gala, ticket sale, corporate table or public venue is currently authorised.")}</p>
         </div>
       </section>
 
@@ -93,9 +100,9 @@ export default function GalaConsolidated() {
       <section className="bg-charcoal py-16 text-white">
         <div className="container mx-auto max-w-4xl space-y-8 px-4">
           <div>
-            <h2 className="font-display text-3xl font-bold">Programme elements</h2>
+            <h2 className="font-display text-3xl font-bold">{tr("runningOrder", "Running order")}</h2>
             <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-              {PROGRAMME_ELEMENTS.map((item) => <li key={item} className="rounded-xl border border-gold/20 bg-charcoal-light/20 p-4 text-sm text-white/75">{item}</li>)}
+              {["Welcome", "Icons of the Decade announcement", "Education-impact stories", "Support a Special-Needs School launch", "Thank you"].map((item) => <li key={item} className="rounded-xl border border-gold/20 bg-charcoal-light/20 p-4 text-sm text-white/75">{item}</li>)}
             </ul>
             <p className="mt-5 text-sm text-white/65">Three Icon categories: {ONLINE_GALA.copy.categories.join(" · ")}.</p>
           </div>
@@ -118,7 +125,10 @@ export default function GalaConsolidated() {
         <div className="container mx-auto max-w-4xl px-4 text-center">
           <Radio className="mx-auto h-8 w-8 text-gold" aria-hidden />
           <h2 className="mt-4 font-display text-3xl font-bold">{t("onlineGala.watch")}</h2>
-          <p className="mt-3 text-white/70">Public viewing information will be released after approval and technical testing.</p>
+          <p className="mt-3 text-white/70">{tr("watchOn", "NESA AFRICA TV on YouTube")}</p>
+          <Button asChild variant="outline" className="mt-5"><a href={YOUTUBE_CHANNEL.url} target="_blank" rel="noopener noreferrer">{tr("subscribe", "Subscribe on YouTube")}</a></Button>
+          <div className="mt-8 grid gap-6 text-left md:grid-cols-2">{videos.map(video => <ProgrammeVideo2026 key={video.videoId} videoId={video.videoId} title={tr(`videos.${video.videoId}`, video.title)} />)}</div>
+          <div className="mt-6 flex flex-wrap justify-center gap-5"><Link to="/media/tv" className="text-gold underline">{tr("allVideos", "See all videos")}</Link><Link to="/media/podcast" className="text-gold underline">{tr("podcast", "Africa Education Enablers Podcast")}</Link></div>
         </div>
       </section>
 

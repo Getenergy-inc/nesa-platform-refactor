@@ -16,6 +16,8 @@ import "@/features/landing/editorial/editorial.css";
 import { BoardOfAdvisorsSection } from "@/features/landing/editorial/BoardOfAdvisorsSection";
 import { PartnersBandSection } from "@/features/landing/editorial/PartnersBandSection";
 import { GovernanceFirewallSection } from "@/components/nesa/GovernanceFirewallSection";
+import { FiveArmsTable } from "@/components/nesa/FiveArmsTable";
+import { useTranslation } from "react-i18next";
 import { RecognitionIntegrityLine } from "@/components/nesa/SiteWideContent2026";
 
 const SECTIONS = [
@@ -78,6 +80,7 @@ function Disclosure({
 }
 
 export default function AboutConsolidated() {
+  const { t } = useTranslation("pages");
   useEffect(() => {
     if (typeof window === "undefined") return;
     const hash = window.location.hash?.replace("#", "");
@@ -116,14 +119,16 @@ export default function AboutConsolidated() {
         id="scef"
         eyebrow="Parent organisation"
         title="Santos Creations Educational Foundation"
-        line="Santos Creations Educational Foundation provides the organisational and governance structure for NESA-Africa."
+        line={t("aboutPage.scefC", "SCEF runs NESA-Africa, EduAid-Africa, Friends of EduAid-Africa and EduAid-Africa Academy. Founder and Chief Visionary Officer: Engr. Babashola-Santos Vincent Aderibigbe.")}
         standalone="/about/scef"
       >
         <SCEF />
       </Disclosure>
 
+      <section id="arms" className="scroll-mt-28 border-t border-gold/10 bg-charcoal"><div className="container mx-auto max-w-4xl px-4 py-16"><h2 className="mb-5 font-display text-3xl text-foreground">{t("fiveArms.title", "Five arms, one mission")}</h2><FiveArmsTable /></div></section>
       <div id="advisors" className="nesa-ed scroll-mt-28"><BoardOfAdvisorsSection /></div>
 
+      <span id="vision" className="block scroll-mt-28" />
       <Disclosure
         id="vision-2035"
         eyebrow="Continental roadmap"
@@ -144,7 +149,7 @@ export default function AboutConsolidated() {
         <FAQ />
       </Disclosure>
 
-      <div id="governance" className="scroll-mt-28"><GovernanceFirewallSection /></div>
+      <div id="governance" className="scroll-mt-28"><GovernanceFirewallSection /><div className="container mx-auto max-w-4xl space-y-4 px-4 pb-12"><p>{t("aboutPage.nrrcC", "The Nominee Research and Review Corps supports nomination completeness checks, contact verification, consent, interviews, evidence research, profile preparation, preliminary eligibility review and dossier organisation. The NRRC does not make the final Africa Education Icon recognition decisions. Eligible Icon dossiers proceed to the nine independent judges.")}</p><p>{t("aboutPage.conflictsC", "Conflicts of interest must be declared and managed. Sponsors, partners and donors have no role in judging.")}</p><p>{t("aboutPage.privacyC", "Private contact details, evidence and research records are protected. Public profiles remain subject to consent and verification.")}</p></div></div>
       <div id="partners" className="nesa-ed scroll-mt-28"><PartnersBandSection /></div>
     </>
   );

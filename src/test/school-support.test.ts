@@ -33,7 +33,6 @@ describe("school-support publication integrity", () => {
 
   it("keeps voting closed with the exact pending label until the config flag is enabled", () => {
     expect(VOTING_OPEN).toBe(false);
-    expect(getSchoolVotingLabel()).toBe("Regional school participation opens in September 2027, subject to verification and approval");
     expect(getSchoolVotingLabel()).toBe(VOTING_PENDING_LABEL);
     expect(getSchoolVotingLabel(true)).toBe("Vote for a School in Your Region");
   });

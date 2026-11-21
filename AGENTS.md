@@ -1,5 +1,8 @@
 # Architecture rules
 
+- Keep public participation interests in the existing Contact enquiry service using historical topic values; keep monetary pledges in the separate Support Fund service so interest never becomes a payment or vote.
+- Share programme-arm descriptions and participation field definitions across Message C pages; use ISO country choices without programme region assignment to preserve the unpublished mapping.
+
 - Test live Support Fund persistence through the page and access rules through real anonymous/member/admin Data API sessions; never substitute privileged SQL or promote fixture users, because either bypasses the rule under test.
 
 - Keep PDF-backed research pathways in a presentation-only registry; legacy taxonomy, nomination keys and eligibility remain authoritative to avoid reclassifying existing nominations.

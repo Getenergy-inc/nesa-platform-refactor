@@ -57,7 +57,7 @@ export function LeanCtas({ ctas }: { ctas: LeanCta[] }) {
       {ctas.map((c) => (
         <Button key={c.label} asChild variant={c.primary ? "default" : "outline"}
           className={c.primary ? "rounded-full bg-gold text-charcoal hover:bg-gold/90 font-semibold" : "rounded-full border-gold/50 text-gold hover:bg-gold/10 hover:text-gold"}>
-          <Link to={c.href}>{c.label}</Link>
+          {/^https:\/\//.test(c.href) ? <a href={c.href} target="_blank" rel="noopener noreferrer">{c.label}</a> : <Link to={c.href}>{c.label}</Link>}
         </Button>
       ))}
     </div>

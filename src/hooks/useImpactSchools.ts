@@ -56,6 +56,8 @@ export function useImpactSchools(): ImpactSchoolsResult {
         const rows = (data || []) as Record<string, unknown>[];
         const schools: ImpactSchool[] = rows.map((r) => ({
           id: String(r.id),
+          verificationStatus: typeof r.verification_status === "string" ? r.verification_status : null,
+          publicationApproved: r.publication_approved === true,
           name: String(r.name ?? ""),
           schoolType: (r.school_type as string) ?? null,
           country: (r.country as string) ?? null,

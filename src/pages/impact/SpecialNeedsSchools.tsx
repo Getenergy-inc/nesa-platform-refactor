@@ -27,6 +27,9 @@ import { TakePartTabs } from "@/components/school-support/TakePartTabs";
 import { AccountabilityDashboard } from "@/components/school-support/AccountabilityDashboard";
 import { ClickToLoadVideo } from "@/components/school-support/ClickToLoadVideo";
 import { SectionHead, Wrap, card, dash, fmtMoney, pillOnDark, pillOutline, pillPrimary } from "@/components/school-support/ui";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { FiveArmsTable } from "@/components/nesa/FiveArmsTable";
 import { RecognitionIntegrityLine } from "@/components/nesa/SiteWideContent2026";
 
 const ICONS: Record<string, LucideIcon> = { eye: Eye, ear: Ear, accessibility: Accessibility, puzzle: Puzzle, "message-circle": MessageCircle, brain: Brain, layers: Layers, sprout: Sprout };
@@ -111,16 +114,19 @@ function RegionCards() {
 
 function VerifiedSchools() {
   const { schools, loading } = useImpactSchools();
-  const approved = schools.filter((s) => canPublishSupportSchool(s));
+  const { t } = useTranslation("pages");
+  const [query, setQuery] = useState("");
+  const approved = schools.filter((s) => canPublishSupportSchool(s)).filter(s => [s.name, s.country, s.region?.name, s.schoolType, s.description].join(" ").toLowerCase().includes(query.toLowerCase()));
   const heads = ["School", "Country", "Region", "Learners", "Identified need", "Accessibility", "Intervention", "Funding target", "Progress", "Outcome"];
   return (
+    <div><label htmlFor="school-search" className="mb-3 block text-sm font-semibold">{t("schoolSupportPage.search", "Search school, country, region or category")}</label><Input id="school-search" value={query} onChange={e => setQuery(e.target.value)} className="mb-4" />
     <div className="overflow-x-auto rounded-2xl border border-ea-line bg-ea-cream">
       <table className="w-full min-w-[900px] text-left text-sm">
         <caption className="sr-only">Verified and approved school profiles</caption>
         <thead className="bg-ea-sand"><tr>{heads.map((h) => <th key={h} scope="col" className="px-3 py-3 font-semibold">{h}</th>)}</tr></thead>
         <tbody>
           {loading ? <tr><td colSpan={10} className="px-3 py-6 text-ea-muted">Loading…</td></tr>
-            : approved.length === 0 ? <tr><td colSpan={10} className="px-3 py-6 font-semibold text-ea-muted">No verified and approved school profiles yet. Nominations open in April 2027.</td></tr>
+            : approved.length === 0 ? <tr><td colSpan={10} className="px-3 py-6 font-semibold text-ea-muted">{t("schoolSupportPage.noSchools", "No verified and publication-approved schools match your search yet.")}</td></tr>
             : approved.map((s) => (
               <tr key={s.id} className="border-t border-ea-line">
                 <td className="px-3 py-3 font-semibold">{dash(s.name)}</td><td className="px-3 py-3">{dash(s.country)}</td><td className="px-3 py-3">{dash(s.region?.name)}</td>
@@ -130,7 +136,7 @@ function VerifiedSchools() {
             ))}
         </tbody>
       </table>
-    </div>
+    </div></div>
   );
 }
 
@@ -168,10 +174,12 @@ function Body() {
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.6fr_1fr]">
           <div className="space-y-6">
             <img src={eduaidLogo} alt="EduAid-Africa — Empowering Africa's Education Enablers · Funding Education Through Partnerships" className="h-20 w-auto rounded-xl bg-ea-cream p-1.5 sm:h-24" />
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-ea-tan">Nominate · Vote · Donate · Sponsor · Attend</p>
-            <h1 className="text-4xl leading-tight sm:text-5xl lg:text-6xl">Support a Special-Needs School <span className="text-ea-tan">Across Africa</span></h1>
-            <p className="max-w-2xl text-base leading-relaxed text-ea-cream/85">Help find, verify and support specialist and inclusive schools serving learners with disabilities and additional support needs — one approved school in each of eight African regions in 2027.</p>
-            <ActionTiles dark />
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-ea-tan">{tr("heroBadge", "Africa Special Needs Education Support Fund 2027 · Presented by NESA-Africa and EduAid-Africa, programmes of SCEF")}</p>
+            <h1 className="text-4xl leading-tight sm:text-5xl lg:text-6xl">{tr("heroHeading", "Eight African Regions. Eight Supported Schools. One Inclusive Future.")}</h1>
+            <p className="max-w-2xl text-base leading-relaxed text-ea-cream/85">{tr("heroIntroduction", "In 2027, one verified special-needs or inclusive school in each of Africa’s eight programme regions will receive support, such as a grant, renovation, equipment, assistive technology, expert advice, volunteers or sponsorship.")}</p>
+            <p className="text-lg font-semibold">{tr("heroLine", "Nominate. Verify. Vote. Fund. Volunteer. Transform.")}</p>
+            <div className="flex flex-wrap gap-3"><Button asChild className={pillOnDark}><a href="#take-part">{tr("takePart", "Take part")}</a></Button><Button asChild className={pillOnDark}><a href="#partner">{tr("partner", "Sponsor or Partner")}</a></Button></div>
+            <p className="text-sm">{tr("schoolIntegrity", SCHOOL_SUPPORT_SPONSORSHIP_INTEGRITY)}</p>
             <p id="vote-footnote" className="text-xs text-ea-cream/70">{SNS_VOTE_FOOTNOTE}</p>
             <div className="flex flex-wrap gap-2">
               <a href={SNS_CTAS.verified.href} className={pillOnDark}>{SNS_CTAS.verified.label}</a>
@@ -235,7 +243,7 @@ function Body() {
       <Wrap id="sponsor-form" className="bg-ea-sand">
         <span id="partner" className="block scroll-mt-28" />
         <div className="grid gap-8 lg:grid-cols-[1fr_1.4fr]">
-          <SectionHead eyebrow="Sponsors & partners" title="Sponsor a Regional School / Become a Programme Partner" intro={<>Sponsor a whole region, a share of a regional target, a verified school, a specific project or in-kind support — or offer your expertise as a programme partner. Any support is subject to due diligence, available funds and written approval. Sponsors and partners are listed only after a written agreement or verified contribution.</>} />
+          <SectionHead eyebrow={tr("partnerEyebrow", "Sponsors & partners")} title={tr("partnerTitle", "Sponsor or Partner")} intro={tr("partnerIntro", "Sponsor a verified school, a region, an intervention or equipment, or partner with us.")} />
           <div className="rounded-3xl border border-ea-line bg-ea-cream p-5 shadow-sm sm:p-7"><SponsorPartnerForm /></div>
         </div>
       </Wrap>
@@ -246,9 +254,9 @@ function Body() {
       </Wrap>
 
       <Wrap id="categories" className="bg-ea-sand">
-        <SectionHead eyebrow="Fourteen categories" title="Fourteen categories of special-needs education" />
+        <SectionHead eyebrow={tr("categoriesEyebrow", "Eight categories")} title={tr("categoriesTitle", "Eight categories of special-needs education")} />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {SNS_CATEGORIES.map((c, i) => {
+          {SNS_CATEGORIES.slice(0, 8).map((c, i) => {
             const Icon = ICONS[c.icon] ?? Sprout;
             return (
               <article key={c.title} className="overflow-hidden rounded-2xl border border-ea-line bg-ea-cream">
@@ -257,7 +265,7 @@ function Body() {
                   <figcaption className="absolute bottom-2 left-2 rounded-full bg-ea-ink/70 px-2 py-0.5 text-[10px] text-ea-cream">Illustrative image{c.image?.credit ? ` · ${c.image.credit}` : ""}</figcaption>
                 </figure>
                 <div className="p-4">
-                  <h3 className="text-lg leading-snug">{c.title}</h3>
+                  <h3 className="text-lg leading-snug">{tr(`category.${i}.title`, c.title.replace(" Support Education", "").replace(" Education", ""))}</h3>
                   <p className="mt-1 text-sm text-ea-muted">{c.description}</p>
                   <div className="mt-2 flex flex-wrap gap-1">{c.tags.map((tg) => <span key={tg} className="rounded-full bg-ea-sand px-2 py-0.5 text-[11px] font-semibold">{tg}</span>)}</div>
                   {CAT_VIDEOS[i] && <div className="mt-3"><ClickToLoadVideo id={CAT_VIDEOS[i]!} title={c.title} caption={SNS_VIDEO_CAPTION} /></div>}
@@ -266,11 +274,13 @@ function Body() {
             );
           })}
         </div>
-        <p className="mt-6 rounded-2xl border-l-4 border-ea-green bg-ea-cream p-4 text-sm font-semibold">{SNS_CATEGORY_RULE}</p>
+        <p className="mt-6 rounded-2xl border-l-4 border-ea-green bg-ea-cream p-4 text-sm font-semibold">{tr("categoryRule", "A school may choose several categories but names one principal category.")}</p>
       </Wrap>
 
+      <Wrap><SectionHead title={tr("arms", "Five arms, one mission")} /><FiveArmsTable /></Wrap>
       <Wrap id="regions">
         <SectionHead eyebrow="Eight regions" title="Eight African Regions. Eight Supported Schools. One Inclusive Future." intro={!COUNTRY_MAP_APPROVED ? SNS_MAP_DRAFT_NOTE : undefined} />
+        <p>{tr("countriesPending", "54 countries; the country list is published once approved")}</p>
         <AfricaRegionMap />
         <div className="mt-10"><RegionCards /></div>
       </Wrap>
@@ -291,13 +301,14 @@ function Body() {
 
       <Wrap>
         <SectionHead eyebrow="Process" title="How the programme works" />
-        <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">{SNS_PROCESS_STEPS.map((s, i) => <li key={s} className={card}><span className="text-xs font-bold text-ea-green">{String(i + 1).padStart(2, "0")}</span><p className="mt-1 font-serif text-lg font-semibold">{s}</p></li>)}</ol>
+        <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">{["Identify", "Nominate", "Verify", "Classify", "Publish", "Shortlist", "Vote", "Select", "Due diligence", "Support", "Report"].map((s, i) => <li key={s} className={card}><span className="text-xs font-bold text-ea-green">{String(i + 1).padStart(2, "0")}</span><p className="mt-1 font-serif text-lg font-semibold">{tr(`process.${i}`, s)}</p></li>)}</ol>
         <div className="mt-10 grid gap-6 lg:grid-cols-3">
           <div><h3 className="text-xl">What a selected school may receive</h3><p className="mt-1 text-xs text-ea-muted">Subject to due diligence, available funds and written approval.</p><ul className="mt-3 space-y-1 text-sm">{SCHOOL_SUPPORT_POSSIBILITIES.map((x) => <li key={x}>• {x}</li>)}</ul></div>
           <div><h3 className="text-xl">Intervention classifications</h3><div className="mt-3 flex flex-wrap gap-1.5">{SCHOOL_SUPPORT_INTERVENTIONS.map((x) => <span key={x} className="rounded-full border border-ea-line px-2.5 py-1 text-xs">{x}</span>)}</div></div>
           <div><h3 className="text-xl">Final support depends on</h3><div className="mt-3 flex flex-wrap gap-1.5">{SCHOOL_SUPPORT_DUE_DILIGENCE.map((x) => <span key={x} className="rounded-full bg-ea-sand px-2.5 py-1 text-xs">{x}</span>)}</div></div>
         </div>
-        <p className="mt-6 text-sm text-ea-muted">{SNS_NEXT_ELIGIBLE_NOTE}</p>
+        <p className="mt-6 text-sm text-ea-muted">{tr("ballots", "Each regional ballot covers one region and one category, with up to seven verified schools. Each person may vote once per ballot.")}</p>
+        <p className="mt-4 text-sm text-ea-muted">{tr("selection", "The highest-voted eligible school in each region goes to final due diligence. A vote alone is not a grant. If that school does not pass, the next eligible school in the region is assessed, and the reasons are recorded.")}</p>
       </Wrap>
 
       <Wrap id="take-part" className="bg-ea-sand">
@@ -355,6 +366,7 @@ function Body() {
         <p className="mt-4 text-xs text-ea-cream/70">{SNS_VOTE_FOOTNOTE}</p>
       </Wrap>
 
+      <Wrap><SectionHead title={tr("safeguardingTitle", "Safeguarding")} /><p>{tr("safeguarding", "We never publish children's names, photographs, diagnoses or medical details. We never ask for card or bank log-in details. Fees are paid to schools or EduAid Africa Ltd, never to individuals.")}</p></Wrap>
       <Wrap id="connect">
         <SectionHead eyebrow="Connect" title="Connect with EduAid-Africa" />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   SNS_PARTNER_CONTRIBUTIONS, SNS_PAYMENT_NOTICE, SNS_REGIONS, SNS_SPONSOR_PRESETS, SNS_SPONSOR_PROJECTS, SNS_SPONSOR_SCOPES,
   makeSupportRef, type RegionKey, type SnsCurrency,
@@ -12,6 +13,7 @@ const CURS: SnsCurrency[] = ["USD", "NGN", "GBP", "EUR"];
 const ORG_TYPES = ["Company", "Foundation", "Development organisation", "Professional association", "Educational institution", "Media organisation", "Diaspora organisation", "Faith-based or community organisation", "Individual", "Other"];
 
 export function SponsorPartnerForm() {
+  const { t } = useTranslation("pages");
   const { sponsorMode: mode, setSponsorMode: setMode, sponsorRegion, setSponsorRegion } = useSupportPage();
   const [scope, setScope] = useState<string>("region");
   const [projects, setProjects] = useState<string[]>([]);
@@ -28,7 +30,7 @@ export function SponsorPartnerForm() {
   if (done) return (
     <div className="space-y-5" aria-live="polite">
       <div className="rounded-2xl bg-ea-green/10 p-5">
-        <h3 className="text-2xl">Thank you — we have your {mode === "sponsor" ? "sponsorship" : "partnership"} enquiry</h3>
+        <h3 className="text-2xl">{t("participation2027.partnerThanks", { defaultValue: "Thank you. We've received your {{formName}}. A pledge is not a payment; we will contact you before any money changes hands.", formName: mode === "sponsor" ? t("participation2027.sponsorshipName", "sponsorship enquiry") : t("participation2027.partnershipName", "partnership enquiry") })}</h3>
         <p className="mt-1 text-sm">Your reference: <strong>{done.ref}</strong></p>
         <p className="mt-2 text-sm text-ea-muted">The programme team will contact you to agree scope in writing. {SNS_PAYMENT_NOTICE}</p>
       </div>

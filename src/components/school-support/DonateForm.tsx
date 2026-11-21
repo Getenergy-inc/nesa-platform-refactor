@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   REGION_TARGET_USD, SNS_CATEGORIES, SNS_DONATION_PRESETS, SNS_DONOR_TYPES, SNS_PAYMENT_NOTICE, SNS_REGIONS,
   makeSupportRef, regionByKey, type SnsCurrency,
@@ -12,6 +13,7 @@ const FREQ = ["One-time", "Monthly", "Annual"] as const;
 const CURS: SnsCurrency[] = ["USD", "NGN", "GBP", "EUR"];
 
 export function DonateForm() {
+  const { t } = useTranslation("pages");
   const { donateRegion, setDonateRegion } = useSupportPage();
   const [freq, setFreq] = useState<(typeof FREQ)[number]>("One-time");
   const [cur, setCur] = useState<SnsCurrency>("USD");
@@ -28,7 +30,7 @@ export function DonateForm() {
   if (done) return (
     <div className="space-y-5" aria-live="polite">
       <div className="rounded-2xl bg-ea-green/10 p-5">
-        <h3 className="text-2xl">Thank you — your pledge is recorded</h3>
+        <h3 className="text-2xl">{t("participation2027.donationThanks", "Thank you. We've received your donation pledge. A pledge is not a payment; we will contact you before any money changes hands.")}</h3>
         <p className="mt-1 text-sm">Your reference: <strong>{done.ref}</strong></p>
         <p className="mt-2 text-sm text-ea-muted">{SNS_PAYMENT_NOTICE}</p>
       </div>
