@@ -1,3 +1,8 @@
+## Website Content v2 — Message C of 3 — 21 Nov 2026
+- [ ] Approve the Message C plan, including eight displayed school categories, closed voting and existing form destinations.
+- [ ] Update Support, Online Programme, About, Get Involved/Academy and Contact without changing design, images or database tables.
+- [ ] Verify new form saves, existing safeguards, focused tests and desktop 1280px/phone 360px screenshots; report destinations and differences. Do not publish.
+
 ## Website Content v2 — Message B of 3 — 20 Nov 2026
 - [x] Align `/awards` cards, recognition paths and canonical timeline with category configuration; retained the existing heading because the category registry totals differ from 22/90.
 - [x] Give all four tier pages the requested section order, hero actions, decision path and searchable/filterable nominee directory.
