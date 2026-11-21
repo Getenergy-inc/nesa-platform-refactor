@@ -35,6 +35,9 @@ import { NOMINATION_WINDOW_LABEL } from "@/config/nominationWindows2026";
 import { PROGRAMME_END_LONG_LABEL } from "@/config/programme";
 import { trackEvent } from "@/lib/analytics";
 import tierImage from "@/assets/story/tier-influencer-education-impact.jpg";
+import tierBadge from "@/assets/certificates/gold-certificate.jpeg";
+import { TierArtworkBand } from "@/features/tiers/TierPageExtras";
+import { TierDecisionPath, TierRecognitionBullets } from "@/features/tiers/TierContent2026";
 import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
 import { SiteClosingBand } from "@/components/nesa/SiteWideContent2026";
 
@@ -154,7 +157,7 @@ export default function InfluencerImpact2026() {
               <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/75 md:text-base lg:mx-0">
                 {t(
                   "tier2Influencer.hero.body",
-                  "Recognising African voices using influence, visibility and public platforms to enable education across Africa and the African Diaspora.",
+                  "Music, social media and sports figures who use their reach to advance education.",
                 )}
               </p>
               <p className="mx-auto mt-4 flex max-w-2xl items-start justify-center gap-2 text-xs leading-relaxed text-white/65 md:text-sm lg:justify-start">
@@ -173,14 +176,14 @@ export default function InfluencerImpact2026() {
                     onClick={() => trackEvent("influencer_hero_cta_click", { cta: "nominate" })}
                   >
                     <Sparkles className="mr-2 h-4 w-4" aria-hidden="true" />
-                    {t("tier2Influencer.hero.nominate", "Nominate an Education Impact Influencer")}
+                    {t("tier2Influencer.hero.nominate", "Nominate an Influencer")}
                   </a>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="h-auto min-h-11 w-full whitespace-normal border-gold/40 px-4 py-3 text-center text-sm text-gold hover:bg-gold/10 sm:w-auto sm:text-base">
-                  <Link to={DIRECTORY_ROUTE}>
-                    {t("tier2Influencer.hero.nominees", "Meet the Education Impact Influencers")}
+                  <a href="#nominees">
+                    {t("tierPage.meetNominees", "Meet the nominees ↓")}
                     <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-                  </Link>
+                  </a>
                 </Button>
               </div>
             </div>
@@ -211,6 +214,9 @@ export default function InfluencerImpact2026() {
             </div>
           </div>
         </section>
+
+        <TierArtworkBand image={tierImage} badge={tierBadge} name="Influencers Education Impact" />
+        <TierRecognitionBullets tier={2} />
 
         {/* 2. Integrity notice */}
         <div className="border-b border-gold/15 bg-gold/5 py-4">
@@ -289,6 +295,9 @@ export default function InfluencerImpact2026() {
           headingHighlight={t("tier2Influencer.nominees.headingHighlight", "Influencer Categories")}
           footerLink={{ to: DIRECTORY_ROUTE, label: t("tier2Influencer.nominees.directory", "Explore the full nominee directory →") }}
         />
+        <TierFamiliesSection tier={2} title="Influencer Education Impact pathway" />
+        <TierDecisionPath tier={2} />
+        <TierNomineeDirectory tier={2} title="Influencers Education Impact nominees" />
 
         {/* 5. Education impact beyond reach */}
         <section aria-labelledby="tier2-impact-heading" className="bg-charcoal py-14 md:py-20">
@@ -410,8 +419,6 @@ export default function InfluencerImpact2026() {
             </div>
           </div>
         </section>
-        <TierFamiliesSection tier={2} title="Influencer Education Impact pathway" />
-        <TierNomineeDirectory tier={2} title="Influencers Education Impact nominees" />
         <SchoolSupportBanner />
       </main>
 

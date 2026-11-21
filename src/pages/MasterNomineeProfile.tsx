@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 import {
   ArrowLeft, Award, MapPin, Share2, Globe2, BookOpen, Sparkles,
   CheckCircle2, TrendingUp, Quote, Calendar, Shield, FileCheck,
-  Building2, ThumbsUp, RotateCcw, Trophy, ChevronRight, Users,
+  Building2, RotateCcw, Trophy, ChevronRight, Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NesaTvLink } from "@/components/common/NesaTvLink";
@@ -17,6 +17,9 @@ import { NomineeWorkflowStatusBadge } from "@/components/nominees/NomineeWorkflo
 import { NomineeEDIScores } from "@/components/nominees/NomineeEDIScores";
 import { generateEnhancedBiography } from "@/lib/nomineeStoryGenerator";
 import { useResolveNomineeMedia } from "@/hooks/useNomineeMedia";
+import { NomineeProfileGovernance } from "@/components/nominees/NomineeProfileGovernance";
+import { TIER_HREF, tierOfDbCategory } from "@/features/tiers/TierNomineeDirectory";
+import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
 
 function isOrg(name: string): boolean {
   const kw = ["bank","group","foundation","university","church","association","network","company","ltd","plc","state","institute","academy","school","college","polytechnic","library","fund","trust","society","ministry","agency","board","hospital","council","ngo"];
@@ -78,6 +81,8 @@ export default function MasterNomineeProfile() {
 
   const org = isOrg(nominee.name);
   const blueGarnet = isBlueGarnet(nominee.category);
+  const tierNumber = tierOfDbCategory(nominee.categorySlug) ?? (blueGarnet ? 4 : 3);
+  const tierNames = { 2: "Influencers Education Impact", 3: "Platinum Recognition", 4: "Gold–Blue Garnet" } as const;
   const workflowConfig = WORKFLOW_STATUS_CONFIG[nominee.workflowStatus];
   // Resolve verified image from nominee_media (ignore broken master default).
   const heroMedia = resolveMedia(nominee.slug, null, nominee.name);
@@ -142,7 +147,7 @@ export default function MasterNomineeProfile() {
                     </div>
                   </div>
                   <Button variant="outline" size="sm" onClick={handleShare} className="border-gold/20 text-gold hover:bg-gold/10">
-                    <Share2 className="w-4 h-4 mr-1.5" />Share
+                    <Share2 className="w-4 h-4 mr-1.5" />Share profile
                   </Button>
                 </div>
 
@@ -150,11 +155,7 @@ export default function MasterNomineeProfile() {
                 <div className="flex flex-wrap gap-2">
                   <Badge className="bg-gold/15 text-gold border-0 font-medium">{nominee.pathway}</Badge>
                   <Badge variant="outline" className="border-emerald-500/20 text-emerald-400">Existing Nominee</Badge>
-                  {blueGarnet && (
-                    <Badge className="bg-blue-600/20 text-blue-400 border-0">
-                      <ThumbsUp className="w-3 h-3 mr-1" />Voting Open
-                    </Badge>
-                  )}
+
                 </div>
 
                 {/* NRC Workflow */}
@@ -163,22 +164,16 @@ export default function MasterNomineeProfile() {
                 {/* Primary Actions */}
                 <div className="flex flex-wrap gap-3 pt-2">
                   <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal font-medium">
-                    <Link to={`/nominate?nominee=${encodeURIComponent(nominee.name)}`}>
+                    <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer">
                       <Award className="w-4 h-4 mr-2" />Nominate
-                    </Link>
+                    </a>
                   </Button>
                   <Button asChild variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
-                    <Link to={`/nominate?nominee=${encodeURIComponent(nominee.name)}&renominate=true`}>
+                    <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer">
                       <RotateCcw className="w-4 h-4 mr-2" />Re-Nominate
-                    </Link>
+                    </a>
                   </Button>
-                  {blueGarnet && (
-                    <Button asChild variant="outline" className="border-blue-500/30 text-blue-400 hover:bg-blue-500/10">
-                      <Link to={`/vote?nominee=${encodeURIComponent(nominee.name)}`}>
-                        <ThumbsUp className="w-4 h-4 mr-2" />Vote
-                      </Link>
-                    </Button>
-                  )}
+
                   <NesaTvLink
                     videoUrl={(nominee as any).videoUrl ?? (nominee as any).video_url ?? null}
                     name={nominee.name}
@@ -189,6 +184,7 @@ export default function MasterNomineeProfile() {
             </div>
           </div>
         </section>
+        <NomineeProfileGovernance tierName={tierNames[tierNumber]} tierHref={`${TIER_HREF[tierNumber]}#nominees`} />
 
         {/* ========== MAIN CONTENT ========== */}
         <div className="container mx-auto px-4 py-10 md:py-14">
@@ -287,7 +283,7 @@ export default function MasterNomineeProfile() {
 
               {/* Mobile Actions */}
               <div className="lg:hidden">
-                <MasterActionCTA nominee={nominee} blueGarnet={blueGarnet} />
+                <MasterActionCTA nominee={nominee} />
               </div>
             </div>
 
@@ -346,7 +342,7 @@ export default function MasterNomineeProfile() {
 
               {/* Desktop Actions */}
               <div className="hidden lg:block">
-                <MasterActionCTA nominee={nominee} blueGarnet={blueGarnet} />
+                <MasterActionCTA nominee={nominee} />
               </div>
             </div>
           </div>
@@ -409,7 +405,7 @@ export default function MasterNomineeProfile() {
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Button asChild className="bg-gold hover:bg-gold-dark text-charcoal font-semibold">
-                <Link to="/nominate"><Award className="w-4 h-4 mr-2" />Nominate</Link>
+                <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer"><Award className="w-4 h-4 mr-2" />Nominate</a>
               </Button>
               <Button asChild variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
                 <Link to="/directory"><Users className="w-4 h-4 mr-2" />Explore Directory</Link>
@@ -423,33 +419,26 @@ export default function MasterNomineeProfile() {
 }
 
 /* ========== ACTION CTA CARD ========== */
-function MasterActionCTA({ nominee, blueGarnet }: { nominee: MasterNominee; blueGarnet: boolean }) {
+function MasterActionCTA({ nominee }: { nominee: MasterNominee }) {
   return (
     <Card className="bg-gradient-to-br from-gold/8 to-transparent border-gold/15">
       <CardContent className="p-5 space-y-4">
         <h3 className="text-sm font-display text-ivory/80 font-medium">Nominee Actions</h3>
         <p className="text-ivory/60 text-xs">
-          Support this nominee through nomination, re-nomination{blueGarnet ? ", or voting" : ""}.
-          {" "}Final confirmation requires sign-in.
+          Support this nominee through the official nomination form.
         </p>
         <div className="flex flex-col gap-2">
           <Button asChild className="w-full bg-gold hover:bg-gold-dark text-charcoal font-medium">
-            <Link to={`/nominate?nominee=${encodeURIComponent(nominee.name)}`}>
+            <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer">
               <Award className="w-4 h-4 mr-2" />Nominate
-            </Link>
+            </a>
           </Button>
           <Button asChild variant="outline" className="w-full border-gold/30 text-gold hover:bg-gold/10">
-            <Link to={`/nominate?nominee=${encodeURIComponent(nominee.name)}&renominate=true`}>
+            <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer">
               <RotateCcw className="w-4 h-4 mr-2" />Re-Nominate
-            </Link>
+            </a>
           </Button>
-          {blueGarnet && (
-            <Button asChild variant="outline" className="w-full border-blue-500/30 text-blue-400 hover:bg-blue-500/10">
-              <Link to={`/vote?nominee=${encodeURIComponent(nominee.name)}`}>
-                <ThumbsUp className="w-4 h-4 mr-2" />Vote
-              </Link>
-            </Button>
-          )}
+
         </div>
       </CardContent>
     </Card>

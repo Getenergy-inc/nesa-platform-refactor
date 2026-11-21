@@ -1,3 +1,10 @@
+## Website Content v2 — Message B of 3 — 20 Nov 2026
+- [x] Align `/awards` cards, recognition paths and canonical timeline with category configuration; retained the existing heading because the category registry totals differ from 22/90.
+- [x] Give all four tier pages the requested section order, hero actions, decision path and searchable/filterable nominee directory.
+- [x] Update `/nominees` filters/cards and nominee profile correction/share/tier actions.
+- [x] Update `/nominate` review notice, eligibility, process, FAQs and school-nomination route; wire Contact correction preselection.
+- [x] Production build and nine focused tests passed; 1280/360 browser checks confirmed no page overflow or browser errors and exercised correction preselection. Do not publish or change data/database.
+
 ## Website Content v2 — Message A of 3 — 20 Nov 2026
 - [x] Replace the shared desktop/mobile navigation, four-column footer, mobile actions and requested legacy redirects without changing access rules.
 - [x] Add the shared integrity line and closing band where requested; remove only visible retired-feature links/pop-ups.

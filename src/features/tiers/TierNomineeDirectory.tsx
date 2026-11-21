@@ -73,14 +73,19 @@ export function TierNomineeDirectory({ tier, title }: { tier: TierNumber; title:
   const { t } = useTranslation("pages");
   const { loading, people } = useTierNominees(tier);
   const [q, setQ] = useState("");
+  const [country, setCountry] = useState("");
   const [shown, setShown] = useState(PAGE);
+  const countries = useMemo(() => Array.from(new Set(people.map((person) => person.country).filter(Boolean) as string[])).sort(), [people]);
   const filtered = useMemo(() => {
     const s = q.trim().toLowerCase();
-    return s ? people.filter((p) => `${p.name} ${p.group ?? ""} ${p.country ?? ""}`.toLowerCase().includes(s)) : people;
-  }, [people, q]);
+    return people.filter((person) => {
+      if (country && person.country !== country) return false;
+      return !s || `${person.name} ${person.group ?? ""} ${person.country ?? ""}`.toLowerCase().includes(s);
+    });
+  }, [people, q, country]);
 
   return (
-    <section id="tier-nominees" aria-labelledby={`tier-${tier}-nominees`} className="bg-charcoal py-14">
+    <section id="nominees" aria-labelledby={`tier-${tier}-nominees`} className="scroll-mt-28 bg-charcoal py-14">
       <div className="container mx-auto max-w-6xl px-4">
         <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gold">{t("tierPage.eyebrow", "Tier")} {tier}</p>
         <h2 id={`tier-${tier}-nominees`} className="mt-1 font-serif text-2xl text-white md:text-3xl">{title}</h2>
@@ -93,23 +98,34 @@ export function TierNomineeDirectory({ tier, title }: { tier: TierNumber; title:
           <p className="mt-6 text-sm text-white/70">{t("tierPage.empty", "Published nominee profiles for this tier will appear here.")}</p>
         ) : (
           <>
-            <label className="mt-6 block max-w-md">
-              <span className="sr-only">{t("tierPage.search", "Search nominees")}</span>
-              <input type="search" value={q} onChange={(e) => { setQ(e.target.value); setShown(PAGE); }} placeholder={t("tierPage.search", "Search nominees")}
-                className="w-full rounded-full border border-gold/30 bg-white/5 px-4 py-2 text-sm text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-gold" />
-            </label>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <label className="block">
+                <span className="sr-only">{t("tierPage.search", "Search nominees")}</span>
+                <input type="search" value={q} onChange={(e) => { setQ(e.target.value); setShown(PAGE); }} placeholder={t("tierPage.search", "Search nominees")}
+                  className="w-full rounded-full border border-gold/30 bg-white/5 px-4 py-2 text-sm text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-gold" />
+              </label>
+              <label className="block">
+                <span className="sr-only">{t("tierPage.country", "Filter by country")}</span>
+                <select aria-label={t("tierPage.country", "Filter by country")} value={country} onChange={(event) => { setCountry(event.target.value); setShown(PAGE); }} className="w-full rounded-full border border-gold/30 bg-charcoal px-4 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-gold">
+                  <option value="">{t("tierPage.allCountries", "All countries")}</option>
+                  {countries.map((option) => <option key={option} value={option}>{option}</option>)}
+                </select>
+              </label>
+            </div>
             <ul className="mt-6 grid list-none grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
               {filtered.slice(0, shown).map((p) => (
                 <li key={p.id} className="min-w-0">
                   <Link to={p.href} className="flex h-full flex-col items-center gap-2 rounded-xl border border-gold/15 bg-white/[0.03] p-3 text-center hover:border-gold/50">
                     <TierAvatar person={p} />
                     <span className="line-clamp-2 text-xs font-semibold text-white">{p.name}</span>
+                    {p.country && <span className="text-[10px] text-white/55">{p.country}</span>}
                     {p.group && <span className="line-clamp-2 text-[10px] capitalize text-white/60">{p.group}</span>}
+                    <span className="mt-auto text-[10px] font-semibold text-gold">{t("tierPage.viewProfile", "View profile →")}</span>
                   </Link>
                 </li>
               ))}
             </ul>
-            {filtered.length === 0 && <p className="mt-4 text-sm text-white/60">{t("tierPage.noMatch", "No nominees match your search.")}</p>}
+            {filtered.length === 0 && <p className="mt-4 text-sm text-white/60">{t("tierPage.noMatch", "No published profiles match your filters yet.")}</p>}
             {shown < filtered.length && (
               <button type="button" onClick={() => setShown((s) => s + PAGE)} className="mt-6 rounded-full border border-gold/40 px-5 py-2 text-sm font-semibold text-gold hover:bg-gold/10">
                 {t("tierPage.more", "Show more")} ({filtered.length - shown})

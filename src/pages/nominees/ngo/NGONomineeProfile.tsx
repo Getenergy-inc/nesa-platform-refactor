@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { NomineeAvatar } from "@/components/nominees/NomineeAvatar";
+import { NomineeProfileGovernance } from "@/components/nominees/NomineeProfileGovernance";
 import {
   NGO_SUBCATEGORIES,
   getNGOBySlug,
@@ -117,6 +118,7 @@ export default function NGONomineeProfile() {
               </Card>
             </div>
           </motion.div>
+          <NomineeProfileGovernance tierName="Gold–Blue Garnet" tierHref="/awards/gold-blue-garnet#nominees" showShare={false} />
 
           {/* Impact story */}
           <section className="grid md:grid-cols-2 gap-6 mb-12">

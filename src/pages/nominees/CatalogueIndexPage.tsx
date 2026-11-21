@@ -27,6 +27,7 @@ import { subcategoryFamilySlug } from "@/config/directory/catalogueTaxonomy";
 import { AFRICA_REGIONS } from "@/config/regions/africaRegions";
 import { toast } from "@/hooks/use-toast";
 import { NomineeAvatar } from "@/components/nominees/NomineeAvatar";
+import { useTranslation } from "react-i18next";
 
 const PAGE_SIZE = 24;
 const CANONICAL = "https://nesa.africa/nominees/catalogue";
@@ -79,6 +80,7 @@ function Counter({ label, value }: { label: string; value: number | string }) {
 }
 
 export default function CatalogueIndexPage() {
+  const { t } = useTranslation("pages");
   const { data: nominees, isLoading, isError, error: loadError, refetch } = useCatalogueNominees();
   const [params, setParams] = useSearchParams();
   const [search, setSearch] = useState(params.get("q") ?? "");
@@ -250,12 +252,10 @@ export default function CatalogueIndexPage() {
               <Layers className="mr-1 h-3 w-3" /> Africa's Education Impact Directory
             </Badge>
             <h1 className="font-playfair text-3xl text-gold md:text-4xl">
-              Recognition Catalogue
+              {t("nomineesPage.title", "Meet Africa's Education Enablers")}
             </h1>
             <p className="mt-2 max-w-3xl text-sm text-foreground/70">
-              Every historical nominee, organised under the NESA-Africa 2026 Recognition
-              Framework: Award Tier → Award Category → Award Subcategory. Counters update
-              automatically from the live record set.
+              {t("nomineesPage.publication", "Profiles are published as nominations are reviewed. Publication does not guarantee selection or recognition.")}
             </p>
           </header>
 
@@ -498,7 +498,7 @@ export default function CatalogueIndexPage() {
                 </div>
               ) : results.length === 0 ? (
                 <p className="rounded-xl border border-gold/20 bg-charcoal-light/30 p-8 text-center text-sm text-foreground/60">
-                  No nominees match these filters yet.
+                  {t("nomineesPage.empty", "No published profiles match your filters yet.")}
                 </p>
               ) : (
                 <>
@@ -577,7 +577,7 @@ export default function CatalogueIndexPage() {
 
                           <div className="mt-3 flex flex-wrap gap-2 pt-1">
                             <Button asChild size="sm" className="h-7 bg-gold text-[11px] text-charcoal hover:bg-gold/90">
-                              <Link to={`/nominees/${n.slug}`}>View Profile</Link>
+                              <Link to={`/nominees/${n.slug}`}>{t("nomineesPage.viewProfile", "View profile →")}</Link>
                             </Button>
                             <Button asChild size="sm" variant="outline" className="h-7 border-gold/40 text-[11px] text-gold">
                               <Link to={`/nominate?renominate=${encodeURIComponent(n.slug)}&category=${encodeURIComponent(meta.category)}`}>

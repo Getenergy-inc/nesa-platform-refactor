@@ -24,3 +24,7 @@ export const CERTIFICATE_WINDOW_CLOSE_LABEL = NOMINATIONS_CLOSE_LABEL;
 /** Detailed judging milestones are not supplied by the approved brief. */
 export const ICON_JUDGING_WINDOW_LABEL = "CONTENT REQUIRED";
 export const ICON_RECIPIENTS_CONFIRMED_LABEL = "CONTENT REQUIRED";
+
+/** Public programme milestones supplied in Website Content v2, Message B. */
+export const ICON_JUDGING_CLOSE_LABEL = "29 November 2026";
+export const CERTIFICATE_RELEASE_LABEL = "29 December 2026";

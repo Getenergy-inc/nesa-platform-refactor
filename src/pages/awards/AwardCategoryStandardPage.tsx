@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, type ReactNode } from "react";
 
 import { Helmet } from "react-helmet-async";
 
@@ -13,6 +13,7 @@ import {
   IntegrityFirewallBlock,
   FinalAwardCTA,
   type HallNominee,
+  type AwardCta,
 } from "@/components/awards/standard/sections";
 import { TierCategoryCards } from "@/components/awards/TierCategoryCards";
 import { getAwardPageContent } from "@/config/awards/awardPageContent";
@@ -22,7 +23,18 @@ import { getTierHeroImage } from "@/config/awards/subpageHeroImages";
 import { resolveIconImage } from "@/data/iconAward/imageManifest";
 import { AwardPageTabs, type AwardPageTab } from "@/components/awards/AwardPageTabs";
 
-type Props = { slug: string };
+type Props = {
+  slug: string;
+  afterHero?: ReactNode;
+  afterPathways?: ReactNode;
+  beforeNominees?: ReactNode;
+  nomineeDirectory?: ReactNode;
+  heroBadge?: string;
+  heroLead?: string;
+  heroPrimaryCta?: AwardCta;
+  heroSecondaryCta?: AwardCta;
+  hideFinalCta?: boolean;
+};
 
 const TABS_BY_SLUG: Record<string, AwardPageTab[]> = {
   "africa-education-icon": [
@@ -66,7 +78,7 @@ const TABS_BY_SLUG: Record<string, AwardPageTab[]> = {
  * Unified premium award page. Drives every Tier / Pillar / Category page off the
  * same structure used by /awards/africa-education-icon.
  */
-export default function AwardCategoryStandardPage({ slug }: Props) {
+export default function AwardCategoryStandardPage({ slug, afterHero, afterPathways, beforeNominees, nomineeDirectory, heroBadge, heroLead, heroPrimaryCta, heroSecondaryCta, hideFinalCta }: Props) {
   const content = getAwardPageContent(slug);
   if (!content) return null;
 
@@ -154,19 +166,20 @@ export default function AwardCategoryStandardPage({ slug }: Props) {
           <section id="overview">
             <AwardHeroStandard
               pageSlug={content.slug}
-              badge={hero.badge}
+              badge={heroBadge ?? hero.badge}
               title={hero.title}
               titleAccent={hero.titleAccent}
               subhead={hero.subhead}
-              lead={hero.lead}
+              lead={heroLead ?? hero.lead}
               stats={stats}
-              primaryCta={hero.primaryCta}
-              secondaryCta={hero.secondaryCta}
+              primaryCta={heroPrimaryCta ?? hero.primaryCta}
+              secondaryCta={heroSecondaryCta ?? hero.secondaryCta}
               trustLine={hero.trustLine}
               heroImage={getTierHeroImage(content.slug)}
               heroImageAlt={`${hero.title} — Enablers of Education for All Across Africa`}
             />
           </section>
+          {afterHero}
 
           {TABS_BY_SLUG[content.slug] ? (
             <AwardPageTabs tabs={TABS_BY_SLUG[content.slug]} />
@@ -182,7 +195,8 @@ export default function AwardCategoryStandardPage({ slug }: Props) {
               <TierCategoryCards tier="platinum-recognition" />
             )}
           </section>
-          <section id="eligibility">
+          {afterPathways}
+          {!nomineeDirectory && <section id="eligibility">
             <WhoIsThisFor
               canBeNominated={eligibility.canBeNominated}
               shouldNotBeNominated={eligibility.shouldNotBeNominated}
@@ -190,8 +204,9 @@ export default function AwardCategoryStandardPage({ slug }: Props) {
               region={eligibility.region}
               pathway={eligibility.pathway}
             />
-          </section>
-          {content.slug !== "influencer-education-impact-2026" && (
+          </section>}
+          {beforeNominees}
+          {nomineeDirectory ?? (content.slug !== "influencer-education-impact-2026" && (
             <section id="nominees">
               <HallOfFamePreview
                 pageSlug={content.slug}
@@ -200,14 +215,23 @@ export default function AwardCategoryStandardPage({ slug }: Props) {
                 nominateHref={content.nominateHref}
               />
             </section>
-          )}
+          ))}
+          {nomineeDirectory && <section id="eligibility">
+            <WhoIsThisFor
+              canBeNominated={eligibility.canBeNominated}
+              shouldNotBeNominated={eligibility.shouldNotBeNominated}
+              evidence={eligibility.evidence}
+              region={eligibility.region}
+              pathway={eligibility.pathway}
+            />
+          </section>}
           <section id="hall-of-fame" aria-label="Hall of Fame" />
           <section id="voting" />
           <section id="process">
             <HowNominationWorks />
             <IntegrityFirewallBlock />
           </section>
-          <section id="nominate">
+          {!hideFinalCta && <section id="nominate">
             <FinalAwardCTA
               pageSlug={content.slug}
               heading={finalCta.heading}
@@ -215,7 +239,7 @@ export default function AwardCategoryStandardPage({ slug }: Props) {
               primaryCta={finalCta.primary}
               secondaryCta={finalCta.secondary}
             />
-          </section>
+          </section>}
         </main>
       </div>
 

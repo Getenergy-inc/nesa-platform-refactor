@@ -19,6 +19,7 @@ import {
 } from "@/components/iconAward/shared";
 import { MapPin, ShieldCheck, Trophy } from "lucide-react";
 import { NesaTvLink } from "@/components/common/NesaTvLink";
+import { NomineeProfileGovernance } from "@/components/nominees/NomineeProfileGovernance";
 
 export default function IconNomineeProfile() {
   const { slug } = useParams<{ slug: string }>();
@@ -130,6 +131,7 @@ export default function IconNomineeProfile() {
             </div>
           </div>
         </section>
+        <NomineeProfileGovernance tierName="Africa Education Icon" tierHref="/awards/africa-education-icon#nominees" />
 
         {/* Lifetime Impact Story */}
         <section className="bg-charcoal py-14">

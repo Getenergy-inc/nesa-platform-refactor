@@ -10,7 +10,7 @@ import "@/features/landing/editorial/editorial.css";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import TierExplorer from "@/components/recognition/TierExplorer";
+import { RecognitionPaths2026, TierCards2026 } from "@/features/tiers/TierContent2026";
 import ImpactJourney from "@/components/recognition/ImpactJourney";
 import {
   ArrowRight,
@@ -49,7 +49,7 @@ import { GovernanceFirewallSection } from "@/components/nesa/GovernanceFirewallS
 import { PageFAQSection } from "@/components/nesa/PageFAQ";
 import { RecognitionIntegrityLine } from "@/components/nesa/SiteWideContent2026";
 import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
-import { NOMINATION_WINDOW_LABEL } from "@/config/nominationWindows2026";
+import { CERTIFICATE_RELEASE_LABEL, ICON_JUDGING_CLOSE_LABEL, NOMINATIONS_CLOSE_LABEL, NOMINATION_WINDOW_LABEL } from "@/config/nominationWindows2026";
 import { PROGRAMME_END_LONG_LABEL } from "@/config/programme";
 import { useTranslation } from "react-i18next";
 
@@ -250,10 +250,12 @@ export default function AwardsPage() {
                   className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8"
                 >
                   <a
-                    href="#pillars"
-                    onClick={() => track("hero", "Explore the Recognition Pillars", "#pillars")}
+                    href={PUBLIC_ACTIONS_2026.nominate.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => track("hero", "Submit a Nomination", PUBLIC_ACTIONS_2026.nominate.href)}
                   >
-                    Explore the Recognition Pillars
+                    {t("awardsPage.submit", "Submit a Nomination")}
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </a>
                 </Button>
@@ -263,13 +265,8 @@ export default function AwardsPage() {
                   variant="outline"
                   className="border-gold/40 text-gold hover:bg-gold/10 rounded-full px-8"
                 >
-                  <a
-                    href={PUBLIC_ACTIONS_2026.nominate.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => track("hero", "Start a Nomination", PUBLIC_ACTIONS_2026.nominate.href)}
-                  >
-                    Start a Nomination
+                  <a href="#pillars" onClick={() => track("hero", "Explore the Recognition Pillars", "#pillars")}>
+                    {t("awardsPage.explorePillars", "Explore the Recognition Pillars")}
                   </a>
                 </Button>
               </div>
@@ -282,7 +279,7 @@ export default function AwardsPage() {
         {/* ─── 1A. CANONICAL TIER EXPLORER + IMPACT JOURNEY ── */}
         <section className="border-y border-gold/10 bg-charcoal/95 py-16 md:py-20">
           <div className="container mx-auto px-4">
-            <TierExplorer className="mb-16" />
+            <TierCards2026 />
             <ImpactJourney variant="section" />
           </div>
         </section>
@@ -363,6 +360,7 @@ export default function AwardsPage() {
               </p>
             </div>
 
+            <RecognitionPaths2026 />
             <ol className="grid grid-cols-3 md:grid-cols-9 gap-2 md:gap-3 max-w-6xl mx-auto">
               {RECOGNITION_FLOW.map((s, i) => (
                 <motion.li
@@ -389,9 +387,12 @@ export default function AwardsPage() {
         <section id="timeline" aria-labelledby="awards-timeline-heading" className="scroll-mt-28 border-b border-gold/10 bg-charcoal py-14">
           <div className="container mx-auto max-w-4xl px-4 text-center">
             <h2 id="awards-timeline-heading" className="font-display text-3xl font-bold text-white">{t("awardsPage.timeline.title", "Programme timeline")}</h2>
-            <dl className="mt-8 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-xl border border-gold/20 bg-white/[0.03] p-5"><dt className="text-sm text-white/60">{t("awardsPage.timeline.nominations", "Public nominations")}</dt><dd className="mt-2 font-semibold text-gold">{NOMINATION_WINDOW_LABEL}</dd></div>
-              <div className="rounded-xl border border-gold/20 bg-white/[0.03] p-5"><dt className="text-sm text-white/60">{t("awardsPage.timeline.programme", "Online Recognition Programme")}</dt><dd className="mt-2 font-semibold text-gold">{PROGRAMME_END_LONG_LABEL}</dd></div>
+            <dl className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+              <div className="rounded-xl border border-gold/20 bg-white/[0.03] p-5"><dt className="text-sm text-white/60">{t("awardsPage.timeline.nominations", "Nominations open")}</dt><dd className="mt-2 font-semibold text-gold">{NOMINATION_WINDOW_LABEL}</dd></div>
+              <div className="rounded-xl border border-gold/20 bg-white/[0.03] p-5"><dt className="text-sm text-white/60">{t("awardsPage.timeline.judging", "Icon judging closes")}</dt><dd className="mt-2 font-semibold text-gold">{ICON_JUDGING_CLOSE_LABEL}</dd></div>
+              <div className="rounded-xl border border-gold/20 bg-white/[0.03] p-5"><dt className="text-sm text-white/60">{t("awardsPage.timeline.programme", "Online Programme")}</dt><dd className="mt-2 font-semibold text-gold">{PROGRAMME_END_LONG_LABEL}</dd></div>
+              <div className="rounded-xl border border-gold/20 bg-white/[0.03] p-5"><dt className="text-sm text-white/60">{t("awardsPage.timeline.certificates", "Certificates from")}</dt><dd className="mt-2 font-semibold text-gold">{CERTIFICATE_RELEASE_LABEL}</dd></div>
+              <div className="rounded-xl border border-gold/20 bg-white/[0.03] p-5"><dt className="text-sm text-white/60">{t("awardsPage.timeline.close", "Tiers 2–4 nominations close")}</dt><dd className="mt-2 font-semibold text-gold">{NOMINATIONS_CLOSE_LABEL}</dd></div>
             </dl>
           </div>
         </section>

@@ -18,6 +18,7 @@ import {
 import { getYouTubeEmbedUrl } from "@/lib/youtube";
 import { NesaTvLink } from "@/components/common/NesaTvLink";
 import { SchoolSupportFundSection } from "@/components/impact/SchoolSupportFundSection";
+import { NomineeProfileGovernance } from "@/components/nominees/NomineeProfileGovernance";
 import { ExternalLink, MapPin, ShieldCheck, Trophy } from "lucide-react";
 
 const SITE = "https://nesaafrica.lovable.app";
@@ -183,9 +184,6 @@ export default function NomineeCanonicalProfile() {
               <p className="mt-5 max-w-2xl leading-relaxed text-white/80">{summary}</p>
               <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/60">This profile is part of an ongoing review process. Publication does not guarantee selection or recognition.</p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Button asChild>
-                  <Link to="/contact">Request a Correction</Link>
-                </Button>
                 <Button asChild variant="outline" className="border-gold/30 text-gold">
                   <Link to="/nominee-portal">Submit Additional Evidence</Link>
                 </Button>
@@ -193,6 +191,7 @@ export default function NomineeCanonicalProfile() {
               </div>
             </div>
           </header>
+          <NomineeProfileGovernance tierName="Africa Education Icon" tierHref="/awards/africa-education-icon#nominees" />
 
           {/* Story */}
           {story && (

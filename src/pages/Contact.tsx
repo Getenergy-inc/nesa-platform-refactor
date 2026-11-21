@@ -30,7 +30,7 @@ const FAQ = [
 
 export default function Contact() {
   const [searchParams] = useSearchParams();
-  const subjectParam = searchParams.get("subject") ?? "";
+  const subjectParam = searchParams.get("subject") ?? searchParams.get("topic") ?? "";
   const [form, setForm] = useState(INITIAL);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");

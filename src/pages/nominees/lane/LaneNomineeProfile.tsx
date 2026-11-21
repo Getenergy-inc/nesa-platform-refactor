@@ -29,6 +29,8 @@ import { useCategoryNominees } from "@/components/awards/branded/categoryNominee
 import { getNomineeLane } from "@/config/nomineeLanes";
 import { getYouTubeEmbedUrl } from "@/lib/youtube";
 import { LaneNomineeCard } from "./LaneGalleryPage";
+import { NomineeProfileGovernance } from "@/components/nominees/NomineeProfileGovernance";
+import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
 
 const SITE = "https://nesaafrica.lovable.app";
 
@@ -130,6 +132,7 @@ export default function LaneNomineeProfile() {
               { label: profile.name },
             ]}
           />
+          <NomineeProfileGovernance tierName={lane.tier} tierHref={`/nominees/lane/${lane.slug}`} showShare={false} />
 
           <div className="grid gap-8 lg:grid-cols-[300px,1fr]">
             <aside className="space-y-4">
@@ -195,7 +198,7 @@ export default function LaneNomineeProfile() {
                 <Share2 className="mr-2 h-4 w-4" /> Share this profile
               </Button>
               <Button asChild className="w-full bg-gold text-charcoal hover:bg-gold/90">
-                <Link to={lane.nominateHref}>Nominate a similar organisation</Link>
+                <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer">Nominate a similar organisation</a>
               </Button>
               <Link
                 to={`/nominees/lane/${lane.slug}`}

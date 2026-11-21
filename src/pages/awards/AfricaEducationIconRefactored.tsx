@@ -1,4 +1,6 @@
 import { TierArtworkBand, SchoolSupportBanner } from "@/features/tiers/TierPageExtras";
+import { TierDecisionPath, TierRecognitionBullets } from "@/features/tiers/TierContent2026";
+import { useTranslation } from "react-i18next";
 import AwardPlaqueMotionSection from "@/components/nesa/AwardPlaqueMotionSection";
 import { IconLifetimeSection } from "@/features/landing/editorial/IconLifetimeSection";
 import { IconScaleSection } from "@/features/landing/editorial/IconScaleSection";
@@ -114,6 +116,7 @@ const scrollTo = (id: string) => {
 };
 
 export default function AfricaEducationIcon() {
+  const { t } = useTranslation("pages");
   useEffect(() => {
     trackEvent("page_view", { page: "africa-education-icon" });
   }, []);
@@ -149,7 +152,7 @@ export default function AfricaEducationIcon() {
       <section className="border-b border-gold/10">
         <div className="container mx-auto px-4 py-10 md:py-14 text-center">
           <Badge className="bg-gold/15 text-gold border border-gold/40 hover:bg-gold/20">
-            <Crown className="h-3.5 w-3.5 mr-1" /> Lifetime Achievement · 2006–2026
+            <Crown className="h-3.5 w-3.5 mr-1" /> {t("tier1.hero.eyebrow", "Tier 1 · Lifetime Achievement · 2006–2026")}
           </Badge>
           <h1 className="font-display text-3xl md:text-5xl font-bold text-white mt-4">
             Africa Education Icon Award
@@ -159,16 +162,13 @@ export default function AfricaEducationIcon() {
             Recognising Africa’s Education Enablers
           </p>
           <p className="mt-4 text-white/70 max-w-3xl mx-auto text-sm md:text-base leading-relaxed">
-            Three Lifetime Pathways · Three Classifications · Nine Laureates. The Africa Education
-            Icon Award is the highest lifetime recognition under NESA-Africa, honouring individuals
-            whose verified contributions have advanced Education for All across Africa between
-            2006 and 2026.
+            {t("tier1.hero.line", "The flagship lifetime honour for transformative contribution to education across Africa, 2006–2026.")}
           </p>
 
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg" className="bg-gold text-charcoal hover:bg-gold/90 rounded-full">
               <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("icon_hero_cta", { target: "nominate" })}>
-                <Sparkles className="mr-2 h-4 w-4" /> Start Nomination
+                <Sparkles className="mr-2 h-4 w-4" /> {t("tierPage.nominate", "Nominate")}
               </a>
             </Button>
             <Button
@@ -180,7 +180,7 @@ export default function AfricaEducationIcon() {
                 scrollTo("nominees");
               }}
             >
-              Explore Existing Nominees
+              {t("tierPage.meetNominees", "Meet the nominees ↓")}
             </Button>
             <Button
               size="lg"
@@ -199,6 +199,7 @@ export default function AfricaEducationIcon() {
 
       {/* Moved from the old homepage: plaque, pathways + nominee strips, scale, timeline, governance, closing */}
       <TierArtworkBand image={tierIconImage} badge={iconCertificate} name="Africa Education Icon" />
+      <TierRecognitionBullets tier={1} />
       <div className="nesa-ed">
         <AwardPlaqueMotionSection />
         <IconLifetimeSection />
@@ -241,7 +242,7 @@ export default function AfricaEducationIcon() {
       </section>
 
       {/* 4. Existing Nominees preview */}
-      <section id="nominees" className="py-12 md:py-16 border-t border-gold/10 bg-black/30">
+      <section id="icon-nominee-preview" className="py-12 md:py-16 border-t border-gold/10 bg-black/30">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap items-end justify-between gap-3 mb-6">
             <div>
@@ -551,6 +552,7 @@ export default function AfricaEducationIcon() {
         </motion.div>
       </section>
 
+      <TierDecisionPath tier={1} />
       <TierNomineeDirectory tier={1} title="Africa Education Icon nominees" />
       <SchoolSupportBanner />
 

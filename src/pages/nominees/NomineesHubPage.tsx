@@ -5,7 +5,10 @@ import { Search, Sparkles } from "lucide-react";
 import { MobileBottomActions } from "@/components/navigation/MobileBottomActions";
 import { BackToTopButton } from "@/components/ui/back-to-top";
 import { ScrollProgressIndicator } from "@/components/nesa/ScrollProgressIndicator";
-import { CATALOGUE_TIERS } from "@/config/directory/catalogueTaxonomy";
+import { CATALOGUE_TIERS, CATEGORY_MAPPINGS } from "@/config/directory/catalogueTaxonomy";
+import { AFRICA_REGIONS } from "@/config/regions/africaRegions";
+import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
+import { useTranslation } from "react-i18next";
 import { DIRECTORY_NAME } from "@/config/platformCopy";
 import { NOMINATIONS_OPEN_LABEL } from "@/config/nominationWindows2026";
 import { trackEvent } from "@/lib/analytics";
@@ -40,9 +43,11 @@ export function catalogueRedirectTarget(params: URLSearchParams): string | null 
 }
 
 export default function NomineesHubPage() {
+  const { t } = useTranslation("pages");
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const [search, setSearch] = useState(params.get("q") ?? "");
+  const [quickFilters, setQuickFilters] = useState({ tier: "", category: "", country: "", region: "" });
   const redirectTo = catalogueRedirectTarget(params);
 
   useEffect(() => { trackEvent("directory_view", { name: DIRECTORY_NAME, surface: "nominees_hub" }); }, []);
@@ -50,6 +55,7 @@ export default function NomineesHubPage() {
   const goToCatalogue = () => {
     const query = new URLSearchParams();
     if (search.trim()) query.set("q", search.trim());
+    Object.entries(quickFilters).forEach(([key, value]) => { if (value) query.set(key, value); });
     const value = query.toString();
     trackEvent("directory_search", { surface: "nominees_hub", query: search.trim() });
     navigate(value ? `/nominees/catalogue?${value}` : "/nominees/catalogue");
@@ -75,15 +81,21 @@ export default function NomineesHubPage() {
           <section className="ed-dir-hero" aria-labelledby="dir-heading">
             <div className="ed-dir-hero-inner">
               <div className="ed-badge"><Sparkles className="h-3.5 w-3.5" aria-hidden="true" />NOMINATIONS OPEN {NOMINATIONS_OPEN_LABEL.toUpperCase()} · NESA-AFRICA 2026</div>
-              <h1 id="dir-heading" className="ed-dir-title">Nominee Profiles <span className="ed-accent">and Review Status</span></h1>
-              <p className="ed-dir-sub">This directory publishes authorised information only at the appropriate review stage and subject to consent, evidence and publication controls.</p>
+              <h1 id="dir-heading" className="ed-dir-title">{t("nomineesPage.title", "Meet Africa's Education Enablers")}</h1>
+              <p className="ed-dir-sub">{t("nomineesPage.publication", "Profiles are published as nominations are reviewed. Publication does not guarantee selection or recognition.")}</p>
               <form className="ed-dir-search" onSubmit={(event) => { event.preventDefault(); goToCatalogue(); }} role="search">
                 <label htmlFor="dir-search" className="sr-only">Search the directory</label>
                 <input id="dir-search" type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search a nominee, organisation, country or category…" />
                 <button type="submit" className="ed-btn-primary"><Search className="mr-1.5 inline h-4 w-4" aria-hidden="true" />Search</button>
+                <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4" aria-label={t("nomineesPage.filters", "Directory filters")}>
+                  <select aria-label={t("nomineesPage.tier", "Tier")} value={quickFilters.tier} onChange={(event) => setQuickFilters((current) => ({ ...current, tier: event.target.value }))} className="rounded-lg border border-gold/30 bg-charcoal px-3 py-2 text-sm text-white"><option value="">{t("nomineesPage.allTiers", "All tiers")}</option>{CATALOGUE_TIERS.map((tier) => <option key={tier.slug} value={tier.slug}>{t("tierPage.eyebrow", "Tier")} {tier.tierNumber} · {tier.name}</option>)}</select>
+                  <select aria-label={t("nomineesPage.award", "Award")} value={quickFilters.category} onChange={(event) => setQuickFilters((current) => ({ ...current, category: event.target.value }))} className="rounded-lg border border-gold/30 bg-charcoal px-3 py-2 text-sm text-white"><option value="">{t("nomineesPage.allAwards", "All awards")}</option>{CATEGORY_MAPPINGS.map((category) => <option key={category.categorySlug} value={category.categorySlug}>{category.displayName}</option>)}</select>
+                  <select aria-label={t("nomineesPage.country", "Country")} value={quickFilters.country} onChange={(event) => setQuickFilters((current) => ({ ...current, country: event.target.value }))} className="rounded-lg border border-gold/30 bg-charcoal px-3 py-2 text-sm text-white"><option value="">{t("nomineesPage.allCountries", "All countries")}</option>{Array.from(new Set(AFRICA_REGIONS.flatMap((region) => region.countries))).sort().map((country) => <option key={country} value={country}>{country}</option>)}</select>
+                  <select aria-label={t("nomineesPage.region", "Region")} value={quickFilters.region} onChange={(event) => setQuickFilters((current) => ({ ...current, region: event.target.value }))} className="rounded-lg border border-gold/30 bg-charcoal px-3 py-2 text-sm text-white"><option value="">{t("nomineesPage.allRegions", "All regions")}</option>{AFRICA_REGIONS.map((region) => <option key={region.slug} value={region.name}>{region.name}</option>)}<option value="African Diaspora">{t("nomineesPage.diaspora", "African Diaspora")}</option></select>
+                </div>
               </form>
               <div className="ed-hero-cta-row" style={{ justifyContent: "center" }}>
-                <Link to="/nominate" className="ed-btn-primary">Submit a Nomination</Link>
+                <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer" className="ed-btn-primary">{t("awardsPage.submit", "Submit a Nomination")}</a>
                 <Link to="/nominees/catalogue" className="ed-btn-ghost">Browse the Full Catalogue →</Link>
               </div>
             </div>

@@ -48,6 +48,7 @@ import {
 
 import { supabase } from "@/integrations/supabase/client";
 import { OfficialNominationForm } from "@/components/nominate/OfficialNominationForm";
+import { NominationGuide2026 } from "@/components/nominate/NominationGuide2026";
 import { getMasterAwards, MASTER_COUNTS } from "@/config/awardMaster2026";
 
 /* ────────────────────────────────────────────────────────────────────────── */
@@ -782,6 +783,12 @@ export default function NominateHub2026() {
               </Link>
             </Button>
           </div>
+        </div>
+      </section>
+
+      <section aria-label="Nomination guide" className="border-b border-gold/15 py-12 md:py-16">
+        <div className="container mx-auto max-w-5xl px-4">
+          <NominationGuide2026 />
         </div>
       </section>
 

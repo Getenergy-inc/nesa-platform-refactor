@@ -1,9 +1,8 @@
 import { useEffect, useMemo } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { ArrowRight, BookOpen, ShieldCheck, Mail, ChevronLeft } from "lucide-react";
+import { ShieldCheck, Mail, ChevronLeft } from "lucide-react";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -11,6 +10,7 @@ import { LanguageSwitcher } from "@/components/i18n";
 import { GoogleFormDisplay } from "@/components/nominate/GoogleFormDisplay";
 import { NativeCategoryNominationForm } from "@/components/awards/NativeCategoryNominationForm";
 import { IntegrityNotice } from "@/components/nominate/IntegrityNotice";
+import { NominationGuide2026 } from "@/components/nominate/NominationGuide2026";
 import { ExistingNomineesInline } from "@/components/nominees/ExistingNomineesInline";
 import {
   AWARD_CATEGORY_FORMS,
@@ -311,85 +311,7 @@ export default function NominateMvp() {
             <LanguageSwitcher variant="compact" />
           </div>
 
-          {/* ── Flash message (brief §4) ───────────────────────────────── */}
-          {!family && !category && (
-            <motion.section
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.25 }}
-              className="space-y-5"
-            >
-              <div className="space-y-3">
-                <p className="text-xs uppercase tracking-[0.2em] text-gold/80 font-semibold">
-                  Start here
-                </p>
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-white">
-                  How NESA-Africa Nominations Work
-                </h2>
-              </div>
-
-              <div className="space-y-3 text-sm md:text-base text-white/80 leading-relaxed">
-                <p>
-                  NESA-Africa nominations help the public identify education
-                  changemakers, institutions, creators, CSR contributors, NGOs,
-                  schools, public figures, organizations and special needs schools
-                  making measurable contributions to education across Africa, the
-                  diaspora and friends of Africa.
-                </p>
-                <p>
-                  For this MVP phase, nominations are collected through official
-                  NESA-Africa Google Forms while the full nomination portal is
-                  being developed.
-                </p>
-                <p>
-                  Please select the correct award category, subcategory or region,
-                  then complete the form carefully with credible evidence.
-                </p>
-                <p>
-                  Your submission does not automatically make the nominee a
-                  finalist, winner, honouree or selected school intervention
-                  beneficiary.
-                </p>
-                <p>
-                  All submissions are subject to eligibility review, category-fit
-                  review, evidence review, duplicate checks, verification,
-                  governance review and NESA-Africa integrity approval.
-                </p>
-                <p>
-                  Sponsorship, donation, ticket purchase, merchandise purchase,
-                  endorsement, media visibility, independent jury review, AGC participation
-                  or any GFAwzip Wallet payment does not influence nominee
-                  approval, finalist selection, judging, regional intervention
-                  selection, school selection or award winner selection.
-                </p>
-              </div>
-
-              <IntegrityNotice />
-
-              <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold rounded-full px-8 gap-2 shadow-gold"
-                >
-                  <a href="#start">
-                    Start Nomination <ArrowRight className="h-4 w-4" />
-                  </a>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="rounded-full border-gold/40 text-gold hover:bg-gold/10 hover:text-gold gap-2"
-                >
-                  <Link to="/policies/nomination-integrity">
-                    <BookOpen className="h-4 w-4" />
-                    Read Nomination Guidelines
-                  </Link>
-                </Button>
-              </div>
-            </motion.section>
-          )}
+          {!family && !category && <NominationGuide2026 />}
 
           {/* ── Family selector ───────────────────────────────────────── */}
           {!family && !category && (

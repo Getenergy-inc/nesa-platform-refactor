@@ -1,8 +1,7 @@
-import { useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { ArrowRight, BadgeCheck, ChevronRight, Share2, Sparkles, ThumbsUp, Trophy, UserPlus, Vote } from "lucide-react";
+import { ArrowRight, BadgeCheck, ChevronRight, Share2, Sparkles, Trophy } from "lucide-react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -10,11 +9,11 @@ import { NomineeBreadcrumbs } from "@/components/nominees/NomineeBreadcrumbs";
 import { getGoldNominee, getGoldCategory } from "@/data/goldSpecialRecognition";
 import { useResolveNomineeMedia } from "@/hooks/useNomineeMedia";
 import { HonoureeImage } from "@/components/honourees/HonoureeImage";
+import { NomineeProfileGovernance } from "@/components/nominees/NomineeProfileGovernance";
 
 export default function GoldNomineeProfilePage() {
   const { categorySlug, nomineeSlug } = useParams<{ categorySlug: string; nomineeSlug: string }>();
   const data = categorySlug && nomineeSlug ? getGoldNominee(categorySlug, nomineeSlug) : null;
-  const [voted, setVoted] = useState(false);
   const resolveMedia = useResolveNomineeMedia();
 
   if (!data) return <Navigate to={`/nominees/gold-special-recognition/${categorySlug ?? ""}`} replace />;
@@ -24,18 +23,11 @@ export default function GoldNomineeProfilePage() {
   const heroImage = media.image ?? nominee.image;
   const ogImage = media.og ?? heroImage;
   const imageAlt = media.alt ?? nominee.name;
-  const totalVotes = nominee.votes + (voted ? 1 : 0);
   const canonical = `https://nesaafrica.lovable.app/nominees/gold-special-recognition/${category.slug}/${nominee.slug}`;
   const related = category.nominees.filter((n) => n.slug !== nominee.slug).slice(0, 3);
   const sameCountry = getGoldCategory(category.slug)?.nominees.filter(
     (n) => n.slug !== nominee.slug && n.country === nominee.country,
   ) ?? [];
-
-  const handleVote = () => {
-    if (voted) return;
-    setVoted(true);
-    toast.success(`Your vote for ${nominee.name} is in!`, { description: "Share to invite others to vote." });
-  };
 
   const handleShare = async () => {
     const shareData = {
@@ -132,30 +124,20 @@ export default function GoldNomineeProfilePage() {
                   <p className="text-ivory/75 text-base md:text-lg mb-6">{nominee.summary}</p>
 
                   <div className="flex flex-wrap items-center gap-3 mb-2">
-                    <Button
-                      onClick={handleVote}
-                      disabled={voted}
-                      size="lg"
-                      className={voted
-                        ? "bg-emerald-600 hover:bg-emerald-600 text-white font-bold rounded-full px-7 gap-2 cursor-default"
-                        : "bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full px-7 gap-2 shadow-lg shadow-gold/20"}
-                    >
-                      {voted ? <><BadgeCheck className="w-4 h-4" /> Voted</> : <><Vote className="w-4 h-4" /> Learn More</>}
+                    <Button asChild size="lg" className="bg-gold font-bold text-charcoal hover:bg-gold/90 rounded-full px-7">
+                      <Link to={`/nominees/gold-special-recognition/${category.slug}`}>Learn More</Link>
                     </Button>
                     <Button onClick={handleShare} size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full px-6 gap-2 bg-charcoal/40 backdrop-blur">
                       <Share2 className="w-4 h-4" /> Share Profile
                     </Button>
                   </div>
-                  <div className="flex items-center gap-2 mt-3 text-sm text-ivory/60">
-                    <ThumbsUp className="w-4 h-4 text-gold" />
-                    <span className="font-display text-lg text-gold font-bold">{totalVotes.toLocaleString()}</span>
-                    <span>votes so far</span>
-                  </div>
+
                 </div>
               </div>
             </motion.div>
           </div>
         </div>
+        <NomineeProfileGovernance tierName="Influencers Education Impact" tierHref="/awards/influencer-education-impact#nominees" showShare={false} />
 
         <div className="container mt-10 grid lg:grid-cols-[1fr,320px] gap-8">
           {/* Main */}
@@ -195,32 +177,7 @@ export default function GoldNomineeProfilePage() {
               </div>
             </section>
 
-            {/* Voting CTA banner */}
-            <section id="vote" className="scroll-mt-24">
-              <div className="rounded-3xl border border-gold/30 bg-gradient-to-br from-gold/15 via-charcoal-light to-charcoal p-8 md:p-10 text-center">
-                <h3 className="font-display text-2xl md:text-3xl font-bold text-ivory mb-3">
-                  Back {nominee.name} for {category.shortName}
-                </h3>
-                <p className="text-ivory/70 mb-6 max-w-xl mx-auto">
-                  Every vote signals public support for education champions across Africa.
-                </p>
-                <div className="flex flex-wrap justify-center gap-3">
-                  <Button
-                    onClick={handleVote}
-                    disabled={voted}
-                    size="lg"
-                    className={voted
-                      ? "bg-emerald-600 text-white font-bold rounded-full px-8 gap-2 cursor-default"
-                      : "bg-gold hover:bg-gold/90 text-charcoal font-bold rounded-full px-8 gap-2"}
-                  >
-                    {voted ? <><BadgeCheck className="w-4 h-4" /> Voted</> : <><Vote className="w-4 h-4" /> Learn More</>}
-                  </Button>
-                  <Button onClick={handleShare} size="lg" variant="outline" className="border-gold/40 text-gold hover:bg-gold/10 rounded-full px-7 gap-2 bg-charcoal/40">
-                    <UserPlus className="w-4 h-4" /> Invite Others to Vote
-                  </Button>
-                </div>
-              </div>
-            </section>
+
 
             {/* Social proof placeholder */}
             <section>
@@ -286,23 +243,7 @@ export default function GoldNomineeProfilePage() {
           </aside>
         </div>
 
-        {/* Mobile sticky vote bar */}
-        <div className="md:hidden fixed bottom-20 inset-x-0 z-40 px-4">
-          <div className="rounded-2xl border border-gold/30 bg-charcoal/95 backdrop-blur p-3 flex gap-2 shadow-2xl shadow-charcoal/80">
-            <Button
-              onClick={handleVote}
-              disabled={voted}
-              className={voted
-                ? "flex-1 bg-emerald-600 text-white font-bold gap-2 cursor-default"
-                : "flex-1 bg-gold hover:bg-gold/90 text-charcoal font-bold gap-2"}
-            >
-              {voted ? <><BadgeCheck className="w-4 h-4" /> Voted</> : <><Vote className="w-4 h-4" /> Learn More</>}
-            </Button>
-            <Button onClick={handleShare} variant="outline" className="border-gold/40 text-gold hover:bg-gold/10">
-              <Share2 className="w-4 h-4" />
-            </Button>
-          </div>
-        </div>
+
       </section>
     </>
   );
