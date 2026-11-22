@@ -150,7 +150,12 @@ function resolveDefaultBase(cwd) {
     });
     if (check.status === 0) return candidate;
   }
-  throw new Error("Cannot establish changed files: supply --base with a valid Git revision.");
+  // Deploy checkouts can be detached HEADs without a main ref: compare with the parent commit.
+  const parent = spawnSync("git", ["rev-parse", "--verify", "HEAD^^{commit}"], { cwd, encoding: "utf8" });
+  if (parent.status === 0) return "HEAD^";
+  // Shallow single-commit checkout: only uncommitted changes can be established.
+  console.warn("Phase 0 guard: no base revision available; checking uncommitted changes only.");
+  return "HEAD";
 }
 
 export function collectChangedFiles(cwd = process.cwd(), requestedBase = null) {
