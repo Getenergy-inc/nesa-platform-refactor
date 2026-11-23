@@ -23,3 +23,4 @@ export { IconGovernanceNote } from "./IconGovernanceNote";
 export { IconScaleSection } from "./IconScaleSection";
 export { IconClosingSection } from "./IconClosingSection";
 export { PartnersBandSection } from "./PartnersBandSection";
+export { IconGovernanceLine, TierStripSection, TrustPartnersSection, ClosingCTASection, TwoPillarsSection } from "./LeanHomeSections";

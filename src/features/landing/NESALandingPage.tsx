@@ -1,9 +1,26 @@
-// NESA-Africa Landing Page — Homepage v3: "Recognise yourself, then act".
-// Retired homepage components remain in ./editorial for other pages and future use.
+// NESA-Africa Landing Page — Lean edition (homepage only).
+//
+// Two messages: (1) Tier 1 Africa Education Icon Award, and (2) after the
+// awards, Support a Special-Needs School Across Africa via EduAid-Africa.
+//
+// Section order (7):
+//   1. Hero — eyebrow, title, one line, two CTAs (Icon nomination · school support)
+//   2. Public nominations notice (compact, one line)
+//   3. Two pillars — Tier 1 Africa Education Icon (three complete category nominee strips)
+//      beside one Special Needs Education Support Africa panel with owner-supplied imagery,
+//      then governance line
+//   4. The four tiers at a glance (TierStripSection)
+//   5. Trust — three points, endorser logos, governance link
+//   6. Award plaque and NESA-Africa seal
+//   7. Focused Online Recognition Programme + single closing CTA
+//
+// Other homepage components remain in ./editorial for tier and other pages.
+// Visual skin lives in ./editorial/editorial.css, scoped under `.nesa-ed`.
 
 import { lazy } from "react";
 import { useTranslation } from "react-i18next";
 import { LocalizedSEO } from "@/components/seo/LocalizedSEO";
+
 import { PublicNominationsNotice } from "@/components/nesa/PublicNominationsNotice";
 import { NESAFooter } from "@/components/nesa/NESAFooter";
 import { NESAHeader } from "@/components/nesa/NESAHeader";
@@ -14,20 +31,18 @@ import { BackToTopButton } from "@/components/ui/back-to-top";
 import { FloatingFAQButton } from "@/components/nesa/PageFAQ";
 
 import "./editorial/editorial.css";
-import { EditorialHero } from "./editorial/EditorialHero";
-import { GalaBandSection } from "./editorial/GalaBandSection";
+import {
+  EditorialHero,
+  IconGovernanceLine,
+  TwoPillarsSection,
+  GalaBandSection,
+} from "./editorial";
 
 const lean = () => import("./editorial/LeanHomeSections");
-const homeV3 = () => import("./editorial/HomepageV3Sections");
-const HomeHookSection = lazy(() => homeV3().then((m) => ({ default: m.HomeHookSection })));
-const HomeIconSection = lazy(() => homeV3().then((m) => ({ default: m.HomeIconSection })));
-const HomeEligibilitySection = lazy(() => homeV3().then((m) => ({ default: m.HomeEligibilitySection })));
-const TierPreviewCardsSection = lazy(() => lean().then((m) => ({ default: m.TierPreviewCardsSection })));
-const HomeRecognitionProcessSection = lazy(() => homeV3().then((m) => ({ default: m.HomeRecognitionProcessSection })));
-const HomeSchoolImpactSection = lazy(() => homeV3().then((m) => ({ default: m.HomeSchoolImpactSection })));
-const HomeActionSection = lazy(() => homeV3().then((m) => ({ default: m.HomeActionSection })));
+const TierStripSection = lazy(() => lean().then((m) => ({ default: m.TierStripSection })));
 const TrustPartnersSection = lazy(() => lean().then((m) => ({ default: m.TrustPartnersSection })));
 const ClosingCTASection = lazy(() => lean().then((m) => ({ default: m.ClosingCTASection })));
+const AwardPlaqueMotionSection = lazy(() => import("@/components/nesa/AwardPlaqueMotionSection"));
 
 export function NESALandingPage() {
   const { t } = useTranslation("pages");
@@ -51,36 +66,30 @@ export function NESALandingPage() {
 
       <ScrollProgressIndicator />
 
-      <div className="nesa-ed min-h-screen pt-[98px] xl:pt-[104px] pb-16">
+      <div className="nesa-ed min-h-screen pt-[92px] xl:pt-[104px] pb-16">
         <NESAHeader />
 
-        {/* 1. HERO + compact nominations notice */}
+        {/* 1. HERO */}
         <EditorialHero />
+
+        {/* 2. PUBLIC NOTICE (compact) */}
         <PublicNominationsNotice compact />
 
-        {/* 2. THE HOOK */}
-        <LazySection><HomeHookSection /></LazySection>
+        {/* 3. TIER 1 · AFRICA EDUCATION ICON */}
+        <TwoPillarsSection />
+        <div className="pt-10" />
+        <IconGovernanceLine />
 
-        {/* 3. TIER 1 — WHO IS AN AFRICA EDUCATION ICON? */}
-        <LazySection><HomeIconSection /></LazySection>
+        {/* 4. THE FOUR TIERS AT A GLANCE */}
+        <LazySection><TierStripSection /></LazySection>
 
-        {/* 4. WHO IS ELIGIBLE? */}
-        <LazySection><HomeEligibilitySection /></LazySection>
-
-        {/* 5. EDUCATION ENABLERS TAKE MANY FORMS */}
-        <LazySection><TierPreviewCardsSection /></LazySection>
-
-        {/* 6. HOW RECOGNITION WORKS */}
-        <LazySection><HomeRecognitionProcessSection /></LazySection>
-
-        {/* 7. FROM RECOGNITION TO EDUCATION IMPACT */}
-        <LazySection><HomeSchoolImpactSection /></LazySection>
-
-        {/* 8. START WITH ONE ACTION */}
-        <LazySection><HomeActionSection /></LazySection>
-
-        {/* 9. TRUST + ONLINE PROGRAMME + CLOSING */}
+        {/* 5. TRUST */}
         <LazySection><TrustPartnersSection /></LazySection>
+
+        {/* 6. AWARD PLAQUE */}
+        <LazySection><AwardPlaqueMotionSection /></LazySection>
+
+        {/* 7. FOCUSED ONLINE PROGRAMME + FINAL CTA */}
         <GalaBandSection />
         <LazySection><ClosingCTASection /></LazySection>
 

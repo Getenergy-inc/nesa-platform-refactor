@@ -120,12 +120,8 @@ export const REFACTOR_REDIRECTS_2026: RefactorRedirect[] = [
   { from: "/reports", to: "/resources#reports", reason: "Resources hub" },
   { from: "/impact/reports", to: "/journal", reason: "EduAid-Africa Journal" },
 
-  // Recognition tier aliases (Website Content v2 canonical + Homepage v3 shortcuts)
+  // Recognition tier alias (Website Content v2 canonical)
   { from: "/awards/platinum", to: "/awards/platinum-recognition", reason: "Canonical tier slug" },
-  { from: "/recognition/tier-1", to: "/awards/africa-education-icon", reason: "Homepage v3 tier shortcut" },
-  { from: "/recognition/tier-2", to: "/awards/influencer-education-impact", reason: "Homepage v3 tier shortcut" },
-  { from: "/recognition/tier-3", to: "/awards/platinum-recognition", reason: "Homepage v3 tier shortcut" },
-  { from: "/recognition/tier-4", to: "/awards/gold-blue-garnet", reason: "Homepage v3 tier shortcut" },
 
   // Community merges — /community was never built; /get-involved is the real
   // Community hub page, so no redirect is registered for it.

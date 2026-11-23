@@ -1,9 +1,4 @@
-## Homepage v3 — Recognise yourself, then act — 23 Nov 2026
-- [x] Replace the homepage with the approved hero, hook, Icon, eligibility, tier-preview, recognition-process, school-impact, action and trust/programme/closing story; preserve components, data, imagery, translations, SEO and lazy loading.
-- [x] Move the unchanged full four-tier nominee rows to `/awards`; add only the four unused `/recognition/tier-*` redirects and retain the real `/recognition` and `/sponsors` pages.
-- [x] Verify official nomination links, first-screen link count, build/tests and 1280px/360px layouts with screenshots. Do not change the database or publish.
-
-## Website Content v2 — Message C of 3 — 21 Nov 2026 (paused by owner)
+## Website Content v2 — Message C of 3 — 21 Nov 2026
 - [ ] Approve the Message C plan, including eight displayed school categories, closed voting and existing form destinations.
 - [ ] Update Support, Online Programme, About, Get Involved/Academy and Contact without changing design, images or database tables.
 - [ ] Verify new form saves, existing safeguards, focused tests and desktop 1280px/phone 360px screenshots; report destinations and differences. Do not publish.
