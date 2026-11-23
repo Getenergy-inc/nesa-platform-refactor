@@ -7,8 +7,10 @@ import "@/features/landing/editorial/editorial.css";
 // Removes featured nominee carousel (was surfacing supermarkets/hotels).
 // Composes existing trusted sections + new framework explainers.
 
+import { lazy } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import { LazySection } from "@/components/ui/lazy-section";
 import { motion } from "framer-motion";
 import { RecognitionPaths2026, TierCards2026 } from "@/features/tiers/TierContent2026";
 import ImpactJourney from "@/components/recognition/ImpactJourney";
@@ -54,6 +56,7 @@ import { PROGRAMME_END_LONG_LABEL } from "@/config/programme";
 import { useTranslation } from "react-i18next";
 
 const SITE = "https://nesaafrica.lovable.app";
+const TierStripSection = lazy(() => import("@/features/landing/editorial/LeanHomeSections").then((m) => ({ default: m.TierStripSection })));
 
 const HERO_STATS = [
   { value: "4", label: "Award Tiers" },
@@ -280,6 +283,9 @@ export default function AwardsPage() {
         <section className="border-y border-gold/10 bg-charcoal/95 py-16 md:py-20">
           <div className="container mx-auto px-4">
             <TierCards2026 />
+            <div className="nesa-ed">
+              <LazySection><TierStripSection /></LazySection>
+            </div>
             <ImpactJourney variant="section" />
           </div>
         </section>

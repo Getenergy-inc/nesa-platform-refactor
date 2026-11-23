@@ -4,6 +4,7 @@ import { PUBLIC_ACTIONS_2026 } from "@/config/publicActions2026";
 // retyped in prose, to prevent naming drift.
 
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Crown } from "lucide-react";
 import {
   BRAND,
@@ -11,6 +12,31 @@ import {
   ICON_NO_PUBLIC_VOTING_NOTE,
   ICON_PATHWAYS,
 } from "@/config/brandHierarchy";
+
+export function IconPathwayCards({ homeV3 = false }: { homeV3?: boolean }) {
+  const { t } = useTranslation("pages");
+  const shortNames: Record<string, string> = {
+    "education-philanthropy-icon": t("landingV3.icon.categories.philanthropy", "Education Philanthropy Icon"),
+    "literary-new-curriculum-advocate": t("landingV3.icon.categories.literary", "Literary & New Curriculum Advocate Icon"),
+    "technical-educator-icon": t("landingV3.icon.categories.technical", "Technical Educator Icon"),
+  };
+
+  return (
+    <ul className="mt-6 grid gap-3 text-left sm:grid-cols-3" aria-label={t("landingV3.icon.categoriesLabel", "Africa Education Icon categories")}>
+      {ICON_PATHWAYS.map((p) => (
+        <li key={p.slug} className="rounded-xl border border-gold/20 bg-white/[0.03] p-4">
+          <h3 className="font-serif text-base text-white">
+            {homeV3 ? shortNames[p.slug] : t(`landingLean.pillars.categories.${p.slug}.name`, p.name)}
+          </h3>
+          <p className="mt-1 text-xs leading-relaxed text-white/65">{t(`landingLean.pillars.categories.${p.slug}.blurb`, p.blurb)}</p>
+          <Link to={p.nomineesHref} className="mt-2 inline-block text-xs font-semibold text-gold hover:underline">
+            {t("landingV3.icon.viewNominees", "View nominees →")}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 export function IconFlagshipSection() {
   return (
@@ -40,15 +66,7 @@ export function IconFlagshipSection() {
             ))}
           </ul>
 
-          <ul className="mt-6 grid gap-3 text-left sm:grid-cols-3" aria-label="Icon pathways">
-            {ICON_PATHWAYS.map((p) => (
-              <li key={p.slug} className="rounded-xl border border-gold/20 bg-white/[0.03] p-4">
-                <h3 className="font-serif text-base text-white">{p.name}</h3>
-                <p className="mt-1 text-xs leading-relaxed text-white/65">{p.blurb}</p>
-                <Link to={p.nomineesHref} className="mt-2 inline-block text-xs font-semibold text-gold hover:underline">View nominees →</Link>
-              </li>
-            ))}
-          </ul>
+          <IconPathwayCards />
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link to="/nominees/africa-education-icon-award" className="ed-btn-primary">

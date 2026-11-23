@@ -19,7 +19,7 @@ export function GalaBandSection() {
       <p className="mx-auto mt-4 max-w-2xl text-white/70">{PROGRAMME_PUBLIC_NOTICE}</p>
       <p className="mx-auto mt-4 max-w-2xl text-white/70">{t("landingLean.programme.noPhysical", "No public physical gala, ticket sale, corporate table or public venue is authorised.")}</p>
       <div className="ed-hero-cta-row" style={{ justifyContent: "center" }}>
-        <button type="button" onClick={downloadProgrammeCalendar} className="ed-btn-ghost">{t("landingLean.programme.calendar", "Add to calendar (.ics)")}</button>
+        <button type="button" onClick={downloadProgrammeCalendar} className="ed-btn-ghost">{t("landingLean.programme.calendar", "Add to calendar")}</button>
         <Link to="/programme/2026" className="ed-btn-primary">{t("landingLean.programme.about", "About the programme →")}</Link>
       </div>
     </section>

@@ -205,38 +205,157 @@ export function TierStripSection() {
   );
 }
 
-/** Trust points + endorser logos + governance link. */
+function TierPreviewNominee({ person }: { person: StripPerson }) {
+  const [broken, setBroken] = useState(false);
+  const [logo, setLogo] = useState(person.kind === "logo");
+  const showImage = person.photo && !broken;
+  return (
+    <Link
+      to={person.href}
+      title={person.name}
+      className="group block min-w-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold"
+    >
+      <span className={`block aspect-[4/5] overflow-hidden rounded-md border border-gold/15 ${showImage && logo ? "bg-white" : "bg-charcoal/60"}`}>
+        {showImage ? (
+          <img
+            src={person.photo!}
+            alt={person.name}
+            width={100}
+            height={125}
+            loading="lazy"
+            decoding="async"
+            onError={() => setBroken(true)}
+            onLoad={(event) => {
+              const image = event.currentTarget;
+              if (image.naturalWidth > image.naturalHeight * 1.05) setLogo(true);
+            }}
+            className={`h-full w-full ${logo ? "object-contain p-1" : "object-cover"}`}
+          />
+        ) : (
+          <span role="img" aria-label={person.name} className="flex h-full w-full items-center justify-center bg-gold/5 font-serif text-lg text-gold">
+            {getInitials(person.name)}
+          </span>
+        )}
+      </span>
+      <span className="mt-1 line-clamp-2 text-[10px] leading-tight text-white/65 group-hover:text-gold">{person.name}</span>
+    </Link>
+  );
+}
+
+type PreviewTier = {
+  n: 1 | 2 | 3 | 4;
+  title: string;
+  body: string;
+  href: string;
+  image: string;
+  cta: string;
+};
+
+function TierPreviewCard({ tier, people, loading }: { tier: PreviewTier; people: StripPerson[]; loading: boolean }) {
+  const { t } = useTranslation("pages");
+  const pictured = people.filter((person) => person.photo).slice(0, 4);
+  return (
+    <article className="ed-card flex h-full min-w-0 flex-col" data-preview-tier={tier.n}>
+      <img src={tier.image} alt={tier.title} width={320} height={180} loading="lazy" decoding="async" className="mb-4 h-36 w-full rounded-lg border border-gold/15 object-cover" />
+      <h3>{tier.title}</h3>
+      <p className="flex-1">{tier.body}</p>
+      {loading ? (
+        <div className="mb-5 grid grid-cols-4 gap-2" aria-label={t("landingV3.tiers.loading", "Loading nominee pictures")}>
+          {[0, 1, 2, 3].map((item) => <span key={item} className="aspect-[4/5] animate-pulse rounded-md bg-white/[0.06]" />)}
+        </div>
+      ) : pictured.length > 0 ? (
+        <div className="mb-5 grid grid-cols-4 gap-2" aria-label={t("landingV3.tiers.pictures", `${tier.title} nominee pictures`, { tier: tier.title })}>
+          {pictured.map((person) => <TierPreviewNominee key={person.id} person={person} />)}
+        </div>
+      ) : (
+        <p className="mb-5 text-xs text-white/55">{t("landingV3.tiers.empty", "No published nominee images are available for this tier yet.")}</p>
+      )}
+      <Link to={tier.href} className="ed-btn-ghost mt-auto self-start">{tier.cta}</Link>
+    </article>
+  );
+}
+
+/** Four compact tier cards with up to four real published nominee pictures each. */
+export function TierPreviewCardsSection() {
+  const { t } = useTranslation("pages");
+  const tier2 = useLiveTierPeople(2);
+  const tier3 = useLiveTierPeople(3);
+  const tier4 = useLiveTierPeople(4);
+  const tiers: PreviewTier[] = [
+    {
+      n: 1,
+      title: t("landingV3.tiers.t1.title", "Icons · Tier 1"),
+      body: t("landingV3.tiers.t1.body", "Individuals with exceptional, sustained and evidence-supported education impact."),
+      href: "/awards/africa-education-icon",
+      image: tierIcon,
+      cta: t("landingV3.tiers.t1.cta", "Explore Tier 1"),
+    },
+    {
+      n: 2,
+      title: t("landingV3.tiers.t2.title", "Influencers · Tier 2"),
+      body: t("landingV3.tiers.t2.body", "Social-media personalities, sports figures and music professionals who use their influence to support education."),
+      href: "/awards/influencer-education-impact",
+      image: tierInfluencer,
+      cta: t("landingV3.tiers.t2.cta", "Explore Tier 2"),
+    },
+    {
+      n: 3,
+      title: t("landingV3.tiers.t3.title", "Institutions and Leaders · Tier 3"),
+      body: t("landingV3.tiers.t3.body", "Libraries, researchers, faith-based education providers, leaders, international partners and the African diaspora advancing education."),
+      href: "/awards/platinum-recognition",
+      image: tierPlatinum,
+      cta: t("landingV3.tiers.t3.cta", "Explore Tier 3"),
+    },
+    {
+      n: 4,
+      title: t("landingV3.tiers.t4.title", "CSR, NGOs and Innovators · Tier 4"),
+      body: t("landingV3.tiers.t4.body", "Companies, CSR programmes, NGOs, EduTech, media, STEM, creative arts and education-policy implementers."),
+      href: "/awards/gold-blue-garnet",
+      image: tierGarnet,
+      cta: t("landingV3.tiers.t4.cta", "Explore Tier 4"),
+    },
+  ];
+
+  return (
+    <section className="ed-section" aria-labelledby="home-tier-previews-heading">
+      <div className="ed-wrap">
+        <div className="ed-section-head">
+          <h2 id="home-tier-previews-heading" className="ed-section-title">{t("landingV3.tiers.title", "Education Enablers Take Many Forms")}</h2>
+        </div>
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {tiers.map((tier) => {
+            const data = tier.n === 1 ? { people: ICON_PEOPLE, loading: false } : tier.n === 2 ? tier2 : tier.n === 3 ? tier3 : tier4;
+            return <TierPreviewCard key={tier.n} tier={tier} people={data.people} loading={data.loading} />;
+          })}
+        </div>
+        <p className="mt-7 text-center text-sm text-white/70">
+          {t("landingV3.tiers.nominateBefore", "Every Icon started as an Education Enabler. Know one? ")}{" "}
+          <a href={PUBLIC_ACTIONS_2026.nominate.href} target="_blank" rel="noopener noreferrer" className="font-semibold text-gold hover:underline">
+            {t("landingV3.tiers.nominateLink", "Nominate them")}
+          </a>
+          {t("landingV3.tiers.nominateAfter", " — one form covers every tier.")}
+        </p>
+      </div>
+    </section>
+  );
+}
+
+/** Slim endorser and governance trust band. */
 export function TrustPartnersSection() {
   const { t } = useTranslation("pages");
-  const points = [
-    { title: t("landingLean.trust.p1t", "Independent NRRC verification"), body: t("landingLean.trust.p1b", "Every nomination researched and verified before review.") },
-    { title: t("landingLean.trust.p2t", "Evidence-based evaluation"), body: t("landingLean.trust.p2b", "Category-specific standards applied consistently across every tier.") },
-    { title: t("landingLean.trust.p3t", "No public voting for the 2026 awards"), body: t("landingLean.trust.p3b", "Nine independent Icon judges and nine Icon NRRC members. Nomination is free.") },
-  ];
   return (
-    <section className="ed-section" aria-labelledby="ed-trust-heading">
-      <div className="ed-wrap">
+    <section className="border-y border-gold/15 py-6" aria-labelledby="ed-trust-heading">
+      <div className="ed-wrap flex flex-col items-center justify-center gap-5 lg:flex-row lg:gap-8">
         <h2 id="ed-trust-heading" className="sr-only">{t("landingLean.trust.title", "Built for trust")}</h2>
-        <div className="ed-trust-band">
-          {points.map((p, i) => (
-            <div key={p.title} className="ed-trust-col">
-              <span className="ed-trust-num">{String(i + 1).padStart(2, "0")}</span>
-              <h3>{p.title}</h3>
-              <p>{p.body}</p>
-            </div>
-          ))}
-        </div>
-        <ul className="mt-6 flex list-none flex-wrap items-center justify-center gap-4" aria-label={t("landingLean.trust.endorsers", "Endorsers")}>
+        <ul className="flex list-none flex-wrap items-center justify-center gap-4" aria-label={t("landingLean.trust.endorsers", "Endorsers")}>
           {ENDORSERS.map((e) => (
-            <li key={e.id} className="flex items-center gap-3">
-              <img src={e.logo} alt={`${e.name} logo`} width={48} height={48} loading="lazy" decoding="async" className="h-12 w-12 rounded-full bg-white object-contain p-1" />
-              <span className="text-sm text-white/80">{e.short}</span>
+            <li key={e.id} className="flex items-center gap-2">
+              <img src={e.logo} alt={t("landingLean.trust.logoAlt", `${e.name} logo`, { name: e.name })} width={40} height={40} loading="lazy" decoding="async" className="h-10 w-10 rounded-full bg-white object-contain p-1" />
+              <span className="text-xs text-white/80">{e.short}</span>
             </li>
           ))}
         </ul>
-        <p className="ed-disclaimer mt-6">
-          <Link to="/about#governance">{t("landingLean.trust.link", "Read our governance →")}</Link>
-        </p>
+        <Link to="/about#governance" className="ed-link-inline shrink-0">{t("landingLean.trust.link", "Read our governance →")}</Link>
       </div>
     </section>
   );
