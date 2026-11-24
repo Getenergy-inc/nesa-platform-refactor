@@ -25,9 +25,10 @@ describe("lean homepage Tier 1 categories", () => {
     const cards = within(categories).getAllByRole("listitem");
     expect(cards).toHaveLength(3);
 
+    const pathwayTitles = ["Education Philanthropy Icon", "Literary & New Curriculum Advocate Icon", "Technical Educator Icon"];
     ICON_PATHWAYS.forEach((pathway, index) => {
       const card = cards[index];
-      expect(within(card).getByRole("heading", { name: pathway.name })).toBeInTheDocument();
+      expect(within(card).getByRole("heading", { name: pathwayTitles[index] })).toBeInTheDocument();
       expect(within(card).getByRole("link", { name: "View nominees →" })).toHaveAttribute(
         "href",
         pathway.nomineesHref,
@@ -64,7 +65,7 @@ describe("lean homepage Tier 1 categories", () => {
       </MemoryRouter>,
     );
 
-    const schoolPanel = screen.getByRole("heading", { name: "From recognition to impact: Support a Special-Needs School Across Africa" }).closest("article");
+    const schoolPanel = screen.getByRole("heading", { name: "From Recognition to Education Impact" }).closest("article");
     expect(schoolPanel).not.toBeNull();
     expect(within(schoolPanel!).getByRole("img", { name: SNS_HERO_IMAGE.alt })).toHaveAttribute("src", SNS_HERO_IMAGE.src);
 

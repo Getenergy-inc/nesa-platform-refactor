@@ -1,3 +1,8 @@
+## Homepage wording-only correction — 24 Nov 2026
+- [x] Confirm the homepage and `/awards` already match commit `dc0bd826b2fd3c8290b6fcc94a2a0219c67de29d`; retain the existing sections, four stacked tier rows, scrolling nominee strips, images and styling.
+- [x] Applied the owner's requested wording and link destinations only inside existing homepage text slots; added no sections or controls and kept every award Nominate action on the official Google Form in a new tab.
+- [x] Production build and three focused homepage tests passed; desktop 1280px/phone 360px checks confirmed the same section order, four tier rows, no page overflow or browser errors. Awards before/after screenshots are pixel-identical. Not published.
+
 ## Website Content v2 — Message C of 3 — 21 Nov 2026
 - [ ] Approve the Message C plan, including eight displayed school categories, closed voting and existing form destinations.
 - [ ] Update Support, Online Programme, About, Get Involved/Academy and Contact without changing design, images or database tables.

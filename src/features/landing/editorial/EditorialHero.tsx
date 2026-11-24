@@ -14,14 +14,14 @@ export function EditorialHero() {
       <div className="ed-hero-content">
         <div className="ed-badge">
           <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
-          {t("landingLean.hero.eyebrow", "NESA-Africa 2026")}
+          {t("landingLean.hero.eyebrow", "NESA-Africa 2026 · The African Blue-Garnet Awards for Education")}
         </div>
         <h1 id="ed-hero-heading" className="ed-hero-headline">
-          {t("landingLean.hero.titleLead", "Recognising Africa’s")}<br />
-          <span className="ed-accent">{t("landingLean.hero.titleAccent", "Education Enablers")}</span>
+          {t("landingLean.hero.titleLead", "Are You — or Someone You Know —")}<br />
+          <span className="ed-accent">{t("landingLean.hero.titleAccent", "Enabling Education Across Africa?")}</span>
         </h1>
         <p className="ed-hero-sub">
-          {t("landingLean.hero.line", "The Africa Education Icon Award honours lifetime impact on education across Africa — and every award opens a door to support schools.")}
+          {t("landingLean.hero.line", "NESA-Africa identifies, documents and recognises the people and organisations helping Africans access better education. If their work is opening doors to learning, skills and opportunity, they may be an Education Enabler Across Africa.")}
         </p>
         <div className="ed-hero-cta-row">
           <a
@@ -31,14 +31,14 @@ export function EditorialHero() {
             className="ed-btn-primary"
             onClick={() => trackEvent("hero_cta_click", { slot: "primary", href: PUBLIC_ACTIONS_2026.nominate.href, surface: "home" })}
           >
-            {t("landingLean.hero.ctaIcon", "Nominate an Africa Education Icon")}
+            {t("landingLean.hero.ctaIcon", "Nominate an Education Enabler")}
           </a>
           <Link
-            to="/impact/special-needs-schools"
+            to="/awards"
             className="ed-btn-ghost"
-            onClick={() => trackEvent("hero_cta_click", { slot: "secondary", href: "/impact/special-needs-schools", surface: "home" })}
+            onClick={() => trackEvent("hero_cta_click", { slot: "secondary", href: "/awards", surface: "home" })}
           >
-            {t("landingLean.hero.ctaSchool", "Support a Special-Needs School")}
+            {t("landingLean.hero.ctaSchool", "See Who Can Be Recognised")}
           </Link>
         </div>
       </div>
